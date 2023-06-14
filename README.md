@@ -2,6 +2,8 @@
 
 A library that provides useful tools for Angular apps development.
 
+[![Angular Toolbox version](https://img.shields.io/badge/Angular%20Toolbox-beta-%231E90FF.svg)]()
+
 ## Installation
 
 ```
