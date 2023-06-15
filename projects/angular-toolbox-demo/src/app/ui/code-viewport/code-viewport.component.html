@@ -1,0 +1,16 @@
+<section>
+    <div class="container border rounded mb-4">
+        <ul class="nav border-bottom">
+            <li class="nav-item">
+              <button class="nav-link" (click)="changeSrcDisplay('html')">HTML</button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link" (click)="changeSrcDisplay('css')">CSS</button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link" (click)="changeSrcDisplay('ts')">TypeScript</button>
+            </li>
+          </ul>
+        <pre> {{ currentSrc }} </pre>
+    </div>
+</section>

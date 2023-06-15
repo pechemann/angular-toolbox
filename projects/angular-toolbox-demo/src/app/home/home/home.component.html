@@ -21,7 +21,7 @@
             </p>
             <ul class="icon-list">
                 <li *ngFor="let item of demoList.getDemoLinkList()">
-                    <a href="#" rel="noopener" [title]="item.label">{{ item.label }}</a>
+                    <a [routerLink]="'../demo/' + item.path" rel="noopener" [title]="item.label">{{ item.label }}</a>
                 </li>
             </ul>
         </div>
