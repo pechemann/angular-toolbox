@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CodeWrapper } from '../model/code-wrapper';
+import { CodeWrapper } from '../model/business/code-wrapper';
 
 declare type Language = "html" | "ts" | "css";
 
