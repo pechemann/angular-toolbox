@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { CodeWrapper } from '../model/code-wrapper';
 
+declare type Language = "html" | "ts" | "css";
+
 @Component({
   selector: 'code-viewport',
   templateUrl: './code-viewport.component.html',
@@ -16,11 +18,14 @@ export class CodeViewportComponent {
   };
 
   public currentSrc: string | null = null;
+  public currLang: Language = 'html';
 
-  public changeSrcDisplay(type: string): void {
-    if (this._codeWrapper) {
-      const code: string = ((obj: any)=> obj[type])(this._codeWrapper);
-      this.currentSrc = code;
-    }
+  public changeSrcDisplay(type: Language): void {
+    this.currLang = type;
+    if (this._codeWrapper) this.currentSrc = this.getRawCode();
+  }
+
+  public getRawCode(): string {
+    return ((obj: any)=> obj[this.currLang ])(this._codeWrapper);
   }
 }
