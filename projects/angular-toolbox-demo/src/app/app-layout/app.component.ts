@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { BreadcrumbService } from '../ui/model/service/breadcrumb.service';
+import { DarkModeService } from 'angular-toolbox';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +9,5 @@ import { BreadcrumbService } from '../ui/model/service/breadcrumb.service';
 })
 export class AppComponent {
 
-  constructor(public breadcrumb: BreadcrumbService) {}
+  constructor(public breadcrumb: BreadcrumbService, darkMode: DarkModeService) {}
 }
