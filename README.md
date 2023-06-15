@@ -1,6 +1,10 @@
 # AngularToolbox
-
-A library that provides useful tools for Angular apps development.
+<p align="center">
+  <img src="projects/angular-toolbox/src/assets/images/logos/angular-toolbox.png" alt="angular-toolbox-logo" width="120px" height="120px"/>
+  <br>
+  <i>A library that provides useful tools for Angular apps development.</i>
+  <br>
+</p>
 
 [![Angular Toolbox version](https://img.shields.io/badge/Angular%20Toolbox-beta-%231E90FF.svg)]()
 
