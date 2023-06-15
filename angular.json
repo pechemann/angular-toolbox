@@ -63,6 +63,7 @@
               "projects/angular-toolbox-demo/src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "projects/angular-toolbox-demo/src/styles.scss"
             ],
             "scripts": []
@@ -126,6 +127,7 @@
               "projects/angular-toolbox-demo/src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "projects/angular-toolbox-demo/src/styles.scss"
             ],
             "scripts": []
