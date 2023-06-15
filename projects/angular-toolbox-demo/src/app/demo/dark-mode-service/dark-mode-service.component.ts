@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { DarkModeService } from 'angular-toolbox';
 import { CodeWrapper } from '../../ui/model/business/code-wrapper';
 import { BreadcrumbService } from '../../ui/model/service/breadcrumb.service';
@@ -8,7 +8,7 @@ import { BreadcrumbService } from '../../ui/model/service/breadcrumb.service';
   templateUrl: './dark-mode-service.component.html',
   styleUrls: ['./dark-mode-service.component.scss']
 })
-export class DarkModeServiceComponent {
+export class DarkModeServiceComponent implements OnDestroy {
 
   constructor(public darkModeService: DarkModeService,
               breadcrumb: BreadcrumbService) {
@@ -27,4 +27,8 @@ export class DarkModeServiceComponent {
     constructor(public darkModeService: DarkModeService) {}
 }`
   };
+
+  public ngOnDestroy(): void {
+    this.darkModeService.disableDarkMode();
+  }
 }
