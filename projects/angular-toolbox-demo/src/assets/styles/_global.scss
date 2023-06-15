@@ -1,4 +1,10 @@
 .dark-mode {
     background: #333;
     color: #fff;
+    .text-dark {
+        color: #fff !important;
+    }
+    .text-muted {
+        color: #999 !important;
+    }
 }
