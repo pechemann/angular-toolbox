@@ -141,4 +141,48 @@ describe('DarkModeService', () => {
     const configProvider: any = { provide: DARK_MODE_CONFIG, useValue: provider };
     expect(buildService(configProvider).darkModeEnabled()).toBeTrue();
   });
+  
+  it('enableDarkMode() should dispatch change event', () => {
+    service = buildService(defaultConfigProvider);
+    spyOn(service.change, 'emit');
+    service.enableDarkMode();
+    expect(service.change.emit).toHaveBeenCalled();
+  });
+  
+  it('disableDarkMode() should dispatch change event', () => {
+    service = buildService(defaultConfigProvider);
+    spyOn(service.change, 'emit');
+    service.disableDarkMode();
+    expect(service.change.emit).toHaveBeenCalled();
+  });
+
+  it('toggleDarkMode() should dispatch change event', () => {
+    service = buildService(defaultConfigProvider);
+    spyOn(service.change, 'emit');
+    service.toggleDarkMode();
+    expect(service.change.emit).toHaveBeenCalled();
+  });
+  
+  it('enableDarkMode() should dispatch change event with current dark mode state', () => {
+    service = buildService(defaultConfigProvider);
+    spyOn(service.change, 'emit');
+    service.enableDarkMode();
+    expect(service.change.emit).toHaveBeenCalledWith(true);
+  });
+  
+  it('disableDarkMode() should dispatch change event with current dark mode state', () => {
+    service = buildService(defaultConfigProvider);
+    spyOn(service.change, 'emit');
+    service.disableDarkMode();
+    expect(service.change.emit).toHaveBeenCalledWith(false);
+  });
+  
+  it('toggleDarkMode() should dispatch change event with current dark mode state', () => {
+    service = buildService(defaultConfigProvider);
+    spyOn(service.change, 'emit');
+    service.toggleDarkMode();
+    expect(service.change.emit).toHaveBeenCalledWith(true);
+    service.toggleDarkMode();
+    expect(service.change.emit).toHaveBeenCalledWith(false);
+  });
 });
