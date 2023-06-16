@@ -10,11 +10,11 @@ describe('DARK_MODE_CONFIG', () => {
     expect(DARK_MODE_CONFIG.storageKey).toEqual("dark-mode-key");
   });
   
-  it('default darkModeEnbled should be false', () => {
-    expect(DARK_MODE_CONFIG.darkModeEnbled).toBeFalse();
+  it('default darkModeEnabled should be false', () => {
+    expect(DARK_MODE_CONFIG.darkModeEnabled).toBeFalse();
   });
 
-  it('default darkModeEnbled should be false', () => {
-    expect(DARK_MODE_CONFIG.darkModeEnbled).toBeFalse();
+  it('default darkModeEnabled should be false', () => {
+    expect(DARK_MODE_CONFIG.darkModeEnabled).toBeFalse();
   });
 });
