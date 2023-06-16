@@ -56,9 +56,9 @@ export const DARK_MODE_CONFIG: DarkModeConfig = {
     
     /**
      * Indicates whether the dark mode uses browser settings (true), or not (false).
-     * Default value is true.
+     * Default value is false.
      */
-    detectBrowserSettings: true,
+    detectBrowserSettings: false,
     
     /**
      * CSS property name used to set the dark mode look and feel.
@@ -177,8 +177,6 @@ export class DarkModeService {
     private initBrowserMode(): void {
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
             this.enableDarkMode();
-        } else {
-            this.disableDarkMode();
         }
     }
 }
