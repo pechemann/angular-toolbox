@@ -14,9 +14,6 @@ import { AngularToolboxModule } from 'angular-toolbox';
     AppRoutingModule,
     AngularToolboxModule
   ],
-  /*providers: [
-    { provide: DARK_MODE_CONFIG, useValue: { enableDarkMode: true} }
-  ],*/
   bootstrap: [AppComponent]
 })
 export class AppModule { }

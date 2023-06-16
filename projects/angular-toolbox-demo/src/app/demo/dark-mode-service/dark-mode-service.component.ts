@@ -14,7 +14,7 @@ export class DarkModeServiceComponent implements OnDestroy {
               breadcrumb: BreadcrumbService) {
     breadcrumb.removeAll()
               .addItem(breadcrumb.buildItem("Demo"))
-              .addItem(breadcrumb.buildItem("Dark Mode Service", "demo/dark-mode-service"));
+              .addItem(breadcrumb.buildItem("Dark Mode Service"));
   }
 
   public srcCode: CodeWrapper = {
