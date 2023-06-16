@@ -15,11 +15,11 @@ export interface DarkModeConfig {
     /**
      * Indicates whether the dark mode is activated by default (true), or not (false).
      */
-    darkModeEnbled?: boolean;
+    darkModeEnabled?: boolean;
     
     /**
      * Indicates whether the dark mode uses browser settings (true), or not (false).
-     * When true, this property overrides the darkModeEnbled property.
+     * When true, this property overrides the darkModeEnabled property.
      */
     detectBrowserSettings?: boolean;
 
@@ -52,7 +52,7 @@ export const DARK_MODE_CONFIG: DarkModeConfig = {
      * Indicates whether the dark mode uses browser settings (true), or not (false).
      * Default value is false.
      */
-    darkModeEnbled: false,
+    darkModeEnabled: false,
     
     /**
      * Indicates whether the dark mode uses browser settings (true), or not (false).
@@ -82,7 +82,7 @@ export const DARK_MODE_CONFIG: DarkModeConfig = {
 export class DarkModeService {
 
     // --> Private properties
-    private _darkModeEnbled: boolean = false;
+    private _darkModeEnabled: boolean = false;
     private _cssProperty: string = CSS_PROP;
     private _storageKey: string = STORAGE_KEY;
 
@@ -105,7 +105,7 @@ export class DarkModeService {
      * Toogles the dark mode state.
      */
     public toggleDarkMode(): void {
-        this._darkModeEnbled ? this.disableDarkMode() : this.enableDarkMode();
+        this._darkModeEnabled ? this.disableDarkMode() : this.enableDarkMode();
     }
 
     /**
@@ -129,9 +129,25 @@ export class DarkModeService {
      * @returns true whether the dark mode state is active; false otherwise.
      */
     public darkModeEnabled(): boolean {
-        return this._darkModeEnbled;
+        return this._darkModeEnabled;
     }
 
+    /**
+     * Returns the value of the CSS property as defined by the config provider.
+     * @returns the value of the CSS property.
+     */
+    public getCssProperty(): string {
+        return this._cssProperty;
+    }
+
+    /**
+     * Returns the value of the storage key as defined by the config provider.
+     * @returns the value of the storage key.
+     */
+    public getStorageKey(): string {
+        return this._storageKey;
+    }
+    
     /**
      * Removes the dark mode information from local storage.
      */
@@ -141,10 +157,10 @@ export class DarkModeService {
 
     // --> Private methods
     private initDarkMode(config: DarkModeConfig): void {
-        this._darkModeEnbled = config.darkModeEnbled || false;
+        this._darkModeEnabled = config.darkModeEnabled || false;
         this._cssProperty = config.cssProperty || CSS_PROP;
         this._storageKey = config.storageKey || STORAGE_KEY;
-        if (this._darkModeEnbled) {
+        if (this._darkModeEnabled) {
             this.enableDarkMode();
         } else {
             this.initStoredDarkMode();
@@ -158,7 +174,7 @@ export class DarkModeService {
     }
 
     private setStoredDarkMode(): void {
-        const data: string = String(this._darkModeEnbled);
+        const data: string = String(this._darkModeEnabled);
         localStorage.setItem(this._storageKey, data);
     }
 
@@ -166,12 +182,12 @@ export class DarkModeService {
         const classList: DOMTokenList = this._document.body.classList;
         if (action === ADD_ACTION) {
             classList.add(this._cssProperty);
-            this._darkModeEnbled = true;
+            this._darkModeEnabled = true;
         } else if (action === REMOVE_ACTION) {
             classList.remove(this._cssProperty);
-            this._darkModeEnbled = false;
+            this._darkModeEnabled = false;
         }
-        this.change.emit(this._darkModeEnbled);
+        this.change.emit(this._darkModeEnabled);
     }
 
     private initBrowserMode(): void {
