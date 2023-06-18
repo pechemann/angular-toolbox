@@ -1,0 +1,14 @@
+<article>
+    <h2 class="mb-4">{{ title }}</h2>
+    <p [innerHTML]="presentation"></p>
+    <h4 class="mb-4">Example</h4>
+    <section class="mb-4">
+        <div class="container border rounded p-5">
+            <ng-content></ng-content>
+            <ng-container *ngTemplateOutlet="contentTemplateRef"></ng-container>
+        </div>
+    </section>
+    <h4 class="mb-4">Code</h4>
+    <code-viewport class="mb-4" [srcCode]="srcCode"></code-viewport>
+    <!--<h4 class="mb-4">Resources</h4>-->
+</article>

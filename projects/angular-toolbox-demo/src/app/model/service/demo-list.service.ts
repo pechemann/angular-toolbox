@@ -7,7 +7,8 @@ import { DemoLink } from '../business/demo-link';
 export class DemoListService {
 
   private readonly DEMO_LINK_LIST: DemoLink[] = [
-    { label: "Dark Mode Service", path: "dark-mode-service" }
+    { label: "Dark Mode Service", path: "dark-mode-service" },
+    { label: "Scroll Service", path: "scroll-service" }
   ]
 
   public getDemoLinkList(): DemoLink[] {

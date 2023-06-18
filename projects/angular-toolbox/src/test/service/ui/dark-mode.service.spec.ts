@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DarkModeService, DARK_MODE_CONFIG, DarkModeConfig } from './dark-mode.service';
+import { DarkModeService, DARK_MODE_CONFIG, DarkModeConfig } from '../../../lib/service/ui/dark-mode.service';
 import { DOCUMENT } from '@angular/common';
 
 describe('DarkModeService', () => {

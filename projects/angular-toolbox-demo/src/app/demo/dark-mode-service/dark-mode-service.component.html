@@ -1,21 +1,6 @@
-
-<article>
-    <h2 class="mb-4">Dark Mode Service Demo</h2>
-    <h4 class="mb-4">Example</h4>
-    <p>
-        A lightweight service that provides <em>Dark Mode</em> implementation for your Angular application.
-    </p>
-    <section class="mb-4">
-        <div class="container border rounded p-5">
-            <div class="mb-4">Click the following button to toggle between dark and light mode:</div>
-            <button class="btn btn-primary" (click)="darkModeService.toggleDarkMode()">
-                Toggle Dark Mode
-            </button>
-        </div>
-    </section>
-    <h4 class="mb-4">Code</h4>
-    <code-viewport class="mb-4" [srcCode]="srcCode"></code-viewport>
-    <!--<h4 class="mb-4">Resources</h4>-->
-</article>
-
-
+<demo [title]="title" [presentation]="presentation" [srcCode]="srcCode">
+    <div class="mb-4">Click the following button to toggle between dark and light mode:</div>
+    <button class="btn btn-primary" (click)="darkModeService.toggleDarkMode()">
+        Toggle Dark Mode
+    </button>
+</demo>

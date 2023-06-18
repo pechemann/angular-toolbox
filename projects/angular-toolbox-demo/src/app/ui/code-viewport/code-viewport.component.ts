@@ -12,7 +12,7 @@ export class CodeViewportComponent {
 
   private _codeWrapper: CodeWrapper | null = null;
 
-  @Input() public set srcCode(value: CodeWrapper) {
+  @Input() public set srcCode(value: CodeWrapper | null) {
     this._codeWrapper = value;
     if (value) this.changeSrcDisplay('html');
   };

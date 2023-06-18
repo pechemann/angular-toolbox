@@ -5,8 +5,7 @@ import { BreadcrumbService } from '../../ui/model/service/breadcrumb.service';
 
 @Component({
   selector: 'app-dark-mode-service',
-  templateUrl: './dark-mode-service.component.html',
-  styleUrls: ['./dark-mode-service.component.scss']
+  templateUrl: './dark-mode-service.component.html'
 })
 export class DarkModeServiceComponent implements OnDestroy {
 
@@ -17,6 +16,8 @@ export class DarkModeServiceComponent implements OnDestroy {
               .addItem(breadcrumb.buildItem("Dark Mode Service"));
   }
 
+  public title: string = "Dark Mode Service Demo";
+  public presentation: string = "A lightweight service that provides <em>Dark Mode</em> implementation for your Angular application.";
   public srcCode: CodeWrapper = {
     html: `<button (click)="darkModeService.toggleDarkMode()"> Toggle Dark Mode </button>`,
     css: `.dark-mode {
