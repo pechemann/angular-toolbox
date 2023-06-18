@@ -3,8 +3,7 @@ import { CodeWrapper } from '../model/business/code-wrapper';
 
 @Component({
   selector: 'demo',
-  templateUrl: './demo.component.html',
-  styleUrls: ['./demo.component.scss']
+  templateUrl: './demo.component.html'
 })
 export class DemoComponent {
 

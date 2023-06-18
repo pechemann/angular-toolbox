@@ -26,6 +26,14 @@ export class CodeViewportComponent {
   }
 
   public getRawCode(): string {
-    return ((obj: any)=> obj[this.currLang ])(this._codeWrapper);
+    return this._getRawCode(this.currLang);
+  }
+
+  public hasSrcCode(type: Language): boolean {
+    return (this._getRawCode(type) != null);
+  }
+  
+  private _getRawCode(type: Language): string {
+    return ((obj: any)=> obj[type])(this._codeWrapper);
   }
 }

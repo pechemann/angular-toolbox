@@ -1,16 +1,19 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BreadcrumbService } from '../../ui/model/service/breadcrumb.service';
 import { CodeWrapper } from '../../ui/model/business/code-wrapper';
+import { ScrollService, SubscriptionService } from 'angular-toolbox';
 
 @Component({
   selector: 'scroll-service',
   templateUrl: './scroll-service.component.html',
   styleUrls: ['./scroll-service.component.scss']
 })
-export class ScrollServiceComponent implements OnDestroy {
+export class ScrollServiceComponent implements OnInit, OnDestroy {
 
-  constructor(breadcrumb: BreadcrumbService) {
-  breadcrumb.removeAll()
+  constructor(breadcrumb: BreadcrumbService,
+              private _scrollService: ScrollService,
+              private _subscription: SubscriptionService) {
+     breadcrumb.removeAll()
       .addItem(breadcrumb.buildItem("Demo"))
       .addItem(breadcrumb.buildItem("Dark Mode Service"));
   }
@@ -18,11 +21,19 @@ export class ScrollServiceComponent implements OnDestroy {
   public title: string = "Scroll Service Demo";
   public presentation: string = "A lightweight service that provides scrolling implementation for your Angular application.";
   public srcCode: CodeWrapper = {
-    html: ``,
-    css: ``,
-    ts: ``
+    html: "<div>Window scrollY position: {{ scrollY }}</div>",
+    ts: "this.scrollService.onScroll.subscribe((e)=> this.scrollY = (e.currentTarget as Window).scrollY);"
   };
 
+  public scrollY: number = 0;
+
+  public ngOnInit(): void {
+    this._subscription.register('ScrollServiceComponent',
+      this._scrollService.onScroll.subscribe((e)=> this.scrollY = (e.currentTarget as Window).scrollY)
+    );
+  }
+
   public ngOnDestroy(): void {
+    this._subscription.clearAll('ScrollServiceComponent');
   }
 }
