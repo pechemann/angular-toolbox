@@ -1,6 +1,6 @@
 {
   "name": "angular-toolbox",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "peerDependencies": {
     "@angular/common": "^17.3.6",
     "@angular/core": "^17.3.6"
