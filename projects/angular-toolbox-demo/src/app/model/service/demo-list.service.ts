@@ -8,7 +8,9 @@ export class DemoListService {
 
   private readonly DEMO_LINK_LIST: DemoLink[] = [
     { label: "Dark Mode Service", path: "dark-mode-service" },
-    { label: "Scroll Service", path: "scroll-service" }
+    { label: "Scroll Service", path: "scroll-service" },
+    { label: "Subscription Service", path: "subscription-service" },
+    { label: "ButtonRole Directive", path: "button-role-directive" }
   ]
 
   public getDemoLinkList(): DemoLink[] {

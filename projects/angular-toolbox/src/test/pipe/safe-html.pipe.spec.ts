@@ -11,7 +11,7 @@ describe('SafeHtmlPipe', () => {
     pipe = new SafeHtmlPipe(TestBed.inject(DomSanitizer));
   });
 
-  it('should be created', () => {
+  it('should create an instance', () => {
     expect(pipe).toBeTruthy();
   });
   

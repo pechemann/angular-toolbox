@@ -5,6 +5,7 @@ import { SubscriptionService } from '../../../lib/service/subscription/subscript
 
 describe('ScrollService', () => {
   const TEST_DIV_SELECTOR: string = ".jasmine_html-reporter";
+  const TIMEOUT_INTERVAL: number = 1000;
   const getTestDiv: Function = ()=> {
     return document.querySelector(TEST_DIV_SELECTOR);
   };
@@ -22,14 +23,21 @@ describe('ScrollService', () => {
   };
   let service: ScrollService;
   let subscription: SubscriptionService;
+  let originalTimeout: number;
 
   beforeEach(() => {
+    originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = TIMEOUT_INTERVAL;
     TestBed.configureTestingModule({});
     service = TestBed.inject(ScrollService);
     subscription = TestBed.inject(SubscriptionService);
   });
 
-  it('should be created', () => {
+  afterEach(function() {
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
+  });
+
+  it('should create an instance', () => {
     expect(service).toBeTruthy();
   });
 

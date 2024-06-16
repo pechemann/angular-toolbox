@@ -1,0 +1,18 @@
+<demo [title]="title" [presentation]="presentation" [srcCode]="srcCode">
+    <div class="mb-4">Click the <em>Unsubscribe</em> button to emulate a call to the <code>ngOnDestroy()</code> method:</div>
+    <div class="btn-group mb-4" role="group" aria-label="Basic outlined example">
+        <button type="button" class="btn btn-outline-primary" (click)="eventEmiter_1.emit('Event #1 - idx: ')">EventEmitter #1</button>
+        <button type="button" class="btn btn-outline-primary" (click)="eventEmiter_2.emit('Event #2 - idx: ')">EventEmitter #2</button>
+        <button type="button" class="btn btn-danger" (click)="ngOnDestroy()">Unsubscribe</button>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h6 class="card-title">Dispatched Events:</h6>
+            <ul class="list-group list-group-flush">
+                @for (item of eventList; track item) {
+                    <li class="list-group-item">{{ item }}</li>
+                }
+            </ul>
+        </div>
+    </div>
+</demo>

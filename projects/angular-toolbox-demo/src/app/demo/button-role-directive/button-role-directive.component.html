@@ -1,0 +1,44 @@
+<demo [title]="title" [presentation]="presentation" [srcCode]="srcCode">
+    <div class="mb-4">Use tab key ans press enter to select User:</div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (item of data; track item) {
+                <tr buttonRole (click)="showModal(item)" (enter)="showModal(item)">
+                    <th scope="row">{{ item.id }}</th>
+                    <td>{{ item.firstName }}</td>
+                    <td>{{ item.lastName }}</td>
+                    <td>{{ item.email }}</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</demo>
+
+<dialog #msgDialog class="border rounded shadow">
+    <h5>Selected User</h5>
+    <hr>
+    <div class="modal-content">
+        <div class="modal-body">
+            @if (selectedUser) {
+                <dl>
+                    <dt>Full Name</dt>
+                    <dd>{{ selectedUser.firstName }} {{ selectedUser.lastName }}</dd>
+                    <dt>Email</dt>
+                    <dd>{{ selectedUser.email }}</dd>
+                </dl>
+            }
+        </div>
+        <hr>
+        <div class="modal-footer justify-content-center">
+            <button type="button" class="btn btn-primary w-50" (click)="closeModal()">OK</button>
+        </div>
+    </div>
+</dialog>

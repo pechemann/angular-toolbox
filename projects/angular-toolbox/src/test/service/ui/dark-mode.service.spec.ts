@@ -23,7 +23,7 @@ describe('DarkModeService', () => {
     clearLocalStorage();
   });
 
-  it('should be created', () => {
+  it('should create an instance', () => {
     expect(buildService(defaultConfigProvider)).toBeTruthy();
   });
   
