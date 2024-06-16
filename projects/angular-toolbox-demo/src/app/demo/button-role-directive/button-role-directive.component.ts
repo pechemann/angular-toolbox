@@ -26,24 +26,9 @@ export class ButtonRoleDirectiveComponent {
   public presentation: string = "An easy-to-use directive that enables keyboard navigation and provides support for keyboard <code>Enter</code> key events";
   public srcCode: CodeWrapper = {
     html: `...
-<!-- Current example implementation -->
 <tbody>
     @for (item of data; track item) {
-        <tr buttonRole (click)="showModal(item)" (enter)="showModal(item)">
-            <th scope="row">{{ item.id }}</th>
-            <td>{{ item.firstName }}</td>
-            <td>{{ item.lastName }}</td>
-            <td>{{ item.email }}</td>
-        </tr>
-    }
-</tbody>
-...
-
-<!-- Router implementation -->
-...
-<tbody>
-    @for (item of data; track item) {
-        <tr buttonRole [routerLink]="'users/' + item.id">
+        <tr buttonRole delegateClick (enter)="showModal(item)">
             <th scope="row">{{ item.id }}</th>
             <td>{{ item.firstName }}</td>
             <td>{{ item.lastName }}</td>

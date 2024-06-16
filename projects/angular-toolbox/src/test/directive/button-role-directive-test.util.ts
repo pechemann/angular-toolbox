@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { AfterViewChecked, ChangeDetectorRef, Component } from "@angular/core";
 
 export interface TestItem {
   value: string;
@@ -149,7 +149,27 @@ export class ButtonRoleDirectiveTestComponent {
 
   protected readonly item: TestItem = TEST_ITEM;
 
-  public onEnter(item: TestItem): void {
-    console.log(item)
+  public onEnter(item: TestItem): void {}
+}
+
+@Component({
+  template: `<div id="testElm" buttonRole delegateClick (enter)="onEnter(item)"><div>`
+})
+export class ButtonRoleDirectiveWithDelegationTestComponent {
+
+  protected readonly item: TestItem = TEST_ITEM;
+
+  public onEnter(item: TestItem): void {}
+}
+
+@Component({
+  template: `<div id="testElm" buttonRole routerLink="/expectedUrl"><div>`
+})
+export class ButtonRoleDirectiveWithRouterLinkTestComponent implements AfterViewChecked {
+
+  constructor(private _cdRef: ChangeDetectorRef) {}
+
+  public ngAfterViewChecked(): void {
+    this._cdRef.detectChanges();
   }
 }

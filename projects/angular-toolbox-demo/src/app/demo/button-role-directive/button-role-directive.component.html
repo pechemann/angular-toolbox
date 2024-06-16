@@ -1,6 +1,6 @@
 <demo [title]="title" [presentation]="presentation" [srcCode]="srcCode">
     <div class="mb-4">Use tab key ans press enter to select User:</div>
-    <table class="table">
+    <table class="table mb-5">
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -11,7 +11,7 @@
         </thead>
         <tbody>
             @for (item of data; track item) {
-                <tr buttonRole (click)="showModal(item)" (enter)="showModal(item)">
+                <tr buttonRole delegateClick (enter)="showModal(item)">
                     <th scope="row">{{ item.id }}</th>
                     <td>{{ item.firstName }}</td>
                     <td>{{ item.lastName }}</td>
@@ -20,6 +20,12 @@
             }
         </tbody>
     </table>
+    <div class="alert alert-info d-flex align-items-center gap-2" role="alert">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+            <use xlink:href="#infoIcon"/>
+        </svg>
+        The <code>delegateClick</code> attribute allows to invoke the <code>showModal(item)</code> callback when User clicks on the decorated HTML element.
+    </div>
 </demo>
 
 <dialog #msgDialog class="border rounded shadow">
