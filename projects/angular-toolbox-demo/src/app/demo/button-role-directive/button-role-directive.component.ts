@@ -39,7 +39,7 @@ export class ButtonRoleDirectiveComponent {
 ...
 `,
     ts: `export class ButtonRoleDirectiveComponent {
-  ....
+
   protected data: User[] = USER_LIST_MOCK;
 
   protected showModal(user: User): void {

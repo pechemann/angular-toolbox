@@ -7,7 +7,6 @@ describe('SafeHtmlPipe', () => {
   const HTML: string = '<h1>My HTML String</h1>';
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
     pipe = new SafeHtmlPipe(TestBed.inject(DomSanitizer));
   });
 

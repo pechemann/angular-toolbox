@@ -10,7 +10,8 @@ export class DemoListService {
     { label: "Dark Mode Service", path: "dark-mode-service" },
     { label: "Scroll Service", path: "scroll-service" },
     { label: "Subscription Service", path: "subscription-service" },
-    { label: "ButtonRole Directive", path: "button-role-directive" }
+    { label: "ButtonRole Directive", path: "button-role-directive" },
+    { label: "Version Service", path: "version-directive" }
   ]
 
   public getDemoLinkList(): DemoLink[] {

@@ -15,10 +15,10 @@ const REMOVE_ACTION: string = "remove";
  * @NgModule({
  * ...
  * providers: [
- *   { provide: DARK_MODE_CONFIG, useValue: { enableDarkMode: true} }
+ *   { provide: DARK_MODE_CONFIG, useValue: { enableDarkMode: true } }
  * ],
  * ...
- * s);
+ * });
  */
 export const DARK_MODE_CONFIG: DarkModeConfig = {
     
