@@ -1,10 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { EventEmitter, Inject, Injectable } from '@angular/core';
-
-/**
- * Workaround for the typescript ScrollBehavior declaration.
- */
-declare type ScrollBehavior = "auto" | "instant" | "smooth";
+import { ScrollBehavior } from '../../model';
 
 @Injectable({
   providedIn: 'root'

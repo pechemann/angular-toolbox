@@ -1,38 +1,12 @@
 import { Inject, Injectable, EventEmitter } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { DarkModeConfig } from '../../model';
 
 // --> Internal constants
 const STORAGE_KEY: string = "dark-mode-key";
 const CSS_PROP: string = "dark-mode";
 const ADD_ACTION: string = "add";
 const REMOVE_ACTION: string = "remove";
-
-/**
- * Defines properties for the DarkModeService configuration.
- */
-export interface DarkModeConfig {
-
-    /**
-     * Indicates whether the dark mode is activated by default (true), or not (false).
-     */
-    darkModeEnabled?: boolean;
-    
-    /**
-     * Indicates whether the dark mode uses browser settings (true), or not (false).
-     * When true, this property overrides the darkModeEnabled property.
-     */
-    detectBrowserSettings?: boolean;
-
-    /**
-     * CSS property name used to set the dark mode look and feel.
-     */
-    cssProperty?: string;
-
-    /**
-     * Reference to the key value used to persist the dark mode state to local storage.
-     */
-    storageKey?: string;
-}
 
 /**
  * The default provider for the DarkModeService configuration. You typically define
