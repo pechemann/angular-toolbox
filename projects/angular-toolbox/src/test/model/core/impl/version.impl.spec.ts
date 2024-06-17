@@ -5,11 +5,12 @@ describe('VersionImpl', () => {
   const MAJOR: number = 2;
   const MINOR: number = 5;
   const PATCH: number = 32;
+  const BUILD_TS: number = Date.now();
 
   let version: VersionImpl;
 
   beforeEach(() => {
-    version = new VersionImpl(MAJOR, MINOR, PATCH);
+    version = new VersionImpl(MAJOR, MINOR, PATCH, BUILD_TS);
   });
 
   it('should create an instance', () => {
@@ -26,6 +27,10 @@ describe('VersionImpl', () => {
 
   it('patch should return the patch version number', () => {
     expect(version.patch).toBe(PATCH);
+  });
+
+  it('buildTimeStamp should return the correct timestamp number', () => {
+    expect(version.buildTimeStamp).toBe(BUILD_TS);
   });
 
   it('toString() should return string representation of the version in the form "M.m.p"', () => {
