@@ -20,7 +20,7 @@ export class VersionServiceComponent {
   public presentation: string = "A lightweight service that provides  Semantic Versionning implementation for your Angular projects.";
   public srcCode: CodeWrapper = {
     html: `<p>Current Angular Toolbox Version: {{ versionService.getVersion().toString() }}</p>
-<p>Build Release Date: {{ versionService.getBuidTimestamp() | date }}</p>`,
+<p>Build Release Date: {{ versionService.getBuildTimestamp() | date }}</p>`,
     ts: `/////////////////////////
 // Application Module
 /////////////////////////

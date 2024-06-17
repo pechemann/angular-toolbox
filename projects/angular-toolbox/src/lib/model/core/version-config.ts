@@ -21,5 +21,5 @@ export interface VersionConfig {
     /**
      * Specifies the timestamp that corresponds to the build date for this config.
      */
-    buildTimeStamp: number;
+    buildTimestamp: number;
 }

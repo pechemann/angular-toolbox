@@ -14,7 +14,7 @@ describe('DARK_MODE_CONFIG', () => {
     expect(VERSION_CONFIG.patch).toEqual(0);
   });
 
-  it('default buildTimeStamp should be NaN', () => {
-    expect(VERSION_CONFIG.buildTimeStamp).toEqual(NaN);
+  it('default buildTimestamp should be NaN', () => {
+    expect(VERSION_CONFIG.buildTimestamp).toEqual(NaN);
   });
 });

@@ -26,7 +26,7 @@ describe('VersionService', () => {
   });
 
   it('should getBuidTimestamp() return a number', () => {
-    expect(service.getBuidTimestamp()).toBeInstanceOf(Number);
+    expect(service.getBuildTimestamp()).toBeInstanceOf(Number);
   });
   
   it('should getVersion() return the specified Version object implementation', () => {

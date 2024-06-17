@@ -31,11 +31,11 @@ export const VERSION_CONFIG: VersionConfig = {
    */
   patch: 0,
 
-    /**
-     * Specifies the timestamp that corresponds to the build date for this Version object.
-     * Default value is NaN.
-     */
-  buildTimeStamp: NaN
+  /**
+   * Specifies the timestamp that corresponds to the build date for this Version object.
+   * Default value is NaN.
+   */
+  buildTimestamp: NaN
 };
 
 /**
@@ -58,7 +58,7 @@ export class VersionService {
       config.major,
       config.minor,
       config.patch,
-      config.buildTimeStamp
+      config.buildTimestamp
     );
   }
 
@@ -76,7 +76,7 @@ export class VersionService {
    * 
    * @return the  build timestamp of the associated Angular project.
    */
-  public getBuidTimestamp(): number {
+  public getBuildTimestamp(): number {
     return this._version.buildTimeStamp;
   }
 }
