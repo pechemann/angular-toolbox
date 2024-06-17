@@ -165,9 +165,11 @@ export class DarkModeService {
     }
 
     private initBrowserMode(): void {
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            this.enableDarkMode();
-        }
+        if (this.matchDarkTheme()) return this.enableDarkMode();
+        this.disableDarkMode();
+    }
+
+    private matchDarkTheme(): boolean {
+        return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
     }
 }
-

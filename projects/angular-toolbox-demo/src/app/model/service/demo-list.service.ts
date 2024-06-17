@@ -11,7 +11,9 @@ export class DemoListService {
     { label: "Scroll Service", path: "scroll-service" },
     { label: "Subscription Service", path: "subscription-service" },
     { label: "ButtonRole Directive", path: "button-role-directive" },
-    { label: "Version Service", path: "version-directive" }
+    { label: "Version Service", path: "version-directive" },
+    { label: "Dark Mode Service: Bootstrap Integration", path: "dark-mode-service-bootstrap" }
+
   ]
 
   public getDemoLinkList(): DemoLink[] {
