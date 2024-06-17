@@ -6,7 +6,7 @@ import { VERSION_CONFIG } from './service';
     declarations: [],
     providers: [
         { provide: DARK_MODE_CONFIG, useValue: DARK_MODE_CONFIG },
-        { provide: VERSION_CONFIG, useValue: { major: 0, minor: 1, patch: 2, buildTimeStamp: 1718550881334 } }
+        { provide: VERSION_CONFIG, useValue: { major: 0, minor: 1, patch: 3, buildTimeStamp: 1718620227318 } }
     ],
     exports: []
 })

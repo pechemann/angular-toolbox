@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+/*import { Injectable, OnInit } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +12,7 @@ export class KeyboardCommandStrategyService implements OnInit {
     document.addEventListener('keydown', (event: KeyboardEvent)=> {
       this._action = null;
       if (!event.ctrlKey) return;
-      /*if (event.ctrlKey && event.key === 'z') {
-        alert('Undo!');
-      }*/
+      ///if (event.ctrlKey && event.key === 'z')
     });
 
     document.addEventListener('keyup', (event)=> {
@@ -22,4 +20,4 @@ export class KeyboardCommandStrategyService implements OnInit {
       self._action = null;
     });
   }
-}
+}*/
