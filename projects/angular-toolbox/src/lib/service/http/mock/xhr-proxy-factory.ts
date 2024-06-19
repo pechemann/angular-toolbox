@@ -1,11 +1,11 @@
 import { XhrFactory } from "@angular/common";
 import { inject } from "@angular/core";
 import { HttpMockService } from "./http-mock.service";
-import { EventTargetImpl } from "../../../model";
+import { EventTargetImpl, XMLHttpRequestProxy } from "../../../model";
 
 const GET: string = 'get';
 
-class XMLHttpRequestProxy implements XMLHttpRequest {
+class XMLHttpRequestProxyImpl implements XMLHttpRequestProxy {
 
     private readonly XHR: XMLHttpRequest;
     private readonly EVT_TGT: EventTarget;
@@ -170,7 +170,7 @@ class XhrProxyFactory extends XhrFactory {
     }
 
     public build(): XMLHttpRequest {
-        return new XMLHttpRequestProxy(this._httpMockService);
+        return new XMLHttpRequestProxyImpl(this._httpMockService);
     }
 }
 

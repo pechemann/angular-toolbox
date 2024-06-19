@@ -1,0 +1,1 @@
+export interface XMLHttpRequestProxy extends XMLHttpRequest {}
