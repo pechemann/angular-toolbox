@@ -1,20 +1,20 @@
 import { HttpHeaders } from "@angular/common/http";
-import { HttpResponseMockConfig } from "../model";
+import { HttpResponseMock } from "../model";
 
 /**
- * A statefull builder for creating new HttpResponseMockConfig instances.
+ * A statefull builder for creating new HttpResponseMock instances.
  */
 export class HttpResponseMockBuilder {
 
     /**
      * @private
      */
-    private _response: HttpResponseMockConfig = { url: null };
+    private _response: HttpResponseMock = { url: null };
 
     /**
-     * Sets the body property of the new HttpResponseMockConfig instance with sthe specified body value.
+     * Sets the body property of the new HttpResponseMock instance with sthe specified body value.
      * 
-     * @param body the value used to set the body property of the new HttpResponseMockConfig instance.
+     * @param body the value used to set the body property of the new HttpResponseMock instance.
      * 
      * @returns a reference to this HttpResponseMockBuilder instance.
      */
@@ -24,9 +24,9 @@ export class HttpResponseMockBuilder {
     }
 
     /**
-     * Sets the headers property of the new HttpResponseMockConfig instance with sthe specified headers value.
+     * Sets the headers property of the new HttpResponseMock instance with sthe specified headers value.
      * 
-     * @param headers the value used to set the headers property of the new HttpResponseMockConfig instance.
+     * @param headers the value used to set the headers property of the new HttpResponseMock instance.
      * 
      * @returns a reference to this HttpResponseMockBuilder instance.
      */
@@ -36,9 +36,9 @@ export class HttpResponseMockBuilder {
     }
 
     /**
-     * Sets the status property of the new HttpResponseMockConfig instance with sthe specified status value.
+     * Sets the status property of the new HttpResponseMock instance with sthe specified status value.
      * 
-     * @param status the value used to set the status property of the new HttpResponseMockConfig instance.
+     * @param status the value used to set the status property of the new HttpResponseMock instance.
      * 
      * @returns a reference to this HttpResponseMockBuilder instance.
      */
@@ -48,9 +48,9 @@ export class HttpResponseMockBuilder {
     }
 
     /**
-     * Sets the statusText property of the new HttpResponseMockConfig instance with sthe specified statusText value.
+     * Sets the statusText property of the new HttpResponseMock instance with sthe specified statusText value.
      * 
-     * @param statusText the value used to set the statusText property of the new HttpResponseMockConfig instance.
+     * @param statusText the value used to set the statusText property of the new HttpResponseMock instance.
      * 
      * @returns a reference to this HttpResponseMockBuilder instance.
      */
@@ -60,9 +60,9 @@ export class HttpResponseMockBuilder {
     }
 
     /**
-     * Sets the url property of the new HttpResponseMockConfig instance with sthe specified url value.
+     * Sets the url property of the new HttpResponseMock instance with sthe specified url value.
      * 
-     * @param url the value used to set the url property of the new HttpResponseMockConfig instance.
+     * @param url the value used to set the url property of the new HttpResponseMock instance.
      * 
      * @returns a reference to this HttpResponseMockBuilder instance.
      */
@@ -72,19 +72,19 @@ export class HttpResponseMockBuilder {
     }
 
     /**
-     * Return a new HttpResponseMockConfig instance, built from the properties specified with the
+     * Return a new HttpResponseMock instance, built from the properties specified with the
      * HttpResponseMockBuilder methods.
      * 
-     * @returns a new HttpResponseMockConfig instance.
+     * @returns a new HttpResponseMock instance.
      */
-    public response(): HttpResponseMockConfig {
+    public response(): HttpResponseMock {
         return this._response;
     }
 }
 
 /**
- * A utility function used to create new "chainable" HttpResponseMockConfig instances.
+ * A utility function used to create new "chainable" HttpResponseMock instances.
  * 
- * @returns a new HttpResponseMockConfig instance;
+ * @returns a new HttpResponseMock instance;
  */
 export const httpResponseMock:()=> HttpResponseMockBuilder = ()=> new HttpResponseMockBuilder();

@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpResponseMockBuilder, HttpResponseMockConfig } from '../../public-api';
+import { HttpResponseMockBuilder, HttpResponseMock } from '../../public-api';
 import { HttpHeaders, HttpStatusCode } from '@angular/common/http';
 
 const BODY: string = 'Body test';
@@ -26,8 +26,8 @@ describe('HttpResponseMockBuilder', () => {
     expect(builder.response()).toBeTruthy();
   });
 
-  it('response() method should create empty HttpResponseMockConfig objects, except "url" property set to "null"', () => {
-    const response: HttpResponseMockConfig = builder.response();
+  it('response() method should create empty HttpResponseMock objects, except "url" property set to "null"', () => {
+    const response: HttpResponseMock = builder.response();
     expect(response.body).toBeUndefined();
     expect(response.headers).toBeUndefined();
     expect(response.status).toBeUndefined();

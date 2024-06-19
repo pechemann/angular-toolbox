@@ -52,7 +52,7 @@ export class AppModule {}`
   };
 
   public loadData(): void {
-    this._http.get("est").subscribe((result: any)=> {
+    this._http.get("/test").subscribe((result: any)=> {
       console.log(result);
     });
   }

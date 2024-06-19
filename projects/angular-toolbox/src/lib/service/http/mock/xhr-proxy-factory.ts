@@ -1,21 +1,15 @@
 import { XhrFactory } from "@angular/common";
 import { inject } from "@angular/core";
 import { HttpMockService } from "./http-mock.service";
-import { EventTargetImpl, XMLHttpRequestProxy } from "../../../model";
-
-/**
- * @private
- */
-const GET: string = 'get';
+import {  HttpMockConfig, XMLHttpRequestProxy } from "../../../model";
+import { DelegateXMLHttpRequest } from "./delegate-xmlhttprequest";
 
 /**
  * @private
  */
 class XMLHttpRequestProxyImpl implements XMLHttpRequestProxy {
 
-    private readonly XHR: XMLHttpRequest;
-    private readonly EVT_TGT: EventTarget;
-    private _routeConfig!: any;
+    private XHR!: XMLHttpRequestProxy;
 
     readonly UNSENT = 0;
     readonly OPENED = 1;
@@ -84,36 +78,29 @@ class XMLHttpRequestProxyImpl implements XMLHttpRequestProxy {
     open(method: unknown, url: unknown, async?: unknown, username?: unknown, password?: unknown): void {
         const m: string = (method as string).toString().toLowerCase();
         const u: string = (url as string);
-       // this._routeConfig = this._httpMockService.getRouteConfig(u, m);
-        if (!this._routeConfig) return this.XHR.open(m.toString(), u, async as any, username as any, password as any);
+        const config: HttpMockConfig = this._httpMockService.getRouteConfig(u, m);
+        if (this.XHR && this.XHR instanceof DelegateXMLHttpRequest) this.XHR.destroy();
+        this.XHR = config ? new DelegateXMLHttpRequest(config) : new XMLHttpRequest();
+        this.XHR.open(m.toString(), u, async as any, username as any, password as any);
     }
 
     abort(): void {
         console.log("abort")
-        if (this._routeConfig) {
-            return;
-        }
         this.XHR.abort();
     }
 
     getResponseHeader(name: string): string | null {
         console.log("getResponseHeader", name)
-        if (this._routeConfig) {
-            return "";
-        }
         return this.XHR.getResponseHeader(name);
     }
 
     dispatchEvent(event: Event): boolean {
         console.log("dispatchEvent", event)
-        return !this._routeConfig ? this.XHR.dispatchEvent(event) : this.EVT_TGT.dispatchEvent(event);
+        return this.XHR.dispatchEvent(event);
     }
 
     getAllResponseHeaders(): string {
         console.log("getAllResponseHeaders", this.XHR.getAllResponseHeaders())
-        if (this._routeConfig) {
-            return "";
-        }
         return this.XHR.getAllResponseHeaders();
     }
 
@@ -121,18 +108,11 @@ class XMLHttpRequestProxyImpl implements XMLHttpRequestProxy {
     addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions | undefined): void;
     addEventListener(type: unknown, listener: unknown, options?: unknown): void {
         console.log("addEventListener", type)
-        if (!this._routeConfig) {
-            this.XHR.addEventListener(type as any, listener as any, options as any);
-            return;
-        }
-        this.EVT_TGT.addEventListener(type as any, listener as any, options as any);
+        this.XHR.addEventListener(type as any, listener as any, options as any);
     }
 
     overrideMimeType(mime: string): void {
         console.log("overrideMimeType", mime)
-        if (this._routeConfig) {
-            return;
-        }
         this.XHR.overrideMimeType(mime);
     }
 
@@ -140,36 +120,23 @@ class XMLHttpRequestProxyImpl implements XMLHttpRequestProxy {
     removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions | undefined): void;
     removeEventListener(type: unknown, listener: unknown, options?: unknown): void {
         console.log("removeEventListener", type)
-        if (!this._routeConfig) {
-            this.XHR.removeEventListener(type as any, listener as any, options as any);
-            return;
-        }
-        this.EVT_TGT.addEventListener(type as any, listener as any, options as any);
+        this.XHR.removeEventListener(type as any, listener as any, options as any);
     }
 
     send(body?: Document | XMLHttpRequestBodyInit | null | undefined): void {
         console.log("send", body)
-        if (this._routeConfig) {
-            return;
-        }
         this.XHR.send(body);
     }
 
     setRequestHeader(name: string, value: string): void {
-        console.log("setRequestHeader", name)
-        if (this._routeConfig) {
-            return;
-        }
+        console.log("setRequestHeader", name, value)
         this.XHR.setRequestHeader(name, value);
     }
 
     /**
      * @private
      */
-    constructor(private _httpMockService: HttpMockService) {
-        this.XHR = new XMLHttpRequest();
-        this.EVT_TGT = new EventTargetImpl();
-    }
+    constructor(private _httpMockService: HttpMockService) {}
 }
 
 /**

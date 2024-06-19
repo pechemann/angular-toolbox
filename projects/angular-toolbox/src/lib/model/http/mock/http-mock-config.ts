@@ -3,7 +3,7 @@ import { HttpHeaders, HttpRequest } from "@angular/common/http";
 /**
  * Defines the config of a HTTP Response mock object.
  */
-export interface HttpResponseMockConfig {
+export interface HttpResponseMock {
 
      /**
      * The response body.
@@ -34,10 +34,10 @@ export interface HttpResponseMockConfig {
 }
 
 /**
- * The HttpMethodMockConfig interface provides actions invoked each time the Angular
+ * The HttpMethodMock interface provides actions invoked each time the Angular
  * HttpClient instance sends requests to a specific endpoint route.
  */
-export interface HttpMethodMockConfig {
+export interface HttpMethodMock {
 
     /**
      * This method emulates a successful HTTP call response.
@@ -45,7 +45,7 @@ export interface HttpMethodMockConfig {
      * @param request the request associated with a HTTP call.
      * @returns a user-defined HttpResponse mock object depending on the specified request parameter.
      */
-    data?: (request: HttpRequest<any>)=> HttpResponseMockConfig
+    data?: (request: HttpRequest<any>)=> HttpResponseMock
     
     /**
      * This method emulates an unsuccessful HTTP call response.
@@ -53,13 +53,13 @@ export interface HttpMethodMockConfig {
      * @param request the request associated with a HTTP call.
      * @returns a user-defined HttpResponse mock object depending on the specified request parameter.
      */
-    error?: (request: HttpRequest<any>)=> HttpResponseMockConfig;
+    error?: (request: HttpRequest<any>)=> HttpResponseMock;
 }
 
 /**
  * Provides the API for defining mock strategies for a specific endpoint route.
  */
-export interface HttpRouteMockConfig {
+export interface HttpRouteMock {
 
     /**
      * The path to the endpoint to mock.
@@ -69,32 +69,32 @@ export interface HttpRouteMockConfig {
     /**
      * The mock configuration of HTTP GET method calls for specified path.
      */
-    get?: HttpMethodMockConfig;
+    get?: HttpMethodMock;
     
     /**
      * The mock configuration of HTTP POST method calls for specified path.
      */
-    post?: HttpMethodMockConfig;
+    post?: HttpMethodMock;
     
     /**
      * The mock configuration of HTTP PUT method calls for specified path.
      */
-    put?: HttpMethodMockConfig;
+    put?: HttpMethodMock;
     
     /**
      * The mock configuration of HTTP DELETE method calls for specified path.
      */
-    delete?: HttpMethodMockConfig;
+    delete?: HttpMethodMock;
     
     /**
      * The mock configuration of HTTP PATCH method calls for specified path.
      */
-    patch?: HttpMethodMockConfig;
+    patch?: HttpMethodMock;
     
     /**
      * The mock configuration of HTTP HEAD method calls for specified path.
      */
-    head?: HttpMethodMockConfig;
+    head?: HttpMethodMock;
 }
 
 /**
@@ -105,5 +105,5 @@ export interface HttpMockConfig {
     /**
      * The configuration of all mock strategies for each specified routes.
      */
-    routes: HttpRouteMockConfig[];
+    routes: HttpRouteMock[];
 }
