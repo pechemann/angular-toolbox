@@ -1,5 +1,5 @@
 import { Component, Input, TemplateRef } from '@angular/core';
-import { CodeWrapper } from '../model/business/code-wrapper';
+import { CodeWrapper } from '../../model/business/code-wrapper';
 
 @Component({
   selector: 'demo',

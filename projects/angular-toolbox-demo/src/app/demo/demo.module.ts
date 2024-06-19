@@ -9,6 +9,7 @@ import { ButtonRoleDirectiveComponent } from './button-role-directive/button-rol
 import { ButtonRoleDirective } from 'projects/angular-toolbox/src/public-api';
 import { VersionServiceComponent } from './version-service/version-service.component';
 import { DarkModeServiceBootstrapComponent } from './dark-mode-service-bootstrap/dark-mode-service-bootstrap.component';
+import { HttpMockServiceComponent } from './http-mock-service/http-mock-service.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { DarkModeServiceBootstrapComponent } from './dark-mode-service-bootstrap
     SubscriptionServiceComponent,
     ButtonRoleDirectiveComponent,
     VersionServiceComponent,
-    DarkModeServiceBootstrapComponent
+    DarkModeServiceBootstrapComponent,
+    HttpMockServiceComponent
   ],
   imports: [
     CommonModule,

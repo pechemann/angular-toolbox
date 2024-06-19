@@ -12,8 +12,8 @@ export class DemoListService {
     { label: "Subscription Service", path: "subscription-service" },
     { label: "ButtonRole Directive", path: "button-role-directive" },
     { label: "Version Service", path: "version-directive" },
-    { label: "Dark Mode Service: Bootstrap Integration", path: "dark-mode-service-bootstrap" }
-
+    { label: "Dark Mode Service: Bootstrap Integration", path: "dark-mode-service-bootstrap" },
+    { label: "HTTP Mock Service", path: "http-mock-service" }
   ]
 
   public getDemoLinkList(): DemoLink[] {

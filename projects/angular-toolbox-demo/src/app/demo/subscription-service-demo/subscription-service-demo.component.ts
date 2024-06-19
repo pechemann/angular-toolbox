@@ -27,7 +27,7 @@ export class SubscriptionServiceComponent implements OnInit, OnDestroy {
   public title: string = "Subscription Service Demo";
   public presentation: string = "A lightweight service that provides easy-to-use functionalities for managing observable subscriptions.";
   public srcCode: CodeWrapper = {
-    html: `<button type="button" class="btn btn-outline-primary" (click)="eventEmiter_1.emit('Event #1 - idx: ')">EventEmitter #1</button>
+    html: [`<button type="button" class="btn btn-outline-primary" (click)="eventEmiter_1.emit('Event #1 - idx: ')">EventEmitter #1</button>
 <button type="button" class="btn btn-outline-primary" (click)="eventEmiter_2.emit('Event #2 - idx: ')">EventEmitter #2</button>
 <button type="button" (click)="ngOnDestroy()">Unsubscribe</button>
 
@@ -35,9 +35,9 @@ export class SubscriptionServiceComponent implements OnInit, OnDestroy {
     @for (item of eventList; track item) {
         <li class="list-group-item">{{ item }}</li>
     }
-</ul>`
+</ul>`]
     ,
-    ts: `const COMPONENT_REF: string = "SubscriptionServiceComponent";
+    ts: [`const COMPONENT_REF: string = "SubscriptionServiceComponent";
   
 export class SubscriptionServiceComponent implements OnInit, OnDestroy {
 
@@ -60,7 +60,7 @@ export class SubscriptionServiceComponent implements OnInit, OnDestroy {
   public ngOnDestroy(): void {
     this._subscriptionService.clearAll(COMPONENT_REF);
   }
-}`
+}`]
   };
 
   public ngOnInit(): void {

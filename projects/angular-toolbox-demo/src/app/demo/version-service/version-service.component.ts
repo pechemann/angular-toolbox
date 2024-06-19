@@ -17,11 +17,11 @@ export class VersionServiceComponent {
   }
 
   public title: string = "Version Service Demo";
-  public presentation: string = "A lightweight service that provides  Semantic Versionning implementation for your Angular projects.";
+  public presentation: string = "A lightweight service that provides Semantic Versionning implementation for your Angular projects.";
   public srcCode: CodeWrapper = {
-    html: `<p>Current Angular Toolbox Version: {{ versionService.getVersion().toString() }}</p>
-<p>Build Release Date: {{ versionService.getBuildTimestamp() | date }}</p>`,
-    ts: `/////////////////////////
+    html: [`<p>Current Angular Toolbox Version: {{ versionService.getVersion().toString() }}</p>
+<p>Build Release Date: {{ versionService.getBuildTimestamp() | date }}</p>`],
+    ts: [`/////////////////////////
 // Application Module
 /////////////////////////
 
@@ -33,14 +33,12 @@ export class VersionServiceComponent {
   exports: []
 })
 export class AppModule { }
-
-
-/////////////////////////
+`, `/////////////////////////
 // Component class
 /////////////////////////
 
 export class VersionServiceComponent {
     constructor(public versionService: VersionService) {}
-}`
+}`]
   };
 }

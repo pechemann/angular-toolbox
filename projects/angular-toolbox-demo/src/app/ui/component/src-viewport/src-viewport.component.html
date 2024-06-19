@@ -1,0 +1,28 @@
+<section>
+  <div class="container border rounded mb-4">
+    <ul class="nav mb-2">
+      @if(hasSrcCode('html')) {
+        <li class="nav-item">
+          <button class="nav-link" [class.active]="currLang === 'html'" (click)="changeSrcDisplay('html')">HTML</button>
+        </li>
+      }
+      @if (hasSrcCode('css')) {
+        <li class="nav-item">
+          <button class="nav-link" [class.active]="currLang === 'css'" (click)="changeSrcDisplay('css')">CSS</button>
+        </li>
+      }
+      @if (hasSrcCode('ts')) {
+        <li class="nav-item">
+          <button class="nav-link" [class.active]="currLang === 'ts'" (click)="changeSrcDisplay('ts')">TypeScript</button>
+        </li>
+      }
+    </ul>
+    @if (hasSrcCode(currLang)) {
+      <div class="border-top">
+        @for(item of currentSrc; track item; let i = $index) {
+          <code-viewport [code]="item"/>
+        }
+      </div>
+    }
+  </div>
+</section>

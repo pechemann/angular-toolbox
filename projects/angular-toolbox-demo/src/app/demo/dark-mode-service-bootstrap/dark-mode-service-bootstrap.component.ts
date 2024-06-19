@@ -24,8 +24,8 @@ export class DarkModeServiceBootstrapComponent implements OnDestroy, OnInit {
   public title: string = "Dark Mode Service: Bootstrap Integration";
   public presentation: string = "The following sample application shows how to easily integrate Bootstrap with the <code>DarkModeService</code> service.";
   public srcCode: CodeWrapper = {
-    html: `<button (click)="darkModeService.toggleDarkMode()"> Toggle Dark Mode </button>`,
-    ts: `export class DarkModeServiceBootstrapComponent {
+    html: [`<button (click)="darkModeService.toggleDarkMode()"> Toggle Dark Mode </button>`],
+    ts: [`export class DarkModeServiceBootstrapComponent {
 
   constructor(public darkModeService: DarkModeService,
               @Inject(DOCUMENT) doc: Document) {
@@ -33,7 +33,7 @@ export class DarkModeServiceBootstrapComponent implements OnDestroy, OnInit {
         (isDarkMode: boolean)=> doc.body.setAttribute("data-bs-theme", isDarkMode ? 'dark' : 'light'))
     );
   }
-}`
+}`]
   };
 
   public ngOnInit(): void {

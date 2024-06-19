@@ -25,7 +25,7 @@ export class ButtonRoleDirectiveComponent {
   public title: string = "ButtonRole Directive Demo";
   public presentation: string = "An easy-to-use directive that enables keyboard navigation and provides support for keyboard <code>Enter</code> key events";
   public srcCode: CodeWrapper = {
-    html: `...
+    html: [`...
 <tbody>
     @for (item of data; track item) {
         <tr buttonRole delegateClick (enter)="showModal(item)">
@@ -37,15 +37,15 @@ export class ButtonRoleDirectiveComponent {
     }
 </tbody>
 ...
-`,
-    ts: `export class ButtonRoleDirectiveComponent {
+`],
+    ts: [`export class ButtonRoleDirectiveComponent {
 
   protected data: User[] = USER_LIST_MOCK;
 
   protected showModal(user: User): void {
     this.modal.showModal(user);
   }
-}`
+}`]
   };
 
   protected showModal(user: User): void {

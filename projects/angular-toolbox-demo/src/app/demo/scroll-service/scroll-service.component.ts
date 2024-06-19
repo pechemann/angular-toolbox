@@ -24,8 +24,8 @@ export class ScrollServiceComponent implements OnInit, OnDestroy {
   public title: string = "Scroll Service Demo";
   public presentation: string = "A lightweight service that provides scrolling capabilities to your Angular application.";
   public srcCode: CodeWrapper = {
-    html: "<div>Window scrollY position: {{ scrollY }}</div>",
-    ts: "this.scrollService.onScroll.subscribe((e)=> this.scrollY = (e.currentTarget as Window).scrollY);"
+    html: ["<div>Window scrollY position: {{ scrollY }}</div>"],
+    ts: ["this.scrollService.onScroll.subscribe((e)=> this.scrollY = (e.currentTarget as Window).scrollY);"]
   };
 
   public scrollY: number = 0;

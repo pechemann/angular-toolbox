@@ -1,0 +1,25 @@
+
+button.active {
+    border-bottom: 2px solid #0d6efd;
+    padding-bottom: 4px;
+}
+
+pre {
+    margin-top: 10px;
+    background-color: #333;
+    padding: 12px;
+    color: #FCF3CF;
+    border-radius: 4px;
+}
+
+.copy-btn-wrapper {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    z-index: 100;
+    padding: 0;
+    button {
+        padding: 3px;
+        color: #FCF3CF !important;
+    }
+}

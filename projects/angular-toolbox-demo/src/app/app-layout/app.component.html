@@ -14,10 +14,18 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a [routerLink]="['home']" title="Home">Home</a></li>
-          <li class="breadcrumb-item" *ngFor="let item of breadcrumb.getItemList()" [ngSwitch]="item.path">
-            <span *ngSwitchCase="undefined">{{ item.label }}</span>
-            <a *ngSwitchDefault [routerLink]="[item.path]" [title]="item.label">{{ item.label }}</a>
-          </li>
+          @for(item of breadcrumb.getItemList(); track item) {
+            <li class="breadcrumb-item" [ngSwitch]="">
+                @switch (item.path) {
+                    @case (undefined) {
+                        <span>{{ item.label }}</span>
+                    }
+                    @default {
+                        <a [routerLink]="[item.path]" [title]="item.label">{{ item.label }}</a>
+                    }
+                }
+            </li>
+          }
         </ol>
       </nav>
     <router-outlet></router-outlet>

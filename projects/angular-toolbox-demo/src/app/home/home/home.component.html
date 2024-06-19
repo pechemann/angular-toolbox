@@ -20,9 +20,11 @@
                 quickly duplicate to a new Angular project.
             </p>
             <ul class="icon-list">
-                <li *ngFor="let item of demoList.getDemoLinkList()">
-                    <a [routerLink]="'../demo/' + item.path" rel="noopener" [title]="item.label">{{ item.label }}</a>
-                </li>
+                @for(item of demoList.getDemoLinkList(); track item) {
+                    <li>
+                        <a [routerLink]="'../demo/' + item.path" rel="noopener" [title]="item.label">{{ item.label }}</a>
+                    </li>
+                }
             </ul>
         </div>
 
