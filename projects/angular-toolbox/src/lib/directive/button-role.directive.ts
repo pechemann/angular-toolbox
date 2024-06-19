@@ -29,26 +29,39 @@ const ROUTER_LINK_REF: string = 'ng-reflect-router-link';
 export class ButtonRoleDirective<T> implements AfterViewInit {
 
   /**
-   * @private
+   * Dispatches events when the user presses the "Enter" key.
    */
   @Output()
   public readonly enter: EventEmitter<T> = new EventEmitter<T>();
 
+  /**
+   * Forces callback methods defined with the "enter" event listener to be invoked when user clicks on the 
+   * decorated element.
+   */
   @Input()
   public delegateClick: any;
 
+  /**
+   * @private
+   */
   @HostListener('keyup', ["$event", "$event.target.value"])
   private onKeyup(event: KeyboardEvent, value: T): void {
     if (event.key !== ENTER_KEY) return;
     this.processEvent(event, value);
   }
   
+  /**
+   * @private
+   */
   @HostListener('click', ["$event", "$event.target.value"])
   private onClick(event: MouseEvent, value: T): void {
     if (this.delegateClick === undefined) return;
     this.processEvent(event, value);
   }
 
+  /**
+   * @private
+   */
   private _routerLinkRef: string | null = null;
 
   /**
@@ -69,6 +82,9 @@ export class ButtonRoleDirective<T> implements AfterViewInit {
     this._routerLinkRef = elm.getAttribute(ROUTER_LINK_REF);
   }
 
+  /**
+   * @private
+   */
   private processEvent(event: Event, value: T): void {
     event.preventDefault();
     event.stopImmediatePropagation();

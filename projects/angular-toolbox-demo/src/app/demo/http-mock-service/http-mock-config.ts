@@ -1,17 +1,15 @@
-import { HttpStatusCode } from "@angular/common/http";
+import { HttpRequest, HttpStatusCode } from "@angular/common/http";
+import { HttpMockConfig, httpResponseMock } from "angular-toolbox";
 
-export const config = {
+export const config: HttpMockConfig = {
     routes: [
         {
             path: "/test",
             get: {
-                data: ()=> "Lorem Ipsum",
-                error: (input: string)=> {
+                data: (req: HttpRequest<any>)=> httpResponseMock().body("Lorem Ipsum").response(),
+                error: (req: HttpRequest<any>)=> {
                     // Build error dynamically depending on input value.
-                    return {
-                        statusCode: HttpStatusCode.NotFound,
-                        message: "Fuck You!"
-                    }
+                    return httpResponseMock().status(HttpStatusCode.NotFound).statusText("Fuck You!").response();
                 }
             }
         }

@@ -7,7 +7,7 @@ describe('EMPTY_STRING', () => {
     TestBed.configureTestingModule({});
   });
   
-  it('EMPTY_STRING constant sould refer to an empty string', () => {
+  it('EMPTY_STRING constant should refer to an empty string', () => {
     expect(EMPTY_STRING).toBe("");
   });
 });

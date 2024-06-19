@@ -46,13 +46,13 @@ export const VERSION_CONFIG: VersionConfig = {
 })
 export class VersionService {
 
-    // --> Private properties
+  // --> Private properties
   private readonly _version: Version;
 
-    /**
-     * Creates a new VersionService instance.
-     * @param config the reference to the VersionConfig provider.
-     */
+  /**
+   * Creates a new VersionService instance.
+   * @param config the reference to the VersionConfig provider.
+   */
   constructor(@Inject(VERSION_CONFIG) config: VersionConfig) {
     this._version = new VersionImpl(
       config.major,

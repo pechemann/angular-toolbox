@@ -25,6 +25,9 @@ export class VersionImpl implements Version {
      */
     public readonly buildTimeStamp: number;
 
+  /**
+   * @private
+   */
     constructor(major: number, minor: number, patch: number, buildTimeStamp: number) {
         this.major = major;
         this.minor = minor;
