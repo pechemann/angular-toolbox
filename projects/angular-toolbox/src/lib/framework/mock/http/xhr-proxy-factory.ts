@@ -2,21 +2,16 @@ import { XhrFactory } from "@angular/common";
 import { inject } from "@angular/core";
 import { HttpMockService } from "../../../service/http/mock/http-mock.service";
 import { HttpMethodMock, XMLHttpRequestProxy } from "../../../model";
-import { DelegateXMLHttpRequest } from "./delegate-xmlhttprequest";
+import { DelegateXhr } from "./delegate-xhr";
 import { EMPTY_STRING } from "../../../util";
+import { XhrBase } from "./xhr-base";
 
 /**
  * @private
  */
-class XMLHttpRequestProxyImpl implements XMLHttpRequestProxy {
+class XMLHttpRequestProxyImpl extends XhrBase implements XMLHttpRequestProxy {
 
     private XHR!: XMLHttpRequestProxy;
-
-    readonly UNSENT = 0;
-    readonly OPENED = 1;
-    readonly HEADERS_RECEIVED = 2;
-    readonly LOADING = 3;
-    readonly DONE = 4;
 
     get response(): any {
         return  this.XHR ? this.XHR.response : null;
@@ -34,7 +29,7 @@ class XMLHttpRequestProxyImpl implements XMLHttpRequestProxy {
         return this.XHR ? this.XHR.statusText : EMPTY_STRING;
     }
 
-    get responseXML(): Document | null {
+    override get responseXML(): Document | null {
         return this.XHR ? this.XHR.responseXML : null;
     }
 
@@ -58,22 +53,6 @@ class XMLHttpRequestProxyImpl implements XMLHttpRequestProxy {
         return this.XHR.upload;
     }
 
-    onabort: ((this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) => any) | null = null;
-
-    onerror: ((this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) => any) | null = null;
-
-    onload: ((this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) => any) | null = null;
-
-    onloadend: ((this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) => any) | null = null;
-
-    onloadstart: ((this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) => any) | null = null;
-
-    onprogress: ((this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) => any) | null = null;
-
-    onreadystatechange: ((this: XMLHttpRequest, ev: Event) => any) | null = null;
-
-    ontimeout: ((this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) => any) | null = null;
-
     open(method: string, url: string | URL): void;
     open(method: string, url: string | URL, async: boolean, username?: string | null | undefined, password?: string | null | undefined): void;
     open(method: unknown, url: unknown, async?: unknown, username?: unknown, password?: unknown): void {
@@ -81,8 +60,8 @@ class XMLHttpRequestProxyImpl implements XMLHttpRequestProxy {
         const m: string = (method as string).toString().toLowerCase();
         const u: string = (url as string);
         const config: HttpMethodMock | undefined = this._httpMockService.getMethodConfig(u, m);
-        if (this.XHR && this.XHR instanceof DelegateXMLHttpRequest) this.XHR.destroy();
-        this.XHR = config ? new DelegateXMLHttpRequest(config) : new XMLHttpRequest();
+        if (this.XHR && this.XHR instanceof DelegateXhr) this.XHR.destroy();
+        this.XHR = config ? new DelegateXhr(config) : new XMLHttpRequest();
         /*this.XHR.onabort = this.onabort;
         this.XHR.onerror = this.onerror;
         this.XHR.onload = this.onload;
@@ -103,7 +82,7 @@ class XMLHttpRequestProxyImpl implements XMLHttpRequestProxy {
         return this.XHR.getResponseHeader(name);
     }
 
-    dispatchEvent(event: Event): boolean {
+    override dispatchEvent(event: Event): boolean {
         console.log("dispatchEvent", event)
         return this.XHR.dispatchEvent(event);
     }
@@ -113,9 +92,7 @@ class XMLHttpRequestProxyImpl implements XMLHttpRequestProxy {
         return this.XHR.getAllResponseHeaders();
     }
 
-    addEventListener<K extends keyof XMLHttpRequestEventMap>(type: K, listener: (this: XMLHttpRequest, ev: XMLHttpRequestEventMap[K]) => any, options?: boolean | AddEventListenerOptions | undefined): void;
-    addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions | undefined): void;
-    addEventListener(type: unknown, listener: unknown, options?: unknown): void {
+    override addEventListener(type: unknown, listener: unknown, options?: unknown): void {
         console.log("addEventListener", type)
         this.XHR.addEventListener(type as any, listener as any, options as any);
     }
@@ -125,9 +102,7 @@ class XMLHttpRequestProxyImpl implements XMLHttpRequestProxy {
         this.XHR.overrideMimeType(mime);
     }
 
-    removeEventListener<K extends keyof XMLHttpRequestEventMap>(type: K, listener: (this: XMLHttpRequest, ev: XMLHttpRequestEventMap[K]) => any, options?: boolean | EventListenerOptions | undefined): void;
-    removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions | undefined): void;
-    removeEventListener(type: unknown, listener: unknown, options?: unknown): void {
+    override removeEventListener(type: unknown, listener: unknown, options?: unknown): void {
         console.log("removeEventListener", type)
         this.XHR.removeEventListener(type as any, listener as any, options as any);
     }
@@ -145,7 +120,9 @@ class XMLHttpRequestProxyImpl implements XMLHttpRequestProxy {
     /**
      * @private
      */
-    constructor(private _httpMockService: HttpMockService) {}
+    constructor(private _httpMockService: HttpMockService) {
+        super();
+    }
 }
 
 /**

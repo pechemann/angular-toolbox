@@ -1,9 +1,10 @@
 import { HttpHeaders, HttpRequest, HttpStatusCode } from "@angular/common/http";
-import { EventTargetImpl, XMLHttpRequestProxy, HttpMethodMock } from "../../../model";
+import { XMLHttpRequestProxy, HttpMethodMock } from "../../../model";
 import { ProgressEventMock } from "./progress-event-mock";
 import { DefaultHeadersConfigFactory } from "./default-headers-config.factory";
 import { EMPTY_STRING } from "../../../util";
 import { HttpResponseMock } from "angular-toolbox";
+import { XhrBase } from "./xhr-base";
 
 declare interface DataStorage {
     httpResponse: HttpResponseMock;
@@ -14,33 +15,8 @@ declare interface DataStorage {
 /**
  * @private
  */
-export class DelegateXMLHttpRequest extends EventTargetImpl implements XMLHttpRequestProxy {
+export class DelegateXhr extends XhrBase implements XMLHttpRequestProxy {
     
-    /**
-     * @private
-     */
-    readonly UNSENT = 0;
-    
-    /**
-     * @private
-     */
-    readonly OPENED = 1;
-    
-    /**
-     * @private
-     */
-    readonly HEADERS_RECEIVED = 2;
-    
-    /**
-     * @private
-     */
-    readonly LOADING = 3;
-    
-    /**
-     * @private
-     */
-    readonly DONE = 4;
-
     /**
      * @private
      */
@@ -118,10 +94,6 @@ export class DelegateXMLHttpRequest extends EventTargetImpl implements XMLHttpRe
         return this._statusText;
     }
 
-    get responseXML(): Document | null {
-        return null;
-    }
-
     get readyState(): number {
         return this._readyState;
     }
@@ -141,22 +113,6 @@ export class DelegateXMLHttpRequest extends EventTargetImpl implements XMLHttpRe
     get upload(): XMLHttpRequestUpload {
         return null as any;
     }
-
-    onabort: ((this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) => any) | null = null;
-
-    onerror: ((this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) => any) | null = null;
-
-    onload: ((this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) => any) | null = null;
-
-    onloadend: ((this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) => any) | null = null;
-
-    onloadstart: ((this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) => any) | null = null;
-
-    onprogress: ((this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) => any) | null = null;
-
-    onreadystatechange: ((this: XMLHttpRequest, ev: Event) => any) | null = null;
-
-    ontimeout: ((this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) => any) | null = null;
 
     open(method: string, url: string | URL): void;
     open(method: string, url: string | URL, async: boolean, username?: string | null | undefined, password?: string | null | undefined): void;
