@@ -1,1 +1,1 @@
-export * from './xhr-proxy-factory';
+export * from './http-mock-factory';

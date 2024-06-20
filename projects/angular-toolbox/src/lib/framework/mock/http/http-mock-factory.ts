@@ -144,6 +144,6 @@ class XhrProxyFactoryImpl extends XhrFactory {
  * 
  * @returns a new XhrFactory instance.
  */
-export const xhrProxyFactory = ()=> {
+export const httpMockFactory = ()=> {
     return new XhrProxyFactoryImpl(inject(HttpMockService));
 }

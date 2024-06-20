@@ -1,21 +1,21 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpMockService } from '../../../../lib/model/service/mock/http/http-mock.service';
-import { xhrProxyFactory } from '../../../../lib/framework/mock/http/xhr-proxy-factory';
+import { httpMockFactory } from '../../../../lib/framework/mock/http/http-mock-factory';
 import { XhrFactory } from '@angular/common';
 
-describe('xhrProxyFactoryFunction', () => {
+describe('httpMockFactory', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [
         HttpMockService,
-        { provide: XhrFactory, useFactory: xhrProxyFactory }
+        { provide: XhrFactory, useFactory: httpMockFactory }
       ]
     });
   });
 
   it('should create a new XhrFactory concrete implementation', () => {
-    const factory: XhrFactory = TestBed.runInInjectionContext(xhrProxyFactory);
+    const factory: XhrFactory = TestBed.runInInjectionContext(httpMockFactory);
     expect(factory).toBeInstanceOf(XhrFactory);
   });
 });

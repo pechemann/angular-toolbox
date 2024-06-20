@@ -96,7 +96,7 @@ import { provideHttpClient } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app-layout/app.component';
-import { AngularToolboxModule, xhrProxyFactory } from 'angular-toolbox';
+import { AngularToolboxModule, httpMockFactory } from 'angular-toolbox';
 
 //=> HTTP mock config import
 import { config } from './http-mock-config';
@@ -107,7 +107,7 @@ import { config } from './http-mock-config';
   ],
   providers: [
     //=> HTTP mock framework initialization
-    { provide: XhrFactory, useFactory: xhrProxyFactory },
+    { provide: XhrFactory, useFactory: httpMockFactory },
     provideHttpClient(),
   ],
   imports: [

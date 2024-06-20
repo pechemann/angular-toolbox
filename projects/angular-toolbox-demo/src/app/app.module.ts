@@ -6,14 +6,14 @@ import { AppComponent } from './app-layout/app.component';
 import { AngularToolboxModule } from 'angular-toolbox';
 import { XhrFactory } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
-import { xhrProxyFactory } from 'projects/angular-toolbox/src/lib/framework';
+import { httpMockFactory } from 'projects/angular-toolbox/src/lib/framework';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   providers: [
-    { provide: XhrFactory, useFactory: xhrProxyFactory },
+    { provide: XhrFactory, useFactory: httpMockFactory },
     provideHttpClient(),
   ],
   imports: [
