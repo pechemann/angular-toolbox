@@ -3,4 +3,4 @@
  * 
  * @see https://xhr.spec.whatwg.org/#the-open()-method
  */
-export interface XMLHttpRequestProxy extends XMLHttpRequest {}
+export interface XhrProxy extends XMLHttpRequest {}

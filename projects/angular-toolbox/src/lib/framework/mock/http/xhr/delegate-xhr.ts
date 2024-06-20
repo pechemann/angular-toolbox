@@ -1,24 +1,35 @@
 import { HttpHeaders, HttpRequest, HttpStatusCode } from "@angular/common/http";
-import { XMLHttpRequestProxy, HttpMethodMock } from "../../../model";
-import { ProgressEventMock } from "./progress-event-mock";
-import { DefaultHeadersConfigFactory } from "./util/default-headers-config.factory";
-import { EMPTY_STRING } from "../../../util";
-import { HttpResponseMock } from "angular-toolbox";
+import { XhrProxy, HttpMethodMock, HttpResponseMock } from "../../../../model";
+import { ProgressEventMock } from "../event/progress-event-mock";
+import { DefaultHeadersConfigFactory } from "../util/default-headers-config.factory";
+import { EMPTY_STRING } from "../../../../util";
 import { XhrBase } from "./xhr-base";
 
 /**
  * @private
  */
 declare interface DataStorage {
+    
+    /**
+     * @private
+     */
     httpResponse: HttpResponseMock;
+
+    /**
+     * @private
+     */
     loaded: number;
+
+    /**
+     * @private
+     */
     total: number;
 }
 
 /**
  * @private
  */
-export class DelegateXhr extends XhrBase implements XMLHttpRequestProxy {
+export class DelegateXhr extends XhrBase implements XhrProxy {
     
     /**
      * @private
@@ -82,7 +93,7 @@ export class DelegateXhr extends XhrBase implements XMLHttpRequestProxy {
     private _responseText: string = EMPTY_STRING;
 
     get response(): any {
-        return this._responseText;
+        return this._dataStorage.httpResponse.body;
     }
 
     get status(): number {
@@ -129,15 +140,20 @@ export class DelegateXhr extends XhrBase implements XMLHttpRequestProxy {
 
     getAllResponseHeaders(): string {
         const headers: HttpHeaders | undefined = this._dataStorage.httpResponse.headers;
+        const NL: string = "\n";
         let result: string = EMPTY_STRING;
         if (headers) {
-            headers.keys().forEach((key: string)=> result += `${key}: ${headers.getAll(key)}`)
+            const keys: string[] = headers.keys();
+            const last: number = keys.length - 1;
+            keys.forEach((key: string, index: number)=> {
+                result += `${key}: ${headers.getAll(key)}${index !== last ? NL : EMPTY_STRING}`;
+            });
         }
         return result;
     }
 
     overrideMimeType(mime: string): void {
-        console.log("d-overrideMimeType", mime)
+        //console.log("d-overrideMimeType", mime)
     }
 
     send(body?: Document | XMLHttpRequestBodyInit | null | undefined): void {
@@ -149,9 +165,11 @@ export class DelegateXhr extends XhrBase implements XMLHttpRequestProxy {
         if (this.onloadstart) this.onloadstart.call(this, this.getProgressEvent("loadstart"));
 
         const response: HttpResponseMock = this._dataStorage.httpResponse;
+        const headers: HttpHeaders | undefined = response.headers;
         this._status = response.status || HttpStatusCode.InternalServerError;
         this._statusText = response.statusText || "Internal Server Error";
         this._responseText = JSON.stringify(response.body);
+        this._headers = headers || new HttpHeaders();
 
         this._dataStorage.loaded = this._dataStorage.total;
         
@@ -170,7 +188,7 @@ export class DelegateXhr extends XhrBase implements XMLHttpRequestProxy {
     constructor(methodConfig: HttpMethodMock) {
         super();
         this._methodConfig = methodConfig;
-        this._headers = DefaultHeadersConfigFactory.create();
+        this._headers = DefaultHeadersConfigFactory.createRequestHeaders();
     }
     
     public destroy(): void {
@@ -186,7 +204,6 @@ export class DelegateXhr extends XhrBase implements XMLHttpRequestProxy {
         const event: Event = new Event(type);
         Object.defineProperty(event, 'target', {writable: false, value: this});
         Object.defineProperty(event, 'currentTarget', {writable: false, value: this});
-        console.log(event)
         this.dispatchEvent(event);
     }
 

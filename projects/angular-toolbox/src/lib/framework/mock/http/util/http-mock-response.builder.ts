@@ -1,5 +1,5 @@
 import { HttpHeaders, HttpStatusCode } from "@angular/common/http";
-import { HttpResponseMock } from "../model";
+import { HttpResponseMock } from "../../../../model";
 
 const OK: string = "OK";
 
@@ -90,7 +90,7 @@ export class HttpResponseMockBuilder {
 }
 
 /**
- * A utility function used to create new "chainable" HttpResponseMock instances.
+ * A utility function used to create new "chainable" HttpResponseMockBuilder instances.
  * 
  * @returns a new HttpResponseMock instance;
  */

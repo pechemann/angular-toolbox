@@ -21,7 +21,7 @@
             </p>
             <ul class="icon-list">
                 @for(item of demoList.getDemoLinkList(); track item) {
-                    <li>
+                    <li class="icon-item">
                         <a [routerLink]="'../demo/' + item.path" rel="noopener" [title]="item.label">{{ item.label }}</a>
                     </li>
                 }
@@ -32,8 +32,8 @@
             <h2>Guides</h2>
             <p>Read more detailed instructions and documentation on using Angular Toolbox.</p>
             <ul class="icon-list">
-                <li><a rel="noopener">Angular Toolbox quick start guide</a></li>
-                <li><a rel="noopener">Angular Toolbox documentation</a></li>
+                <li class="icon-item"><a rel="noopener">Angular Toolbox quick start guide</a></li>
+                <li class="icon-item"><a rel="noopener">Angular Toolbox documentation</a></li>
             </ul>
         </div>
     </div>

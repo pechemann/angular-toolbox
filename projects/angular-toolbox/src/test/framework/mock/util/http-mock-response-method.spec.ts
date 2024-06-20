@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpResponseMockBuilder, httpResponseMock } from '../../public-api';
+import { HttpResponseMockBuilder, httpResponseMock } from '../../../../public-api';
 
 describe('httpResponseMock', () => {
 

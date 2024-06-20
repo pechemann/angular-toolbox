@@ -1,4 +1,5 @@
 import { HttpHeaders } from "@angular/common/http";
+import { httpHeadersMock } from "./http-response-headers-mock.builder";
 
 /**
  * @private
@@ -6,18 +7,13 @@ import { HttpHeaders } from "@angular/common/http";
  */
 export class DefaultHeadersConfigFactory {
 
-    public static create(): HttpHeaders {
-        const headers: HttpHeaders = new HttpHeaders();
+    public static createRequestHeaders(): HttpHeaders {
         // "Accept" header is set by Angular framework when missing
-        headers.set("Accept-Encoding", "gzip, deflate, br, zstd");
-        headers.set("Accept-Language", navigator.language);
-        headers.set("Cache-Control", "no-cache");
-        headers.set("Pragma", "no-cache");
-        headers.set("Priority", "u=0, i");
-        headers.set("Sec-Fetch-Dest", "empty");
-        headers.set("Sec-Fetch-Mode", "cors");
-        headers.set("Sec-Fetch-Site", "cross-site");
-        headers.set("User-Agent", navigator.userAgent);
-        return headers;
+        return httpHeadersMock().cacheControl()
+                                .acceptEncoding()
+                                .set("Accept-Language", navigator.language)
+                                .set("Priority", "u=0, i")
+                                .set("User-Agent", navigator.userAgent)
+                                .headers();
     }
 }

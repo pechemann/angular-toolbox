@@ -1,0 +1,98 @@
+import { HttpHeaders } from "@angular/common/http";
+
+/**
+ * A statefull builder for creating new HttpHeaders instances.
+ */
+export class HttpHeadersMockBuilder {
+
+    /**
+     * @private
+     */
+    private _headers: HttpHeaders = new HttpHeaders();
+
+    /**
+     * Sets the "Cache-Control" property of the new HttpHeaders instance with the specified value.
+     * 
+     * @param value the value used to set the "Cache-Control" property of the new HttpHeaders instance.
+     * Default value is "no-cache".
+     * 
+     * @returns a reference to this HttpResponseMockBuilder instance.
+     */
+    public cacheControl(value: string = "no-cache"): HttpHeadersMockBuilder {
+        this.setHeader("Cache-Control", value);
+        return this;
+    }
+    
+    /**
+     * Sets the "CContent-Type" property of the new HttpHeaders instance with the specified value.
+     * 
+     * @param value the value used to set the "Content-Type" property of the new HttpHeaders instance.
+     * Default value is "application/json; charset=utf-8".
+     * 
+     * @returns a reference to this HttpResponseMockBuilder instance.
+     */
+    public contentType(value: string = "application/json; charset=utf-8"): HttpHeadersMockBuilder {
+        this.setHeader("Content-Type", value);
+        return this;
+    }
+    
+    /**
+     * Sets the "Pragma" property of the new HttpHeaders instance with the specified value.
+     * 
+     * @param value the value used to set the "Pragma" property of the new HttpHeaders instance.
+     * Default value is "no-cache".
+     * 
+     * @returns a reference to this HttpResponseMockBuilder instance.
+     */
+    public pragma(value: string = "no-cache"): HttpHeadersMockBuilder {
+        this.setHeader("Pragma", value);
+        return this;
+    }
+
+    /**
+     * Sets the "Accept-Encoding" property of the new HttpHeaders instance with the specified value.
+     * 
+     * @param value the value used to set the "Accept-Encoding" property of the new HttpHeaders instance.
+     * Default value is "ngzip, deflate, br, zstd".
+     * 
+     * @returns a reference to this HttpResponseMockBuilder instance.
+     */
+    public acceptEncoding(value: string = "gzip, deflate, br, zstd"): HttpHeadersMockBuilder {
+        this.setHeader("Accept-Encoding", value);
+        return this;
+    }
+
+    /**
+     * Sets or modifies a value of the new HttpHeaders instance.
+     *
+     * @param name The header name.
+     * @param value The value or values to set or override for the given header.
+     * 
+     * @returns a reference to this HttpResponseMockBuilder instance.
+     */
+    public set(name: string, value: string | string[]): HttpHeadersMockBuilder {
+        this.setHeader(name, value);
+        return this;
+    }
+
+    /**
+     * Return a new HttpHeaders instance, built from the properties specified with the
+     * HttpHeadersMockBuilder methods.
+     * 
+     * @returns a new HttpHeaders instance.
+     */
+    public headers(): HttpHeaders {
+        return this._headers;
+    }
+
+    private setHeader(name: string, value: string | string[]): void {
+        this._headers = this._headers.set(name, value);
+    }
+}
+
+/**
+ * A utility function used to create new "chainable" HttpHeadersMockBuilder instances.
+ * 
+ * @returns a new HttpHeadersMockBuilder instance;
+ */
+export const httpHeadersMock:()=> HttpHeadersMockBuilder = ()=> new HttpHeadersMockBuilder();

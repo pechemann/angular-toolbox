@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { EMPTY_STRING } from '../../public-api';
+import { EMPTY_STRING } from '../../../../public-api';
 
 describe('EMPTY_STRING', () => {
 

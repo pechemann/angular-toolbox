@@ -1,4 +1,4 @@
-import { EventTargetImpl } from "../../../model/business/impl/event/event-target.impl";
+import { EventTargetImpl } from "../../../../model/business/impl/event/event-target.impl";
 
 /**
  * @private
@@ -125,5 +125,4 @@ export class XhrBase extends EventTargetImpl {
      * XMLHTTPRequest API
      */
     ontimeout: ((this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) => any) | null = null;
-
 }

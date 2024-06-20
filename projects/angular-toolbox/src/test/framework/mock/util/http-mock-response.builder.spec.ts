@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpResponseMockBuilder } from '../../public-api';
+import { HttpResponseMockBuilder } from '../../../../public-api';
 import { HttpHeaders, HttpStatusCode } from '@angular/common/http';
 
 const BODY: string = 'Body test';
