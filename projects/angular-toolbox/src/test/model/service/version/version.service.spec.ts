@@ -1,8 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { VERSION_CONFIG } from '../../../lib/model/business/version/version-config.provider';
-import { VersionService } from '../../../lib/model/service/core/version/version.service';
-import { VersionImpl } from '../../../lib/model/business/impl/version/version.impl';
-import { Version } from '../../../lib/model/business/version/version';
+import { Version, VersionService, VERSION_CONFIG } from '../../../../lib/model';
+import { VersionImpl } from '../../../../lib/model/business/impl/version/version.impl';
 
 describe('VersionService', () => {
   let service: VersionService;

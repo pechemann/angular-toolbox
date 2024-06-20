@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { Observable, interval } from 'rxjs';
-import { SubscriptionService } from '../../../lib/model/service/subscription/subscription.service';
+import { SubscriptionService } from '../../../../lib/model';
 
 describe('SubscriptionService', () => {
   let service: SubscriptionService;

@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DarkModeService } from '../../../lib/model/service/ui/dark-mode.service';
+import { DarkModeService } from '../../../../lib/model/service/ui/dark-mode.service';
 import { DOCUMENT } from '@angular/common';
-import { DARK_MODE_CONFIG, DarkModeConfig } from '../../../lib/model';
+import { DARK_MODE_CONFIG, DarkModeConfig } from '../../../../lib/model';
 
 describe('DarkModeService', () => {
   const browserDarkModeState: boolean =

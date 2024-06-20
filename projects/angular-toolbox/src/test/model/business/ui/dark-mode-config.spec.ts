@@ -1,4 +1,4 @@
-import { DARK_MODE_CONFIG } from "projects/angular-toolbox/src/public-api";
+import { DARK_MODE_CONFIG } from "../../../../lib/model";
 
 describe('DARK_MODE_CONFIG', () => {
 

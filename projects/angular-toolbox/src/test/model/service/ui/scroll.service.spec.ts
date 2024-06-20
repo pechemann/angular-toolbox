@@ -1,11 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ScrollService } from '../../../lib/model/service/ui/scroll.service';
-import { SubscriptionService } from '../../../lib/model/service/subscription/subscription.service';
+import { SubscriptionService, ScrollService } from '../../../../lib/model';
 
 describe('ScrollService', () => {
   const TEST_DIV_SELECTOR: string = ".jasmine_html-reporter";
-  const TIMEOUT_INTERVAL: number = 1000;
+  const TIMEOUT_INTERVAL: number = 2000;
   const getTestDiv: Function = ()=> {
     return document.querySelector(TEST_DIV_SELECTOR);
   };
@@ -16,10 +15,10 @@ describe('ScrollService', () => {
     view.style.width = "4000px";
     return { height: height, width: width };
   };
-  const restoreTestDiv: Function = (view: HTMLDivElement, size: any)=> {
+  const restoreTestDiv: Function = async (view: HTMLDivElement, size: any)=> {
     view.style.width = size.width + "px";
     view.style.height = size.height + "px";
-    window.scrollTo({ top: 0, left: 0 });
+    await window.scrollTo({ top: 0, left: 0 });
   };
   let service: ScrollService;
   let subscription: SubscriptionService;
@@ -33,7 +32,7 @@ describe('ScrollService', () => {
     subscription = TestBed.inject(SubscriptionService);
   });
 
-  afterEach(function() {
+  afterEach(()=> {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
   });
 

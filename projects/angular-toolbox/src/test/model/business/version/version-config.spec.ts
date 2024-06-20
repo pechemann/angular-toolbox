@@ -1,4 +1,4 @@
-import { VERSION_CONFIG } from '../../../lib/model/business/version/version-config.provider';
+import { VERSION_CONFIG } from '../../../../lib/model/business/version/version-config.provider';
 
 describe('DARK_MODE_CONFIG', () => {
 
