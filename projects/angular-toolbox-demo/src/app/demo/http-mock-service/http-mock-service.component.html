@@ -1,10 +1,28 @@
 <demo [title]="title" [presentation]="presentation" [srcCode]="srcCode">
     <p>
+        Open the <em>Network Activity Console</em> of you browser to verify that the mock data is not coming from a remote server:
     </p>
-    <button (click)="loadData()" role="button">
-        Load Data
-    </button>
-    <p>
-        
-    </p>
+    <hr>
+    <div class="containe mt-5">
+        <div class="row">
+            <div class="col">
+                {{data}}
+            </div>
+            <div class="col">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                            value="option1">
+                        <label class="form-check-label" for="inlineRadio1">Real data</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                            value="option2">
+                        <label class="form-check-label" for="inlineRadio2">Mocked data</label>
+                    </div>
+                    <button class="btn btn-primary" (click)="loadData()" role="button">
+                        Load Data
+                    </button>
+            </div>
+        </div>
+    </div>
 </demo>

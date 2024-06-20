@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpMockService } from '../../../../lib/service/http/mock/http-mock.service';
 import { XhrFactory } from '@angular/common';
-import { xhrProxyFactoryFunction } from 'projects/angular-toolbox/src/lib/service/http/mock/xhr-proxy-factory';
+import { xhrProxyFactory } from '../../../../lib/framework/mock/http/xhr-proxy-factory';
 
 describe('XhrProxyFactory', () => {
   let factory: XhrFactory;
@@ -10,10 +10,10 @@ describe('XhrProxyFactory', () => {
     await TestBed.configureTestingModule({
       providers: [
         HttpMockService,
-        { provide: XhrFactory, useFactory: xhrProxyFactoryFunction }
+        { provide: XhrFactory, useFactory: xhrProxyFactory }
       ]
     });
-    factory = TestBed.runInInjectionContext(xhrProxyFactoryFunction);
+    factory = TestBed.runInInjectionContext(xhrProxyFactory);
   });
 
   it('build() method() should create and return a new XMLHttpRequest object', () => {

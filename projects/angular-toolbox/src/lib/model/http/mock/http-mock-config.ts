@@ -18,14 +18,14 @@ export interface HttpResponseMock {
     /**
      * Response status code.
      */
-    status?: number;
+    status: number;
 
     /**
      * Textual description of response status code, defaults to OK.
      *
      * Do not depend on this.
      */
-    statusText?: string;
+    statusText: string;
 
     /**
      * URL of the resource retrieved, or null if not available.

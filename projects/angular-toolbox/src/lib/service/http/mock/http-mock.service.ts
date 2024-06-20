@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
+import { HttpRouteMock, HttpMockConfig, HttpMethodMock } from '../../../model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpMockService {
 
-  private _routes: Map<string, any> = new Map<string, any>();
+  private _configList: Map<string, HttpMethodMock> = new Map<string, any>();
 
-  public setConfig(config: any): void {
-    config.routes.forEach((route: any) => {
+  public setConfig(config: HttpMockConfig): void {
+    config.routes.forEach((route: HttpRouteMock) => {
       this.extractPathConfig(route, "get");
       this.extractPathConfig(route, "post");
       this.extractPathConfig(route, "put");
@@ -17,16 +18,16 @@ export class HttpMockService {
   }
 
   public clearConfig(): void {
-    this._routes.clear();
+    this._configList.clear();
   }
 
-  public getRouteConfig(route: any, method: string): any | undefined {
-    return this._routes.get(this.buildConfigKey(route, method));
+  public getMethodConfig(path: string, method: string): HttpMethodMock | undefined {
+    return this._configList.get(this.buildConfigKey(path, method));
   }
 
   private extractPathConfig(route: any, method: string): void {
     if (!route[method]) return;
-    this._routes.set(this.buildConfigKey(route.path, method), route[method]);
+    this._configList.set(this.buildConfigKey(route.path, method), route[method]);
   }
 
   private buildConfigKey(path: string, method: string): string {

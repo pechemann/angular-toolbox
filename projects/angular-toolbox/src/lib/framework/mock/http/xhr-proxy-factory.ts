@@ -1,8 +1,9 @@
 import { XhrFactory } from "@angular/common";
 import { inject } from "@angular/core";
-import { HttpMockService } from "./http-mock.service";
-import {  HttpMockConfig, XMLHttpRequestProxy } from "../../../model";
+import { HttpMockService } from "../../../service/http/mock/http-mock.service";
+import { HttpMethodMock, XMLHttpRequestProxy } from "../../../model";
 import { DelegateXMLHttpRequest } from "./delegate-xmlhttprequest";
+import { EMPTY_STRING } from "../../../util";
 
 /**
  * @private
@@ -18,19 +19,19 @@ class XMLHttpRequestProxyImpl implements XMLHttpRequestProxy {
     readonly DONE = 4;
 
     get response(): any {
-        return this.XHR.response;
+        return  this.XHR ? this.XHR.response : null;
     }
 
     get status(): number {
-        return this.XHR.status;
+        return this.XHR ? this.XHR.status : 0;
     }
 
     get withCredentials(): boolean {
-        return this.XHR.withCredentials;
+        return this.XHR ? this.XHR.withCredentials : false;
     }
 
     get statusText(): string {
-        return this.XHR.statusText;
+        return this.XHR ? this.XHR.statusText : EMPTY_STRING;
     }
 
     get responseXML(): Document | null {
@@ -38,15 +39,15 @@ class XMLHttpRequestProxyImpl implements XMLHttpRequestProxy {
     }
 
     get readyState(): number {
-        return this.XHR.readyState;
+        return this.XHR ? this.XHR.readyState : this.UNSENT;
     }
 
     get responseURL(): string {
-        return this.XHR.responseURL;
+        return this.XHR ? this.XHR.responseURL : EMPTY_STRING;
     }
 
     get responseText(): string {
-        return this.XHR.responseText;
+        return this.XHR ? this.XHR.responseText : EMPTY_STRING;
     }
 
     responseType!: XMLHttpRequestResponseType;
@@ -57,30 +58,38 @@ class XMLHttpRequestProxyImpl implements XMLHttpRequestProxy {
         return this.XHR.upload;
     }
 
-    onabort: ((this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) => any) | null = ()=> {};
+    onabort: ((this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) => any) | null = null;
 
-    onerror: ((this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) => any) | null = ()=> {};
+    onerror: ((this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) => any) | null = null;
 
-    onload: ((this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) => any) | null = ()=> {};
+    onload: ((this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) => any) | null = null;
 
-    onloadend: ((this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) => any) | null = ()=> {};
+    onloadend: ((this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) => any) | null = null;
 
-    onloadstart: ((this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) => any) | null = ()=> {};
+    onloadstart: ((this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) => any) | null = null;
 
-    onprogress: ((this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) => any) | null = ()=> {};
+    onprogress: ((this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) => any) | null = null;
 
-    onreadystatechange: ((this: XMLHttpRequest, ev: Event) => any) | null = ()=> {};
+    onreadystatechange: ((this: XMLHttpRequest, ev: Event) => any) | null = null;
 
-    ontimeout: ((this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) => any) | null = ()=> {};
+    ontimeout: ((this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) => any) | null = null;
 
     open(method: string, url: string | URL): void;
     open(method: string, url: string | URL, async: boolean, username?: string | null | undefined, password?: string | null | undefined): void;
     open(method: unknown, url: unknown, async?: unknown, username?: unknown, password?: unknown): void {
+        console.log("open")
         const m: string = (method as string).toString().toLowerCase();
         const u: string = (url as string);
-        const config: HttpMockConfig = this._httpMockService.getRouteConfig(u, m);
+        const config: HttpMethodMock | undefined = this._httpMockService.getMethodConfig(u, m);
         if (this.XHR && this.XHR instanceof DelegateXMLHttpRequest) this.XHR.destroy();
         this.XHR = config ? new DelegateXMLHttpRequest(config) : new XMLHttpRequest();
+        /*this.XHR.onabort = this.onabort;
+        this.XHR.onerror = this.onerror;
+        this.XHR.onload = this.onload;
+        this.XHR.onloadend = this.onloadend;
+        this.XHR.onloadstart = this.onloadstart;
+        this.XHR.onprogress = this.onprogress;
+        this.XHR.onreadystatechange = this.onreadystatechange;*/
         this.XHR.open(m.toString(), u, async as any, username as any, password as any);
     }
 
@@ -142,7 +151,7 @@ class XMLHttpRequestProxyImpl implements XMLHttpRequestProxy {
 /**
  * @private
  */
-class XhrProxyFactory extends XhrFactory {
+class XhrProxyFactoryImpl extends XhrFactory {
 
     /**
      * @private
@@ -159,6 +168,11 @@ class XhrProxyFactory extends XhrFactory {
     }
 }
 
-export const xhrProxyFactoryFunction = ()=> {
-    return new XhrProxyFactory(inject(HttpMockService));
+/**
+ * A factory function that creates and returns a new XhrFactory instance.
+ * 
+ * @returns a new XhrFactory instance.
+ */
+export const xhrProxyFactory = ()=> {
+    return new XhrProxyFactoryImpl(inject(HttpMockService));
 }

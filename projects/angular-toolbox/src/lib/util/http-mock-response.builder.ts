@@ -1,5 +1,7 @@
-import { HttpHeaders } from "@angular/common/http";
+import { HttpHeaders, HttpStatusCode } from "@angular/common/http";
 import { HttpResponseMock } from "../model";
+
+const OK: string = "OK";
 
 /**
  * A statefull builder for creating new HttpResponseMock instances.
@@ -9,7 +11,12 @@ export class HttpResponseMockBuilder {
     /**
      * @private
      */
-    private _response: HttpResponseMock = { url: null };
+    private _response: HttpResponseMock = {
+        url: null,
+        body: null,
+        status: HttpStatusCode.Ok,
+        statusText: OK
+    };
 
     /**
      * Sets the body property of the new HttpResponseMock instance with sthe specified body value.

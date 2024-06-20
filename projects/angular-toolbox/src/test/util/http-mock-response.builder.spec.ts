@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpResponseMockBuilder, HttpResponseMock } from '../../public-api';
+import { HttpResponseMockBuilder } from '../../public-api';
 import { HttpHeaders, HttpStatusCode } from '@angular/common/http';
 
 const BODY: string = 'Body test';
@@ -26,13 +26,24 @@ describe('HttpResponseMockBuilder', () => {
     expect(builder.response()).toBeTruthy();
   });
 
-  it('response() method should create empty HttpResponseMock objects, except "url" property set to "null"', () => {
-    const response: HttpResponseMock = builder.response();
-    expect(response.body).toBeUndefined();
-    expect(response.headers).toBeUndefined();
-    expect(response.status).toBeUndefined();
-    expect(response.statusText).toBeUndefined();
-    expect(response.url).toBeNull();
+  it('response() method should create a HttpResponseMock with "url" property set to "null"', () => {
+    expect(builder.response().url).toBeNull();
+  });
+
+  it('response() method should create a HttpResponseMock with "body" property set to "null"', () => {
+    expect(builder.response().body).toBeNull();
+  });
+
+  it('response() method should create a HttpResponseMock with "headers" property set to "undefined"', () => {
+    expect(builder.response().headers).toBeUndefined();
+  });
+
+  it('response() method should create a HttpResponseMock with "status" property set to "undefined"', () => {
+    expect(builder.response().status).toEqual(HttpStatusCode.Ok);
+  });
+  
+  it('response() method should create a HttpResponseMock with "status" property set to "OK"', () => {
+    expect(builder.response().statusText).toEqual("OK");
   });
 
   it('body() method should set the "body" property of the response object', () => {
