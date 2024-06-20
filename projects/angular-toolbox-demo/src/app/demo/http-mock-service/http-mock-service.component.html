@@ -1,28 +1,22 @@
 <demo [title]="title" [presentation]="presentation" [srcCode]="srcCode">
     <p>
-        Open the <em>Network Activity Console</em> of you browser to verify that the mock data is not coming from a remote server:
+        Open the <em>Network Activity Console</em> of you browser to verify that mock data are not coming from a remote server:
     </p>
     <hr>
-    <div class="containe mt-5">
-        <div class="row">
-            <div class="col">
-                {{data}}
-            </div>
-            <div class="col">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
-                            value="option1">
-                        <label class="form-check-label" for="inlineRadio1">Real data</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                            value="option2">
-                        <label class="form-check-label" for="inlineRadio2">Mocked data</label>
-                    </div>
-                    <button class="btn btn-primary" (click)="loadData()" role="button">
-                        Load Data
-                    </button>
-            </div>
+    <div class="mb-3">
+        <button class="btn btn-primary" role="button" (click)="loadData()">
+            Load Data
+        </button>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h6  class="card-title">Loaded Data</h6>
+            <hr>
+            @if (data) {
+                <code>{{ data }}</code>
+            } @else {
+                No data loaded...
+            }
         </div>
     </div>
 </demo>

@@ -6,10 +6,6 @@ import { Subscription } from 'rxjs';
 import { HttpMockService } from 'projects/angular-toolbox/src/public-api';
 import { config } from './http-mock-config';
 
-const realDataUri: string = "https://jsonplaceholder.typicode.com/todos/1";
-//'https://etablissements-publics.api.gouv.fr/v3/departements/14/maison_handicapees';
-const fakeUrl: string = "/test";
-
 @Component({
   selector: 'app-http-mock-service',
   templateUrl: './http-mock-service.component.html'
@@ -30,7 +26,15 @@ export class HttpMockServiceComponent {
   public title: string = "HTTP Mock Service Demo";
   public presentation: string = "A lightweight service that provides Mocking strategies for developing HTTP-based components in your Angular projects.";
   public srcCode: CodeWrapper = {
-    html: [``],
+    html: [`...
+  <button class="btn btn-primary" role="button" (click)="loadData()">Load Data</button>
+
+  <h6  class="card-title">Loaded Data</h6>
+  <hr>
+
+  @if (data) { <code>{{ data }}</code> }
+  @else { <p>No data loaded...<p/> }
+...`],
     ts: [
 `/////////////////////////
 // HTTP Mock Config
@@ -38,13 +42,21 @@ export class HttpMockServiceComponent {
 
 import { HttpRequest, HttpStatusCode } from "@angular/common/http";
 import { HttpMockConfig, httpResponseMock } from "angular-toolbox";
+import { User } from "./business";
+
+const USER: User = {
+    userId: 3,
+    id: 3,
+    title: "lorem ipsum",
+    completed: true
+};
 
 export const config: HttpMockConfig = {
     routes: [
         {
-            path: "/test",
+            path: "https://jsonplaceholder.typicode.com/todos/:id",
             get: {
-                data: (req: HttpRequest<any>)=> httpResponseMock().body("Hello world!")
+                data: (req: HttpRequest<any>)=> httpResponseMock().body(USER)
                                                                   .response(),
                 error: (req: HttpRequest<any>)=> httpResponseMock().status(HttpStatusCode.NotFound)
                                                                    .statusText("Not Found")
@@ -52,7 +64,27 @@ export const config: HttpMockConfig = {
             }
         }
     ]
-};`,
+}`,
+`/////////////////////////
+// HTTP Mock Config
+/////////////////////////
+
+@Component({
+  selector: 'app-http-mock-service',
+  templateUrl: './http-mock-service.component.html'
+})
+export class HttpMockServiceComponent {
+
+  protected data!: string;
+
+  constructor(private _http: HttpClient) {}
+
+  protected loadData(): void {
+    this._http.get("https://jsonplaceholder.typicode.com/todos/3").subscribe((result: any)=> {
+      this.data = JSON.stringify(result, null, 4);
+    });
+  }
+}`,
 `/////////////////////////
 // Application module
 /////////////////////////
@@ -95,10 +127,9 @@ export class AppModule {
 ]
   };
 
-  public loadData(): void {
-    this._http.get(fakeUrl).subscribe((result: any)=> {
-      console.log(result)
-      this.data = result;
+  protected loadData(): void {
+    this._http.get("https://jsonplaceholder.typicode.com/todos/3").subscribe((result: any)=> {
+      this.data = JSON.stringify(result, null, 4);
     });
   }
 }

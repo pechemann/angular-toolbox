@@ -79,15 +79,11 @@ export class DelegateXhr extends XhrBase implements XMLHttpRequestProxy {
     private _responseText: string = EMPTY_STRING;
 
     get response(): any {
-        return null;
+        return this._responseText;
     }
 
     get status(): number {
         return this._status;
-    }
-
-    get withCredentials(): boolean {
-        return true;
     }
 
     get statusText(): string {
@@ -106,10 +102,6 @@ export class DelegateXhr extends XhrBase implements XMLHttpRequestProxy {
         return this._responseText;
     }
 
-    responseType!: XMLHttpRequestResponseType;
-
-    timeout!: number;
-
     get upload(): XMLHttpRequestUpload {
         return null as any;
     }
@@ -117,32 +109,27 @@ export class DelegateXhr extends XhrBase implements XMLHttpRequestProxy {
     open(method: string, url: string | URL): void;
     open(method: string, url: string | URL, async: boolean, username?: string | null | undefined, password?: string | null | undefined): void;
     open(method: unknown, url: unknown, async?: unknown, username?: unknown, password?: unknown): void {
-        console.log("d-open")
         this._method = method;
         this._url = url;
         this.seetReadyState(this.OPENED);
     }
 
     abort(): void {
-        console.log("d-abort")
         this.eventDispatch("abort");
         if (this.onabort) this.onabort.call(this, this.getProgressEvent("abort"));
     }
 
     getResponseHeader(name: string): string | null {
-        console.log("d-getResponseHeader", name)
         const header: HttpHeaders | undefined = this._dataStorage.httpResponse.headers;
         return header ? header.get(name) : null;
     }
 
     getAllResponseHeaders(): string {
-        console.log("d-getAllResponseHeaders")
         const headers: HttpHeaders | undefined = this._dataStorage.httpResponse.headers;
         let result: string = EMPTY_STRING;
         if (headers) {
             headers.keys().forEach((key: string)=> result += `${key}: ${headers.getAll(key)}`)
         }
-        console.log(result)
         return result;
     }
 
@@ -151,7 +138,6 @@ export class DelegateXhr extends XhrBase implements XMLHttpRequestProxy {
     }
 
     send(body?: Document | XMLHttpRequestBodyInit | null | undefined): void {
-        console.log("d-send", body);
         this.buildDataStorage(body)
         this.seetReadyState(this.HEADERS_RECEIVED);
 
@@ -175,7 +161,6 @@ export class DelegateXhr extends XhrBase implements XMLHttpRequestProxy {
     }
 
     setRequestHeader(name: string, value: string): void {
-        console.log("d-setRequestHeader", name, value)
         this._headers.append(name, value);
     }
 
@@ -196,6 +181,9 @@ export class DelegateXhr extends XhrBase implements XMLHttpRequestProxy {
      */
     private eventDispatch(type: string): void {
         const event: Event = new Event(type);
+        Object.defineProperty(event, 'target', {writable: false, value: this});
+        Object.defineProperty(event, 'currentTarget', {writable: false, value: this});
+        console.log(event)
         this.dispatchEvent(event);
     }
 

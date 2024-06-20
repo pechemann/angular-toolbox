@@ -8,7 +8,7 @@ export class DefaultHeadersConfigFactory {
 
     public static create(): HttpHeaders {
         const headers: HttpHeaders = new HttpHeaders();
-        headers.set("Accept", "*/*");
+        // "Accept" header is set by Angular framework when missing
         headers.set("Accept-Encoding", "gzip, deflate, br, zstd");
         headers.set("Accept-Language", navigator.language);
         headers.set("Cache-Control", "no-cache");

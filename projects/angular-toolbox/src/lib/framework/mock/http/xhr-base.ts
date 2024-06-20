@@ -1,4 +1,4 @@
-import { EventTargetImpl } from "angular-toolbox";
+import { EventTargetImpl } from "../../../model";
 
 /**
  * @private
@@ -48,6 +48,27 @@ export class XhrBase extends EventTargetImpl {
     get responseXML(): Document | null {
         return null;
     }
+
+    /**
+     * @private
+     * 
+     * XMLHTTPRequest API
+     */
+    withCredentials: boolean = false;
+
+    /**
+     * @private
+     * 
+     * XMLHTTPRequest API
+     */
+    responseType!: XMLHttpRequestResponseType;
+
+    /**
+     * @private
+     * 
+     * XMLHTTPRequest API
+     */
+    timeout!: number;
 
     /**
      * @private

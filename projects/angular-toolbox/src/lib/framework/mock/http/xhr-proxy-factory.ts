@@ -21,10 +21,6 @@ class XMLHttpRequestProxyImpl extends XhrBase implements XMLHttpRequestProxy {
         return this.XHR ? this.XHR.status : 0;
     }
 
-    get withCredentials(): boolean {
-        return this.XHR ? this.XHR.withCredentials : false;
-    }
-
     get statusText(): string {
         return this.XHR ? this.XHR.statusText : EMPTY_STRING;
     }
@@ -45,10 +41,6 @@ class XMLHttpRequestProxyImpl extends XhrBase implements XMLHttpRequestProxy {
         return this.XHR ? this.XHR.responseText : EMPTY_STRING;
     }
 
-    responseType!: XMLHttpRequestResponseType;
-
-    timeout!: number;
-
     get upload(): XMLHttpRequestUpload {
         return this.XHR.upload;
     }
@@ -62,6 +54,8 @@ class XMLHttpRequestProxyImpl extends XhrBase implements XMLHttpRequestProxy {
         const config: HttpMethodMock | undefined = this._httpMockService.getMethodConfig(u, m);
         if (this.XHR && this.XHR instanceof DelegateXhr) this.XHR.destroy();
         this.XHR = config ? new DelegateXhr(config) : new XMLHttpRequest();
+        this.XHR.withCredentials = this.withCredentials;
+        this.XHR.responseType = this.responseType;
         /*this.XHR.onabort = this.onabort;
         this.XHR.onerror = this.onerror;
         this.XHR.onload = this.onload;
