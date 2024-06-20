@@ -50,6 +50,58 @@ export class HttpHeadersMockBuilder {
     }
 
     /**
+     * Sets the "Priority" property of the new HttpHeaders instance with the specified value.
+     * 
+     * @param value the value used to set the "Priority" property of the new HttpHeaders instance.
+     * Default value is "u=0, i".
+     * 
+     * @returns a reference to this HttpResponseMockBuilder instance.
+     */
+    public priority(value: string = "u=0, i"): HttpHeadersMockBuilder {
+        this.setHeader("Priority", value);
+        return this;
+    }
+
+    /**
+     * Sets the "User-Agent" property of the new HttpHeaders instance with the specified value.
+     * 
+     * @param value the value used to set the "User-Agent" property of the new HttpHeaders instance.
+     * Default value is the navigator user agent.
+     * 
+     * @returns a reference to this HttpResponseMockBuilder instance.
+     */
+    public userAgent(value: string | null = null): HttpHeadersMockBuilder {
+        this.setHeader("User-Agent", value || navigator.userAgent);
+        return this;
+    }
+
+    /**
+     * Sets the "Accept-Language" property of the new HttpHeaders instance with the specified value.
+     * 
+     * @param value the value used to set the "Accept-Language" property of the new HttpHeaders instance.
+     * Default value is the navigator language.
+     * 
+     * @returns a reference to this HttpResponseMockBuilder instance.
+     */
+    public acceptLanguage(value: string | null = null): HttpHeadersMockBuilder {
+        this.setHeader("Accept-Language", value || navigator.language);
+        return this;
+    }
+
+    /**
+     * Sets the "Accept" property of the new HttpHeaders instance with the specified value.
+     * 
+     * @param value the value used to set the "Accept" property of the new HttpHeaders instance.
+     * Default value is '*\/*'.
+     * 
+     * @returns a reference to this HttpResponseMockBuilder instance.
+     */
+    public accept(value: string = "*/*"): HttpHeadersMockBuilder {
+        this.setHeader("Accept", value);
+        return this;
+    }
+
+    /**
      * Sets the "Accept-Encoding" property of the new HttpHeaders instance with the specified value.
      * 
      * @param value the value used to set the "Accept-Encoding" property of the new HttpHeaders instance.

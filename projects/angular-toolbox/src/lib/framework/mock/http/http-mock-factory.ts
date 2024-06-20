@@ -8,6 +8,15 @@ import { XhrBase } from "./xhr/xhr-base";
 
 /**
  * @private
+ * An error used as reference for unit testing.
+ * Angular framework calls XMLHttpRequest method only after the open() method invokation.
+ */
+const XHR_ERROR: (method: string)=>void = (method: string)=> {
+    throw new Error(`Attempt to call ${method}() method before calling open().`)
+};
+
+/**
+ * @private
  */
 class XMLHttpRequestProxyImpl extends XhrBase implements XhrProxy {
 
@@ -24,7 +33,7 @@ class XMLHttpRequestProxyImpl extends XhrBase implements XhrProxy {
      * XMLHTTPRequest API
      */
     get response(): any {
-        return  this.XHR ? this.XHR.response : null;
+        return  this.XHR ? this.XHR.response : undefined;
     }
 
     /**
@@ -43,15 +52,6 @@ class XMLHttpRequestProxyImpl extends XhrBase implements XhrProxy {
      */
     get statusText(): string {
         return this.XHR ? this.XHR.statusText : EMPTY_STRING;
-    }
-
-    /**
-     * @private
-     * 
-     * XMLHTTPRequest API
-     */
-    override get responseXML(): Document | null {
-        return this.XHR ? this.XHR.responseXML : null;
     }
 
     /**
@@ -93,7 +93,6 @@ class XMLHttpRequestProxyImpl extends XhrBase implements XhrProxy {
     open(method: string, url: string | URL): void;
     open(method: string, url: string | URL, async: boolean, username?: string | null | undefined, password?: string | null | undefined): void;
     open(method: unknown, url: unknown, async?: unknown, username?: unknown, password?: unknown): void {
-        //console.log("open")
         const m: string = (method as string).toString().toLowerCase();
         const u: string = (url as string);
         const config: HttpMethodMock | undefined = this._httpMockService.getMethodConfig(u, m);
@@ -110,28 +109,8 @@ class XMLHttpRequestProxyImpl extends XhrBase implements XhrProxy {
      * XMLHTTPRequest API
      */
     abort(): void {
-        //console.log("abort")
-        this.XHR.abort();
-    }
-
-    /**
-     * @private
-     * 
-     * XMLHTTPRequest API
-     */
-    getResponseHeader(name: string): string | null {
-        console.log("getResponseHeader", name)
-        return this.XHR.getResponseHeader(name);
-    }
-
-    /**
-     * @private
-     * 
-     * XMLHTTPRequest API
-     */
-    override dispatchEvent(event: Event): boolean {
-        //console.log("dispatchEvent", event)
-        return this.XHR.dispatchEvent(event);
+        if (this.XHR) this.XHR.abort();
+        XHR_ERROR("abort");
     }
 
     /**
@@ -149,18 +128,8 @@ class XMLHttpRequestProxyImpl extends XhrBase implements XhrProxy {
      * XMLHTTPRequest API
      */
     override addEventListener(type: unknown, listener: unknown, options?: unknown): void {
-        //console.log("addEventListener", type)
-        this.XHR.addEventListener(type as any, listener as any, options as any);
-    }
-
-    /**
-     * @private
-     * 
-     * XMLHTTPRequest API
-     */
-    overrideMimeType(mime: string): void {
-        console.log("overrideMimeType", mime)
-        this.XHR.overrideMimeType(mime);
+        if (this.XHR) return this.XHR.addEventListener(type as any, listener as any, options as any);
+        XHR_ERROR("addEventListener");
     }
 
     /**
@@ -169,8 +138,8 @@ class XMLHttpRequestProxyImpl extends XhrBase implements XhrProxy {
      * XMLHTTPRequest API
      */
     override removeEventListener(type: unknown, listener: unknown, options?: unknown): void {
-        //console.log("removeEventListener", type)
-        this.XHR.removeEventListener(type as any, listener as any, options as any);
+        if (this.XHR) return this.XHR.removeEventListener(type as any, listener as any, options as any);
+        XHR_ERROR("removeEventListener");
     }
 
     /**
@@ -179,8 +148,8 @@ class XMLHttpRequestProxyImpl extends XhrBase implements XhrProxy {
      * XMLHTTPRequest API
      */
     send(body?: Document | XMLHttpRequestBodyInit | null | undefined): void {
-        console.log("send", body)
-        this.XHR.send(body);
+        if (this.XHR) return this.XHR.send(body);
+        XHR_ERROR("removeEventListener");
     }
 
     /**
@@ -189,8 +158,8 @@ class XMLHttpRequestProxyImpl extends XhrBase implements XhrProxy {
      * XMLHTTPRequest API
      */
     setRequestHeader(name: string, value: string): void {
-        console.log("setRequestHeader", name, value)
-        this.XHR.setRequestHeader(name, value);
+        if (this.XHR) return this.XHR.setRequestHeader(name, value);
+        XHR_ERROR("removeEventListener");
     }
 
     /**

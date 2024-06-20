@@ -1,9 +1,9 @@
 import { HttpHeaders, HttpRequest, HttpStatusCode } from "@angular/common/http";
 import { XhrProxy, HttpMethodMock, HttpResponseMock } from "../../../../model";
 import { ProgressEventMock } from "../event/progress-event-mock";
-import { DefaultHeadersConfigFactory } from "../util/default-headers-config.factory";
 import { EMPTY_STRING } from "../../../../util";
 import { XhrBase } from "./xhr-base";
+import { HttpHeadersUtil } from "../util/http-headers.util";
 
 /**
  * @private
@@ -31,6 +31,11 @@ declare interface DataStorage {
  */
 export class DelegateXhr extends XhrBase implements XhrProxy {
     
+    /**
+     * @private
+     */
+    private _progressiveDownload: boolean = false;
+
     /**
      * @private
      */
@@ -130,55 +135,28 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
 
     abort(): void {
         this.eventDispatch("abort");
-        if (this.onabort) this.onabort.call(this, this.getProgressEvent("abort"));
-    }
-
-    getResponseHeader(name: string): string | null {
-        const header: HttpHeaders | undefined = this._dataStorage.httpResponse.headers;
-        return header ? header.get(name) : null;
     }
 
     getAllResponseHeaders(): string {
-        const headers: HttpHeaders | undefined = this._dataStorage.httpResponse.headers;
-        const NL: string = "\n";
-        let result: string = EMPTY_STRING;
-        if (headers) {
-            const keys: string[] = headers.keys();
-            const last: number = keys.length - 1;
-            keys.forEach((key: string, index: number)=> {
-                result += `${key}: ${headers.getAll(key)}${index !== last ? NL : EMPTY_STRING}`;
-            });
-        }
-        return result;
-    }
-
-    overrideMimeType(mime: string): void {
-        //console.log("d-overrideMimeType", mime)
+        return HttpHeadersUtil.stringify(this._dataStorage.httpResponse.headers);
     }
 
     send(body?: Document | XMLHttpRequestBodyInit | null | undefined): void {
         this.buildDataStorage(body)
         this.seetReadyState(this.HEADERS_RECEIVED);
-
-        
         this.seetReadyState(this.LOADING);
-        if (this.onloadstart) this.onloadstart.call(this, this.getProgressEvent("loadstart"));
 
         const response: HttpResponseMock = this._dataStorage.httpResponse;
         const headers: HttpHeaders | undefined = response.headers;
-        this._status = response.status || HttpStatusCode.InternalServerError;
-        this._statusText = response.statusText || "Internal Server Error";
         this._responseText = JSON.stringify(response.body);
         this._headers = headers || new HttpHeaders();
 
-        this._dataStorage.loaded = this._dataStorage.total;
-        
-        this.seetReadyState(this.DONE);
-
-        if (this.onload) this.onload.call(this, this.getProgressEvent("load"));
-        this.eventDispatch("load");
-
-        if (this.onloadend) this.onloadend.call(this, this.getProgressEvent("loadend"));
+        if (!this._progressiveDownload) {
+            this._statusText = response.statusText || EMPTY_STRING;
+            this._status = response.status || 0;
+            return this.onLoadComplete();
+        }
+        this.doProgressiveDownload();
     }
 
     setRequestHeader(name: string, value: string): void {
@@ -188,12 +166,48 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
     constructor(methodConfig: HttpMethodMock) {
         super();
         this._methodConfig = methodConfig;
-        this._headers = DefaultHeadersConfigFactory.createRequestHeaders();
+        this._progressiveDownload = methodConfig.progressive || false;
+        this._headers = HttpHeadersUtil.createDefaultRequestHeaders();
     }
     
     public destroy(): void {
         this._methodConfig = null as any;
         this._headers = null as any;
+    }
+
+    private doProgressiveDownload(): void {
+        const total: number = this._dataStorage.total;
+        if (total <= 200) {
+            console.warn("[Angular Toolbox]: Body content is too small for emulating progressive download! Minimum size is 200 octets.");
+            return this.onLoadComplete();
+        }
+        // TODO ameliorate the following process:
+        const self: DelegateXhr = this;
+        const chunckSize: number = Math.floor(total / 10);
+        let cursor: number = 0;
+        this._statusText = "Partial Content";
+        this._status = HttpStatusCode.PartialContent;
+        const idx = setInterval(()=> {
+            cursor += chunckSize;
+            if (cursor > total) {
+                cursor = total;
+                clearInterval(idx);
+                self.onLoadComplete();
+            } else {
+                this._dataStorage.loaded = cursor;
+                self.dispatchProgressEvent();
+            }
+        }, 100);
+    }
+
+    /**
+     * @private
+     * Dispatches an new event with the specified type.
+     */
+    private onLoadComplete(): void {
+        this._dataStorage.loaded = this._dataStorage.total;
+        this.seetReadyState(this.DONE);
+        this.eventDispatch("load");
     }
 
     /**
@@ -207,18 +221,16 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
         this.dispatchEvent(event);
     }
 
-    private getProgressEvent(type: string): ProgressEvent {
+    private dispatchProgressEvent(): void {
         const d: any = this._dataStorage;
-        const event: ProgressEventMock = new ProgressEventMock(type);
+        const event: ProgressEventMock = new ProgressEventMock("progress");
         event.loaded = d.loaded;
         event.total = d.total;
-        return event;
+        this.dispatchEvent(event);
     }
 
     private seetReadyState(state: number): void {
         this._readyState = state;
-        if (!this.onreadystatechange) return;
-        this.onreadystatechange.call(this, new Event("readystatechange"));
     }
 
     private buildDataStorage(requestBody?: Document | XMLHttpRequestBodyInit | null | undefined): void {

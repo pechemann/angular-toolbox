@@ -2,6 +2,8 @@ import { EventTargetImpl } from "../../../../model/business/impl/event/event-tar
 
 /**
  * @private
+ * 
+ * Elemenets marked as "Useless" are never invoked by the Angular framework.
  */
 export class XhrBase extends EventTargetImpl {
     
@@ -43,7 +45,7 @@ export class XhrBase extends EventTargetImpl {
     /**
      * @private
      * 
-     * XMLHTTPRequest API
+     * XMLHTTPRequest API - Useless
      */
     get responseXML(): Document | null {
         return null;
@@ -73,56 +75,70 @@ export class XhrBase extends EventTargetImpl {
     /**
      * @private
      * 
-     * XMLHTTPRequest API
+     * XMLHTTPRequest API - Useless
      */
     onabort: ((this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) => any) | null = null;
 
     /**
      * @private
      * 
-     * XMLHTTPRequest API
+     * XMLHTTPRequest API - Useless
      */
     onerror: ((this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) => any) | null = null;
 
     /**
      * @private
      * 
-     * XMLHTTPRequest API
+     * XMLHTTPRequest API - Useless
      */
     onload: ((this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) => any) | null = null;
 
     /**
      * @private
      * 
-     * XMLHTTPRequest API
+     * XMLHTTPRequest API - Useless
      */
     onloadend: ((this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) => any) | null = null;
 
     /**
      * @private
      * 
-     * XMLHTTPRequest API
+     * XMLHTTPRequest API - Useless
      */
     onloadstart: ((this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) => any) | null = null;
 
     /**
      * @private
      * 
-     * XMLHTTPRequest API
+     * XMLHTTPRequest API - Useless
      */
     onprogress: ((this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) => any) | null = null;
 
     /**
      * @private
      * 
-     * XMLHTTPRequest API
+     * XMLHTTPRequest API - Useless
      */
     onreadystatechange: ((this: XMLHttpRequest, ev: Event) => any) | null = null;
 
     /**
      * @private
      * 
-     * XMLHTTPRequest API
+     * XMLHTTPRequest API - Useless
      */
     ontimeout: ((this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) => any) | null = null;
+
+    /**
+     * @private
+     * 
+     * XMLHTTPRequest API - Useless
+     */
+    overrideMimeType(mime: string): void {}
+
+    /**
+     * @private
+     * 
+     * XMLHTTPRequest API - Useless
+     */
+    getResponseHeader(name: string): string | null { return null }
 }

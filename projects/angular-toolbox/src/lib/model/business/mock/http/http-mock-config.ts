@@ -39,6 +39,11 @@ export interface HttpResponseMock {
  */
 export interface HttpMethodMock {
 
+    /***
+     * Indicates whether to emulate progressive download (true), or not (false) 
+     */
+    progressive?: boolean;
+
     /**
      * This method emulates a successful HTTP call response.
      * 
