@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpRouteMock, HttpMockConfig, HttpMethodMock } from '../../../model';
+import { HttpRouteMock, HttpMockConfig, HttpMethodMock } from '../../..';
 
 @Injectable({
   providedIn: 'root'

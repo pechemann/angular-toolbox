@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { EventEmitter, Inject, Injectable } from '@angular/core';
-import { ScrollBehavior } from '../../model';
+import { ScrollBehavior } from '../../business';
 
 @Injectable({
   providedIn: 'root'

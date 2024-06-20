@@ -1,4 +1,4 @@
-import { VersionImpl } from '../../../../lib/model/core/impl/version.impl';
+import { VersionImpl } from '../../../../lib/model/business/impl/version/version.impl';
 
 describe('VersionImpl', () => {
 

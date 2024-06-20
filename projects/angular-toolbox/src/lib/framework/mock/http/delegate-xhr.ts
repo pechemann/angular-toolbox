@@ -1,11 +1,14 @@
 import { HttpHeaders, HttpRequest, HttpStatusCode } from "@angular/common/http";
 import { XMLHttpRequestProxy, HttpMethodMock } from "../../../model";
 import { ProgressEventMock } from "./progress-event-mock";
-import { DefaultHeadersConfigFactory } from "./default-headers-config.factory";
+import { DefaultHeadersConfigFactory } from "./util/default-headers-config.factory";
 import { EMPTY_STRING } from "../../../util";
 import { HttpResponseMock } from "angular-toolbox";
 import { XhrBase } from "./xhr-base";
 
+/**
+ * @private
+ */
 declare interface DataStorage {
     httpResponse: HttpResponseMock;
     loaded: number;

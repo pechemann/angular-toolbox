@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpMockService } from '../../../../lib/service/http/mock/http-mock.service';
+import { HttpMockService } from '../../../../lib/model/service/mock/http/http-mock.service';
 import { XhrFactory } from '@angular/common';
 import { xhrProxyFactory } from '../../../../lib/framework/mock/http/xhr-proxy-factory';
 

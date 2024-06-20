@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpMockService } from '../../../../lib/service/http/mock/http-mock.service';
+import { HttpMockService } from '../../../../lib/model/service/mock/http/http-mock.service';
 
 describe('HttpMockService', () => {
   let service: HttpMockService;

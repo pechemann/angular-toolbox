@@ -1,4 +1,4 @@
-import { Version } from "../version";
+import { Version } from "../../version/version";
 
 /**
  * Specifies the semantic versioning of an API.

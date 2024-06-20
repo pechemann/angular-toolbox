@@ -1,6 +1,6 @@
 import { XhrFactory } from "@angular/common";
 import { inject } from "@angular/core";
-import { HttpMockService } from "../../../service/http/mock/http-mock.service";
+import { HttpMockService } from "../../../model/service/mock/http/http-mock.service";
 import { HttpMethodMock, XMLHttpRequestProxy } from "../../../model";
 import { DelegateXhr } from "./delegate-xhr";
 import { EMPTY_STRING } from "../../../util";

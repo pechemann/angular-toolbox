@@ -1,5 +1,5 @@
 /**
- * 
+ * @Private
  */
 export class ProgressEventMock extends ProgressEvent {
     

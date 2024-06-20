@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ScrollService } from '../../../lib/service/ui/scroll.service';
-import { SubscriptionService } from '../../../lib/service/subscription/subscription.service';
+import { ScrollService } from '../../../lib/model/service/ui/scroll.service';
+import { SubscriptionService } from '../../../lib/model/service/subscription/subscription.service';
 
 describe('ScrollService', () => {
   const TEST_DIV_SELECTOR: string = ".jasmine_html-reporter";

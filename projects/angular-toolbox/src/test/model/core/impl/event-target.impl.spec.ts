@@ -1,4 +1,4 @@
-import { EventTargetImpl } from '../../../../lib/model/core/impl/event-target.impl';
+import { EventTargetImpl } from '../../../../lib/model/business/impl/event/event-target.impl';
 
 describe('EventTargetImpl', () => {
 

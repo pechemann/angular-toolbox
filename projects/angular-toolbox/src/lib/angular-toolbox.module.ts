@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
-import { DARK_MODE_CONFIG } from './service/ui/dark-mode.service';
-import { VERSION_CONFIG } from './service';
+import { DARK_MODE_CONFIG, VERSION_CONFIG } from './model';
 
 /**
  * @private
