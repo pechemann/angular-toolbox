@@ -13,6 +13,7 @@ import { config } from './http-mock-config';
 export class HttpMockServiceComponent {
 
   protected data!: string;
+  protected todoIdx: number = 0;
 
   constructor(private _http: HttpClient,
               private _httpMockService: HttpMockService,
@@ -29,11 +30,13 @@ export class HttpMockServiceComponent {
     html: [`...
   <button class="btn btn-primary" role="button" (click)="loadData()">Load Data</button>
 
-  <h6  class="card-title">Loaded Data</h6>
-  <hr>
-
-  @if (data) { <code>{{ data }}</code> }
-  @else { <p>No data loaded...<p/> }
+  @if (data) {
+      <h6  class="card-title">Loaded data for ID #{{todoIdx}}</h6>
+      <hr>
+      <code>{{ data }}</code>
+  } @else {
+      No data loaded...
+  }
 ...`],
     ts: [
 `/////////////////////////
@@ -42,31 +45,37 @@ export class HttpMockServiceComponent {
 
 import { HttpRequest, HttpStatusCode } from "@angular/common/http";
 import { HttpMockConfig, httpResponseMock } from "angular-toolbox";
-import { User } from "./business";
+import { Todo } from "./model/business";
 
-const USER: User = {
-    userId: 3,
-    id: 3,
-    title: "lorem ipsum",
-    completed: true
+const getTodo = (params: any): Todo => {
+    const id: number = params.id;
+    return {
+        id: id,
+        userId: id,
+        title: "lorem ipsum",
+        completed: true
+    }
 };
 
 export const config: HttpMockConfig = {
-    routes: [
+    origin: "https://jsonplaceholder.typicode.com",
+    interceptors: [
         {
-            path: "https://jsonplaceholder.typicode.com/todos/:id",
-            get: {
-                data: (req: HttpRequest<any>)=> httpResponseMock().body(USER)
-                                                                  .response(),
-                error: (req: HttpRequest<any>)=> httpResponseMock().status(HttpStatusCode.NotFound)
-                                                                   .statusText("Not Found")
-                                                                   .response()
-            }
+            id: "getTodo",
+            endpoints: [
+                {
+                    route: "/todos/:id",
+                    get: {
+                        data: (req: HttpRequest<any>, params: any)=> httpResponseMock().body( getTodo(params) )
+                                                                                       .response()
+                    }
+                }
+            ]
         }
     ]
-}`,
+};`,
 `/////////////////////////
-// HTTP Mock Config
+// Sample Component
 /////////////////////////
 
 @Component({
@@ -76,11 +85,13 @@ export const config: HttpMockConfig = {
 export class HttpMockServiceComponent {
 
   protected data!: string;
+  protected userIdx: number = 0;
 
   constructor(private _http: HttpClient) {}
 
   protected loadData(): void {
-    this._http.get("https://jsonplaceholder.typicode.com/todos/3").subscribe((result: any)=> {
+    const url: string = "https://jsonplaceholder.typicode.com/todos/" + ++this.userIdx;
+    this._http.get(url).subscribe((result: any)=> {
       this.data = JSON.stringify(result, null, 4);
     });
   }
@@ -99,7 +110,7 @@ import { AppComponent } from './app-layout/app.component';
 import { AngularToolboxModule, httpMockFactory } from 'angular-toolbox';
 
 //=> HTTP mock config import
-import { config } from './http-mock-config';
+import { config } from './app-mock/http-mock-config';
 
 @NgModule({
   declarations: [
@@ -128,7 +139,8 @@ export class AppModule {
   };
 
   protected loadData(): void {
-    this._http.get("https://jsonplaceholder.typicode.com/todos/3").subscribe((result: any)=> {
+    const url: string = "https://jsonplaceholder.typicode.com/todos/" + ++this.todoIdx;
+    this._http.get(url).subscribe((result: any)=> {
       this.data = JSON.stringify(result, null, 4);
     });
   }

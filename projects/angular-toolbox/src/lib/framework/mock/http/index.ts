@@ -1,2 +1,3 @@
-export * from './http-mock-factory';
 export * from './util';
+
+export * from './xhr/http-mock-factory';

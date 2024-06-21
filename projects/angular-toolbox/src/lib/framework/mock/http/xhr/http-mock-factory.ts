@@ -1,10 +1,11 @@
 import { XhrFactory } from "@angular/common";
 import { inject } from "@angular/core";
-import { HttpMockService } from "../../../model/service/mock/http/http-mock.service";
-import { HttpMethodMock, XhrProxy } from "../../../model";
-import { DelegateXhr } from "./xhr/delegate-xhr";
-import { EMPTY_STRING } from "../../../util";
-import { XhrBase } from "./xhr/xhr-base";
+import { HttpMockService } from "../../../../model/service/mock/http/http-mock.service";
+import { XhrProxy } from "../../../../model";
+import { DelegateXhr } from "./delegate-xhr";
+import { EMPTY_STRING } from "../../../../util";
+import { XhrBase } from "./xhr-base";
+import { RouteMockConfig } from "../config/route-mock-config";
 
 /**
  * @private
@@ -94,13 +95,13 @@ class XMLHttpRequestProxyImpl extends XhrBase implements XhrProxy {
     open(method: string, url: string | URL, async: boolean, username?: string | null | undefined, password?: string | null | undefined): void;
     open(method: unknown, url: unknown, async?: unknown, username?: unknown, password?: unknown): void {
         const m: string = (method as string).toString().toLowerCase();
-        const u: string = (url as string);
-        const config: HttpMethodMock | undefined = this._httpMockService.getMethodConfig(u, m);
+        const parsedUrl: URL = new URL(url as string);
+        const config: RouteMockConfig | undefined = this._httpMockService.getRouteConfig(parsedUrl, m);
         if (this.XHR && this.XHR instanceof DelegateXhr) this.XHR.destroy();
         this.XHR = config ? new DelegateXhr(config) : new XMLHttpRequest();
         this.XHR.withCredentials = this.withCredentials;
         this.XHR.responseType = this.responseType;
-        this.XHR.open(m.toString(), u, async as any, username as any, password as any);
+        this.XHR.open(m.toString(), parsedUrl.toString(), async as any, username as any, password as any);
     }
 
     /**

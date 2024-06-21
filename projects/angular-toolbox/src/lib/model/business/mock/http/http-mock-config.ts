@@ -50,56 +50,71 @@ export interface HttpMethodMock {
      * @param request the request associated with a HTTP call.
      * @returns a user-defined HttpResponse mock object depending on the specified request parameter.
      */
-    data?: (request: HttpRequest<any>)=> HttpResponseMock
-    
-    /**
-     * This method emulates an unsuccessful HTTP call response.
-     * 
-     * @param request the request associated with a HTTP call.
-     * @returns a user-defined HttpResponse mock object depending on the specified request parameter.
-     */
-    error?: (request: HttpRequest<any>)=> HttpResponseMock;
+    data?: (request: HttpRequest<any>, parameters?: any)=> HttpResponseMock;
 }
 
 /**
- * Provides the API for defining mock strategies for a specific endpoint route.
+ * Provides the API for defining mock strategies for a specific endpoint.
  */
-export interface HttpRouteMock {
-
+export interface HttpMockEndpoint {
+    
     /**
-     * The path to the endpoint to mock.
+     * The route pert of the endpoint to mock.
      */
-    path: string;
+    route: string;
 
     /**
-     * The mock configuration of HTTP GET method calls for specified path.
+     * The mock configuration of HTTP GET method calls for specified route.
      */
     get?: HttpMethodMock;
     
     /**
-     * The mock configuration of HTTP POST method calls for specified path.
+     * The mock configuration of HTTP POST method calls for specified route.
      */
     post?: HttpMethodMock;
     
     /**
-     * The mock configuration of HTTP PUT method calls for specified path.
+     * The mock configuration of HTTP PUT method calls for specified route.
      */
     put?: HttpMethodMock;
     
     /**
-     * The mock configuration of HTTP DELETE method calls for specified path.
+     * The mock configuration of HTTP DELETE method calls for specified route.
      */
     delete?: HttpMethodMock;
     
     /**
-     * The mock configuration of HTTP PATCH method calls for specified path.
+     * The mock configuration of HTTP PATCH method calls for specified route.
      */
     patch?: HttpMethodMock;
     
     /**
-     * The mock configuration of HTTP HEAD method calls for specified path.
+     * The mock configuration of HTTP HEAD method calls for specified route.
      */
     head?: HttpMethodMock;
+}
+
+
+/**
+ * Provides the API for defining mock strategies for a specific API.
+ */
+export interface HttpMockInterceptor {
+
+    /**
+     * The ID of this interceptor.
+     */
+    id: string;
+    
+    /**
+     * The URL origin for this interceptor, as defined by the URL stanfard.
+     * @see https://url.spec.whatwg.org/#url
+     */
+    origin?: string;
+
+    /**
+     * A list of endpoints that must be intercepted by the HTTP Mock Framework.
+     */
+    endpoints: HttpMockEndpoint[];
 }
 
 /**
@@ -108,7 +123,13 @@ export interface HttpRouteMock {
 export interface HttpMockConfig {
 
     /**
-     * The configuration of all mock strategies for each specified routes.
+     * The main URL origin for this mock, as defined by the URL stanfard.
+     * @see https://url.spec.whatwg.org/#url
      */
-    routes: HttpRouteMock[];
+    origin?: string;
+
+    /**
+     * The configuration of all mock strategies for each specified API.
+     */
+    interceptors: HttpMockInterceptor[];
 }

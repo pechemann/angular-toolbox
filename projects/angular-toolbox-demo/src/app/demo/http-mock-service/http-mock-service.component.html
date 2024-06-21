@@ -14,9 +14,9 @@
     </div>
     <div class="card">
         <div class="card-body">
-            <h6  class="card-title">Loaded Data</h6>
-            <hr>
             @if (data) {
+                <h6  class="card-title">Loaded data for ID #{{todoIdx}}</h6>
+                <hr>
                 <code>{{ data }}</code>
             } @else {
                 No data loaded...

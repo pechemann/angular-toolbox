@@ -1,9 +1,10 @@
 import { HttpHeaders, HttpRequest, HttpStatusCode } from "@angular/common/http";
-import { XhrProxy, HttpMethodMock, HttpResponseMock } from "../../../../model";
+import { XhrProxy, HttpResponseMock } from "../../../../model";
 import { ProgressEventMock } from "../event/progress-event-mock";
 import { EMPTY_STRING } from "../../../../util";
 import { XhrBase } from "./xhr-base";
 import { HttpHeadersUtil } from "../util/http-headers.util";
+import { RouteMockConfig } from "../config/route-mock-config";
 
 /**
  * @private
@@ -39,7 +40,7 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
     /**
      * @private
      */
-    private _methodConfig: HttpMethodMock;
+    private _routeConfig: RouteMockConfig;
 
     /**
      * @private
@@ -163,16 +164,17 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
         this._headers.append(name, value);
     }
 
-    constructor(methodConfig: HttpMethodMock) {
+    constructor(routeConfig: RouteMockConfig) {
         super();
-        this._methodConfig = methodConfig;
-        this._progressiveDownload = methodConfig.progressive || false;
+        this._routeConfig = routeConfig;
+        this._progressiveDownload = routeConfig.methodConfig.progressive || false;
         this._headers = HttpHeadersUtil.createDefaultRequestHeaders();
     }
     
     public destroy(): void {
-        this._methodConfig = null as any;
+        this._routeConfig = null as any;
         this._headers = null as any;
+        this._dataStorage = null as any;
     }
 
     private doProgressiveDownload(): void {
@@ -235,7 +237,8 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
 
     private buildDataStorage(requestBody?: Document | XMLHttpRequestBodyInit | null | undefined): void {
         const request: HttpRequest<any> = new HttpRequest<any>(this._method as string, this._url as any, requestBody);
-        const data: HttpResponseMock = (this._methodConfig as any).data(request);
+        const rc: RouteMockConfig = this._routeConfig;
+        const data: HttpResponseMock = (rc.methodConfig as any).data(request, rc.parameters);
         const body: any = data.body;
         this._dataStorage = {
             httpResponse: data,

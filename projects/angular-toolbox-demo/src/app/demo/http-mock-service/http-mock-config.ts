@@ -1,24 +1,37 @@
-import { HttpRequest, HttpStatusCode } from "@angular/common/http";
+import { HttpRequest } from "@angular/common/http";
 import { HttpMockConfig, httpResponseMock } from "projects/angular-toolbox/src/public-api";
 
-const USER: any = {
-    userId: 3,
-    id: 3,
-    title: "lorem ipsum",
-    completed: true
+export interface Todo {
+    id: number;
+    userId: number;
+    title: string;
+    completed: boolean;
+};
+
+const getTodo = (params: any): Todo => {
+    const id: number = params.id;
+    return {
+        id: id,
+        userId: id,
+        title: "lorem ipsum",
+        completed: true
+    }
 };
 
 export const config: HttpMockConfig = {
-    routes: [
+    origin: "https://jsonplaceholder.typicode.com",
+    interceptors: [
         {
-            path: "https://jsonplaceholder.typicode.com/todos/3",
-            get: {
-                data: (req: HttpRequest<any>)=> httpResponseMock().body(USER)
-                                                                  .response(),
-                error: (req: HttpRequest<any>)=> httpResponseMock().status(HttpStatusCode.NotFound)
-                                                                   .statusText("Not Found")
-                                                                   .response()
-            }
+            id: "getTodo",
+            endpoints: [
+                {
+                    route: "/todos/:id",
+                    get: {
+                        data: (req: HttpRequest<any>, params: any)=> httpResponseMock().body( getTodo(params) )
+                                                                                       .response()
+                    }
+                }
+            ]
         }
     ]
 };
