@@ -113,26 +113,12 @@ export class EventTargetImpl implements EventTarget {
         const listenersForType = ll.get(type);
         if (!listenersForType) return true;
         for (const listnerEntry of listenersForType.entries()) {
-            const listener = listnerEntry[0];
+            const listener: any = listnerEntry[0];
             const options: any = listnerEntry[1];
-            try {
-                if (typeof listener === FUNCTION_TYPE) {
-                    // Listener functions must be executed with the EventTarget as the `this` context.
-                    listener.call(this, event);
-                } else if (listener && typeof listener.handleEvent === FUNCTION_TYPE) {
-                    // Listener objects have their handleEvent method called, if they have one
-                    listener.handleEvent(event);
-                }
-            } catch (err) {
-                // We need to report the error to the global error handling event,
-                // but we do not want to break the loop that is executing the events.
-                // Unfortunately, this is the best we can do, which isn't great, because the
-                // native EventTarget will actually do this synchronously before moving to the next
-                // event in the loop.
-                setTimeout(() => {
-                    throw err;
-                });
-            }
+            // Listener functions must be executed with the EventTarget as the `this` context.
+            if (typeof listener === FUNCTION_TYPE) listener.call(this, event);
+            // Listener objects have their handleEvent method called, if they have one
+            else if (listener && typeof listener.handleEvent === FUNCTION_TYPE) listener.handleEvent(event);
             if (options && options.once) listenersForType.delete(listener);
         }
         return true;

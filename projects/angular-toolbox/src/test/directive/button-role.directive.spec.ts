@@ -63,7 +63,7 @@ describe('ButtonRoleDirective', () => {
         expect(fixture.componentInstance.onEnter).not.toHaveBeenCalled();
     });
 
-    it('should invike the "blur()" method on the decorated element after event dispatching', () => {
+    it('should invoke the "blur()" method on the decorated element after event dispatching', () => {
         decoratedElm.dispatchEvent(createKeyEvent('keyup', 'Enter'));
         fixture.detectChanges();
         expect(fixture.componentInstance).not.toBe(document.activeElement as any);
