@@ -1,10 +1,21 @@
+/**
+ * @license
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at [TOOLBOXLICENSE]
+ */
+
 import { HttpHeaders, HttpStatusCode } from "@angular/common/http";
 import { HttpResponseMock } from "../../../../model";
 
+/**
+ * @private
+ */
 const OK: string = "OK";
 
 /**
- * A statefull builder for creating new HttpResponseMock instances.
+ * A statefull builder for creating new `HttpResponseMock` instances.
  */
 export class HttpResponseMockBuilder {
 
@@ -19,11 +30,11 @@ export class HttpResponseMockBuilder {
     };
 
     /**
-     * Sets the body property of the new HttpResponseMock instance with sthe specified body value.
+     * Sets the body property of the new `HttpResponseMock` instance with the specified `body` value.
      * 
-     * @param body the value used to set the body property of the new HttpResponseMock instance.
+     * @param body The value used to set the body property of the new `HttpResponseMock` instance.
      * 
-     * @returns a reference to this HttpResponseMockBuilder instance.
+     * @returns A reference to this `HttpResponseMockBuilder` instance.
      */
     public body(body: any): HttpResponseMockBuilder {
         this._response.body = body;
@@ -31,11 +42,11 @@ export class HttpResponseMockBuilder {
     }
 
     /**
-     * Sets the headers property of the new HttpResponseMock instance with sthe specified headers value.
+     * Sets the headers property of the new `HttpResponseMock` instance with the specified `headers` value.
      * 
-     * @param headers the value used to set the headers property of the new HttpResponseMock instance.
+     * @param headers The value used to set the `headers` property of the new `HttpResponseMock` instance.
      * 
-     * @returns a reference to this HttpResponseMockBuilder instance.
+     * @returns A reference to this `HttpResponseMockBuilder` instance.
      */
     public headers(headers: HttpHeaders): HttpResponseMockBuilder {
         this._response.headers = headers;
@@ -43,11 +54,11 @@ export class HttpResponseMockBuilder {
     }
 
     /**
-     * Sets the status property of the new HttpResponseMock instance with sthe specified status value.
+     * Sets the `status` property of the new `HttpResponseMock` instance with the specified `status` value.
      * 
-     * @param status the value used to set the status property of the new HttpResponseMock instance.
+     * @param status The value used to set the `status` property of the new `HttpResponseMock` instance.
      * 
-     * @returns a reference to this HttpResponseMockBuilder instance.
+     * @returns A reference to this `HttpResponseMockBuilder` instance.
      */
     public status(status: number): HttpResponseMockBuilder {
         this._response.status = status;
@@ -55,11 +66,11 @@ export class HttpResponseMockBuilder {
     }
 
     /**
-     * Sets the statusText property of the new HttpResponseMock instance with sthe specified statusText value.
+     * Sets the `statusText` property of the new `HttpResponseMock` instance with the specified `statusText` value.
      * 
-     * @param statusText the value used to set the statusText property of the new HttpResponseMock instance.
+     * @param statusText The value used to set the `statusText` property of the new `HttpResponseMock` instance.
      * 
-     * @returns a reference to this HttpResponseMockBuilder instance.
+     * @returns A reference to this `HttpResponseMockBuilder` instance.
      */
     public statusText(statusText: string): HttpResponseMockBuilder {
         this._response.statusText = statusText;
@@ -67,11 +78,11 @@ export class HttpResponseMockBuilder {
     }
 
     /**
-     * Sets the url property of the new HttpResponseMock instance with sthe specified url value.
+     * Sets the `url` property of the new `HttpResponseMock` instance with the specified `url` value.
      * 
-     * @param url the value used to set the url property of the new HttpResponseMock instance.
+     * @param url The value used to set the `url` property of the new `HttpResponseMock` instance.
      * 
-     * @returns a reference to this HttpResponseMockBuilder instance.
+     * @returns A reference to this `HttpResponseMockBuilder` instance.
      */
     public url(url: string | null): HttpResponseMockBuilder {
         this._response.url = url;
@@ -79,10 +90,10 @@ export class HttpResponseMockBuilder {
     }
 
     /**
-     * Return a new HttpResponseMock instance, built from the properties specified with the
-     * HttpResponseMockBuilder methods.
+     * Return a new `HttpResponseMock` instance, built from the properties specified with the
+     * `HttpResponseMockBuilder` methods.
      * 
-     * @returns a new HttpResponseMock instance.
+     * @returns A new `HttpResponseMock` instance.
      */
     public response(): HttpResponseMock {
         return this._response;
@@ -90,8 +101,8 @@ export class HttpResponseMockBuilder {
 }
 
 /**
- * A utility function used to create new "chainable" HttpResponseMockBuilder instances.
+ * A utility function used to create new "chainable" `HttpResponseMockBuilder` instances.
  * 
- * @returns a new HttpResponseMock instance;
+ * @returns A new `HttpResponseMockBuilder` instance.
  */
 export const httpResponseMock:()=> HttpResponseMockBuilder = ()=> new HttpResponseMockBuilder();

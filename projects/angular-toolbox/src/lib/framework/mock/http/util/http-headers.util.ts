@@ -1,3 +1,11 @@
+/**
+ * @license
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at [TOOLBOXLICENSE]
+ */
+
 import { HttpHeaders } from "@angular/common/http";
 import { EMPTY_STRING } from "../../../../util";
 import { httpHeadersMock } from "./http-response-headers-mock.builder";
@@ -10,17 +18,18 @@ const NL: string = "\n";
 
 /**
  * @private
- * A set of static utilities for manipulating HttpHeaders objects.
+ * A set of static utilities for manipulating `HttpHeaders` objects.
  */
 export class HttpHeadersUtil {
 
     /**
      * @private
-     * Returns a string representation the the specified HttpHeaders object, compatible with the format
-     * waited by the XMLHttpRequest: getAllResponseHeaders() method.
+     * Returns a string representation the the specified `HttpHeaders `object, compatible with the format
+     * expected by the `XMLHttpRequest.getAllResponseHeaders()` method.
      * 
-     * @param headers the HttpHeaders object to format.
-     * @returns a string compatible with the format waited by the XMLHttpRequest: getAllResponseHeaders() method.
+     * @param headers The `HttpHeaders` object to format.
+     * 
+     * @returns A string compatible with the format expected by the `XMLHttpRequest.getAllResponseHeaders()` method.
      */
     public static stringify(headers: HttpHeaders | undefined): string {
         let result: string = EMPTY_STRING;
@@ -35,10 +44,9 @@ export class HttpHeadersUtil {
     
     /**
      * @private
+     * Creates the default `HttpHeaders` object for a mocked HTTP request.
      * 
-     * Creates the default HttpHeaders object for a mock HTTP request.
-     * 
-     * @returns the default HttpHeaders object for a mock HTTP request.
+     * @returns The default `HttpHeaders` object for a mocked HTTP request.
      */
     public static createDefaultRequestHeaders(): HttpHeaders {
         // "Accept" header is set by Angular framework when missing

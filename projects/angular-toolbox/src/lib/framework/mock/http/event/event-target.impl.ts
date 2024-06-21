@@ -7,14 +7,13 @@
  *
  * This source code is derived from the following original source code:
  * - https://github.com/benlesh/event-target-polyfill
- * - Copyright 2020 by Ben Lesh
+ * - Copyright (c) 2020 Ben Lesh
  * 
  * Use of the original source code is governed by an MIT-style license 
  * that can be found in the LICENSE file at
  * https://github.com/benlesh/event-target-polyfill/blob/master/LICENSE
  */
 
-//--> Internal constants
 /**
  * @private
  */

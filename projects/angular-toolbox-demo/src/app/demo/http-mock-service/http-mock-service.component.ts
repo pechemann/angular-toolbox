@@ -89,9 +89,8 @@ export class HttpMockServiceComponent {
 
   protected loadData(): void {
     const url: string = "https://jsonplaceholder.typicode.com/todos/" + ++this.userIdx;
-    const sub: Subscription = this._http.get(url).subscribe((result: Todo)=> {
+    this._http.get(url).subscribe((result: Todo)=> {
       this.data = JSON.stringify(result, null, 4);
-      sub.unsubscribe();
     });
   }
 }`,
@@ -139,9 +138,8 @@ export class AppModule {
 
   protected loadData(): void {
     const url: string = "https://jsonplaceholder.typicode.com/todos/" + ++this.todoIdx;
-    const sub: Subscription = this._http.get(url).subscribe((result: any)=> {
+    this._http.get(url).subscribe((result: any)=> {
       this.data = JSON.stringify(result, null, 4);
-      sub.unsubscribe();
     });
   }
 }

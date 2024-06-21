@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpMockInterceptor, HttpMockConfig, HttpMethodMock, HttpMockEndpoint } from '../../../business';
 import { HTTPMethodRef } from '../../../../framework/mock/http/util/http-method-ref.enum';
-import { Key, TokenData, parse, tokensToRegexp } from '../../../../framework/mock/http/path-to-regexp/path-to-regexp';
+import { Key, TokenData, stringToTokenData, tokenDataToRegexp } from '../../../../framework/mock/http/path-to-regexp/path-to-regexp';
 import { RouteMockConfig } from '../../../../framework/mock/http/config/route-mock-config';
 
 const SLASH: string = "/";
@@ -86,14 +86,14 @@ export class HttpMockService {
   private extractEndpointConfig(origin: string, endpoint: HttpMockEndpoint, method: HTTPMethodRef): void {
     const ep: any = endpoint;
     if (!ep[method as any]) return;
-    const originMap = this._configList.get(origin) as any;
+    const originConfig: Map<string, HttpMockEndpointStorage[]> = this._configList.get(origin) as any;
     const route: string = endpoint.route;
-    const data: TokenData = parse(route);
+    const data: TokenData = stringToTokenData(route);
     const keys: Key[] = [];
-    const regexp: RegExp = tokensToRegexp(data, keys, {});
-    if (!originMap.has(method)) originMap.set(method, []);
-    const methodMap: HttpMockEndpointStorage[] = originMap.get(method);
-    methodMap.push({
+    const regexp: RegExp = tokenDataToRegexp(data, keys, {});
+    if (!originConfig.has(method)) originConfig.set(method, []);
+    const methodConfig: HttpMockEndpointStorage[] = originConfig.get(method) as any;
+    methodConfig.push({
       regexp: regexp,
       keys: keys,
       methodMock: ep[method]

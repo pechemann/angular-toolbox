@@ -1,7 +1,15 @@
+/**
+ * @license
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at [TOOLBOXLICENSE]
+ */
+
 import { HttpHeaders } from "@angular/common/http";
 
 /**
- * A statefull builder for creating new HttpHeaders instances.
+ * A statefull builder for creating new `HttpHeaders` instances.
  */
 export class HttpHeadersMockBuilder {
 
@@ -11,12 +19,12 @@ export class HttpHeadersMockBuilder {
     private _headers: HttpHeaders = new HttpHeaders();
 
     /**
-     * Sets the "Cache-Control" property of the new HttpHeaders instance with the specified value.
+     * Sets the `"Cache-Control"` property of the new `HttpHeaders` instance with the specified value.
      * 
-     * @param value the value used to set the "Cache-Control" property of the new HttpHeaders instance.
-     * Default value is "no-cache".
+     * @param value The value used to set the `"Cache-Control"` property of the new `HttpHeaders` instance.
+     * Default value is `"no-cache"`.
      * 
-     * @returns a reference to this HttpResponseMockBuilder instance.
+     * @returns A reference to this `HttpResponseMockBuilder` instance.
      */
     public cacheControl(value: string = "no-cache"): HttpHeadersMockBuilder {
         this.setHeader("Cache-Control", value);
@@ -24,12 +32,12 @@ export class HttpHeadersMockBuilder {
     }
     
     /**
-     * Sets the "CContent-Type" property of the new HttpHeaders instance with the specified value.
+     * Sets the `"CContent-Type"` property of the new `HttpHeaders` instance with the specified value.
      * 
-     * @param value the value used to set the "Content-Type" property of the new HttpHeaders instance.
-     * Default value is "application/json; charset=utf-8".
+     * @param value The value used to set the `"Content-Type"` property of the new `HttpHeaders` instance.
+     * Default value is `"application/json; charset=utf-8"`.
      * 
-     * @returns a reference to this HttpResponseMockBuilder instance.
+     * @returns A reference to this `HttpResponseMockBuilder` instance.
      */
     public contentType(value: string = "application/json; charset=utf-8"): HttpHeadersMockBuilder {
         this.setHeader("Content-Type", value);
@@ -37,12 +45,12 @@ export class HttpHeadersMockBuilder {
     }
     
     /**
-     * Sets the "Pragma" property of the new HttpHeaders instance with the specified value.
+     * Sets the `"Pragma"` property of the new `HttpHeaders` instance with the specified value.
      * 
-     * @param value the value used to set the "Pragma" property of the new HttpHeaders instance.
-     * Default value is "no-cache".
+     * @param value The value used to set the `"Pragma"` property of the new `HttpHeaders` instance.
+     * Default value is `"no-cache"`.
      * 
-     * @returns a reference to this HttpResponseMockBuilder instance.
+     * @returns A reference to this `HttpResponseMockBuilder` instance.
      */
     public pragma(value: string = "no-cache"): HttpHeadersMockBuilder {
         this.setHeader("Pragma", value);
@@ -50,12 +58,12 @@ export class HttpHeadersMockBuilder {
     }
 
     /**
-     * Sets the "Priority" property of the new HttpHeaders instance with the specified value.
+     * Sets the `"Priority"` property of the new `HttpHeaders` instance with the specified value.
      * 
-     * @param value the value used to set the "Priority" property of the new HttpHeaders instance.
-     * Default value is "u=0, i".
+     * @param value The value used to set the `"Priority"` property of the new `HttpHeaders` instance.
+     * Default value is `"u=0, i"`.
      * 
-     * @returns a reference to this HttpResponseMockBuilder instance.
+     * @returns A reference to this `HttpResponseMockBuilder` instance.
      */
     public priority(value: string = "u=0, i"): HttpHeadersMockBuilder {
         this.setHeader("Priority", value);
@@ -63,12 +71,12 @@ export class HttpHeadersMockBuilder {
     }
 
     /**
-     * Sets the "User-Agent" property of the new HttpHeaders instance with the specified value.
+     * Sets the `"User-Agent"` property of the new `HttpHeaders` instance with the specified value.
      * 
-     * @param value the value used to set the "User-Agent" property of the new HttpHeaders instance.
+     * @param value The value used to set the `"User-Agent"` property of the new `HttpHeaders` instance.
      * Default value is the navigator user agent.
      * 
-     * @returns a reference to this HttpResponseMockBuilder instance.
+     * @returns A reference to this `HttpResponseMockBuilder` instance.
      */
     public userAgent(value: string | null = null): HttpHeadersMockBuilder {
         this.setHeader("User-Agent", value || navigator.userAgent);
@@ -76,12 +84,12 @@ export class HttpHeadersMockBuilder {
     }
 
     /**
-     * Sets the "Accept-Language" property of the new HttpHeaders instance with the specified value.
+     * Sets the `"Accept-Language"` property of the new `HttpHeaders` instance with the specified value.
      * 
-     * @param value the value used to set the "Accept-Language" property of the new HttpHeaders instance.
+     * @param value The value used to set the `"Accept-Language"` property of the new `HttpHeaders` instance.
      * Default value is the navigator language.
      * 
-     * @returns a reference to this HttpResponseMockBuilder instance.
+     * @returns A reference to this `HttpResponseMockBuilder` instance.
      */
     public acceptLanguage(value: string | null = null): HttpHeadersMockBuilder {
         this.setHeader("Accept-Language", value || navigator.language);
@@ -89,12 +97,12 @@ export class HttpHeadersMockBuilder {
     }
 
     /**
-     * Sets the "Accept" property of the new HttpHeaders instance with the specified value.
+     * Sets the `"Accept"` property of the new `HttpHeaders` instance with the specified value.
      * 
-     * @param value the value used to set the "Accept" property of the new HttpHeaders instance.
-     * Default value is '*\/*'.
+     * @param value The value used to set the `"Accept"` property of the new `HttpHeaders` instance.
+     * Default value is `'*\/*'`.
      * 
-     * @returns a reference to this HttpResponseMockBuilder instance.
+     * @returns A reference to this `HttpResponseMockBuilder` instance.
      */
     public accept(value: string = "*/*"): HttpHeadersMockBuilder {
         this.setHeader("Accept", value);
@@ -102,12 +110,12 @@ export class HttpHeadersMockBuilder {
     }
 
     /**
-     * Sets the "Accept-Encoding" property of the new HttpHeaders instance with the specified value.
+     * Sets the `"Accept-Encoding"` property of the new `HttpHeaders` instance with the specified value.
      * 
-     * @param value the value used to set the "Accept-Encoding" property of the new HttpHeaders instance.
-     * Default value is "ngzip, deflate, br, zstd".
+     * @param value The value used to set the `"Accept-Encoding"` property of the new `HttpHeaders` instance.
+     * Default value is `"ngzip, deflate, br, zstd"`.
      * 
-     * @returns a reference to this HttpResponseMockBuilder instance.
+     * @returns A reference to this `HttpResponseMockBuilder` instance.
      */
     public acceptEncoding(value: string = "gzip, deflate, br, zstd"): HttpHeadersMockBuilder {
         this.setHeader("Accept-Encoding", value);
@@ -115,12 +123,12 @@ export class HttpHeadersMockBuilder {
     }
 
     /**
-     * Sets or modifies a value of the new HttpHeaders instance.
+     * Sets or modifies a value of the new `HttpHeaders` instance.
      *
      * @param name The header name.
      * @param value The value or values to set or override for the given header.
      * 
-     * @returns a reference to this HttpResponseMockBuilder instance.
+     * @returns A reference to this `HttpResponseMockBuilder` instance.
      */
     public set(name: string, value: string | string[]): HttpHeadersMockBuilder {
         this.setHeader(name, value);
@@ -128,23 +136,26 @@ export class HttpHeadersMockBuilder {
     }
 
     /**
-     * Return a new HttpHeaders instance, built from the properties specified with the
-     * HttpHeadersMockBuilder methods.
+     * Return a new `HttpHeaders` instance, built from the properties specified with the
+     * `HttpHeadersMockBuilder` methods.
      * 
-     * @returns a new HttpHeaders instance.
+     * @returns A new `HttpHeaders` instance.
      */
     public headers(): HttpHeaders {
         return this._headers;
     }
 
+    /**
+     * @private
+     */
     private setHeader(name: string, value: string | string[]): void {
         this._headers = this._headers.set(name, value);
     }
 }
 
 /**
- * A utility function used to create new "chainable" HttpHeadersMockBuilder instances.
+ * A utility function used to create new "chainable" `HttpHeadersMockBuilder` instances.
  * 
- * @returns a new HttpHeadersMockBuilder instance;
+ * @returns A new `HttpHeadersMockBuilder` instance;
  */
 export const httpHeadersMock:()=> HttpHeadersMockBuilder = ()=> new HttpHeadersMockBuilder();

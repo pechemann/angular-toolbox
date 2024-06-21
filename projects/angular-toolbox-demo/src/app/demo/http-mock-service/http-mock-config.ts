@@ -27,8 +27,8 @@ export const config: HttpMockConfig = {
                 {
                     route: "/todos/:id",
                     get: {
-                        data: (req: HttpRequest<any>, params: any)=> httpResponseMock().body( getTodo(params) )
-                                                                                       .response()
+                        data: (req: HttpRequest<Todo>, params: any)=> httpResponseMock().body( getTodo(params) )
+                                                                                        .response()
                     }
                 }
             ]

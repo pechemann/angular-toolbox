@@ -8,6 +8,7 @@
 
 import { HttpRequest } from "@angular/common/http";
 import { HttpResponseMock } from "./http-response-mock";
+import { HttpMockParameters } from "../../../../framework";
 
 /**
  * The `HttpMethodMock` interface provides actions invoked each time an Angular
@@ -28,5 +29,5 @@ export interface HttpMethodMock {
      * 
      * @returns A user-defined `HttpResponse` mock object.
      */
-    data?: (request: HttpRequest<any>, parameters?: any)=> HttpResponseMock;
+    data?: (request: HttpRequest<any>, parameters?: HttpMockParameters)=> HttpResponseMock;
 }
