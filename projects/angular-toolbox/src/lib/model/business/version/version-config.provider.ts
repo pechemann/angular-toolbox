@@ -1,8 +1,17 @@
+/**
+ * @license
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at [TOOLBOXLICENSE]
+ */
+
 import { VersionConfig } from "./version-config";
 
 /**
- * The default provider for the VersionService configuration. You typically define
- * the custom properties in the main NgModule declaration to initialize the app / library config:
+ * The default provider for the `VersionService` configuration. You typically define
+ * the custom properties in the main `NgModule` declaration to initialize the application
+ * config:
  * 
  * @NgModule({
  * ...
@@ -30,8 +39,8 @@ export const VERSION_CONFIG: VersionConfig = {
     patch: 0,
 
     /**
-     * Specifies the timestamp that corresponds to the build date for this Version object.
-     * Default value is NaN.
+     * Specifies the timestamp that corresponds to the build date for this `Version` object.
+     * Default value is `NaN`.
      */
     buildTimestamp: NaN
 };

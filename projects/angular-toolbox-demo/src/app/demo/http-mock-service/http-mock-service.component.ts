@@ -27,17 +27,15 @@ export class HttpMockServiceComponent {
   public title: string = "HTTP Mock Service Demo";
   public presentation: string = "A lightweight service that provides Mocking strategies for developing HTTP-based components in your Angular projects.";
   public srcCode: CodeWrapper = {
-    html: [`...
-  <button class="btn btn-primary" role="button" (click)="loadData()">Load Data</button>
+    html: [` <button role="button" (click)="loadData()">Load Data</button>
 
   @if (data) {
-      <h6  class="card-title">Loaded data for ID #{{todoIdx}}</h6>
+      <h6>Loaded data for ID #{{todoIdx}}</h6>
       <hr>
       <code>{{ data }}</code>
   } @else {
       No data loaded...
-  }
-...`],
+  }`],
     ts: [
 `/////////////////////////
 // HTTP Mock Config
@@ -91,8 +89,9 @@ export class HttpMockServiceComponent {
 
   protected loadData(): void {
     const url: string = "https://jsonplaceholder.typicode.com/todos/" + ++this.userIdx;
-    this._http.get(url).subscribe((result: any)=> {
+    const sub: Subscription = this._http.get(url).subscribe((result: Todo)=> {
       this.data = JSON.stringify(result, null, 4);
+      sub.unsubscribe();
     });
   }
 }`,
@@ -140,8 +139,9 @@ export class AppModule {
 
   protected loadData(): void {
     const url: string = "https://jsonplaceholder.typicode.com/todos/" + ++this.todoIdx;
-    this._http.get(url).subscribe((result: any)=> {
+    const sub: Subscription = this._http.get(url).subscribe((result: any)=> {
       this.data = JSON.stringify(result, null, 4);
+      sub.unsubscribe();
     });
   }
 }

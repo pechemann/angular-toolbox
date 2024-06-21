@@ -1,5 +1,13 @@
 /**
- * Specifies the semantic versioning of an API.
+ * @license
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at [TOOLBOXLICENSE]
+ */
+
+/**
+ * Specifies the semantic versioning of an Angular application.
  */
 export interface Version {
 
@@ -19,14 +27,14 @@ export interface Version {
     patch: number;
     
     /**
-     * Specifies the timestamp that corresponds to the build date for this Version object.
+     * Specifies the timestamp that corresponds to the build date for this `Version` object.
      */
     buildTimeStamp: number;
 
     /**
-     * Returns a string representation of this Version object.
+     * Returns a string representation of this `Version` object.
      * 
-     * @returns a string representation of this Version object.
+     * @returns A string representation of this `Version` object.
      */
     toString(): string;
 };

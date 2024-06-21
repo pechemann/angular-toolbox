@@ -1,3 +1,11 @@
+/**
+ * @license
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at [TOOLBOXLICENSE]
+ */
+
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
 
@@ -10,16 +18,19 @@ import { Subscription } from 'rxjs';
 export class SubscriptionService {
 
     /**
-     * The internal Subscription instances storage.
+     * @private
+     * 
+     * The internal `Subscription` instances storage.
      */
     private _subMap: Map<String, Array<Subscription>> = new Map<String, Array<Subscription>>();
 
     /**
-     * Stores a new Subscription instance associated with the specified reference.
+     * Stores a new `Subscription` instance associated with the specified reference.
      * 
-     * @param ref the reference for which to store a new Subscription instance.
-     * @param subscription the Subscription instance to register.
-     * @returns a reference to this SubscriptionService instance.
+     * @param ref The reference for which to store a new `Subscription` instance.
+     * @param subscription The `Subscription` instance to register.
+     * 
+     * @returns A reference to this `SubscriptionService` instance.
      */
     public register(ref: String, subscription: Subscription): SubscriptionService {
         if (!this._subMap.has(ref)) this._subMap.set(ref, []);
@@ -28,10 +39,11 @@ export class SubscriptionService {
     }
  
     /**
-     * Unsubscribes and removes all Subscription instances associated with the specified reference.
+     * Unsubscribes and removes all `Subscription` instances associated with the specified reference.
      * 
-     * @param ref the reference for which to remove all Subscription instances.
-     * @returns true whether the specified reference exists; false otherwise.
+     * @param ref The reference for which to remove all `Subscription` instances.
+     * 
+     * @returns `true` whether the specified reference exists; `false` otherwise.
      */
     public clearAll(ref: String): boolean {
         let result: boolean = false;
@@ -44,10 +56,11 @@ export class SubscriptionService {
     }
 
     /**
-     * Returns all Subscription instances associated with the specified reference.
+     * Returns all `Subscription` instances associated with the specified reference.
      * 
-     * @param ref the reference for which to remove get Subscription instances.
-     * @returns all Subscription instances associated with the specified reference, or whether
+     * @param ref The reference for which to remove get `Subscription` instances.
+     * 
+     * @returns All `Subscription` instances associated with the specified reference, or whether
      *          the specified reference does not exists.
      */
     public get(ref: String): Array<Subscription> | null {

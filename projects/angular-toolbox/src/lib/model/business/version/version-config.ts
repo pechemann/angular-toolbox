@@ -1,5 +1,13 @@
 /**
- * The VersionConfig interface provides the basic API that defines a version config token.
+ * @license
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at [TOOLBOXLICENSE]
+ */
+
+/**
+ * The `VersionConfig` interface provides the basic API that defines a version config token.
  */
 export interface VersionConfig {
 

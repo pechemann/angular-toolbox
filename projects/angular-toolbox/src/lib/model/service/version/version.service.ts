@@ -1,3 +1,11 @@
+/**
+ * @license
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at [TOOLBOXLICENSE]
+ */
+
 import { Inject, Injectable } from '@angular/core';
 import { VERSION_CONFIG, Version, VersionConfig } from '../../business';
 import { VersionImpl } from '../../business/impl/version/version.impl';
@@ -10,7 +18,9 @@ import { VersionImpl } from '../../business/impl/version/version.impl';
 })
 export class VersionService {
 
-  // --> Private properties
+  /**
+   * @private
+   */
   private readonly _version: Version;
 
   /**

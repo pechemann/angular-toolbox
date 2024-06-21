@@ -1,6 +1,15 @@
+/**
+ * @license
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at [TOOLBOXLICENSE]
+ */
+
 import { Version } from "../../version/version";
 
 /**
+ * @private
  * Specifies the semantic versioning of an API.
  */
 export class VersionImpl implements Version {
@@ -21,13 +30,13 @@ export class VersionImpl implements Version {
     public readonly patch: number;
     
     /**
-     * Specifies the timestamp that corresponds to the build date for this Version instance.
+     * Specifies the timestamp that corresponds to the build date for this `Version` instance.
      */
     public readonly buildTimeStamp: number;
 
-  /**
-   * @private
-   */
+    /**
+     * @private
+     */
     constructor(major: number, minor: number, patch: number, buildTimeStamp: number) {
         this.major = major;
         this.minor = minor;
@@ -36,11 +45,11 @@ export class VersionImpl implements Version {
     }
 
     /**
-     * Returns a string representation of this Version object in the form "M.m.p", where
-     * "M" represents the major number, "m" represents the minor number and "p" represents
-     * the patch number of  this VersionImpl instance.
+     * Returns a string representation of this `Version` object in the form `M.m.p`, where
+     * `M` represents the major number, `m` represents the minor number and `p` represents
+     * the patch number of this `VersionImpl` instance.
      * 
-     * @returns a string representation of this VersionImpl instance.
+     * @returns A string representation of this `VersionImpl` instance.
      */
     public toString(): string {
         return `${this.major}.${this.minor}.${this.patch}`;

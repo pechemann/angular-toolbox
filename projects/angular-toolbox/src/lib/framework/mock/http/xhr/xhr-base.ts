@@ -1,4 +1,4 @@
-import { EventTargetImpl } from "../../../../model/business/impl/event/event-target.impl";
+import { EventTargetImpl } from "../event/event-target.impl";
 
 /**
  * @private

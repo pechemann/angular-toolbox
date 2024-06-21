@@ -1,16 +1,24 @@
 /**
- * Defines properties for the DarkModeService configuration.
+ * @license
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at [TOOLBOXLICENSE]
+ */
+
+/**
+ * Defines properties for the `DarkModeService` configuration.
  */
 export interface DarkModeConfig {
 
     /**
-     * Indicates whether the dark mode is activated by default (true), or not (false).
+     * Indicates whether the dark mode is activated by default (`true`), or not (`false`).
      */
     darkModeEnabled?: boolean;
     
     /**
-     * Indicates whether the dark mode uses browser settings (true), or not (false).
-     * When true, this property overrides the darkModeEnabled property.
+     * Indicates whether the dark mode uses browser settings (`true`), or not (`false`).
+     * When `true`, this property overrides the `darkModeEnabled` property.
      */
     detectBrowserSettings?: boolean;
 

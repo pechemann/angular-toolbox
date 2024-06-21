@@ -1,10 +1,30 @@
+/**
+ * @license
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at [TOOLBOXLICENSE]
+ */
+
 import { Inject, Injectable, EventEmitter } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { CSS_PROP, DARK_MODE_CONFIG, DarkModeConfig, STORAGE_KEY } from '../../business';
 
 // --> Internal constants
+/**
+ * @private
+ */
 const ADD_ACTION: string = "add";
+
+/**
+ * @private
+ */
 const REMOVE_ACTION: string = "remove";
+
+/**
+ * @private
+ */
+const TRUE: string = "true";
 
 @Injectable({
     providedIn: 'root'
@@ -13,22 +33,35 @@ const REMOVE_ACTION: string = "remove";
  * A lightweight service that provides Dark Mode implementation for your Angular application.
  */
 export class DarkModeService {
-
-    // --> Private properties
+    
+    /**
+     * @private
+     */
     private _darkModeEnabled: boolean = false;
+
+    /**
+     * @private
+     */
     private _cssProperty: string = CSS_PROP;
+
+    /**
+     * @private
+     */
     private _storageKey: string = STORAGE_KEY;
 
     /**
      * The callback function that is triggered when the dark mode changes.
-     * @typeParam EventEmitter<boolean> the value returned by the darkModeEnabled() property.
+     * 
+     * @typeParam `EventEmitter<boolean>` the value returned by the `darkModeEnabled()` property.
      */
     public readonly change: EventEmitter<boolean> = new EventEmitter<boolean>(true);
 
     /**
-     * Creates a new DarkModeService instance.
-     * @param _document the reference to the Document singleton.
-     * @param config the reference to the DarkModeConfig provider.
+     * @private
+     * Creates a new `DarkModeService` instance.
+     * 
+     * @param _document The reference to the `Document` singleton.
+     * @param config The reference to the `DarkModeConfig` provider.
      */
     constructor(@Inject(DOCUMENT) private _document: Document, @Inject(DARK_MODE_CONFIG) config: DarkModeConfig) {
         this.initDarkMode(config);
@@ -58,8 +91,9 @@ export class DarkModeService {
     }
 
     /**
-     * Returns a boolean value that indicates the dark mode state is active (true), or not (false).
-     * @returns true whether the dark mode state is active; false otherwise.
+     * Returns a `boolean` value that indicates the dark mode state is active (`true`), or not (`false`).
+     * 
+     * @returns `true` whether the dark mode state is active; `false` otherwise.
      */
     public darkModeEnabled(): boolean {
         return this._darkModeEnabled;
@@ -67,7 +101,8 @@ export class DarkModeService {
 
     /**
      * Returns the value of the CSS property as defined by the config provider.
-     * @returns the value of the CSS property.
+     * 
+     * @returns The value of the CSS property.
      */
     public getCssProperty(): string {
         return this._cssProperty;
@@ -75,7 +110,8 @@ export class DarkModeService {
 
     /**
      * Returns the value of the storage key as defined by the config provider.
-     * @returns the value of the storage key.
+     * 
+     * @returns The value of the storage key.
      */
     public getStorageKey(): string {
         return this._storageKey;
@@ -87,8 +123,10 @@ export class DarkModeService {
     public invalidateStorage(): void {
         localStorage.removeItem(this._storageKey);
     }
-
-    // --> Private methods
+    
+    /**
+     * @private
+     */
     private initDarkMode(config: DarkModeConfig): void {
         this._darkModeEnabled = config.darkModeEnabled || false;
         this._cssProperty = config.cssProperty || CSS_PROP;
@@ -100,17 +138,26 @@ export class DarkModeService {
         }
         if (config.detectBrowserSettings) this.initBrowserMode();
     }
-    
+
+    /**
+     * @private
+     */
     private initStoredDarkMode(): void {
         const result: string | null = localStorage.getItem(this._storageKey);
-        if (result === "true") this.enableDarkMode();
+        if (result === TRUE) this.enableDarkMode();
     }
-
+    
+    /**
+     * @private
+     */
     private setStoredDarkMode(): void {
         const data: string = String(this._darkModeEnabled);
         localStorage.setItem(this._storageKey, data);
     }
-
+    
+    /**
+     * @private
+     */
     private setDarkMode(action: string): void {
         const classList: DOMTokenList = this._document.body.classList;
         if (action === ADD_ACTION) {
@@ -122,12 +169,18 @@ export class DarkModeService {
         }
         this.change.emit(this._darkModeEnabled);
     }
-
+    
+    /**
+     * @private
+     */
     private initBrowserMode(): void {
         if (this.matchDarkTheme()) return this.enableDarkMode();
         this.disableDarkMode();
     }
-
+    
+    /**
+     * @private
+     */
     private matchDarkTheme(): boolean {
         return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
     }
