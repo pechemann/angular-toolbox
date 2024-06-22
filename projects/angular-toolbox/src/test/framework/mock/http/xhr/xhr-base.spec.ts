@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { XhrBase } from '../../../../lib/framework/mock/http/xhr/xhr-base';
+import { XhrBase } from '../../../../../lib/framework/mock/http/xhr/xhr-base';
 
 describe('XhrBase', () => {
   let baseClassInstance: XhrBase;

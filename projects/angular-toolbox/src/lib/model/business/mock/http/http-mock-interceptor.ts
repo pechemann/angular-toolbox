@@ -26,7 +26,7 @@ export interface HttpMockInterceptor {
     origin?: string;
 
     /**
-     * A list of endpoints that must be intercepted by the HTTP Mock Framework.
+     * A list of endpoints that must be intercepted by the HTTP Mocking Framework.
      */
     endpoints: HttpMockEndpoint[];
 }

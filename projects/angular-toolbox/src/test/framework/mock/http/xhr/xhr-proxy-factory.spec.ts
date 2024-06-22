@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpMockService } from '../../../../lib/model/service/mock/http/http-mock.service';
+import { HttpMockService } from '../../../../../lib/model/service/mock/http/http-mock.service';
 import { XhrFactory } from '@angular/common';
-import { httpMockFactory } from '../../../../lib/framework/mock/http/xhr/http-mock-factory';
+import { httpMockFactory } from '../../../../../lib/framework/mock/http/xhr/http-mock-factory';
 
 describe('XhrProxyFactory', () => {
   let factory: XhrFactory;
