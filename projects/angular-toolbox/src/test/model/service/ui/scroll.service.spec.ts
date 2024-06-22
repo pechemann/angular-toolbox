@@ -1,5 +1,12 @@
-import { TestBed } from '@angular/core/testing';
+/**
+ * @license
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at [TOOLBOXLICENSE]
+ */
 
+import { TestBed } from '@angular/core/testing';
 import { SubscriptionService, ScrollService } from '../../../../lib/model';
 
 describe('ScrollService', () => {

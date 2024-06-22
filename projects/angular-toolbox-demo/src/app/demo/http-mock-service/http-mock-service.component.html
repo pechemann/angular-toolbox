@@ -1,8 +1,11 @@
 <demo [title]="title" [presentation]="presentation" [srcCode]="srcCode">
     <p>
-        Open the <em>Network Activity Console</em> of you browser to verify that mock data are not coming from a remote server:
+        Open the <em>Network Activity Console</em> of you browser to verify that data are not loaded from a remote server:
     </p>
     <hr>
+    <p>
+        API endpoint: <code>https://jsonplaceholder.typicode.com/todos/:id</code>
+    </p>
     <div class="mb-3">
         <button class="btn btn-primary btn-lg" role="button" (click)="loadData()">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 16 16">

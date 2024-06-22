@@ -14,7 +14,7 @@
  * https://github.com/pillarjs/path-to-regexp/blob/master/LICENSE
  */
 
-import { escapeRegexpString } from "./escape";
+import { escapeRegexpString } from "./escape-to-regexp-string";
 
 /**
  * @private

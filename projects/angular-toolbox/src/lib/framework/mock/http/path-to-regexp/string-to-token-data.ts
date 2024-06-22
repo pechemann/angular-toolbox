@@ -15,8 +15,8 @@
  */
 
 import { EMPTY_STRING } from "../../../../util";
-import { DEFAULT_DELIMITER } from "./constants";
-import { escapeRegexpString } from "./escape";
+import { ASTERISK, CHAR, RIGHT_CURLY_BRACE, DEFAULT_DELIMITER, END, ESCAPED, NAME, LEFT_CURLY_BRACE, PATTERN } from "./constants";
+import { escapeRegexpString } from "./escape-to-regexp-string";
 import { Iter } from "./iter";
 import { ParseOptions } from "./parse-options";
 import { Token } from "./token";
@@ -50,9 +50,9 @@ export const stringToTokenData: RouteStringTokenizer = (str: string, options: Pa
   let path: string = EMPTY_STRING;
 
   do {
-    const char: string | undefined = it.tryConsume("CHAR");
-    const name: string | undefined = it.tryConsume("NAME");
-    const pattern: string | undefined = it.tryConsume("PATTERN");
+    const char: string | undefined = it.tryConsume(CHAR);
+    const name: string | undefined = it.tryConsume(NAME);
+    const pattern: string | undefined = it.tryConsume(PATTERN);
 
     if (name || pattern) {
       let prefix: string = char || EMPTY_STRING;
@@ -82,7 +82,7 @@ export const stringToTokenData: RouteStringTokenizer = (str: string, options: Pa
       continue;
     }
 
-    const value: string | undefined = char || it.tryConsume("ESCAPED");
+    const value: string | undefined = char || it.tryConsume(ESCAPED);
     if (value) {
       path += value;
       continue;
@@ -93,7 +93,7 @@ export const stringToTokenData: RouteStringTokenizer = (str: string, options: Pa
       path = EMPTY_STRING;
     }
 
-    const asterisk: string | undefined = it.tryConsume("*");
+    const asterisk: string | undefined = it.tryConsume(ASTERISK);
     if (asterisk) {
       tokens.push(
         patternToKey(
@@ -109,14 +109,14 @@ export const stringToTokenData: RouteStringTokenizer = (str: string, options: Pa
       continue;
     }
 
-    const open: string | undefined = it.tryConsume("{");
+    const open: string | undefined = it.tryConsume(LEFT_CURLY_BRACE);
     if (open) {
       const prefix: string = it.text();
-      const name: string | undefined = it.tryConsume("NAME");
-      const pattern: string | undefined = it.tryConsume("PATTERN");
+      const name: string | undefined = it.tryConsume(NAME);
+      const pattern: string | undefined = it.tryConsume(PATTERN);
       const suffix: string = it.text();
 
-      it.consume("}");
+      it.consume(RIGHT_CURLY_BRACE);
 
       tokens.push(
         patternToKey(
@@ -132,7 +132,7 @@ export const stringToTokenData: RouteStringTokenizer = (str: string, options: Pa
       continue;
     }
 
-    it.consume("END");
+    it.consume(END);
     break;
   } while (true);
 

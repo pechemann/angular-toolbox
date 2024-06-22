@@ -15,6 +15,7 @@
  */
 
 import { EMPTY_STRING } from "../../../../util";
+import { ASTERISK, CHAR, ESCAPED, PLUS, QUESTION_MARK } from "./constants";
 import { LexToken } from "./lex-token";
 
 /**
@@ -58,7 +59,7 @@ export class Iter {
   public text(): string {
     let result = EMPTY_STRING;
     let value: string | undefined;
-    while ((value = this.tryConsume("CHAR") || this.tryConsume("ESCAPED"))) {
+    while ((value = this.tryConsume(CHAR) || this.tryConsume(ESCAPED))) {
       result += value;
     }
     return result;
@@ -68,7 +69,7 @@ export class Iter {
    * @private
    */
   public modifier(): string | undefined {
-    return this.tryConsume("?") || this.tryConsume("*") || this.tryConsume("+");
+    return this.tryConsume(QUESTION_MARK) || this.tryConsume(ASTERISK) || this.tryConsume(PLUS);
   }
 
   /**

@@ -1,3 +1,11 @@
+/**
+ * @license
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at [TOOLBOXLICENSE]
+ */
+
 import { VERSION_CONFIG } from '../../../../lib/model/business/version/version-config.provider';
 
 describe('DARK_MODE_CONFIG', () => {

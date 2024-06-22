@@ -15,7 +15,7 @@
  */
 
 import { G_FLAG } from "./constants";
-import { escapeRegexpString } from "./escape";
+import { escapeRegexpString } from "./escape-to-regexp-string";
 import { looseReplacer } from "./loose-replacer";
 
 /**

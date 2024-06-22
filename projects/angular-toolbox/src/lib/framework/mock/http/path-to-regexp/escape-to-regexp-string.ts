@@ -23,7 +23,7 @@ const ESCAPE_VALUE: string = "\\$1";
  * @private
  * Escape a regular expression string.
  * 
- * @param str The string expression to escape.
+ * @param str The regular expression string to escape.
  * @returns An escaped a regular expression string.
  */
 export const escapeRegexpString: Encode = (str: string)=> {

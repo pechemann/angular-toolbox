@@ -17,7 +17,7 @@
 import { EMPTY_STRING } from "../../../../util";
 import { DEFAULT_DELIMITER } from "./constants";
 import { Encode } from "./encode";
-import { escapeRegexpString } from "./escape";
+import { escapeRegexpString } from "./escape-to-regexp-string";
 import { Key } from "./key";
 import { getFlags } from "./get-flags";
 import { PathToRegexpOptions } from "./path-to-regexp-options";

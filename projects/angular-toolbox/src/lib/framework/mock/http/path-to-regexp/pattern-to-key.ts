@@ -14,6 +14,7 @@
  * https://github.com/pillarjs/path-to-regexp/blob/master/LICENSE
  */
 
+import { ASTERISK, PLUS } from "./constants";
 import { Encode } from "./encode";
 import { Key } from "./key";
 
@@ -35,7 +36,7 @@ export const patternToKey: (encode: Encode, delimiter: string, name: string, pat
   const prefix: string = encode(inputPrefix);
   const suffix: string = encode(inputSuffix);
   const separator: string | undefined =
-    modifier === "*" || modifier === "+"
+    modifier === ASTERISK || modifier === PLUS
       ? prefix + suffix || delimiter
       : undefined;
   return { name, prefix, suffix, pattern, modifier, separator };

@@ -15,6 +15,7 @@
  */
 
 import { EMPTY_STRING } from "../../../../util";
+import { ESC_BACK_SLASH, CHAR, COLON, END, ESCAPED, LEFT_PARENTHESIS, NAME, PATTERN, QUESTION_MARK, RIGHT_PARENTHESIS } from "./constants";
 import { Iter } from "./iter";
 import { LexToken } from "./lex-token";
 import { TokenType } from "./token-type";
@@ -59,12 +60,12 @@ export const lexer: (str: string)=> Iter = (str: string): Iter => {
       continue;
     }
 
-    if (value === "\\") {
-      tokens.push({ type: "ESCAPED", index: i++, value: chars[i++] });
+    if (value === ESC_BACK_SLASH) {
+      tokens.push({ type: ESCAPED, index: i++, value: chars[i++] });
       continue;
     }
 
-    if (value === ":") {
+    if (value === COLON) {
       let name: string = EMPTY_STRING;
 
       while (ID_CHAR.test(chars[++i])) {
@@ -75,34 +76,34 @@ export const lexer: (str: string)=> Iter = (str: string): Iter => {
         throw new TypeError(`Missing parameter name at ${i}`);
       }
 
-      tokens.push({ type: "NAME", index: i, value: name });
+      tokens.push({ type: NAME, index: i, value: name });
       continue;
     }
 
-    if (value === "(") {
+    if (value === LEFT_PARENTHESIS) {
       const pos: number = i++;
       let count: number = 1;
       let pattern: string = EMPTY_STRING;
 
-      if (chars[i] === "?") {
+      if (chars[i] === QUESTION_MARK) {
         throw new TypeError(`Pattern cannot start with "?" at ${i}`);
       }
 
       while (i < chars.length) {
-        if (chars[i] === "\\") {
+        if (chars[i] === ESC_BACK_SLASH) {
           pattern += chars[i++] + chars[i++];
           continue;
         }
 
-        if (chars[i] === ")") {
+        if (chars[i] === RIGHT_PARENTHESIS) {
           count--;
           if (count === 0) {
             i++;
             break;
           }
-        } else if (chars[i] === "(") {
+        } else if (chars[i] === LEFT_PARENTHESIS) {
           count++;
-          if (chars[i + 1] !== "?") {
+          if (chars[i + 1] !== QUESTION_MARK) {
             throw new TypeError(`Capturing groups are not allowed at ${i}`);
           }
         }
@@ -113,14 +114,14 @@ export const lexer: (str: string)=> Iter = (str: string): Iter => {
       if (count) throw new TypeError(`Unbalanced pattern at ${pos}`);
       if (!pattern) throw new TypeError(`Missing pattern at ${pos}`);
 
-      tokens.push({ type: "PATTERN", index: i, value: pattern });
+      tokens.push({ type: PATTERN, index: i, value: pattern });
       continue;
     }
 
-    tokens.push({ type: "CHAR", index: i, value: chars[i++] });
+    tokens.push({ type: CHAR, index: i, value: chars[i++] });
   }
 
-  tokens.push({ type: "END", index: i, value: EMPTY_STRING });
+  tokens.push({ type: END, index: i, value: EMPTY_STRING });
 
   return new Iter(tokens);
 }

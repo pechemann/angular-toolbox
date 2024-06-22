@@ -1,3 +1,11 @@
+/**
+ * @license
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at [TOOLBOXLICENSE]
+ */
+
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { ButtonRoleDirective } from "../../public-api";
 import {  Router, RouterModule } from "@angular/router";

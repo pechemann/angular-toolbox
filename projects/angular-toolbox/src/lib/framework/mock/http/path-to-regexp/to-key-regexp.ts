@@ -15,9 +15,10 @@
  */
 
 import { EMPTY_STRING } from "../../../../util";
+import { ASTERISK, QUESTION_MARK } from "./constants";
 import { DecodeKeyToString } from "./decode-key-to-string";
 import { Encode } from "./encode";
-import { escapeRegexpString } from "./escape";
+import { escapeRegexpString } from "./escape-to-regexp-string";
 import { Key } from "./key";
 
 /**
@@ -34,7 +35,7 @@ export const toKeyRegexp: (stringify: Encode, delimiter: string)=> DecodeKeyToSt
     if (key.name) {
       const pattern: string = key.pattern || segmentPattern;
       if (key.separator) {
-        const mod: string = key.modifier === "*" ? "?" : EMPTY_STRING;
+        const mod: string = key.modifier === ASTERISK ? QUESTION_MARK : EMPTY_STRING;
         const split: string = stringify(key.separator);
         return `(?:${prefix}((?:${pattern})(?:${split}(?:${pattern}))*)${suffix})${mod}`;
       } else {
