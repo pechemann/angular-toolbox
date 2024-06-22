@@ -126,7 +126,7 @@ export class XhrProxyImpl extends XhrBase implements XhrProxy {
         if (this.XHR && this.XHR instanceof DelegateXhr) this.XHR.destroy();
         this.XHR = config ? new DelegateXhr(config) : new XMLHttpRequest();
         this.XHR.withCredentials = this.withCredentials;
-        this.XHR.open(m.toString(), parsedUrl.toString(), async as any, username as any, password as any);
+        this.XHR.open(m.toString(), parsedUrl.toString());
     }
 
     /**

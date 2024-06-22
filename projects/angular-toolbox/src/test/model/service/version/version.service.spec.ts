@@ -23,7 +23,7 @@ describe('VersionService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should getVersion() return a Version object', () => {
+  it('getVersion() should return a Version object', () => {
     const version: Version = service.getVersion();
     expect(version.major).toBeInstanceOf(Number);
     expect(version.minor).toBeInstanceOf(Number);
@@ -32,11 +32,11 @@ describe('VersionService', () => {
     expect(version.toString()).toBeInstanceOf(String);
   });
 
-  it('should getBuidTimestamp() return a number', () => {
+  it('getBuidTimestamp() should return a number', () => {
     expect(service.getBuildTimestamp()).toBeInstanceOf(Number);
   });
   
-  it('should getVersion() return the specified Version object implementation', () => {
+  it('getVersion() should return the specified Version object implementation', () => {
     expect(service.getVersion()).toBeInstanceOf(VersionImpl);
   });
 });
