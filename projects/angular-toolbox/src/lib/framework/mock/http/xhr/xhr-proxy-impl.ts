@@ -41,7 +41,7 @@ export class XhrProxyImpl extends XhrBase implements XhrProxy {
      * XMLHTTPRequest API
      */
     get response(): any {
-        return  this.XHR ? this.XHR.response : undefined;
+        return this.XHR ? this.XHR.response : undefined;
     }
 
     /**
@@ -96,6 +96,16 @@ export class XhrProxyImpl extends XhrBase implements XhrProxy {
      */
     get responseType(): XMLHttpRequestResponseType {
         return this.XHR ? this.XHR.responseType : "";
+    }
+
+    /**
+     * @private
+     * 
+     * XMLHTTPRequest API
+     */
+    set responseType(value: XMLHttpRequestResponseType)  {
+        if(!this.XHR) XHR_ERROR("responseType");
+        this.XHR.responseType = value;
     }
 
     get upload(): XMLHttpRequestUpload {

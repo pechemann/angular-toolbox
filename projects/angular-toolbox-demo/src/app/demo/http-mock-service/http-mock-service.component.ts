@@ -45,16 +45,8 @@ export class HttpMockServiceComponent implements OnDestroy {
 
 import { HttpRequest, HttpStatusCode } from "@angular/common/http";
 import { HttpMockConfig, httpResponseMock } from "angular-toolbox";
-import { Todo } from "./model/business";
-
-const getTodo = (params: any): Todo => {
-    return {
-        id: params.id,
-        userId: 1,
-        title: getRandomString(4),
-        completed: Math.random() < 0.4
-    }
-};
+import { Todo } from "../model/business";
+import { getTodo } from '../app-mock/http-mock-util';
 
 export const config: HttpMockConfig = {
     origin: "https://jsonplaceholder.typicode.com",
@@ -65,8 +57,8 @@ export const config: HttpMockConfig = {
                 {
                     route: "/todos/:id",
                     get: {
-                        data: (req: HttpRequest<any>, params: any)=> httpResponseMock().body( getTodo(params) )
-                                                                                       .response()
+                        data: (req: HttpRequest<any>, params: any)=>
+                              httpResponseMock().body(getTodo(params)).response();
                     }
                 }
             ]
@@ -89,10 +81,9 @@ export class HttpMockServiceComponent {
   constructor(private _http: HttpClient) {}
 
   protected loadData(): void {
-    const url: string = "https://jsonplaceholder.typicode.com/todos/" + ++this.userIdx;
-    this._http.get(url).subscribe((result: Todo)=> {
-      this.data = JSON.stringify(result, null, 4);
-    });
+    const url: string = \u0060https://jsonplaceholder.typicode.com/todos/$\u007B++this.userIdx\u007D\u0060;
+    //--> You should use the SubscriptionService to wrap HTTP calls:
+    this._http.get(url).subscribe((result: any)=> this.data = JSON.stringify(result, null, 4));
   }
 }`,
 `/////////////////////////
@@ -116,7 +107,7 @@ import { config } from './app-mock/http-mock-config';
     AppComponent
   ],
   providers: [
-    //=> HTTP mock framework initialization
+    //--> HTTP mock framework initialization
     { provide: XhrFactory, useFactory: httpMockFactory },
     provideHttpClient(),
   ],
@@ -130,19 +121,45 @@ import { config } from './app-mock/http-mock-config';
 export class AppModule {
 
   constructor(httpMockService: HttpMockService) {
-    //=> HTTP mock config initialization
+    //--> HTTP mock config initialization
     httpMockService.setConfig(config);
   }
-}`
+}`,
+`/////////////////////////
+// HTTP Mock Util
+/////////////////////////
+
+import { Todo } from "./model/business";
+
+const loremIpsum: string[] = [
+  'Lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur', 'adipiscing', 'elit',
+  'sed', 'do', 'eiusmod', 'tempor', 'incididunt', 'ut', 'labore', 'et', 'dolore'
+];
+
+const getRandomString = (size: number, isFirst: boolean = true): string => {
+  let result: string = loremIpsum[Math.floor(Math.random()* loremIpsum.length)];
+  if (size > 1) result += " " + getRandomString(--size, false);
+  if (isFirst) return result.charAt(0).toUpperCase() + result.slice(1);
+  return result;
+};
+
+const getRandomBoolean = (): boolean => Math.random() < 0.4;
+
+export const getTodo = (params: any): Todo => {
+  return {
+      id: params.id,
+      userId: 1,
+      title: getRandomString(4),
+      completed: getRandomBoolean()
+  }
+};`
 ]
   };
 
   protected loadData(): void {
-    const url: string = "https://jsonplaceholder.typicode.com/todos/" + ++this.todoIdx;
+    const url: string = `https://jsonplaceholder.typicode.com/todos/${++this.todoIdx}`;
     this._subscription.register(COMP_REF,
-      this._http.get(url).subscribe((result: any)=> {
-        this.data = JSON.stringify(result, null, 4);
-      })
+      this._http.get(url).subscribe((result: any)=> this.data = JSON.stringify(result, null, 4))
     );
   }
   

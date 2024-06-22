@@ -1,0 +1,29 @@
+/**
+ * @license
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at [TOOLBOXLICENSE]
+ *
+ * This source code is derived from the following original source code:
+ * - https://github.com/pillarjs/path-to-regexp
+ * - Copyright (c) 2014 Blake Embrey (hello@blakeembrey.com)
+ * 
+ * Use of the original source code is governed by an MIT-style license 
+ * that can be found in the LICENSE file at
+ * https://github.com/pillarjs/path-to-regexp/blob/master/LICENSE
+ */
+
+import { G_FLAG } from "./constants";
+import { escapeRegexpString } from "./escape";
+import { looseReplacer } from "./loose-replacer";
+
+/**
+ * @private
+ * Encode all non-delimiter characters using the encode function.
+ */
+export const toStringify: Function = (loose: string): Function => {
+  if (!loose) return escapeRegexpString;
+  const re: RegExp = new RegExp(`[^${escapeRegexpString(loose)}]+|(.)`, G_FLAG);
+  return (value: string) => value.replace(re, looseReplacer);
+}

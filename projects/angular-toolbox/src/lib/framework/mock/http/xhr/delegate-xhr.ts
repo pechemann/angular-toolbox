@@ -114,13 +114,6 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
     private _responseText: string = EMPTY_STRING;
 
     /**
-     * @private
-     * 
-     * Internal storage for the HTTP request `responseText`.
-     */
-    private _responseType: XMLHttpRequestResponseType = "";
-
-    /**
      * Returns the response body content.
      *
      * @see https://developer.mozilla.org/docs/Web/API/XMLHttpRequest/response
@@ -190,9 +183,7 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
      *
      * @see https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseType
      */
-    get responseType(): XMLHttpRequestResponseType {
-        return this._responseType;
-    }
+    responseType: XMLHttpRequestResponseType = "";
 
     /**
      * Initializes a newly-created request, or re-initializes an existing one.
@@ -278,7 +269,7 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
         const methodConfig: HttpMethodMock = routeConfig.methodConfig;
         this._routeConfig = routeConfig;
         this._progressiveDownload = methodConfig.progressive || false;
-        this._responseType = methodConfig.responseType || "";
+        this.responseType = methodConfig.responseType || "";
         this._headers = HttpHeadersUtil.createDefaultRequestHeaders();
     }
     

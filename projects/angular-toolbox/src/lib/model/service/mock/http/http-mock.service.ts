@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpMockInterceptor, HttpMockConfig, HttpMethodMock, HttpMockEndpoint } from '../../../business';
 import { HTTPMethodRef } from '../../../../framework/mock/http/util/http-method-ref.enum';
-import { Key, TokenData, stringToTokenData, tokenDataToRegexp } from '../../../../framework/mock/http/path-to-regexp/path-to-regexp';
+import { tokenDataToRegexp } from '../../../../framework/mock/http/path-to-regexp/token-data-to-regexp';
 import { RouteMockConfig } from '../../../../framework/mock/http/config/route-mock-config';
-
-const SLASH: string = "/";
+import { Key } from '../../../../framework/mock/http/path-to-regexp/key';
+import { TokenData } from '../../../../framework/mock/http/path-to-regexp/token-data';
+import { stringToTokenData } from '../../../../framework/mock/http/path-to-regexp/string-to-token-data';
+import { DEFAULT_DELIMITER } from '../../../../framework/mock/http/path-to-regexp/constants';
 
 interface HttpMockEndpointStorage {
   methodMock: HttpMethodMock;
@@ -88,6 +90,7 @@ export class HttpMockService {
     if (!ep[method as any]) return;
     const originConfig: Map<string, HttpMockEndpointStorage[]> = this._configList.get(origin) as any;
     const route: string = endpoint.route;
+    // TODO: possibly use options parameter:
     const data: TokenData = stringToTokenData(route);
     const keys: Key[] = [];
     const regexp: RegExp = tokenDataToRegexp(data, keys, {});
@@ -101,6 +104,6 @@ export class HttpMockService {
   }
 
   private checkOrigin(origin: string): void {
-    if (origin.endsWith(SLASH)) throw new SyntaxError(`Origin must not end with a / characted: ["${origin}"]`);
+    if (origin.endsWith(DEFAULT_DELIMITER)) throw new SyntaxError(`Origin must not end with a / characted: ["${origin}"]`);
   }
 }
