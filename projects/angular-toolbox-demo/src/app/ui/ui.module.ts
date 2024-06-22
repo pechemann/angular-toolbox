@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SrcViewportComponent } from './component/src-viewport/src-viewport.component';
-import { ClipboardModule } from '@angular/cdk/clipboard';
 import { DemoComponent } from './component/demo/demo.component';
 import { CodeViewportComponent } from './component/code-viewport/code-viewport.component';
 
@@ -12,8 +11,7 @@ import { CodeViewportComponent } from './component/code-viewport/code-viewport.c
     DemoComponent
   ],
   imports: [
-    CommonModule,
-    ClipboardModule
+    CommonModule
   ],
   exports: [
     CodeViewportComponent,

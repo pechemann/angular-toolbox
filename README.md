@@ -18,33 +18,33 @@ npm install angular-toolbox
 
 ### 1. `SubscriptionService`
 
-An easy-to-use and lightweight service to manage Angular subscriptions and prevent performance issues of your applications.
+An easy-to-use and lightweight service to manage Angular subscriptions and prevent performance issues.
 
 ```typescript
-public obj: MyInterface;
+const COMP_REF: string = 'MyComponentName';
+
+...
 
 constructor(private _myService: MyService,
             private _myHttpService: MyHttpService,
             private _subscriptions: SubscriptionService) {}
 
-// Unsubscribe from all subscriptions at once:
+// Unsubscribe all subscriptions:
 public ngOnDestroy(): void {
-    this._subscriptions.clearAll('MyCOmponent');
+    this._subscriptions.clearAll(COMP_REF);
 }
 
-// Create as many subscription as you want:
+// Create as many subscriptions as you want:
 public ngOnInit(): void {
-    this._subscriptions.register('MyCOmponent', 
+    this._subscriptions.register(COMP_REF, 
                             this._myService.myMethod1().subscribe()
-                        ).register('MyCOmponent', 
-                            this._myHttpService.myMethod1('test').subscribe(
-                                result => this.obj = result
-                            )
+                        ).register(COMP_REF, 
+                            this._myHttpService.get('test').subscribe(result => console.log(result))
                         );
 }
 
 public myMethod(): void {
-    this._subscriptions.register('MyCOmponent', 
+    this._subscriptions.register(COMP_REF, 
         this._myService.myMethod2().subscribe()
     );
 }

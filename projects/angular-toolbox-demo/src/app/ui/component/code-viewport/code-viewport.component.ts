@@ -9,4 +9,8 @@ export class CodeViewportComponent {
 
   @Input()
   public code!: string;
+
+  public copyToClipboard(): void {
+    navigator.clipboard.writeText(this.code);
+  }
 }
