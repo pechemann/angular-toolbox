@@ -3,7 +3,7 @@
  * Copyright Pascal ECHEMANN. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at [TOOLBOXLICENSE]
+ * found in the LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
  */
 
 import { ASTERISK, CHAR, COLON, DEFAULT_DELIMITER, END, ESCAPED, ESC_BACK_SLASH, G_FLAG, I_FLAG, LEFT_CURLY_BRACE, LEFT_PARENTHESIS, NAME, PATTERN, PLUS, QUESTION_MARK, RIGHT_CURLY_BRACE, RIGHT_PARENTHESIS } from "../../../../../lib/framework/mock/http/path-to-regexp/constants";
