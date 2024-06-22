@@ -1,5 +1,5 @@
 import { HttpRequest } from "@angular/common/http";
-import { HttpMockConfig, httpResponseMock } from "projects/angular-toolbox/src/public-api";
+import { HttpMockConfig, httpResponseMock } from "angular-toolbox";
 
 export interface Todo {
     id: number;
@@ -8,13 +8,20 @@ export interface Todo {
     completed: boolean;
 };
 
+const loremIpsum: string[] = ['Lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur', 'adipiscing', 'elit', 'sed', 'do', 'eiusmod', 'tempor', 'incididunt', 'ut', 'labore', 'et', 'dolore'];
+
+const getRandomString = (size: number): string => {
+    let result: string = loremIpsum[Math.floor(Math.random()* loremIpsum.length)];
+    if (size > 1) result += " " + getRandomString(--size);
+    return result;
+};
+
 const getTodo = (params: any): Todo => {
-    const id: number = params.id;
     return {
-        id: id,
-        userId: id,
-        title: "lorem ipsum",
-        completed: true
+        id: params.id,
+        userId: 1,
+        title: getRandomString(4),
+        completed: Math.random() < 0.4
     }
 };
 

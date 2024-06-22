@@ -10,7 +10,7 @@ const COMP_REF: string = "DarkModeServiceBootstrapComponent";
   selector: 'app-dark-mode-service-bootstrap',
   templateUrl: './dark-mode-service-bootstrap.component.html'
 })
-export class DarkModeServiceBootstrapComponent implements OnDestroy, OnInit {
+export class DarkModeServiceBootstrapComponent implements OnInit, OnDestroy {
 
   constructor(public darkModeService: DarkModeService,
               private _subscription: SubscriptionService,

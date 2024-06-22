@@ -63,13 +63,6 @@ export class XhrBase extends EventTargetImpl {
      * 
      * XMLHTTPRequest API
      */
-    responseType!: XMLHttpRequestResponseType;
-
-    /**
-     * @private
-     * 
-     * XMLHTTPRequest API
-     */
     timeout!: number;
 
     /**

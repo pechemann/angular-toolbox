@@ -20,6 +20,11 @@ export interface HttpMethodMock {
      * Indicates whether to emulate progressive download (`true`), or not (`false`) .
      */
     progressive?: boolean;
+    
+    /**
+     * An enumerated string value specifying the type of data contained in the response.
+     */
+    responseType?: XMLHttpRequestResponseType;
 
     /**
      * This method emulates a successful HTTP call response.

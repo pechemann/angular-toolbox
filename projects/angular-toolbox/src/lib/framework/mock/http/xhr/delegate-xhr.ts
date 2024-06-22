@@ -7,7 +7,7 @@
  */
 
 import { HttpHeaders, HttpRequest, HttpStatusCode } from "@angular/common/http";
-import { XhrProxy, HttpResponseMock } from "../../../../model";
+import { XhrProxy, HttpResponseMock, HttpMethodMock } from "../../../../model";
 import { ProgressEventMock } from "../event/progress-event-mock";
 import { EMPTY_STRING } from "../../../../util";
 import { XhrBase } from "./xhr-base";
@@ -114,6 +114,13 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
     private _responseText: string = EMPTY_STRING;
 
     /**
+     * @private
+     * 
+     * Internal storage for the HTTP request `responseText`.
+     */
+    private _responseType: XMLHttpRequestResponseType = "";
+
+    /**
      * Returns the response body content.
      *
      * @see https://developer.mozilla.org/docs/Web/API/XMLHttpRequest/response
@@ -176,6 +183,15 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
      */
     get upload(): XMLHttpRequestUpload {
         return null as any;
+    }
+    
+    /**
+     *  Returns an an enumerated string value specifying the type of data contained in the response. 
+     *
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseType
+     */
+    get responseType(): XMLHttpRequestResponseType {
+        return this._responseType;
     }
 
     /**
@@ -259,8 +275,10 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
      */
     constructor(routeConfig: RouteMockConfig) {
         super();
+        const methodConfig: HttpMethodMock = routeConfig.methodConfig;
         this._routeConfig = routeConfig;
-        this._progressiveDownload = routeConfig.methodConfig.progressive || false;
+        this._progressiveDownload = methodConfig.progressive || false;
+        this._responseType = methodConfig.responseType || "";
         this._headers = HttpHeadersUtil.createDefaultRequestHeaders();
     }
     

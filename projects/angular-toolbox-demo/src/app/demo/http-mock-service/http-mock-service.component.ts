@@ -1,22 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { CodeWrapper } from '../../ui/model/business/code-wrapper';
 import { BreadcrumbService } from '../../ui/model/service/breadcrumb.service';
 import { HttpClient } from '@angular/common/http';
-import { Subscription } from 'rxjs';
-import { HttpMockService } from 'projects/angular-toolbox/src/public-api';
 import { config } from './http-mock-config';
+import { SubscriptionService, HttpMockService } from 'angular-toolbox';
+
+const COMP_REF: string = "HttpMockServiceComponent";
 
 @Component({
   selector: 'app-http-mock-service',
   templateUrl: './http-mock-service.component.html'
 })
-export class HttpMockServiceComponent {
+export class HttpMockServiceComponent implements OnDestroy {
 
   protected data!: string;
   protected todoIdx: number = 0;
 
   constructor(private _http: HttpClient,
               private _httpMockService: HttpMockService,
+              private _subscription: SubscriptionService,
               breadcrumb: BreadcrumbService) {
     breadcrumb.removeAll()
               .addItem(breadcrumb.buildItem("Demo"))
@@ -46,12 +48,11 @@ import { HttpMockConfig, httpResponseMock } from "angular-toolbox";
 import { Todo } from "./model/business";
 
 const getTodo = (params: any): Todo => {
-    const id: number = params.id;
     return {
-        id: id,
-        userId: id,
-        title: "lorem ipsum",
-        completed: true
+        id: params.id,
+        userId: 1,
+        title: getRandomString(4),
+        completed: Math.random() < 0.4
     }
 };
 
@@ -138,8 +139,14 @@ export class AppModule {
 
   protected loadData(): void {
     const url: string = "https://jsonplaceholder.typicode.com/todos/" + ++this.todoIdx;
-    this._http.get(url).subscribe((result: any)=> {
-      this.data = JSON.stringify(result, null, 4);
-    });
+    this._subscription.register(COMP_REF,
+      this._http.get(url).subscribe((result: any)=> {
+        this.data = JSON.stringify(result, null, 4);
+      })
+    );
+  }
+  
+  public ngOnDestroy(): void {
+    this._subscription.clearAll(COMP_REF);
   }
 }

@@ -89,6 +89,15 @@ export class XhrProxyImpl extends XhrBase implements XhrProxy {
         return this.XHR ? this.XHR.responseText : EMPTY_STRING;
     }
 
+    /**
+     * @private
+     * 
+     * XMLHTTPRequest API
+     */
+    get responseType(): XMLHttpRequestResponseType {
+        return this.XHR ? this.XHR.responseType : "";
+    }
+
     get upload(): XMLHttpRequestUpload {
         return this.XHR.upload;
     }
@@ -107,7 +116,6 @@ export class XhrProxyImpl extends XhrBase implements XhrProxy {
         if (this.XHR && this.XHR instanceof DelegateXhr) this.XHR.destroy();
         this.XHR = config ? new DelegateXhr(config) : new XMLHttpRequest();
         this.XHR.withCredentials = this.withCredentials;
-        this.XHR.responseType = this.responseType;
         this.XHR.open(m.toString(), parsedUrl.toString(), async as any, username as any, password as any);
     }
 

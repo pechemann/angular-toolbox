@@ -3,10 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app-layout/app.component';
-import { AngularToolboxModule, DARK_MODE_CONFIG, VERSION_CONFIG } from 'angular-toolbox';
+import { AngularToolboxModule, DARK_MODE_CONFIG, VERSION_CONFIG, httpMockFactory } from 'angular-toolbox';
 import { XhrFactory } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
-import { httpMockFactory } from 'projects/angular-toolbox/src/lib/framework';
 
 @NgModule({
   declarations: [
