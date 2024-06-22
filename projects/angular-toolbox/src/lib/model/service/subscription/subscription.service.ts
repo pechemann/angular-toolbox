@@ -8,6 +8,7 @@
 
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { SubscriptionError } from '../../../core';
 
 @Injectable({
     providedIn: 'root'
@@ -19,10 +20,16 @@ export class SubscriptionService {
 
     /**
      * @private
-     * 
+     * Stores an internal reference to the last reference used with the `register()`
+     * method.
+     */
+    private _lastRef: string | null = null;
+
+    /**
+     * @private
      * The internal `Subscription` instances storage.
      */
-    private _subMap: Map<String, Array<Subscription>> = new Map<String, Array<Subscription>>();
+    private _subMap: Map<string, Array<Subscription>> = new Map<string, Array<Subscription>>();
 
     /**
      * Stores a new `Subscription` instance associated with the specified reference.
@@ -32,10 +39,24 @@ export class SubscriptionService {
      * 
      * @returns A reference to this `SubscriptionService` instance.
      */
-    public register(ref: String, subscription: Subscription): SubscriptionService {
+    public register(ref: string, subscription: Subscription): SubscriptionService {
+        this._lastRef = ref;
         if (!this._subMap.has(ref)) this._subMap.set(ref, []);
         this._subMap.get(ref)?.push(subscription);
         return this;
+    }
+
+    /**
+     * Stores a new `Subscription` instance associated with the reference specified
+     * by the last `register()` method invokation.
+     * 
+     * @param subscription The `Subscription` instance to register.
+     * 
+     * @returns A reference to this `SubscriptionService` instance.
+     */
+    public append(subscription: Subscription): SubscriptionService {
+        if (!this._lastRef) throw new SubscriptionError("Illegal Access Error: you must call the register() method before invoking the append() method.");
+        return this.register(this._lastRef, subscription);
     }
  
     /**
@@ -45,8 +66,9 @@ export class SubscriptionService {
      * 
      * @returns `true` whether the specified reference exists; `false` otherwise.
      */
-    public clearAll(ref: String): boolean {
+    public clearAll(ref: string): boolean {
         let result: boolean = false;
+        if (this._lastRef === ref) this._lastRef = null;
         if (this._subMap.has(ref)) {
             this._subMap.get(ref)?.forEach(subscription => {
                 if (!subscription.closed) subscription.unsubscribe();
@@ -65,7 +87,7 @@ export class SubscriptionService {
      * @returns All `Subscription` instances associated with the specified reference, or whether
      *          the specified reference does not exists.
      */
-    public get(ref: String): Array<Subscription> | null {
+    public get(ref: string): Array<Subscription> | null {
         return this._subMap.get(ref) || null;
     }
 }

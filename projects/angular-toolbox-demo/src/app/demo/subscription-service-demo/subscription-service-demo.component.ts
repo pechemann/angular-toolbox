@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnDestroy, OnInit } from '@angular/core';
-import { SubscriptionService } from 'angular-toolbox';
 import { CodeWrapper } from '../../ui/model/business/code-wrapper';
 import { BreadcrumbService } from '../../ui/model/service/breadcrumb.service';
+import { SubscriptionService } from 'angular-toolbox';
 
 const COMPONENT_REF: string = "SubscriptionServiceComponent";
 
@@ -14,8 +14,8 @@ export class SubscriptionServiceComponent implements OnInit, OnDestroy {
   protected eventEmiter_1: EventEmitter<string> = new EventEmitter<string>();
   protected eventEmiter_2: EventEmitter<string> = new EventEmitter<string>();
   protected eventList: string[] = [];
-  private _event1_Idx: number = 0;
-  private _event2_Idx: number = 0;
+  private _event1_Idx: number = 1;
+  private _event2_Idx: number = 1;
 
   constructor(private _subscriptionService: SubscriptionService,
               breadcrumb: BreadcrumbService) {
@@ -44,15 +44,15 @@ export class SubscriptionServiceComponent implements OnInit, OnDestroy {
   protected eventEmiter_1: EventEmitter<string> = new EventEmitter<string>();
   protected eventEmiter_2: EventEmitter<string> = new EventEmitter<string>();
   protected eventList: string[] = [];
-  private _event1_Idx: number = 0;
-  private _event2_Idx: number = 0;
+  private _event1_Idx: number = 1;
+  private _event2_Idx: number = 1;
 
   constructor(private _subscriptionService: SubscriptionService) {}
 
   public ngOnInit(): void {
     this._subscriptionService.register(COMPONENT_REF,
       this.eventEmiter_1.subscribe(next => this.eventList.push(next + this._event1_Idx++))
-    ).register(COMPONENT_REF,
+    ).append(
       this.eventEmiter_2.subscribe(next => this.eventList.push(next + this._event2_Idx++))
     );
   }
@@ -66,7 +66,7 @@ export class SubscriptionServiceComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this._subscriptionService.register(COMPONENT_REF,
       this.eventEmiter_1.subscribe(next => this.eventList.push(next + this._event1_Idx++))
-    ).register(COMPONENT_REF,
+    ).append(
       this.eventEmiter_2.subscribe(next => this.eventList.push(next + this._event2_Idx++))
     );
   }
