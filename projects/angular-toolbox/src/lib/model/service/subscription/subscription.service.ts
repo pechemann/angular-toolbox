@@ -48,7 +48,9 @@ export class SubscriptionService {
     public clearAll(ref: String): boolean {
         let result: boolean = false;
         if (this._subMap.has(ref)) {
-            this._subMap.get(ref)?.forEach(subscription => subscription.unsubscribe());
+            this._subMap.get(ref)?.forEach(subscription => {
+                if (!subscription.closed) subscription.unsubscribe();
+             });
             this._subMap.delete(ref);
             result = true;
         }
