@@ -6,11 +6,11 @@
  * found in the LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
  */
 
-import { EMPTY_STRING } from '../../../../public-api';
+import { BUTTON_ROLE } from '../../public-api';
 
-describe('EMPTY_STRING', () => {
+describe('BUTTON_ROLE', () => {
   
-  it('EMPTY_STRING constant should refer to an empty string', () => {
-    expect(EMPTY_STRING).toBe("");
+  it('BUTTON_ROLE should be "button"', () => {
+    expect(BUTTON_ROLE).toEqual('button');
   });
 });

@@ -1,42 +1,37 @@
 <main>
     <h1>Angular Toolbox Resource Center</h1>
-    <p class="fs-5 col-md-8">
-        Quickly and easily get started with Angular Toolbox compiled, production-ready files with this
-        barebones example featuring some basic Demo and helpful links. Install all our examples to get started.
+    <p class="fs-5 col-md-8  mb-5">
+        Welcome to the Angular Toolbox Documentation! These resources will guide you through the core concepts of the
+        framework, and get you started building performant, scalable apps.
     </p>
-    <pre class="border rounded p-3"><code>$ git clone https://github.com/pechemann/angular-toolbox</code></pre>
-    <div class="mb-5 github-link">
-        <a href="#" class="btn btn-primary btn-lg px-4 disabled" role="button">
-            <img src="./assets/home/github.svg" width="35">
-            GitHub
-        </a>
-    </div>
     <hr class="mb-5">
-    <!--<div class="row g-5">
-        <div class="col-md-6">
-            <h2>Demo</h2>
-            <p>
-                Ready to beyond the starter template? Check out these open source projects that you can 
-                quickly duplicate to a new Angular project.
-            </p>
-            <ul class="icon-list">
-                @for(item of demoList.getDemoLinkList(); track item) {
-                    <li class="icon-item">
-                        <a [routerLink]="'../demo/' + item.path" rel="noopener" [title]="item.label">{{ item.label }}</a>
-                    </li>
-                }
-            </ul>
+    <div class="container mb-5">
+        <div class="row align-items-md-stretch">
+            <div class="col-md-6 mb-4">
+                <div class="h-100 p-5 text-bg-dark rounded-3">
+                    <h2 class="mb-4 border-bottom pb-2">HTTP Mocking Framework</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat
+                    </p>
+                    <button class="btn btn-outline-light mt-4" type="button">Get started</button>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="h-100 p-5 bg-body-tertiary border rounded-3">
+                    <h2 class="mb-4 border-bottom pb-2">Subscription Service</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat
+                    </p>
+                    <button class="btn btn-outline-secondary mt-4" type="button">Get started</button>
+                </div>
+            </div>
         </div>
-
-        <div class="col-md-6">
-            <h2>Guides</h2>
-            <p>Read more detailed instructions and documentation on using Angular Toolbox.</p>
-            <ul class="icon-list">
-                <li class="icon-item"><a [routerLink]="['/resources']">Angular Toolbox Resources</a></li>
-                <li class="icon-item"><a rel="noopener">Angular Toolbox quick start guide</a></li>
-                <li class="icon-item"><a rel="noopener">Angular Toolbox documentation</a></li>
-                <li class="icon-item"><a rel="noopener">Angular Toolbox HTTP Mocking Framework</a></li>
-            </ul>
-        </div>
-    </div>-->
+    </div>
+    <hr class="mb-4">
+    <h2 class="mb-4">Git Repository</h2>
+    <git-btn />
 </main>

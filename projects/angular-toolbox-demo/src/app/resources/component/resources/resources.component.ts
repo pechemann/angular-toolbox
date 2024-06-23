@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { BreadcrumbService } from '../../../ui/model/service/breadcrumb.service';
+import { GitComponent } from '../../../ui/component/git/git.component';
 
 @Component({
   selector: 'app-resources',
   standalone: true,
-  providers: [],
+  imports: [
+    GitComponent
+  ],
   templateUrl: './resources.component.html',
   styleUrl: './resources.component.scss'
 })

@@ -8,16 +8,12 @@
 
 import { AfterViewInit, Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { BUTTON_ROLE } from '../util';
 
 /**
  * @private
  */
 const ENTER_KEY: string = 'Enter';
-
-/**
- * @private
- */
-const BUTTON_ROLE: string = 'button';
 
 /**
  * @private

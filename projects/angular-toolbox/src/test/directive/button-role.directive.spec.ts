@@ -8,7 +8,7 @@
 
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { ButtonRoleDirective } from "../../public-api";
-import {  Router, RouterModule } from "@angular/router";
+import { Router, RouterModule } from "@angular/router";
 import { ButtonRoleDirectiveTestComponent, ButtonRoleDirectiveWithDelegationTestComponent, ButtonRoleDirectiveWithRouterLinkTestComponent, Key, TEST_ITEM } from "./button-role-directive-test.util";
 
 const createKeyEvent = (event: string, key: string) => new KeyboardEvent(event, { key: key });
