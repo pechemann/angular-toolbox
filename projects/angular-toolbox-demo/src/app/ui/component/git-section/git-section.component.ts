@@ -2,15 +2,15 @@ import { Component } from '@angular/core';
 import { NavigateToUrlDirective } from 'angular-toolbox';
 
 @Component({
-  selector: 'git-btn',
+  selector: 'git-section',
   standalone: true,
   imports: [
     NavigateToUrlDirective
   ],
-  templateUrl: './git.component.html',
-  styleUrl: './git.component.scss'
+  templateUrl: './git-section.component.html',
+  styleUrl: './git-section.component.scss'
 })
-export class GitComponent {
+export class GitSectionComponent {
   
   protected readonly gitRef: string = "https://github.com/pechemann/angular-toolbox";
 }

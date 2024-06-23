@@ -6,7 +6,8 @@
  * the LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
  */
 
-import { HttpHeaders, HttpRequest } from "@angular/common/http";
+import { HttpHeaders } from "@angular/common/http";
+import { Observable } from "rxjs";
 
 /**
  * Defines the config of a HTTP response mock object.
@@ -16,7 +17,7 @@ export interface HttpResponseMock {
      /**
      * The response body.
      */
-    body?: any;
+    body?: any | Observable<any>;
 
     /**
      * All response headers.

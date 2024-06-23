@@ -4,7 +4,6 @@
         Quickly and easily get started with Angular Toolbox compiled, production-ready files with this
         barebones example featuring some basic Demo and helpful links. Install all our examples to get started.
     </p>
-    <git-btn/>
     <hr class="mb-5">
     <div class="row g-5">
         <div class="col-md-6">
@@ -27,10 +26,15 @@
             <p>Read more detailed instructions and documentation on using Angular Toolbox.</p>
             <ul class="icon-list">
                 <li class="icon-item"><a [routerLink]="['/resources']">Angular Toolbox Resources</a></li>
-                <li class="icon-item"><a rel="noopener">Angular Toolbox quick start guide</a></li>
-                <li class="icon-item"><a rel="noopener">Angular Toolbox documentation</a></li>
-                <li class="icon-item"><a rel="noopener">Angular Toolbox HTTP Mocking Framework</a></li>
+                <li class="icon-item"><a [routerLink]="['/resources', 'documentation', 'quick-start-guide']">Angular Toolbox Quick Start Guide</a></li>
+                <li class="icon-item"><a [routerLink]="['/resources', 'documentation']">Angular Toolbox Documentation</a></li>
+                <li class="icon-item"><a [routerLink]="['/resources', 'documentation', 'http-mocking-framework']">HTTP Mocking Framework</a></li>
             </ul>
         </div>
     </div>
+    <p>
+        Notice that the <em>Angular Toolbox Demo</em> application itself is built on top of the <em>Angular Toolbox Library</em>
+    </p>
+    <hr class="mb-5 mb-5">
+    <git-section/>
 </main>

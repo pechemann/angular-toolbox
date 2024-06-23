@@ -1,1 +1,15 @@
-<main [innerHTML]="page | safeHtml"></main>
+<main>
+    @if(isHomePage) {
+        <h1>Angular Toolbox Documentation</h1>
+        <p class="fs-5 col-md-8  mb-5">
+            Learn the fundamentals and start building powerfull Angular applications faster.
+        </p>
+        <hr class="mb-5">
+        <div class="mb-5">
+            
+        </div>
+    } @else {
+        <div [innerHTML]="page | safeHtml"></div>
+    }
+</main>
+    

@@ -8,6 +8,17 @@
     <div class="container mb-5">
         <div class="row align-items-md-stretch">
             <div class="col-md-6 mb-4">
+                <div class="h-100 p-5 bg-body-tertiary border rounded-3">
+                    <h2 class="mb-4 border-bottom pb-2">Quick Start Guide</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat
+                    </p>
+                    <button class="btn btn-outline-secondary mt-4" type="button" [routerLink]="['documentation', 'quick-start-guide']">Get started</button>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
                 <div class="h-100 p-5 text-bg-dark rounded-3">
                     <h2 class="mb-4 border-bottom pb-2">HTTP Mocking Framework</h2>
                     <p>
@@ -21,20 +32,8 @@
                     <button class="btn btn-outline-light mt-4" type="button" [routerLink]="['documentation', 'http-mocking-framework']">Get started</button>
                 </div>
             </div>
-            <div class="col-md-6 mb-4">
-                <div class="h-100 p-5 bg-body-tertiary border rounded-3">
-                    <h2 class="mb-4 border-bottom pb-2">Subscription Service</h2>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat
-                    </p>
-                    <button class="btn btn-outline-secondary mt-4" type="button">Get started</button>
-                </div>
-            </div>
         </div>
     </div>
     <hr class="mb-4">
-    <h2 class="mb-4">Git Repository</h2>
-    <git-btn />
+    <git-section/>
 </main>

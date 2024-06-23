@@ -204,7 +204,7 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
     open(method: unknown, url: unknown, async?: unknown, username?: unknown, password?: unknown): void {
         this._method = method;
         this._url = url;
-        this.seetReadyState(this.OPENED);
+        this.setReadyState(this.OPENED);
     }
 
     /**
@@ -234,9 +234,10 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
      * @param body A body of data to be sent in the XHR request.
      */
     send(body?: Document | XMLHttpRequestBodyInit | null | undefined): void {
-        this.buildDataStorage(body)
-        this.seetReadyState(this.HEADERS_RECEIVED);
-        this.seetReadyState(this.LOADING);
+        this.setReadyState(this.HEADERS_RECEIVED);
+        this.buildDataStorage(body);
+
+        this.setReadyState(this.LOADING);
 
         const response: HttpResponseMock = this._dataStorage.httpResponse;
         const headers: HttpHeaders | undefined = response.headers;
@@ -316,7 +317,7 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
      */
     private onLoadComplete(): void {
         this._dataStorage.loaded = this._dataStorage.total;
-        this.seetReadyState(this.DONE);
+        this.setReadyState(this.DONE);
         this.eventDispatch("load");
     }
 
@@ -345,7 +346,7 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
     /**
      * @private 
      */
-    private seetReadyState(state: number): void {
+    private setReadyState(state: number): void {
         this._readyState = state;
     }
 
