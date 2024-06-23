@@ -95,7 +95,7 @@ export class XhrProxyImpl extends XhrBase implements XhrProxy {
      * XMLHTTPRequest API
      */
     get responseType(): XMLHttpRequestResponseType {
-        return this.XHR ? this.XHR.responseType : "";
+        return this.XHR ? this.XHR.responseType : EMPTY_STRING as XMLHttpRequestResponseType;
     }
 
     /**

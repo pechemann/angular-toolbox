@@ -31,7 +31,7 @@ export class Iter {
   /**
    * @private 
    */
-  constructor(private tokens: LexToken[]) {}
+  constructor(public readonly tokens: LexToken[]) {}
 
   /**
    * @private

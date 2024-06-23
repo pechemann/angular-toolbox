@@ -6,7 +6,8 @@
  * found in the LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
  */
 
-import { EMPTY_STRING } from "angular-toolbox";
+
+import { EMPTY_STRING } from "../../../../../lib/util/empty-string.const";
 import { I_FLAG } from "../../../../../lib/framework/mock/http/path-to-regexp/constants";
 import { getFlags } from "../../../../../lib/framework/mock/http/path-to-regexp/get-flags";
 

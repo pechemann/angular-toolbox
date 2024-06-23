@@ -21,7 +21,19 @@ import { TokenType } from "./token-type";
  * Defines the API for tokenizer results.
  */
 export interface LexToken {
+    
+  /**
+   * @private
+   */
   type: TokenType;
+    
+  /**
+   * @private
+   */
   index: number;
+    
+  /**
+   * @private
+   */
   value: string;
 }

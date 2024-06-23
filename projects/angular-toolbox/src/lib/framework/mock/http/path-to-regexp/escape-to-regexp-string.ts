@@ -16,7 +16,14 @@
 
 import { Encode } from "./encode";
 
+/**
+ * @private
+ */
 const ESCAPE_REGEXP: RegExp = /([.+*?=^!:${}()[\]|/\\])/g;
+
+/**
+ * @private
+ */
 const ESCAPE_VALUE: string = "\\$1";
 
 /**

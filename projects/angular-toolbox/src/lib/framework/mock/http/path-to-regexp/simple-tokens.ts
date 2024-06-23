@@ -14,41 +14,19 @@
  * https://github.com/pillarjs/path-to-regexp/blob/master/LICENSE
  */
 
+import { TokenType } from "./token-type";
 
 /**
  * @private
- * A key is a capture group in a regex.
+ * A markup interface for token types consumed by `Lexer` objects.
  */
-export interface Key {
-    
-    /**
-     * @private
-     */
-    name: string;
-
-    /**
-     * @private
-     */
-    prefix: string;
-    
-    /**
-     * @private
-     */
-    suffix: string;
-    
-    /**
-     * @private
-     */
-    pattern: string;
-    
-    /**
-     * @private
-     */
-    modifier: string;
-    
-    /**
-     * @private
-     */
-    separator?: string;
-}
-  
+export const SIMPLE_TOKENS: Record<string, TokenType> = {
+  "!": "!",
+  "@": "@",
+  ";": ";",
+  "*": "*",
+  "+": "+",
+  "?": "?",
+  "{": "{",
+  "}": "}",
+};

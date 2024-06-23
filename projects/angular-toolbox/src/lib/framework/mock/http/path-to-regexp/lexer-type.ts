@@ -14,41 +14,10 @@
  * https://github.com/pillarjs/path-to-regexp/blob/master/LICENSE
  */
 
+import { Iter } from "./iter";
 
 /**
  * @private
- * A key is a capture group in a regex.
+ * The markup interface of the lexer used to analyse route strings.
  */
-export interface Key {
-    
-    /**
-     * @private
-     */
-    name: string;
-
-    /**
-     * @private
-     */
-    prefix: string;
-    
-    /**
-     * @private
-     */
-    suffix: string;
-    
-    /**
-     * @private
-     */
-    pattern: string;
-    
-    /**
-     * @private
-     */
-    modifier: string;
-    
-    /**
-     * @private
-     */
-    separator?: string;
-}
-  
+export type Lexer = (str: string)=> Iter;

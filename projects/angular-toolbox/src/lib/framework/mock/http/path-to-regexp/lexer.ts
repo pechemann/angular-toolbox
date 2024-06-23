@@ -18,21 +18,8 @@ import { EMPTY_STRING } from "../../../../util";
 import { ESC_BACK_SLASH, CHAR, COLON, END, ESCAPED, LEFT_PARENTHESIS, NAME, PATTERN, QUESTION_MARK, RIGHT_PARENTHESIS } from "./constants";
 import { Iter } from "./iter";
 import { LexToken } from "./lex-token";
-import { TokenType } from "./token-type";
-
-/**
- * @private
- */
-const SIMPLE_TOKENS: Record<string, TokenType> = {
-  "!": "!",
-  "@": "@",
-  ";": ";",
-  "*": "*",
-  "+": "+",
-  "?": "?",
-  "{": "{",
-  "}": "}",
-};
+import { Lexer } from "./lexer-type";
+import { SIMPLE_TOKENS } from "./simple-tokens";
 
 /**
  * @private
@@ -46,7 +33,7 @@ const ID_CHAR: RegExp = /^\p{XID_Continue}$/u;
  * @param str The string expression to analyse.
  * @returns A new `Iter`object instance built from the specified input string.
  */
-export const lexer: (str: string)=> Iter = (str: string): Iter => {
+export const lexer: Lexer = (str: string): Iter => {
   const chars: string[] = [...str];
   const tokens: LexToken[] = [];
   let i: number = 0;
@@ -122,6 +109,6 @@ export const lexer: (str: string)=> Iter = (str: string): Iter => {
   }
 
   tokens.push({ type: END, index: i, value: EMPTY_STRING });
-
+  
   return new Iter(tokens);
 }
