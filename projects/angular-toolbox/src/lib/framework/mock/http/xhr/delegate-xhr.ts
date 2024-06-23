@@ -13,30 +13,9 @@ import { EMPTY_STRING } from "../../../../util";
 import { XhrBase } from "./xhr-base";
 import { HttpHeadersUtil } from "../util/http-headers.util";
 import { RouteMockConfig } from "../config/route-mock-config";
-
-/**
- * @private
- * Utility interface used by the `DelegateXhr` class to store HTTP request information.
- */
-interface DataStorage {
-    
-    /**
-     * @private
-     */
-    httpResponse: HttpResponseMock;
-
-    /**
-     * @private
-     * The amount of data currently loaded.
-     */
-    loaded: number;
-
-    /**
-     * @private
-     * The totla size  of data to load.
-     */
-    total: number;
-}
+import { Observable, Subscription, of } from "rxjs";
+import { DataStorage } from "../core/data-storage";
+import { DataStorageBuilder } from "../util/data-storage.builder";
 
 /**
  * @private
@@ -107,19 +86,12 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
     private _statusText: string = EMPTY_STRING;
 
     /**
-     * @private
-     * 
-     * Internal storage for the HTTP request `responseText`.
-     */
-    private _responseText: string = EMPTY_STRING;
-
-    /**
      * Returns the response body content.
      *
      * @see https://developer.mozilla.org/docs/Web/API/XMLHttpRequest/response
      */
     get response(): any {
-        return this._dataStorage.httpResponse.body;
+        return this._dataStorage?.data || null;
     }
 
     /**
@@ -166,7 +138,7 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
      * @see https://developer.mozilla.org/docs/Web/API/XMLHttpRequest/responseText
      */
     get responseText(): string {
-        return this._responseText;
+        return this._dataStorage?.stringifiedData || EMPTY_STRING;
     }
 
     /**
@@ -234,22 +206,26 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
      * @param body A body of data to be sent in the XHR request.
      */
     send(body?: Document | XMLHttpRequestBodyInit | null | undefined): void {
-        this.setReadyState(this.HEADERS_RECEIVED);
-        this.buildDataStorage(body);
+        const request: HttpRequest<any> = new HttpRequest<any>(this._method as string, this._url as any, body);
+        const rc: RouteMockConfig = this._routeConfig;
+        const httpResponseMock: HttpResponseMock = (rc.methodConfig as any).data(request, rc.parameters);
+        const sub: Subscription = this.loadData(httpResponseMock).subscribe((data: any) => {
+            this._dataStorage = DataStorageBuilder.buildDataStorage(httpResponseMock, data);
+            this.setReadyState(this.HEADERS_RECEIVED);
+            this.setReadyState(this.LOADING);
 
-        this.setReadyState(this.LOADING);
-
-        const response: HttpResponseMock = this._dataStorage.httpResponse;
-        const headers: HttpHeaders | undefined = response.headers;
-        this._responseText = JSON.stringify(response.body);
-        this._headers = headers || new HttpHeaders();
-
-        if (!this._progressiveDownload) {
-            this._statusText = response.statusText || EMPTY_STRING;
-            this._status = response.status || 0;
-            return this.onLoadComplete();
-        }
-        this.doProgressiveDownload();
+            const response: HttpResponseMock = this._dataStorage.httpResponse;
+            const headers: HttpHeaders | undefined = response.headers;
+            this._headers = headers || new HttpHeaders();
+    
+            if (!this._progressiveDownload) {
+                this._statusText = response.statusText || EMPTY_STRING;
+                this._status = response.status || 0;
+                return this.onLoadComplete();
+            }
+            this.doProgressiveDownload();
+            
+        });
     }
 
     /**
@@ -292,7 +268,7 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
             console.warn("[Angular Toolbox]: Body content is too small for emulating progressive download! Minimum size is 200 octets.");
             return this.onLoadComplete();
         }
-        // TODO ameliorate the following process:
+        // TODO: ameliorate the following process:
         const self: DelegateXhr = this;
         const chunckSize: number = Math.floor(total / 10);
         let cursor: number = 0;
@@ -353,15 +329,8 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
     /**
      * @private 
      */
-    private buildDataStorage(requestBody?: Document | XMLHttpRequestBodyInit | null | undefined): void {
-        const request: HttpRequest<any> = new HttpRequest<any>(this._method as string, this._url as any, requestBody);
-        const rc: RouteMockConfig = this._routeConfig;
-        const data: HttpResponseMock = (rc.methodConfig as any).data(request, rc.parameters);
-        const body: any = data.body;
-        this._dataStorage = {
-            httpResponse: data,
-            loaded: 0,
-            total: body ? new Blob([JSON.stringify(body)]).size : 0
-        };
+    private loadData(httpResponseMock: HttpResponseMock): Observable<any> {
+        const responseBody: any | Observable<any> = httpResponseMock.body;
+        return (responseBody instanceof Observable) ? responseBody : of(responseBody);
     }
 }

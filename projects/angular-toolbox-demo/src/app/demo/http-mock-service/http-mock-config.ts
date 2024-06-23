@@ -1,5 +1,6 @@
 import { HttpRequest } from "@angular/common/http";
 import { HttpMockConfig, httpResponseMock } from "angular-toolbox";
+import { Observable, of } from "rxjs";
 
 export interface Todo {
     id: number;
@@ -25,7 +26,7 @@ const getTodo = (params: any): Todo => {
         userId: 1,
         title: getRandomString(4),
         completed: getRandomBoolean()
-    }
+    };
 };
 
 export const config: HttpMockConfig = {
@@ -37,7 +38,7 @@ export const config: HttpMockConfig = {
                 {
                     route: "/todos/:id",
                     get: {
-                        data: (req: HttpRequest<Todo>, params: any)=> httpResponseMock().body( getTodo(params) )
+                        data: (req: HttpRequest<Todo>, params: any)=> httpResponseMock().body( getTodo(params) ) //of()
                                                                                         .response()
                     }
                 }

@@ -15,7 +15,7 @@ import { Observable } from "rxjs";
 export interface HttpResponseMock {
 
      /**
-     * The response body.
+     * The response body. Can be either an object, or an `Observable` instance.
      */
     body?: any | Observable<any>;
 
