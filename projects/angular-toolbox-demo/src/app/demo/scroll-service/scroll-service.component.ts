@@ -2,12 +2,17 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BreadcrumbService } from '../../ui/model/service/breadcrumb.service';
 import { CodeWrapper } from '../../ui/model/business/code-wrapper';
 import { ScrollService, SubscriptionService } from 'angular-toolbox';
+import { DemoComponent } from '../../ui/component/demo/demo.component';
 
 
 const COMP_REF: string = "ScrollServiceComponent";
 
 @Component({
   selector: 'scroll-service',
+  standalone: true,
+  imports: [
+    DemoComponent
+  ],
   templateUrl: './scroll-service.component.html',
   styleUrls: ['./scroll-service.component.scss']
 })

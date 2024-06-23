@@ -4,11 +4,16 @@ import { BreadcrumbService } from '../../ui/model/service/breadcrumb.service';
 import { HttpClient } from '@angular/common/http';
 import { config } from './http-mock-config';
 import { SubscriptionService, HttpMockService } from 'angular-toolbox';
+import { DemoComponent } from '../../ui/component/demo/demo.component';
 
 const COMP_REF: string = "HttpMockServiceComponent";
 
 @Component({
   selector: 'app-http-mock-service',
+  standalone: true,
+  imports: [
+    DemoComponent
+  ],
   templateUrl: './http-mock-service.component.html'
 })
 export class HttpMockServiceComponent implements OnDestroy {

@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'code-viewport',
+  standalone: true,
   templateUrl: './code-viewport.component.html',
   styleUrls: ['./code-viewport.component.scss']
 })

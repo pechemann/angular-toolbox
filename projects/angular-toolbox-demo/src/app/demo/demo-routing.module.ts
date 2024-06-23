@@ -1,21 +1,35 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DarkModeServiceComponent } from './dark-mode-service/dark-mode-service.component';
-import { ScrollServiceComponent } from './scroll-service/scroll-service.component';
-import { SubscriptionServiceComponent } from './subscription-service-demo/subscription-service-demo.component';
-import { ButtonRoleDirectiveComponent } from './button-role-directive/button-role-directive.component';
-import { VersionServiceComponent } from './version-service/version-service.component';
-import { DarkModeServiceBootstrapComponent } from './dark-mode-service-bootstrap/dark-mode-service-bootstrap.component';
-import { HttpMockServiceComponent } from './http-mock-service/http-mock-service.component';
 
 const routes: Routes = [
-  { path: 'dark-mode-service', component: DarkModeServiceComponent },
-  { path: 'scroll-service', component: ScrollServiceComponent },
-  { path: 'subscription-service', component: SubscriptionServiceComponent },
-  { path: 'button-role-directive', component: ButtonRoleDirectiveComponent },
-  { path: 'version-directive', component: VersionServiceComponent },
-  { path: 'dark-mode-service-bootstrap', component: DarkModeServiceBootstrapComponent },
-  { path: 'http-mock-service', component: HttpMockServiceComponent }
+  {
+    path: 'dark-mode-service',
+    loadComponent: () => import('./dark-mode-service/dark-mode-service.component').then(mod => mod.DarkModeServiceComponent)
+  },
+  {
+    path: 'scroll-service',
+    loadComponent: () => import('./scroll-service/scroll-service.component').then(mod => mod.ScrollServiceComponent)
+  },
+  {
+    path: 'subscription-service',
+    loadComponent: () => import('./subscription-service-demo/subscription-service-demo.component').then(mod => mod.SubscriptionServiceComponent)
+  },
+  {
+    path: 'button-role-directive',
+    loadComponent: () => import('./button-role-directive/button-role-directive.component').then(mod => mod.ButtonRoleDirectiveComponent)
+  },
+  {
+    path: 'version-service',
+    loadComponent: () => import('./version-service/version-service.component').then(mod => mod.VersionServiceComponent)
+  },
+  {
+    path: 'dark-mode-service-bootstrap',
+    loadComponent: () => import('./dark-mode-service-bootstrap/dark-mode-service-bootstrap.component').then(mod => mod.DarkModeServiceBootstrapComponent)
+  },
+  {
+    path: 'http-mock-service',
+    loadComponent: () => import('./http-mock-service/http-mock-service.component').then(mod => mod.HttpMockServiceComponent)
+  }
 ];
 
 @NgModule({

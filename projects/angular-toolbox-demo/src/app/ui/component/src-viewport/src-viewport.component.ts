@@ -1,10 +1,15 @@
 import { Component, Input } from '@angular/core';
 import { CodeWrapper } from '../../model/business/code-wrapper';
+import { CodeViewportComponent } from '../code-viewport/code-viewport.component';
 
 declare type Language = "html" | "ts" | "css";
 
 @Component({
   selector: 'src-viewport',
+  standalone: true,
+  imports: [
+    CodeViewportComponent
+  ],
   templateUrl: './src-viewport.component.html',
   styleUrls: ['./src-viewport.component.scss']
 })

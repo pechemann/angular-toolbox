@@ -2,9 +2,16 @@ import { Component } from '@angular/core';
 import { VersionService } from 'angular-toolbox';
 import { CodeWrapper } from '../../ui/model/business/code-wrapper';
 import { BreadcrumbService } from '../../ui/model/service/breadcrumb.service';
+import { DatePipe } from '@angular/common';
+import { DemoComponent } from '../../ui/component/demo/demo.component';
 
 @Component({
   selector: 'app-version-service',
+  standalone: true,
+  imports: [
+    DemoComponent,
+    DatePipe
+  ],
   templateUrl: './version-service.component.html'
 })
 export class VersionServiceComponent {

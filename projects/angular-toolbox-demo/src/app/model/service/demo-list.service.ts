@@ -11,7 +11,7 @@ export class DemoListService {
     { label: "Scroll Service", path: "scroll-service" },
     { label: "Subscription Service", path: "subscription-service" },
     { label: "ButtonRole Directive", path: "button-role-directive" },
-    { label: "Version Service", path: "version-directive" },
+    { label: "Version Service", path: "version-service" },
     { label: "Dark Mode Service: Bootstrap Integration", path: "dark-mode-service-bootstrap" },
     { label: "HTTP Mock Service", path: "http-mock-service" }
   ]

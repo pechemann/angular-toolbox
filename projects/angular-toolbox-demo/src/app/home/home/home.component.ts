@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
 import { DemoListService } from '../../model/service/demo-list.service';
 import { BreadcrumbService } from '../../ui/model/service/breadcrumb.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
+  standalone: true,
+  imports: [
+    RouterModule
+  ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
