@@ -59,8 +59,10 @@
             "tsConfig": "projects/angular-toolbox-demo/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "projects/angular-toolbox-demo/src/favicon.ico",
-              "projects/angular-toolbox-demo/src/assets"
+              {
+                "glob": "**/*",
+                "input": "projects/angular-toolbox-demo/public"
+              }
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
@@ -123,8 +125,10 @@
             "tsConfig": "projects/angular-toolbox-demo/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "projects/angular-toolbox-demo/src/favicon.ico",
-              "projects/angular-toolbox-demo/src/assets"
+              {
+                "glob": "**/*",
+                "input": "projects/angular-toolbox-demo/public"
+              }
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",

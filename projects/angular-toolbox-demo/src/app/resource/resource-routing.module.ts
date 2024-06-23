@@ -7,7 +7,7 @@ const routes: Routes = [
     loadComponent: () => import('./component/resources/resources.component').then(mod => mod.ResourcesComponent)
   },
   {
-    path: "documentation/*",
+    path: "documentation/:id",
     loadComponent: () => import('./component/documentation/documentation.component').then(mod => mod.DocumentationComponent)
   }
 ];
@@ -16,4 +16,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ResourcesRoutingModule { }
+export class ResourceRoutingModule { }
