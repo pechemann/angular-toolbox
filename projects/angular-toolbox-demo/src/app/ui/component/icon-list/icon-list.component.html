@@ -1,0 +1,7 @@
+<ul class="icon-list">
+    @for(item of itemList; track item) {
+        <li class="icon-item">
+            <a [routerLink]="item.urlTree" [title]="item.label">{{ item.label }}</a>
+        </li>
+    }
+</ul>
