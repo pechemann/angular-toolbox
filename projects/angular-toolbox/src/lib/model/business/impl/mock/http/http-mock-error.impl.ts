@@ -21,11 +21,6 @@ export class HttpMockErrorImpl implements HttpMockError {
     public readonly status: HttpStatusCode;
 
     /**
-     * Specifies the body of the error.
-     */
-    public readonly body: any;
-
-    /**
      * Specifies the error status text.
      */
     public readonly statusText: string;
@@ -33,10 +28,9 @@ export class HttpMockErrorImpl implements HttpMockError {
     /**
      * @private
      */
-    constructor(status: HttpStatusCode, statusText: string, body: any) {
+    constructor(status: HttpStatusCode, statusText: string) {
         if (status < HttpStatusCode.BadRequest) throw new RangeError("Error status must be equal to, or greater than 400.")
         this.status = status;
         this.statusText = statusText;
-        this.body = body;
     }
 };

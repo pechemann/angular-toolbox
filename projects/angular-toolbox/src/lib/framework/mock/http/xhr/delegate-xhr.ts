@@ -304,8 +304,6 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
     private onError(error: HttpMockError): void {
         this._status = error.status;
         this._statusText = error.statusText;
-        this._dataStorage.data = error.body;
-        this._dataStorage.total = 0;
         this.setReadyState(this.DONE);
         this.dispatchProgressEvent("error");
     }

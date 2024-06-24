@@ -1,25 +1,25 @@
 import { Component, OnDestroy } from '@angular/core';
 import { CodeWrapper } from '../../../ui/model/business/code-wrapper';
 import { BreadcrumbService } from '../../../ui/model/service/breadcrumb.service';
-import { HttpClient } from '@angular/common/http';
-import { config } from './http-mock-config';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { config } from './http-mock-error-config';
 import { SubscriptionService, HttpMockService } from 'angular-toolbox';
 import { DemoComponent } from '../../../ui/component/demo/demo.component';
+import { catchError, of } from 'rxjs';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-http-mock-service',
+  selector: 'app-http-mock-error',
   standalone: true,
   imports: [
     DemoComponent,
     RouterModule
   ],
-  templateUrl: './http-mock-service.component.html'
+  templateUrl: './http-mock-error.component.html'
 })
-export class HttpMockServiceComponent implements OnDestroy {
+export class HttpMockErrorComponent implements OnDestroy {
 
-  protected data!: string;
-  protected todoIdx: number = 0;
+  protected error!: string;
 
   constructor(private _http: HttpClient,
               private _httpMockService: HttpMockService,
@@ -27,19 +27,19 @@ export class HttpMockServiceComponent implements OnDestroy {
               breadcrumb: BreadcrumbService) {
     breadcrumb.removeAll()
               .addItem(breadcrumb.buildItem("Demo"))
-              .addItem(breadcrumb.buildItem("HTTP Mock Service"));
+              .addItem(breadcrumb.buildItem("HTTP Mock Error"));
     this._httpMockService.setConfig(config);
   }
 
-  public title: string = "HTTP Mock Service Demo";
+  public title: string = "HTTP Mock Error Demo";
   public presentation: string = "A lightweight service that provides Mocking strategies for developing HTTP-based components in your Angular projects.";
   public srcCode: CodeWrapper = {
     html: [` <button role="button" (click)="loadData()">Load Data</button>
 
-  @if (data) {
-      <h6>Loaded data for ID #{{todoIdx}}</h6>
+  @if (error) {
+      <h5>Data loading error:</h5>
       <hr>
-      <code>{{ data }}</code>
+      <code>{{ error }}</code>
   } @else {
       No data loaded...
   }`],
@@ -53,6 +53,11 @@ import { HttpMockConfig, httpResponseMock } from "angular-toolbox";
 import { Todo } from "../model/business";
 import { getTodo } from '../app-mock/http-mock-util';
 
+const error: HttpMockError = {
+  status: 400,
+  statusText: "Bad Request"
+};
+
 export const config: HttpMockConfig = {
     origin: "https://jsonplaceholder.typicode.com",
     interceptors: [
@@ -63,7 +68,7 @@ export const config: HttpMockConfig = {
                     route: "/todos/:id",
                     get: {
                         data: (req: HttpRequest<any>, params: any)=>
-                              httpResponseMock().body(getTodo(params)).response();
+                              httpResponseMock().body(getTodo(params)).response(error);
                     }
                 }
             ]
@@ -76,9 +81,9 @@ export const config: HttpMockConfig = {
 
 @Component({
   selector: 'app-http-mock-service',
-  templateUrl: './http-mock-service.component.html'
+  templateUrl: './http-mock-error.component.html'
 })
-export class HttpMockServiceComponent {
+export class HttpMockErrorComponent {
 
   protected data!: string;
   protected userIdx: number = 0;
@@ -86,9 +91,14 @@ export class HttpMockServiceComponent {
   constructor(private _http: HttpClient) {}
 
   protected loadData(): void {
-    const url: string = \u0060https://jsonplaceholder.typicode.com/todos/$\u007B++this.userIdx\u007D\u0060;
+    const url: string = "https://jsonplaceholder.typicode.com/todos/1";
     //--> You should use the SubscriptionService to wrap HTTP calls:
-    this._http.get(url).subscribe((result: any)=> this.data = JSON.stringify(result, null, 4));
+    this._http.get(url).pipe(
+      catchError((error: HttpErrorResponse) => {
+        this.error = error.message;
+        return of(error);
+      })
+    ).subscribe();
   }
 }`,
 `/////////////////////////
@@ -162,9 +172,12 @@ export const getTodo = (params: any): Todo => {
   };
 
   protected loadData(): void {
-    const url: string = `https://jsonplaceholder.typicode.com/todos/${++this.todoIdx}`;
+    const url: string = "https://jsonplaceholder.typicode.com/todos/1";
     this._subscription.register(this,
-      this._http.get(url).subscribe((result: any)=> this.data = JSON.stringify(result, null, 4))
+      this._http.get(url).pipe(catchError((error: HttpErrorResponse) => {
+        this.error = error.message;
+        return of(error);
+      })).subscribe()
     );
   }
   

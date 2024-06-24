@@ -18,11 +18,6 @@ export interface HttpMockError {
      * Error status code.
      */
     status: HttpStatusCode;
-
-    /**
-     * The response body.
-     */
-    body?: any;
     
     /**
      * Textual description of error status code.

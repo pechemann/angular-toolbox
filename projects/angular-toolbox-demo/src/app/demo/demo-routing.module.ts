@@ -29,6 +29,10 @@ const routes: Routes = [
   {
     path: 'http-mock-service',
     loadComponent: () => import('./component/http-mock-service/http-mock-service.component').then(mod => mod.HttpMockServiceComponent)
+  },
+  {
+    path: 'http-mock-error',
+    loadComponent: () => import('./component/http-mock-error/http-mock-error.component').then(mod => mod.HttpMockErrorComponent)
   }
 ];
 
