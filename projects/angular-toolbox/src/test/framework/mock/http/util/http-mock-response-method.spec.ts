@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
  */
 
-import { HttpResponseMockBuilder, httpResponseMock } from '../../../../public-api';
+import { HttpResponseMockBuilder, httpResponseMock } from '../../../../../public-api';
 
 describe('httpResponseMock', () => {
   

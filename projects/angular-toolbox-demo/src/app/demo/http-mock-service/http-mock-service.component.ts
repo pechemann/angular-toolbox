@@ -6,8 +6,6 @@ import { config } from './http-mock-config';
 import { SubscriptionService, HttpMockService } from 'angular-toolbox';
 import { DemoComponent } from '../../ui/component/demo/demo.component';
 
-const COMP_REF: string = "HttpMockServiceComponent";
-
 @Component({
   selector: 'app-http-mock-service',
   standalone: true,
@@ -163,12 +161,12 @@ export const getTodo = (params: any): Todo => {
 
   protected loadData(): void {
     const url: string = `https://jsonplaceholder.typicode.com/todos/${++this.todoIdx}`;
-    this._subscription.register(COMP_REF,
+    this._subscription.register(this,
       this._http.get(url).subscribe((result: any)=> this.data = JSON.stringify(result, null, 4))
     );
   }
   
   public ngOnDestroy(): void {
-    this._subscription.clearAll(COMP_REF);
+    this._subscription.clearAll(this);
   }
 }

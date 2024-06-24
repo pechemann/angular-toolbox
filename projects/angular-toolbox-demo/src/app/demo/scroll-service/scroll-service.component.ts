@@ -4,9 +4,6 @@ import { CodeWrapper } from '../../ui/model/business/code-wrapper';
 import { ScrollService, SubscriptionService } from 'angular-toolbox';
 import { DemoComponent } from '../../ui/component/demo/demo.component';
 
-
-const COMP_REF: string = "ScrollServiceComponent";
-
 @Component({
   selector: 'scroll-service',
   standalone: true,
@@ -36,12 +33,12 @@ export class ScrollServiceComponent implements OnInit, OnDestroy {
   public scrollY: number = 0;
 
   public ngOnInit(): void {
-    this._subscription.register(COMP_REF,
+    this._subscription.register(this,
       this._scrollService.onScroll.subscribe((e)=> this.scrollY = (e.currentTarget as Window).scrollY)
     );
   }
 
   public ngOnDestroy(): void {
-    this._subscription.clearAll(COMP_REF);
+    this._subscription.clearAll(this);
   }
 }

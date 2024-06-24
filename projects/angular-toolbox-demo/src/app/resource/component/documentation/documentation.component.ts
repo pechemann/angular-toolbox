@@ -4,8 +4,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EMPTY_STRING, SafeHtmlPipe, SubscriptionService } from 'angular-toolbox';
 import { ActivatedRoute, RouterModule, UrlSegment } from '@angular/router';
 
-const COMP_REF: string = "DocumentationComponent";
-
 @Component({
   selector: 'app-documentation',
   standalone: true,
@@ -33,7 +31,7 @@ export class DocumentationComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     const headers: HttpHeaders = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
     const origin: string = 'http://localhost:4200/documentation';
-    this._subsciptionService.register(COMP_REF,
+    this._subsciptionService.register(this,
       this._route.url.subscribe((segments: UrlSegment[])=> {
         const cursor: number = segments.length;
         if (cursor === 1) {
@@ -50,6 +48,6 @@ export class DocumentationComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this._subsciptionService.clearAll(COMP_REF);
+    this._subsciptionService.clearAll(this);
   }
 }

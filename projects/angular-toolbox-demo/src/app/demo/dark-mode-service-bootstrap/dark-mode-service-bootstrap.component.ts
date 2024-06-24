@@ -5,8 +5,6 @@ import { BreadcrumbService } from '../../ui/model/service/breadcrumb.service';
 import { DOCUMENT } from '@angular/common';
 import { DemoComponent } from '../../ui/component/demo/demo.component';
 
-const COMP_REF: string = "DarkModeServiceBootstrapComponent";
-
 @Component({
   selector: 'app-dark-mode-service-bootstrap',
   standalone: true,
@@ -42,7 +40,7 @@ export class DarkModeServiceBootstrapComponent implements OnInit, OnDestroy {
   };
 
   public ngOnInit(): void {
-    this._subscription.register(COMP_REF,
+    this._subscription.register(this,
       this.darkModeService.change.subscribe(
         (isDarkMode: boolean)=> this._document.body.setAttribute("data-bs-theme", isDarkMode ? 'dark' : 'light'))
     );
@@ -50,6 +48,6 @@ export class DarkModeServiceBootstrapComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.darkModeService.disableDarkMode();
-    this._subscription.clearAll(COMP_REF);
+    this._subscription.clearAll(this);
   }
 }

@@ -4,8 +4,6 @@ import { BreadcrumbService } from '../../ui/model/service/breadcrumb.service';
 import { SubscriptionService } from 'angular-toolbox';
 import { DemoComponent } from '../../ui/component/demo/demo.component';
 
-const COMPONENT_REF: string = "SubscriptionServiceComponent";
-
 @Component({
   selector: 'app-subscription-service-demo',
   standalone: true,
@@ -42,9 +40,7 @@ export class SubscriptionServiceComponent implements OnInit, OnDestroy {
     }
 </ul>`]
     ,
-    ts: [`const COMPONENT_REF: string = "SubscriptionServiceComponent";
-  
-export class SubscriptionServiceComponent implements OnInit, OnDestroy {
+    ts: [`export class SubscriptionServiceComponent implements OnInit, OnDestroy {
 
   protected eventEmiter_1: EventEmitter<string> = new EventEmitter<string>();
   protected eventEmiter_2: EventEmitter<string> = new EventEmitter<string>();
@@ -55,7 +51,7 @@ export class SubscriptionServiceComponent implements OnInit, OnDestroy {
   constructor(private _subscriptionService: SubscriptionService) {}
 
   public ngOnInit(): void {
-    this._subscriptionService.register(COMPONENT_REF,
+    this._subscriptionService.register(this,
       this.eventEmiter_1.subscribe(next => this.eventList.push(next + this._event1_Idx++))
     ).append(
       this.eventEmiter_2.subscribe(next => this.eventList.push(next + this._event2_Idx++))
@@ -63,13 +59,13 @@ export class SubscriptionServiceComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this._subscriptionService.clearAll(COMPONENT_REF);
+    this._subscriptionService.clearAll(this);
   }
 }`]
   };
 
   public ngOnInit(): void {
-    this._subscriptionService.register(COMPONENT_REF,
+    this._subscriptionService.register(this,
       this.eventEmiter_1.subscribe(next => this.eventList.push(next + this._event1_Idx++))
     ).append(
       this.eventEmiter_2.subscribe(next => this.eventList.push(next + this._event2_Idx++))
@@ -77,6 +73,6 @@ export class SubscriptionServiceComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this._subscriptionService.clearAll(COMPONENT_REF);
+    this._subscriptionService.clearAll(this);
   }
 }

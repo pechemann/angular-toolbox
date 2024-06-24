@@ -6,7 +6,7 @@
  * the LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
  */
 
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SubscriptionError } from '../../../core';
 
@@ -35,14 +35,16 @@ export class SubscriptionService {
      * Stores a new `Subscription` instance associated with the specified reference.
      * 
      * @param ref The reference for which to store a new `Subscription` instance.
+     *            Can be either a string or a "destroyable" object.
      * @param subscription The `Subscription` instance to register.
      * 
      * @returns A reference to this `SubscriptionService` instance.
      */
-    public register(ref: string, subscription: Subscription): SubscriptionService {
-        this._lastRef = ref;
-        if (!this._subMap.has(ref)) this._subMap.set(ref, []);
-        this._subMap.get(ref)?.push(subscription);
+    public register(ref: string | OnDestroy, subscription: Subscription): SubscriptionService {
+        const REF: string = this.getRef(ref);
+        this._lastRef = REF;
+        if (!this._subMap.has(REF)) this._subMap.set(REF, []);
+        this._subMap.get(REF)?.push(subscription);
         return this;
     }
 
@@ -63,17 +65,19 @@ export class SubscriptionService {
      * Unsubscribes and removes all `Subscription` instances associated with the specified reference.
      * 
      * @param ref The reference for which to remove all `Subscription` instances.
+     *            Can be either a string or a "destroyable" object.
      * 
      * @returns `true` whether the specified reference exists; `false` otherwise.
      */
-    public clearAll(ref: string): boolean {
+    public clearAll(ref: string | OnDestroy): boolean {
+        const REF: string = this.getRef(ref);
         let result: boolean = false;
-        if (this._lastRef === ref) this._lastRef = null;
-        if (this._subMap.has(ref)) {
-            this._subMap.get(ref)?.forEach(subscription => {
+        if (this._lastRef === REF) this._lastRef = null;
+        if (this._subMap.has(REF)) {
+            this._subMap.get(REF)?.forEach(subscription => {
                 if (!subscription.closed) subscription.unsubscribe();
              });
-            this._subMap.delete(ref);
+            this._subMap.delete(REF);
             result = true;
         }
         return result;
@@ -83,11 +87,25 @@ export class SubscriptionService {
      * Returns all `Subscription` instances associated with the specified reference.
      * 
      * @param ref The reference for which to remove get `Subscription` instances.
+     *            Can be either a string or a "destroyable" object.
      * 
      * @returns All `Subscription` instances associated with the specified reference, or whether
      *          the specified reference does not exists.
      */
-    public get(ref: string): Array<Subscription> | null {
-        return this._subMap.get(ref) || null;
+    public get(ref: string | OnDestroy): Array<Subscription> | null {
+        return this._subMap.get( this.getRef(ref)) || null;
+    }
+
+    /**
+     * @private 
+     * Returns the string reference for the regsitration process. 
+     * 
+     * @param ref The reference to be used the regsitration process. 
+     *            Can be either a string or a "destroyable" object.
+     * 
+     * @returns the string reference for the regsitration process. 
+     */
+    private getRef(ref: string | OnDestroy): string {
+        return typeof ref === "string" ? ref : ref.constructor.name;
     }
 }
