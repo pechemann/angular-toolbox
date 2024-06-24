@@ -15,16 +15,15 @@
  */
 
 import { EMPTY_STRING } from "../../../../util";
-import { ASTERISK, CHAR, RIGHT_CURLY_BRACE, DEFAULT_DELIMITER, END, ESCAPED, NAME, LEFT_CURLY_BRACE, PATTERN } from "./constants";
-import { escapeRegexpString } from "./escape-to-regexp-string";
+import { ASTERISK, RIGHT_CURLY_BRACE, DEFAULT_DELIMITER, END, NAME, LEFT_CURLY_BRACE, PATTERN, SEMI_COLON } from "./constants";
 import { Iter } from "./iter";
 import { ParseOptions } from "./parse-options";
 import { Token } from "./token";
 import { TokenData } from "./token-data";
-import { patternToKey } from "./pattern-to-key";
 import { lexer } from "./lexer";
 import { Encode } from "./encode";
 import { RouteStringTokenizer } from "./route-string-tokenizer";
+import { LexToken } from "./lex-token";
 
 /**
  * @private
@@ -40,72 +39,39 @@ const NOOP_VALUE: Encode = (value: string): string => value;
  */
 export const stringToTokenData: RouteStringTokenizer = (str: string, options: ParseOptions = {}): TokenData => {
   const {
-    prefixes = "./",
     delimiter = DEFAULT_DELIMITER,
     encodePath = NOOP_VALUE,
   } = options;
   const tokens: Token[] = [];
   const it: Iter = lexer(str);
   let keyIndex: number = 0;
-  let path: string = EMPTY_STRING;
 
   do {
-    const char: string | undefined = it.tryConsume(CHAR);
+    const path: string = it.text();
+    if (path) tokens.push(encodePath(path));
     const name: string | undefined = it.tryConsume(NAME);
     const pattern: string | undefined = it.tryConsume(PATTERN);
-
     if (name || pattern) {
-      let prefix: string = char || EMPTY_STRING;
-      const modifier: string | undefined = it.modifier();
-
-      if (!prefixes.includes(prefix)) {
-        path += prefix;
-        prefix = EMPTY_STRING;
+      tokens.push({
+        name: name || String(keyIndex++),
+        pattern,
+      });
+      const next: LexToken = it.peek();
+      if (next.type === ASTERISK) {
+        throw new TypeError(
+          `Unexpected * at ${next.index}, you probably want \`/*\` or \`{/:foo}*\`: https://git.new/pathToRegexpError`,
+        );
       }
-
-      if (path) {
-        tokens.push(encodePath(path));
-        path = EMPTY_STRING;
-      }
-
-      tokens.push(
-        patternToKey(
-          encodePath,
-          delimiter,
-          name || String(keyIndex++),
-          pattern,
-          prefix,
-          EMPTY_STRING,
-          modifier,
-        ),
-      );
       continue;
     }
-
-    const value: string | undefined = char || it.tryConsume(ESCAPED);
-    if (value) {
-      path += value;
-      continue;
-    }
-
-    if (path) {
-      tokens.push(encodePath(path));
-      path = EMPTY_STRING;
-    }
-
-    const asterisk: string | undefined = it.tryConsume(ASTERISK);
+    const asterisk = it.tryConsume(ASTERISK);
     if (asterisk) {
-      tokens.push(
-        patternToKey(
-          encodePath,
-          delimiter,
-          String(keyIndex++),
-          `[^${escapeRegexpString(delimiter)}]*`,
-          EMPTY_STRING,
-          EMPTY_STRING,
-          asterisk,
-        ),
-      );
+      tokens.push({
+        name: String(keyIndex++),
+        pattern: `[^${escape(delimiter)}]*`,
+        modifier: ASTERISK,
+        separator: delimiter,
+      });
       continue;
     }
 
@@ -115,20 +81,20 @@ export const stringToTokenData: RouteStringTokenizer = (str: string, options: Pa
       const name: string | undefined = it.tryConsume(NAME);
       const pattern: string | undefined = it.tryConsume(PATTERN);
       const suffix: string = it.text();
+      const separator: string | undefined = it.tryConsume(SEMI_COLON) ? it.text() : prefix + suffix;
 
       it.consume(RIGHT_CURLY_BRACE);
 
-      tokens.push(
-        patternToKey(
-          encodePath,
-          delimiter,
-          name || (pattern ? String(keyIndex++) : EMPTY_STRING),
-          pattern,
-          prefix,
-          suffix,
-          it.modifier(),
-        ),
-      );
+      const modifier = it.modifier();
+
+      tokens.push({
+        name: name || (pattern ? String(keyIndex++) : EMPTY_STRING),
+        prefix: encodePath(prefix),
+        suffix: encodePath(suffix),
+        pattern,
+        modifier,
+        separator,
+      });
       continue;
     }
 

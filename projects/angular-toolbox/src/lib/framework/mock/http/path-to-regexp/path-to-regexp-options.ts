@@ -31,10 +31,10 @@ export interface PathToRegexpOptions extends ParseOptions {
 
   /**
    * @private
-   * Set characters to treat as "loose" and allow arbitrarily repeated.
-   * Default value is `"/""`.
+   * Allow delimiter to be arbitrarily repeated.
+   * Default value is `true`.
    */
-  loose?: string;
+  loose?: boolean;
 
   /**
    * @private

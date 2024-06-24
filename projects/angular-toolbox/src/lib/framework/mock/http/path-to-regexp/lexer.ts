@@ -20,6 +20,7 @@ import { Iter } from "./iter";
 import { LexToken } from "./lex-token";
 import { Lexer } from "./lexer-type";
 import { SIMPLE_TOKENS } from "./simple-tokens";
+import { TokenType } from "./token-type";
 
 /**
  * @private
@@ -40,7 +41,7 @@ export const lexer: Lexer = (str: string): Iter => {
 
   while (i < chars.length) {
     const value: string = chars[i];
-    const type = SIMPLE_TOKENS[value];
+    const type: TokenType = SIMPLE_TOKENS[value];
 
     if (type) {
       tokens.push({ type, index: i++, value });

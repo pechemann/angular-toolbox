@@ -50,7 +50,7 @@ export class Iter {
     const value: string | undefined = this.tryConsume(type);
     if (value !== undefined) return value;
     const { type: nextType, index } = this.peek();
-    throw new TypeError(`Unexpected ${nextType} at ${index}, expected ${type}`);
+    throw new TypeError(`Unexpected ${nextType} at ${index}, expected ${type}: https://git.new/pathToRegexpError`);
   }
 
   /**
@@ -68,14 +68,14 @@ export class Iter {
   /**
    * @private
    */
-  public modifier(): string | undefined {
-    return this.tryConsume(QUESTION_MARK) || this.tryConsume(ASTERISK) || this.tryConsume(PLUS);
+  public modifier(): string {
+    return this.tryConsume(QUESTION_MARK) || this.tryConsume(ASTERISK) || this.tryConsume(PLUS) || EMPTY_STRING;
   }
 
   /**
    * @private
    */
-  private peek(): LexToken {
+  public peek(): LexToken {
     return this.tokens[this._index];
   }
 }

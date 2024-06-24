@@ -22,8 +22,8 @@ import { looseReplacer } from "./loose-replacer";
  * @private
  * Encode all non-delimiter characters using the encode function.
  */
-export const toStringify: Function = (loose: string): Function => {
+export const toStringify: Function = (loose: string, delimiter: string): Function => {
   if (!loose) return escapeRegexpString;
-  const re: RegExp = new RegExp(`[^${escapeRegexpString(loose)}]+|(.)`, G_FLAG);
+  const re: RegExp = new RegExp(`[^${escapeRegexpString(delimiter)}]+|(.)`, G_FLAG);
   return (value: string) => value.replace(re, looseReplacer);
 }

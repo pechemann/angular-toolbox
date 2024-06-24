@@ -15,7 +15,7 @@
  */
 
 import { EMPTY_STRING } from "../../../../util";
-import { DEFAULT_DELIMITER } from "./constants";
+import { CARRET, DEFAULT_DELIMITER, DOLLAR } from "./constants";
 import { Encode } from "./encode";
 import { escapeRegexpString } from "./escape-to-regexp-string";
 import { Key } from "./key";
@@ -36,11 +36,11 @@ export const tokenDataToRegexp: TokenDataRegExpFactory = (data: TokenData, keys:
     trailing = true,
     start = true,
     end = true,
-    loose = DEFAULT_DELIMITER,
+    loose = true,
   } = options;
-  const stringify: Encode = toStringify(loose);
+  const stringify: Encode = toStringify(loose, data.delimiter);
   const keyToRegexp: DecodeKeyToString = toKeyRegexp(stringify, data.delimiter);
-  let pattern: string = start ? "^" : EMPTY_STRING;
+  let pattern: string = start ? CARRET : EMPTY_STRING;
   
   for (const token of data.tokens) {
     if (typeof token === "string") {
@@ -52,7 +52,7 @@ export const tokenDataToRegexp: TokenDataRegExpFactory = (data: TokenData, keys:
   }
 
   if (trailing) pattern += `(?:${stringify(data.delimiter)})?`;
-  pattern += end ? "$" : `(?=${escapeRegexpString(data.delimiter)}|$)`;
+  pattern += end ? DOLLAR : `(?=${escapeRegexpString(data.delimiter)}|$)`;
 
   // URLs in general are case-sensitive (with the exception of machine names).
   // See https://www.w3.org/TR/WD-html40-970708/htmlweb.html

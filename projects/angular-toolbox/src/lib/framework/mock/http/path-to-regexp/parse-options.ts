@@ -31,12 +31,6 @@ export interface ParseOptions {
 
   /**
    * @private
-   * List of characters to automatically consider prefixes when parsing.
-   */
-  prefixes?: string;
-
-  /**
-   * @private
    * Function for encoding input strings for output into path.
    */
   encodePath?: Encode;

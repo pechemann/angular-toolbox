@@ -29,22 +29,22 @@ export interface Key {
     /**
      * @private
      */
-    prefix: string;
+    prefix?: string;
     
     /**
      * @private
      */
-    suffix: string;
+    suffix?: string;
     
     /**
      * @private
      */
-    pattern: string;
+    pattern?: string;
     
     /**
      * @private
      */
-    modifier: string;
+    modifier?: string;
     
     /**
      * @private

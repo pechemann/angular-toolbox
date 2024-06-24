@@ -91,6 +91,12 @@ export const END: TokenType = "END";
 
 /**
  * @private
+ * The reference to the semi colon (`;`) character.
+ */
+export const SEMI_COLON: TokenType = ";";
+
+/**
+ * @private
  * The reference to the colon (`:`) character.
  */
 export const COLON: string = ":";
@@ -107,9 +113,20 @@ export const LEFT_PARENTHESIS: string = "(";
  */
 export const RIGHT_PARENTHESIS: string = ")";
 
-
 /**
  * @private
  * The reference to the escaped back slash (`\\`) character.
  */
 export const ESC_BACK_SLASH: string = "\\";
+
+/**
+ * @private
+ * The reference to the carret (`^`) character.
+ */
+export const CARRET: string = "^";
+
+/**
+ * @private
+ * The reference to the carret (`$`) character.
+ */
+export const DOLLAR: string = "$";

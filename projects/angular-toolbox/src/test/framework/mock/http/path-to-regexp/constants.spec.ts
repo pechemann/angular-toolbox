@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
  */
 
-import { ASTERISK, CHAR, COLON, DEFAULT_DELIMITER, END, ESCAPED, ESC_BACK_SLASH, G_FLAG, I_FLAG, LEFT_CURLY_BRACE, LEFT_PARENTHESIS, NAME, PATTERN, PLUS, QUESTION_MARK, RIGHT_CURLY_BRACE, RIGHT_PARENTHESIS } from "../../../../../lib/framework/mock/http/path-to-regexp/constants";
+import { ASTERISK, CARRET, CHAR, COLON, DEFAULT_DELIMITER, DOLLAR, END, ESCAPED, ESC_BACK_SLASH, G_FLAG, I_FLAG, LEFT_CURLY_BRACE, LEFT_PARENTHESIS, NAME, PATTERN, PLUS, QUESTION_MARK, RIGHT_CURLY_BRACE, RIGHT_PARENTHESIS, SEMI_COLON } from "../../../../../lib/framework/mock/http/path-to-regexp/constants";
 
 describe('path-to-regexp constants', () => {
   
@@ -62,6 +62,10 @@ describe('path-to-regexp constants', () => {
         expect(END).toEqual("END");
     });
 
+    it('COLON should be ";"', () => {
+        expect(SEMI_COLON).toEqual(";");
+    });
+
     it('COLON should be ":"', () => {
         expect(COLON).toEqual(":");
     });
@@ -76,6 +80,14 @@ describe('path-to-regexp constants', () => {
 
     it('ESC_BACK_SLASH should be "\\"', () => {
         expect(ESC_BACK_SLASH).toEqual("\\");
+    });
+
+    it('CARRET should be "^"', () => {
+        expect(CARRET).toEqual("^");
+    });
+
+    it('DOLLAR should be "$"', () => {
+        expect(DOLLAR).toEqual("$");
     });
 });
 

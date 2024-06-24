@@ -15,7 +15,7 @@
  */
 
 import { EMPTY_STRING } from "../../../../util";
-import { ASTERISK, QUESTION_MARK } from "./constants";
+import { ASTERISK, PLUS, QUESTION_MARK } from "./constants";
 import { DecodeKeyToString } from "./decode-key-to-string";
 import { Encode } from "./encode";
 import { escapeRegexpString } from "./escape-to-regexp-string";
@@ -29,20 +29,20 @@ export const toKeyRegexp: (stringify: Encode, delimiter: string)=> DecodeKeyToSt
   const segmentPattern: string = `[^${escapeRegexpString(delimiter)}]+?`;
 
   return (key: Key): string => {
-    const prefix: string = stringify(key.prefix);
-    const suffix: string = stringify(key.suffix);
+    const prefix: string = key.prefix ? stringify(key.prefix) : EMPTY_STRING;
+    const suffix: string = key.suffix ? stringify(key.suffix) : EMPTY_STRING;
+    const modifier = key.modifier || EMPTY_STRING;
 
     if (key.name) {
       const pattern: string = key.pattern || segmentPattern;
-      if (key.separator) {
+      if (key.modifier === PLUS || key.modifier === ASTERISK) {
         const mod: string = key.modifier === ASTERISK ? QUESTION_MARK : EMPTY_STRING;
-        const split: string = stringify(key.separator);
+        const split: string = key.separator ? stringify(key.separator) : EMPTY_STRING;
         return `(?:${prefix}((?:${pattern})(?:${split}(?:${pattern}))*)${suffix})${mod}`;
-      } else {
-        return `(?:${prefix}(${pattern})${suffix})${key.modifier}`;
       }
+      return `(?:${prefix}(${pattern})${suffix})${modifier}`;
     }
 
-    return `(?:${prefix}${suffix})${key.modifier}`;
+    return `(?:${prefix}${suffix})${modifier}`;
   };
 }
