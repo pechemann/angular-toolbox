@@ -11,7 +11,7 @@ import { HttpMockInterceptor, HttpMockConfig, HttpMethodMock, HttpMockEndpoint }
 import { HTTPMethodRef } from '../../../../framework/mock/http/util/http-method-ref.enum';
 import { tokenDataToRegexp } from '../../../../framework/mock/http/path-to-regexp/token-data-to-regexp';
 import { RouteMockConfig } from '../../../../framework/mock/http/config/route-mock-config';
-import { Key } from '../../../../framework/mock/http/path-to-regexp/key';
+import { Key } from '../../../../framework/mock/http/path-to-regexp/model/key';
 import { TokenData } from '../../../../framework/mock/http/path-to-regexp/token-data';
 import { stringToTokenData } from '../../../../framework/mock/http/path-to-regexp/string-to-token-data';
 import { DEFAULT_DELIMITER } from '../../../../framework/mock/http/path-to-regexp/constants';

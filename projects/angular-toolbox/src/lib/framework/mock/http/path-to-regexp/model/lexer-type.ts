@@ -14,7 +14,7 @@
  * https://github.com/pillarjs/path-to-regexp/blob/master/LICENSE
  */
 
-import { Iter } from "./iter";
+import { Iter } from "../iter";
 
 /**
  * @private

@@ -14,7 +14,7 @@
  * https://github.com/pillarjs/path-to-regexp/blob/master/LICENSE
  */
 
-import { Encode } from "./encode";
+import { Encode } from "./model/encode";
 
 /**
  * @private

@@ -14,7 +14,7 @@
  * https://github.com/pillarjs/path-to-regexp/blob/master/LICENSE
  */
 
-import { Token } from "./token";
+import { Token } from "./model/token";
 
 /**
  * @private

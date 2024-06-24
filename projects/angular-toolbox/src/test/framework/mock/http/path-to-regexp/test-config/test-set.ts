@@ -14,9 +14,9 @@
  * https://github.com/pillarjs/path-to-regexp/blob/master/LICENSE
  */
 
-import { Key } from "../../../../../../lib/framework/mock/http/path-to-regexp/key";
+import { Key } from "../../../../../../lib/framework/mock/http/path-to-regexp/model/key";
 import { EMPTY_STRING } from "../../../../../../lib/util";
-import { LexToken } from "../../../../../../lib/framework/mock/http/path-to-regexp/lex-token";
+import { LexToken } from "../../../../../../lib/framework/mock/http/path-to-regexp/model/lex-token";
 import { ASTERISK, DEFAULT_DELIMITER, LEFT_CURLY_BRACE, PATTERN, PLUS, RIGHT_CURLY_BRACE } from "../../../../../../lib/framework/mock/http/path-to-regexp/constants";
 import { CHAR, END, NAME, QUESTION_MARK } from "../../../../../../lib/framework/mock/http/path-to-regexp/constants";
 

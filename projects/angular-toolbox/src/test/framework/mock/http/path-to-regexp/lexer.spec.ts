@@ -14,7 +14,7 @@
  * https://github.com/pillarjs/path-to-regexp/blob/master/LICENSE
  */
 
-import { Lexer } from "../../../../../lib/framework/mock/http/path-to-regexp/lexer-type";
+import { Lexer } from "../../../../../lib/framework/mock/http/path-to-regexp/model/lexer-type";
 import { lexer } from "../../../../../lib/framework/mock/http/path-to-regexp/lexer";
 import { MISSING_NAME_ERROR, MISSING_NAME_STRING, MISSING_PATTERN_ERROR, MISSING_PATTERN_STRING, NESTED_CAPTURING_GROUP_ERROR, NESTED_CAPTURING_GROUP_STRING, NON_CAPTURING_PATTERN_ERROR, NON_CAPTURING_PATTERN_STRING, UNBALANCED_PATTERN_ERROR, UNBALANCED_PATTERN_STRING } from "./test-config/test-errors";
 import { TEST_SET, TestSet } from "./test-config/test-set";

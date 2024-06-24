@@ -17,12 +17,14 @@
 import { G_FLAG } from "./constants";
 import { escapeRegexpString } from "./escape-to-regexp-string";
 import { looseReplacer } from "./loose-replacer";
+import { Encode } from "./model/encode";
+import { NonDelimiterEncoderProvider } from "./model/non-delimiter-encoder-provider";
 
 /**
  * @private
  * Encode all non-delimiter characters using the encode function.
  */
-export const toStringify: Function = (loose: string, delimiter: string): Function => {
+export const toStringify: NonDelimiterEncoderProvider = (loose: boolean, delimiter: string): Encode => {
   if (!loose) return escapeRegexpString;
   const re: RegExp = new RegExp(`[^${escapeRegexpString(delimiter)}]+|(.)`, G_FLAG);
   return (value: string) => value.replace(re, looseReplacer);

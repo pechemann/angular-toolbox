@@ -16,16 +16,16 @@
 
 import { EMPTY_STRING } from "../../../../util";
 import { CARRET, DEFAULT_DELIMITER, DOLLAR } from "./constants";
-import { Encode } from "./encode";
+import { Encode } from "./model/encode";
 import { escapeRegexpString } from "./escape-to-regexp-string";
-import { Key } from "./key";
+import { Key } from "./model/key";
 import { getFlags } from "./get-flags";
-import { PathToRegexpOptions } from "./path-to-regexp-options";
+import { PathToRegexpOptions } from "./model/path-to-regexp-options";
 import { TokenData } from "./token-data";
-import { DecodeKeyToString } from "./decode-key-to-string";
+import { DecodeKeyToString } from "./model/decode-key-to-string";
 import { toKeyRegexp } from "./to-key-regexp";
 import { toStringify } from "./to-stringify";
-import { TokenDataRegExpFactory } from "./token-data-regexp-factory";
+import { TokenDataRegExpFactory } from "./model/token-data-regexp-factory";
 
 /**
  * @Private

@@ -14,11 +14,8 @@
  * https://github.com/pillarjs/path-to-regexp/blob/master/LICENSE
  */
 
-import { ParseOptions } from "./parse-options";
-import { TokenData } from "./token-data";
-
 /**
  * @private
- * This interface defines the default API that must be implemented by HTTP routes parsers tokenizers.
+ * The markup interface of the function that provides encoders for escaping loose characters.
  */
-export type RouteStringTokenizer = (str: string, options?: ParseOptions)=> TokenData;
+export type LooseReplacerProvider = (substring: string, ...args: any[])=> string;

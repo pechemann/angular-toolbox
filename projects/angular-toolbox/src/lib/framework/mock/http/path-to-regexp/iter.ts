@@ -16,7 +16,7 @@
 
 import { EMPTY_STRING } from "../../../../util";
 import { ASTERISK, CHAR, ESCAPED, PLUS, QUESTION_MARK } from "./constants";
-import { LexToken } from "./lex-token";
+import { LexToken } from "./model/lex-token";
 
 /**
  * @private

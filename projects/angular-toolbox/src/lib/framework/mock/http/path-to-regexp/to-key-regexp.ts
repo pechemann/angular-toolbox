@@ -16,10 +16,10 @@
 
 import { EMPTY_STRING } from "../../../../util";
 import { ASTERISK, PLUS, QUESTION_MARK } from "./constants";
-import { DecodeKeyToString } from "./decode-key-to-string";
-import { Encode } from "./encode";
+import { DecodeKeyToString } from "./model/decode-key-to-string";
+import { Encode } from "./model/encode";
 import { escapeRegexpString } from "./escape-to-regexp-string";
-import { Key } from "./key";
+import { Key } from "./model/key";
 
 /**
  * @private

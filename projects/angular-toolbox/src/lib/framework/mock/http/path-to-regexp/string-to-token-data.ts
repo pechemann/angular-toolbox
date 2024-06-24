@@ -17,13 +17,13 @@
 import { EMPTY_STRING } from "../../../../util";
 import { ASTERISK, RIGHT_CURLY_BRACE, DEFAULT_DELIMITER, END, NAME, LEFT_CURLY_BRACE, PATTERN, SEMI_COLON } from "./constants";
 import { Iter } from "./iter";
-import { ParseOptions } from "./parse-options";
-import { Token } from "./token";
+import { ParseOptions } from "./model/parse-options";
+import { Token } from "./model/token";
 import { TokenData } from "./token-data";
 import { lexer } from "./lexer";
-import { Encode } from "./encode";
-import { RouteStringTokenizer } from "./route-string-tokenizer";
-import { LexToken } from "./lex-token";
+import { Encode } from "./model/encode";
+import { RouteStringTokenizer } from "./model/route-string-tokenizer";
+import { LexToken } from "./model/lex-token";
 
 /**
  * @private

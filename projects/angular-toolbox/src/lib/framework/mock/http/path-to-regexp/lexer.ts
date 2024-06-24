@@ -17,10 +17,10 @@
 import { EMPTY_STRING } from "../../../../util";
 import { ESC_BACK_SLASH, CHAR, COLON, END, ESCAPED, LEFT_PARENTHESIS, NAME, PATTERN, QUESTION_MARK, RIGHT_PARENTHESIS } from "./constants";
 import { Iter } from "./iter";
-import { LexToken } from "./lex-token";
-import { Lexer } from "./lexer-type";
-import { SIMPLE_TOKENS } from "./simple-tokens";
-import { TokenType } from "./token-type";
+import { LexToken } from "./model/lex-token";
+import { Lexer } from "./model/lexer-type";
+import { SIMPLE_TOKENS } from "./model/simple-tokens";
+import { TokenType } from "./model/token-type";
 
 /**
  * @private

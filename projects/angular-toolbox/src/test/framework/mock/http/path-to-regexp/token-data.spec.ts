@@ -7,7 +7,7 @@
  */
 
 import { DEFAULT_DELIMITER } from '../../../../../lib/framework/mock/http/path-to-regexp/constants';
-import { Token } from '../../../../../lib/framework/mock/http/path-to-regexp/token';
+import { Token } from '../../../../../lib/framework/mock/http/path-to-regexp/model/token';
 import { TokenData } from '../../../../../lib/framework/mock/http/path-to-regexp/token-data';
 
 describe('TokenData', () => {

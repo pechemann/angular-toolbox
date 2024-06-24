@@ -6,7 +6,7 @@
  * the LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
  */
 
-import { TokenType } from "./token-type";
+import { TokenType } from "./model/token-type";
 
 /**
  * @private

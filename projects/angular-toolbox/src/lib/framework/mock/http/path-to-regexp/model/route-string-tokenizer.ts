@@ -14,17 +14,11 @@
  * https://github.com/pillarjs/path-to-regexp/blob/master/LICENSE
  */
 
-import { escapeRegexpString } from "./escape-to-regexp-string";
-import { LooseReplacerProvider } from "./model/loose-replacer-provider";
+import { ParseOptions } from "./parse-options";
+import { TokenData } from "../token-data";
 
 /**
  * @private
- * Escape and repeat loose characters for regular expressions.
- * 
- * @param value The string expression to escape.
- * @param loose 
- * @returns The escaped string transfromed from the original string expression.
+ * This interface defines the default API that must be implemented by HTTP routes parsers tokenizers.
  */
-export const looseReplacer: LooseReplacerProvider = (value: string, loose: string): string => {
-  return loose ? `${escapeRegexpString(value)}+` : escapeRegexpString(value);
-}
+export type RouteStringTokenizer = (str: string, options?: ParseOptions)=> TokenData;
