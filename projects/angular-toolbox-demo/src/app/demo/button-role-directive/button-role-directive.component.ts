@@ -45,7 +45,7 @@ export class ButtonRoleDirectiveComponent {
 </tbody>
 ...
 `],
-    ts: [`export class ButtonRoleDirectiveComponent {
+  typescript: [`export class ButtonRoleDirectiveComponent {
 
   protected data: User[] = USER_LIST_MOCK;
 

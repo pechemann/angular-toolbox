@@ -28,7 +28,7 @@ export class DarkModeServiceBootstrapComponent implements OnInit, OnDestroy {
   public presentation: string = "The following sample application shows how to easily integrate Bootstrap with the <code>DarkModeService</code> service.";
   public srcCode: CodeWrapper = {
     html: [`<button (click)="darkModeService.toggleDarkMode()"> Toggle Dark Mode </button>`],
-    ts: [`export class DarkModeServiceBootstrapComponent {
+    typescript: [`export class DarkModeServiceBootstrapComponent {
 
   constructor(public darkModeService: DarkModeService,
               @Inject(DOCUMENT) doc: Document) {

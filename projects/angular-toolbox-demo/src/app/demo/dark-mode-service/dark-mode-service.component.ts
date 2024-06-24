@@ -29,7 +29,7 @@ export class DarkModeServiceComponent implements OnDestroy {
     background: #333;
     color: #fff;
 }`],
-    ts:[`export class DarkModeServiceComponent {
+    typescript:[`export class DarkModeServiceComponent {
     constructor(public darkModeService: DarkModeService) {}
 }`]
   };

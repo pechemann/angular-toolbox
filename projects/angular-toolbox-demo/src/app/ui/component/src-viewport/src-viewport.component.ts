@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CodeWrapper } from '../../model/business/code-wrapper';
 import { CodeViewportComponent } from '../code-viewport/code-viewport.component';
 
-declare type Language = "html" | "ts" | "css";
+declare type Language = "html" | "typescript" | "css";
 
 @Component({
   selector: 'src-viewport',

@@ -41,7 +41,7 @@ export class HttpMockServiceComponent implements OnDestroy {
   } @else {
       No data loaded...
   }`],
-    ts: [
+    typescript: [
 `/////////////////////////
 // HTTP Mock Config
 /////////////////////////

@@ -3,6 +3,7 @@ import { BreadcrumbService } from '../../../ui/model/service/breadcrumb.service'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EMPTY_STRING, SafeHtmlPipe, SubscriptionService } from 'angular-toolbox';
 import { ActivatedRoute, RouterModule, UrlSegment } from '@angular/router';
+import { HighlightService } from '../../../ui/model/service/highlight.service';
 
 @Component({
   selector: 'app-documentation',
@@ -22,7 +23,8 @@ export class DocumentationComponent implements OnInit, OnDestroy {
   constructor(breadcrumb: BreadcrumbService,
               private _http: HttpClient,
               private _subsciptionService: SubscriptionService,
-              private _route : ActivatedRoute) {
+              private _route : ActivatedRoute,
+              private _highlightService: HighlightService) {
     breadcrumb.removeAll()
               .addItem(breadcrumb.buildItem("Resources", "resources"))
               .addItem(breadcrumb.buildItem("Documentation"));
@@ -40,8 +42,11 @@ export class DocumentationComponent implements OnInit, OnDestroy {
         }
         const path: string = segments.slice(1).join("/");
         const endpoint: string = `${origin}/${path}/${cursor === 2 ? "index" : EMPTY_STRING}.html`;
-        this._subsciptionService.append(
-          this._http.get(endpoint, { headers, responseType: 'text'}).subscribe(data => this.page = data)
+        this._subsciptionService.register(this,
+          this._http.get(endpoint, { headers, responseType: 'text'}).subscribe(data => {
+            this.page = data;
+            this._highlightService.highlightAll();
+          })
         )
       })
     );

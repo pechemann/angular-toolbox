@@ -1,5 +1,5 @@
 export interface CodeWrapper {
-    ts?: string[];
+    typescript?: string[];
     html?: string[];
     css?: string[];
 }

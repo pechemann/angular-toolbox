@@ -14,7 +14,7 @@ export class DemoListService {
     { label: "Version Service", urlTree: ["../demo", "version-service"] },
     { label: "Dark Mode Service: Bootstrap Integration", urlTree: ["../demo", "dark-mode-service-bootstrap"] },
     { label: "HTTP Mock Service", urlTree: ["../demo", "http-mock-service"] }
-  ]
+  ];
 
   public getDemoLinkList(): IconListItem[] {
     return this.DEMO_LINK_LIST;

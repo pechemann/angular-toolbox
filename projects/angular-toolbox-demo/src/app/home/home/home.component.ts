@@ -24,7 +24,7 @@ export class HomeComponent {
     { label: "Angular Toolbox Quick Start Guide",  urlTree: ['/resources', 'documentation', 'quick-start-guide'] },
     { label: "Angular Toolbox Documentation",  urlTree: ['/resources', 'documentation'] },
     { label: "HTTP Mocking Framework",  urlTree: ['/resources', 'documentation', 'http-mocking-framework'] }
-  ]
+  ];
 
   constructor(public demoList: DemoListService,
               breadcrumb: BreadcrumbService) {

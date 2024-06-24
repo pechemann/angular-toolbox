@@ -10,8 +10,7 @@ import { DemoComponent } from '../../ui/component/demo/demo.component';
   imports: [
     DemoComponent
   ],
-  templateUrl: './scroll-service.component.html',
-  styleUrls: ['./scroll-service.component.scss']
+  templateUrl: './scroll-service.component.html'
 })
 export class ScrollServiceComponent implements OnInit, OnDestroy {
 
@@ -27,7 +26,7 @@ export class ScrollServiceComponent implements OnInit, OnDestroy {
   public presentation: string = "A lightweight service that provides scrolling capabilities to your Angular application.";
   public srcCode: CodeWrapper = {
     html: ["<div>Window scrollY position: {{ scrollY }}</div>"],
-    ts: ["this.scrollService.onScroll.subscribe((e)=> this.scrollY = (e.currentTarget as Window).scrollY);"]
+    typescript: ["this.scrollService.onScroll.subscribe((e)=> this.scrollY = (e.currentTarget as Window).scrollY);"]
   };
 
   public scrollY: number = 0;

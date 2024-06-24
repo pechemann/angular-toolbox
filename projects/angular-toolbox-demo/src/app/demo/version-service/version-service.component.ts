@@ -28,7 +28,7 @@ export class VersionServiceComponent {
   public srcCode: CodeWrapper = {
     html: [`<p>Current Angular Toolbox Demo Version: {{ versionService.getVersion().toString() }}</p>
 <p>Build Release Date: {{ versionService.getBuildTimestamp() | date }}</p>`],
-    ts: [`/////////////////////////
+    typescript: [`/////////////////////////
 // Application Module
 /////////////////////////
 

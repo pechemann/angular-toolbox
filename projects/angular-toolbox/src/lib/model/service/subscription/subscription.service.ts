@@ -93,7 +93,7 @@ export class SubscriptionService {
      *          the specified reference does not exists.
      */
     public get(ref: string | OnDestroy): Array<Subscription> | null {
-        return this._subMap.get( this.getRef(ref)) || null;
+        return this._subMap.get(this.getRef(ref)) || null;
     }
 
     /**

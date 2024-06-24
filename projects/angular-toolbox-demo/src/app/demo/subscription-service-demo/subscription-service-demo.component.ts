@@ -40,7 +40,7 @@ export class SubscriptionServiceComponent implements OnInit, OnDestroy {
     }
 </ul>`]
     ,
-    ts: [`export class SubscriptionServiceComponent implements OnInit, OnDestroy {
+    typescript: [`export class SubscriptionServiceComponent implements OnInit, OnDestroy {
 
   protected eventEmiter_1: EventEmitter<string> = new EventEmitter<string>();
   protected eventEmiter_2: EventEmitter<string> = new EventEmitter<string>();
