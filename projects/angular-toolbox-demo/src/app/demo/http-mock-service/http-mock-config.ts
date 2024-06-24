@@ -1,6 +1,5 @@
 import { HttpRequest } from "@angular/common/http";
-import { HttpMockConfig, httpResponseMock } from "angular-toolbox";
-import { Observable, of } from "rxjs";
+import { HttpMockConfig, HttpMockError, httpResponseMock } from "angular-toolbox";
 
 export interface Todo {
     id: number;
@@ -20,6 +19,11 @@ const getRandomString = (size: number, isFirst: boolean = true): string => {
 
 const getRandomBoolean = (): boolean => Math.random() < 0.4;
 
+const error: HttpMockError = {
+    status: 400,
+    statusText: "Bad Request",
+};
+
 const getTodo = (params: any): Todo => {
     return {
         id: params.id,
@@ -38,8 +42,8 @@ export const config: HttpMockConfig = {
                 {
                     route: "/todos/:id",
                     get: {
-                        data: (req: HttpRequest<Todo>, params: any)=> httpResponseMock().body( getTodo(params) ) //of()
-                                                                                        .response()
+                        data: (req: HttpRequest<Todo>, params: any)=> httpResponseMock().body( getTodo(params) )
+                                                                                        .response(error)
                     }
                 }
             ]

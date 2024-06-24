@@ -8,13 +8,14 @@
 
 import { HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { HttpMockError } from "./http-mock-error";
 
 /**
  * Defines the config of a HTTP response mock object.
  */
 export interface HttpResponseMock {
 
-     /**
+    /**
      * The response body. Can be either an object, or an `Observable` instance.
      */
     body?: any | Observable<any>;
@@ -38,4 +39,9 @@ export interface HttpResponseMock {
      * URL of the resource retrieved, or `null` if not available.
      */
     url: string | null;
+
+    /**
+     * The optional error for this HTTP request.
+     */
+    error: HttpMockError | null;
 }

@@ -7,7 +7,7 @@
  */
 
 import { HttpHeaders, HttpStatusCode } from "@angular/common/http";
-import { HttpResponseMock } from "../../../../model";
+import { HttpMockError, HttpResponseMock } from "../../../../model";
 
 /**
  * @private
@@ -26,7 +26,8 @@ export class HttpResponseMockBuilder {
         url: null,
         body: null,
         status: HttpStatusCode.Ok,
-        statusText: OK
+        statusText: OK,
+        error: null
     };
 
     /**
@@ -93,9 +94,13 @@ export class HttpResponseMockBuilder {
      * Return a new `HttpResponseMock` instance, built from the properties specified with the
      * `HttpResponseMockBuilder` methods.
      * 
+     * @param error An optional value used to set the `error` property of the new `HttpResponseMock` instance.
+     *              The `error` parameter values take precedence over all other properties of the `HttpResponseMock`
+     *              instance.
      * @returns A new `HttpResponseMock` instance.
      */
-    public response(): HttpResponseMock {
+    public response(error: HttpMockError | null = null): HttpResponseMock {
+        this._response.error = error;
         return this._response;
     }
 }

@@ -7,7 +7,7 @@
  */
 
 import { HttpHeaders, HttpRequest, HttpStatusCode } from "@angular/common/http";
-import { XhrProxy, HttpResponseMock, HttpMethodMock } from "../../../../model";
+import { XhrProxy, HttpResponseMock, HttpMethodMock, HttpMockError } from "../../../../model";
 import { ProgressEventMock } from "../event/progress-event-mock";
 import { EMPTY_STRING } from "../../../../util";
 import { XhrBase } from "./xhr-base";
@@ -211,9 +211,12 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
         const httpResponseMock: HttpResponseMock = (rc.methodConfig as any).data(request, rc.parameters);
         const sub: Subscription = this.loadData(httpResponseMock).subscribe((data: any) => {
             this._dataStorage = DataStorageBuilder.buildDataStorage(httpResponseMock, data);
+            const error: HttpMockError | null = this._dataStorage.httpResponse.error;
             this.setReadyState(this.HEADERS_RECEIVED);
-            this.setReadyState(this.LOADING);
 
+            if (error) return this.onError(error);
+
+            this.setReadyState(this.LOADING);
             const response: HttpResponseMock = this._dataStorage.httpResponse;
             const headers: HttpHeaders | undefined = response.headers;
             this._headers = headers || new HttpHeaders();
@@ -289,17 +292,27 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
 
     /**
      * @private
-     * Dispatches an new event with the specified type.
      */
     private onLoadComplete(): void {
         this._dataStorage.loaded = this._dataStorage.total;
         this.setReadyState(this.DONE);
-        this.eventDispatch("load");
+        this.dispatchProgressEvent("load");
     }
 
     /**
      * @private
-     * Dispatches an new event with the specified type.
+     */
+    private onError(error: HttpMockError): void {
+        this._status = error.status;
+        this._statusText = error.statusText;
+        this._dataStorage.data = error.body;
+        this._dataStorage.total = 0;
+        this.setReadyState(this.DONE);
+        this.dispatchProgressEvent("error");
+    }
+
+    /**
+     * @private
      */
     private eventDispatch(type: string): void {
         const event: Event = new Event(type);
@@ -311,9 +324,9 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
     /**
      * @private 
      */
-    private dispatchProgressEvent(): void {
+    private dispatchProgressEvent(type: string = "progress"): void {
         const d: any = this._dataStorage;
-        const event: ProgressEventMock = new ProgressEventMock("progress");
+        const event: ProgressEventMock = new ProgressEventMock(type);
         event.loaded = d.loaded;
         event.total = d.total;
         this.dispatchEvent(event);
