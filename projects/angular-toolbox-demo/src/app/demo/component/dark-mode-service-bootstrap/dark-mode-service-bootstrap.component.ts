@@ -1,9 +1,9 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { DarkModeService, SubscriptionService } from 'angular-toolbox';
-import { CodeWrapper } from '../../ui/model/business/code-wrapper';
-import { BreadcrumbService } from '../../ui/model/service/breadcrumb.service';
+import { CodeWrapper } from '../../../ui/model/business/code-wrapper';
+import { BreadcrumbService } from '../../../ui/model/service/breadcrumb.service';
 import { DOCUMENT } from '@angular/common';
-import { DemoComponent } from '../../ui/component/demo/demo.component';
+import { DemoComponent } from '../../../ui/component/demo/demo.component';
 
 @Component({
   selector: 'app-dark-mode-service-bootstrap',

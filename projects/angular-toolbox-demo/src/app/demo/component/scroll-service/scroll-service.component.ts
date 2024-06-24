@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { BreadcrumbService } from '../../ui/model/service/breadcrumb.service';
-import { CodeWrapper } from '../../ui/model/business/code-wrapper';
+import { BreadcrumbService } from '../../../ui/model/service/breadcrumb.service';
+import { CodeWrapper } from '../../../ui/model/business/code-wrapper';
 import { ScrollService, SubscriptionService } from 'angular-toolbox';
-import { DemoComponent } from '../../ui/component/demo/demo.component';
+import { DemoComponent } from '../../../ui/component/demo/demo.component';
 
 @Component({
   selector: 'scroll-service',

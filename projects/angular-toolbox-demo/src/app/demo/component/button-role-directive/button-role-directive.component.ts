@@ -1,8 +1,8 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { CodeWrapper } from '../../ui/model/business/code-wrapper';
-import { BreadcrumbService } from '../../ui/model/service/breadcrumb.service';
+import { CodeWrapper } from '../../../ui/model/business/code-wrapper';
+import { BreadcrumbService } from '../../../ui/model/service/breadcrumb.service';
 import { USER_LIST_MOCK, User } from '../subscription-service-demo/user-list.mock';
-import { DemoComponent } from '../../ui/component/demo/demo.component';
+import { DemoComponent } from '../../../ui/component/demo/demo.component';
 import { ButtonRoleDirective } from 'angular-toolbox';
 
 @Component({

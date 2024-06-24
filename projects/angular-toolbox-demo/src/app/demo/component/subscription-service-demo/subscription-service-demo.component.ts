@@ -1,8 +1,8 @@
 import { Component, EventEmitter, OnDestroy, OnInit } from '@angular/core';
-import { CodeWrapper } from '../../ui/model/business/code-wrapper';
-import { BreadcrumbService } from '../../ui/model/service/breadcrumb.service';
+import { CodeWrapper } from '../../../ui/model/business/code-wrapper';
+import { BreadcrumbService } from '../../../ui/model/service/breadcrumb.service';
 import { SubscriptionService } from 'angular-toolbox';
-import { DemoComponent } from '../../ui/component/demo/demo.component';
+import { DemoComponent } from '../../../ui/component/demo/demo.component';
 
 @Component({
   selector: 'app-subscription-service-demo',

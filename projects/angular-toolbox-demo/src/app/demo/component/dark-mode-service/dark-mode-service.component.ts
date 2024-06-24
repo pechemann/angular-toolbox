@@ -1,8 +1,8 @@
 import { Component, OnDestroy } from '@angular/core';
 import { DarkModeService } from 'angular-toolbox';
-import { CodeWrapper } from '../../ui/model/business/code-wrapper';
-import { BreadcrumbService } from '../../ui/model/service/breadcrumb.service';
-import { DemoComponent } from '../../ui/component/demo/demo.component';
+import { CodeWrapper } from '../../../ui/model/business/code-wrapper';
+import { BreadcrumbService } from '../../../ui/model/service/breadcrumb.service';
+import { DemoComponent } from '../../../ui/component/demo/demo.component';
 
 @Component({
   selector: 'app-dark-mode-service',

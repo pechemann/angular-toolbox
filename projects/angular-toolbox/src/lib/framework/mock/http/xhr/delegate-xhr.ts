@@ -227,7 +227,6 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
                 return this.onLoadComplete();
             }
             this.doProgressiveDownload();
-            
         });
     }
 
