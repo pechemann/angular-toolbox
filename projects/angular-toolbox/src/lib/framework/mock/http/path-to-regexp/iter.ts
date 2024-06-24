@@ -31,7 +31,7 @@ export class Iter {
   /**
    * @private 
    */
-  constructor(public readonly tokens: LexToken[]) {}
+  constructor(private _tokens: LexToken[]) {}
 
   /**
    * @private
@@ -76,6 +76,6 @@ export class Iter {
    * @private
    */
   public peek(): LexToken {
-    return this.tokens[this._index];
+    return this._tokens[this._index];
   }
 }

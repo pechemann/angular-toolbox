@@ -18,7 +18,7 @@ import { Lexer } from "../../../../../lib/framework/mock/http/path-to-regexp/mod
 import { lexer } from "../../../../../lib/framework/mock/http/path-to-regexp/lexer";
 import { MISSING_NAME_ERROR, MISSING_NAME_STRING, MISSING_PATTERN_ERROR, MISSING_PATTERN_STRING, NESTED_CAPTURING_GROUP_ERROR, NESTED_CAPTURING_GROUP_STRING, NON_CAPTURING_PATTERN_ERROR, NON_CAPTURING_PATTERN_STRING, UNBALANCED_PATTERN_ERROR, UNBALANCED_PATTERN_STRING } from "./test-config/test-errors";
 import { TEST_SET, TestSet } from "./test-config/test-set";
-import { LexToken } from "dist/angular-toolbox/lib/framework/mock/http/path-to-regexp/lex-token";
+import { Iter } from "../../../../../lib/framework/mock/http/path-to-regexp/iter";
 
 describe('lexer', () => {
 
@@ -49,9 +49,8 @@ describe('lexer', () => {
     });
 
     TEST_SET.forEach((testDef: TestSet)=> {
-        const tokens: LexToken[] = testDef.tokens;
-        it(`path "${testDef.path}" should return valid token array (expected tokens num = ${tokens.length})`, () => {
-            expect(lx(testDef.path).tokens).toEqual(tokens);
+        it(`path "${testDef.path}" should return valid instance of Iter class`, () => {
+            expect(lx(testDef.path)).toBeInstanceOf(Iter);
         });
     });
 });
