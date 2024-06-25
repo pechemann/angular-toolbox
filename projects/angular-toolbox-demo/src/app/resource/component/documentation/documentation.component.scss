@@ -1,0 +1,27 @@
+::ng-deep {
+    .documentation {
+        h3:not(:first-child) {
+            margin-top: 3.5rem;
+        }
+        h3 {
+            margin-bottom: 1.5rem;
+        }
+        h4 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        pre {
+            margin-top: 1.5rem;
+        }
+        .page-menu {
+            position: sticky;
+            top: 20px;
+            float: right;
+        }
+        @media (max-width: 1199.98px) { 
+            .page-menu {
+                display: none;
+            }
+        }
+    }
+}

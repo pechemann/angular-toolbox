@@ -1,13 +1,20 @@
-<main>
+<main class="documentation">
     @if(isHomePage) {
         <h1>Angular Toolbox Documentation</h1>
-        <p class="fs-5 col-md-8  mb-5">
-            Learn the fundamentals and start building powerfull Angular applications faster.
-        </p>
-        <hr class="mb-5">
-        <div class="mb-5">
-            
+        <div class="row">
+            <p class="fs-5 col-md-8 mb-2">
+                <em class="lib-name">Angular Toolbox</em> documentation has all the information you need to make your Angular project a smashing success.
+            </p>
+            <p class="col-md-4 text-end">
+                Latest stable release: <span class="badge text-bg-primary p-2">{{ versionService.getVersion().toString() }}</span>
+            </p>
         </div>
+        <hr class="mb-5">
+       <h2 class="mb-4">All Utilities Documentation</h2>
+       <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+       </p>
+       <icon-list [itemList]="documentationList"/>
     } @else {
         <div [innerHTML]="page | safeHtml"></div>
     }

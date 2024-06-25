@@ -1,16 +1,19 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BreadcrumbService } from '../../../ui/model/service/breadcrumb.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { EMPTY_STRING, SafeHtmlPipe, SubscriptionService } from 'angular-toolbox';
+import { EMPTY_STRING, SafeHtmlPipe, SubscriptionService, VersionService } from 'angular-toolbox';
 import { ActivatedRoute, RouterModule, UrlSegment } from '@angular/router';
 import { HighlightService } from '../../../ui/model/service/highlight.service';
+import { IconListItem } from '../../../ui/model/business/icon-list-item';
+import { IconListComponent } from '../../../ui/component/icon-list/icon-list.component';
 
 @Component({
   selector: 'app-documentation',
   standalone: true,
   imports: [
     RouterModule,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    IconListComponent
   ],
   templateUrl: './documentation.component.html',
   styleUrl: './documentation.component.scss'
@@ -20,7 +23,11 @@ export class DocumentationComponent implements OnInit, OnDestroy {
   protected page!: string;
   protected isHomePage: boolean = false;
 
+  
+  protected documentationList!: IconListItem[];
+
   constructor(breadcrumb: BreadcrumbService,
+              public versionService: VersionService,
               private _http: HttpClient,
               private _subsciptionService: SubscriptionService,
               private _route : ActivatedRoute,
@@ -37,6 +44,7 @@ export class DocumentationComponent implements OnInit, OnDestroy {
       this._route.url.subscribe((segments: UrlSegment[])=> {
         const cursor: number = segments.length;
         if (cursor === 1) {
+          this.initDocumentationList();
           this.isHomePage = true;
           return;
         }
@@ -54,5 +62,17 @@ export class DocumentationComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this._subsciptionService.clearAll(this);
+  }
+
+  private initDocumentationList(): void {
+    this.documentationList = [
+      { label: "Quick Start Guide",  urlTree: ['/resources', 'documentation', 'quick-start-guide'] },
+      { label: "HTTP Mocking Framework",  urlTree: ['/resources', 'documentation', 'http-mocking-framework'] },
+      { label: "Subscription Service",  urlTree: ['/resources', 'documentation'] },
+      { label: "Dark Mode Service",  urlTree: ['/resources', 'documentation'] },
+      { label: "ButtonRole Directive",  urlTree: ['/resources', 'documentation'] },
+      { label: "Version Service",  urlTree: ['/resources', 'documentation'] },
+      { label: "Scroll Service",  urlTree: ['/resources', 'documentation'] }
+    ];
   }
 }

@@ -1,34 +1,73 @@
-<h2 class="mb-3">Angular Toolbox Quick Start Guide</h2>
-<p class="fs-5 col-md-8 mb-4">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
-</p>
-<hr class="mb-4">
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-9 col">
-            <h3>Prerequisites</h3>
-            <pre><code class="language-plaintext">minimum angular version: 18.0.3</code></pre>
-
-            <h3>Install</h3>
-            <pre><code class="language-bash">$npm install angular-toolbox</code></pre>
-
-            <h3>Peer Dependencies</h3>
-            <pre><code class="language-json">"@angular/common": "^18.0.3",
-"@angular/core": "^18.0.3",
-"@angular/platform-browser": "^18.0.3",
-"@angular/router": "^18.0.3"</code></pre>
-            
-        </div>
-        <div class="col-md-3 col">
-            <h5 class="mb-4">On this page</h5>
-            <ul class="list-group">
-                <li class="list-group-item"><a rel="noopener">Prerequisites</a></li>
-                <li class="list-group-item"><a rel="noopener">Install</a></li>
-                <li class="list-group-item"><a rel="noopener">Peer Dependencies</a></li>
-            </ul>
-        </div>
-    </div>
+<div class="page-menu col-xl-3 ps-4">
+    <aside class="w-100">
+        <h5 class="mb-4">On this page</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a rel="noopener">Prerequisites</a></li>
+            <li class="list-group-item"><a rel="noopener">Install</a></li>
+            <li class="list-group-item"><a rel="noopener">Usage</a></li>
+            <li class="list-group-item"><a rel="noopener">Running Tests</a></li>
+        </ul>
+    </aside>
 </div>
 
+
+<div class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3">Angular Toolbox Quick Start Guide</h2>
+    <p>
+        <em class="lib-name">Angular Toolbox</em> is a library of lightweight utilities gathered  to solve recurring issues encountered by Angular apps developers.
+    </p>
+    <p>
+        The library focuses on ease-of-use and robust test processes, to maintain quality over time.
+    </p>
+    <hr class="mt-4">
+</div>
+
+
+<div class="col-xl-9">
+    <h3>Prerequisites</h3>
+    <p>
+        The <em class="lib-name">Angular Toolbox</em> library is built on top of the 
+        <a href="https://angular.dev/" title="Angular">Angular</a> framework.
+        So, make sure that you have created an Angular project with the minimum required
+        version before starting the <em class="lib-name">Angular Toolbox</em> install:
+    </p>
+    <pre><code class="language-plaintext">minimum angular version: 18.0.3</code></pre>
+    <h4>Peer Dependencies</h4>
+    <p>
+        The <em class="lib-name">Angular Toolbox</em> library needs the following Angular modules to be installed to work:
+    </p>
+    <pre><code class="language-typescript">"@angular/common"
+"@angular/core"
+"@angular/platform-browser"
+"@angular/router"</code></pre>
+    <h3>Install</h3>
+    <p>
+        <em class="lib-name">Angular Toolbox</em> is available for download at npm.
+    </p>
+    <pre><code class="language-bash">$cd &lt;YOUR-PROJECT-NAME&gt;
+$npm install angular-toolbox</code></pre>
+    <h3>Usage</h3>
+    <p>
+        Each utility can be imported individually so that you only bundle what you use.
+    </p>
+    <pre><code class="language-typescript">import { Component } from '@angular/core';
+import { DarkModeService } from 'angular-toolbox';
+
+@Component({
+    selector: 'app-custom-component',
+    standalone: true,
+    templateUrl: './custom.component.html'
+})
+export class CustomComponent {
+    
+    constructor(darkModeService: DarkModeService) {}
+}</code></pre>
+    <h3>Running Tests</h3>
+    <p>
+        <em class="lib-name">Angular Toolbox</em> unit testing is the process of testing all pieces of code provided with the library.
+    </p>
+    <p>
+        Run the the unit testing suite with the <code>npm test</code> command:
+    </p>
+    <pre><code class="language-bash">$npm test</code></pre>
+</div>

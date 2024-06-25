@@ -10,8 +10,7 @@ import { GitSectionComponent } from '../../../ui/component/git-section/git-secti
     RouterModule,
     GitSectionComponent
   ],
-  templateUrl: './resources.component.html',
-  styleUrl: './resources.component.scss'
+  templateUrl: './resources.component.html'
 })
 export class ResourcesComponent {
 
