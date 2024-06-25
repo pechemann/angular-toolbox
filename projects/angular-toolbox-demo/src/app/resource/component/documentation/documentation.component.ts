@@ -4,7 +4,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EMPTY_STRING, HttpMockService, SafeHtmlPipe, SubscriptionService, VersionService, httpResponseMock } from 'angular-toolbox';
 import { ActivatedRoute, RouterModule, UrlSegment } from '@angular/router';
 import { HighlightService } from '../../../ui/model/service/highlight.service';
-import { IconListItem } from '../../../ui/model/business/icon-list-item';
 import { IconListComponent } from '../../../ui/component/icon-list/icon-list.component';
 import { IconListService } from '../../../model/service/icon-list-list.service';
 
@@ -43,7 +42,7 @@ export class DocumentationComponent implements OnInit, OnDestroy {
                 origin: "https://pascalechemann.com",
                 endpoints: [
                     {
-                        route: "/documentation/*",
+                        route: "/angular-toolbox/documentation/*",
                         get: {
                             data: (req: any, params: any)=> {
                               const headers: HttpHeaders = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
@@ -60,7 +59,7 @@ export class DocumentationComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     const headers: HttpHeaders = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
-    const origin: string = 'https://pascalechemann.com/documentation';
+    const origin: string = 'https://pascalechemann.com/angular-toolbox/documentation';
     this._subsciptionService.register(this,
       this._route.url.subscribe((segments: UrlSegment[])=> {
         const cursor: number = segments.length;
