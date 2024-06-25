@@ -14,7 +14,7 @@
        <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
        </p>
-       <icon-list [itemList]="documentationList"/>
+       <icon-list [itemList]="iconListService.getDocumentationList()"/>
     } @else {
         <div [innerHTML]="page | safeHtml"></div>
     }
