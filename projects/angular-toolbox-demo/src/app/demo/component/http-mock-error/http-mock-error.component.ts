@@ -112,7 +112,7 @@ import { provideHttpClient } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app-layout/app.component';
-import { AngularToolboxModule, httpMockFactory } from 'angular-toolbox';
+import { HttpMockService, httpMockFactory } from 'angular-toolbox';
 
 //=> HTTP mock config import
 import { config } from './app-mock/http-mock-config';
@@ -128,8 +128,7 @@ import { config } from './app-mock/http-mock-config';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    AngularToolboxModule
+    AppRoutingModule
   ],
   bootstrap: [AppComponent]
 })
