@@ -18,8 +18,7 @@ import { LexToken } from "../../../../../lib/framework/mock/http/path-to-regexp/
 import { Iter } from "../../../../../lib/framework/mock/http/path-to-regexp/iter";
 import { TEST_SET } from "./test-config/test-set";
 import { EMPTY_STRING } from "../../../../../lib/util/empty-string.const";
-import { END } from "../../../../../lib/framework/mock/http/path-to-regexp/constants";
-
+import { ASTERISK, END, PLUS, QUESTION_MARK } from "../../../../../lib/framework/mock/http/path-to-regexp/constants";
 
 describe('Iter', () => {
 
@@ -34,10 +33,14 @@ describe('Iter', () => {
         expect(new Iter(tokens)).toBeTruthy();
     });
 
-    it(`tryConsume() should return a string`, () => {
+    it(`tryConsume() should return a string for matched tokens`, () => {
         const result: string | undefined = iter.tryConsume(tokens[0].type);
-        const expected: boolean = (typeof result === "string") || (result === undefined);
-        expect(expected).toBeTrue();
+        expect(typeof result === "string").toBeTrue();
+    });
+
+    it(`tryConsume() should return a undefined when not matching tokens`, () => {
+        const result: string | undefined = iter.tryConsume(END);
+        expect(result).toBeUndefined();
     });
 
     it(`consecutive peek() invokations should return the same LexToken object`, () => {
@@ -64,6 +67,12 @@ describe('Iter', () => {
         expect(last.type).toEqual(END);
     });
     
+    it(`tryConsume() must not change peek() value when not matching tokens`, () => {
+        const token: LexToken = iter.peek();
+        iter.tryConsume(END);
+        expect(iter.peek()).toEqual(token);
+    });
+
     it(`final text() invokation should return the text part of token list from the specified index`, () => {
         const PATH: string = "/test/";
         expect(iter.text()).toEqual(PATH);
@@ -71,5 +80,34 @@ describe('Iter', () => {
         iter.tryConsume(tokens[0].type);
         iter.tryConsume(tokens[1].type);
         expect(iter.text()).toEqual(PATH.substring(2));
+    });
+    
+    it(`consume() should retrun a string when matching tokens`, () => {
+        const result: string | undefined = iter.consume(tokens[0].type);
+        expect(typeof result === "string").toBeTrue();
+    });
+
+    it(`consume() should throw an error when not matching tokens`, () => {
+        const error: TypeError = new TypeError("Unexpected CHAR at 0, expected END: https://git.new/pathToRegexpError");
+        expect(()=> iter.consume(END)).toThrow(error);
+    });
+    
+    it(`modifier() should return an empyy string when peek() method returns a non modifier token`, () => {
+        expect(iter.modifier()).toEqual(EMPTY_STRING);
+    });
+    
+    it(`modifier() should return an asterisk (*) when peek() method returns a token of type of "asterisk" `, () => {
+        iter = new Iter([ { type: ASTERISK, index: 0, value: ASTERISK }]);
+        expect(iter.modifier()).toEqual(ASTERISK);
+    });
+    
+    it(`modifier() should return a question mark (?) string when peek() method returns a token of type of "question mark" `, () => {
+        iter = new Iter([ { type: QUESTION_MARK, index: 0, value: QUESTION_MARK }]);
+        expect(iter.modifier()).toEqual(QUESTION_MARK);
+    });
+    
+    it(`modifier() should return a plus (+) when peek() method returns a token of type of "plus" `, () => {
+        iter = new Iter([ { type: PLUS, index: 0, value: PLUS }]);
+        expect(iter.modifier()).toEqual(PLUS);
     });
 });
