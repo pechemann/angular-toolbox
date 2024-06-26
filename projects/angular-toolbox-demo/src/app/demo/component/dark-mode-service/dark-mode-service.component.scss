@@ -1,0 +1,14 @@
+::ng-deep {
+    .dark-mode {
+        background: navy !important;
+        color: #fff;
+
+        .text-dark {
+            color: #fff !important;
+        }
+
+        .text-muted {
+            color: #999 !important;
+        }
+    }
+}

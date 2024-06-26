@@ -7,7 +7,7 @@
  */
 
 import { DOCUMENT } from '@angular/common';
-import { Directive, ElementRef, HostListener, Inject, Input } from '@angular/core';
+import { Directive, ElementRef, HostListener, Inject, Input, NgZone } from '@angular/core';
 import { LINK_ROLE } from '../util';
 import { DEFAULT_SCROLL_BEHAVIOR } from '../util/default-scroll-behavior';
 import { Router } from '@angular/router';
@@ -16,9 +16,6 @@ import { Router } from '@angular/router';
 @Directive({
   selector: '[anchorLink]',
   standalone: true,
-  providers: [
-    Router
-  ]
 })
 export class AnchorLinklDirective {
 
@@ -28,12 +25,11 @@ export class AnchorLinklDirective {
   /**
    * @private
    */
-  @HostListener('click')
+  @HostListener('click', ['$event'])
   private onClick(event: MouseEvent): void {
     event.preventDefault();
     const HREF: string | undefined = this.href;
     if (!HREF) throw new ReferenceError("href attribute is not defined.");
-    this._document.defaultView.location.href = HREF;
     this._router.navigate([], { fragment: HREF.slice(1)});
     (this._document.querySelector(HREF) as HTMLElement).scrollIntoView(DEFAULT_SCROLL_BEHAVIOR);
   }
@@ -43,7 +39,8 @@ export class AnchorLinklDirective {
    */
   constructor(@Inject(DOCUMENT) private _document: any,
               private _elmRef: ElementRef,
-              private _router: Router) {
+              private _router: Router,
+              private _zone: NgZone) {
     const elm: HTMLElement = this._elmRef.nativeElement;
     elm.role = LINK_ROLE;
     elm.tabIndex = 0;

@@ -46,9 +46,11 @@ export class DocumentationComponent implements OnInit, OnDestroy {
         const cursor: number = segments.length;
         if (cursor === 1) {
           this.isHomePage = true;
-          this._breadcrumb.addItem(
-            this._breadcrumb.buildItem("Documentation")
-          );
+          setTimeout(()=> {
+            this._breadcrumb.addItem(
+              this._breadcrumb.buildItem("Documentation")
+            )
+          });
           return;
         }
         const path: string = segments.slice(1).join("/");

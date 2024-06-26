@@ -1,8 +1,7 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { DarkModeService, SubscriptionService } from 'angular-toolbox';
+import { Component } from '@angular/core';
+import { DarkModeService } from 'angular-toolbox';
 import { CodeWrapper } from '../../../ui/model/business/code-wrapper';
 import { BreadcrumbService } from '../../../ui/model/service/breadcrumb.service';
-import { DOCUMENT } from '@angular/common';
 import { DemoComponent } from '../../../ui/component/demo/demo.component';
 
 @Component({
@@ -13,11 +12,10 @@ import { DemoComponent } from '../../../ui/component/demo/demo.component';
   ],
   templateUrl: './dark-mode-service-bootstrap.component.html'
 })
-export class DarkModeServiceBootstrapComponent implements OnInit, OnDestroy {
+export class DarkModeServiceBootstrapComponent {
 
+  //--> Darkmode logic for this example is located in the AppComponent.
   constructor(public darkModeService: DarkModeService,
-              private _subscription: SubscriptionService,
-              @Inject(DOCUMENT) private _document: Document,
               breadcrumb: BreadcrumbService) {
     breadcrumb.removeAll()
               .addItem(breadcrumb.buildItem("Demo"))
@@ -32,22 +30,12 @@ export class DarkModeServiceBootstrapComponent implements OnInit, OnDestroy {
 
   constructor(public darkModeService: DarkModeService,
               @Inject(DOCUMENT) doc: Document) {
-    this.darkModeService.change.subscribe(
-        (isDarkMode: boolean)=> doc.body.setAttribute("data-bs-theme", isDarkMode ? 'dark' : 'light'))
-    );
+    this.setDarkmodeState(darkModeService.darkModeEnabled(), doc);
+    darkModeService.change.subscribe((isDarkMode: boolean)=> this.setDarkmodeState(isDarkMode, doc));
+  }
+  private setDarkmodeState(isDarkMode: boolean, doc: Document): void {
+    doc.body.setAttribute("data-bs-theme", isDarkMode ? 'dark' : 'light')
   }
 }`]
   };
-
-  public ngOnInit(): void {
-    this._subscription.register(this,
-      this.darkModeService.change.subscribe(
-        (isDarkMode: boolean)=> this._document.body.setAttribute("data-bs-theme", isDarkMode ? 'dark' : 'light'))
-    );
-  }
-
-  public ngOnDestroy(): void {
-    this.darkModeService.disableDarkMode();
-    this._subscription.clearAll(this);
-  }
 }
