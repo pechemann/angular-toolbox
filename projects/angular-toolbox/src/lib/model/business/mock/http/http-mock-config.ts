@@ -6,6 +6,7 @@
  * the LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
  */
 
+import { Uuid } from "../../../../util";
 import { HttpMockInterceptor } from "./http-mock-interceptor";
 
 /**
@@ -19,6 +20,11 @@ export interface HttpMockConfig {
      * @see https://url.spec.whatwg.org/#url
      */
     origin?: string;
+
+    /**
+     * The unique identifier for this HTTP mock config.
+     */
+    id?: Uuid;
 
     /**
      * The configuration of mocking strategies for each specific API.

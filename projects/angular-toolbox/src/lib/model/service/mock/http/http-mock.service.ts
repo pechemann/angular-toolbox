@@ -15,6 +15,7 @@ import { Key } from '../../../../framework/mock/http/path-to-regexp/model/key';
 import { TokenData } from '../../../../framework/mock/http/path-to-regexp/token-data';
 import { stringToTokenData } from '../../../../framework/mock/http/path-to-regexp/string-to-token-data';
 import { DEFAULT_DELIMITER } from '../../../../framework/mock/http/path-to-regexp/constants';
+import { Uuid } from '../../../../util';
 
 interface HttpMockEndpointStorage {
   methodMock: HttpMethodMock;
@@ -29,12 +30,15 @@ export class HttpMockService {
 
   private _configList: Map<string, Map<string, HttpMockEndpointStorage[]>> = new Map<string, Map<string, HttpMockEndpointStorage[]>>();
 
-  public setConfig(config: HttpMockConfig): void {
+  public addConfig(config: HttpMockConfig): void {
     const origin: string | undefined = config.origin;
+    if (!config.id) config.id = Uuid.build();
     config.interceptors.forEach((interceptor: HttpMockInterceptor) => this.extractConfig(interceptor, origin) );
   }
 
-  public clearConfig(): void {
+  public removeConfig(id: Uuid): void { }
+
+  public clearConfigs(): void {
     this._configList.clear();
   }
 

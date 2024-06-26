@@ -24,11 +24,11 @@ export const HttpForwardProxy: Function = (config: any): Function=> {
         const ngOnInit = constructor.prototype.ngOnInit;
         const ngOnDestroy = constructor.prototype.ngOnDestroy;
         constructor.prototype.ngOnInit = function() {
-            getMockService(this).setConfig(config);
+            getMockService(this).addConfig(config);
             ngOnInit.call(this);
         };
         constructor.prototype.ngOnDestroy = function() {
-            getMockService(this).clearConfig();
+            getMockService(this).clearConfigs();
             ngOnDestroy.call(this);
         };
     };

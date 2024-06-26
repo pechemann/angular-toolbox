@@ -37,7 +37,9 @@ export class IconListService {
       { label: "ButtonRole Directive",  urlTree: ['/resources', 'documentation'] },
       { label: "Version Service",  urlTree: ['/resources', 'documentation'] },
       { label: "Scroll Service",  urlTree: ['/resources', 'documentation'] },
-      { label: "Uuid Class",  urlTree: ['/resources', 'documentation', 'uuid'] }
+      { label: "AppBridge Service",  urlTree: ['/resources', 'documentation'] },
+      { label: "Uuid Class",  urlTree: ['/resources', 'documentation', 'uuid-class'] },
+      { label: "Destroyable Interface",  urlTree: ['/resources', 'documentation', 'destroyable-interface'] }
     ];
   }
 }

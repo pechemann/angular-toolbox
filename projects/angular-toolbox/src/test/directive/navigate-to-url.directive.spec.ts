@@ -7,8 +7,8 @@
  */
 
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { NavigateToUrlDirective } from "../../public-api";
-import { NavigateToUrlDirectiveNoHrefTestComponent, NavigateToUrlDirectiveTestComponent } from "./navigate-to-url-test.util";
+import { LINK_ROLE, NavigateToUrlDirective } from "../../public-api";
+import { NavigateToUrlDirectiveTestComponent } from "./navigate-to-url-test.util";
 
 describe('NavigateToUrlDirective', () => {
   
@@ -36,8 +36,8 @@ describe('NavigateToUrlDirective', () => {
     expect(decoratedElm.hasAttribute("role")).toBe(true);
   });
 
-  it('should create a "role" atribute set to "button"', () => {
-    expect(decoratedElm.getAttribute("role")).toBe("button");
+  it('should create a "role" atribute set to "link"', () => {
+    expect(decoratedElm.getAttribute("role")).toBe(LINK_ROLE);
   });
 
   it('should create a "tabIndex" atribute on the decorated HTML element', () => {

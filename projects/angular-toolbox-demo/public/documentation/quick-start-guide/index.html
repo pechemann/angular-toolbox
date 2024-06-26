@@ -2,10 +2,10 @@
     <aside class="w-100">
         <h5 class="mb-4">On this page</h5>
         <ul class="list-group">
-            <li class="list-group-item"><a rel="noopener">Prerequisites</a></li>
-            <li class="list-group-item"><a rel="noopener">Install</a></li>
-            <li class="list-group-item"><a rel="noopener">Usage</a></li>
-            <li class="list-group-item"><a rel="noopener">Running Tests</a></li>
+            <li class="list-group-item"><a href="#prerequisites" onclick="appBridge.goToAnchor(event)">Prerequisites</a></li>
+            <li class="list-group-item"><a href="#install" onclick="appBridge.goToAnchor(event)">Install</a></li>
+            <li class="list-group-item"><a href="#usage" onclick="appBridge.goToAnchor(event)">Usage</a></li>
+            <li class="list-group-item"><a href="#running-tests" onclick="appBridge.goToAnchor(event)">Running Tests</a></li>
         </ul>
     </aside>
 </div>
@@ -24,7 +24,7 @@
 
 
 <div class="col-xl-9">
-    <h3>Prerequisites</h3>
+    <h3 id="prerequisites">Prerequisites</h3>
     <p>
         The <em class="lib-name">Angular Toolbox</em> library is built on top of the 
         <a href="https://angular.dev/" title="Angular">Angular</a> framework.
@@ -40,13 +40,13 @@
 "@angular/core"
 "@angular/platform-browser"
 "@angular/router"</code></pre>
-    <h3>Install</h3>
+    <h3 id="install">Install</h3>
     <p>
         <em class="lib-name">Angular Toolbox</em> is available for download at npm.
     </p>
     <pre><code class="language-bash">$cd &lt;YOUR-PROJECT-NAME&gt;
 $npm install angular-toolbox</code></pre>
-    <h3>Usage</h3>
+    <h3 id="usage">Usage</h3>
     <p>
         Each utility can be imported individually so that you only bundle what you use.
     </p>
@@ -62,7 +62,7 @@ export class CustomComponent {
     
     constructor(darkModeService: DarkModeService) {}
 }</code></pre>
-    <h3>Running Tests</h3>
+    <h3 id="running-tests">Running Tests</h3>
     <p>
         <em class="lib-name">Angular Toolbox</em> unit testing is the process of testing all pieces of code provided with the library.
     </p>

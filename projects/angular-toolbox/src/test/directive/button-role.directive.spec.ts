@@ -7,7 +7,7 @@
  */
 
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ButtonRoleDirective } from "../../public-api";
+import { BUTTON_ROLE, ButtonRoleDirective } from "../../public-api";
 import { Router, RouterModule } from "@angular/router";
 import { ButtonRoleDirectiveTestComponent, ButtonRoleDirectiveWithDelegationTestComponent, ButtonRoleDirectiveWithRouterLinkTestComponent, Key, TEST_ITEM } from "./button-role-directive-test.util";
 
@@ -39,7 +39,7 @@ describe('ButtonRoleDirective', () => {
     });
     
     it('should create a "role" atribute set to "button"', () => {
-        expect(decoratedElm.getAttribute("role")).toBe("button");
+        expect(decoratedElm.getAttribute("role")).toBe(BUTTON_ROLE);
     });
     
     it('should create a "tabIndex" atribute on the decorated HTML element', () => {

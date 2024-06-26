@@ -13,6 +13,10 @@ const routes: Routes = [
   {
     path: "documentation/:id",
     loadComponent: () => import('./component/documentation/documentation.component').then(mod => mod.DocumentationComponent)
+  },
+  {
+    path: "documentation/:id/:page",
+    loadComponent: () => import('./component/documentation/documentation.component').then(mod => mod.DocumentationComponent)
   }
 ];
 

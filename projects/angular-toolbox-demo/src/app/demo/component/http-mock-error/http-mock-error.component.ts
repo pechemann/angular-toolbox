@@ -28,7 +28,7 @@ export class HttpMockErrorComponent implements OnDestroy {
     breadcrumb.removeAll()
               .addItem(breadcrumb.buildItem("Demo"))
               .addItem(breadcrumb.buildItem("HTTP Mock Error"));
-    this._httpMockService.setConfig(config);
+    this._httpMockService.addConfig(config);
   }
 
   public title: string = "HTTP Mock Error Demo";
@@ -136,7 +136,7 @@ export class AppModule {
 
   constructor(httpMockService: HttpMockService) {
     //--> HTTP mock config initialization
-    httpMockService.setConfig(config);
+    httpMockService.addConfig(config);
   }
 }`,
 `/////////////////////////
@@ -181,6 +181,7 @@ export const getTodo = (params: any): Todo => {
   }
   
   public ngOnDestroy(): void {
+    this._httpMockService.clearConfigs();
     this._subscription.clearAll(this);
   }
 }

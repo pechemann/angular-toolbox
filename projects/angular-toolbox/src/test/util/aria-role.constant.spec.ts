@@ -6,11 +6,15 @@
  * found in the LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
  */
 
-import { BUTTON_ROLE } from '../../public-api';
+import { BUTTON_ROLE, LINK_ROLE } from '../../public-api';
 
-describe('BUTTON_ROLE', () => {
+describe('Aria Roles', () => {
   
   it('BUTTON_ROLE should be "button"', () => {
     expect(BUTTON_ROLE).toEqual('button');
+  });
+  
+  it('LINK_ROLE should be "link"', () => {
+    expect(LINK_ROLE).toEqual('link');
   });
 });
