@@ -34,7 +34,7 @@ export class DarkModeServiceBootstrapComponent {
     darkModeService.change.subscribe((isDarkMode: boolean)=> this.setDarkmodeState(isDarkMode, doc));
   }
   private setDarkmodeState(isDarkMode: boolean, doc: Document): void {
-    doc.body.setAttribute("data-bs-theme", isDarkMode ? 'dark' : 'light')
+    doc.body.setAttribute("data-bs-theme", isDarkMode ? 'dark' : 'light');
   }
 }`]
   };

@@ -1,3 +1,26 @@
-header a img {
-    margin-right: 10px;
+header {
+    figure {
+        margin-right: 10px;
+        display: inline;
+    }
+}
+
+details {
+    ul {
+        right: 0;
+        top: 30px;
+        list-style: none;
+        width: max-content;
+        svg {
+            display: block;
+        }
+    }
+
+    li {
+        padding: 3px 6px;
+    }
+
+    summary {
+        list-style: none;
+    }
 }
