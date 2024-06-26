@@ -36,7 +36,8 @@ export class IconListService {
       { label: "Dark Mode Service",  urlTree: ['/resources', 'documentation'] },
       { label: "ButtonRole Directive",  urlTree: ['/resources', 'documentation'] },
       { label: "Version Service",  urlTree: ['/resources', 'documentation'] },
-      { label: "Scroll Service",  urlTree: ['/resources', 'documentation'] }
+      { label: "Scroll Service",  urlTree: ['/resources', 'documentation'] },
+      { label: "Uuid Class",  urlTree: ['/resources', 'documentation', 'uuid'] }
     ];
   }
 }

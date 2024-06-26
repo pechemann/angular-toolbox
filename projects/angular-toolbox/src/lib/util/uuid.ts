@@ -8,6 +8,7 @@
 
 import { EMPTY_STRING } from "./empty-string.const";
 import { IntegrityError } from "../core/error";
+import { Destroyable } from "../model";
 
 /**
  * @private
@@ -19,7 +20,7 @@ const VALIDATOR: RegExp = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9
  * A class that represents an immutable universally unique identifier (UUID).
  * This class is not available in workers. 
  */
-export class Uuid {
+export class Uuid implements Destroyable {
 
     /**
      * @private
@@ -94,5 +95,12 @@ export class Uuid {
      */
     public static validate(uuid: string): boolean {
         return VALIDATOR.test(uuid);
+    }
+
+    /**
+     * Makes this `Uuid` instance elligible for garbage collection.
+     */
+    public destroy(): void {
+        Uuid._hash = Uuid._hash.replace(this._uuid, EMPTY_STRING); 
     }
 }

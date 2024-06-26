@@ -58,4 +58,11 @@ describe('Uuid', () => {
     const uuid = Uuid.fromString(randomUUID);
     expect(uuid.toString()).toEqual(randomUUID);
   });
+  
+  it('destroy() should remove the UUID reference from the system', () => {
+    const randomUUID: string = crypto.randomUUID();
+    const uuid = Uuid.fromString(randomUUID);
+    uuid.destroy();
+    expect(()=> Uuid.fromString(randomUUID)).not.toThrow();
+  });
 });
