@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IconListService } from '../../model/service/icon-list-list.service';
+import { IconListService } from '../../ui/model/service/icon-list-list.service';
 import { BreadcrumbService } from '../../ui/model/service/breadcrumb.service';
 import { RouterModule } from '@angular/router';
 import { GitSectionComponent } from '../../ui/component/git-section/git-section.component';

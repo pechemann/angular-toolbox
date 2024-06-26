@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IconListItem } from '../../ui/model/business/icon-list-item';
+import { IconListItem } from '../business/icon-list-item';
 
 @Injectable({
   providedIn: 'root'

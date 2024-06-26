@@ -1,11 +1,11 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BreadcrumbService } from '../../../ui/model/service/breadcrumb.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EMPTY_STRING, HttpMockService, SafeHtmlPipe, SubscriptionService, VersionService } from 'angular-toolbox';
 import { ActivatedRoute, UrlSegment } from '@angular/router';
 import { HighlightService } from '../../../ui/model/service/highlight.service';
 import { IconListComponent } from '../../../ui/component/icon-list/icon-list.component';
-import { IconListService } from '../../../model/service/icon-list-list.service';
+import { IconListService } from '../../../ui/model/service/icon-list-list.service';
 import { HttpForwardProxy } from 'projects/angular-toolbox/src/lib/framework/mock/http/proxy';
 import { DOCUMENTATION_PROXY_CONFIG } from '../../proxy/documentation-proxy.config';
 import { BreadcrumbItem } from '../../../ui/model/business/breadcrumb-item';
