@@ -35,6 +35,8 @@ export class IconListService {
       { label: "Subscription Service",  urlTree: ['/resources', 'documentation'] },
       { label: "Dark Mode Service",  urlTree: ['/resources', 'documentation'] },
       { label: "ButtonRole Directive",  urlTree: ['/resources', 'documentation'] },
+      { label: "AnchorLink Directive",  urlTree: ['/resources', 'documentation'] },
+      { label: "NavigateToUrlDirective Directive",  urlTree: ['/resources', 'documentation'] },
       { label: "Version Service",  urlTree: ['/resources', 'documentation'] },
       { label: "Scroll Service",  urlTree: ['/resources', 'documentation'] },
       { label: "AppBridge Service",  urlTree: ['/resources', 'documentation'] },

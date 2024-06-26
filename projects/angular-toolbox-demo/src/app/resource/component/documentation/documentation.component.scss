@@ -1,4 +1,7 @@
 ::ng-deep {
+    object {
+        display: none;
+    }
     .documentation {
         h3:not(:first-child) {
             margin-top: 3.5rem;

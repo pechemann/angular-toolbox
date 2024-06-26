@@ -9,7 +9,6 @@ import { IconListService } from '../../../ui/model/service/icon-list-list.servic
 import { HttpForwardProxy } from 'projects/angular-toolbox/src/lib/framework/mock/http/proxy';
 import { DOCUMENTATION_PROXY_CONFIG } from '../../proxy/documentation-proxy.config';
 import { BreadcrumbItem } from '../../../ui/model/business/breadcrumb-item';
-import { AppBrigeService } from 'projects/angular-toolbox/src/public-api';
 
 @HttpForwardProxy(DOCUMENTATION_PROXY_CONFIG) 
 @Component({
@@ -27,11 +26,11 @@ export class DocumentationComponent implements OnInit, OnDestroy {
   protected page!: string;
   protected isHomePage: boolean = false;
 
-  constructor(private _breadcrumb: BreadcrumbService,
-              public versionService: VersionService,
+  constructor(public versionService: VersionService,
               public iconListService: IconListService,
+              //--> HttpMockService sideclared only for @HttpForwardProxy reference:
               private _httpMockService: HttpMockService,
-              private _appBrigeService: AppBrigeService,
+              private _breadcrumb: BreadcrumbService,
               private _http: HttpClient,
               private _subsciptionService: SubscriptionService,
               private _route : ActivatedRoute,
@@ -52,7 +51,6 @@ export class DocumentationComponent implements OnInit, OnDestroy {
           );
           return;
         }
-        
         const path: string = segments.slice(1).join("/");
         let endpoint: string;
         if (cursor === 2) endpoint = `${origin}/${path}/index.html`;
@@ -62,7 +60,7 @@ export class DocumentationComponent implements OnInit, OnDestroy {
             this.page = data;
             setTimeout(()=> {
               this._highlightService.highlightAll();
-              this.builBbreadcrumb(segments);
+              this.builBbreadcrumb();
             })
           })
         )
@@ -74,13 +72,20 @@ export class DocumentationComponent implements OnInit, OnDestroy {
     this._subsciptionService.clearAll(this);
   }
 
-  private builBbreadcrumb(segments: UrlSegment[]): void {
-    console.log(segments)
+  private builBbreadcrumb(): void {
+    const rootPath: string = "resources/documentation";
     const breadcrumbItemList: BreadcrumbItem[] = [
-      this._breadcrumb.buildItem("Documentation", "resources/documentation")
+      this._breadcrumb.buildItem("Documentation", rootPath)
     ];
-    const titleElm: HTMLHeadingElement | null = document.querySelector("h2");
-    if (titleElm) breadcrumbItemList.push(this._breadcrumb.buildItem(titleElm.textContent as any));
+    const navigationTree: HTMLObjectElement | null = document.querySelector("#navigation-tree");
+    if (navigationTree && navigationTree?.dataset["tree"]) {
+      const dataSet: any[] = eval(navigationTree.dataset["tree"]);
+      dataSet.forEach((item)=> {
+        const itemPath: string = item.path;
+        const path: string | undefined = itemPath ? `${rootPath}/${itemPath}` : undefined;
+        breadcrumbItemList.push(this._breadcrumb.buildItem(item.label, path))
+      });
+    }
     breadcrumbItemList.forEach(item=> this._breadcrumb.addItem(item));
   }
 }
