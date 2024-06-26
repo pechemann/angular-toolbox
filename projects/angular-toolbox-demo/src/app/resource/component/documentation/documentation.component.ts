@@ -1,17 +1,19 @@
-import { Component, OnDestroy, OnInit, isDevMode } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BreadcrumbService } from '../../../ui/model/service/breadcrumb.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { EMPTY_STRING, HttpMockService, SafeHtmlPipe, SubscriptionService, VersionService, httpResponseMock } from 'angular-toolbox';
-import { ActivatedRoute, RouterModule, UrlSegment } from '@angular/router';
+import { EMPTY_STRING, HttpMockService, SafeHtmlPipe, SubscriptionService, VersionService } from 'angular-toolbox';
+import { ActivatedRoute, UrlSegment } from '@angular/router';
 import { HighlightService } from '../../../ui/model/service/highlight.service';
 import { IconListComponent } from '../../../ui/component/icon-list/icon-list.component';
 import { IconListService } from '../../../model/service/icon-list-list.service';
+import { HttpForwardProxy } from 'projects/angular-toolbox/src/lib/framework/mock/http/proxy';
+import { DOCUMENTATION_PROXY_CONFIG } from '../../proxy/documentation-proxy.config';
 
+@HttpForwardProxy(DOCUMENTATION_PROXY_CONFIG) 
 @Component({
   selector: 'app-documentation',
   standalone: true,
   imports: [
-    RouterModule,
     SafeHtmlPipe,
     IconListComponent
   ],
@@ -26,35 +28,14 @@ export class DocumentationComponent implements OnInit, OnDestroy {
   constructor(breadcrumb: BreadcrumbService,
               public versionService: VersionService,
               public iconListService: IconListService,
+              private _httpMockService: HttpMockService,
               private _http: HttpClient,
               private _subsciptionService: SubscriptionService,
               private _route : ActivatedRoute,
-              private _highlightService: HighlightService,
-              private _HttpMockService: HttpMockService) {
+              private _highlightService: HighlightService) {
     breadcrumb.removeAll()
               .addItem(breadcrumb.buildItem("Resources", "resources"))
               .addItem(breadcrumb.buildItem("Documentation"));
-    if (isDevMode()) {
-        this._HttpMockService.setConfig({
-        interceptors: [
-            {
-                id: "getDoc",
-                origin: "https://pascalechemann.com",
-                endpoints: [
-                    {
-                        route: "/angular-toolbox/documentation/*",
-                        get: {
-                            data: (req: any, params: any)=> {
-                              const headers: HttpHeaders = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
-                              return httpResponseMock().body(this._http.get(`http://localhost:4200/documentation/${params[0]}`, { headers, responseType: 'text'})).response();
-                            }
-                        }
-                    }
-                ]
-            }
-          ]
-      });
-    }
   }
 
   public ngOnInit(): void {
@@ -80,7 +61,6 @@ export class DocumentationComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this._HttpMockService.clearConfig();
     this._subsciptionService.clearAll(this);
   }
 }
