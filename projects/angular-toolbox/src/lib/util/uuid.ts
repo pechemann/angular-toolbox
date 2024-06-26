@@ -6,7 +6,7 @@
  * the LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
  */
 
-import { EMPTY_STRING } from ".";
+import { EMPTY_STRING } from "./empty-string.const";
 import { IntegrityError } from "../core/error";
 
 /**
