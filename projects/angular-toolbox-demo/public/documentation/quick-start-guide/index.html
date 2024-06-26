@@ -70,6 +70,16 @@ export class CustomComponent {
         Run the the unit testing suite with the <code>npm test</code> command:
     </p>
     <pre><code class="language-bash">$npm test</code></pre>
+
+    <h4>Test Troubles</h4>
+    <p>
+        Running test suites when the browser window is <em>minimized</em> can produce failures for tests involving 
+        GUI manipulation (eg. <code>SrcollService</code> test suite).
+    </p>
+    <div class="alert alert-success" role="alert">
+        This is not an <em class="lib-name">Angular Toolbox</em> issue and will be fixed by running
+        tests with the browser window <em>maximized</em>, or <em>reduced</em>.
+    </div>
 </div>
 
 <!-- We use a data object to store navigation tree structure-->
