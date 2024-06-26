@@ -28,7 +28,7 @@ export class DocumentationComponent implements OnInit, OnDestroy {
 
   constructor(public versionService: VersionService,
               public iconListService: IconListService,
-              //--> HttpMockService sideclared only for @HttpForwardProxy reference:
+              //--> HttpMockService is declared only for @HttpForwardProxy reference:
               private _httpMockService: HttpMockService,
               private _breadcrumb: BreadcrumbService,
               private _http: HttpClient,
