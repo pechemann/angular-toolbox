@@ -15,7 +15,7 @@
  */
 
 import { EMPTY_STRING } from "../../../../util";
-import { CARRET, DEFAULT_DELIMITER, DOLLAR } from "./constants";
+import { CARRET, DOLLAR } from "./constants";
 import { Encode } from "./model/encode";
 import { escapeRegexpString } from "./escape-to-regexp-string";
 import { Key } from "./model/key";

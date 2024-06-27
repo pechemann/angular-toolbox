@@ -9,6 +9,7 @@
 import { AfterViewInit, Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { BUTTON_ROLE } from '../util';
+import { NavigationDirectiveBase } from './navigation-directive-base';
 
 /**
  * @private
@@ -30,7 +31,7 @@ const ROUTER_LINK_REF: string = 'ng-reflect-router-link';
   ],
   standalone: true
 })
-export class ButtonRoleDirective<T> implements AfterViewInit {
+export class ButtonRoleDirective<T> extends NavigationDirectiveBase implements AfterViewInit {
 
   /**
    * Dispatches events when the user presses the "Enter" key.
@@ -71,18 +72,16 @@ export class ButtonRoleDirective<T> implements AfterViewInit {
   /**
    * @private
    */
-  constructor(private _elmRef: ElementRef,
+  constructor(elmRef: ElementRef,
               private _router: Router) {
-    const elm: HTMLElement = this._elmRef.nativeElement;
-    elm.role = BUTTON_ROLE;
-    elm.tabIndex = 0;
+    super(elmRef, BUTTON_ROLE);
   }
 
   /**
    * @private
    */
   public ngAfterViewInit(): void {
-    const elm: HTMLElement = this._elmRef.nativeElement;
+    const elm: HTMLElement = this.elmRef.nativeElement;
     this._routerLinkRef = elm.getAttribute(ROUTER_LINK_REF);
   }
 
@@ -96,7 +95,7 @@ export class ButtonRoleDirective<T> implements AfterViewInit {
       this._router.navigate([this._routerLinkRef]);
       return;
     }
-    this._elmRef.nativeElement.blur();
+    this.elmRef.nativeElement.blur();
     this.enter.emit(value);
   }
 }

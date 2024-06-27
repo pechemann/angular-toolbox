@@ -23,7 +23,7 @@ import { Key } from "./model/key";
 
 /**
  * @private
- * Convert a token into a regexp string (re-used for path validation).
+ * Returns a functon thar converts a token into a regexp string
  */
 export const toKeyRegexp: (stringify: Encode, delimiter: string)=> DecodeKeyToString = (stringify: Encode, delimiter: string): DecodeKeyToString => {
   const segmentPattern: string = `[^${escapeRegexpString(delimiter)}]+?`;

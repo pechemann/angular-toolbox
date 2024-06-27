@@ -11,13 +11,14 @@ import { Directive, ElementRef, HostListener, Inject, Input, NgZone } from '@ang
 import { LINK_ROLE } from '../util';
 import { DEFAULT_SCROLL_BEHAVIOR } from '../util/default-scroll-behavior';
 import { Router } from '@angular/router';
+import { NavigationDirectiveBase } from './navigation-directive-base';
 
 // NOT TESTED YET
 @Directive({
   selector: '[anchorLink]',
   standalone: true,
 })
-export class AnchorLinklDirective {
+export class AnchorLinklDirective extends NavigationDirectiveBase {
 
   @Input()
   public href!: string;
@@ -38,11 +39,9 @@ export class AnchorLinklDirective {
    * @private
    */
   constructor(@Inject(DOCUMENT) private _document: any,
-              private _elmRef: ElementRef,
+              elmRef: ElementRef,
               private _router: Router,
               private _zone: NgZone) {
-    const elm: HTMLElement = this._elmRef.nativeElement;
-    elm.role = LINK_ROLE;
-    elm.tabIndex = 0;
+    super(elmRef, LINK_ROLE);
   }
 }

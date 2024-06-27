@@ -9,12 +9,13 @@
 import { DOCUMENT } from '@angular/common';
 import { Directive, ElementRef, HostListener, Inject, Input } from '@angular/core';
 import { LINK_ROLE } from '../util';
+import { NavigationDirectiveBase } from './navigation-directive-base';
 
 @Directive({
   selector: '[navigateToUrl]',
   standalone: true
 })
-export class NavigateToUrlDirective {
+export class NavigateToUrlDirective extends NavigationDirectiveBase {
 
   @Input()
   public href!: string;
@@ -33,9 +34,7 @@ export class NavigateToUrlDirective {
    * @private
    */
   constructor(@Inject(DOCUMENT) private _document: any,
-              private _elmRef: ElementRef) {
-    const elm: HTMLElement = this._elmRef.nativeElement;
-    elm.role = LINK_ROLE;
-    elm.tabIndex = 0;
+              elmRef: ElementRef) {
+    super(elmRef, LINK_ROLE);
   }
 }
