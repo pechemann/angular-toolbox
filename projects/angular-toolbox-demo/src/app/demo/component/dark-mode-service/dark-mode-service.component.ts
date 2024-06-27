@@ -30,9 +30,9 @@ export class DarkModeServiceComponent implements OnDestroy {
     console.log(this._darkModeEnabled)
   }
 
-  public title: string = "Dark Mode Service Demo";
-  public presentation: string = "A lightweight service that provides <em>Dark Mode</em> implementation for your Angular application.";
-  public srcCode: CodeWrapper = {
+  protected title: string = "Dark Mode Service Demo";
+  protected presentation: string = "A lightweight service that provides <em>Dark Mode</em> implementation for your Angular application.";
+  protected srcCode: CodeWrapper = {
     html: [`<button (click)="darkModeService.toggleDarkMode()"> Toggle Dark Mode </button>`],
     css: [`.dark-mode {
     background: navy;

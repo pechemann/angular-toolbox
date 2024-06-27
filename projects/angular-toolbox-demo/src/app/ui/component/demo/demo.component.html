@@ -8,7 +8,18 @@
             <ng-container *ngTemplateOutlet="contentTemplateRef"></ng-container>
         </div>
     </section>
-    <h4 class="mb-4">Code</h4>
-    <src-viewport class="mb-4" [srcCode]="srcCode"></src-viewport>
-    <!--<h4 class="mb-4">Resources</h4>-->
+    @if (documentation) {
+        <section class="mb-4">
+            <h4 class="mb-4">Documentation</h4>
+            <p>
+                For more information about this feature, please read the documentation at:
+                <br>
+                <a class="icon-item mt-2" [routerLink]="documentation.commands" [title]="documentation.label">{{documentation.label}}</a>
+            </p>
+        </section>
+    }
+    <section>
+        <h4 class="mb-4">Code</h4>
+        <src-viewport class="mb-4" [srcCode]="srcCode"></src-viewport>
+    </section>
 </article>

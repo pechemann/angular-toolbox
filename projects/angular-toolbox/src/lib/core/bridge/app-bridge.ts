@@ -6,6 +6,7 @@
  * fthe LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
  */
 
+import { AppBridgeCommand } from "../../model/business/lang/app-bridge-command";
 import { AppBridgeError } from "../error";
 
 /**
@@ -19,7 +20,7 @@ export class AppBridge {
      * @private
      * Stores all commands registered by the `AppBridgeService` instance.
      */
-    private readonly _commandMap: Map<string, any> = new  Map<string, any>();
+    private readonly _commandMap: Map<string, AppBridgeCommand> = new  Map<string, AppBridgeCommand>();
 
     /**
      * Executes the command with the specified `name` parameter.
@@ -28,7 +29,7 @@ export class AppBridge {
      * @param args The list of parmeters so be sent to the command.
      */
     public execute(name: string, ...args: any[]): void {
-        const command: any = this._commandMap.get(name);
+        const command: Function | undefined = this._commandMap.get(name);
         if (command) command.apply(null, args);
         else throw new AppBridgeError(`Invalid AppBridge command: method width name '${name}' does not exist.`);
     }
@@ -39,7 +40,7 @@ export class AppBridge {
      * @param name The name of the command to register.
      * @param command The command to register.
      */
-    public addCommand(name: string, command: any): void {
+    public addCommand(name: string, command: AppBridgeCommand): void {
         this._commandMap.set(name, command);
     }
     
@@ -62,7 +63,18 @@ export class AppBridge {
      * @returns Returns the command associated with the specified name.
      *          If no command is associated with the specified name, `undefined` is returned.
      */
-    public getCommand(name: string): any | undefined {
+    public getCommand(name: string): AppBridgeCommand | undefined {
         return this._commandMap.get(name);
+    }
+
+    /**
+     * Returns a boolean indicating whether a command with the specified name exists or not.
+     * 
+     * @param name The name of the command to retreive.
+     * 
+     * @returns Returns `true` whether the command exists; `false` otherwise.
+     */
+    public hasCommand(name: string): boolean {
+        return this._commandMap.has(name);
     }
 }

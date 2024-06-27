@@ -23,9 +23,9 @@ export class VersionServiceComponent {
               .addItem(breadcrumb.buildItem("Version Service"));
   }
 
-  public title: string = "Version Service Demo";
-  public presentation: string = "A lightweight service that provides Semantic Versionning implementation for your Angular projects.";
-  public srcCode: CodeWrapper = {
+  protected title: string = "Version Service Demo";
+  protected presentation: string = "A lightweight service that provides Semantic Versionning implementation for your Angular projects.";
+  protected srcCode: CodeWrapper = {
     html: [`<p>Current Angular Toolbox Version: {{ versionService.getVersion().toString() }}</p>
 <p>Build Release Date: {{ versionService.getBuildTimestamp() | date }}</p>`],
     typescript: [`/////////////////////////

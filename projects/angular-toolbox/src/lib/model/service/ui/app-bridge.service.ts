@@ -11,6 +11,9 @@ import { Injectable, NgZone, Inject } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { DEFAULT_SCROLL_BEHAVIOR } from '../../../util/default-scroll-behavior';
 import { AppBridge } from '../../../core/bridge/app-bridge';
+import { AppBridgeError } from '../../../core';
+import { BrowsingContext } from '../../../util';
+import { AppBridgeCommand } from '../../business/lang/app-bridge-command';
 
 /**
  * @private
@@ -23,7 +26,13 @@ export const APP_PRIDGE_REF: string = "appBridge";
 const HREF: string = "href";
 
 /**
- * 
+ * @private
+ */
+const NATIVE_COMMANDS: string = "navigate|goToAnchor|setLocation|open|declareCommand|deleteCommand|getCommand";
+
+/**
+ * @unstable Not tested yet.
+ * A utility service that allows HTML fragments dynamically loaded, to interact with the Angular application.
  */
 @Injectable({
     providedIn: 'root'
@@ -37,6 +46,7 @@ export class AppBrigeService {
 
     /**
      * @private
+     * Thereference to the command invoker.
      */
     private readonly _appBridge: AppBridge;
 
@@ -51,13 +61,29 @@ export class AppBrigeService {
         if(!this._defaultView[APP_PRIDGE_REF]) this._defaultView[APP_PRIDGE_REF] = this;
     }
 
+    /**
+     * Provides the ability to invoke the `navigate()` method of the Angular app router.
+     * 
+     * @unstable Not tested yet.
+     * @param commands The commands array as specified by the Angular router `navigate()` method.
+     * @param extras The navigation options as specified by the Angular router `navigate()` method.
+     */
     public navigate(commands: string[], extras?: NavigationExtras | undefined): void {
         this._zone.run(() => {
             return this._router.navigate(commands, extras);
         });
     }
 
-    public goToAnchor(event: MouseEvent): void {
+    /**
+     * Allows to scroll to the fragment specified by the `href attribute` when the user element interact with the associated element.
+     * 
+     * @example
+     * <a href="#myAnchor" onclick="appBridge.goToAnchor(event)">My Section</a></code>
+     * 
+     * @unstable Not tested yet.
+     * @param event The event that triggers the anchor navigation.
+     */
+    public goToAnchor(event: Event): void {
         event.preventDefault();
         const anchor: string = (event.target as any).getAttribute(HREF);
         if (!anchor) return;
@@ -67,28 +93,79 @@ export class AppBrigeService {
         (document.querySelector(anchor) as HTMLElement).scrollIntoView(DEFAULT_SCROLL_BEHAVIOR);
     }
 
-    public setLocation(uri: string): void {
-        this._defaultView.location.href = uri;
+    /**
+     * Replaces the current page location with the specified URL string;
+     * 
+     * @unstable Not tested yet.
+     * @param url The URL of the new page to navigate to.
+     */
+    public setLocation(url: string): void {
+        this._defaultView.location.href = url;
     }
 
-    public open(uri: string): void {
-        this._defaultView.open(uri, '_blank');
+    /**
+     * Loads a specified resource into a new or existing browsing context.
+     * 
+     * @unstable Not tested yet.
+     * @param url A string indicating the URL or path of the resource to be loaded.
+     * @param target Specifyizs the name of the browsing context the resource is being loaded into. 
+     * @param windowFeatures A string containing parameters as specified by the `window.open()`
+     *                       specificaton: https://developer.mozilla.org/en-US/docs/Web/API/Window/open#windowfeatures
+     */
+    public open(url: string, target: BrowsingContext = '_blank', windowFeatures: any = undefined): void {
+        this._defaultView.open(url, target);
     }
 
-    public declareCommand(name: string, value: any): void {
-        if(!this._defaultView[APP_PRIDGE_REF][name]) {
-            this._defaultView[APP_PRIDGE_REF][name] = value;
+    /**
+     * Declares a new javascript command to be used with dynamically loaded documents.
+     * 
+     * @unstable Not tested yet.
+     * @param name The name of the command to declare.
+     * @param command The reference to a javascript command to be used with dynamically loaded documents.
+     */
+    public declareCommand(name: string, command: AppBridgeCommand): void {
+        this.checkCommandName(name);
+        if(!this._appBridge.hasCommand(name)) {
+            this._appBridge.addCommand(name, command);
+            Object.defineProperty(this, name, {
+                get: function() {
+                    return this._appBridge.getCommand(name);
+                },
+                writable: false,
+                configurable: false
+            });
         }
     }
     
-    public deleteCommand(name: string): void {   
-        if (this._defaultView[APP_PRIDGE_REF][name]) {
-            this._defaultView[APP_PRIDGE_REF][name] = null;
-            delete this._defaultView[APP_PRIDGE_REF][name];
-        }
+    /**
+     * Unregisters a javascript command previously referenced with the `declareCommand()` method.
+     * 
+     * @unstable Not tested yet.
+     * @param name The name of the command to remove.
+     */
+    public deleteCommand(name: string): void {
+        this.checkCommandName(name);
+        if(!this._appBridge.removeCommand(name)) return;
+        Object.defineProperty(this, name, {writable: false});
+        delete this._defaultView[APP_PRIDGE_REF][name];
     }
     
-    public getCommand(name: string): any | undefined {   
-        return this._defaultView[APP_PRIDGE_REF][name];
+    /**
+     * Returns the javascript command previously referenced with the `declareCommand()` method.
+     * 
+     * @unstable Not tested yet.
+     * @param name The name of the command to retreive.
+     * @returns The javascript command previously referenced with the specified `name` parameter.
+     *          If no command is found, returns `undefined`.
+     */
+    public getCommand(name: string): AppBridgeCommand | undefined {   
+        return this._appBridge.getCommand(name);
+    }
+
+    /**
+     * @private
+     */
+    private checkCommandName(name: string): void {
+        if (NATIVE_COMMANDS.includes(name)) throw new AppBridgeError("Command name cannot be the reference to a native command: " + name);
     }
 }

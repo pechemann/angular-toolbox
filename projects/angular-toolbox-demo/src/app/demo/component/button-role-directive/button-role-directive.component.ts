@@ -29,9 +29,9 @@ export class ButtonRoleDirectiveComponent {
               .addItem(breadcrumb.buildItem("ButtonRole Directive"));
   }
 
-  public title: string = "ButtonRole Directive Demo";
-  public presentation: string = "An easy-to-use directive that enables keyboard navigation and provides support for keyboard <code>Enter</code> key events";
-  public srcCode: CodeWrapper = {
+  protected title: string = "ButtonRole Directive Demo";
+  protected presentation: string = "An easy-to-use directive that enables keyboard navigation and provides support for keyboard <code>Enter</code> key events";
+  protected srcCode: CodeWrapper = {
     html: [`...
 <tbody>
     @for (item of data; track item) {

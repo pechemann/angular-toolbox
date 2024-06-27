@@ -14,7 +14,7 @@ import { provideHttpClient } from '@angular/common/http';
     { provide: XhrFactory, useFactory: httpMockFactory },
     { provide: DARK_MODE_CONFIG, useValue: { detectBrowserSettings: false, storageKey: "angular-toolbox-dark-mode" } },
     //--> Angular Toolbox lib version
-    { provide: VERSION_CONFIG, useValue: { major: 0, minor: 1, patch: 4, buildTimestamp: 1718620817645 } },
+    { provide: VERSION_CONFIG, useValue: { major: 0, minor: 7, patch: 0, buildTimestamp: 1719486823542 } },
     provideHttpClient(),
   ],
   imports: [

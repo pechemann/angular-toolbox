@@ -7,6 +7,7 @@ import { SubscriptionService, HttpMockService } from 'angular-toolbox';
 import { DemoComponent } from '../../../ui/component/demo/demo.component';
 import { catchError, of } from 'rxjs';
 import { RouterModule } from '@angular/router';
+import { DocumentationLink } from '../../../ui/model/business/ducumentation-link';
 
 @Component({
   selector: 'app-http-mock-error',
@@ -31,9 +32,13 @@ export class HttpMockErrorComponent implements OnDestroy {
     this._httpMockService.addConfig(config);
   }
 
-  public title: string = "HTTP Mock Error Demo";
-  public presentation: string = "A lightweight service that provides Mocking strategies for developing HTTP-based components in your Angular projects.";
-  public srcCode: CodeWrapper = {
+  protected documentation: DocumentationLink = {
+    label: "Angular Toolbox HTTP Mocking Framework",
+    commands: ['/resources', 'documentation', 'http-mocking-framework']
+  };
+  protected title: string = "HTTP Mock Error Demo";
+  protected presentation: string = "A lightweight service that provides Mocking strategies for developing HTTP-based components in your Angular projects.";
+  protected srcCode: CodeWrapper = {
     html: [` <button role="button" (click)="loadData()">Load Data</button>
 
   @if (error) {

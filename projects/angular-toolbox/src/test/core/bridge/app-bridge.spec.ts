@@ -43,13 +43,22 @@ describe('AppBridge', () => {
     expect(invoker.removeCommand(commandRef.name)).toBeFalse();
   });
 
-  it('removeCommand() should return true the command reference whe it exists', () => {
+  it('removeCommand() should return true the command reference when it exists', () => {
     invoker.addCommand(commandRef.name, commandRef.action);
     expect(invoker.removeCommand(commandRef.name)).toBeTrue();
   });
 
   it('execute() should throw an excetion when the command does not exist', () => {
     expect(()=> invoker.execute(commandRef.name)).toThrow(new AppBridgeError("Invalid AppBridge command: method width name 'testCommand' does not exist."));
+  });
+
+  it('hasCommand() should return false wether the command with the specified name does not exist', () => {
+    expect(invoker.hasCommand(commandRef.name)).toBeFalse();
+  });
+
+  it('removeCommand() should return true wether the command with the specified name exists', () => {
+    invoker.addCommand(commandRef.name, commandRef.action);
+    expect(invoker.hasCommand(commandRef.name)).toBeTrue();
   });
 
   it('execute() should invoke the command when it exists', () => {

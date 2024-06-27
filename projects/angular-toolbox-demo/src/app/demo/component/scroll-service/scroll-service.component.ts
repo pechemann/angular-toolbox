@@ -22,14 +22,14 @@ export class ScrollServiceComponent implements OnInit, OnDestroy {
       .addItem(breadcrumb.buildItem("Dark Mode Service"));
   }
 
-  public title: string = "Scroll Service Demo";
-  public presentation: string = "A lightweight service that provides scrolling capabilities to your Angular application.";
-  public srcCode: CodeWrapper = {
+  protected title: string = "Scroll Service Demo";
+  protected presentation: string = "A lightweight service that provides scrolling capabilities to your Angular application.";
+  protected srcCode: CodeWrapper = {
     html: ["<div>Window scrollY position: {{ scrollY }}</div>"],
     typescript: ["this.scrollService.onScroll.subscribe((e)=> this.scrollY = (e.currentTarget as Window).scrollY);"]
   };
 
-  public scrollY: number = 0;
+  protected scrollY: number = 0;
 
   public ngOnInit(): void {
     this._subscription.register(this,

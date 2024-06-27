@@ -27,9 +27,9 @@ export class SubscriptionServiceComponent implements OnInit, OnDestroy {
               .addItem(breadcrumb.buildItem("Subscription Service"));
   }
 
-  public title: string = "Subscription Service Demo";
-  public presentation: string = "A lightweight service that provides easy-to-use functionalities for managing observable subscriptions.";
-  public srcCode: CodeWrapper = {
+  protected title: string = "Subscription Service Demo";
+  protected presentation: string = "A lightweight service that provides easy-to-use functionalities for managing observable subscriptions.";
+  protected srcCode: CodeWrapper = {
     html: [`<button type="button" class="btn btn-outline-primary" (click)="eventEmiter_1.emit('Event #1 - idx: ')">EventEmitter #1</button>
 <button type="button" class="btn btn-outline-primary" (click)="eventEmiter_2.emit('Event #2 - idx: ')">EventEmitter #2</button>
 <button type="button" (click)="ngOnDestroy()">Unsubscribe</button>

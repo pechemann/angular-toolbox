@@ -22,9 +22,9 @@ export class DarkModeServiceBootstrapComponent {
               .addItem(breadcrumb.buildItem("Dark Mode Service"));
   }
 
-  public title: string = "Dark Mode Service: Bootstrap Integration";
-  public presentation: string = "The following sample application shows how to easily integrate Bootstrap with the <code>DarkModeService</code> service.";
-  public srcCode: CodeWrapper = {
+  protected title: string = "Dark Mode Service: Bootstrap Integration";
+  protected presentation: string = "The following sample application shows how to easily integrate Bootstrap with the <code>DarkModeService</code> service.";
+  protected srcCode: CodeWrapper = {
     html: [`<button (click)="darkModeService.toggleDarkMode()"> Toggle Dark Mode </button>`],
     typescript: [`export class DarkModeServiceBootstrapComponent {
 
