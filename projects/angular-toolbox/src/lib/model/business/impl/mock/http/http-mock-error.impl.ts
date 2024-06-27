@@ -29,7 +29,7 @@ export class HttpMockErrorImpl implements HttpMockError {
      * @private
      */
     constructor(status: HttpStatusCode, statusText: string) {
-        if (status < HttpStatusCode.BadRequest) throw new RangeError("Error status must be equal to, or greater than 400.")
+        if (status < HttpStatusCode.BadRequest) throw new RangeError("Error status must be equal to, or greater than 400; current is: " + status);
         this.status = status;
         this.statusText = statusText;
     }
