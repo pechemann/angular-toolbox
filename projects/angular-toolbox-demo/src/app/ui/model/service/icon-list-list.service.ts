@@ -30,18 +30,18 @@ export class IconListService {
 
   public getDocumentationList(): IconListItem[] {
     return [
-      { label: "Quick Start Guide",  urlTree: ['/resources', 'documentation', 'quick-start-guide'] },
-      { label: "HTTP Mocking Framework",  urlTree: ['/resources', 'documentation', 'http-mocking-framework'] },
-      { label: "Subscription Service",  urlTree: ['/resources', 'documentation'] },
-      { label: "Dark Mode Service",  urlTree: ['/resources', 'documentation'] },
-      { label: "ButtonRole Directive",  urlTree: ['/resources', 'documentation'] },
-      { label: "AnchorLink Directive",  urlTree: ['/resources', 'documentation'] },
-      { label: "NavigateToUrlDirective Directive",  urlTree: ['/resources', 'documentation'] },
-      { label: "Version Service",  urlTree: ['/resources', 'documentation'] },
-      { label: "Scroll Service",  urlTree: ['/resources', 'documentation'] },
-      { label: "AppBridge Service",  urlTree: ['/resources', 'documentation', 'app-bridge-service'] },
-      { label: "Uuid Class",  urlTree: ['/resources', 'documentation', 'uuid-class'] },
-      { label: "Destroyable Interface",  urlTree: ['/resources', 'documentation', 'destroyable-interface'] }
+      { label: "Quick Start Guide", urlTree: ['/resources', 'documentation', 'quick-start-guide'] },
+      { label: "HTTP Mocking Framework", urlTree: ['/resources', 'documentation', 'http-mocking-framework'] },
+      { label: "Subscription Service", /*urlTree: ['/resources', 'documentation']*/ },
+      { label: "Dark Mode Service", /*urlTree: ['/resources', 'documentation']*/ },
+      { label: "ButtonRole Directive", /*urlTree: ['/resources', 'documentation']*/ },
+      { label: "AnchorLink Directive", /*urlTree: ['/resources', 'documentation']*/ },
+      { label: "NavigateToUrlDirective Directive", /*urlTree: ['/resources', 'documentation']*/ },
+      { label: "Version Service", /*urlTree: ['/resources', 'documentation']*/ },
+      { label: "Scroll Service", /*urlTree: ['/resources', 'documentation']*/ },
+      { label: "AppBridge Service", /*urlTree: ['/resources', 'documentation', 'app-bridge-service']*/ },
+      { label: "Uuid Class", /*urlTree: ['/resources', 'documentation', 'uuid-class']*/ },
+      { label: "Destroyable Interface", /*urlTree: ['/resources', 'documentation', 'destroyable-interface']*/ }
     ];
   }
 }
