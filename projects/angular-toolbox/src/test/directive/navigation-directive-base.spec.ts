@@ -7,13 +7,8 @@
  */
 
 import { NavigationDirectiveBase } from "../../lib/directive/navigation-directive-base";
-import { ElementRef } from "@angular/core";
 import { BUTTON_ROLE } from "../../public-api";
-
-class MockElementRef extends ElementRef {
-    constructor() { super(null); }
-    override nativeElement: any = {};
-};
+import { MockElementRef } from "./test-utils/mock-element-ref";
 
 describe('NavigationDirectiveBase', () => {
 

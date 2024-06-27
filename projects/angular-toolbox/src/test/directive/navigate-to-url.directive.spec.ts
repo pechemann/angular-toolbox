@@ -8,7 +8,7 @@
 
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { LINK_ROLE, NavigateToUrlDirective } from "../../public-api";
-import { NavigateToUrlDirectiveTestComponent } from "./navigate-to-url-test.util";
+import { NavigateToUrlDirectiveTestComponent } from "./test-utils/navigate-to-url-test.util";
 
 describe('NavigateToUrlDirective', () => {
   
