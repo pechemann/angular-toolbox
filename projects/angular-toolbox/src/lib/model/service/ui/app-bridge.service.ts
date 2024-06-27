@@ -12,7 +12,6 @@ import { NavigationExtras, Router } from '@angular/router';
 import { DEFAULT_SCROLL_BEHAVIOR } from '../../../util/default-scroll-behavior';
 import { AppBridge } from '../../../core/bridge/app-bridge';
 import { AppBridgeError } from '../../../core';
-import { BrowsingContext } from '../../../util';
 import { AppBridgeCommand } from '../../business/lang/app-bridge-command';
 
 /**
@@ -28,7 +27,7 @@ const HREF: string = "href";
 /**
  * @private
  */
-const NATIVE_COMMANDS: string = "navigate|goToAnchor|setLocation|open|declareCommand|deleteCommand|getCommand";
+const NATIVE_COMMANDS: string = "navigate|goToAnchor|declareCommand|deleteCommand|getCommand";
 
 /**
  * @unstable Not tested yet.
@@ -129,7 +128,7 @@ export class AppBrigeService {
      * Returns the JavaScript command previously referenced with the `declareCommand()` method.
      * 
      * @unstable Not tested yet.
-     * @param name The name of the command to retreive.
+     * @param name The name of the command to retrieve.
      * @returns The JavaScript command previously referenced with the specified `name` parameter.
      *          If no command is found, returns `undefined`.
      */

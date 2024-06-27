@@ -12,34 +12,24 @@
 </nav>
 
 <header class="fs-5 col-xl-9 mb-4">
-    <h2 class="mb-3"><code>AppBridge.declareCommand()</code> Method</h2>
+    <h2 class="mb-3"><code>AppBridge.deleteCommand()</code> Method</h2>
     <p>
-        The <code>AppBridge.declareCommand()</code> allows to register a new JavaScript commands to be used with dynamically loaded HTML documents.
+        The <code>AppBridge.deleteCommand()</code> allows to remove a JavaScript command
+        previously referenced with the <code>declareCommand()</code> method.
     </p>
     <hr class="mt-4">
 </header>
 
 <section class="col-xl-9 mb-4">
     <h3 id="presentation">Signature</h3>
-    <pre><code class="language-typescript">declareCommand(name: string, command: AppBridgeCommand): void</code></pre>
+    <pre><code class="language-typescript">deleteCommand(name: string): void</code></pre>
     <h5>Parameters</h5>
     <div class="border rounded p-3">
         <dl>
             <dt><code>name: string</code></dt>
             <dd>
                 <p>
-                    The name of the JavaScript command to declare.
-                </p>
-            </dd>
-        </dl>
-        <dl>
-            <dt><code>command: AppBridgeCommand</code></dt>
-            <dd>
-                <p>
-                    The reference to the JavaScript command to declare.
-                    <br>
-                    See <a href="javascript:appBridge.navigate(['resources/documentation/app-bridge-service/declare-command])"
-                           title="AppBridgeCommand"><code>AppBridgeCommand</code></a> interface.
+                    The name of the JavaScript command to remove.
                 </p>
             </dd>
         </dl>

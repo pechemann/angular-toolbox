@@ -12,55 +12,38 @@
 </nav>
 
 <header class="fs-5 col-xl-9 mb-4">
-    <h2 class="mb-3"><code>AppBridge.declareCommand()</code> Method</h2>
+    <h2 class="mb-3"><code>AppBridge.getCommand()</code> Method</h2>
     <p>
-        The <code>AppBridge.declareCommand()</code> allows to register a new JavaScript commands to be used with dynamically loaded HTML documents.
+        The <code>AppBridge.getCommand()</code> returns a JavaScript command
+        previously referenced with the <code>declareCommand()</code> method.
     </p>
     <hr class="mt-4">
 </header>
 
 <section class="col-xl-9 mb-4">
     <h3 id="presentation">Signature</h3>
-    <pre><code class="language-typescript">declareCommand(name: string, command: AppBridgeCommand): void</code></pre>
+    <pre><code class="language-typescript">getCommand(name: string): AppBridgeCommand | undefined</code></pre>
     <h5>Parameters</h5>
     <div class="border rounded p-3">
         <dl>
             <dt><code>name: string</code></dt>
             <dd>
                 <p>
-                    The name of the JavaScript command to declare.
-                </p>
-            </dd>
-        </dl>
-        <dl>
-            <dt><code>command: AppBridgeCommand</code></dt>
-            <dd>
-                <p>
-                    The reference to the JavaScript command to declare.
-                    <br>
-                    See <a href="javascript:appBridge.navigate(['resources/documentation/app-bridge-service/declare-command])"
-                           title="AppBridgeCommand"><code>AppBridgeCommand</code></a> interface.
+                    The name of the JavaScript command to retrieve.
                 </p>
             </dd>
         </dl>
     </div>
-    <h5 class="mt-3">Exeptions</h5>
+    <h5 class="mt-3">Returns</h5>
     <div class="border rounded p-3">
-        <dl>
-            <dt><code>AppBridgeError</code></dt>
-            <dd>
-                <p>
-                    Thrown if the <code>name</code> parameter refers to a native method:
-                    <ul>
-                        <li><code>navigate</code></li>
-                        <li><code>goToAnchor</code></li>
-                        <li><code>declareCommand</code></li>
-                        <li><code>deleteCommand</code></li>
-                        <li><code>getCommand</code></li>
-                    </ul>
-                </p>
-            </dd>
-        </dl>
+        <p>
+            The reference to the <code>AppBridgeCommand</code> associated with <code>name</code> parameter.
+            <br>
+            <code>undefined</code> wether no command is associated with <code>name</code> parameter.
+            <br>
+            See <a href="javascript:appBridge.navigate(['resources/documentation/app-bridge-service/declare-command])"
+                   title="AppBridgeCommand"><code>AppBridgeCommand</code></a> interface.
+        </p>
     </div>
 </section>
 

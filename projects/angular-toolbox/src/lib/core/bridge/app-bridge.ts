@@ -58,7 +58,7 @@ export class AppBridge {
     /**
      * Returns the command with the specified name.
      * 
-     * @param name The name of the command to retreive.
+     * @param name The name of the command to retrieve.
      * 
      * @returns Returns the command associated with the specified name.
      *          If no command is associated with the specified name, `undefined` is returned.
@@ -70,7 +70,7 @@ export class AppBridge {
     /**
      * Returns a boolean indicating whether a command with the specified name exists or not.
      * 
-     * @param name The name of the command to retreive.
+     * @param name The name of the command to retrieve.
      * 
      * @returns Returns `true` whether the command exists; `false` otherwise.
      */

@@ -2,9 +2,9 @@
     <section class="w-100">
         <h5 class="mb-4">On this page</h5>
         <ul class="list-group">
-            <li class="list-group-item"><a href="#presentation" onclick="appBridge.goToAnchor(event)" title="Presentation">Presentation</a></li>
+            <li class="list-group-item"><a href="#presentation" onclick="appBridge.goToAnchor(event)" title="motivation">Motivation</a></li>
             <li class="list-group-item"><a href="#api" onclick="appBridge.goToAnchor(event)" title="API">API</a></li>
-            <li class="list-group-item"><a href="#examles" onclick="appBridge.goToAnchor(event)" title="Examples">Examples</a></li>
+            <li class="list-group-item"><a href="#examples" onclick="appBridge.goToAnchor(event)" title="Examples">Examples</a></li>
         </ul>
     </section>
 </nav>
@@ -18,9 +18,24 @@
 </header>
 
 <section class="col-xl-9 mb-4">
-    <h3 id="presentation">Presentation</h3>
+    <h3 id="motivation">Motivation</h3>
     <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+        One common issue encountered with Angular is the difficult to deal with massive sets of HTML data.
+        The reason is that Angular has been designed to render components instead of HTML pages.
+        This is the core principle of <a href="https://developer.mozilla.org/en-US/docs/Glossary/SPA" title="SPA (Single-page application)">SPAs</a>.
+    </p>
+    <p>
+        The inclusion of dynamic HTML pages prevents the use of the framework features.
+        On the other hand, creating specific pages to access these features will significantly increase
+        the size of the bundle and/or the complexity of the application.
+    </p>
+    <p>
+        The goal of the <code>AppBridge</code> service is to solve these issues as much as possible.
+    </p>
+    <p>
+        This <em>Documentation</em> section is built on top of the <code>AppBridge</code> API.
+        It shows how to display an infinite number of static HTML pages without increasing the size
+        of your Angular application.
     </p>
 </section>
 
@@ -98,12 +113,38 @@
                 </button>
             </td>
           </tr>
+          <tr>
+            <th><code>deleteCommand()</code></th>
+            <td>
+                Removes a JavaScript command referenced with the <code>declareCommand()</code> method.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/app-bridge-service/delete-command'])" title="deleteCommand()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <th><code>getCommand()</code></th>
+            <td>
+                Returns returns a JavaScript command previously referenced with the <code>declareCommand()</code> method.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/app-bridge-service/get-command'])" title="getCommand()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
         </tbody>
       </table>
 </section>
 
 <section class="col-xl-9 mb-4">
-    <h3 id="examles">Examples</h3>
+    <h3 id="examples">Examples</h3>
 
     <h4>Using Native Commands</h4>
     <p>
