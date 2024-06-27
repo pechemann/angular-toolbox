@@ -16,7 +16,7 @@
        </p>
        <icon-list [itemList]="iconListService.getDocumentationList()"/>
     } @else {
-        <div [innerHTML]="page | safeHtml"></div>
+        <article [innerHTML]="page | safeHtml"></article>
     }
 </main>
     

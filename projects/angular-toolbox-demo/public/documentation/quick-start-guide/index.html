@@ -1,5 +1,5 @@
-<div class="page-menu col-xl-3 ps-4">
-    <aside class="w-100">
+<nav class="page-menu col-xl-3 ps-4">
+    <section class="w-100">
         <h5 class="mb-4">On this page</h5>
         <ul class="list-group">
             <li class="list-group-item"><a href="#prerequisites" onclick="appBridge.goToAnchor(event)">Prerequisites</a></li>
@@ -7,11 +7,11 @@
             <li class="list-group-item"><a href="#usage" onclick="appBridge.goToAnchor(event)">Usage</a></li>
             <li class="list-group-item"><a href="#running-tests" onclick="appBridge.goToAnchor(event)">Running Tests</a></li>
         </ul>
-    </aside>
-</div>
+    </section>
+</nav>
 
 
-<div class="fs-5 col-xl-9 mb-4">
+<header class="fs-5 col-xl-9 mb-4">
     <h2 class="mb-3">Angular Toolbox Quick Start Guide</h2>
     <p>
         <em class="lib-name">Angular Toolbox</em> is a library of lightweight utilities gathered  to solve recurring issues encountered by Angular apps developers.
@@ -20,10 +20,9 @@
         The library focuses on ease-of-use and robust test processes, to maintain quality over time.
     </p>
     <hr class="mt-4">
-</div>
+</header>
 
-
-<div class="col-xl-9">
+<section class="col-xl-9">
     <h3 id="prerequisites">Prerequisites</h3>
     <p>
         The <em class="lib-name">Angular Toolbox</em> library is built on top of the 
@@ -40,12 +39,18 @@
 "@angular/core"
 "@angular/platform-browser"
 "@angular/router"</code></pre>
+</section>
+
+<section class="col-xl-9">
     <h3 id="install">Install</h3>
     <p>
         <em class="lib-name">Angular Toolbox</em> is available for download at npm.
     </p>
     <pre><code class="language-bash">$cd &lt;YOUR-PROJECT-NAME&gt;
 $npm install angular-toolbox</code></pre>
+</section>
+
+<section class="col-xl-9">
     <h3 id="usage">Usage</h3>
     <p>
         Each utility can be imported individually so that you only bundle what you use.
@@ -62,6 +67,9 @@ export class CustomComponent {
     
     constructor(darkModeService: DarkModeService) {}
 }</code></pre>
+</section>
+
+<section class="col-xl-9">
     <h3 id="running-tests">Running Tests</h3>
     <p>
         <em class="lib-name">Angular Toolbox</em> unit testing is the process of testing all pieces of code provided with the library.
@@ -80,7 +88,7 @@ export class CustomComponent {
         This is not an <em class="lib-name">Angular Toolbox</em> issue and will be fixed by running
         tests with the browser window <em>maximized</em>, or <em>reduced</em>.
     </div>
-</div>
+</section>
 
 <!-- We use a data object to store navigation tree structure-->
 <object id="navigation-tree"
