@@ -1,0 +1,61 @@
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation/app-bridge-service'])" title="AppBridge Service">
+                    <code>AppBridge</code> Service
+                </a>
+            </li>
+        </ul>
+    </aside>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3"><code>AppBridge.navigate()</code> Method</h2>
+    <p>
+        The <code>AppBridge.navigate()</code> allows to invoke the <code>navigate()</code> method of the Angular app router
+        from an HTML page dynamically injected.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="presentation">Signature</h3>
+    <pre><code class="language-typescript">navigate(commands: string[], extras?: NavigationExtras | undefined): void</code></pre>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>commands: string[]</code></dt>
+            <dd>
+                <p>
+                    An array of URL fragments with which to construct the target URL.
+                </p>
+            </dd>
+        </dl>
+        <dl>
+            <dt><code>extras?: NavigationExtras | undefined</code></dt>
+            <dd>
+                <p>
+                    An options object that determines how the URL should be constructed or interpreted.
+                    <br>
+                    See <a href="https://angular.dev/api/router/NavigationExtras" title="NavigationExtras">https://angular.dev/api/router/NavigationExtras</a> for details.
+                </p>
+            </dd>
+        </dl>
+    </div>
+</section>
+
+
+<section class="col-xl-9 mb-4">
+    <h3 id="presentation">Usage</h3>
+    <figure>
+        <figcaption>External HTML page:</figcaption>
+        <pre><code class="language-html">&lt;a href="javascript:appBridge.navigate(['my', 'page'])"title="My Page"&gt;My Page&lt;/a&gt;</code></pre></figure>
+</section>
+
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'AppBridge Service', 'path': 'app-bridge-service' }, { 'label': 'AppBridge.navigate() method' }]">
+</object>

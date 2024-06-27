@@ -10,6 +10,12 @@ pre {
     color: #df3c4c;
 }
 
+.flex-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
 /* IconList component */
 .icon-list {
     padding-left: 0;

@@ -8,8 +8,7 @@ import { IconListItem } from '../../model/business/icon-list-item';
   imports: [
     RouterModule
   ],
-  templateUrl: './icon-list.component.html',
-  styleUrl: './icon-list.component.scss'
+  templateUrl: './icon-list.component.html'
 })
 export class IconListComponent {
 

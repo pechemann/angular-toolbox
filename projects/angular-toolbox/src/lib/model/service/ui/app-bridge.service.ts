@@ -55,8 +55,8 @@ export class AppBrigeService {
      */
     constructor(private _router: Router,
                 private _zone: NgZone,
-                @Inject(DOCUMENT) private _document: any) {
-        this._defaultView = this._document.defaultView;
+                @Inject(DOCUMENT) document: any) {
+        this._defaultView = document.defaultView;
         this._appBridge = new AppBridge();
         if(!this._defaultView[APP_PRIDGE_REF]) this._defaultView[APP_PRIDGE_REF] = this;
     }
@@ -94,29 +94,6 @@ export class AppBrigeService {
     }
 
     /**
-     * Replaces the current page location with the specified URL string;
-     * 
-     * @unstable Not tested yet.
-     * @param url The URL of the new page to navigate to.
-     */
-    public setLocation(url: string): void {
-        this._defaultView.location.href = url;
-    }
-
-    /**
-     * Loads a specified resource into a new or existing browsing context.
-     * 
-     * @unstable Not tested yet.
-     * @param url A string indicating the URL or path of the resource to be loaded.
-     * @param target Specifyizs the name of the browsing context the resource is being loaded into. 
-     * @param windowFeatures A string containing parameters as specified by the `window.open()`
-     *                       specificaton: https://developer.mozilla.org/en-US/docs/Web/API/Window/open#windowfeatures
-     */
-    public open(url: string, target: BrowsingContext = '_blank', windowFeatures: any = undefined): void {
-        this._defaultView.open(url, target);
-    }
-
-    /**
      * Declares a new javascript command to be used with dynamically loaded documents.
      * 
      * @unstable Not tested yet.
@@ -128,11 +105,10 @@ export class AppBrigeService {
         if(!this._appBridge.hasCommand(name)) {
             this._appBridge.addCommand(name, command);
             Object.defineProperty(this, name, {
+                configurable: true,
                 get: function() {
                     return this._appBridge.getCommand(name);
-                },
-                writable: false,
-                configurable: false
+                }
             });
         }
     }
@@ -146,7 +122,6 @@ export class AppBrigeService {
     public deleteCommand(name: string): void {
         this.checkCommandName(name);
         if(!this._appBridge.removeCommand(name)) return;
-        Object.defineProperty(this, name, {writable: false});
         delete this._defaultView[APP_PRIDGE_REF][name];
     }
     

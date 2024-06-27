@@ -39,7 +39,7 @@ export class IconListService {
       { label: "NavigateToUrlDirective Directive", /*urlTree: ['/resources', 'documentation']*/ },
       { label: "Version Service", /*urlTree: ['/resources', 'documentation']*/ },
       { label: "Scroll Service", /*urlTree: ['/resources', 'documentation']*/ },
-      { label: "AppBridge Service", /*urlTree: ['/resources', 'documentation', 'app-bridge-service']*/ },
+      { label: "AppBridge Service", urlTree: ['/resources', 'documentation', 'app-bridge-service'] },
       { label: "Uuid Class", /*urlTree: ['/resources', 'documentation', 'uuid-class']*/ },
       { label: "Destroyable Interface", /*urlTree: ['/resources', 'documentation', 'destroyable-interface']*/ }
     ];

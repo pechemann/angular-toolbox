@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BreadcrumbService } from '../../../ui/model/service/breadcrumb.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { HttpMockService, SafeHtmlPipe, SubscriptionService, VersionService } from 'angular-toolbox';
+import { HttpMockService, SafeHtmlPipe, SubscriptionService, VersionService, AppBrigeService } from 'angular-toolbox';
 import { ActivatedRoute, UrlSegment } from '@angular/router';
 import { HighlightService } from '../../../ui/model/service/highlight.service';
 import { IconListComponent } from '../../../ui/component/icon-list/icon-list.component';
@@ -34,7 +34,8 @@ export class DocumentationComponent implements OnInit, OnDestroy {
               private _http: HttpClient,
               private _subsciptionService: SubscriptionService,
               private _route : ActivatedRoute,
-              private _highlightService: HighlightService) {
+              private _highlightService: HighlightService,
+              private _appBridgService: AppBrigeService) {
     this._breadcrumb.removeAll().addItem(this._breadcrumb.buildItem("Resources", "resources"));
   }
 
@@ -68,9 +69,14 @@ export class DocumentationComponent implements OnInit, OnDestroy {
         )
       })
     );
+    this._appBridgService.declareCommand(
+      "showVersion",
+      ()=> window.alert(`Current Angular Toolbox is: ${this.versionService.getVersion().toString()}`)
+    );
   }
 
   public ngOnDestroy(): void {
+    this._appBridgService.deleteCommand("showVersion");
     this._subsciptionService.clearAll(this);
   }
 

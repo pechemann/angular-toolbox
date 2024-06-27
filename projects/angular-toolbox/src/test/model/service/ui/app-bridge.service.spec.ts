@@ -36,7 +36,7 @@ describe('AppBrigeService', () => {
         expect(service).toBeTruthy();
     });
 
-    it('should create an appBridge object on the defaultView default view', () => {
+    it('should create an appBridge object on the defaultView object', () => {
         expect(document.defaultView.appBridge).toBeTruthy();
     });
 
@@ -45,12 +45,4 @@ describe('AppBrigeService', () => {
         document.defaultView.appBridge.navigate(segment, extras);
         expect(router.navigate).toHaveBeenCalledWith(segment, extras);
     });*/
-    
-    it('should open a new window with the specified url', () => {
-        const url: string = "https://pascalechemann.com/angular-toolbox";
-        spyOn(window, 'open')
-        document.defaultView.appBridge.open(url);
-        expect(window.open).toHaveBeenCalledWith(url, '_blank');
-    });
-
 });
