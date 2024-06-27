@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
  */
 
-import { SubscriptionError } from '../../../../lib/core/error/subscription-error';
+import { SubscriptionError } from '../../../../../lib/core/error/subscription-error';
 import { OnDestroy } from '@angular/core';
 
 class FakeService implements OnDestroy {

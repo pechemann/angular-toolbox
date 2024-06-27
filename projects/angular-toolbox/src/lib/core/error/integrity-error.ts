@@ -7,6 +7,11 @@
  */
 
 /**
+ * @private
+ */
+const NAME: string = "IntegrityError";
+
+/**
  * Represents a data integrity violation error.
  */
 export class IntegrityError extends Error {
@@ -18,6 +23,6 @@ export class IntegrityError extends Error {
      */
     constructor(message: string) {
         super(message);
-        this.name = "IntegrityError";
+        this.name = NAME;
     }
 }

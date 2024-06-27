@@ -9,17 +9,15 @@
 /**
  * @private
  */
-const NAME: string = "SubscriptionError";
+const NAME: string = "AppBridgeError";
 
 /**
- * Represents errors thrown by `SubscriptionService` instances.
+ * Represents exceptions thrown by the `AppBridge` class.
  */
-export class SubscriptionError extends Error {
+export class AppBridgeError extends ReferenceError {
 
     /**
-     * Creates en new `SubscriptionService` instances.
-     * 
-     * @param message A human-readable description of the error.
+     * @private
      */
     constructor(message: string) {
         super(message);

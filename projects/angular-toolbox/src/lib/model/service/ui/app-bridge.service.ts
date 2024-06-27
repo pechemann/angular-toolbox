@@ -10,27 +10,44 @@ import { DOCUMENT } from '@angular/common';
 import { Injectable, NgZone, Inject } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { DEFAULT_SCROLL_BEHAVIOR } from '../../../util/default-scroll-behavior';
+import { AppBridge } from '../../../core/bridge/app-bridge';
 
 /**
  * @private
  */
-const APP_PRIDGE_REF: string = "appBridge";
+export const APP_PRIDGE_REF: string = "appBridge";
 
 /**
  * @private
- * This functionality is under development.
+ */
+const HREF: string = "href";
+
+/**
+ * 
  */
 @Injectable({
     providedIn: 'root'
 })
 export class AppBrigeService {
 
+    /**
+     * @private
+     */
     private readonly _defaultView: any;
 
+    /**
+     * @private
+     */
+    private readonly _appBridge: AppBridge;
+
+    /**
+     * @private
+     */
     constructor(private _router: Router,
                 private _zone: NgZone,
                 @Inject(DOCUMENT) private _document: any) {
         this._defaultView = this._document.defaultView;
+        this._appBridge = new AppBridge();
         if(!this._defaultView[APP_PRIDGE_REF]) this._defaultView[APP_PRIDGE_REF] = this;
     }
 
@@ -42,7 +59,7 @@ export class AppBrigeService {
 
     public goToAnchor(event: MouseEvent): void {
         event.preventDefault();
-        const anchor: string = (event.target as any).getAttribute("href");
+        const anchor: string = (event.target as any).getAttribute(HREF);
         if (!anchor) return;
         this._zone.run(() => {
            return this._router.navigate([], { fragment: anchor.slice(1)});
@@ -55,23 +72,23 @@ export class AppBrigeService {
     }
 
     public open(uri: string): void {
-        this._defaultView.open(uri, '_blank')
+        this._defaultView.open(uri, '_blank');
     }
 
-    public declareBridgeProp(name: string, value: any): void {   
+    public declareCommand(name: string, value: any): void {
         if(!this._defaultView[APP_PRIDGE_REF][name]) {
             this._defaultView[APP_PRIDGE_REF][name] = value;
         }
     }
     
-    public deleteBridgeProp(name: string): void {   
+    public deleteCommand(name: string): void {   
         if (this._defaultView[APP_PRIDGE_REF][name]) {
             this._defaultView[APP_PRIDGE_REF][name] = null;
             delete this._defaultView[APP_PRIDGE_REF][name];
         }
     }
     
-    public getProp(name: string): any {   
+    public getCommand(name: string): any | undefined {   
         return this._defaultView[APP_PRIDGE_REF][name];
     }
 }

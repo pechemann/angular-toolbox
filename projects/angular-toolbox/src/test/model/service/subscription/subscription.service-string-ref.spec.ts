@@ -9,7 +9,7 @@
 import { TestBed } from '@angular/core/testing';
 import { Observable, interval } from 'rxjs';
 import { SubscriptionService } from '../../../../lib/model';
-import { ILLEGAL_ACCESS_ERROR } from './subscription.service-test-util';
+import { ILLEGAL_ACCESS_ERROR } from './test-config/subscription.service-test-util';
 
 describe('SubscriptionService: string reference', () => {
   let service: SubscriptionService;
