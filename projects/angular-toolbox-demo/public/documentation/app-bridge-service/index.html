@@ -26,9 +26,30 @@
 
 <section class="col-xl-9 mb-4">
     <h3 id="api">API</h3>
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
-    </p>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Interface</th>
+            <th scope="col">Description</th>
+            <th scope="col">Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th><code>AppBridgeCommand</code></th>
+            <td>
+                The markup interface for all JavaScript commands consumed by the <code>AppBridge</code> service.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/app-bridge-service/app-bridge-command'])" title="AppBridgeCommand">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+        </tbody>
+    </table>
     <table class="table table-striped">
         <thead>
           <tr>
@@ -58,6 +79,19 @@
             </td>
             <td>
                 <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/app-bridge-service/go-to-anchor'])" title="goToAnchor()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <th><code>declareCommand()</code></th>
+            <td>
+                Declares a new JavaScript command to be used with dynamically injected HTML documents.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/app-bridge-service/declare-command'])" title="declareCommand()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
                         <use href="#linkIcon"/>
                     </svg>
@@ -96,9 +130,9 @@
         </div>
     </div>
 
-    <h4>Using Custom Commands</h4>
+    <h4>Creating Custom Commands</h4>
     <p>
-        The following sample code shows how to declare a javascript command that invokes the
+        The following sample code shows how to declare a JavaScript command that invokes the
         <code>VersionService</code> methods from an external HTML page:
     </p>
     <div class="card">
@@ -107,7 +141,7 @@
             <figure>
                 <figcaption>Angular component:</figcaption>
                 <pre><code class="language-typescript">public ngOnInit(): void {
-    this._appBridgService.declareCommand(
+    this.appBridgService.declareCommand(
         "showVersion",
         ()=> window.alert(`Current Angular Toolbox is: ${this.versionService.getVersion().toString()}`)
     );

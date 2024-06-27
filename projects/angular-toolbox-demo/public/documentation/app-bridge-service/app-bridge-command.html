@@ -1,0 +1,60 @@
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation/app-bridge-service'])" title="AppBridge Service">
+                    <code>AppBridge</code> Service
+                </a>
+            </li>
+        </ul>
+    </aside>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3"><code>AppBridgeCommand</code> Interface</h2>
+    <p>
+        The markup interface for all JavaScript commands consumed by the <code>AppBridge</code> service.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="presentation">Description</h3>
+    <p>
+        Developer can creates its own JavaScript methods to create unidirectional interactions from dynamically HTML documents and an Angular app.
+    </p>
+    <p>
+        Such a method is called a <em>Command</em>. The <code>AppBridgeCommand</code> interface simply defines the type of a JavaScript command.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="presentation">Signature</h3>
+    <pre><code class="language-typescript">type AppBridgeCommand = (...rest: any[])=> void;</code></pre>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>...rest: any[]</code></dt>
+            <dd>
+                <p>
+                    Optional liste of <em>user-defined</em> paramters passed to the command when it is invoked by the framework.
+                </p>
+            </dd>
+        </dl>
+    </div>
+</section>
+
+
+<section class="col-xl-9 mb-4">
+    <h3 id="presentation">Usage</h3>
+    <figure>
+        <figcaption>TypeScript file:</figcaption>
+        <pre><code class="language-typescript">const sayHello: AppBridgeCommand = (name: string): void => console.log(`Hello $&#123;name&#125;!`);</code></pre></figure>
+    <figure>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'AppBridge Service', 'path': 'app-bridge-service' }, { 'label': 'AppBridgeCommand interface' }]">
+</object>

@@ -94,11 +94,11 @@ export class AppBrigeService {
     }
 
     /**
-     * Declares a new javascript command to be used with dynamically loaded documents.
+     * Declares a new JavaScript command to be used with dynamically loaded documents.
      * 
      * @unstable Not tested yet.
      * @param name The name of the command to declare.
-     * @param command The reference to a javascript command to be used with dynamically loaded documents.
+     * @param command The reference to a JavaScript command to be used with dynamically loaded documents.
      */
     public declareCommand(name: string, command: AppBridgeCommand): void {
         this.checkCommandName(name);
@@ -114,7 +114,7 @@ export class AppBrigeService {
     }
     
     /**
-     * Unregisters a javascript command previously referenced with the `declareCommand()` method.
+     * Unregisters a JavaScript command previously referenced with the `declareCommand()` method.
      * 
      * @unstable Not tested yet.
      * @param name The name of the command to remove.
@@ -126,11 +126,11 @@ export class AppBrigeService {
     }
     
     /**
-     * Returns the javascript command previously referenced with the `declareCommand()` method.
+     * Returns the JavaScript command previously referenced with the `declareCommand()` method.
      * 
      * @unstable Not tested yet.
      * @param name The name of the command to retreive.
-     * @returns The javascript command previously referenced with the specified `name` parameter.
+     * @returns The JavaScript command previously referenced with the specified `name` parameter.
      *          If no command is found, returns `undefined`.
      */
     public getCommand(name: string): AppBridgeCommand | undefined {   

@@ -1,0 +1,67 @@
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation/app-bridge-service'])" title="AppBridge Service">
+                    <code>AppBridge</code> Service
+                </a>
+            </li>
+        </ul>
+    </aside>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3"><code>AppBridge.declareCommand()</code> Method</h2>
+    <p>
+        The <code>AppBridge.declareCommand()</code> allows to register a new JavaScript commands to be used with dynamically loaded HTML documents.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="presentation">Signature</h3>
+    <pre><code class="language-typescript">declareCommand(name: string, command: AppBridgeCommand): void</code></pre>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>name: string</code></dt>
+            <dd>
+                <p>
+                    The name of the JavaScript command to declare.
+                </p>
+            </dd>
+        </dl>
+        <dl>
+            <dt><code>command: AppBridgeCommand</code></dt>
+            <dd>
+                <p>
+                    The reference to the JavaScript command to declare.
+                    <br>
+                    See <a href="javascript:appBridge.navigate(['resources/documentation/app-bridge-service/declare-command])"
+                           title="AppBridgeCommand"><code>AppBridgeCommand</code> Interface</a>
+                </p>
+            </dd>
+        </dl>
+    </div>
+</section>
+
+
+<section class="col-xl-9 mb-4">
+    <h3 id="presentation">Usage</h3>
+    <figure>
+        <figcaption>Angular component:</figcaption>
+        <pre><code class="language-typescript">public ngOnInit(): void {
+    this.appBridgService.declareCommand(
+        "showVersion",
+        ()=> window.alert(`Current Angular Toolbox is: ${this.versionService.getVersion().toString()}`)
+    );
+}</code></pre></figure>
+    <figure>
+</section>
+
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'AppBridge Service', 'path': 'app-bridge-service' }, { 'label': 'AppBridge.declareCommand() method' }]">
+</object>
