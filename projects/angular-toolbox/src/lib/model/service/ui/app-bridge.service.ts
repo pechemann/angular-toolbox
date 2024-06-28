@@ -53,8 +53,8 @@ export class AppBrigeService {
      */
     constructor(private _router: Router,
                 private _zone: NgZone,
-                @Inject(DOCUMENT) document: any) {
-        this._defaultView = document.defaultView;
+                @Inject(DOCUMENT) private _document: any) {
+        this._defaultView = _document.defaultView;
         this._appBridge = new AppBridge();
         if(!this._defaultView[APP_PRIDGE_REF]) this._defaultView[APP_PRIDGE_REF] = this;
     }
@@ -62,33 +62,39 @@ export class AppBrigeService {
     /**
      * Provides the ability to invoke the `navigate()` method of the Angular app router.
      * 
-     * @unstable Not tested yet.
      * @param commands The commands array as specified by the Angular router `navigate()` method.
      * @param extras The navigation options as specified by the Angular router `navigate()` method.
+     * @return `Promise` that resolves to `true` when navigation succeeds, or `false` when navigation fails.
+     * 
+     * @see https://angular.dev/api/router/Router#navigate
      */
-    public navigate(commands: string[], extras?: NavigationExtras | undefined): void {
-        this._zone.run(() => {
+    public navigate(commands: string[], extras?: NavigationExtras | undefined): Promise<boolean> {
+        return this._zone.run(() => {
             return this._router.navigate(commands, extras);
         });
     }
 
     /**
-     * Allows to scroll to the fragment specified by the `href attribute` when the user element interact with the associated element.
+     * Allows to scroll to the fragment specified by the `href` attribute when the user element interact with the associated element.
      * 
      * @example
      * <a href="#myAnchor" onclick="appBridge.goToAnchor(event)">My Section</a></code>
      * 
-     * @unstable Not tested yet.
      * @param event The event that triggers the anchor navigation.
+     * @return `Promise` that resolves to `true` when navigation succeeds, or `false` when navigation fails.
+     * 
+     * @see https://angular.dev/api/router/Router#navigate
      */
-    public goToAnchor(event: Event): void {
+    public goToAnchor(event: Event): Promise<boolean> {
         event.preventDefault();
         const anchor: string = (event.target as any).getAttribute(HREF);
-        if (!anchor) return;
-        this._zone.run(() => {
+        if (!anchor) throw new ReferenceError("href attribute is not defined.");
+        const elm: any = this._document.querySelector(anchor);
+        if (!elm) return new Promise((resolve: Function) => resolve(false));
+        elm.scrollIntoView(DEFAULT_SCROLL_BEHAVIOR);
+        return this._zone.run(() => {
            return this._router.navigate([], { fragment: anchor.slice(1)});
         });
-        (document.querySelector(anchor) as HTMLElement).scrollIntoView(DEFAULT_SCROLL_BEHAVIOR);
     }
 
     /**

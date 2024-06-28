@@ -9,33 +9,35 @@
 import { TestBed } from '@angular/core/testing';
 import { AppBrigeService } from '../../../../lib/model/service/ui/app-bridge.service';
 import { DOCUMENT } from '@angular/common';
-import { NavigationExtras, Router, RouterModule } from '@angular/router';
-import { BRIDGE_COMMAND, BRIDGE_COMMAND_NAME } from '../../../core/bridge/test-util/app-bridge-command-util';
+import { Router, RouterModule, Routes } from '@angular/router';
+import { addAnchor, BRIDGE_COMMAND, BRIDGE_COMMAND_NAME, getAnchorName, getButton, MockEvent } from '../../../core/bridge/test-util/app-bridge-test-utils';
 import { AppBridgeError } from '../../../../lib/core/error/app-bridge-error';
 
+//TODO: test NavigationExtras of the navigate() method
 describe('AppBrigeService', () => {
-
+    
+    const validSegment: string = "segment";
     const reservedKeywords: string[] = ["navigate", "goToAnchor", "declareCommand", "deleteCommand", "getCommand"];
     const buildError = (methodName: string) => {
         return new AppBridgeError("Command name cannot be the reference to a native command: " + methodName);
-      };
-      
-    const segment: string[] = ["/segment"];
-    const extras: NavigationExtras = {};
+    };
     
     let service: AppBrigeService;
-    let document: any;
+    let testDocument: any;
     let router: Router;
+    const routes: Routes = [
+        { path: validSegment, loadComponent: () => import('../../../core/bridge/test-util/app-bridge-test-utils').then(mod => mod.MockComponent) }
+    ];
 
-    beforeEach(async () => {
+    beforeEach(async() => {
         await TestBed.configureTestingModule({
-            imports: [
-                RouterModule
-            ],
-            providers: [Router]
-        });
+            imports: [ RouterModule.forRoot(routes) ],
+            providers: [
+                { provide: DOCUMENT, useValue: document }
+            ]
+        }).compileComponents();
+        testDocument = TestBed.inject(DOCUMENT);
         service = TestBed.inject(AppBrigeService);
-        document = TestBed.inject(DOCUMENT);
         router = TestBed.inject(Router);
     });
 
@@ -44,7 +46,7 @@ describe('AppBrigeService', () => {
     });
 
     it('should create an appBridge object on the defaultView object', () => {
-        expect(document.defaultView.appBridge).toBeTruthy();
+        expect(testDocument.defaultView.appBridge).toBeTruthy();
     });
 
     it('getCommand() should return undefined wheth no command is defiend for the specified name', () => {
@@ -65,21 +67,74 @@ describe('AppBrigeService', () => {
         expect(service.deleteCommand(BRIDGE_COMMAND_NAME)).toBeTrue();
     });
 
-    it('declareCommand() should throw an error when the command name is a reserver keyword', () => {
+    it('declareCommand() should throw an error when the command name is a reserved keyword', () => {
         reservedKeywords.forEach(keyword => {
             expect(()=> service.declareCommand(keyword, BRIDGE_COMMAND)).toThrow(buildError(keyword));
         });
     });
 
-    it('deleteCommand() should throw an error when the command name is a reserver keyword', () => {
+    it('deleteCommand() should throw an error when the command name is a reserved keyword', () => {
         reservedKeywords.forEach(keyword => {
             expect(()=> service.deleteCommand(keyword)).toThrow(buildError(keyword));
         });
     });
+    
+    it('navigate() should invoke the angular router and return false when navigation fails', async() => {
+        await testDocument.defaultView.appBridge.navigate(["/test"]).then((result: boolean)=> expect(result).toBeFalse());
+    });
+    
+    it('navigate() should invoke the angular router and return true when navigation succeeds', async() => {
+        await service.navigate([validSegment]).then((result: boolean)=> expect(result).toBeTrue());
+    });
 
-    /*it('navigate should invoke the angular router, in the app context, with the specified parameters', () => {
-        spyOn(router, 'navigate');
-        document.defaultView.appBridge.navigate(segment, extras);
-        expect(router.navigate).toHaveBeenCalledWith(segment, extras);
-    });*/
+    it('goToAnchor() should throw an error when no "href" attribute is specified on the decorated element', () => {
+        const link = getButton(null);
+        const event: MockEvent = new MockEvent(link);
+        const expected = new ReferenceError("href attribute is not defined.");
+        expect(()=> service.goToAnchor(event)).toThrow(expected);
+    });
+
+    it('goToAnchor() should silently fail when no id matches the "href" attribute', async() => {
+        const anchorName: string = getAnchorName();
+        const link = getButton("#" + anchorName);
+        const event: MockEvent = new MockEvent(link);
+        await service.goToAnchor(event).then((result: boolean)=> expect(result).toBeFalse());
+    });
+
+    it('goToAnchor() should scroll to the element with the id specified by the "href" attribute', () => {
+        const anchorName: string = getAnchorName();
+        const elm: HTMLElement = addAnchor(testDocument, anchorName);
+        const link = getButton("#" + anchorName);
+        const event: MockEvent = new MockEvent(link);
+        spyOn(elm, "scrollIntoView");
+        service.goToAnchor(event);
+        expect(elm.scrollIntoView).toHaveBeenCalled();
+    });
+    
+    it('goToAnchor() should invoke the angular router and return true when navigation succeeds', async() => {
+        const anchorName: string = getAnchorName();
+        const elm: HTMLElement = addAnchor(testDocument, anchorName);
+        const link = getButton("#" + anchorName);
+        const event: MockEvent = new MockEvent(link);
+        await service.goToAnchor(event).then((result: boolean)=> expect(result).toBeTrue());
+    });
+
+    it('declareCommand() should add a new command accessible as a property of the service instance', () => {
+        service.declareCommand(BRIDGE_COMMAND_NAME, BRIDGE_COMMAND);
+        expect((service as any)[BRIDGE_COMMAND_NAME]).toEqual(BRIDGE_COMMAND);
+    });
+
+    it('declareCommand() should create a getter property only', () => {
+        service.declareCommand(BRIDGE_COMMAND_NAME, BRIDGE_COMMAND);
+        const setToNull = ()=> {
+            (service as any)[BRIDGE_COMMAND_NAME] = null;
+        };
+        expect(setToNull).toThrowError("Cannot set property testCommand of [object Object] which has only a getter");
+    });
+
+    it('deleteCommand() should remove the command accessible as a property of the service instance', () => {
+        service.declareCommand(BRIDGE_COMMAND_NAME, BRIDGE_COMMAND);
+        service.deleteCommand(BRIDGE_COMMAND_NAME);
+        expect((service as any)[BRIDGE_COMMAND_NAME]).toBeUndefined();
+    });
 });

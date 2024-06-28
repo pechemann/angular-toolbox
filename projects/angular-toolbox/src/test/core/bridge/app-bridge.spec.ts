@@ -8,7 +8,7 @@
 
 import { AppBridgeError } from '../../../lib/core/error/app-bridge-error';
 import { AppBridge } from '../../../lib/core/bridge/app-bridge';
-import { BRIDGE_COMMAND, BRIDGE_COMMAND_NAME, ERROR_MESSAGE, FIRST_NAME, LAST_NAME } from './test-util/app-bridge-command-util';
+import { BRIDGE_COMMAND, BRIDGE_COMMAND_NAME, ERROR_MESSAGE, FIRST_NAME, LAST_NAME } from './test-util/app-bridge-test-utils';
 
 describe('AppBridge', () => {
 
