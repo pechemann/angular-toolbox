@@ -1,4 +1,10 @@
-// Source: https://ymnjk.csb.app/
+/**
+ * @license
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
+ */
 
 export interface User {
     id: number;
@@ -7,6 +13,7 @@ export interface User {
     email: string;
 }
 
+// Source: https://ymnjk.csb.app/
 export const USER_LIST_MOCK: User[] = [
     {
       id: 1,
