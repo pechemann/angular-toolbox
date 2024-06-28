@@ -30,8 +30,7 @@ const HREF: string = "href";
 const NATIVE_COMMANDS: string = "navigate|goToAnchor|declareCommand|deleteCommand|getCommand";
 
 /**
- * @unstable Not tested yet.
- * A utility service that allows HTML fragments dynamically loaded, to interact with the Angular application.
+ * A utility service that allows dynamically injected HTML fragments, to interact with the Angular application.
  */
 @Injectable({
     providedIn: 'root'
@@ -95,7 +94,6 @@ export class AppBrigeService {
     /**
      * Declares a new JavaScript command to be used with dynamically loaded documents.
      * 
-     * @unstable Not tested yet.
      * @param name The name of the command to declare.
      * @param command The reference to a JavaScript command to be used with dynamically loaded documents.
      */
@@ -115,19 +113,20 @@ export class AppBrigeService {
     /**
      * Unregisters a JavaScript command previously referenced with the `declareCommand()` method.
      * 
-     * @unstable Not tested yet.
      * @param name The name of the command to remove.
+     * 
+     * @returns `true` whether the command existed and has been removed; `false` otherwise.
      */
-    public deleteCommand(name: string): void {
+    public deleteCommand(name: string): boolean {
         this.checkCommandName(name);
-        if(!this._appBridge.removeCommand(name)) return;
+        if(!this._appBridge.removeCommand(name)) return false;
         delete this._defaultView[APP_PRIDGE_REF][name];
+        return true;
     }
     
     /**
      * Returns the JavaScript command previously referenced with the `declareCommand()` method.
      * 
-     * @unstable Not tested yet.
      * @param name The name of the command to retrieve.
      * @returns The JavaScript command previously referenced with the specified `name` parameter.
      *          If no command is found, returns `undefined`.
