@@ -15,7 +15,7 @@ import { SubscriptionService, HttpMockService, AbstractIdentifiable } from 'angu
 import { DemoComponent } from '../../../ui/component/demo/demo.component';
 import { catchError, of } from 'rxjs';
 import { RouterModule } from '@angular/router';
-import { DocumentationLink } from '../../../ui/model/business/ducumentation-link';
+import { DocumentationLink } from '../../../ui/model/business/documentation-link';
 
 @Component({
   selector: 'app-http-mock-error',

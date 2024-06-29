@@ -17,6 +17,8 @@ import { IconListService } from '../../../ui/model/service/icon-list-list.servic
 import { HttpForwardProxy } from 'projects/angular-toolbox/src/lib/framework/mock/http/proxy';
 import { DOCUMENTATION_PROXY_CONFIG } from '../../proxy/documentation-proxy.config';
 import { BreadcrumbItem } from '../../../ui/model/business/breadcrumb-item';
+import { IconListItem } from '../../../ui/model/business/icon-list-item';
+import { DocumentationLinkMenu } from '../../../ui/model/business/documentation-link';
 
 @HttpForwardProxy(DOCUMENTATION_PROXY_CONFIG) 
 @Component({
@@ -33,9 +35,9 @@ export class DocumentationComponent extends AbstractIdentifiable implements OnIn
 
   protected page!: string;
   protected isHomePage: boolean = false;
+  protected itemList!: IconListItem[];
 
   constructor(public versionService: VersionService,
-              public iconListService: IconListService,
               //--> HttpMockService is declared only for @HttpForwardProxy reference:
               private _httpMockService: HttpMockService,
               private _breadcrumb: BreadcrumbService,
@@ -43,7 +45,8 @@ export class DocumentationComponent extends AbstractIdentifiable implements OnIn
               private _subsciptionService: SubscriptionService,
               private _route : ActivatedRoute,
               private _highlightService: HighlightService,
-              private _appBridgService: AppBrigeService) {
+              private _appBridgService: AppBrigeService,
+              private _iconListService: IconListService) {
     super();
     this._breadcrumb.removeAll().addItem(this._breadcrumb.buildItem("Resources", "resources"));
   }
@@ -55,6 +58,9 @@ export class DocumentationComponent extends AbstractIdentifiable implements OnIn
       this._route.url.subscribe((segments: UrlSegment[])=> {
         const cursor: number = segments.length;
         if (cursor === 1) {
+          this._subsciptionService.register(this,
+            this._iconListService.getDocumentationList().subscribe((result: DocumentationLinkMenu)=> this.itemList = result.menu )
+          );
           this.isHomePage = true;
           setTimeout(()=> {
             this._breadcrumb.addItem(

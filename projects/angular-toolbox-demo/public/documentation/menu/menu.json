@@ -1,0 +1,16 @@
+{
+    "menu": [
+        { "label": "Quick Start Guide", "urlTree": [ "/resources", "documentation", "quick-start-guide" ] },
+        { "label": "HTTP Mocking Framework" },
+        { "label": "Subscription Service", "urlTree": [ "/resources", "documentation", "subscription-service" ] },
+        { "label": "Dark Mode Service" },
+        { "label": "ButtonRole Directive" },
+        { "label": "AnchorLink Directive" },
+        { "label": "NavigateToUrlDirective Directive" },
+        { "label": "Version Service" },
+        { "label": "Scroll Service" },
+        { "label": "AppBridge Service", "urlTree": [ "/resources", "documentation", "app-bridge-service" ] },
+        { "label": "Uuid Class", "urlTree": [ "/resources", "documentation", "uuid-class" ] },
+        { "label": "Destroyable Interface", "urlTree": [ "/resources", "documentation", "destroyable-interface" ] }
+    ]
+}

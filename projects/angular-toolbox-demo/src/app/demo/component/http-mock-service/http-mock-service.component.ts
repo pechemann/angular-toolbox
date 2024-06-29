@@ -14,7 +14,7 @@ import { config } from './http-mock-config';
 import { SubscriptionService, HttpMockService, AbstractIdentifiable } from 'angular-toolbox';
 import { DemoComponent } from '../../../ui/component/demo/demo.component';
 import { RouterModule } from '@angular/router';
-import { DocumentationLink } from '../../../ui/model/business/ducumentation-link';
+import { DocumentationLink } from '../../../ui/model/business/documentation-link';
 
 @Component({
   selector: 'app-http-mock-service',

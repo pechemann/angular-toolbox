@@ -6,6 +6,11 @@
  * found in the LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
  */
 
+
+export interface DocumentationLinkMenu {
+    menu: DocumentationLink[];
+}
+
 export interface DocumentationLink {
     label: string;
     commands: string[];

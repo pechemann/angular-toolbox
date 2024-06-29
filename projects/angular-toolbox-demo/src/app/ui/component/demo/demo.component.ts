@@ -11,7 +11,7 @@ import { CodeWrapper } from '../../model/business/code-wrapper';
 import { SrcViewportComponent } from '../src-viewport/src-viewport.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { DocumentationLink } from '../../model/business/ducumentation-link';
+import { DocumentationLink } from '../../model/business/documentation-link';
 
 @Component({
   selector: 'demo',
