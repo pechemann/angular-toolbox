@@ -7,7 +7,7 @@
  */
 
 import { HttpStatusCode } from '@angular/common/http';
-import { HttpMockErrorImpl } from '../../../../../../lib/model/business/impl/mock/http/http-mock-error.impl';
+import { HttpMockErrorImpl } from '../../../../../../lib/core/impl/mock/http/http-mock-error.impl';
 import { EMPTY_STRING } from '../../../../../../public-api';
 
 describe('HttpMockErrorImpl', () => {

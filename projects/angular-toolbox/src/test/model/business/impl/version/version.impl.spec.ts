@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
  */
 
-import { VersionImpl } from '../../../../../lib/model/business/impl/version/version.impl';
+import { VersionImpl } from '../../../../../lib/core/impl/version/version.impl';
 
 describe('VersionImpl', () => {
 

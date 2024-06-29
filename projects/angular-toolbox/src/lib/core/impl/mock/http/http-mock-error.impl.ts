@@ -7,7 +7,7 @@
  */
 
 import { HttpStatusCode } from "@angular/common/http";
-import { HttpMockError } from "../../../mock/http";
+import { HttpMockError } from "../../../../model";
 
 /**
  * @private

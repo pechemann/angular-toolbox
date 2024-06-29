@@ -6,7 +6,7 @@
  * fthe LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
  */
 
-import { Version } from "../../version/version";
+import { Version } from "../../../model";
 
 /**
  * @private

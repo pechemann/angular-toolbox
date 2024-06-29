@@ -8,7 +8,7 @@
 
 import { Inject, Injectable } from '@angular/core';
 import { VERSION_CONFIG, Version, VersionConfig } from '../../business';
-import { VersionImpl } from '../../business/impl/version/version.impl';
+import { VersionImpl } from '../../../core/impl/version/version.impl';
 
 /**
  * A lightweight service that provides Semantic Versioning implementation for your Angular projects.

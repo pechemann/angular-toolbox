@@ -6,8 +6,8 @@
  * fthe LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
  */
 
-import { Uuid } from "projects/angular-toolbox/src/public-api";
-import { Identifiable } from "../../lang";
+import { Identifiable } from "../../../model";
+import { Uuid } from "../../../util";
 
 /**
  * @private
