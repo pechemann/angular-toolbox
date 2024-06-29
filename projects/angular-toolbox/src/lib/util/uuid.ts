@@ -46,11 +46,13 @@ export class Uuid implements Destroyable {
      *
      * @param uuid A string used that represents the UUID associated with this `Uuid` instance.
      *             If `null` creates a random UUID value. 
+     * @param track If `true`, stores the UUID reference in the system.
      */
-    private constructor(uuid: string | null) {
-        if (Uuid._lockConstructor) throw new ReferenceError("Uuid class has private constructor.")
-        this._uuid = uuid || crypto.randomUUID();
-        Uuid._hash += `${uuid}|`;
+    private constructor(uuid: string | null, track: boolean) {
+        if (Uuid._lockConstructor) throw new ReferenceError("Uuid class has private constructor.");
+        const UUID: string = uuid || crypto.randomUUID();
+        this._uuid = UUID;
+        if (track) Uuid._hash += `${UUID}|`;
         Uuid._lockConstructor = true;
     }
 
@@ -66,25 +68,30 @@ export class Uuid implements Destroyable {
     /**
      * Creates and returns a new `Uuid` instance.
      * 
+     * @param track If `true`, stores the UUID reference in the system.
+     * 
      * @returns A new `Uuid` instance.
      */
-    public static build(): Uuid {
+    public static build(track: boolean = false): Uuid {
         Uuid._lockConstructor = false;
-        return new Uuid(null);
+        return new Uuid(null, track);
     }
     
     /**
      * Creates and returns a new `Uuid` instance built from the specified `uuid` parameter.
      * 
      * @param uuid The UUID string value used to create the new `Uuid` instance.
+     * @param track If `true`, performs a validation process to ensure that the UUID string does not exists in the system.
      * 
      * @returns A new `Uuid` instance built from the specified `uuid` parameter.
      */
-    public static fromString(uuid: string): Uuid {
-        if(Uuid._hash.includes(uuid)) throw new IntegrityError("Data Integrity Violation. UUID already exists: " + uuid);
+    public static fromString(uuid: string, track: boolean = false): Uuid {
+        if(track) {
+            if(!this.isSystemSafe(uuid)) throw new IntegrityError("Data Integrity Violation. UUID already exists: " + uuid);
+        }
         if (!Uuid.validate(uuid)) throw new TypeError("Invalid UUID value: " + uuid);
         Uuid._lockConstructor = false;
-        return new Uuid(uuid);
+        return new Uuid(uuid, track);
     }
 
     /**
@@ -98,9 +105,26 @@ export class Uuid implements Destroyable {
     }
 
     /**
-     * Makes this `Uuid` instance elligible for garbage collection.
+     * Performs a validation process to ensure that the UUID string does not exists in the system.
+     * 
+     * @param uuid A UUID representation string to check.
+     * @returns `true` whether the `uuid` string parameter is tracked; `false` otherwise.
      */
-    public destroy(): void {
-        Uuid._hash = Uuid._hash.replace(this._uuid, EMPTY_STRING); 
+    public static isSystemSafe(uuid: string): boolean {
+        return !Uuid._hash.includes(uuid);
+    }
+    
+    /**
+     * Releases the specified `Uuid` instance from the tracking system and makes itelligible for garbage collection.
+     * 
+     * @returns `true` whether the `Uuid` instance was found and removed; `false` otherwise. 
+     */
+    public destroy(): boolean {
+        const ref: string =this._uuid;
+        if (!Uuid.isSystemSafe(ref)) {
+            Uuid._hash = Uuid._hash.replace(ref, EMPTY_STRING);
+            return true;
+        }
+        return false;
     }
 }

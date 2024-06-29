@@ -20,17 +20,43 @@ describe('Uuid', () => {
   it('build() should create a new Uuuid instance', () => {
     expect(Uuid.build()).toBeInstanceOf(Uuid);
   });
-  
+
   it('fromString() should create a new Uuuid instance when the uuid parameter is a valid UUID', () => {
     expect(Uuid.fromString(crypto.randomUUID())).toBeInstanceOf(Uuid);
   });
 
-  it('fromString() should throw an error when UUID already exists', () => {
+  it('fromString() should throw an error when UUID already exists and track parameters is true', () => {
     const uuid: string = crypto.randomUUID();
-    Uuid.fromString(uuid);
-    expect(()=> Uuid.fromString(uuid)).toThrowError("Data Integrity Violation. UUID already exists: " + uuid);
+    Uuid.fromString(uuid, true);
+    expect(()=> Uuid.fromString(uuid, true)).toThrowError("Data Integrity Violation. UUID already exists: " + uuid);
   });
 
+  it('fromString() should create a tracked UUID when the track parameter is true', () => {
+    const uuid: string = crypto.randomUUID();
+    Uuid.fromString(uuid, true);
+    expect(Uuid.isSystemSafe(uuid)).toBeFalse();
+  });
+
+  it('isSystemSafe() should return true for untracked UUIDs', () => {
+    const uuid: string = crypto.randomUUID();
+    expect(Uuid.isSystemSafe(uuid)).toBeTrue();
+  });
+
+  it('isSystemSafe() should return true for tracked UUIDs', () => {
+    const instance = Uuid.build(true);
+    expect(Uuid.isSystemSafe(instance.toString())).toBeFalse();
+  });
+
+  it('build() must create untracked Uuid instance if track parameters is false (default)', () => {
+    const instance = Uuid.build();
+    expect(Uuid.isSystemSafe(instance.toString())).toBeTrue();
+  });
+  
+  it('build() must create untracked Uuid instance if track parameters is true', () => {
+    const instance = Uuid.build(true);
+    expect(Uuid.isSystemSafe(instance.toString())).toBeFalse();
+  });
+  
   it('fromString() should throw an error when the uuid parameter is not a valid UUID', () => {
     expect(()=> Uuid.fromString(IN_VALID_UUID)).toThrowError("Invalid UUID value: " + IN_VALID_UUID);
   });
@@ -64,5 +90,15 @@ describe('Uuid', () => {
     const uuid = Uuid.fromString(randomUUID);
     uuid.destroy();
     expect(()=> Uuid.fromString(randomUUID)).not.toThrow();
+  });
+  
+  it('destroy() should return false whether the Uuid parameters is not tracked', () => {
+    const uuid = Uuid.build();
+    expect(uuid.destroy()).toBeFalse();
+  });
+  
+  it('destroy() should return true whether the Uuid parameters is tracked', () => {
+    const uuid = Uuid.build(true);
+    expect(uuid.destroy()).toBeTrue();
   });
 });

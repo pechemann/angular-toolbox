@@ -10,10 +10,8 @@
     <section class="w-100">
         <h5 class="mb-4">On this page</h5>
         <ul class="list-group">
-            <li class="list-group-item"><a rel="noopener">Prerequisites</a></li>
-            <li class="list-group-item"><a rel="noopener">Install</a></li>
-            <li class="list-group-item"><a rel="noopener">Usage</a></li>
-            <li class="list-group-item"><a rel="noopener">Running Tests</a></li>
+            <li class="list-group-item"><a href="#motivation" onclick="appBridge.goToAnchor(event)" title="motivation">Motivation</a></li>
+            <li class="list-group-item"><a href="#api" onclick="appBridge.goToAnchor(event)" title="API">API</a></li>
         </ul>
     </section>
 </nav>
@@ -21,24 +19,165 @@
 <header class="fs-5 col-xl-9 mb-4">
     <h2 class="mb-3"><code>Uuid</code> Class</h2>
     <p>
-        <em class="lib-name">Angular Toolbox</em> is a library of lightweight utilities gathered  to solve recurring issues encountered by Angular apps developers.
+        The <code>Uuid</code> is used to parse, construct and manage UUIDs in the context of an Angular app.
     </p>
-    <p>
-        The library focuses on ease-of-use and robust test processes, to maintain quality over time.
-    </p>
+    <div class="alert alert-warning flex-icon" role="alert">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.15.15 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.2.2 0 0 1-.054.06.1.1 0 0 1-.066.017H1.146a.1.1 0 0 1-.066-.017.2.2 0 0 1-.054-.06.18.18 0 0 1 .002-.183L7.884 2.073a.15.15 0 0 1 .054-.057m1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767z"/>
+            <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z"/>
+        </svg>
+        This class is not available in workers.
+    </div>
     <hr class="mt-4">
 </header>
 
-<section class="col-xl-9">
-    <h3>Install</h3>
+<section class="col-xl-9 mb-4">
+    <h3 id="motivation">Motivation</h3>
     <p>
-        <em class="lib-name">Angular Toolbox</em> is available for download at npm.
+        A <em>Universally Unique Identifier (UUID)</em> is a 128-bit label used for information in computer systems
     </p>
-    <pre><code class="language-bash">$cd &lt;YOUR-PROJECT-NAME&gt;
-$npm install angular-toolbox</code></pre>
+    <p>
+        Ma
+    </p>
+    <p>
+        The goal of the <code>AppBridge</code> service is to solve these issues as much as possible.
+    </p>
+    <p>
+        This <em>Documentation</em> section is built on top of the <code>AppBridge</code> API.
+        It shows how to display an infinite number of static HTML pages without increasing the size
+        of your Angular application.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="api">API</h3>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Interface</th>
+            <th scope="col">Description</th>
+            <th scope="col">Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th><code>Destroyable</code></th>
+            <td>
+                The <code>Destroyable</code> interface provides implementators the capability to destroy their contents.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/destroyable-interface'])" title="Destroyable">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Instance Method</th>
+            <th scope="col">Description</th>
+            <th scope="col">Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th><code>toString()</code></th>
+            <td>
+                Returns a string that represents the UUID value associated with this <code>Uuid</code> instance.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/uuid-class/to-string'])" title="toString()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <th><code>destroy()</code></th>
+            <td>
+                Makes this <code>Uuid</code> instance elligible for garbage collection..
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/uuid-class/destroy'])" title="destroy()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Class Method</th>
+            <th scope="col">Description</th>
+            <th scope="col">Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th><code>build()</code></th>
+            <td>
+                Creates and returns a new <code>Uuid</code> instance.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/uuid-class/build'])" title="build()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <th><code>fromString()</code></th>
+            <td>
+                Creates and returns a new <code>Uuid</code> instance built from the specified string parameter.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/uuid-class/from-string'])" title="fromString()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <th><code>validate()</code></th>
+            <td>
+                Performs validation on the specified UUID string parameter.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/uuid-class/validate'])" title="validate()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <th><code>isSystemSafe()</code></th>
+            <td>
+                Performs a validation process to ensure that the UUID string is not tracked by the system.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/uuid-class/is-system-safe'])" title="isSystemSafe()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 </section>
 
 <!-- We use a data object to store navigation tree structure-->
 <object id="navigation-tree"
-        data-tree="[{ 'label': 'Uuid Class' }]">
+        data-tree="[{ 'label': 'AppBridge Service' }]">
 </object>

@@ -7,35 +7,60 @@
 -->
  
 <nav class="page-menu col-xl-3 ps-4">
-    <aside class="w-100">
+    <section class="w-100">
         <h5 class="mb-4">On this page</h5>
         <ul class="list-group">
-            <li class="list-group-item"><a rel="noopener">Prerequisites</a></li>
-            <li class="list-group-item"><a rel="noopener">Install</a></li>
-            <li class="list-group-item"><a rel="noopener">Usage</a></li>
-            <li class="list-group-item"><a rel="noopener">Running Tests</a></li>
+            <li class="list-group-item"><a href="#destroy" onclick="appBridge.goToAnchor(event)" title="destroy()">destroy()</a></li>
+            <li class="list-group-item"><a href="#usage" onclick="appBridge.goToAnchor(event)" title="Usage">Usage</a></li>
         </ul>
-    </aside>
+        <ul class="list-group mt-4">
+            <li class="list-group-item icon-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation'])" title="Documentation">
+                    Documentation
+                </a>
+            </li>
+        </div>
+    </section>
 </nav>
 
 <header class="fs-5 col-xl-9 mb-4">
     <h2 class="mb-3"><code>Destroyable</code> Interface</h2>
     <p>
-        <em class="lib-name">Angular Toolbox</em> is a library of lightweight utilities gathered  to solve recurring issues encountered by Angular apps developers.
+        The <em class="lib-name">Destroyable</em> interface provides implementators the capability to destroy their contents.
     </p>
     <p>
-        The library focuses on ease-of-use and robust test processes, to maintain quality over time.
+        Since TypeScript interfaces are never compiled, developers should always take advantage of
+        adding such an interferface in their projects.
+        <br>
+        The implementation of a destruction mechanism can be easily tested to
+        ensure the destruction of objects and the proper functioning of your application.
     </p>
     <hr class="mt-4">
 </header>
 
-<section class="col-xl-9">
-    <h3>Install</h3>
+<section class="col-xl-9 mb-4">
+    <h3 id="destroy"><code>Destroyable.destroy()</code></h3>
+    <pre><code class="language-typescript">destroy(): any</code></pre>
     <p>
-        <em class="lib-name">Angular Toolbox</em> is available for download at npm.
+        The <code>destroy()</code> must contain mechanisms to delete all internal references.
+        That will make the object instance eligible for garbage collection. 
     </p>
-    <pre><code class="language-bash">$cd &lt;YOUR-PROJECT-NAME&gt;
-$npm install angular-toolbox</code></pre>
+</section>
+
+<section class="col-xl-9">
+    <h3 id="usage">Usage</h3>
+    <figure><pre><code class="language-typescript">class MyUtilityObject implements Destroyable &#123;
+
+    private _refMap: &lt;string, ManagedObject&gt; = new &lt;string, ManagedObject&gt;();
+
+    public addManagedObject(obj: ManagedObject): void &#123;
+        this._refMap.set(obj.key, obj);
+    &#125;
+
+    public destroy(): any &#123;
+        this._refMap.clear();
+    &#125;
+&#125;</code></pre></figure>
 </section>
 
 <!-- We use a data object to store navigation tree structure-->
