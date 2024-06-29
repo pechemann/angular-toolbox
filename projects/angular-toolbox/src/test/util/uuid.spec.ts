@@ -34,27 +34,27 @@ describe('Uuid', () => {
   it('fromString() should create a tracked UUID when the track parameter is true', () => {
     const uuid: string = crypto.randomUUID();
     Uuid.fromString(uuid, true);
-    expect(Uuid.isSystemSafe(uuid)).toBeFalse();
+    expect(Uuid.isTracked(uuid)).toBeFalse();
   });
 
-  it('isSystemSafe() should return true for untracked UUIDs', () => {
+  it('isTracked() should return true for untracked UUIDs', () => {
     const uuid: string = crypto.randomUUID();
-    expect(Uuid.isSystemSafe(uuid)).toBeTrue();
+    expect(Uuid.isTracked(uuid)).toBeTrue();
   });
 
-  it('isSystemSafe() should return true for tracked UUIDs', () => {
+  it('isTracked() should return true for tracked UUIDs', () => {
     const instance = Uuid.build(true);
-    expect(Uuid.isSystemSafe(instance.toString())).toBeFalse();
+    expect(Uuid.isTracked(instance.toString())).toBeFalse();
   });
 
   it('build() must create untracked Uuid instance if track parameters is false (default)', () => {
     const instance = Uuid.build();
-    expect(Uuid.isSystemSafe(instance.toString())).toBeTrue();
+    expect(Uuid.isTracked(instance.toString())).toBeTrue();
   });
   
   it('build() must create untracked Uuid instance if track parameters is true', () => {
     const instance = Uuid.build(true);
-    expect(Uuid.isSystemSafe(instance.toString())).toBeFalse();
+    expect(Uuid.isTracked(instance.toString())).toBeFalse();
   });
   
   it('fromString() should throw an error when the uuid parameter is not a valid UUID', () => {

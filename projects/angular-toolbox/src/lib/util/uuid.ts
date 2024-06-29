@@ -46,13 +46,13 @@ export class Uuid implements Destroyable {
      *
      * @param uuid A string used that represents the UUID associated with this `Uuid` instance.
      *             If `null` creates a random UUID value. 
-     * @param track If `true`, stores the UUID reference in the system.
+     * @param tracked If `true`, stores the UUID reference in the system.
      */
-    private constructor(uuid: string | null, track: boolean) {
+    private constructor(uuid: string | null, tracked: boolean) {
         if (Uuid._lockConstructor) throw new ReferenceError("Uuid class has private constructor.");
         const UUID: string = uuid || crypto.randomUUID();
         this._uuid = UUID;
-        if (track) Uuid._hash += `${UUID}|`;
+        if (tracked) Uuid._hash += `${UUID}|`;
         Uuid._lockConstructor = true;
     }
 
@@ -87,7 +87,7 @@ export class Uuid implements Destroyable {
      */
     public static fromString(uuid: string, track: boolean = false): Uuid {
         if(track) {
-            if(!this.isSystemSafe(uuid)) throw new IntegrityError("Data Integrity Violation. UUID already exists: " + uuid);
+            if(!this.isTracked(uuid)) throw new IntegrityError("Data Integrity Violation. UUID already exists: " + uuid);
         }
         if (!Uuid.validate(uuid)) throw new TypeError("Invalid UUID value: " + uuid);
         Uuid._lockConstructor = false;
@@ -105,12 +105,12 @@ export class Uuid implements Destroyable {
     }
 
     /**
-     * Performs a validation process to ensure that the UUID string does not exists in the system.
+     * Performs a validation process to ensure that the UUID string is not tracked the system.
      * 
      * @param uuid A UUID representation string to check.
      * @returns `true` whether the `uuid` string parameter is tracked; `false` otherwise.
      */
-    public static isSystemSafe(uuid: string): boolean {
+    public static isTracked(uuid: string): boolean {
         return !Uuid._hash.includes(uuid);
     }
     
@@ -121,7 +121,7 @@ export class Uuid implements Destroyable {
      */
     public destroy(): boolean {
         const ref: string =this._uuid;
-        if (!Uuid.isSystemSafe(ref)) {
+        if (!Uuid.isTracked(ref)) {
             Uuid._hash = Uuid._hash.replace(ref, EMPTY_STRING);
             return true;
         }

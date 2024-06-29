@@ -12,6 +12,7 @@
         <ul class="list-group">
             <li class="list-group-item"><a href="#motivation" onclick="appBridge.goToAnchor(event)" title="motivation">Motivation</a></li>
             <li class="list-group-item"><a href="#api" onclick="appBridge.goToAnchor(event)" title="API">API</a></li>
+            <li class="list-group-item"><a href="#examples" onclick="appBridge.goToAnchor(event)" title="API">Examples</a></li>
         </ul>
     </section>
 </nav>
@@ -19,7 +20,7 @@
 <header class="fs-5 col-xl-9 mb-4">
     <h2 class="mb-3"><code>Uuid</code> Class</h2>
     <p>
-        The <code>Uuid</code> is used to parse, construct and manage UUIDs in the context of an Angular app.
+        The <code>Uuid</code> class is used to parse, construct and manage UUIDs in the context of an Angular app.
     </p>
     <div class="alert alert-warning flex-icon" role="alert">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
@@ -34,18 +35,15 @@
 <section class="col-xl-9 mb-4">
     <h3 id="motivation">Motivation</h3>
     <p>
-        A <em>Universally Unique Identifier (UUID)</em> is a 128-bit label used for information in computer systems
+        A <em>Universally Unique Identifier (UUID)</em> is a 128-bit label used for information in computer systems.
     </p>
     <p>
-        Ma
+        The <code>Uuid</code> class provides a safe encapsulation mechanism for working with UUID strings.
+        UUIDs encapsulation should be considered by developers as a part of OOP design brest practices.
     </p>
     <p>
-        The goal of the <code>AppBridge</code> service is to solve these issues as much as possible.
-    </p>
-    <p>
-        This <em>Documentation</em> section is built on top of the <code>AppBridge</code> API.
-        It shows how to display an infinite number of static HTML pages without increasing the size
-        of your Angular application.
+        For example, using instances of the <code>Uuid</code> class guarantees that your application
+        won't corrupt UUID strings managed by server side.
     </p>
 </section>
 
@@ -100,7 +98,7 @@
           <tr>
             <th><code>destroy()</code></th>
             <td>
-                Makes this <code>Uuid</code> instance elligible for garbage collection..
+                Makes this <code>Uuid</code> instance elligible for garbage collection.
             </td>
             <td>
                 <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/uuid-class/destroy'])" title="destroy()">
@@ -161,12 +159,12 @@
             </td>
           </tr>
           <tr>
-            <th><code>isSystemSafe()</code></th>
+            <th><code>isTracked()</code></th>
             <td>
-                Performs a validation process to ensure that the UUID string is not tracked by the system.
+                Performs a validation process to ensure that the UUID string is tracked, or not, by the system.
             </td>
             <td>
-                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/uuid-class/is-system-safe'])" title="isSystemSafe()">
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/uuid-class/is-tracked'])" title="isTracked()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
                         <use href="#linkIcon"/>
                     </svg>
@@ -177,7 +175,67 @@
       </table>
 </section>
 
+<section class="col-xl-9 mb-4">
+    <h3 id="examples">Examples</h3>
+    <h4>External Data Validation</h4>
+    <p>
+        The following code sample shows how to securely include external datasets that include UUIDs:
+    </p>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title mb-2">Code</h5>
+            <figure>
+                <figcaption>Data type:</figcaption>
+                <pre><code class="language-typescript">export interface DataType {
+    id: Uuid;
+    foo: string;
+    bar: number;
+}
+</code></pre></figure>
+            <figure>
+                <figcaption>Data service:</figcaption>
+                <pre><code class="language-typescript">@Injectable({
+    providedIn: 'root'
+})
+export class DataService {
+
+    constructor(private _http: HttpClient) { }
+
+    public getData(): Observable&lt;DataType[]&gt; {
+        return this._http.get&lt;DataType[]&gt;("https://www.foo.bar.com/api/data").pipe(
+            map((data) => data.map(this.decoreate))
+        );
+    }
+
+    // Ensures that UUIDs from external the dataset are not corrupted
+    // (duplicates, invalids):
+    private decoreate(data: any): DataType {
+        data.id = Uuid.fromString(data.id, true);
+        return data;
+    }
+}</code></pre></figure>
+
+
+<h4>Data Update</h4>
+<p>
+    The following code sample shows how to securely udate data that include UUIDs.
+    <br>
+    <span class="fst-italic">
+        (Notice that UUIDs sent within the content of the PUT method body should never be considered by the server.)
+    </span>
+</p>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title mb-2">Code</h5>
+        <figure>
+            <figcaption>Data service:</figcaption>
+            <pre><code class="language-typescript">public update(data: DataType): Observable&lt;Result&gt; {
+    const endpoint: string = `https://www.foo.bar.com/api/data/${data.id.toString()}`;
+    return this._http.put(endpoint, data);
+}</code></pre></figure>
+</section>
+
 <!-- We use a data object to store navigation tree structure-->
 <object id="navigation-tree"
-        data-tree="[{ 'label': 'AppBridge Service' }]">
+        data-tree="[{ 'label': 'Uuid Class' }]">
 </object>
