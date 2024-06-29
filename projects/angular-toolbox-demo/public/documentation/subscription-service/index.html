@@ -1,0 +1,193 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <section class="w-100">
+        <h5 class="mb-4">On this page</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="#motivation" onclick="appBridge.goToAnchor(event)" title="motivation">Motivation</a></li>
+            <li class="list-group-item"><a href="#api" onclick="appBridge.goToAnchor(event)" title="API">API</a></li>
+            <li class="list-group-item"><a href="#example" onclick="appBridge.goToAnchor(event)" title="API">Example</a></li>
+        </ul>
+    </section>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3"><em>Subscription</em> Service</h2>
+    <p>
+        A lightweight service that helps to manage unregistration issues of Angular subscriptions.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="motivation">Motivation</h3>
+    <h4>Subscription Overview</h4>
+    <p>
+        According to <a href="https://rxjs.dev/guide/subscription" title="Subscription">RXJS documentation</a>:
+    </p>
+    <blockquote class="blockquote text-center border rounded p-3">
+        <p>
+            A <code>Subscription</code> is an object that represents a disposable resource, usually the execution of an <code>Observable</code>.
+            It has one important method, <code>unsubscribe</code>, that just disposes the resource held by the subscription.
+        </p>
+    </blockquote>
+    <h4>Angular Concerns</h4>
+    <p>
+        Most Angular features, such as HTTP integration, are built on top of the RXJS Observable API.
+    </p>
+    <p>
+        Observable makes management of asynchronous features easy-to-use, significantly reducing development time.
+        Unfortunately, unsubscription process of <code>Observables</code> objects is really tedious.
+        Additionally, misunderstanding unsubscription mechanisms can lead to many issues, such as memory leaks and poor performance.
+    </p>
+    <h4>Benefits of Using <code>SubscriptionService</code></h4>
+    <p>
+        The aim of the Angular Toolbox <code>SubscriptionService</code> is to deal with unsubscription of Observables in a very simple way.
+    </p>
+    <p>
+        The basic idea is to let the framework register all subscriptions related to a single component
+        and to remove them all at once when the <code>ngOnDestroy()</code> method is called.
+        <br>
+        Thus, all the complexity is hidden under the hood.
+    </p>
+    <p>
+        <strong>This is a fairly simple but very powerful mechanism.</strong>
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="api">API</h3>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Method</th>
+            <th scope="col">Description</th>
+            <th scope="col">Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th><code>register()</code></th>
+            <td>
+                Stores a new <code>Subscription</code> instance associated with the specified object, or reference.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/subscription-service/register'])" title="register()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <th><code>append()</code></th>
+            <td>
+                Stores a new <code>Subscription</code> instance, associated with the reference specified
+                by the last invokation of the <code>register() </code>method.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/subscription-service/append'])" title="append()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <th><code>clearAll()</code></th>
+            <td>
+                Unsubscribes and removes all <code>Subscription</code> instances associated with the specified reference, or object.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/subscription-service/clear-all'])" title="clearAll()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <th><code>get()</code></th>
+            <td>
+                Returns all <code>Subscription</code> instances associated with the specified reference, or object.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/subscription-service/get'])" title="get()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="example">Example</h3>
+    <p>
+        The following code sample shows how easilly implement the <em>Subscription</em> Service:
+    </p>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title mb-2">Code</h5>
+            <figure>
+                <figcaption>HTML Template:</figcaption>
+                <pre><code class="language-html">&lt;div&gt;
+    &lt;button (click)="eventEmiter_1.emit('Event #1 - idx: ')"&gt;EventEmitter #1&lt;/button&gt;
+    &lt;button (click)="eventEmiter_2.emit('Event #2 - idx: ')"&gt;EventEmitter #2&lt;/button&gt;
+    &lt;button (click)="ngOnDestroy()"&gt;Unsubscribe&lt;/button&gt;
+
+    &lt;ul&gt;
+        &#64;for (item of eventList; track item) &#123;
+            &lt;li&gt;&#123;&#123; item &#125;&#125;&lt;/li&gt;
+            &#125;
+    &lt;/ul&gt;
+&lt;/div&gt;</code></pre></figure>
+            <figure>
+                <figcaption>Angular Component:</figcaption>
+                <pre><code class="language-typescript">export class SubscriptionServiceComponent implements OnInit, OnDestroy &#123;
+
+    protected eventEmiter_1: EventEmitter<string> = new EventEmitter<string>();
+    protected eventEmiter_2: EventEmitter<string> = new EventEmitter<string>();
+
+    protected eventList: string[] = [];
+
+    private _event1_Idx: number = 1;
+    private _event2_Idx: number = 1;
+
+    constructor(private _subscriptionService: SubscriptionService) &#123;&#125;
+
+    public ngOnInit(): void &#123;
+        this._subscriptionService.register(this,
+            this.eventEmiter_1.subscribe(next => this.eventList.push(next + this._event1_Idx++))
+        ).append(
+            this.eventEmiter_2.subscribe(next => this.eventList.push(next + this._event2_Idx++))
+        );
+    &#125;
+
+    public ngOnDestroy(): void &#123;
+        this._subscriptionService.clearAll(this);
+        &#125;
+&#125;</code></pre></figure>
+             <h5 class="card-title mb-2">Code</h5>
+             <p>
+                To see this sample in action, go to the demo section:
+             </p>
+             <button class="btn btn-primary btn-lg" onclick="appBridge.navigate(['demo/subscription-service'])" title="Subscription Service Demo">
+                Subscription Service Demo
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'Subscription Service' }]">
+</object>

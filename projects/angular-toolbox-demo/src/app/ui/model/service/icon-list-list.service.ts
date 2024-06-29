@@ -39,8 +39,8 @@ export class IconListService {
   public getDocumentationList(): IconListItem[] {
     return [
       { label: "Quick Start Guide", urlTree: ['/resources', 'documentation', 'quick-start-guide'] },
-      { label: "HTTP Mocking Framework", urlTree: ['/resources', 'documentation', 'http-mocking-framework'] },
-      { label: "Subscription Service", /*urlTree: ['/resources', 'documentation']*/ },
+      { label: "HTTP Mocking Framework", /*urlTree: ['/resources', 'documentation', 'http-mocking-framework']*/ },
+      { label: "Subscription Service", urlTree: ['/resources', 'documentation', 'subscription-service'] },
       { label: "Dark Mode Service", /*urlTree: ['/resources', 'documentation']*/ },
       { label: "ButtonRole Directive", /*urlTree: ['/resources', 'documentation']*/ },
       { label: "AnchorLink Directive", /*urlTree: ['/resources', 'documentation']*/ },
