@@ -6,8 +6,8 @@
  * found in the LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
  */
 
-import { AbstractIdentifiable } from '../../../../../lib/core/impl';
-import { Identifiable, Uuid } from '../../../../../public-api';
+import { AbstractIdentifiable } from '../../../../lib/core/impl';
+import { Identifiable, Uuid } from '../../../../public-api';
 
 class IdentifiableImpl extends AbstractIdentifiable {
   constructor() {

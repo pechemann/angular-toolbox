@@ -9,7 +9,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BreadcrumbService } from '../../../ui/model/service/breadcrumb.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { HttpMockService, SafeHtmlPipe, SubscriptionService, VersionService, AppBrigeService } from 'angular-toolbox';
+import { HttpMockService, SafeHtmlPipe, SubscriptionService, VersionService, AppBrigeService, AbstractIdentifiable } from 'angular-toolbox';
 import { ActivatedRoute, UrlSegment } from '@angular/router';
 import { HighlightService } from '../../../ui/model/service/highlight.service';
 import { IconListComponent } from '../../../ui/component/icon-list/icon-list.component';
@@ -29,7 +29,7 @@ import { BreadcrumbItem } from '../../../ui/model/business/breadcrumb-item';
   templateUrl: './documentation.component.html',
   styleUrl: './documentation.component.scss'
 })
-export class DocumentationComponent implements OnInit, OnDestroy {
+export class DocumentationComponent extends AbstractIdentifiable implements OnInit, OnDestroy {
 
   protected page!: string;
   protected isHomePage: boolean = false;
@@ -44,6 +44,7 @@ export class DocumentationComponent implements OnInit, OnDestroy {
               private _route : ActivatedRoute,
               private _highlightService: HighlightService,
               private _appBridgService: AppBrigeService) {
+    super();
     this._breadcrumb.removeAll().addItem(this._breadcrumb.buildItem("Resources", "resources"));
   }
 

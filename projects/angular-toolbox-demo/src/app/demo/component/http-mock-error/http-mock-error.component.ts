@@ -11,7 +11,7 @@ import { CodeWrapper } from '../../../ui/model/business/code-wrapper';
 import { BreadcrumbService } from '../../../ui/model/service/breadcrumb.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { config } from './http-mock-error-config';
-import { SubscriptionService, HttpMockService } from 'angular-toolbox';
+import { SubscriptionService, HttpMockService, AbstractIdentifiable } from 'angular-toolbox';
 import { DemoComponent } from '../../../ui/component/demo/demo.component';
 import { catchError, of } from 'rxjs';
 import { RouterModule } from '@angular/router';
@@ -26,7 +26,7 @@ import { DocumentationLink } from '../../../ui/model/business/ducumentation-link
   ],
   templateUrl: './http-mock-error.component.html'
 })
-export class HttpMockErrorComponent implements OnDestroy {
+export class HttpMockErrorComponent extends AbstractIdentifiable implements OnDestroy {
 
   protected error!: string;
 
@@ -34,6 +34,7 @@ export class HttpMockErrorComponent implements OnDestroy {
               private _httpMockService: HttpMockService,
               private _subscription: SubscriptionService,
               breadcrumb: BreadcrumbService) {
+    super();
     breadcrumb.removeAll()
               .addItem(breadcrumb.buildItem("Demo"))
               .addItem(breadcrumb.buildItem("HTTP Mock Error"));

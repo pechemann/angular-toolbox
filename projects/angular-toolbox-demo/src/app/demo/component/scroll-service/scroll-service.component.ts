@@ -9,7 +9,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BreadcrumbService } from '../../../ui/model/service/breadcrumb.service';
 import { CodeWrapper } from '../../../ui/model/business/code-wrapper';
-import { ScrollService, SubscriptionService } from 'angular-toolbox';
+import { AbstractIdentifiable, ScrollService, SubscriptionService } from 'angular-toolbox';
 import { DemoComponent } from '../../../ui/component/demo/demo.component';
 
 @Component({
@@ -20,12 +20,13 @@ import { DemoComponent } from '../../../ui/component/demo/demo.component';
   ],
   templateUrl: './scroll-service.component.html'
 })
-export class ScrollServiceComponent implements OnInit, OnDestroy {
+export class ScrollServiceComponent extends AbstractIdentifiable implements OnInit, OnDestroy {
 
   constructor(breadcrumb: BreadcrumbService,
               private _scrollService: ScrollService,
               private _subscription: SubscriptionService) {
-     breadcrumb.removeAll()
+    super();
+    breadcrumb.removeAll()
       .addItem(breadcrumb.buildItem("Demo"))
       .addItem(breadcrumb.buildItem("Dark Mode Service"));
   }

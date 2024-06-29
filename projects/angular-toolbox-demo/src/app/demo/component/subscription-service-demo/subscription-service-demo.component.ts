@@ -9,7 +9,7 @@
 import { Component, EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { CodeWrapper } from '../../../ui/model/business/code-wrapper';
 import { BreadcrumbService } from '../../../ui/model/service/breadcrumb.service';
-import { SubscriptionService } from 'angular-toolbox';
+import { AbstractIdentifiable, SubscriptionService } from 'angular-toolbox';
 import { DemoComponent } from '../../../ui/component/demo/demo.component';
 
 @Component({
@@ -20,7 +20,7 @@ import { DemoComponent } from '../../../ui/component/demo/demo.component';
   ],
   templateUrl: './subscription-service-demo.component.html'
 })
-export class SubscriptionServiceComponent implements OnInit, OnDestroy {
+export class SubscriptionServiceComponent extends AbstractIdentifiable implements OnInit, OnDestroy {
 
   protected eventEmiter_1: EventEmitter<string> = new EventEmitter<string>();
   protected eventEmiter_2: EventEmitter<string> = new EventEmitter<string>();
@@ -30,6 +30,7 @@ export class SubscriptionServiceComponent implements OnInit, OnDestroy {
 
   constructor(private _subscriptionService: SubscriptionService,
               breadcrumb: BreadcrumbService) {
+    super();
     breadcrumb.removeAll()
               .addItem(breadcrumb.buildItem("Demo"))
               .addItem(breadcrumb.buildItem("Subscription Service"));

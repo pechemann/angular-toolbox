@@ -6,9 +6,12 @@
  * the LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
  */
 
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SubscriptionError } from '../../../core';
+import { AbstractIdentifiable } from '../../../core/impl';
+import { EMPTY_STRING } from '../../../util';
+import { Identifiable } from '../../business';
 
 @Injectable({
     providedIn: 'root'
@@ -35,12 +38,12 @@ export class SubscriptionService {
      * Stores a new `Subscription` instance associated with the specified reference.
      * 
      * @param ref The reference for which to store a new `Subscription` instance.
-     *            Can be either a string or a "destroyable" object.
+     *            Can be either a string or an "Identifiable" object.
      * @param subscription The `Subscription` instance to register.
      * 
      * @returns A reference to this `SubscriptionService` instance.
      */
-    public register(ref: string | OnDestroy, subscription: Subscription): SubscriptionService {
+    public register(ref: string | Identifiable, subscription: Subscription): SubscriptionService {
         const REF: string = this.getRef(ref);
         this._lastRef = REF;
         if (!this._subMap.has(REF)) this._subMap.set(REF, []);
@@ -65,11 +68,11 @@ export class SubscriptionService {
      * Unsubscribes and removes all `Subscription` instances associated with the specified reference.
      * 
      * @param ref The reference for which to remove all `Subscription` instances.
-     *            Can be either a string or a "destroyable" object.
+     *            Can be either a string or an "Identifiable" object.
      * 
      * @returns `true` whether the specified reference exists; `false` otherwise.
      */
-    public clearAll(ref: string | OnDestroy): boolean {
+    public clearAll(ref: string | Identifiable): boolean {
         const REF: string = this.getRef(ref);
         let result: boolean = false;
         if (this._lastRef === REF) this._lastRef = null;
@@ -87,12 +90,12 @@ export class SubscriptionService {
      * Returns all `Subscription` instances associated with the specified reference.
      * 
      * @param ref The reference for which to remove get `Subscription` instances.
-     *            Can be either a string or a "destroyable" object.
+     *            Can be either a string or an "Identifiable" object.
      * 
      * @returns All `Subscription` instances associated with the specified reference, or whether
      *          the specified reference does not exists.
      */
-    public get(ref: string | OnDestroy): Array<Subscription> | null {
+    public get(ref: string | Identifiable): Array<Subscription> | null {
         return this._subMap.get(this.getRef(ref)) || null;
     }
 
@@ -101,11 +104,15 @@ export class SubscriptionService {
      * Returns the string reference for the regsitration process. 
      * 
      * @param ref The reference to be used the regsitration process. 
-     *            Can be either a string or a "destroyable" object.
+     *            Can be either a string or an "Identifiable" object.
      * 
      * @returns the string reference for the regsitration process. 
      */
-    private getRef(ref: string | OnDestroy): string {
-        return typeof ref === "string" ? ref : ref.constructor.name;
+    private getRef(ref: string | Identifiable): string {
+        let targetRef: string;
+        if (typeof ref === "string") targetRef = ref;
+        else if (ref instanceof AbstractIdentifiable) targetRef = ref.getID().toString();
+        else throw new TypeError("ref must be of type of string or Identifiable");
+        return targetRef;
     }
 }
