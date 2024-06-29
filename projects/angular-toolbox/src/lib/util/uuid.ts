@@ -105,9 +105,9 @@ export class Uuid implements Destroyable {
     }
 
     /**
-     * Performs a validation process to ensure that the UUID string is not tracked the system.
+     * Performs a test to ensure that the UUID string is not tracked the system.
      * 
-     * @param uuid A UUID representation string to check.
+     * @param uuid A UUID representation string to test.
      * @returns `true` whether the `uuid` string parameter is tracked; `false` otherwise.
      */
     public static isTracked(uuid: string): boolean {
@@ -115,7 +115,7 @@ export class Uuid implements Destroyable {
     }
     
     /**
-     * Releases the specified `Uuid` instance from the tracking system and makes itelligible for garbage collection.
+     * Releases the `Uuid` instance from the tracking system and makes it elligible for garbage collection.
      * 
      * @returns `true` whether the `Uuid` instance was found and removed; `false` otherwise. 
      */

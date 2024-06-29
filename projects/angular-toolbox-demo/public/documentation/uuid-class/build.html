@@ -1,0 +1,58 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation/uuid-class'])" title="Uuid Class">
+                    <code>Uuid</code> Class
+                </a>
+            </li>
+        </ul>
+    </aside>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3"><code>Uuid.build()</code> Static Method</h2>
+    <p>
+        The <code>Uuid.build()</code> static method creates and returns a new <code>Uuid</code> instance.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3>Signature</h3>
+    <pre><code class="language-typescript">static build(track: boolean = false): Uuid</code></pre>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>track: boolean</code></dt>
+            <dd>
+                <p>
+                    If <code>true</code>, makes the associated UUID string elligible for tracking by the system.
+                </p>
+                <p>
+                    Default value is <code> false</code>.
+                </p>
+            </dd>
+        </dl>
+    </div>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <p>
+            A new <code>Uuid</code> instance.
+        </p>
+    </div>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'Uuid class', 'path': 'uuid-class' }, { 'label': 'Uuid.build() static method' }]">
+</object>
