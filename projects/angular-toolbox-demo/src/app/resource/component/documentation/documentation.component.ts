@@ -18,7 +18,7 @@ import { HttpMock } from 'projects/angular-toolbox/src/lib/framework/mock/http/p
 import { DOCUMENTATION_PROXY_CONFIG } from '../../proxy/documentation-proxy.config';
 import { BreadcrumbItem } from '../../../ui/model/business/breadcrumb-item';
 import { IconListItem } from '../../../ui/model/business/icon-list-item';
-import { DocumentationLinkMenu } from '../../../ui/model/business/documentation-link';
+import { DocumentationMenu } from '../../../ui/model/business/documentation-link';
 
 @HttpMock(DOCUMENTATION_PROXY_CONFIG) 
 @Component({
@@ -35,7 +35,7 @@ export class DocumentationComponent extends AbstractIdentifiable implements OnIn
 
   protected page!: string;
   protected isHomePage: boolean = false;
-  protected itemList!: IconListItem[];
+  protected itemListCollection: IconListItem[][] = [];
 
   constructor(public versionService: VersionService,
               //--> HttpMockService is declared only for @HttpForwardProxy reference:
@@ -59,7 +59,12 @@ export class DocumentationComponent extends AbstractIdentifiable implements OnIn
         this._breadcrumb.removeAll().addItem(this._breadcrumb.buildItem("Resources", "resources"));
         if (cursor === 1) {
           this._subsciptionService.register(this,
-            this._iconListService.getDocumentationList().subscribe((result: DocumentationLinkMenu)=> this.itemList = result.menu )
+            this._iconListService.getDocumentationList().subscribe((result: DocumentationMenu)=> {
+              const doc: any[] = result.documentation;
+              while(doc.length) {
+                this.itemListCollection.push(doc.splice(0,10));
+              }
+            })
           );
           this.isHomePage = true;
           setTimeout(()=> {
@@ -81,7 +86,7 @@ export class DocumentationComponent extends AbstractIdentifiable implements OnIn
               this.builBbreadcrumb();
             })
           })
-        )
+        );
       })
     );
     this._appBridgService.declareCommand(

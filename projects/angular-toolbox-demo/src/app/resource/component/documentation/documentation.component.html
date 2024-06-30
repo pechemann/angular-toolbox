@@ -25,10 +25,15 @@
         </div>
         <hr class="mb-5">
        <h2 class="mb-4">All Utilities Documentation</h2>
-       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-       </p>
-       <icon-list [itemList]="itemList"/>
+       <div class="row">
+        @for (item of itemListCollection; track item) {
+            <div class="col-md-6">
+                <icon-list [itemList]="item"/>
+            </div>
+        }
+       </div>
+       <hr class="mb-5">
+       <h2 class="mb-4">Articles</h2>
     } @else {
         <article [innerHTML]="page | safeHtml"></article>
     }

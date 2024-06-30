@@ -1,5 +1,5 @@
 {
-    "menu": [
+    "documentation": [
         { "label": "Quick Start Guide", "urlTree": [ "/resources", "documentation", "quick-start-guide" ] },
         { "label": "HTTP Mocking Framework" },
         { "label": "Subscription Service", "urlTree": [ "/resources", "documentation", "subscription-service" ] },

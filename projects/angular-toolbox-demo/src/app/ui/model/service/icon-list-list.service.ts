@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 import { IconListItem } from '../business/icon-list-item';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { DocumentationLinkMenu } from '../business/documentation-link';
+import { DocumentationMenu } from '../business/documentation-link';
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +41,7 @@ export class IconListService {
     ];
   }
 
-  public getDocumentationList(): Observable<DocumentationLinkMenu> {
-    return this._http.get<DocumentationLinkMenu>("https://pascalechemann.com/angular-toolbox/documentation/menu/menu.json");
+  public getDocumentationList(): Observable<DocumentationMenu> {
+    return this._http.get<DocumentationMenu>("https://pascalechemann.com/angular-toolbox/documentation/menu/menu.json");
   }
 }

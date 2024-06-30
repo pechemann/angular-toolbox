@@ -20,10 +20,10 @@
 </nav>
 
 <header class="fs-5 col-xl-9 mb-4">
-    <h2 class="mb-3"><code>SubscriptionService.register()</code> Method</h2>
+    <h2 class="mb-3"><code>SubscriptionService.append()</code> Method</h2>
     <p>
-        The <code>SubscriptionService.register()</code> method allows to strore new <code>Subscription</code> instance,
-        associated with the specified reference.
+        The <code>SubscriptionService.append()</code> method allows to register a new <code>Subscription</code>
+        instance associated with the reference specified by the last <code>register()</code> method invokation.
     </p>
     <p>
         The <code>Subscription</code> will be unsubscribed when the 
@@ -34,19 +34,9 @@
 
 <section class="col-xl-9 mb-4">
     <h3>Signature</h3>
-    <pre><code class="language-typescript">register(ref: string | Identifiable, subscription: Subscription): SubscriptionService</code></pre>
+    <pre><code class="language-typescript">append(subscription: Subscription): SubscriptionService</code></pre>
     <h5>Parameters</h5>
     <div class="border rounded p-3">
-        <dl>
-            <dt><code>ref: string | Identifiable</code></dt>
-            <dd>
-                <p>
-                    The reference for which to store a new <code>Subscription</code> instance. Can be either a string or an <code>Identifiable</code> object.
-                    <br>
-                    See <a href="javascript:appBridge.navigate(['resources/documentation/identifiable-interface'])" title="Identifiable"><code>Identifiable</code></a> for details.
-                </p>
-            </dd>
-        </dl>
         <dl>
             <dt><code>subscription: Subscription</code></dt>
             <dd>
@@ -67,29 +57,45 @@
     <h5 class="mt-3">Exeptions</h5>
     <div class="border rounded p-3">
         <dl>
-            <dt><code>TypeError</code></dt>
+            <dt><code>SubscriptionError</code></dt>
             <dd>
                 <p>
-                    Thrown when the <code>ref</code> parameter is neither a string, nor an <code>AbstractIdentifiable</code>
-                    instance.
+                    Thrown when the <code>register()</code> method have not been called before this
+                    <code>append()</code> method invokation.
                 </p>
             </dd>
         </dl>
     </div>
 </section>
 
-
 <section class="col-xl-9 mb-4">
     <h3 id="presentation">Usage</h3>
     <figure>
         <figcaption>Angular component:</figcaption>
         <pre><code class="language-typescript">this.subsciptionService.register(this,
-    this.http.get("/my-api/data").subscribe(result => this.result = result.data)
+    this.http.get("/my-api/foo").subscribe(result => this.foo = result.foo)
+).append(
+    this.http.get("/my-api/bar").subscribe(result => this.bar = result.bar)
 );</code></pre></figure>
-</section>
+            <p>The sample code above is to the following one:</p>
+    <figure>
+        <figcaption>Angular component:</figcaption>
+        <pre><code class="language-typescript">this.subsciptionService.register(this,
+    this.http.get("/my-api/foo").subscribe(result => this.foo = result.foo)
+).register(this,
+    this.http.get("/my-api/bar").subscribe(result => this.bar = result.bar)
+);</code></pre></figure>
 
+    <div class="alert alert-danger flex-icon" role="alert">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.15.15 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.2.2 0 0 1-.054.06.1.1 0 0 1-.066.017H1.146a.1.1 0 0 1-.066-.017.2.2 0 0 1-.054-.06.18.18 0 0 1 .002-.183L7.884 2.073a.15.15 0 0 1 .054-.057m1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767z"/>
+            <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z"/>
+          </svg>
+        You should not use the <code>append()</code> method out of a chaining method context.
+    </div>
+</section>
 
 <!-- We use a data object to store navigation tree structure-->
 <object id="navigation-tree"
-        data-tree="[{ 'label': 'Subscription Service', 'path': 'subscription-service' }, { 'label': 'SubscriptionService.register() method' }]">
+        data-tree="[{ 'label': 'Subscription Service', 'path': 'subscription-service' }, { 'label': 'SubscriptionService.append() method' }]">
 </object>

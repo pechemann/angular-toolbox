@@ -7,8 +7,8 @@
  */
 
 
-export interface DocumentationLinkMenu {
-    menu: DocumentationLink[];
+export interface DocumentationMenu {
+    documentation: DocumentationLink[];
 }
 
 export interface DocumentationLink {

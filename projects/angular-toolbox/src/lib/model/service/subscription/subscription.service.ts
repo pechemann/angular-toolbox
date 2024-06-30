@@ -38,7 +38,7 @@ export class SubscriptionService {
      * Stores a new `Subscription` instance associated with the specified reference.
      * 
      * @param ref The reference for which to store a new `Subscription` instance.
-     *            Can be either a string or an "Identifiable" object.
+     *            Can be either a string or an `Identifiable` object.
      * @param subscription The `Subscription` instance to register.
      * 
      * @returns A reference to this `SubscriptionService` instance.
@@ -68,7 +68,7 @@ export class SubscriptionService {
      * Unsubscribes and removes all `Subscription` instances associated with the specified reference.
      * 
      * @param ref The reference for which to remove all `Subscription` instances.
-     *            Can be either a string or an "Identifiable" object.
+     *            Can be either a string or an `Identifiable` object.
      * 
      * @returns `true` whether the specified reference exists; `false` otherwise.
      */
@@ -90,10 +90,10 @@ export class SubscriptionService {
      * Returns all `Subscription` instances associated with the specified reference.
      * 
      * @param ref The reference for which to remove get `Subscription` instances.
-     *            Can be either a string or an "Identifiable" object.
+     *            Can be either a string or an `Identifiable` object.
      * 
-     * @returns All `Subscription` instances associated with the specified reference, or whether
-     *          the specified reference does not exists.
+     * @returns All `Subscription` instances associated with the specified reference, or 
+     *          `null` whether the specified reference does not exists.
      */
     public get(ref: string | Identifiable): Array<Subscription> | null {
         return this._subMap.get(this.getRef(ref)) || null;
@@ -104,7 +104,7 @@ export class SubscriptionService {
      * Returns the string reference for the regsitration process. 
      * 
      * @param ref The reference to be used the regsitration process. 
-     *            Can be either a string or an "Identifiable" object.
+     *            Can be either a string or an `Identifiable` object.
      * 
      * @returns the string reference for the regsitration process. 
      */

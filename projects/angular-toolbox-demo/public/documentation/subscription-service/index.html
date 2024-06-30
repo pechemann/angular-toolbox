@@ -158,7 +158,7 @@
     <p>
         The following code sample shows how easilly implement the <em>Subscription</em> Service:
     </p>
-    <div class="card">
+    <div class="card mb-4">
         <div class="card-body">
             <h5 class="card-title mb-2">Code</h5>
             <figure>
@@ -171,12 +171,12 @@
     &lt;ul&gt;
         &#64;for (item of eventList; track item) &#123;
             &lt;li&gt;&#123;&#123; item &#125;&#125;&lt;/li&gt;
-            &#125;
+        &#125;
     &lt;/ul&gt;
 &lt;/div&gt;</code></pre></figure>
             <figure>
                 <figcaption>Angular Component:</figcaption>
-                <pre><code class="language-typescript">export class SubscriptionServiceComponent implements OnInit, OnDestroy &#123;
+                <pre><code class="language-typescript">export class SubscriptionServiceComponent extends AbstractIdentifiable implements OnInit, OnDestroy &#123;
 
     protected eventEmiter_1: EventEmitter<string> = new EventEmitter<string>();
     protected eventEmiter_2: EventEmitter<string> = new EventEmitter<string>();
@@ -198,7 +198,7 @@
 
     public ngOnDestroy(): void &#123;
         this._subscriptionService.clearAll(this);
-        &#125;
+    &#125;
 &#125;</code></pre></figure>
              <h5 class="card-title mb-2">Code</h5>
              <p>
@@ -207,6 +207,35 @@
              <button class="btn btn-primary btn-lg" onclick="appBridge.navigate(['demo/subscription-service'])" title="Subscription Service Demo">
                 Subscription Service Demo
             </button>
+        </div>
+    </div>
+    <p>
+        You can use a string reference, instead of a <code>Identifiable</code> object, to manage subscriptions:
+    </p>
+    <div class="card">
+        <div class="card-body">
+            <figure>
+                <figcaption>Angular Component:</figcaption>
+                <pre><code class="language-typescript">const COMP_REF: string = "SubscriptionServiceComponent";
+
+export class SubscriptionServiceComponent implements OnInit, OnDestroy &#123;
+
+    ...
+
+    constructor(private _subscriptionService: SubscriptionService) &#123;&#125;
+
+    public ngOnInit(): void &#123;
+        this._subscriptionService.register(COMP_REF,
+            this.eventEmiter_1.subscribe(next => this.eventList.push(next + this._event1_Idx++))
+        ).append(
+            this.eventEmiter_2.subscribe(next => this.eventList.push(next + this._event2_Idx++))
+        );
+    &#125;
+
+    public ngOnDestroy(): void &#123;
+        this._subscriptionService.clearAll(COMP_REF);
+    &#125;
+&#125;</code></pre></figure>
         </div>
     </div>
 </section>
