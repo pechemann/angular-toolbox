@@ -20,29 +20,19 @@
 </nav>
 
 <header class="fs-5 col-xl-9 mb-4">
-    <h2 class="mb-3"><code>DarkModeService.change</code> Property</h2>
+    <h2 class="mb-3"><code>DarkModeService.disableDarkMode()</code> Method</h2>
     <p>
-        The <code>DarkModeService.change</code> property is an <code>EventEmitter</code> object
-        that triggers events when the dark state has changed.
+        The <code>DarkModeService.disableDarkMode()</code> method sets the dark mode state of an application to <em>inactive</em>.
     </p>
     <hr class="mt-4">
 </header>
 
 <section class="col-xl-9 mb-4">
     <h3>Signature</h3>
-    <pre><code class="language-typescript">readonly change: EventEmitter&lt;boolean&gt;<boolean></code></pre>
-    <h5>Type</h5>
-    <div class="border rounded p-3">
-        <dl>
-            <dt><code>EventEmitter&lt;boolean&gt;</code></dt>
-            <dd>
-                <p>
-                    Emits events containing a boolean value that indicates whether the dark mode is active (<code>true</code>),
-                    or not (<code>false</code>).
-                </p>
-            </dd>
-        </dl>
-    </div>
+    <pre><code class="language-typescript">disableDarkMode(): void</code></pre>
+    <p>
+        Sets the dark mode state to <em>inactive</em>.
+    </p>
 </section>
 
 
@@ -50,13 +40,14 @@
     <h3 id="usage">Usage</h3>
     <figure>
         <figcaption>Angular component:</figcaption>
-        <pre><code class="language-typescript">this.darkModeService.change(
-    (enabled: boolean)=> console.log("Dark mode enabled: ", enabled)
-);</code></pre></figure>
+        <pre><code class="language-typescript">this.darkModeService.disableDarkMode();
+console.log(this.darkModeService.darkModeEnabled());
+// Output: false</code></pre></figure>
+
 </section>
 
 
 <!-- We use a data object to store navigation tree structure-->
 <object id="navigation-tree"
-    data-tree="[{ 'label': 'Dark Mode Service', 'path': 'dark-mode-service' }, { 'label': 'SubscriptionService.change Property' }]">
+    data-tree="[{ 'label': 'Dark Mode Service', 'path': 'dark-mode-service' }, { 'label': 'DarkModeService.disableDarkMode() Method' }]">
 </object>

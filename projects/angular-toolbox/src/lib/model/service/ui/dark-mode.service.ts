@@ -91,7 +91,7 @@ export class DarkModeService {
     }
 
     /**
-     * Returns a `boolean` value that indicates the dark mode state is active (`true`), or not (`false`).
+     * Returns a `boolean` value that indicates whether the dark mode state is active (`true`), or not (`false`).
      * 
      * @returns `true` whether the dark mode state is active; `false` otherwise.
      */

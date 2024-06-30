@@ -10,7 +10,6 @@
     <section class="w-100">
         <h5 class="mb-4">On this page</h5>
         <ul class="list-group">
-            <li class="list-group-item"><a href="#motivation" onclick="appBridge.goToAnchor(event)" title="motivation">Motivation</a></li>
             <li class="list-group-item"><a href="#api" onclick="appBridge.goToAnchor(event)" title="API">API</a></li>
             <li class="list-group-item"><a href="#configuration" onclick="appBridge.goToAnchor(event)" title="API">Configuration</a></li>
         </ul>
@@ -24,11 +23,6 @@
     </p>
     <hr class="mt-4">
 </header>
-
-<section class="col-xl-9 mb-4">
-    <h3 id="motivation">Motivation</h3>
-    
-</section>
 
 <section class="col-xl-9 mb-4">
     <h3 id="api">API</h3>
@@ -99,8 +93,110 @@
                 </button>
             </td>
           </tr>
-          
+          <tr>
+            <th><code>disableDarkMode()</code></th>
+            <td>
+                Sets the dark mode state to <em>inactive</em>.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/dark-mode-service/disable-dark-mode'])" title="disableDarkMode()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <th><code>enableDarkMode()</code></th>
+            <td>
+                Sets the dark mode state to <em>active</em>.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/dark-mode-service/enable-dark-mode'])" title="enableDarkMode()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <th><code>darkModeEnabled()</code></th>
+            <td>
+                Indicates whether the dark mode state is <em>active</em>, or not.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/dark-mode-service/dark-mode-enabled'])" title="darkModeEnabled()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <th><code>getStorageKey()</code></th>
+            <td>
+                Gets the value of the storage key as defined by the config provider.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/dark-mode-service/get-storage-key'])" title="getStorageKey()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <th><code>getCssProperty()</code></th>
+            <td>
+                Gets the value of the CSS property as defined by the config provider.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/dark-mode-service/get-css-property'])" title="getCssProperty()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <th><code>invalidateStorage()</code></th>
+            <td>
+                Removes the dark mode settings information from local storage.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/dark-mode-service/invalidate-storage'])" title="invalidateStorage()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
         </tbody>
+        <thead>
+            <tr>
+              <th scope="col">Constant</th>
+              <th scope="col">Description</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th><code>STORAGE_KEY</code></th>
+              <td>
+                Reference to the dark mode default storage key. Value is <code>"dark-mode-key"</code>
+              </td>
+              <td>
+              </td>
+            </tr>
+            <tr>
+                <th><code>CSS_PROP</code></th>
+                <td>
+                    Reference to the dark mode default css property. Value is <code>"dark-mode"</code>
+                </td>
+                <td>
+                </td>
+              </tr>
+          </tbody>
         <thead>
           <tr>
             <th scope="col">Provider</th>
@@ -112,7 +208,7 @@
           <tr>
             <th><code>DARK_MODE_CONFIG</code></th>
             <td>
-               
+                The default provider for the <code>DarkModeService</code> configuration.
             </td>
             <td>
                 <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/dark-mode-service/dark-mode-config-provider'])" title="DARK_MODE_CONFIG">

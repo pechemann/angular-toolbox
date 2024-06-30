@@ -20,43 +20,37 @@
 </nav>
 
 <header class="fs-5 col-xl-9 mb-4">
-    <h2 class="mb-3"><code>DarkModeService.change</code> Property</h2>
+    <h2 class="mb-3"><code>DarkModeService.getCssProperty()</code> Method</h2>
     <p>
-        The <code>DarkModeService.change</code> property is an <code>EventEmitter</code> object
-        that triggers events when the dark state has changed.
+        The <code>DarkModeService.getCssProperty()</code> method indicates the value of the CSS property as defined by the config provider.
     </p>
     <hr class="mt-4">
 </header>
 
 <section class="col-xl-9 mb-4">
     <h3>Signature</h3>
-    <pre><code class="language-typescript">readonly change: EventEmitter&lt;boolean&gt;<boolean></code></pre>
-    <h5>Type</h5>
+    <pre><code class="language-typescript">getCssProperty(): string</code></pre>
+    <h5 class="mt-3">Returns</h5>
     <div class="border rounded p-3">
-        <dl>
-            <dt><code>EventEmitter&lt;boolean&gt;</code></dt>
-            <dd>
-                <p>
-                    Emits events containing a boolean value that indicates whether the dark mode is active (<code>true</code>),
-                    or not (<code>false</code>).
-                </p>
-            </dd>
-        </dl>
+        <code>string</code>
+        <p>
+            The the value of the CSS property as defined by the config provider.
+            <br>
+            Default valus is <code>"dark-mode"</code>.
+        </p>
     </div>
 </section>
-
 
 <section class="col-xl-9 mb-4">
     <h3 id="usage">Usage</h3>
     <figure>
         <figcaption>Angular component:</figcaption>
-        <pre><code class="language-typescript">this.darkModeService.change(
-    (enabled: boolean)=> console.log("Dark mode enabled: ", enabled)
-);</code></pre></figure>
+        <pre><code class="language-typescript">this.darkModeService.getCssProperty();
+// Output: dark-mode</code></pre></figure>
 </section>
 
 
 <!-- We use a data object to store navigation tree structure-->
 <object id="navigation-tree"
-    data-tree="[{ 'label': 'Dark Mode Service', 'path': 'dark-mode-service' }, { 'label': 'SubscriptionService.change Property' }]">
+    data-tree="[{ 'label': 'Dark Mode Service', 'path': 'dark-mode-service' }, { 'label': 'DarkModeService.getCssProperty() Method' }]">
 </object>
