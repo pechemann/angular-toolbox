@@ -4,7 +4,7 @@
         { "label": "HTTP Mocking Framework" },
         { "label": "Subscription Service", "urlTree": [ "/resources", "documentation", "subscription-service" ] },
         { "label": "Dark Mode Service", "urlTree": [ "/resources", "documentation", "dark-mode-service" ] },
-        { "label": "ButtonRole Directive" },
+        { "label": "ButtonRole Directive", "urlTree": [ "/resources", "documentation", "button-role-directive" ] },
         { "label": "AnchorLink Directive" },
         { "label": "NavigateToUrlDirective Directive" },
         { "label": "Version Service" },
