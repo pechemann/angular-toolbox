@@ -14,13 +14,13 @@ import { ActivatedRoute, UrlSegment } from '@angular/router';
 import { HighlightService } from '../../../ui/model/service/highlight.service';
 import { IconListComponent } from '../../../ui/component/icon-list/icon-list.component';
 import { IconListService } from '../../../ui/model/service/icon-list-list.service';
-import { HttpForwardProxy } from 'projects/angular-toolbox/src/lib/framework/mock/http/proxy';
+import { HttpMock } from 'projects/angular-toolbox/src/lib/framework/mock/http/proxy';
 import { DOCUMENTATION_PROXY_CONFIG } from '../../proxy/documentation-proxy.config';
 import { BreadcrumbItem } from '../../../ui/model/business/breadcrumb-item';
 import { IconListItem } from '../../../ui/model/business/icon-list-item';
 import { DocumentationLinkMenu } from '../../../ui/model/business/documentation-link';
 
-@HttpForwardProxy(DOCUMENTATION_PROXY_CONFIG) 
+@HttpMock(DOCUMENTATION_PROXY_CONFIG) 
 @Component({
   selector: 'app-documentation',
   standalone: true,
@@ -48,7 +48,6 @@ export class DocumentationComponent extends AbstractIdentifiable implements OnIn
               private _appBridgService: AppBrigeService,
               private _iconListService: IconListService) {
     super();
-    this._breadcrumb.removeAll().addItem(this._breadcrumb.buildItem("Resources", "resources"));
   }
 
   public ngOnInit(): void {
@@ -57,6 +56,7 @@ export class DocumentationComponent extends AbstractIdentifiable implements OnIn
     this._subsciptionService.register(this,
       this._route.url.subscribe((segments: UrlSegment[])=> {
         const cursor: number = segments.length;
+        this._breadcrumb.removeAll().addItem(this._breadcrumb.buildItem("Resources", "resources"));
         if (cursor === 1) {
           this._subsciptionService.register(this,
             this._iconListService.getDocumentationList().subscribe((result: DocumentationLinkMenu)=> this.itemList = result.menu )

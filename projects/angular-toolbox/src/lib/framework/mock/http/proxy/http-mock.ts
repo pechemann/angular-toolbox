@@ -13,7 +13,7 @@ import { HttpMockService } from "../../../../model";
  * @param config 
  * @returns 
  */
-export const HttpForwardProxy: Function = (config: any): Function=> {
+export const HttpMock: Function = (config: any): Function=> {
     return (constructor: any)=> {
         const getMockService = (instance: any): HttpMockService => {
             const mockService: HttpMockService = Object.values(instance).find((v: any)=> v.constructor.name === "HttpMockService") as any;
