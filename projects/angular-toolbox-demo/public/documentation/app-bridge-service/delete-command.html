@@ -30,7 +30,7 @@
 
 <section class="col-xl-9 mb-4">
     <h3>Signature</h3>
-    <pre><code class="language-typescript">deleteCommand(name: string): void</code></pre>
+    <pre><code class="language-typescript">deleteCommand(name: string): boolean</code></pre>
     <h5>Parameters</h5>
     <div class="border rounded p-3">
         <dl>
@@ -44,6 +44,7 @@
     </div>
     <h5 class="mt-3">Returns</h5>
     <div class="border rounded p-3">
+        <code>boolean</code>
         <p>
             <code>true</code> whether the command existed and has been removed; <code>false</code> otherwise.
         </p>

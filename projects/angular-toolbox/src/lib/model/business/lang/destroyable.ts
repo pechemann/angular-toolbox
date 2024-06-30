@@ -14,5 +14,5 @@ export interface Destroyable {
     /**
      * Makes an object elligible for garbage collection.
      */
-    destroy(): any;
+    destroy(): void | any;
 }

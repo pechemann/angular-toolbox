@@ -24,16 +24,19 @@
             </p>
         </div>
         <hr class="mb-5">
-       <h2 class="mb-4">All Utilities Documentation</h2>
-       <div class="row">
-        @for (item of itemListCollection; track item) {
-            <div class="col-md-6">
-                <icon-list [itemList]="item"/>
-            </div>
-        }
+        <h2 class="mb-4">All Utilities Documentation</h2>
+        <div class="row">
+            @for (item of itemListCollection; track item) {
+                <div class="col-md-6">
+                    <icon-list [itemList]="item"/>
+                </div>
+            }
+        </div>
+        <hr class="mb-5">
+        <h2 class="mb-4">Articles</h2>
+        <div class="row">
+        <icon-list [itemList]="articles"/>
        </div>
-       <hr class="mb-5">
-       <h2 class="mb-4">Articles</h2>
     } @else {
         <article [innerHTML]="page | safeHtml"></article>
     }

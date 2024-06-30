@@ -9,6 +9,7 @@
 
 export interface DocumentationMenu {
     documentation: DocumentationLink[];
+    articles: DocumentationLink[];
 }
 
 export interface DocumentationLink {

@@ -29,7 +29,7 @@
 
 <section class="col-xl-9 mb-4">
     <h3>Signature</h3>
-    <pre><code class="language-typescript">get(ref: string | Identifiable): Array<Subscription> | null</code></pre>
+    <pre><code class="language-typescript">get(ref: string | Identifiable): Array&lt;Subscription&gt; | null</code></pre>
     <h5>Parameters</h5>
     <div class="border rounded p-3">
         <dl>
@@ -45,6 +45,7 @@
     </div>
     <h5 class="mt-3">Returns</h5>
     <div class="border rounded p-3">
+        <code>Array&lt;Subscription&gt; | null</code>
         <p>
             All <code>Subscription</code> instances associated with the specified reference, or <code>null</code> whether
             the specified reference does not exists.

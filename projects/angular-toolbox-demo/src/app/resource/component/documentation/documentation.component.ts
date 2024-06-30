@@ -36,6 +36,7 @@ export class DocumentationComponent extends AbstractIdentifiable implements OnIn
   protected page!: string;
   protected isHomePage: boolean = false;
   protected itemListCollection: IconListItem[][] = [];
+  protected articles!: IconListItem[];
 
   constructor(public versionService: VersionService,
               //--> HttpMockService is declared only for @HttpForwardProxy reference:
@@ -56,7 +57,9 @@ export class DocumentationComponent extends AbstractIdentifiable implements OnIn
     this._subsciptionService.register(this,
       this._route.url.subscribe((segments: UrlSegment[])=> {
         const cursor: number = segments.length;
-        this._breadcrumb.removeAll().addItem(this._breadcrumb.buildItem("Resources", "resources"));
+        setTimeout(()=> {
+          this._breadcrumb.removeAll().addItem(this._breadcrumb.buildItem("Resources", "resources"));
+        });
         if (cursor === 1) {
           this._subsciptionService.register(this,
             this._iconListService.getDocumentationList().subscribe((result: DocumentationMenu)=> {
@@ -64,6 +67,7 @@ export class DocumentationComponent extends AbstractIdentifiable implements OnIn
               while(doc.length) {
                 this.itemListCollection.push(doc.splice(0,10));
               }
+              this.articles = result.articles;
             })
           );
           this.isHomePage = true;

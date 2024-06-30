@@ -1,0 +1,74 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
+-->
+ 
+<nav class="page-menu col-xl-3 ps-4">
+    <section class="w-100">
+        <h5 class="mb-4">On this page</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="#darkModeEnabled" onclick="appBridge.goToAnchor(event)" title="darkModeEnabled">darkModeEnabled</a></li>
+            <li class="list-group-item"><a href="#detectBrowserSettings" onclick="appBridge.goToAnchor(event)" title="detectBrowserSettings">detectBrowserSettings</a></li>
+            <li class="list-group-item"><a href="#cssProperty" onclick="appBridge.goToAnchor(event)" title="cssProperty">cssProperty</a></li>
+            <li class="list-group-item"><a href="#storageKey" onclick="appBridge.goToAnchor(event)" title="storageKey">storageKey</a></li>
+        </ul>
+        <ul class="list-group mt-4">
+            <li class="list-group-item icon-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation'])" title="Documentation">
+                    Documentation
+                </a>
+            </li>
+        </div>
+    </section>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3"><code>DarkModeConfig</code> Interface</h2>
+    <p>
+        The <code>DarkModeConfig</code> defines properties used to configure <code>DarkModeService</code> instances.
+    </p>
+    
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="darkModeEnabled"><code>DarkModeConfig.darkModeEnabled</code></h3>
+    <pre><code class="language-typescript">darkModeEnabled?: boolean</code></pre>
+    <p>
+        A boolean value that indicates whether the dark mode is activated by default (<code>true</code>), or not (<code>false</code>).
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="detectBrowserSettings"><code>DarkModeConfig.detectBrowserSettings</code></h3>
+    <pre><code class="language-typescript">detectBrowserSettings?: boolean</code></pre>
+    <p>
+        A boolean value that indicates whether the dark mode uses browser settings (<code>true</code>), or not (<code>false</code>).
+        <br>
+        When <code>true</code>, this property overrides the <code>darkModeEnabled</code> property.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="cssProperty"><code>DarkModeConfig.cssProperty</code></h3>
+    <pre><code class="language-typescript">cssProperty?: string</code></pre>
+    <p>
+        The name of the CSS property used to set the dark mode look and feel.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="storageKey"><code>DarkModeConfig.storageKey</code></h3>
+    <pre><code class="language-typescript">storageKey?: string</code></pre>
+    <p>
+        The reference to the key value used to persist the dark mode state to local storage.
+    </p>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+    data-tree="[{ 'label': 'Dark Mode Service', 'path': 'dark-mode-service' }, { 'label': 'DarkModeConfig interface' }]">
+</object>

@@ -1,0 +1,62 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation/dark-mode-service'])" title="Dark Mode Service">
+                    Dark Mode Service
+                </a>
+            </li>
+        </ul>
+    </aside>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3"><code>DarkModeService.change</code> Property</h2>
+    <p>
+        The <code>DarkModeService.change</code> property is an <code>EventEmitter</code> object
+        that triggers events when the dark state has changed.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3>Signature</h3>
+    <pre><code class="language-typescript">readonly change: EventEmitter&lt;boolean&gt;<boolean></code></pre>
+    <h5>Type</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>EventEmitter&lt;boolean&gt;</code></dt>
+            <dd>
+                <p>
+                    Emits events containing a boolean value that indicates whether the dark mode is active (<code>true</code>),
+                    or not (<code>false</code>).
+                </p>
+            </dd>
+        </dl>
+    </div>
+</section>
+
+
+<section class="col-xl-9 mb-4">
+    <h3 id="presentation">Usage</h3>
+    <figure>
+        <figcaption>Angular component:</figcaption>
+        <pre><code class="language-typescript">this.darkModeService.change(
+    (enabled: boolean)=> console.log("Dark mode enabled: ", enabled)
+);</code></pre></figure>
+</section>
+
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+    data-tree="[{ 'label': 'Dark Mode Service', 'path': 'dark-mode-service' }, { 'label': 'SubscriptionService.change Property' }]">
+</object>
