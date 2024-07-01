@@ -10,6 +10,7 @@ import { Component, Inject, ViewChild } from '@angular/core';
 import { BreadcrumbService } from '../ui/model/service/breadcrumb.service';
 import { DarkModeService } from 'angular-toolbox';
 import { DOCUMENT } from '@angular/common';
+import { RouterModule, RouterOutlet } from '@angular/router';
 
 const LIGHT: string = 'light';
 const DARK: string = 'dark';
@@ -18,7 +19,12 @@ const BS_ATTRIBUTE: string = 'data-bs-theme';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [
+    RouterOutlet,
+    RouterModule
+  ]
 })
 export class AppComponent {
 

@@ -6,10 +6,9 @@
  * found in the LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
  */
 
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     redirectTo: 'home',
@@ -28,9 +27,3 @@ const routes: Routes = [
     loadChildren: () => import('./resource/resource.module').then(m => m.ResourceModule)
   }
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }
