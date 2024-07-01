@@ -12,6 +12,7 @@ import { CodeWrapper } from '../../../ui/model/business/code-wrapper';
 import { BreadcrumbService } from '../../../ui/model/service/breadcrumb.service';
 import { DatePipe } from '@angular/common';
 import { DemoComponent } from '../../../ui/component/demo/demo.component';
+import { DocumentationLink } from '../../../ui/model/business/documentation-link';
 
 @Component({
   selector: 'app-version-service',
@@ -31,6 +32,11 @@ export class VersionServiceComponent {
               .addItem(breadcrumb.buildItem("Version Service"));
   }
 
+
+  protected documentation: DocumentationLink = {
+    label: "Version Service",
+    commands: ['/resources', 'documentation', 'version-service']
+  };
   protected title: string = "Version Service Demo";
   protected presentation: string = "A lightweight service that provides Semantic Versionning implementation for your Angular projects.";
   protected srcCode: CodeWrapper = {

@@ -11,6 +11,7 @@ import { CodeWrapper } from '../../../ui/model/business/code-wrapper';
 import { BreadcrumbService } from '../../../ui/model/service/breadcrumb.service';
 import { AbstractIdentifiable, SubscriptionService } from 'angular-toolbox';
 import { DemoComponent } from '../../../ui/component/demo/demo.component';
+import { DocumentationLink } from '../../../ui/model/business/documentation-link';
 
 @Component({
   selector: 'app-subscription-service-demo',
@@ -36,6 +37,10 @@ export class SubscriptionServiceComponent extends AbstractIdentifiable implement
               .addItem(breadcrumb.buildItem("Subscription Service"));
   }
 
+  protected documentation: DocumentationLink = {
+    label: "Subscription Service",
+    commands: ['/resources', 'documentation', 'subscription-service']
+  };
   protected title: string = "Subscription Service Demo";
   protected presentation: string = "A lightweight service that provides easy-to-use functionalities for managing observable subscriptions.";
   protected srcCode: CodeWrapper = {

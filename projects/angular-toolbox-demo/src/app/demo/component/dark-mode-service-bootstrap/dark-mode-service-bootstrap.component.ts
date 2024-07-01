@@ -11,6 +11,7 @@ import { DarkModeService } from 'angular-toolbox';
 import { CodeWrapper } from '../../../ui/model/business/code-wrapper';
 import { BreadcrumbService } from '../../../ui/model/service/breadcrumb.service';
 import { DemoComponent } from '../../../ui/component/demo/demo.component';
+import { DocumentationLink } from '../../../ui/model/business/documentation-link';
 
 @Component({
   selector: 'app-dark-mode-service-bootstrap',
@@ -30,6 +31,10 @@ export class DarkModeServiceBootstrapComponent {
               .addItem(breadcrumb.buildItem("Dark Mode Service"));
   }
 
+  protected documentation: DocumentationLink = {
+    label: "Dark Mode Service",
+    commands: ['/resources', 'documentation', 'dark-mode-service']
+  };
   protected title: string = "Dark Mode Service: Bootstrap Integration";
   protected presentation: string = "The following sample application shows how to easily integrate Bootstrap with the <code>DarkModeService</code> service.";
   protected srcCode: CodeWrapper = {

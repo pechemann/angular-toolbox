@@ -11,6 +11,7 @@ import { BreadcrumbService } from '../../../ui/model/service/breadcrumb.service'
 import { CodeWrapper } from '../../../ui/model/business/code-wrapper';
 import { AbstractIdentifiable, ScrollService, SubscriptionService } from 'angular-toolbox';
 import { DemoComponent } from '../../../ui/component/demo/demo.component';
+import { DocumentationLink } from '../../../ui/model/business/documentation-link';
 
 @Component({
   selector: 'scroll-service',
@@ -31,6 +32,10 @@ export class ScrollServiceComponent extends AbstractIdentifiable implements OnIn
       .addItem(breadcrumb.buildItem("Dark Mode Service"));
   }
 
+  protected documentation: DocumentationLink = {
+    label: "Scroll Service",
+    commands: ['/resources', 'documentation', 'scroll-service']
+  };
   protected title: string = "Scroll Service Demo";
   protected presentation: string = "A lightweight service that provides scrolling capabilities to your Angular application.";
   protected srcCode: CodeWrapper = {

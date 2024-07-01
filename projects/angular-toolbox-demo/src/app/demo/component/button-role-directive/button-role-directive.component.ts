@@ -12,6 +12,7 @@ import { BreadcrumbService } from '../../../ui/model/service/breadcrumb.service'
 import { USER_LIST_MOCK, User } from '../subscription-service-demo/user-list.mock';
 import { DemoComponent } from '../../../ui/component/demo/demo.component';
 import { ButtonRoleDirective } from 'angular-toolbox';
+import { DocumentationLink } from '../../../ui/model/business/documentation-link';
 
 @Component({
   selector: 'app-button-role-directive',
@@ -37,6 +38,10 @@ export class ButtonRoleDirectiveComponent {
               .addItem(breadcrumb.buildItem("ButtonRole Directive"));
   }
 
+  protected documentation: DocumentationLink = {
+    label: "ButtonRole Directive",
+    commands: ['/resources', 'documentation', 'button-role-directive']
+  };
   protected title: string = "ButtonRole Directive Demo";
   protected presentation: string = "An easy-to-use directive that enables keyboard navigation and provides support for keyboard <code>Enter</code> key events";
   protected srcCode: CodeWrapper = {
