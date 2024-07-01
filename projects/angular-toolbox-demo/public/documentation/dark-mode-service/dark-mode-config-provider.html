@@ -19,6 +19,11 @@
         <ul class="list-group mt-4">
             <li class="list-group-item icon-item">
                 <a href="javascript:appBridge.navigate(['resources/documentation/dark-mode-service'])" title="Dark Mode Service">
+                    DarkModeService
+                </a>
+            </li>
+            <li class="list-group-item icon-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation'])" title="Documentation">
                     Documentation
                 </a>
             </li>
@@ -27,10 +32,10 @@
 </nav>
 
 <header class="fs-5 col-xl-9 mb-4">
-    <h2 class="mb-3"><code>DarkModeConfig</code> Provider</h2>
+    <h2 class="mb-3"><code>DARK_MODE_CONFIG</code> Provider</h2>
     <p>
         The default provider for the <code>DarkModeService</code> configuration.
-        You typically define the custom properties in the main <code>NgModule</code> declaration to initialize the app dark mode
+        You typically define the custom properties in the main <code>NgModule</code> declaration to initialize the app dark mode.
     </p>
     <hr class="mt-4">
 </header>
@@ -99,11 +104,11 @@
         BrowserModule
     ],
     bootstrap: [AppComponent]
-    &#125;)
+&#125;)
 export class AppModule &#123; &#125;</code></pre></figure>
 </section>
 
 <!-- We use a data object to store navigation tree structure-->
 <object id="navigation-tree"
-    data-tree="[{ 'label': 'Dark Mode Service', 'path': 'dark-mode-service' }, { 'label': 'DarkModeConfig Provider' }]">
+    data-tree="[{ 'label': 'Dark Mode Service', 'path': 'dark-mode-service' }, { 'label': 'DARK_MODE_CONFIG Provider' }]">
 </object>

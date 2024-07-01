@@ -7,7 +7,7 @@
         { "label": "ButtonRole Directive", "urlTree": [ "/resources", "documentation", "button-role-directive" ] },
         { "label": "AnchorLink Directive", "urlTree": [ "/resources", "documentation", "anchor-link-directive" ] },
         { "label": "NavigateToUrl Directive", "urlTree": [ "/resources", "documentation", "navigate-to-url-directive" ] },
-        { "label": "Version Service" },
+        { "label": "Version Service", "urlTree": [ "/resources", "documentation", "version-service" ] },
         { "label": "Scroll Service" },
         { "label": "AppBridge Service", "urlTree": [ "/resources", "documentation", "app-bridge-service" ] },
         { "label": "Uuid Class", "urlTree": [ "/resources", "documentation", "uuid-class" ] },

@@ -1,0 +1,186 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <section class="w-100">
+        <h5 class="mb-4">On this page</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="#motivation" onclick="appBridge.goToAnchor(event)" title="motivation">Motivation</a></li>
+            <li class="list-group-item"><a href="#api" onclick="appBridge.goToAnchor(event)" title="API">API</a></li>
+            <li class="list-group-item"><a href="#example" onclick="appBridge.goToAnchor(event)" title="API">Example</a></li>
+        </ul>
+    </section>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3"><em>Version</em> Service</h2>
+    <p>
+        A lightweight service that provides <em>Semantic Versioning</em> implementation for your Angular apps.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="motivation">Motivation</h3>
+    <p>
+        According to <a href="https://semver.org/" title="Semantic Versioning">Semantic Versioning 2.0.0</a>:
+    </p>
+    <blockquote class="blockquote text-center border rounded p-3">
+        <p>
+            <em>[Semantic Versioning proposes]</em> a simple set of rules and requirements that dictate how version numbers are assigned and incremented.
+        </p>
+    </blockquote>
+    <p>
+        Providing users the version en the build date of an app is a classical functionality
+        in software development.
+        Since HTML-based single page application are becoming a major standard in the software industry,
+        it is important to provide such information to users.
+    </p>
+    <p>
+        The purpose of the <em class="lib-name">Angular Toolbox </em>version service is allow Developer
+        to easily implement <em>Semantic Versioning</em> in their Angular apps.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="api">API</h3>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Interface</th>
+            <th scope="col">Description</th>
+            <th scope="col">Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>Version</code></td>
+            <td>
+                Specifies the semantic versioning of an Angular application.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/version-service/version-interface'])" title="Version">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+        </tbody>
+        <thead>
+          <tr>
+            <th scope="col">Method</th>
+            <th scope="col">Description</th>
+            <th scope="col">Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>getVersion()</code></td>
+            <td>
+                Returns the version of your Angular app.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/version-service/get-version'])" title="getVersion()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <td><code>getBuildTimestamp()</code></td>
+            <td>
+                Returns the build timestamp of your Angular app.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/version-service/get-build-time-stamp'])" title="getBuildTimestamp()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+        </tbody>
+        <thead>
+            <tr>
+              <th scope="col">Provider</th>
+              <th scope="col">Description</th>
+              <th scope="col">Link</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>VERSION_CONFIG</code></td>
+              <td>
+                  The default provider for the <code>VersionService</code> configuration.
+              </td>
+              <td>
+                  <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/version-service/version-config-provider'])" title="VERSION_CONFIG">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                          <use href="#linkIcon"/>
+                      </svg>
+                  </button>
+              </td>
+            </tr>
+          </tbody>
+      </table>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="example">Example</h3>
+    <p>
+        The following code sample shows how to easilly integrate <code>VersionService</code> functionalities in an Angular app:
+    </p>
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title mb-2">Code</h5>
+            <figure>
+                <figcaption>Application Module:</figcaption>
+                <pre><code class="language-typescript">&#64;NgModule(&#123;
+    declarations: [],
+    providers: [
+        &#123;
+            provide: VERSION_CONFIG,
+            useValue: &#123; major: 0, minor: 1, patch: 0 &#125;
+        &#125;
+    ],
+    exports: []
+&#125;)
+export class AppModule &#123; &#125;</code></pre></figure>
+<figure>
+    <figure>
+        <figcaption>HTML Template:</figcaption>
+        <pre><code class="language-html">&lt;p&gt;Current Angular Toolbox Version: &#123;&#123; versionService.getVersion().toString() &#125;&#125;&lt;/p&gt;
+&lt;p&gt;Build Release Date: &#123;&#123; versionService.getBuildTimestamp() | date &#125;&#125;&lt;/p&gt;</code></pre></figure>
+    <figcaption>Angular component:</figcaption>
+    <pre><code class="language-typescript">&#64;Component(&#123;
+    selector: 'app-version-service',
+    standalone: true,
+    imports: [
+        DatePipe
+    ],
+    templateUrl: './version-service.component.html'
+&#125;)
+export class VersionServiceComponent &#123;
+    constructor(public versionService: VersionService) &#123; &#125;
+&#125;</code></pre></figure>
+             <p>
+                To see this sample in action, go to the demo section:
+             </p>
+             <button class="btn btn-primary btn-lg" onclick="appBridge.navigate(['demo/version-service'])" title="Version Service Demo">
+                Version Service Demo
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'Version Service' }]">
+</object>
