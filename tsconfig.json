@@ -14,6 +14,9 @@
     "paths": {
       "angular-toolbox": [
         "dist/angular-toolbox"
+      ],
+      "angular-toolbox-demo-component-lib": [
+        "./dist/angular-toolbox-demo-component-lib"
       ]
     },
     "declaration": false,

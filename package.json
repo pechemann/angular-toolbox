@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --open",
+    "start-demo": "ng serve --open",
     "build": "ng build angular-toolbox --configuration production",
     "build-demo": "ng build angular-toolbox-demo --configuration production --base-href /angular-toolbox/",
+    "start-http-mock-sample": "ng serve http-mocking-framework-example --open",
     "test": "ng test"
   },
   "private": true,
