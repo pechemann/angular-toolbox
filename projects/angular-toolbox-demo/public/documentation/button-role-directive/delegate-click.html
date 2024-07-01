@@ -1,0 +1,66 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation/button-role-directive'])" title="ButtonRole Directive">
+                    ButtonRole Directive
+                </a>
+            </li>
+        </ul>
+    </aside>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3"><code>delegateClick</code> Attribute</h2>
+    <p>
+        The <code>delegateClick</code> attribute forces callback methods associated with the
+        <code>enter</code> event taregt to be invoked when User clicks on the decorated element.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3>Description</h3>
+    <p>
+        The <code>delegateClick</code> attribute avoid duplicate code by delegating 
+        HTML <code>click</code> events to the <em>template method</em> of the <code>enter</code>
+        <em>event target</em>:
+    </p>
+    <figure>
+        <figcaption>HTML template:</figcaption>
+        <pre><code class="language-html">&lt;!-- following code: --&gt;
+&lt;div buttonRole delegateClick (enter)="log('test')"&gt;&lt;/div&gt;
+&lt;!-- is equivalent to: --&gt;
+&lt;div buttonRole (click)="log('test')" (enter)="log('test')"&gt;&lt;/div&gt;</code></pre></figure>
+    <figure>
+</section>
+
+
+<section class="col-xl-9 mb-4">
+    <h3 id="usage">Usage</h3>
+    <figure>
+        <figcaption>HTML template:</figcaption>
+        <pre><code class="language-html">&lt;div buttonRole delegateClick (enter)="log('test')"&gt;&lt;/div&gt;</code></pre></figure>
+    <figure>
+        <figcaption>Angular component:</figcaption>
+        <pre><code class="language-typescript">protected log(msg: string): void &#123;
+    console.log(msg);
+&#125;
+// When User clicks on the decorated element,
+// Output: test</code></pre></figure>
+</section>
+
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+    data-tree="[{ 'label': 'ButtonRole Directive', 'path': 'button-role-directive' }, { 'label': 'buttonRole Directive Declaration' }]">
+</object>

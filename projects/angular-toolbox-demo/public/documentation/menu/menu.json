@@ -6,7 +6,7 @@
         { "label": "Dark Mode Service", "urlTree": [ "/resources", "documentation", "dark-mode-service" ] },
         { "label": "ButtonRole Directive", "urlTree": [ "/resources", "documentation", "button-role-directive" ] },
         { "label": "AnchorLink Directive" },
-        { "label": "NavigateToUrlDirective Directive" },
+        { "label": "NavigateToUrl Directive" },
         { "label": "Version Service" },
         { "label": "Scroll Service" },
         { "label": "AppBridge Service", "urlTree": [ "/resources", "documentation", "app-bridge-service" ] },

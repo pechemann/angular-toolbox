@@ -1,0 +1,65 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation/button-role-directive'])" title="ButtonRole Directive">
+                    ButtonRole Directive
+                </a>
+            </li>
+        </ul>
+    </aside>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3"><code>ButtonRole.enter</code> Event</h2>
+    <p>
+        The <code>ButtonRole.enter</code> <code>EventEmitter</code> object fires events when the user
+        presses the <em>Enter</em> key.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3>Signature</h3>
+    <pre><code class="language-typescript">readonly enter: EventEmitter&lt;T&gt;<boolean></code></pre>
+    <h5>Type</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>EventEmitter&lt;T&gt;</code></dt>
+            <dd>
+                <p>
+                    Emits events containing the value passed to the <code>event</code> method of the HTML template.
+                </p>
+            </dd>
+        </dl>
+    </div>
+</section>
+
+
+<section class="col-xl-9 mb-4">
+    <h3 id="usage">Usage</h3>
+    <figure>
+        <figcaption>HTML template:</figcaption>
+        <pre><code class="language-html">&lt;div buttonRole (enter)="log('test')"&gt;&lt;/div&gt;</code></pre></figure>
+    <figure>
+        <figcaption>Angular component:</figcaption>
+        <pre><code class="language-typescript">protected log(msg: string): void &#123;
+    console.log(msg);
+&#125;
+// Output: test</code></pre></figure>
+</section>
+
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+    data-tree="[{ 'label': 'ButtonRole Directive', 'path': 'button-role-directive' }, { 'label': 'ButtonRole.enter Event' }]">
+</object>

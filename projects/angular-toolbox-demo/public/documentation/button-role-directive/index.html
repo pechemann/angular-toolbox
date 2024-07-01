@@ -27,13 +27,89 @@
 
 <section class="col-xl-9 mb-4">
     <h3 id="motivation">Motivation</h3>
-   
+   <p>
+        In software development, keyboard navigation is a must have. The concept of SaaS and the use of platforms
+        like <a href="https://www.electronjs.org/" title="Electron">Electron</a> make keyboard navigation an essential
+        functionality for building quality applications.
+   </p>
+   <p>
+        The <code>ButtonRole</code> directive aims to implement such functionality by removing tedious coding tasks.
+        Additionally, it provides built-in ARIA elements to support accessibility.
+   </p>
 </section>
 
 
 <section class="col-xl-9 mb-4">
     <h3 id="api">API</h3>
-   
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Directive</th>
+            <th scope="col">Description</th>
+            <th scope="col">Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th><code>buttonRole</code></th>
+            <td>
+                Enables keyboard navigation and provides support for keyboard <em>Enter</em> key events.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/button-role-directive/button-role'])" title="buttonRole">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+        </tbody>
+        <thead>
+          <tr>
+            <th scope="col">Attribute</th>
+            <th scope="col">Description</th>
+            <th scope="col">Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th><code>delegateClick</code></th>
+            <td>
+                Forces callback methods associated with the <code>enter</code> event taregt to be invoked when User
+                clicks on the decorated element.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/button-role-directive/delegate-click'])" title="delegateClick">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+        </tbody>
+        <thead>
+            <tr>
+              <th scope="col">Event</th>
+              <th scope="col">Description</th>
+              <th scope="col">Link</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th><code>enter</code></th>
+              <td>
+                Dispatches events when the user presses the <em>Enter</em> key.
+              </td>
+              <td>
+                  <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/button-role-directive/enter'])" title="enter">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                          <use href="#linkIcon"/>
+                      </svg>
+                  </button>
+              </td>
+            </tr>
+          </tbody>
+    </table>
 </section>
 
 
