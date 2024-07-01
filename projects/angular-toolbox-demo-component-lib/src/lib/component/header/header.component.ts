@@ -18,7 +18,7 @@ import { AngularToolboxLogoComponent } from '../angular-toolbox-logo/angular-too
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class  AngularToolboxHeaderComponent {
+export class AngularToolboxHeaderComponent {
 
   @Input()
   public title!: string;

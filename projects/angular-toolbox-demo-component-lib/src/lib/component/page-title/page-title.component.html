@@ -10,12 +10,11 @@
     <div class="col-md-8">
         <h1 [innerHTML]="label | safeHtml"></h1>
         <p class="fs-5">
-            <ng-content></ng-content>
+            <ng-content select="[primary]"></ng-content>
         </p>
     </div>
-    @if (showQrCode) {
-        <p class="col-md-4 text-center d-none d-md-block">
-            <img height="150" src="qrcode/demo-qrcode.svg">
-        </p>
-    }
+    <p class="col-md-4 d-none d-md-block">
+        <ng-content select="[secondary]"></ng-content>
+    </p>
 </div>
+<hr class="mb-5">

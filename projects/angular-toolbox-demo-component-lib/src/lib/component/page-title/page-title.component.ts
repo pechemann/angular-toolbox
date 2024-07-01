@@ -21,7 +21,4 @@ export class AngularToolboxPageTitleComponent {
 
   @Input()
   public label!: string;
-
-  @Input()
-  public showQrCode: boolean = false;
 }

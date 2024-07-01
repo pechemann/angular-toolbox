@@ -10,13 +10,15 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { GitSectionComponent } from '../../../ui/component/git-section/git-section.component';
 import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/lib/model/service';
+import { AngularToolboxPageTitleComponent } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
 
 @Component({
   selector: 'app-resources',
   standalone: true,
   imports: [
     RouterModule,
-    GitSectionComponent
+    GitSectionComponent,
+    AngularToolboxPageTitleComponent
   ],
   templateUrl: './resources.component.html'
 })

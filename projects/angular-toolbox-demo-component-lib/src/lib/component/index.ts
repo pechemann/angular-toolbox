@@ -15,3 +15,4 @@ export * from './footer/footer.component';
 export * from './dark-mode/dark-mode.component';
 export * from './page-title/page-title.component';
 export * from './breadcrumb/breadcrumb.component';
+export * from './icon-list/icon-list.component';

@@ -11,14 +11,15 @@ import { RouterModule } from '@angular/router';
 import { IconListItem } from '../../model/business/icon-list-item';
 
 @Component({
-  selector: 'icon-list',
+  selector: 'at-icon-list',
   standalone: true,
   imports: [
     RouterModule
   ],
-  templateUrl: './icon-list.component.html'
+  templateUrl: './icon-list.component.html',
+  styleUrl: './icon-list.component.scss'
 })
-export class IconListComponent {
+export class AngularToolboxIconListComponent {
 
   @Input()
   public itemList!: IconListItem[];

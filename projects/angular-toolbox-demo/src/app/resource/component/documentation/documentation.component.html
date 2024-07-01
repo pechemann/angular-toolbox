@@ -14,28 +14,28 @@
 </svg>
 <main class="documentation">
     @if(isHomePage) {
-        <h1>Angular Toolbox Documentation</h1>
-        <div class="row">
-            <p class="fs-5 col-md-8 mb-2">
+        <at-page-title label="Angular Toolbox Documentation">
+            <p primary class="fs-5">
                 <em class="lib-name">Angular Toolbox</em> documentation has all the information you need to make your Angular project a smashing success.
             </p>
-            <p class="col-md-4 text-end">
-                Latest stable release: <span class="badge text-bg-primary p-2">{{ versionService.getVersion().toString() }}</span>
-            </p>
-        </div>
-        <hr class="mb-5">
+            <div secondary class="d-flex justify-content-end align-items-end h-100">
+                <p>
+                    Latest stable release: <span class="badge text-bg-primary p-2">{{ versionService.getVersion().toString() }}</span>
+                </p>
+            </div>
+        </at-page-title>
         <h2 class="mb-4">All Utilities Documentation</h2>
         <div class="row">
             @for (item of itemListCollection; track item) {
                 <div class="col-md-6">
-                    <icon-list [itemList]="item"/>
+                    <at-icon-list [itemList]="item"/>
                 </div>
             }
         </div>
         <hr class="mb-5">
         <h2 class="mb-4">Articles</h2>
         <div class="row">
-        <icon-list [itemList]="articles"/>
+        <at-icon-list [itemList]="articles"/>
        </div>
     } @else {
         <article [innerHTML]="page | safeHtml"></article>
