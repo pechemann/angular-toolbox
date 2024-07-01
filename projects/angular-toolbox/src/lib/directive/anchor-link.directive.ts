@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 import { NavigationDirectiveBase } from './navigation-directive-base';
 
 /**
- * Provides functionality to activate anchor navigation through the native  Angular router.
+ * Provides functionality to activate anchor navigation through the native Angular router.
  */
 @Directive({
   selector: '[anchorLink]',

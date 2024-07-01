@@ -1,0 +1,107 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <section class="w-100">
+        <h5 class="mb-4">On this page</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="#api" onclick="appBridge.goToAnchor(event)" title="API">API</a></li>
+            <li class="list-group-item"><a href="#usage" onclick="appBridge.goToAnchor(event)" title="API">Usage</a></li>
+        </ul>
+    </section>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3"><code>AnchorLink</code> Directive</h2>
+    <p>
+        Provides functionality to activate anchor navigation through the native  Angular router.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="api">API</h3>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Directive</th>
+            <th scope="col">Description</th>
+            <th scope="col">Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+                <td><code>anchorLink</code></td>
+                <td>
+                    Scrolls to a DOM element and updates the URL fragment with the specified <code>href</code> reference..
+                </td>
+                <td>
+                    <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/anchor-link-directive/anchor-link'])" title="anchorLink">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                            <use href="#linkIcon"/>
+                        </svg>
+                    </button>
+                </td>
+          </tr>
+          
+        </tbody>
+        <thead>
+          <tr>
+            <td scope="col">Attribute</td>
+            <td scope="col">Description</td>
+            <td scope="col"></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>href</code></td>
+            <td>
+                The <code>href</code> attribute of the decorated element. Must refer to an element in the DOM with an
+                <code>id</code> attribute that matches the <code>href</code> value.
+            </td>
+            <td></td>
+          </tr>
+        </tbody>
+    </table>
+</section>
+
+
+<section class="col-xl-9 mb-4">
+    <h3 id="example">Example</h3>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title mb-2">Code</h5>
+            <figure>
+                <figcaption>HTML template:</figcaption>
+                <pre><code class="language-html">...
+&lt;nav&gt;
+    &lt;a href="#my-anchor" anchorLink title="My Anchored Section"&gt;My Anchored Section&lt;/a&gt;
+&lt;/nav&gt;
+...
+&lt;main&gt;
+    &lt;h2 id="my-anchor"&gt;My Anchored Section&lt;/h2&gt;
+&lt;/main&gt;
+...</code></pre></figure>
+<figure>
+    <figcaption>Angular component:</figcaption>
+    <pre><code class="language-typescript">&#64;Component(&#123;
+    selector: 'app-anchor-link-directive',
+    standalone: true,
+    imports: [
+        AnchorLinklDirective
+    ],
+    templateUrl: './anchor-link-directive.component.html'
+&#125;)
+export class AnchorLink DirectiveComponent &#123;
+&#125;</code></pre></figure>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'ButtonRole Directive' }]">
+</object>
