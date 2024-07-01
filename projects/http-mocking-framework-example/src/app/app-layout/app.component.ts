@@ -8,7 +8,7 @@
 
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { AngularToolboxDarkModeComponent, AngularToolboxFooterComponent,  AngularToolboxHeaderComponent } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
+import { AngularToolboxBreadcrumbComponent, AngularToolboxDarkModeComponent, AngularToolboxFooterComponent,  AngularToolboxHeaderComponent } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +18,8 @@ import { AngularToolboxDarkModeComponent, AngularToolboxFooterComponent,  Angula
     RouterOutlet,
     AngularToolboxHeaderComponent,
     AngularToolboxFooterComponent,
-    AngularToolboxDarkModeComponent
+    AngularToolboxDarkModeComponent,
+    AngularToolboxBreadcrumbComponent
   ]
 })
 export class AppComponent {}

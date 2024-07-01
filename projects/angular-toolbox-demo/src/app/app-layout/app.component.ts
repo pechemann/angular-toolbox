@@ -7,10 +7,8 @@
  */
 
 import { Component } from '@angular/core';
-import { BreadcrumbService } from '../ui/model/service/breadcrumb.service';
 import { RouterModule, RouterOutlet } from '@angular/router';
-import { AngularToolboxDarkModeComponent, AngularToolboxFooterComponent, AngularToolboxHeaderComponent } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
-
+import { AngularToolboxBreadcrumbComponent, AngularToolboxDarkModeComponent, AngularToolboxFooterComponent, AngularToolboxHeaderComponent } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
 
 @Component({
   selector: 'app-root',
@@ -21,10 +19,8 @@ import { AngularToolboxDarkModeComponent, AngularToolboxFooterComponent, Angular
     RouterModule,
     AngularToolboxHeaderComponent,
     AngularToolboxFooterComponent,
-    AngularToolboxDarkModeComponent
+    AngularToolboxDarkModeComponent,
+    AngularToolboxBreadcrumbComponent
   ]
 })
-export class AppComponent {
-
-  constructor(public breadcrumb: BreadcrumbService) {}
-}
+export class AppComponent {}

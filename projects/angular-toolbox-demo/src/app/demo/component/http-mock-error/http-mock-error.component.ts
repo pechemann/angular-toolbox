@@ -8,7 +8,6 @@
 
 import { Component, OnDestroy } from '@angular/core';
 import { CodeWrapper } from '../../../ui/model/business/code-wrapper';
-import { BreadcrumbService } from '../../../ui/model/service/breadcrumb.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { config } from './http-mock-error-config';
 import { SubscriptionService, HttpMockService, AbstractIdentifiable } from 'angular-toolbox';
@@ -16,6 +15,7 @@ import { DemoComponent } from '../../../ui/component/demo/demo.component';
 import { catchError, of } from 'rxjs';
 import { RouterModule } from '@angular/router';
 import { DocumentationLink } from '../../../ui/model/business/documentation-link';
+import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/lib/model/service';
 
 @Component({
   selector: 'app-http-mock-error',

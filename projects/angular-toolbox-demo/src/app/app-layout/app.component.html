@@ -15,26 +15,10 @@
 </svg>
 <div class="col-lg-8 mx-auto p-3 py-md-5">
     <nav class="d-flex align-items-center pb-3 mb-5 border-bottom">
-        <lib-angular-toolbox-header title="Angular Toolbox Demo"/>
-        <lib-angular-toolbox-dark-mode class="ms-auto"/>
+        <at-header title="Angular Toolbox Demo"/>
+        <at-dark-mode class="ms-auto"/>
     </nav>
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a [routerLink]="['home']" title="Home">Home</a></li>
-            @for(item of breadcrumb.getItemList(); track item.label) {
-                <li class="breadcrumb-item">
-                    @switch (item.path) {
-                        @case (undefined) {
-                            <span>{{ item.label }}</span>
-                        }
-                        @default {
-                            <a [routerLink]="[item.path]" [title]="item.label">{{ item.label }}</a>
-                        }
-                    }
-                </li>
-            }
-        </ol>
-    </nav>
+    <at-breadcrumb/>
     <router-outlet></router-outlet>
-    <lib-angular-toolbox-footer/>
+    <at-footer/>
 </div>

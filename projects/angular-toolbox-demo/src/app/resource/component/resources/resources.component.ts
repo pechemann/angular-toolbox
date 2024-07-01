@@ -7,9 +7,9 @@
  */
 
 import { Component } from '@angular/core';
-import { BreadcrumbService } from '../../../ui/model/service/breadcrumb.service';
 import { RouterModule } from '@angular/router';
 import { GitSectionComponent } from '../../../ui/component/git-section/git-section.component';
+import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/lib/model/service';
 
 @Component({
   selector: 'app-resources',

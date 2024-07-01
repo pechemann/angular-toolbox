@@ -7,7 +7,6 @@
  */
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { BreadcrumbService } from '../../../ui/model/service/breadcrumb.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { HttpMockService, SafeHtmlPipe, SubscriptionService, VersionService, AppBrigeService, AbstractIdentifiable } from 'angular-toolbox';
 import { ActivatedRoute, UrlSegment } from '@angular/router';
@@ -16,9 +15,10 @@ import { IconListComponent } from '../../../ui/component/icon-list/icon-list.com
 import { IconListService } from '../../../ui/model/service/icon-list-list.service';
 import { HttpMock } from 'projects/angular-toolbox/src/lib/framework/mock/http/proxy';
 import { DOCUMENTATION_PROXY_CONFIG } from '../../proxy/documentation-proxy.config';
-import { BreadcrumbItem } from '../../../ui/model/business/breadcrumb-item';
 import { IconListItem } from '../../../ui/model/business/icon-list-item';
 import { DocumentationMenu } from '../../../ui/model/business/documentation-link';
+import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/lib/model/service';
+import { BreadcrumbItem } from 'projects/angular-toolbox-demo-component-lib/src/lib/model/business';
 
 @HttpMock(DOCUMENTATION_PROXY_CONFIG) 
 @Component({

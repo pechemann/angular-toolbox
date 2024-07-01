@@ -1,0 +1,17 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a [routerLink]="['home']" title="Home">Home</a></li>
+        @for(item of breadcrumb.getItemList(); track item.label) {
+            <li class="breadcrumb-item">
+                @switch (item.path) {
+                    @case (undefined) {
+                        <span>{{ item.label }}</span>
+                    }
+                    @default {
+                        <a [routerLink]="[item.path]" [title]="item.label">{{ item.label }}</a>
+                    }
+                }
+            </li>
+        }
+    </ol>
+</nav>

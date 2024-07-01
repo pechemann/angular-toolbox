@@ -15,7 +15,7 @@ const DARK: string = 'dark';
 const BS_ATTRIBUTE: string = 'data-bs-theme';
 
 @Component({
-  selector: 'lib-angular-toolbox-dark-mode',
+  selector: 'at-dark-mode',
   standalone: true,
   providers: [ DarkModeService ],
   templateUrl: './dark-mode.component.html',

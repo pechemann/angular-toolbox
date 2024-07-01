@@ -7,19 +7,21 @@
  */
 
 import { Component, Input } from '@angular/core';
-import { AngularToolboxLogoComponent } from '../angular-toolbox-logo/angular-toolbox-logo.component';
+import { SafeHtmlPipe } from 'angular-toolbox';
 
 @Component({
-  selector: 'at-header',
+  selector: 'at-page-title',
   standalone: true,
+  templateUrl: './page-title.component.html',
   imports: [
-    AngularToolboxLogoComponent
-  ],
-  templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+    SafeHtmlPipe
+  ]
 })
-export class  AngularToolboxHeaderComponent {
+export class AngularToolboxPageTitleComponent {
 
   @Input()
-  public title!: string;
+  public label!: string;
+
+  @Input()
+  public showQrCode: boolean = false;
 }

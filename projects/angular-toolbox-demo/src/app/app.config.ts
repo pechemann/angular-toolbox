@@ -21,6 +21,6 @@ export const appConfig: ApplicationConfig = {
     { provide: DARK_MODE_CONFIG, useValue: { detectBrowserSettings: false, storageKey: "angular-toolbox-dark-mode" } },
     //--> Angular Toolbox lib version
     { provide: VERSION_CONFIG, useValue: { major: 0, minor: 7, patch: 0, buildTimestamp: 1719486823542 } },
-    provideHttpClient(),
+    provideHttpClient()
   ]
 };

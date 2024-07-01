@@ -9,7 +9,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'lib-angular-toolbox-footer',
+  selector: 'at-footer',
   standalone: true,
   templateUrl: './footer.component.html'
 })

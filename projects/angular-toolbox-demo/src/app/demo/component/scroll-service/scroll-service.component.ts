@@ -7,11 +7,11 @@
  */
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { BreadcrumbService } from '../../../ui/model/service/breadcrumb.service';
 import { CodeWrapper } from '../../../ui/model/business/code-wrapper';
 import { AbstractIdentifiable, ScrollService, SubscriptionService } from 'angular-toolbox';
 import { DemoComponent } from '../../../ui/component/demo/demo.component';
 import { DocumentationLink } from '../../../ui/model/business/documentation-link';
+import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/lib/model/service';
 
 @Component({
   selector: 'scroll-service',
