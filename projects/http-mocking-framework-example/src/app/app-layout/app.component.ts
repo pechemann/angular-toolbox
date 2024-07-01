@@ -13,7 +13,6 @@ import { AngularToolboxDarkModeComponent, AngularToolboxFooterComponent,  Angula
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
   standalone: true,
   imports: [
     RouterOutlet,
