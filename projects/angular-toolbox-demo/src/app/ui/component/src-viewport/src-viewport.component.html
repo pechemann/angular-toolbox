@@ -28,7 +28,7 @@
     @if (hasSrcCode(currLang)) {
       <div class="border-top">
         @for(item of currentSrc; track item; let i = $index) {
-          <code-viewport [lang]="currLang">{{item}}</code-viewport>
+          <at-code-viewport [lang]="currLang">{{item}}</at-code-viewport>
         }
       </div>
     }

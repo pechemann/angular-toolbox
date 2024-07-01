@@ -10,12 +10,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { HttpMockService, SafeHtmlPipe, SubscriptionService, VersionService, AppBrigeService, AbstractIdentifiable } from 'angular-toolbox';
 import { ActivatedRoute, UrlSegment } from '@angular/router';
-import { HighlightService } from '../../../ui/model/service/highlight.service';
 import { IconListService } from '../../../ui/model/service/icon-list-list.service';
 import { HttpMock } from 'projects/angular-toolbox/src/lib/framework/mock/http/proxy';
 import { DOCUMENTATION_PROXY_CONFIG } from '../../proxy/documentation-proxy.config';
 import { DocumentationMenu } from '../../../ui/model/business/documentation-link';
-import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/lib/model/service';
+import { BreadcrumbService, HighlightService } from 'projects/angular-toolbox-demo-component-lib/src/lib/model/service';
 import { BreadcrumbItem, IconListItem } from 'projects/angular-toolbox-demo-component-lib/src/lib/model/business';
 import { AngularToolboxIconListComponent, AngularToolboxPageTitleComponent } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
 

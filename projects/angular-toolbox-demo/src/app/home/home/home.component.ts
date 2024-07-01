@@ -8,19 +8,17 @@
 
 import { Component } from '@angular/core';
 import { IconListService } from '../../ui/model/service/icon-list-list.service';
-import { GitSectionComponent } from '../../ui/component/git-section/git-section.component';
 import { AnchorLinklDirective } from 'angular-toolbox';
-import { CodeViewportComponent } from '../../ui/component/code-viewport/code-viewport.component';
-import { AngularToolboxIconListComponent, AngularToolboxPageTitleComponent } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
+import { AngularToolboxCodeViewportComponent, AngularToolboxGitSectionComponent, AngularToolboxIconListComponent, AngularToolboxPageTitleComponent } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
 import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/lib/model/service';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
-    GitSectionComponent,
+    AngularToolboxGitSectionComponent,
     AnchorLinklDirective,
-    CodeViewportComponent,
+    AngularToolboxCodeViewportComponent,
     AngularToolboxPageTitleComponent,
     AngularToolboxIconListComponent
   ],

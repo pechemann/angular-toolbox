@@ -8,7 +8,7 @@
 
 import { Component, Input } from '@angular/core';
 import { CodeWrapper } from '../../model/business/code-wrapper';
-import { CodeViewportComponent } from '../code-viewport/code-viewport.component';
+import { AngularToolboxCodeViewportComponent } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
 
 declare type Language = "html" | "typescript" | "css";
 
@@ -16,7 +16,7 @@ declare type Language = "html" | "typescript" | "css";
   selector: 'src-viewport',
   standalone: true,
   imports: [
-    CodeViewportComponent
+    AngularToolboxCodeViewportComponent
   ],
   templateUrl: './src-viewport.component.html',
   styleUrls: ['./src-viewport.component.scss']

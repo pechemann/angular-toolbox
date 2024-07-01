@@ -15,8 +15,6 @@ declare const hljs: any;
 })
 export class HighlightService {
 
-  constructor() { }
-
   public highlightAll(): void {
     setTimeout(()=> hljs.highlightAll(), 0);
   }

@@ -10,12 +10,12 @@ import { Component, Input } from '@angular/core';
 import { HighlightService } from '../../model/service/highlight.service';
 
 @Component({
-  selector: 'code-viewport',
+  selector: 'at-code-viewport',
   standalone: true,
   templateUrl: './code-viewport.component.html',
   styleUrls: ['./code-viewport.component.scss']
 })
-export class CodeViewportComponent {
+export class AngularToolboxCodeViewportComponent {
 
   protected language: string = "language-typescript";
 
