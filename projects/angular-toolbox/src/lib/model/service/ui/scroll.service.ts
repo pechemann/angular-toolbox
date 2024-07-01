@@ -79,12 +79,12 @@ export class ScrollService {
   }
   
   /**
-   * Scrolls the app viewport to the specified `x/y` coordinates, into the browser window.
+   * Scrolls the app viewport by the specified `x/y` coordinates, into the browser window.
    * 
    * @param x The horizontal pixel value that you want to scroll by.
    * @param y The vertical  pixel value that you want to scroll by.
    */
-  public scrollTo(x: number, y: number): void {
+  public scrollBy(x: number, y: number): void {
     window.scrollBy(x, y);
   }
 }

@@ -1,0 +1,59 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation/scroll-service'])" title="Scroll Service">
+                    Scroll Service
+                </a>
+            </li>
+        </ul>
+    </aside>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3"><code>ScrollService.scroll()</code> Method</h2>
+    <p>
+        The <code>ScrollService.scroll()</code> method allows to scroll the app viewport according to
+        the specified <code>options</code> parameter, into the client window.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3>Signature</h3>
+    <pre><code class="language-typescript">scroll(options?: ScrollToOptions): void</code></pre>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>options: ScrollToOptions</code></dt>
+            <dd>
+                <p>
+                    An optional diationary with the following properties:
+                    <ul>
+                        <li><code>left?: number</code></li>
+                        <li><code>top?: number</code></li>
+                        <li><code>behavior?: ScrollBehavior</code></li>
+                    </ul>
+                    See <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/scroll"
+                    title="element.scroll">element.scroll</a> on the MDN website for details.
+                </p>
+                
+            </dd>
+        </dl>
+        </dl>
+    </div>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'Scroll Service', 'path': 'scroll-service' }, { 'label': 'ScrollService.scroll() method' }]">
+</object>

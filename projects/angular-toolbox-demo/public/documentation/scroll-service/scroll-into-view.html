@@ -1,0 +1,79 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation/scroll-service'])" title="Scroll Service">
+                    Scroll Service
+                </a>
+            </li>
+        </ul>
+    </aside>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3"><code>ScrollService.scrollIntoView()</code> Method</h2>
+    <p>
+        The <code>ScrollService.scrollIntoView()</code> method allows to scroll the ancestor containers
+        of an HTML element with the specified selector, such that this element is visible to the user.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3>Signature</h3>
+    <pre><code class="language-typescript">scrollIntoView(selector: string, arg?: boolean | ScrollIntoViewOptions | undefined): void</code></pre>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>selector: string</code></dt>
+            <dd>
+                <p>
+                    The selector of the HTML target element.
+                </p>
+            </dd>
+        </dl>
+        <dl>
+            <dt><code>arg?: boolean | ScrollIntoViewOptions | undefined</code></dt>
+            <dd>
+                <p>
+                    Can be either a boolean value, a <code>ScrollIntoViewOptions</code> object,
+                    or <code>undefined</code>.
+                </p>
+                <p>
+                    If a boolean value:
+                    <ul>
+                        <li>
+                            if <code>true</code>, the top of the element will be aligned to the top of the visible
+                            area of the scrollable ancestor.
+                        </li>
+                        <li>
+                            if <code>true</code>, the bottom of the element will be aligned to the bottom of
+                            the visible area of the scrollable ancestor. 
+                        </li>
+                    </ul>
+                    Otherwise, a <code>ScrollIntoViewOptions</code> object is dictionary containing the scroll parameters.
+                    See <a href="https://developer.mozilla.org/fr/docs/Web/API/Element/scrollIntoView#scrollintoviewoptions"
+                        title="element.scrollIntoView">element.scrollIntoView</a> on the MDN website for details.
+                    <br>
+                </p>
+                <p>
+                    Default value is <code>undefined</code>.
+                </p>
+            </dd>
+        </dl>
+    </div>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'Scroll Service', 'path': 'scroll-service' }, { 'label': 'ScrollService.scrollIntoView() method' }]">
+</object>

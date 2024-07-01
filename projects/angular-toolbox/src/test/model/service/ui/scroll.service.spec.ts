@@ -69,10 +69,10 @@ describe('ScrollService', () => {
     }, 0);
   });
   
-  it('scrollTo() should scroll to the correct X and Y positions', (done) => {
+  it('scrollBy() should scroll to the correct X and Y positions', (done) => {
     const view: HTMLDivElement = getTestDiv();
     const size: any = initTestDiv(view);
-    service.scrollTo(100, 100);
+    service.scrollBy(100, 100);
     setTimeout(()=> {
       expect(window.scrollY).toEqual(100);
       expect(window.scrollX).toEqual(100);

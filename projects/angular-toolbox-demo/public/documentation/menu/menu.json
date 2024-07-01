@@ -8,7 +8,7 @@
         { "label": "AnchorLink Directive", "urlTree": [ "/resources", "documentation", "anchor-link-directive" ] },
         { "label": "NavigateToUrl Directive", "urlTree": [ "/resources", "documentation", "navigate-to-url-directive" ] },
         { "label": "Version Service", "urlTree": [ "/resources", "documentation", "version-service" ] },
-        { "label": "Scroll Service" },
+        { "label": "Scroll Service", "urlTree": [ "/resources", "documentation", "scroll-service" ] },
         { "label": "AppBridge Service", "urlTree": [ "/resources", "documentation", "app-bridge-service" ] },
         { "label": "Uuid Class", "urlTree": [ "/resources", "documentation", "uuid-class" ] },
         { "label": "Identifiable Interface", "urlTree": [ "/resources", "documentation", "identifiable-interface" ] },

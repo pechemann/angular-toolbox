@@ -1,0 +1,70 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation/scroll-service'])" title="Scroll Service">
+                    Scroll Service
+                </a>
+            </li>
+        </ul>
+    </aside>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3"><code>ScrollService.onScroll</code> Event</h2>
+    <p>
+        The <code>onScroll</code> <code>EventEmitter</code> object fires events when the user
+        client performs a <em>scrolling</em> operation.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3>Signature</h3>
+    <pre><code class="language-typescript">readonly onScroll: EventEmitter&lt;Event&gt;<boolean></code></pre>
+    <h5>Type</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>EventEmitter&lt;Event&gt;</code></dt>
+            <dd>
+                <p>
+                    Emits events containing the type of event that triggers the original <em>scrolling</em> operation.
+                </p>
+            </dd>
+        </dl>
+    </div>
+</section>
+
+
+<section class="col-xl-9 mb-4">
+    <h3 id="usage">Usage</h3>
+    <figure>
+        <figcaption>HTML template:</figcaption>
+        <pre><code class="language-html">&lt;div&gt;Window scrollY position: &#123;&#123; scrollY &#125;&#125; &lt;/div&gt;</code></pre></figure>
+    <figure>
+        <figcaption>Angular component:</figcaption>
+        <pre><code class="language-typescript">protected scrollY: number = 0;
+
+this.scrollService.onScroll.subscribe((e)=> this.scrollY = (e.currentTarget as Window).scrollY);</code></pre></figure>
+    <p>
+        To see this sample in action, go to the demo section:
+    </p>
+    <button class="btn btn-primary btn-lg" onclick="appBridge.navigate(['demo/scroll-service'])" title="Scroll Service Demo">
+        Scroll Service Demo
+    </button>
+</section>
+
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+    data-tree="[{ 'label': 'Scroll Service', 'path': 'scroll-service' }, { 'label': 'ScrollService.onScroll Event' }]">
+</object>
