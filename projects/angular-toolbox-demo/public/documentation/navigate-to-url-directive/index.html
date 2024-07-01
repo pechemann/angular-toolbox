@@ -17,16 +17,16 @@
 </nav>
 
 <header class="fs-5 col-xl-9 mb-4">
-    <h2 class="mb-3"><code>AnchorLink</code> Directive</h2>
+    <h2 class="mb-3"><code>NavigateToUrl</code> Directive</h2>
     <p>
-        Provides functionality to activate anchor navigation through the native  Angular router.
+        An easy-to-use directive that enables keyboard navigation and provides support for navigating to an external URL.
     </p>
     <div class="alert alert-info fs-6" role="alert">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
             <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
         </svg>
-        The <code>AnchorLink</code> directive makes the decorated element enable for keyboard navigation and accessibility (<em>ARIA</em>).
+        The <code>NavigateToUrl</code> directive makes the decorated element enable for keyboard navigation and accessibility (<em>ARIA</em>).
     </div>
     <hr class="mt-4">
 </header>
@@ -43,12 +43,12 @@
         </thead>
         <tbody>
           <tr>
-                <td><code>anchorLink</code></td>
+                <td><code>navigateToUrl</code></td>
                 <td>
-                    Scrolls to a DOM element and updates the URL fragment with the specified <code>href</code> reference.
+                    Navigates to the external URL specified by the <code>href</code> attribute of the decorated element.
                 </td>
                 <td>
-                    <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/anchor-link-directive/anchor-link'])" title="anchorLink">
+                    <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/navigate-to-url-directive/navigate-to-url'])" title="anchorLink">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
                             <use href="#linkIcon"/>
                         </svg>
@@ -68,8 +68,7 @@
           <tr>
             <td><code>href</code></td>
             <td>
-                The <code>href</code> attribute of the decorated element. Must refer to an element in the DOM with an
-                <code>id</code> attribute that matches the <code>href</code> value.
+                The <code>href</code> attribute of the decorated element.
             </td>
             <td></td>
           </tr>
@@ -87,28 +86,12 @@
                 <figcaption>HTML template:</figcaption>
                 <pre><code class="language-html">...
 &lt;nav&gt;
-    &lt;a href="#my-anchor" anchorLink title="My Anchored Section"&gt;My Anchored Section&lt;/a&gt;
+    &lt;a href="https://mydomain.com" navigateToUrl title="My External URL"&gt;My External URL&lt;/a&gt;
 &lt;/nav&gt;
-...
-&lt;main&gt;
-    &lt;h2 id="my-anchor"&gt;My Anchored Section&lt;/h2&gt;
-&lt;/main&gt;
 ...</code></pre></figure>
-<figure>
-    <figcaption>Angular component:</figcaption>
-    <pre><code class="language-typescript">&#64;Component(&#123;
-    selector: 'app-anchor-link-directive',
-    standalone: true,
-    imports: [
-        AnchorLinklDirective
-    ],
-    templateUrl: './anchor-link-directive.component.html'
-&#125;)
-export class AnchorLink DirectiveComponent &#123;
-&#125;</code></pre></figure>
 </section>
 
 <!-- We use a data object to store navigation tree structure-->
 <object id="navigation-tree"
-        data-tree="[{ 'label': 'AnchorLink Directive' }]">
+        data-tree="[{ 'label': 'NavigateToUrl Directive' }]">
 </object>

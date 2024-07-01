@@ -11,12 +11,18 @@ import { Directive, ElementRef, HostListener, Inject, Input } from '@angular/cor
 import { LINK_ROLE } from '../util';
 import { NavigationDirectiveBase } from './navigation-directive-base';
 
+/**
+ * An easy-to-use directive that enables keyboard navigation and provides support for navigating to an external URL.
+ */
 @Directive({
   selector: '[navigateToUrl]',
   standalone: true
 })
 export class NavigateToUrlDirective extends NavigationDirectiveBase {
 
+  /**
+   * The `href` attribute of the decorated element.
+   */
   @Input()
   public href!: string;
   

@@ -1,0 +1,58 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation/navigate-to-url-directive'])" title="NavigateToUrl Directive">
+                    NavigateToUrl Directive
+                </a>
+            </li>
+        </ul>
+    </aside>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3"><code>navigateToUrl</code> Directive Declaration</h2>
+    <p>
+        The <code>navigateToUrl</code> allows to navigate to the external URL specified by the
+        <code>href</code> attribute of the decorated element.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3>Description</h3>
+    <p>
+        The <code>navigateToUrl</code> directive declaration provides the following functionalities to HTML elements:
+        <ul>
+            <li>adds a <code>tabindex</code> attribute to the decorated element (set to <code>0</code>)</li>
+            <li>adds a <code>role</code> attribute to the decorated element (set to <code>link</code>)</li>
+        </ul>
+    </p>
+</section>
+
+
+<section class="col-xl-9 mb-4">
+    <h3 id="usage">Usage</h3>
+    <figure>
+        <figcaption>HTML template:</figcaption>
+        <pre><code class="language-html">...
+&lt;nav&gt;
+    &lt;a href="https://mydomain.com" navigateToUrl title="My External URL"&gt;My External URL&lt;/a&gt;
+&lt;/nav&gt;
+...</code></pre></figure>
+</section>
+
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+    data-tree="[{ 'label': 'NavigateToUrl Directive', 'path': 'navigate-to-url-directive' }, { 'label': 'navigateToUrl Directive Declaration' }]">
+</object>
