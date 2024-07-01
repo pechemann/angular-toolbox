@@ -7,7 +7,7 @@
 -->
  
 <main>
-    <at-page-title label="Get started with Angular Toolbox">
+    <atx-page-title label="Get started with Angular Toolbox">
         <p primary class="fs-5">
             Quickly and easily get started with Angular Toolbox compiled, production-ready files with this
             barebones example featuring some basic Demo and helpful links. Install all our examples to get started.
@@ -15,7 +15,7 @@
         <div secondary class="text-center">
             <img height="150" src="qrcode/demo-qrcode.svg">
         </div>
-    </at-page-title>
+    </atx-page-title>
     <div class="mb-4 row g-5">
         <div class="col-md-6">
             <h2>Demo</h2>
@@ -23,12 +23,12 @@
                 Ready to beyond the starter template? Check out these open source projects that you can 
                 quickly duplicate to a new Angular project.
             </p>
-            <at-icon-list [itemList]="iconListService.getHomeDemoList()"/>
+            <atx-icon-list [itemList]="iconListService.getHomeDemoList()"/>
         </div>
         <div class="col-md-6">
             <h2>Guides</h2>
             <p>Read more detailed instructions and documentation on using Angular Toolbox.</p>
-            <at-icon-list [itemList]="iconListService.getHomeGuideList()"/>
+            <atx-icon-list [itemList]="iconListService.getHomeGuideList()"/>
             <h2 class="mt-4">Why Angular Toolbox?</h2>
             <p>
                 Learn more about the Angular Toolbox goal and philosophy:
@@ -46,9 +46,9 @@
             To deploy the application locally, <a href="#git-section" anchorLink>clone the GIT project</a>
             on your computer and run the following commands from the project folder:
         </p>
-        <at-code-viewport lang="bash">$npm install
-$npm start</at-code-viewport>
+        <atx-code-viewport lang="bash">$npm install
+$npm start</atx-code-viewport>
     </div>
     <hr class="mb-5">
-    <at-git-section id="git-section"/>
+    <atx-git-section id="git-section"/>
 </main>

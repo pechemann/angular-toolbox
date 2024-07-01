@@ -10,7 +10,7 @@ import { Component, Input } from '@angular/core';
 import { HighlightService } from '../../model/service/highlight.service';
 
 @Component({
-  selector: 'at-code-viewport',
+  selector: 'atx-code-viewport',
   standalone: true,
   templateUrl: './code-viewport.component.html',
   styleUrls: ['./code-viewport.component.scss']

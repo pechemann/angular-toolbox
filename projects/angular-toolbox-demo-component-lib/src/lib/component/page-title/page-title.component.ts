@@ -10,7 +10,7 @@ import { Component, Input } from '@angular/core';
 import { SafeHtmlPipe } from 'angular-toolbox';
 
 @Component({
-  selector: 'at-page-title',
+  selector: 'atx-page-title',
   standalone: true,
   templateUrl: './page-title.component.html',
   imports: [

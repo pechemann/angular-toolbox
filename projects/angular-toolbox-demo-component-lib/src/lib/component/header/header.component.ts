@@ -10,7 +10,7 @@ import { Component, Input } from '@angular/core';
 import { AngularToolboxLogoComponent } from '../angular-toolbox-logo/angular-toolbox-logo.component';
 
 @Component({
-  selector: 'at-header',
+  selector: 'atx-header',
   standalone: true,
   imports: [
     AngularToolboxLogoComponent

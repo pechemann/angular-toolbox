@@ -11,7 +11,7 @@ import { RouterModule } from '@angular/router';
 import { IconListItem } from '../../model/business/icon-list-item';
 
 @Component({
-  selector: 'at-icon-list',
+  selector: 'atx-icon-list',
   standalone: true,
   imports: [
     RouterModule

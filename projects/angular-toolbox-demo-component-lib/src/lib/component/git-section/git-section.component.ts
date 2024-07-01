@@ -11,7 +11,7 @@ import { NavigateToUrlDirective } from 'angular-toolbox';
 import { AngularToolboxCodeViewportComponent } from '../code-viewport/code-viewport.component';
 
 @Component({
-  selector: 'at-git-section',
+  selector: 'atx-git-section',
   standalone: true,
   imports: [
     NavigateToUrlDirective,

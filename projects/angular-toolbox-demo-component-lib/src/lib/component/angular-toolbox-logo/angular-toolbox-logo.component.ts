@@ -9,7 +9,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'at-logo',
+  selector: 'atx-logo',
   standalone: true,
   templateUrl: './angular-toolbox-logo.component.html'
 })

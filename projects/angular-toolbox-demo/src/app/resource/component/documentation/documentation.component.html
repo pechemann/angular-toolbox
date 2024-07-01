@@ -14,7 +14,7 @@
 </svg>
 <main class="documentation">
     @if(isHomePage) {
-        <at-page-title label="Angular Toolbox Documentation">
+        <atx-page-title label="Angular Toolbox Documentation">
             <p primary class="fs-5">
                 <em class="lib-name">Angular Toolbox</em> documentation has all the information you need to make your Angular project a smashing success.
             </p>
@@ -23,19 +23,19 @@
                     Latest stable release: <span class="badge text-bg-primary p-2">{{ versionService.getVersion().toString() }}</span>
                 </p>
             </div>
-        </at-page-title>
+        </atx-page-title>
         <h2 class="mb-4">All Utilities Documentation</h2>
         <div class="row">
             @for (item of itemListCollection; track item) {
                 <div class="col-md-6">
-                    <at-icon-list [itemList]="item"/>
+                    <atx-icon-list [itemList]="item"/>
                 </div>
             }
         </div>
         <hr class="mb-5">
         <h2 class="mb-4">Articles</h2>
         <div class="row">
-        <at-icon-list [itemList]="articles"/>
+        <atx-icon-list [itemList]="articles"/>
        </div>
     } @else {
         <article [innerHTML]="page | safeHtml"></article>

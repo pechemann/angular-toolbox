@@ -9,7 +9,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'at-footer',
+  selector: 'atx-footer',
   standalone: true,
   templateUrl: './footer.component.html'
 })

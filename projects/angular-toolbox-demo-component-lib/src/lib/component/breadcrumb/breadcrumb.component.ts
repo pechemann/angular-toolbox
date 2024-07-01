@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { BreadcrumbService } from '../../model/service';
 
 @Component({
-  selector: 'at-breadcrumb',
+  selector: 'atx-breadcrumb',
   standalone: true,
   imports: [
     RouterModule
