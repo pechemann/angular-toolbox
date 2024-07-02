@@ -10,4 +10,5 @@ export interface TodoDto {
     userId: number;
     title: string;
     completed: boolean;
+    id: number;
 }

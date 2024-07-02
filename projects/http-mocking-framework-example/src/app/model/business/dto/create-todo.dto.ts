@@ -6,8 +6,7 @@
  * found in the LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
  */
 
-export interface Todo {
+export interface CreateTodoDto {
+    userId: number;
     title: string;
-    completed: boolean;
-    id: number;
 }

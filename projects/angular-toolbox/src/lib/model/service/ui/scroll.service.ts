@@ -51,6 +51,7 @@ export class ScrollService {
    */
   public scrollIntoView(selector: string, arg?: boolean | ScrollIntoViewOptions | undefined): void {
     const elm: Element | null = this._document.querySelector(selector);
+    console.log(elm)
     if (elm) elm.scrollIntoView(arg);
   }
 

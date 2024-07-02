@@ -13,11 +13,11 @@ import { Todo } from '../../../model/business/todo';
 import { TodoService } from '../../../model/service/todo.service';
 import { TODOS_MOCK_CONFIG } from '../../../mock/http-mock-config';
 import { HttpMock, } from 'projects/angular-toolbox/src/lib/framework/mock/http/proxy';
-import { AbstractIdentifiable, HttpMockService, SubscriptionService } from 'angular-toolbox';
+import { AbstractIdentifiable, EMPTY_STRING, HttpMockService, SubscriptionService } from 'angular-toolbox';
 import { UserService } from '../../../model/service/user.service';
 import { LogerService } from '../../../model/service/logger.service';
 import { Log } from '../../../model/business/log';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 
 @HttpMock(TODOS_MOCK_CONFIG)
@@ -26,7 +26,7 @@ import { DatePipe } from '@angular/common';
   standalone: true,
   imports: [
     AngularToolboxPageTitleComponent,
-    FormsModule,
+    ReactiveFormsModule,
     DatePipe
   ],
   templateUrl: './todo.component.html',
@@ -34,23 +34,34 @@ import { DatePipe } from '@angular/common';
 })
 export class TodoComponent extends AbstractIdentifiable implements OnInit, OnDestroy {
 
-  protected todoList: Todo[] = [];
+  protected todoList: Todo[] | null = null;
   protected logList: Log[] = [];
+
+  protected readonly todoForm: FormGroup;
 
   constructor(breadcrumb: BreadcrumbService,
               private todoService: TodoService,
               private userService: UserService,
               private loggerService: LogerService,
               private subscriptionService: SubscriptionService,
+              private formBuilder: FormBuilder,
               private mockService: HttpMockService) {
     super();
     breadcrumb.removeAll()
               .addItem(breadcrumb.buildItem("Todo"));
+    this.todoForm = this.formBuilder.group({
+      todoInput: [EMPTY_STRING, Validators.required ]
+    });
   }
 
   public ngOnInit(): void {
+    const logContainer: any = document.querySelector("#log-viewport");
+    this.todoForm.disable();
     this.subscriptionService.register(this,
-      this.loggerService.onLog.subscribe((log: Log)=> this.logList.push(log))
+      this.loggerService.onLog.subscribe((log: Log)=> {
+        this.logList.push(log);
+        setTimeout(()=> logContainer.scrollTop = logContainer.scrollHeight);
+      })
     );
   }
 
@@ -59,22 +70,36 @@ export class TodoComponent extends AbstractIdentifiable implements OnInit, OnDes
   }
 
   protected userSelect(event: any): void {
-    const selectedId: number = event.target.value;
+    const selectedId: number = parseInt(event.target.value);
     this.userService.setUserId(selectedId);
-    this.resetTodoList();
+    this.todoList = null;
+    this.todoForm.disable();
     if (selectedId === -1) return;
     this.subscriptionService.register(this,
-      this.todoService.getTodoList().subscribe(todoList => this.todoList = todoList)
+      this.todoService.getTodoList().subscribe(todoList => {
+        this.todoList = todoList;
+        this.todoForm.enable();
+      })
     );
+  }
+
+  protected createTodo(): void {
+    if (this.todoForm.valid) {
+      const title: string = this.todoForm.get("todoInput")?.value;
+      this.resetForm();
+      this.subscriptionService.register(this,
+        this.todoService.createTodo(title).subscribe((todo: Todo)=> this.todoList?.push(todo))
+      );
+    }
   }
 
   protected deleteAllTodos(): void {
     this.subscriptionService.register(this,
-      this.todoService.deleteTodoList().subscribe(_=> this.resetTodoList())
+      this.todoService.deleteTodoList().subscribe(_=> (this.todoList as any).length = 0 )
     );
   }
 
-  private resetTodoList(): void {
-    this.todoList.length = 0;
+  protected resetForm(): void {
+    this.todoForm.reset();
   }
 }

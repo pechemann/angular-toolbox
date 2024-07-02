@@ -13,6 +13,7 @@ import { TodoDto } from '../../business/dto/todo.dto';
 import { LogerService } from '../logger.service';
 import { LogLevel } from '../../business/log';
 import { Todo } from '../../business/todo';
+import { CreateTodoDto } from '../../business/dto/create-todo.dto';
 
 @Injectable({
   providedIn: "root"
@@ -30,7 +31,7 @@ export class TodoDao {
         this.loggerService.log("HTTP GET responded with status: " + response.status, LogLevel.DEBUG);
         const result: Todo[] = [];
         response.body.forEach((dto: TodoDto)=> {
-          result.push( { title: dto.title, completed: dto.completed } );
+          result.push( { title: dto.title, completed: dto.completed, id: dto.id } );
         });
         return result;
       }),
@@ -45,11 +46,31 @@ export class TodoDao {
     const endpoint: string = "https://my-awsome-company.com/todos/" + userId;
     this.loggerService.log("HTTP DELETE: " + endpoint, LogLevel.DEBUG);
     return this.http.delete<any>(endpoint, { observe: 'response' }).pipe(
-      tap(response=> {
+      tap(response => {
         this.loggerService.log("HTTP DELETE responded with status: " + response.status, LogLevel.DEBUG);
       }),
       catchError((err)=>{
         this.loggerService.log(`HTTP DELETE responded with error: ${err.status} ${err.message}`, LogLevel.ERROR);
+        return throwError(() => new Error('Something bad happened; please try again later.'));
+      })
+    );
+  }
+
+  public createTodo(userId: number, title: string): Observable<Todo> {
+    const endpoint: string = `https://my-awsome-company.com/todos/${userId}/todo`;
+    const dto: CreateTodoDto = {
+      userId: userId,
+      title: title
+    };
+    this.loggerService.log("HTTP POST: " + endpoint, LogLevel.DEBUG);
+    return this.http.post<any>(endpoint, dto, { observe: 'response' }).pipe(
+      map(response => {
+        const responseDto: TodoDto = response.body;
+        this.loggerService.log("HTTP POST responded with status: " + response.status, LogLevel.DEBUG);
+        return { title: responseDto.title, completed: responseDto.completed, id: responseDto.id };
+      }),
+      catchError((err)=>{
+        this.loggerService.log(`HTTP POST responded with error: ${err.status} ${err.message}`, LogLevel.ERROR);
         return throwError(() => new Error('Something bad happened; please try again later.'));
       })
     );

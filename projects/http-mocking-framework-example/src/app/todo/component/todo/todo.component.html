@@ -31,16 +31,16 @@
                         </select>
                     </div>
                 </form>
-                <form class="ms-5 me-5">
+                <form class="ms-5 me-5" [formGroup]="todoForm">
                     <fieldset>
                         <legend class="display-3 text-center text-primary mb-4">
                             Todos
                         </legend>
                         <div class="mb-3 shadow p-3">
-                            <input type="text" class="form-control form-control-lg text-center pt-3 pb-3 mb-3" id="todoInput" aria-describedby="todoInput"
-                                    placeholder="What needs to be done?">
-                            
-                            @if (logList.length) {
+                            <input id="todoInput" formControlName="todoInput" aria-describedby="todoInput"
+                                    type="text" class="form-control form-control-lg text-center pt-3 pb-3 mb-3"
+                                    placeholder="What needs to be done?" (keyup.enter)="createTodo()">
+                            @if (todoList) {
                             <div>
                                 @for (todo of todoList; track todo) {
                                     <div class="input-group mb-1">
@@ -50,7 +50,7 @@
                                         <input type="text" class="form-control" [value]="todo.title">
                                     </div>
                                 }
-                                <button class="btn" (click)="deleteAllTodos()">
+                                <button type="button" class="btn" (click)="deleteAllTodos()">
                                     Delete All
                                 </button>
                             </div>
@@ -69,7 +69,7 @@
                         Logs
                     </div>
                     <div class="card-body">
-                        <div class="card-text d-flex flex-column log-viewport">
+                        <div id="log-viewport" class="card-text d-flex flex-column">
                             @for (log of logList; track log) {
                                 <span class="text-warning" [class.text-danger]="log.level === 1">[{{ log.timestamp | date:'medium' }}][{{ log.level === 0 ? 'DEBUG': 'ERROR' }}] {{ log.message }}</span>
                             }

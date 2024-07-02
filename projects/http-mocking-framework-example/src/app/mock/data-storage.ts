@@ -10,21 +10,26 @@ import { TodoDto } from "../model/business/dto/todo.dto";
 
 export class DataStorage {
 
+    private autoIncrementIdx: number = 3;
+
     private DB: TodoDto[] = [
         {
             userId: 0,
             title: "Create test suite for the Foo component",
-            completed: false
+            completed: false,
+            id: 1
         },
         {
             userId: 1,
             title: "Book a hotel room",
-            completed: false
+            completed: false,
+            id: 2
         },
         {
             userId: 0,
             title: "Complete documentation for the Foo component",
-            completed: true
+            completed: true,
+            id: 3
         }
     ];
 
@@ -35,5 +40,16 @@ export class DataStorage {
     public deteteTodoCollection(userId: number): boolean {
         this.DB = this.DB.filter((todo: TodoDto)=> todo.userId !== userId);
         return true;
+    }
+    
+    public addTodo(userId: number, title: string): TodoDto {
+        const dto: TodoDto = {
+            userId: userId,
+            title: title,
+            completed: false,
+            id: ++this.autoIncrementIdx
+        };
+        this.DB.push(dto);
+        return dto;
     }
 }
