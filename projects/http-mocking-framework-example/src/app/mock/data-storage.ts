@@ -52,4 +52,13 @@ export class DataStorage {
         this.DB.push(dto);
         return dto;
     }
+
+    public updateTodo(userId: number, id: number, title: string, completed: boolean): boolean {
+        const dto: TodoDto | undefined = this.DB.find((todo: TodoDto)=> todo.userId === userId && todo.id === id);
+        if (!dto) return false;
+        dto.title = title;
+        dto.completed = completed;
+        return true;
+    }
+    
 }

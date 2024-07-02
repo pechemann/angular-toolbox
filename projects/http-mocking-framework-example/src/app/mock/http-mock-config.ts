@@ -11,7 +11,7 @@ import { HttpMockConfig, HttpMockError, httpResponseMock } from "angular-toolbox
 import { DataStorage } from "./data-storage";
 import { validateUser } from "./validate-user";
 import { TodoDto } from "../model/business/dto/todo.dto";
-import { CreateTodoDto } from "../model/business/dto/create-todo.dto";
+import { UpdateTodoDto } from "../model/business/dto/update-todo.dto";
 
 const DATA_STORAGE: DataStorage = new DataStorage();
 
@@ -36,7 +36,7 @@ export const TODOS_MOCK_CONFIG: HttpMockConfig = {
                     get: {
                         data: (req: HttpRequest<TodoDto>, params: any)=> {
                             const responseMock = httpResponseMock();
-                            const userId: number = parseInt(params.userId)
+                            const userId: number = parseInt(params.userId);
                             if (validateUser(userId)) return responseMock.body( DATA_STORAGE.getTodoCollection(userId) )
                                                                          .response();
                             return responseMock.response(NOT_FOUND_ERROR);
@@ -45,7 +45,7 @@ export const TODOS_MOCK_CONFIG: HttpMockConfig = {
                     delete: {
                         data: (req: HttpRequest<TodoDto>, params: any)=> {
                             const responseMock = httpResponseMock();
-                            const userId: number = parseInt(params.userId)
+                            const userId: number = parseInt(params.userId);
                             if (validateUser(userId)) return responseMock.body( DATA_STORAGE.deteteTodoCollection(userId) )
                                                                          .response();
                             return responseMock.response(NOT_FOUND_ERROR);
@@ -60,15 +60,33 @@ export const TODOS_MOCK_CONFIG: HttpMockConfig = {
                 {
                     route: "/todos/:userId/todo",
                     post: {
-                        data: (req: HttpRequest<CreateTodoDto>, params: any)=> {
+                        data: (req: HttpRequest<string>, params: any)=> {
                             const responseMock = httpResponseMock();
                             if ( req.body === null) return responseMock.response(BAD_REQUEST_ERROR);
-                            const createDto: CreateTodoDto = JSON.parse(req.body as any);
-                            const dto: TodoDto = DATA_STORAGE.addTodo(createDto.userId, createDto.title);
-                            return httpResponseMock().body( dto )
-                                                     .status(HttpStatusCode.Created)
-                                                     .statusText("Created")
-                                                     .response();
+                            const userId: number = parseInt(params.userId);
+                            const dto: TodoDto = DATA_STORAGE.addTodo(userId, req.body);
+                            return responseMock.body( dto )
+                                               .status(HttpStatusCode.Created)
+                                               .statusText("Created")
+                                               .response();
+                        }
+                    }
+                },
+                {
+                    route: "/todos/:userId/todo/:id",
+                    put: {
+                        data: (req: HttpRequest<UpdateTodoDto>, params: any)=> {
+                            const responseMock = httpResponseMock();
+                            if ( req.body === null) return responseMock.response(BAD_REQUEST_ERROR);
+                            const id: number = parseInt(params.id);
+                            const userId: number = parseInt(params.userId);
+                            const dto: UpdateTodoDto = JSON.parse(req.body as any);
+                            const result: boolean = DATA_STORAGE.updateTodo(userId, id, dto.title, dto.completed);
+                            if (result) return responseMock.body( null )
+                                                           .status(HttpStatusCode.NoContent)
+                                                           .statusText("No Content")
+                                                           .response();
+                            return responseMock.response(NOT_FOUND_ERROR);
                         }
                     }
                 }

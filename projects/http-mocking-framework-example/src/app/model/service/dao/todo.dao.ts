@@ -13,7 +13,6 @@ import { TodoDto } from '../../business/dto/todo.dto';
 import { LogerService } from '../logger.service';
 import { LogLevel } from '../../business/log';
 import { Todo } from '../../business/todo';
-import { CreateTodoDto } from '../../business/dto/create-todo.dto';
 
 @Injectable({
   providedIn: "root"
@@ -58,12 +57,8 @@ export class TodoDao {
 
   public createTodo(userId: number, title: string): Observable<Todo> {
     const endpoint: string = `https://my-awsome-company.com/todos/${userId}/todo`;
-    const dto: CreateTodoDto = {
-      userId: userId,
-      title: title
-    };
     this.loggerService.log("HTTP POST: " + endpoint, LogLevel.DEBUG);
-    return this.http.post<any>(endpoint, dto, { observe: 'response' }).pipe(
+    return this.http.post<any>(endpoint, title, { observe: 'response' }).pipe(
       map(response => {
         const responseDto: TodoDto = response.body;
         this.loggerService.log("HTTP POST responded with status: " + response.status, LogLevel.DEBUG);
