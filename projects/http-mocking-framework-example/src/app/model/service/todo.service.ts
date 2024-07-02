@@ -17,11 +17,16 @@ import { UserService } from './user.service';
 })
 export class TodoService {
 
-  constructor(private _todoDao: TodoDao,
-              private _userService: UserService) { }
+  constructor(private todoDao: TodoDao,
+              private userService: UserService) { }
 
   public getTodoList(): Observable<Todo[]> {
-    const currentuserid: number = this._userService.getUserId();
-    return this._todoDao.getTodos(currentuserid);
+    const currentuserid: number = this.userService.getUserId();
+    return this.todoDao.getTodos(currentuserid);
+  }
+
+  public deleteTodoList(): Observable<Todo[]> {
+    const currentuserid: number = this.userService.getUserId();
+    return this.todoDao.deleteTodos(currentuserid);
   }
 }

@@ -15,16 +15,16 @@ import { LogLevel } from '../business/log';
 })
 export class UserService {
 
-  constructor(private _loggerService: LogerService) {}
+  constructor(private loggerService: LogerService) {}
 
-  private _iserId: number = -1;
+  private currUserId: number = -1;
 
   public setUserId(id: number): void {
-    this._loggerService.log("User changed: " + id, LogLevel.DEBUG);
-    this._iserId = id;
+    this.loggerService.log("User changed: " + id, LogLevel.DEBUG);
+    this.currUserId = id;
   }
   
   public getUserId(): number {
-    return this._iserId;
+    return this.currUserId;
   }
 }

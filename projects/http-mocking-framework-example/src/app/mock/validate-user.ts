@@ -6,13 +6,6 @@
  * found in the LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
  */
 
-export enum LogLevel {
-    DEBUG = 0,
-    ERROR = 1
-}
-
-export interface Log {
-    message: string;
-    timestamp: number;
-    level: LogLevel;
+export const validateUser = (userId: number): boolean => {
+    return (userId === 0 || userId === 1);
 }

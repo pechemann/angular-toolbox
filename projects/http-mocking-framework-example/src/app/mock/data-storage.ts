@@ -8,12 +8,17 @@
 
 import { TodoDto } from "../model/business/dto/todo.dto";
 
-export class Storage {
+export class DataStorage {
 
-    private readonly DB: TodoDto[] = [
+    private DB: TodoDto[] = [
         {
             userId: 0,
             title: "Create test suite for the Foo component",
+            completed: false
+        },
+        {
+            userId: 1,
+            title: "Book a hotel room",
             completed: false
         },
         {
@@ -23,8 +28,12 @@ export class Storage {
         }
     ];
 
-    public getTodoCollection(userId: string): TodoDto[] | undefined {
-        const id: number = parseInt(userId);
-        return this.DB.filter((todo: TodoDto)=> todo.userId === id);
+    public getTodoCollection(userId: number): TodoDto[] | undefined {
+        return this.DB.filter((todo: TodoDto)=> todo.userId === userId);
+    }
+
+    public deteteTodoCollection(userId: number): boolean {
+        this.DB = this.DB.filter((todo: TodoDto)=> todo.userId !== userId);
+        return true;
     }
 }

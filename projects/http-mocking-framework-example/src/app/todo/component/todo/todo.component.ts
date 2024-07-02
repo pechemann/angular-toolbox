@@ -38,10 +38,10 @@ export class TodoComponent extends AbstractIdentifiable implements OnInit, OnDes
   protected logList: Log[] = [];
 
   constructor(breadcrumb: BreadcrumbService,
-              private _todoService: TodoService,
-              private _userService: UserService,
-              private _loggerService: LogerService,
-              private _subscriptionService: SubscriptionService,
+              private todoService: TodoService,
+              private userService: UserService,
+              private loggerService: LogerService,
+              private subscriptionService: SubscriptionService,
               private mockService: HttpMockService) {
     super();
     breadcrumb.removeAll()
@@ -49,24 +49,32 @@ export class TodoComponent extends AbstractIdentifiable implements OnInit, OnDes
   }
 
   public ngOnInit(): void {
-    this._subscriptionService.register(this,
-      this._loggerService.onLog.subscribe((log: Log)=> this.logList.push(log))
+    this.subscriptionService.register(this,
+      this.loggerService.onLog.subscribe((log: Log)=> this.logList.push(log))
     );
   }
 
   public ngOnDestroy(): void {
-    this._subscriptionService.clearAll(this);
+    this.subscriptionService.clearAll(this);
   }
 
   protected userSelect(event: any): void {
-    const userId: number = event.target.value;
-    this._userService.setUserId(userId);
-    if (userId === -1) {
-      this.todoList.length = 0;
-      return;
-    }
-    this._subscriptionService.register(this,
-      this._todoService.getTodoList().subscribe(todoList => this.todoList = todoList)
+    const selectedId: number = event.target.value;
+    this.userService.setUserId(selectedId);
+    this.resetTodoList();
+    if (selectedId === -1) return;
+    this.subscriptionService.register(this,
+      this.todoService.getTodoList().subscribe(todoList => this.todoList = todoList)
     );
+  }
+
+  protected deleteAllTodos(): void {
+    this.subscriptionService.register(this,
+      this.todoService.deleteTodoList().subscribe(_=> this.resetTodoList())
+    );
+  }
+
+  private resetTodoList(): void {
+    this.todoList.length = 0;
   }
 }
