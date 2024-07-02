@@ -44,4 +44,10 @@ export interface HttpResponseMock {
      * The optional error for this HTTP request.
      */
     error: HttpMockError | null;
+
+    /**
+     * Returns a delayed response, in miliseconds.
+     * Maximum value is `10000` miliseconds (10 seconds).
+     */
+    delay?: number;
 }

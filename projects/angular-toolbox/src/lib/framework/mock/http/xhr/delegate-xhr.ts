@@ -19,6 +19,12 @@ import { DataStorageBuilder } from "../util/data-storage.builder";
 
 /**
  * @private
+ * The maximum value for a delayed HTTP response.
+ */
+const MAX_TIMER: number = 10000;
+
+/**
+ * @private
  * A utility class used as delegate of `XMLHttpRequest` functionalities when
  * a HTTP request is intercepted by the Mocking Framework .
  */
@@ -84,6 +90,11 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
      * Internal storage for the HTTP request `statusText`.
      */
     private _statusText: string = EMPTY_STRING;
+
+    /**
+     * @private
+     */
+    private _loadSubscription: Subscription | null = null;
 
     /**
      * Returns the response body content.
@@ -209,24 +220,26 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
         const request: HttpRequest<any> = new HttpRequest<any>(this._method as string, this._url as any, body);
         const rc: RouteMockConfig = this._routeConfig;
         const httpResponseMock: HttpResponseMock = (rc.methodConfig as any).data(request, rc.parameters);
-        const sub: Subscription = this.loadData(httpResponseMock).subscribe((data: any) => {
+        let timer: number = httpResponseMock.delay || 0;
+        if (timer > MAX_TIMER) timer = MAX_TIMER;
+        this._loadSubscription = this.loadData(httpResponseMock).subscribe((data: any) => {
             this._dataStorage = DataStorageBuilder.buildDataStorage(httpResponseMock, data);
             const error: HttpMockError | null = this._dataStorage.httpResponse.error;
-            this.setReadyState(this.HEADERS_RECEIVED);
-
-            if (error) return this.onError(error);
-
-            this.setReadyState(this.LOADING);
-            const response: HttpResponseMock = this._dataStorage.httpResponse;
-            const headers: HttpHeaders | undefined = response.headers;
-            this._headers = headers || new HttpHeaders();
-    
-            if (!this._progressiveDownload) {
-                this._statusText = response.statusText || EMPTY_STRING;
-                this._status = response.status || 0;
-                return this.onLoadComplete();
-            }
-            this.doProgressiveDownload();
+            setTimeout(()=> {
+                this.setReadyState(this.HEADERS_RECEIVED);
+                if (error) return this.onError(error);
+                this.setReadyState(this.LOADING);
+                const response: HttpResponseMock = this._dataStorage.httpResponse;
+                const headers: HttpHeaders | undefined = response.headers;
+                this._headers = headers || new HttpHeaders();
+        
+                if (!this._progressiveDownload) {
+                    this._statusText = response.statusText || EMPTY_STRING;
+                    this._status = response.status || 0;
+                    return this.onLoadComplete();
+                }
+                this.doProgressiveDownload();
+            }, timer);
         });
     }
 
@@ -259,6 +272,10 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
         this._routeConfig = null as any;
         this._headers = null as any;
         this._dataStorage = null as any;
+        if (this._loadSubscription) {
+            this._loadSubscription.unsubscribe();
+            this._loadSubscription = null;
+        }
     }
 
     /**

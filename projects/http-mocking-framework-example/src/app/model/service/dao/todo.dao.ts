@@ -22,7 +22,7 @@ export class TodoDao {
   constructor(private http: HttpClient,
               private loggerService: LogerService) { }
 
-  public getTodos(userId: number): Observable<Todo[]> {
+  public getAll(userId: number): Observable<Todo[]> {
     const endpoint: string = "https://my-awsome-company.com/todos/" + userId;
     this.loggerService.log("HTTP GET: " + endpoint, LogLevel.DEBUG);
     return this.http.get<any>(endpoint, { observe: 'response' }).pipe(
@@ -41,7 +41,7 @@ export class TodoDao {
     );
   }
 
-  public deleteTodos(userId: number): Observable<any> {
+  public deleteAll(userId: number): Observable<any> {
     const endpoint: string = "https://my-awsome-company.com/todos/" + userId;
     this.loggerService.log("HTTP DELETE: " + endpoint, LogLevel.DEBUG);
     return this.http.delete<any>(endpoint, { observe: 'response' }).pipe(
@@ -55,7 +55,7 @@ export class TodoDao {
     );
   }
 
-  public createTodo(userId: number, title: string): Observable<Todo> {
+  public create(userId: number, title: string): Observable<Todo> {
     const endpoint: string = `https://my-awsome-company.com/todos/${userId}/todo`;
     this.loggerService.log("HTTP POST: " + endpoint, LogLevel.DEBUG);
     return this.http.post<any>(endpoint, title, { observe: 'response' }).pipe(

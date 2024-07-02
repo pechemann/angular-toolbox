@@ -27,7 +27,8 @@ export class HttpResponseMockBuilder {
         body: null,
         status: HttpStatusCode.Ok,
         statusText: OK,
-        error: null
+        error: null,
+        delay: 0
     };
 
     /**
@@ -87,6 +88,19 @@ export class HttpResponseMockBuilder {
      */
     public url(url: string | null): HttpResponseMockBuilder {
         this._response.url = url;
+        return this;
+    }
+
+    /**
+     * Sets the `delay` property of the new `HttpResponseMock` instance with the specified `timer` duration.
+     * Maximum value is `10000` miliseconds (10 seconds).
+     * 
+     * @param timer The value used to set the `delay` property of the new `HttpResponseMock` instance.
+     * 
+     * @returns A reference to this `HttpResponseMockBuilder` instance.
+     */
+    public delay(timer: number = 0): HttpResponseMockBuilder {
+        this._response.delay = timer;
         return this;
     }
 

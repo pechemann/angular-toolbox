@@ -22,16 +22,16 @@ export class TodoService {
 
   public getTodoList(): Observable<Todo[]> {
     const currentuserid: number = this.userService.getUserId();
-    return this.todoDao.getTodos(currentuserid);
+    return this.todoDao.getAll(currentuserid);
   }
 
   public deleteTodoList(): Observable<Todo[]> {
     const currentuserid: number = this.userService.getUserId();
-    return this.todoDao.deleteTodos(currentuserid);
+    return this.todoDao.deleteAll(currentuserid);
   }
 
   public createTodo(title: string): Observable<Todo> {
     const currentuserid: number = this.userService.getUserId();
-    return this.todoDao.createTodo(currentuserid, title);
+    return this.todoDao.create(currentuserid, title);
   }
 }
