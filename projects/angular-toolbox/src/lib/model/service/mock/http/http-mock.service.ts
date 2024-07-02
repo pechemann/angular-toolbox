@@ -12,10 +12,12 @@ import { HTTPMethodRef } from '../../../../framework/mock/http/util/http-method-
 import { tokenDataToRegexp } from '../../../../framework/mock/http/path-to-regexp/token-data-to-regexp';
 import { RouteMockConfig } from '../../../../framework/mock/http/config/route-mock-config';
 import { Key } from '../../../../framework/mock/http/path-to-regexp/model/key';
-import { TokenData } from '../../../../framework/mock/http/path-to-regexp/token-data';
 import { stringToTokenData } from '../../../../framework/mock/http/path-to-regexp/string-to-token-data';
 import { DEFAULT_DELIMITER } from '../../../../framework/mock/http/path-to-regexp/constants';
 import { Uuid } from '../../../../util';
+import { TokenData } from '../../../../framework/mock/http/path-to-regexp/token-data';
+
+export const HTTP_MOCK_SERVICE: string = "HttpMockService";
 
 interface HttpMockEndpointStorage {
   methodMock: HttpMethodMock;
@@ -27,6 +29,12 @@ interface HttpMockEndpointStorage {
   providedIn: 'root'
 })
 export class HttpMockService {
+
+  /**
+   * @private
+   * Make sure that class type is still accessible after TypeScript compilation.
+   */
+  public readonly type: string = HTTP_MOCK_SERVICE;
 
   private _configList: Map<string, Map<string, HttpMockEndpointStorage[]>> = new Map<string, Map<string, HttpMockEndpointStorage[]>>();
 
@@ -49,7 +57,7 @@ export class HttpMockService {
     if (!urlConfigList) return result;
     const methodList: HttpMockEndpointStorage[] | undefined = urlConfigList.get(method);
     if (!methodList) return result;
-    const len: number = methodList.length - 1;
+    let len: number = methodList.length - 1;
     while (len >= 0 ) {
       const methodMap: HttpMockEndpointStorage = methodList[len];
       const regexp: RegExp = methodMap.regexp;
@@ -60,6 +68,7 @@ export class HttpMockService {
         };
         break;
       }
+      len--;
     }
     return result;
   }

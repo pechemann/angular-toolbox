@@ -6,7 +6,7 @@
  * the LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
  */
 
-import { HttpMockService } from "../../../../model";
+import { HTTP_MOCK_SERVICE, HttpMockService } from "../../../../model";
 
 /**
  * 
@@ -16,7 +16,9 @@ import { HttpMockService } from "../../../../model";
 export const HttpMock: Function = (config: any): Function=> {
     return (constructor: any)=> {
         const getMockService = (instance: any): HttpMockService => {
-            const mockService: HttpMockService = Object.values(instance).find((v: any)=> v.constructor.name === "HttpMockService") as any;
+            const mockService: any = Object.values(instance).find((v: any)=> {
+                return (v.hasOwnProperty('type') && v.type === HTTP_MOCK_SERVICE);
+            });
             if (!mockService) throw new ReferenceError("HttpMockService is not provided into component.");
             return mockService;
         };

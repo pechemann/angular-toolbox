@@ -10,12 +10,16 @@ import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { DARK_MODE_CONFIG } from 'angular-toolbox';
+import { DARK_MODE_CONFIG, httpMockFactory } from 'angular-toolbox';
+import { provideHttpClient } from '@angular/common/http';
+import { XhrFactory } from '@angular/common';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }), 
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideHttpClient(),
     provideRouter(routes),
+    { provide: XhrFactory, useFactory: httpMockFactory },
     { provide: DARK_MODE_CONFIG, useValue: { detectBrowserSettings: false, storageKey: "http-mocking-sample-dark-mode" } }
   ]
 };
