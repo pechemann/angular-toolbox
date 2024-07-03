@@ -18,3 +18,4 @@ export * from './breadcrumb/breadcrumb.component';
 export * from './icon-list/icon-list.component';
 export * from './code-viewport/code-viewport.component';
 export * from './git-section/git-section.component';
+export * from './hr/hr.component';

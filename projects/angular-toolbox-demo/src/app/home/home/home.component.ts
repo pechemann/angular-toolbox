@@ -9,7 +9,7 @@
 import { Component } from '@angular/core';
 import { IconListService } from '../../ui/model/service/icon-list-list.service';
 import { AnchorLinklDirective } from 'angular-toolbox';
-import { AngularToolboxCodeViewportComponent, AngularToolboxGitSectionComponent, AngularToolboxIconListComponent, AngularToolboxPageTitleComponent } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
+import { AngularToolboxCodeViewportComponent, AngularToolboxGitSectionComponent, AngularToolboxHrComponent, AngularToolboxIconListComponent, AngularToolboxPageTitleComponent } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
 import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/lib/model/service';
 
 @Component({
@@ -20,7 +20,8 @@ import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/s
     AnchorLinklDirective,
     AngularToolboxCodeViewportComponent,
     AngularToolboxPageTitleComponent,
-    AngularToolboxIconListComponent
+    AngularToolboxIconListComponent,
+    AngularToolboxHrComponent
   ],
   templateUrl: './home.component.html'
 })

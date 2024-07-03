@@ -16,7 +16,7 @@ import { DOCUMENTATION_PROXY_CONFIG } from '../../proxy/documentation-proxy.conf
 import { DocumentationMenu } from '../../../ui/model/business/documentation-link';
 import { BreadcrumbService, HighlightService } from 'projects/angular-toolbox-demo-component-lib/src/lib/model/service';
 import { BreadcrumbItem, IconListItem } from 'projects/angular-toolbox-demo-component-lib/src/lib/model/business';
-import { AngularToolboxIconListComponent, AngularToolboxPageTitleComponent } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
+import { AngularToolboxHrComponent, AngularToolboxIconListComponent, AngularToolboxPageTitleComponent } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
 
 @HttpMock(DOCUMENTATION_PROXY_CONFIG) 
 @Component({
@@ -25,7 +25,8 @@ import { AngularToolboxIconListComponent, AngularToolboxPageTitleComponent } fro
   imports: [
     SafeHtmlPipe,
     AngularToolboxIconListComponent,
-    AngularToolboxPageTitleComponent
+    AngularToolboxPageTitleComponent,
+    AngularToolboxHrComponent
   ],
   templateUrl: './documentation.component.html',
   styleUrl: './documentation.component.scss'

@@ -8,7 +8,7 @@
 
 import { Component } from '@angular/core';
 import { NavigateToUrlDirective } from 'angular-toolbox';
-import { AngularToolboxCodeViewportComponent, AngularToolboxGitSectionComponent, AngularToolboxIconListComponent, AngularToolboxPageTitleComponent } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
+import { AngularToolboxCodeViewportComponent, AngularToolboxGitSectionComponent, AngularToolboxHrComponent, AngularToolboxIconListComponent, AngularToolboxPageTitleComponent } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
 import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/lib/model/service';
 import { RouterModule } from '@angular/router';
 
@@ -21,6 +21,8 @@ import { RouterModule } from '@angular/router';
     AngularToolboxCodeViewportComponent,
     AngularToolboxPageTitleComponent,
     AngularToolboxIconListComponent,
+    AngularToolboxHrComponent,
+    AngularToolboxGitSectionComponent,
     RouterModule
   ],
   templateUrl: './home.component.html'
