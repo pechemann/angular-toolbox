@@ -9,4 +9,5 @@
 export interface IconListItem {
     label: string;
     urlTree?: string[];
+    url?: string;
 }
