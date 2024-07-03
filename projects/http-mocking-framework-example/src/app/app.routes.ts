@@ -15,10 +15,10 @@ export const routes: Routes = [ {
   },
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+    loadComponent: () => import('./home/home.component').then(mod => mod.HomeComponent)
   },
   {
     path: 'todo',
-    loadChildren: () => import('./todo/todo.module').then(m => m.TodoModule)
+    loadComponent: () => import('./todo/component/todo/todo.component').then(mod => mod.TodoComponent)
   }
 ];

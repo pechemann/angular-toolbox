@@ -70,4 +70,19 @@ export class TodoDao {
       })
     );
   }
+  
+  public delete(userId: number, todoId: number): Observable<number> {
+    const endpoint: string = `https://my-awsome-company.com/todos/${userId}/todo/${todoId}`;
+    this.loggerService.log("HTTP DELETE: " + endpoint, LogLevel.DEBUG);
+    return this.http.delete<any>(endpoint, { observe: 'response' }).pipe(
+      map(response => {
+        this.loggerService.log("HTTP DELETE responded with status: " + response.status, LogLevel.DEBUG);
+        return parseInt(response.body);
+      }),
+      catchError((err)=>{
+        this.loggerService.log(`HTTP DELETE responded with error: ${err.status} ${err.message}`, LogLevel.ERROR);
+        return throwError(() => new Error('Something bad happened; please try again later.'));
+      })
+    );
+  }
 }

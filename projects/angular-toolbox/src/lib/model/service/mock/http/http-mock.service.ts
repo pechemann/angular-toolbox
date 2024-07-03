@@ -81,7 +81,7 @@ export class HttpMockService {
     let i: number = 1;
     for (; i <= len; ++i) {
       const key: Key = keys[i - 1];
-      params[key.name] = execResult[len];
+      params[key.name] = execResult[i];
     }
     return params;
   }

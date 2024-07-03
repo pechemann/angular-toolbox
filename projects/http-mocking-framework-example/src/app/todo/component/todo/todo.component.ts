@@ -19,6 +19,8 @@ import { LogerService } from '../../../model/service/logger.service';
 import { Log } from '../../../model/business/log';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { TodoItemComponent } from '../todo-item/todo-item.component';
+import { TodoItemAction, TodoItemActionType } from '../../model/business/todo-item-action';
 
 @HttpMock(TODOS_MOCK_CONFIG)
 @Component({
@@ -27,7 +29,8 @@ import { DatePipe } from '@angular/common';
   imports: [
     AngularToolboxPageTitleComponent,
     ReactiveFormsModule,
-    DatePipe
+    DatePipe,
+    TodoItemComponent
   ],
   templateUrl: './todo.component.html',
   styleUrl: './todo.component.scss'
@@ -101,5 +104,21 @@ export class TodoComponent extends AbstractIdentifiable implements OnInit, OnDes
 
   protected resetForm(): void {
     this.todoForm.reset();
+  }
+
+  protected onUserInput(action: TodoItemAction): void {
+    const type: TodoItemActionType = action.type;
+    const todo: Todo = action.todo;
+    if (type === "update") {
+      //this.todoService.deleteTodoList().subscribe(_=> (this.todoList as any).length = 0 )
+    } else if (type === "delete") {
+      this.subscriptionService.register(this,
+        this.todoService.deleteTodo(todo).subscribe(todoId => {
+          if (!this.todoList) return;
+          const idx: number | undefined = this.todoList.findIndex((todo: Todo)=> todo.id === todoId);
+          this.todoList.splice(idx, 1);
+        })
+      );
+    }
   }
 }

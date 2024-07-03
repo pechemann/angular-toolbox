@@ -64,6 +64,7 @@ export const TODOS_MOCK_CONFIG: HttpMockConfig = {
                             const responseMock = httpResponseMock();
                             if ( req.body === null) return responseMock.response(BAD_REQUEST_ERROR);
                             const userId: number = parseInt(params.userId);
+                            if (!validateUser(userId)) return responseMock.response(NOT_FOUND_ERROR);
                             const dto: TodoDto = DATA_STORAGE.addTodo(userId, req.body);
                             return responseMock.body( dto )
                                                .status(HttpStatusCode.Created)
@@ -78,13 +79,28 @@ export const TODOS_MOCK_CONFIG: HttpMockConfig = {
                         data: (req: HttpRequest<UpdateTodoDto>, params: any)=> {
                             const responseMock = httpResponseMock();
                             if ( req.body === null) return responseMock.response(BAD_REQUEST_ERROR);
-                            const id: number = parseInt(params.id);
                             const userId: number = parseInt(params.userId);
+                            if (!validateUser(userId)) return responseMock.response(NOT_FOUND_ERROR);
+                            const id: number = parseInt(params.id);
                             const dto: UpdateTodoDto = JSON.parse(req.body as any);
                             const result: boolean = DATA_STORAGE.updateTodo(userId, id, dto.title, dto.completed);
                             if (result) return responseMock.body( null )
                                                            .status(HttpStatusCode.NoContent)
                                                            .statusText("No Content")
+                                                           .response();
+                            return responseMock.response(NOT_FOUND_ERROR);
+                        }
+                    },
+                    delete: {
+                        data: (req: HttpRequest<UpdateTodoDto>, params: any)=> {
+                            const responseMock = httpResponseMock();
+                            const userId: number = parseInt(params.userId);
+                            if (!validateUser(userId)) return responseMock.response(NOT_FOUND_ERROR);
+                            const id: number = parseInt(params.id);
+                            const result: boolean = DATA_STORAGE.deleteTodo(userId, id);
+                            if (result) return responseMock.body( id )
+                                                           .status(HttpStatusCode.Accepted)
+                                                           .statusText("Accepted")
                                                            .response();
                             return responseMock.response(NOT_FOUND_ERROR);
                         }

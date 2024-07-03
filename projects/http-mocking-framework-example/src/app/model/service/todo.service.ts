@@ -34,4 +34,9 @@ export class TodoService {
     const currentuserid: number = this.userService.getUserId();
     return this.todoDao.create(currentuserid, title);
   }
+
+  public deleteTodo(todo: Todo): Observable<number> {
+    const currentuserid: number = this.userService.getUserId();
+    return this.todoDao.delete(currentuserid, todo.id);
+  }
 }

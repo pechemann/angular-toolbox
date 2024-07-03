@@ -60,5 +60,13 @@ export class DataStorage {
         dto.completed = completed;
         return true;
     }
+
+    public deleteTodo(userId: number, todoId: number): boolean {
+        const idx: number = this.DB.findIndex((todo: TodoDto)=> todo.userId === userId && todo.id === todoId);
+        if (idx === -1) return false;
+        this.DB.splice(idx, 1);
+        return true;
+    }
+    
     
 }
