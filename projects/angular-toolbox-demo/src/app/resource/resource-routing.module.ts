@@ -15,6 +15,10 @@ const routes: Routes = [
     loadComponent: () => import('./component/resources/resources.component').then(mod => mod.ResourcesComponent)
   },
   {
+    path: "license",
+    loadComponent: () => import('./component/license/license.component').then(mod => mod.LicenseComponent)
+  },
+  {
     path: "documentation",
     loadComponent: () => import('./component/documentation/documentation.component').then(mod => mod.DocumentationComponent)
   },
