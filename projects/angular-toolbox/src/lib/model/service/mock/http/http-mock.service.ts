@@ -38,10 +38,16 @@ export class HttpMockService {
 
   private _configList: Map<string, Map<string, HttpMockEndpointStorage[]>> = new Map<string, Map<string, HttpMockEndpointStorage[]>>();
 
+  private readonly APP_ORIGIN: string = window.location.origin;
+
   public addConfig(config: HttpMockConfig): void {
-    const origin: string | undefined = config.origin;
+    const origin: string = config.origin || this.APP_ORIGIN;
     if (!config.id) config.id = Uuid.build();
     config.interceptors.forEach((interceptor: HttpMockInterceptor) => this.extractConfig(interceptor, origin) );
+  }
+
+  public getAppOrigin(): string {
+    return this.APP_ORIGIN;
   }
 
   public removeConfig(id: Uuid): void { }

@@ -121,7 +121,7 @@ export class XhrProxyImpl extends XhrBase implements XhrProxy {
     open(method: string, url: string | URL, async: boolean, username?: string | null | undefined, password?: string | null | undefined): void;
     open(method: unknown, url: unknown, async?: unknown, username?: unknown, password?: unknown): void {
         const m: string = (method as string).toString().toLowerCase();
-        const parsedUrl: URL = new URL(url as string);
+        const parsedUrl: URL = URL.canParse(url as string) ? new URL(url as string) : new URL(this._httpMockService.getAppOrigin() + url);
         const config: RouteMockConfig | undefined = this._httpMockService.getRouteConfig(parsedUrl, m);
         if (this.XHR && this.XHR instanceof DelegateXhr) this.XHR.destroy();
         this.XHR = config ? new DelegateXhr(config) : new XMLHttpRequest();

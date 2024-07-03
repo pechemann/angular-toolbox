@@ -1,7 +1,7 @@
 {
     "documentation": [
         { "label": "Quick Start Guide", "urlTree": [ "/resources", "documentation", "quick-start-guide" ] },
-        { "label": "HTTP Mocking Framework" },
+        { "label": "HTTP Mocking Framework", "urlTree": [ "/resources", "documentation", "http-mocking-framework" ] },
         { "label": "Subscription Service", "urlTree": [ "/resources", "documentation", "subscription-service" ] },
         { "label": "Dark Mode Service", "urlTree": [ "/resources", "documentation", "dark-mode-service" ] },
         { "label": "ButtonRole Directive", "urlTree": [ "/resources", "documentation", "button-role-directive" ] },
