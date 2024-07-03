@@ -110,7 +110,9 @@ export class TodoComponent extends AbstractIdentifiable implements OnInit, OnDes
     const type: TodoItemActionType = action.type;
     const todo: Todo = action.todo;
     if (type === "update") {
-      //this.todoService.deleteTodoList().subscribe(_=> (this.todoList as any).length = 0 )
+      this.subscriptionService.register(this,
+        this.todoService.updateTodo(todo).subscribe()
+      );
     } else if (type === "delete") {
       this.subscriptionService.register(this,
         this.todoService.deleteTodo(todo).subscribe(todoId => {
