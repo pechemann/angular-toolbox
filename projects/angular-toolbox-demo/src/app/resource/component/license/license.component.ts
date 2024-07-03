@@ -8,8 +8,7 @@ import { AngularToolboxPageTitleComponent } from 'projects/angular-toolbox-demo-
   imports: [
     AngularToolboxPageTitleComponent
   ],
-  templateUrl: './license.component.html',
-  styleUrl: './license.component.scss'
+  templateUrl: './license.component.html'
 })
 export class LicenseComponent {
 

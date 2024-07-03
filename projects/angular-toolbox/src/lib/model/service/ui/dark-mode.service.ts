@@ -3,7 +3,7 @@
  * Copyright Pascal ECHEMANN. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be ound in
- * fthe LICENSE file at https://github.com/pechemann/angular-toolbox/blob/main/LICENSE
+ * fthe LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
 import { Inject, Injectable, EventEmitter } from '@angular/core';
