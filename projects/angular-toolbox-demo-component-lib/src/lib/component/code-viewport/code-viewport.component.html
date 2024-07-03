@@ -7,7 +7,7 @@
 -->
  
 <div class="position-relative">
-  <pre class="border"><code [class]="language"><ng-content></ng-content></code></pre>
+  <pre class="border"><code [class]="language" #code><ng-content></ng-content></code></pre>
   <div class="copy-btn-wrapper" >
     <button class="btn d-flex text-light" title="Copy to clipboard" (click)="copyToClipboard()">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
