@@ -36,7 +36,6 @@ export class DarkModeServiceComponent implements OnDestroy {
               .addItem(breadcrumb.buildItem("Dark Mode Service"));
     this._darkModeEnabled = this.darkModeService.darkModeEnabled();
     this.darkModeService.disableDarkMode();
-    console.log(this._darkModeEnabled)
   }
 
   protected documentation: DocumentationLink = {

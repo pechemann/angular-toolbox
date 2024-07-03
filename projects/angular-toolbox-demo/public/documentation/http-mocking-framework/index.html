@@ -51,7 +51,68 @@
     <p>
         The Angular HTTP engine is built on top of <a href="https://rxjs.dev/guide/observable" title="Observable">RXJS <code>Observable</code></a>,
         which provides an elegant way to fetch data over HTTP requests.
+        <br>
+        For example, to fetch configuration data from a hypothetical API using the <code>HttpClient.get()</code> method:
+        <figure>
+            <figcaption>Example from Angular documentation:</figcaption>
+            <pre><code class="language-typescript">http.get<Config>('/api/config').subscribe(config => {
+    // process the configuration.
+});</code></pre></figure>
     </p>
+</section>
+<section class="col-xl-9">
+    <h3>Mocking API calls</h3>
+    <p>
+        API mocking is the creation of a simulated version of an API that mirrors the
+        behaviour of an actual API.
+    </p>
+    <p>
+        A common use case is where front-end developers need to create new features,
+        based on backend APIs made by other development teams.
+        This is a recurring problem that all Angular developers have to face!
+    </p>
+    <p>
+        Ideally, the <em>data access layer</em> should never be changed when mocking APIs.
+        It means that the URI endpoint in the following sample must not be modified during all developement process:
+        <figure>
+            <pre><code class="language-typescript">http.get<Config>('https://my-domain.com/api/data').subscribe(config => {
+    // process the data.
+});</code></pre></figure>
+    </p>
+    <p>
+        You may argue that you can change a single URL, but what if several developers
+        create different services in separated parts of an app?
+        <br>
+        Unfortunately, Angular does not offer a native solution to overcome this problem.
+    </p>
+    <p class="lead">
+        This is where the <em>HTTP Mocking Framework</em> comes in!
+    </p>
+</section>
+<section class="col-xl-9">
+    <h3>Keep It Simple!</h3>
+    <p>
+        If you are familiar with developing <a href="nodejs.or" title="Node.js">Node.js</a> apps
+        created with <a href="https://expressjs.com/" title=">Express.js">Express.js</a>,
+        handling the <em>HTTP Mocking Framework</em> will be straightforward.
+    </p>
+    <p>
+        The only difficulty is to correctly set URL patterns, as you usually do with the Angular router.
+        <br>
+        The following sample code shows how to write a basic config that will intercept all HTTP calls
+        for URLs on the form <code>http://localhost:4200/todos/:id</code> with the <code>GET</code> method:
+    </p>
+    <figure>
+        <pre><code class="language-typescript">const getTodo = (id: string) => { ... }
+...
+{
+    route: "/todos/:id",
+    get: {
+        data: (req: HttpRequest<any>, params: any) => 
+               httpResponseMock().body( getTodo(params.id) ).response();
+    }
+}</code></pre></figure>
+
 </section>
 
 <!-- We use a data object to store navigation tree structure-->

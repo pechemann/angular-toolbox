@@ -38,7 +38,7 @@
         <atx-icon-list [itemList]="articles"/>
        </div>
     } @else {
-        <article [innerHTML]="page | safeHtml"></article>
+        <article renderContent [content]="page" (rendered)="pageRendered($event)"></article>
     }
 </main>
     

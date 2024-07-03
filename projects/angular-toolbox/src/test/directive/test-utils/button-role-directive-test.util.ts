@@ -151,7 +151,7 @@ export enum Key {
 };
 
 @Component({
-  template: `<div id="testElm" buttonRole (enter)="onEnter(item)"><div>`
+  template: `<div id="testElm" buttonRole (enter)="onEnter(item)"></div>`
 })
 export class ButtonRoleDirectiveTestComponent {
 
@@ -161,7 +161,7 @@ export class ButtonRoleDirectiveTestComponent {
 }
 
 @Component({
-  template: `<div id="testElm" buttonRole delegateClick (enter)="onEnter(item)"><div>`
+  template: `<div id="testElm" buttonRole delegateClick (enter)="onEnter(item)"></div>`
 })
 export class ButtonRoleDirectiveWithDelegationTestComponent {
 
@@ -171,7 +171,7 @@ export class ButtonRoleDirectiveWithDelegationTestComponent {
 }
 
 @Component({
-  template: `<div id="testElm" buttonRole routerLink="/expectedUrl"><div>`
+  template: `<div id="testElm" buttonRole routerLink="/expectedUrl"></div>`
 })
 export class ButtonRoleDirectiveWithRouterLinkTestComponent implements AfterViewChecked {
 

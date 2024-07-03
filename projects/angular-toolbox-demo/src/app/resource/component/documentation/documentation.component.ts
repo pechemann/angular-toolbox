@@ -8,7 +8,7 @@
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { HttpMockService, SafeHtmlPipe, SubscriptionService, VersionService, AppBrigeService, AbstractIdentifiable } from 'angular-toolbox';
+import { HttpMockService, SafeHtmlPipe, SubscriptionService, VersionService, AppBrigeService, AbstractIdentifiable, RenderContentDirective } from 'angular-toolbox';
 import { ActivatedRoute, UrlSegment } from '@angular/router';
 import { IconListService } from '../../../ui/model/service/icon-list-list.service';
 import { HttpMock } from 'projects/angular-toolbox/src/lib/framework/mock/http/proxy';
@@ -24,6 +24,7 @@ import { AngularToolboxHrComponent, AngularToolboxIconListComponent, AngularTool
   standalone: true,
   imports: [
     SafeHtmlPipe,
+    RenderContentDirective,
     AngularToolboxIconListComponent,
     AngularToolboxPageTitleComponent,
     AngularToolboxHrComponent
@@ -57,9 +58,7 @@ export class DocumentationComponent extends AbstractIdentifiable implements OnIn
     this._subsciptionService.register(this,
       this._route.url.subscribe((segments: UrlSegment[])=> {
         const cursor: number = segments.length;
-        setTimeout(()=> {
-          this._breadcrumb.removeAll().addItem(this._breadcrumb.buildItem("Resources", "resources"));
-        });
+        this._breadcrumb.removeAll().addItem(this._breadcrumb.buildItem("Resources", "resources"));
         if (cursor === 1) {
           this._subsciptionService.register(this,
             this._iconListService.getDocumentationList().subscribe((result: DocumentationMenu)=> {
@@ -71,11 +70,9 @@ export class DocumentationComponent extends AbstractIdentifiable implements OnIn
             })
           );
           this.isHomePage = true;
-          setTimeout(()=> {
-            this._breadcrumb.addItem(
-              this._breadcrumb.buildItem("Documentation")
-            )
-          });
+          this._breadcrumb.addItem(
+            this._breadcrumb.buildItem("Documentation")
+          );
           return;
         }
         const path: string = segments.slice(1).join("/");
@@ -83,13 +80,7 @@ export class DocumentationComponent extends AbstractIdentifiable implements OnIn
         if (cursor === 2) endpoint = `${origin}/${path}/index.html`;
         else endpoint = `${origin}/${path}.html`;
         this._subsciptionService.register(this,
-          this._http.get(endpoint, { headers, responseType: 'text'}).subscribe(data => {
-            this.page = data;
-            setTimeout(()=> {
-              this._highlightService.highlightAll();
-              this.builBbreadcrumb();
-            })
-          })
+          this._http.get(endpoint, { headers, responseType: 'text'}).subscribe(data => this.page = data)
         );
       })
     );
@@ -104,12 +95,17 @@ export class DocumentationComponent extends AbstractIdentifiable implements OnIn
     this._subsciptionService.clearAll(this);
   }
 
-  private builBbreadcrumb(): void {
+  protected pageRendered(elm: HTMLElement): void {
+    this.builBbreadcrumb(elm);
+    this._highlightService.highlightAll();
+  }
+
+  private builBbreadcrumb(elm: HTMLElement): void {
     const rootPath: string = "resources/documentation";
     const breadcrumbItemList: BreadcrumbItem[] = [
       this._breadcrumb.buildItem("Documentation", rootPath)
     ];
-    const navigationTree: HTMLObjectElement | null = document.querySelector("#navigation-tree");
+    const navigationTree: HTMLObjectElement | null = elm.querySelector("#navigation-tree");
     if (navigationTree && navigationTree?.dataset["tree"]) {
       const dataSet: any[] = eval(navigationTree.dataset["tree"]);
       dataSet.forEach((item)=> {
