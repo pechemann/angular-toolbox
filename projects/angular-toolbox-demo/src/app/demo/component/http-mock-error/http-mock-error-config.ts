@@ -19,7 +19,7 @@ export const config: HttpMockConfig = {
     origin: "https://jsonplaceholder.typicode.com",
     interceptors: [
         {
-            id: "getTodo",
+            id: "todos",
             endpoints: [
                 {
                     route: "/todos/:id",

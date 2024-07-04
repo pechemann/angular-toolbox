@@ -9,7 +9,7 @@
 import { HttpMockEndpoint } from "./http-mock-endpoint";
 
 /**
- * Provides the API for defining mocking strategies for a specific API.
+ * Provides the API to define mocking strategies for a specific API.
  */
 export interface HttpMockInterceptor {
 

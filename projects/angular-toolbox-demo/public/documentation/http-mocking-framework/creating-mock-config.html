@@ -7,6 +7,13 @@
 -->
 
 <nav class="page-menu col-xl-3 ps-4">
+    <section class="w-100 mb-4">
+        <h5 class="mb-4">On this page</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="#creating-mock-config" onclick="appBridge.goToAnchor(event)" title="Creating Mock Config">Creating Mock Config</a></li>
+            <li class="list-group-item"><a href="#basic-structure" onclick="appBridge.goToAnchor(event)" title="Basic Structure">Basic Structure</a></li>
+        </ul>
+    </section>
     <aside class="w-100">
         <h5 class="mb-4">In this topic</h5>
         <ul class="list-group">
@@ -16,7 +23,7 @@
             </li>
             <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','setting-up-the-framework'])">
                 Setting up the Framework
-            </a></li>
+            </a>
             </li>
            <li class="list-group-item active" aria-current="true">
                 Creating Mock Config
@@ -30,6 +37,9 @@
             <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','the-proxy-anti-pattern'])">
                 The Proxy Anti-pattern </a>
             </li>-->
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','api'])">
+                API </a>
+            </li>
         </ul>
     </aside>
 </nav>
@@ -43,10 +53,62 @@
     <hr class="mt-4">
 </header>
 
-<section class="col-xl-9" id="setting-up-the-framework">
+<section class="col-xl-9" id="creating-mock-config">
     <h3>Creating Mock Config</h3>
-    
+    <p>
+        Mock configurations are objects of type <a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','http-mock-config'])"
+        title="HttpMockConfig Interface"><code>HttpMockConfig</code></a>.
+        <br>
+        The framework supports multiple config declarations, so you can create and import as many <code>HttpMockConfig</code> objects as needed.
+    </p>
 </section>
+
+<section class="col-xl-9" id="basic-structure">
+    <h4>Basic Structure</h4>
+    <p>
+        A mock config is composed of an optional <em>URL origin</em> and a list of <em>interceptors</em>.
+    </p>
+    <p>
+        <em>Interceptors</em> are logical groups of endpoints that can share the same <em>URL origin</em>.
+        If no  <em>URL origin</em> is defined for both, root and interceptor levels, the framework use the app
+        URL as origin (usually <code>http://localhost:4200</code>).
+    </p>
+    <p>
+        Interceptors contain the config for each API endpoint, including route patterns and the HTTP methods to intercept.
+    </p>
+    <p>
+        The following sample shows how to mock an HTTP call for the API URL <code>http://my-awsome-company.com/api/sayHello/&lt;name&gt;</code>,
+        with the <code>GET</code> method:
+    </p>
+    <figure>
+        <figcaption>http-mock.config.ts</figcaption>
+        <pre><code class="language-typescript">import &#123; HttpMockConfig, httpResponseMock &#125; from 'angular-toolbox';
+
+export const config: HttpMockConfig = &#123;
+  origin: "http://my-awsome-company.com/api",
+  interceptors: [
+    &#123;
+      id: "sayHello",
+      endpoints: [
+        &#123;
+          route: "/sayHello/:name",
+          get: &#123;
+            data: (req: HttpRequest&lt;any&gt;, params: any) =&gt;
+                   httpResponseMock().body(`Hello $&#123;params.name&#125;!`).response()
+          &#125;
+        &#125;
+      ]
+    &#125;
+  ]
+&#125;;</code></pre></figure>
+    <p>
+       Thus, calling the URL <code>http://my-awsome-company.com/api/sayHello/John</code>
+       from angular  will return <code>"Hello John!"</code>.
+    </p>
+
+</section>
+
+
 
 <!-- We use a data object to store navigation tree structure-->
 <object id="navigation-tree"

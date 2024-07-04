@@ -17,7 +17,7 @@ export interface HttpMockConfig {
     /**
      * The main URL origin for this mock, as defined by the URL standard.
      * 
-     * @see https://url.spec.whatwg.org/#url
+     * @see https://url.spec.whatwg.org/#concept-url-origin
      */
     origin?: string;
 

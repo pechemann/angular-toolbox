@@ -11,7 +11,7 @@ import { HttpResponseMock } from "./http-response-mock";
 import { HttpMockParameters } from "../../../../framework";
 
 /**
- * The `HttpMethodMock` interface provides actions invoked each time an Angular
+ * The `HttpMethodMock` interface defines the behavior of actions invoked each time an Angular
  * `HttpClient` instance sends requests to a specific API endpoint.
  */
 export interface HttpMethodMock {

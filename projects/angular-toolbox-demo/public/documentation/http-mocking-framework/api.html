@@ -1,0 +1,220 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework'])">
+                Presentation
+            </a>
+            </li>
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','setting-up-the-framework'])">
+                Setting up the Framework
+            </a>
+            </li>
+           <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','creating-mock-config'])">
+                Creating Mock Config
+            </a>
+            </li>
+             <!--<li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','forcing-http-errors'])">
+                Forcing HTTP Errors</a>
+            </li>
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','use-cases'])">
+                Use Cases</a>
+            </li>
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','the-proxy-anti-pattern'])">
+                The Proxy Anti-pattern </a>
+            </li>-->
+            <li class="list-group-item active" aria-current="true">
+                API
+            </li>
+        </ul>
+    </aside>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3">HTTP Mocking Framework</h2>
+    <p>
+        The <em class="lib-name">HTTP Mocking Framework</em> provides an easy-to-use and highly configurable
+        solution to mock HTTP responses to API calls sent from your Angular applications.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9" id="setting-up-the-framework">
+    <h3>API</h3>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Interface</th>
+            <th scope="col">Description</th>
+            <th scope="col">Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>HttpMockConfig</code></td>
+            <td>
+                An interface that let Developer define mocking strategies for Angular HTTP calls.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/http-mocking-framework/http-mock-config'])" title="HttpMockConfig">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <td><code>HttpMockInterceptor</code></td>
+            <td>
+                Provides the API to define mocking strategies for a specific API.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/http-mocking-framework/http-mock-interceptor'])" title="HttpMockInterceptor">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <td><code>HttpMockEndpoint</code></td>
+            <td>
+                Provides the API to define mocking strategies for a specific endpoint.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/http-mocking-framework/http-mock-endpoint'])" title="HttpMockEndpoint">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <td><code>HttpMethodMock</code></td>
+            <td>
+                Defines the behavior of actions invoked each time Angular sends requests to a specific API endpoint.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/http-mocking-framework/http-method-mock'])" title="HttpMethodMock">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <td><code>HttpResponseMock</code></td>
+            <td>
+                Defines the config of a HTTP response associated with a mock object.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/http-mocking-framework/http-response-mock'])" title="HttpResponseMock">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <td><code>HttpMockParameters</code></td>
+            <td>
+                The type of parameter objects associated with a HTTP call.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/http-mocking-framework/http-mock-parameters'])" title="HttpMockParameters">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <td><code>HttpMockError</code></td>
+            <td>
+                Provides the API that must be implemented by HTTP mock errors.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/http-mocking-framework/http-mock-error'])" title="HttpMockError">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+        </tbody>
+        <thead>
+            <tr>
+              <th scope="col">Utility</th>
+              <th scope="col">Description</th>
+              <th scope="col">Link</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>HttpResponseMockBuilder</code></td>
+                <td>
+                    A statefull builder for creating new <code>HttpResponseMock</code> objects.
+                </td>
+                <td>
+                    <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/http-mocking-framework/http-response-mock-builder'])" title="HttpResponseMockBuilder">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                            <use href="#linkIcon"/>
+                        </svg>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td><code>httpResponseMock()</code></td>
+                <td>
+                    A utility function used to easily create new <em>chainable</em> <code>HttpResponseMockBuilder</code> instances.
+                </td>
+                <td>
+                    <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/http-mocking-framework/http-response-mock-method'])" title="httpResponseMock()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                            <use href="#linkIcon"/>
+                        </svg>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td><code>HttpHeadersMockBuilder</code></td>
+                <td>
+                    A statefull builder for creating new <code>HttpHeaders</code> instances.
+                </td>
+                <td>
+                    <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/http-mocking-framework/http-headers-mock-builder'])" title="HttpHeadersMockBuilder">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                            <use href="#linkIcon"/>
+                        </svg>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td><code>httpHeadersMock()</code></td>
+                <td>
+                    A utility function used to easily create new <em>chainable</em> <code>HttpHeadersMockBuilder</code> instances.
+                </td>
+                <td>
+                    <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/http-mocking-framework/http-headers-mock-method'])" title="httpHeadersMock()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                            <use href="#linkIcon"/>
+                        </svg>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+      </table>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'HTTP Mocking Framework', 'path': 'http-mocking-framework' }, { 'label': 'API' }]">
+</object>
