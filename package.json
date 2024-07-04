@@ -1,6 +1,7 @@
 {
   "name": "angular-toolbox",
   "version": "0.1.0",
+  "license": "SEE LICENSE IN LICENSE",
   "scripts": {
     "ng": "ng",
     "start-demo": "ng serve angular-toolbox-demo --open",
