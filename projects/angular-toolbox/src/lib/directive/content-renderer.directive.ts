@@ -22,7 +22,7 @@ const CHILD_LIST_TYPE: string = "childList";
   selector: '[renderContent]',
   standalone: true
 })
-export class RenderContentDirective implements OnInit, OnDestroy {
+export class ContentRendererDirective implements OnInit, OnDestroy {
 
   /**
    * @private

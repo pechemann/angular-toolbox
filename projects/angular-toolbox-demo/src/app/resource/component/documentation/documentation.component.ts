@@ -8,7 +8,7 @@
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { HttpMockService, SafeHtmlPipe, SubscriptionService, VersionService, AppBrigeService, AbstractIdentifiable, RenderContentDirective } from 'angular-toolbox';
+import { HttpMockService, SafeHtmlPipe, SubscriptionService, VersionService, AppBrigeService, AbstractIdentifiable, ContentRendererDirective } from 'angular-toolbox';
 import { ActivatedRoute, UrlSegment } from '@angular/router';
 import { IconListService } from '../../../ui/model/service/icon-list-list.service';
 import { HttpMock } from 'projects/angular-toolbox/src/lib/framework/mock/http/proxy';
@@ -24,7 +24,7 @@ import { AngularToolboxHrComponent, AngularToolboxIconListComponent, AngularTool
   standalone: true,
   imports: [
     SafeHtmlPipe,
-    RenderContentDirective,
+    ContentRendererDirective,
     AngularToolboxIconListComponent,
     AngularToolboxPageTitleComponent,
     AngularToolboxHrComponent

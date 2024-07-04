@@ -12,8 +12,7 @@ import { AngularToolboxPageTitleComponent } from 'projects/angular-toolbox-demo-
 import { Todo } from '../../../model/business/todo';
 import { TodoService } from '../../../model/service/todo.service';
 import { TODOS_MOCK_CONFIG } from '../../../mock/http-mock-config';
-import { HttpMock, } from 'projects/angular-toolbox/src/lib/framework/mock/http/proxy';
-import { AbstractIdentifiable, EMPTY_STRING, HttpMockService, SubscriptionService } from 'angular-toolbox';
+import { AbstractIdentifiable, ContentRendererDirective, EMPTY_STRING, HttpMockService, SubscriptionService, HttpMock } from 'angular-toolbox';
 import { UserService } from '../../../model/service/user.service';
 import { LogerService } from '../../../model/service/logger.service';
 import { Log } from '../../../model/business/log';
@@ -30,7 +29,8 @@ import { TodoItemAction, TodoItemActionType } from '../../model/business/todo-it
     AngularToolboxPageTitleComponent,
     ReactiveFormsModule,
     DatePipe,
-    TodoItemComponent
+    TodoItemComponent,
+    ContentRendererDirective
   ],
   templateUrl: './todo.component.html',
   styleUrl: './todo.component.scss'
@@ -58,13 +58,9 @@ export class TodoComponent extends AbstractIdentifiable implements OnInit, OnDes
   }
 
   public ngOnInit(): void {
-    const logContainer: any = document.querySelector("#log-viewport");
     this.todoForm.disable();
     this.subscriptionService.register(this,
-      this.loggerService.onLog.subscribe((log: Log)=> {
-        this.logList.push(log);
-        setTimeout(()=> logContainer.scrollTop = logContainer.scrollHeight);
-      })
+      this.loggerService.onLog.subscribe((log: Log)=> this.logList.push(log))
     );
   }
 
@@ -122,5 +118,9 @@ export class TodoComponent extends AbstractIdentifiable implements OnInit, OnDes
         })
       );
     }
+  }
+
+  protected logRendered(elm: HTMLElement): void {
+    elm.scrollTop = elm.scrollHeight;
   }
 }

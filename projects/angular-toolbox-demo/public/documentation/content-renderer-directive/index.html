@@ -18,30 +18,17 @@
 </nav>
 
 <header class="fs-5 col-xl-9 mb-4">
-    <h2 class="mb-3"><code>ButtonRoleDirective</code></h2>
+    <h2 class="mb-3"><code>ContentRendererDirective</code></h2>
     <p>
-        An easy-to-use directive that enables keyboard navigation and provides support for keyboard "Enter" key events.
+        
     </p>
-    <div class="alert alert-info fs-6" role="alert">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-            <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
-        </svg>
-        The <code>ButtonRoleDirective</code> class makes the decorated element enable for keyboard navigation.
-    </div>
     <hr class="mt-4">
 </header>
 
 <section class="col-xl-9 mb-4">
     <h3 id="motivation">Motivation</h3>
    <p>
-        In software development, keyboard navigation is a must have. The concept of SaaS and the use of platforms
-        like <a href="https://www.electronjs.org/" title="Electron">Electron</a> make keyboard navigation an essential
-        functionality for building quality applications.
-   </p>
-   <p>
-        The <code>ButtonRole</code> directive aims to implement such functionality by removing tedious coding tasks.
-        Additionally, it provides built-in ARIA elements to support accessibility.
+       
    </p>
 </section>
 
@@ -58,12 +45,12 @@
         </thead>
         <tbody>
           <tr>
-            <td><code>buttonRole</code></td>
+            <td><code>renderContent</code></td>
             <td>
-                Enables keyboard navigation and provides support for keyboard <em>Enter</em> key events.
+                
             </td>
             <td>
-                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/button-role-directive/button-role'])" title="buttonRole">
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/render-content-directive/render-content'])" title="renderContent">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
                         <use href="#linkIcon"/>
                     </svg>
@@ -80,13 +67,12 @@
         </thead>
         <tbody>
           <tr>
-            <td><code>delegateClick</code></td>
+            <td><code>content</code></td>
             <td>
-                Forces callback methods associated with the <code>enter</code> event taregt to be invoked when User
-                clicks on the decorated element.
+                
             </td>
             <td>
-                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/button-role-directive/delegate-click'])" title="delegateClick">
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/render-content-directive/content'])" title="content">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
                         <use href="#linkIcon"/>
                     </svg>
@@ -103,12 +89,12 @@
           </thead>
           <tbody>
             <tr>
-              <td><code>enter</code></td>
+              <td><code>rendered</code></td>
               <td>
-                Dispatches events when the user presses the <em>Enter</em> key.
+                
               </td>
               <td>
-                  <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/button-role-directive/enter'])" title="enter">
+                  <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/render-content-directive/rendered'])" title="rendered">
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
                           <use href="#linkIcon"/>
                       </svg>
@@ -146,12 +132,12 @@
             <figure>
                 <figcaption>Angular component:</figcaption>
                 <pre><code class="language-typescript">&#64;Component(&#123;
-    selector: 'app-button-role-directive',
+    selector: 'app-render-content-directive',
     standalone: true,
     imports: [
         ButtonRoleDirective
     ],
-    templateUrl: './button-role-directive.component.html'
+    templateUrl: './render-content-directive.component.html'
 &#125;)
 export class ButtonRoleDirectiveComponent &#123;
 
@@ -163,15 +149,9 @@ export class ButtonRoleDirectiveComponent &#123;
         this._modal.showModal(user);
     &#125;
 &#125;</code></pre></figure>
-    <p>
-        To see this sample in action, go to the demo section:
-    </p>
-    <button class="btn btn-primary btn-lg" onclick="appBridge.navigate(['demo/button-role-directive'])" title="ButtonRoleDirective Demo">
-        ButtonRoleDirective Demo
-    </button>
 </section>
 
 <!-- We use a data object to store navigation tree structure-->
 <object id="navigation-tree"
-        data-tree="[{ 'label': 'ButtonRoleDirective' }]">
+        data-tree="[{ 'label': 'ContentRendererDirective' }]">
 </object>
