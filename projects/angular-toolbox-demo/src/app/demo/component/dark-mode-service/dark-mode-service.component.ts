@@ -7,11 +7,11 @@
  */
 
 import { Component, OnDestroy } from '@angular/core';
-import { DarkModeService } from 'angular-toolbox';
+import { DarkModeService } from 'projects/angular-toolbox/src/public-api';
 import { CodeWrapper } from '../../../ui/model/business/code-wrapper';
 import { DemoComponent } from '../../../ui/component/demo/demo.component';
 import { DocumentationLink } from '../../../ui/model/business/documentation-link';
-import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/lib/model/service';
+import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
 
 @Component({
   selector: 'app-dark-mode-service',

@@ -11,4 +11,4 @@
  */
 
 export * from './lib/component';
-
+export * from './lib/model';

@@ -7,12 +7,12 @@
  */
 
 import { Component } from '@angular/core';
-import { VersionService } from 'angular-toolbox';
+import { VersionService } from 'projects/angular-toolbox/src/public-api';
 import { CodeWrapper } from '../../../ui/model/business/code-wrapper';
 import { DatePipe } from '@angular/common';
 import { DemoComponent } from '../../../ui/component/demo/demo.component';
 import { DocumentationLink } from '../../../ui/model/business/documentation-link';
-import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/lib/model/service';
+import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
 
 @Component({
   selector: 'app-version-service',

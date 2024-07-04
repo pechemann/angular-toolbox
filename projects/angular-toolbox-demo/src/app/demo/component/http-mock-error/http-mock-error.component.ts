@@ -10,12 +10,12 @@ import { Component, OnDestroy } from '@angular/core';
 import { CodeWrapper } from '../../../ui/model/business/code-wrapper';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { config } from './http-mock-error-config';
-import { SubscriptionService, HttpMockService, AbstractIdentifiable } from 'angular-toolbox';
+import { SubscriptionService, HttpMockService, AbstractIdentifiable } from 'projects/angular-toolbox/src/public-api';
 import { DemoComponent } from '../../../ui/component/demo/demo.component';
 import { catchError, of } from 'rxjs';
 import { RouterModule } from '@angular/router';
 import { DocumentationLink } from '../../../ui/model/business/documentation-link';
-import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/lib/model/service';
+import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
 
 @Component({
   selector: 'app-http-mock-error',
@@ -63,7 +63,7 @@ export class HttpMockErrorComponent extends AbstractIdentifiable implements OnDe
 /////////////////////////
 
 import { HttpRequest, HttpStatusCode } from "@angular/common/http";
-import { HttpMockConfig, httpResponseMock } from "angular-toolbox";
+import { HttpMockConfig, httpResponseMock } from 'projects/angular-toolbox/src/public-api';
 import { Todo } from "../model/business";
 import { getTodo } from '../app-mock/http-mock-util';
 
@@ -126,7 +126,7 @@ import { provideHttpClient } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app-layout/app.component';
-import { HttpMockService, httpMockFactory } from 'angular-toolbox';
+import { HttpMockService, httpMockFactory } from 'projects/angular-toolbox/src/public-api';
 
 //=> HTTP mock config import
 import { config } from './app-mock/http-mock-config';

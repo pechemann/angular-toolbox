@@ -10,7 +10,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DemoRoutingModule } from './demo-routing.module';
 import { UiModule } from '../ui/ui.module';
-import { ButtonRoleDirective } from 'angular-toolbox';
+import { ButtonRoleDirective } from 'projects/angular-toolbox/src/public-api';
 
 @NgModule({
   declarations: [],

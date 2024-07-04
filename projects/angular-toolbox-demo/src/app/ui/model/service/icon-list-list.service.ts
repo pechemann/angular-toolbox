@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { DocumentationMenu } from '../business/documentation-link';
-import { IconListItem } from 'projects/angular-toolbox-demo-component-lib/src/lib/model/business';
+import { IconListItem } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
 
 @Injectable({
   providedIn: 'root'

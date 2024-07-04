@@ -7,7 +7,7 @@
  */
 
 
-import { HttpMockConfig, httpResponseMock } from 'angular-toolbox';
+import { HttpMockConfig, httpResponseMock } from 'projects/angular-toolbox/src/public-api';
 import { Observable, from } from 'rxjs';
 
 const getBody = (path: string): Observable<string>=> {

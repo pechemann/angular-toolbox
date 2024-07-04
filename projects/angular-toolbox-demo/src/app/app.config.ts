@@ -10,7 +10,7 @@ import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { DARK_MODE_CONFIG, VERSION_CONFIG, httpMockFactory } from 'angular-toolbox';
+import { DARK_MODE_CONFIG, VERSION_CONFIG, httpMockFactory } from 'projects/angular-toolbox/src/public-api';
 import { provideHttpClient } from '@angular/common/http';
 import { XhrFactory } from '@angular/common';
 

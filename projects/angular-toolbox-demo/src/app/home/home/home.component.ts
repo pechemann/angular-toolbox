@@ -8,9 +8,8 @@
 
 import { Component } from '@angular/core';
 import { IconListService } from '../../ui/model/service/icon-list-list.service';
-import { AnchorLinklDirective } from 'angular-toolbox';
-import { AngularToolboxCodeViewportComponent, AngularToolboxGitSectionComponent, AngularToolboxHrComponent, AngularToolboxIconListComponent, AngularToolboxPageTitleComponent } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
-import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/lib/model/service';
+import { AnchorLinklDirective } from 'projects/angular-toolbox/src/public-api';
+import { AngularToolboxCodeViewportComponent, AngularToolboxGitSectionComponent, AngularToolboxHrComponent, AngularToolboxIconListComponent, AngularToolboxPageTitleComponent, BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
 
 @Component({
   selector: 'app-home',

@@ -7,7 +7,7 @@
  */
 
 import { HttpRequest } from "@angular/common/http";
-import { HttpMockConfig, HttpMockError, httpResponseMock } from "angular-toolbox";
+import { HttpMockConfig, HttpMockError, httpResponseMock } from 'projects/angular-toolbox/src/public-api';
 import { getTodo, Todo } from "../../util/http-mock/http-mock-util";
 
 const error: HttpMockError = {

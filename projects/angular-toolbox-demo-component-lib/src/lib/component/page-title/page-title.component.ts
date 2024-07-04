@@ -7,7 +7,7 @@
  */
 
 import { Component, Input } from '@angular/core';
-import { SafeHtmlPipe } from 'angular-toolbox';
+import { SafeHtmlPipe } from 'projects/angular-toolbox/src/public-api';
 import { AngularToolboxHrComponent } from '../hr/hr.component';
 
 @Component({

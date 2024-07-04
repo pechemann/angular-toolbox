@@ -7,12 +7,11 @@
  */
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/lib/model/service';
-import { AngularToolboxPageTitleComponent } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
+import { AngularToolboxPageTitleComponent, BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
 import { Todo } from '../../../model/business/todo';
 import { TodoService } from '../../../model/service/todo.service';
 import { TODOS_MOCK_CONFIG } from '../../../mock/http-mock-config';
-import { AbstractIdentifiable, ContentRendererDirective, EMPTY_STRING, HttpMockService, SubscriptionService, HttpMock } from 'angular-toolbox';
+import { AbstractIdentifiable, ContentRendererDirective, EMPTY_STRING, HttpMockService, SubscriptionService, HttpMock } from 'projects/angular-toolbox/src/public-api';
 import { UserService } from '../../../model/service/user.service';
 import { LogerService } from '../../../model/service/logger.service';
 import { Log } from '../../../model/business/log';

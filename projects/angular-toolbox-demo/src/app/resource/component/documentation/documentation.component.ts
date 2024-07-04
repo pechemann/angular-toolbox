@@ -8,15 +8,12 @@
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { HttpMockService, SafeHtmlPipe, SubscriptionService, VersionService, AppBrigeService, AbstractIdentifiable, ContentRendererDirective } from 'angular-toolbox';
+import { HttpMockService, SafeHtmlPipe, SubscriptionService, VersionService, AppBrigeService, AbstractIdentifiable, ContentRendererDirective, HttpMock } from 'projects/angular-toolbox/src/public-api';
 import { ActivatedRoute, UrlSegment } from '@angular/router';
 import { IconListService } from '../../../ui/model/service/icon-list-list.service';
-import { HttpMock } from 'projects/angular-toolbox/src/lib/framework/mock/http/proxy';
 import { DOCUMENTATION_PROXY_CONFIG } from '../../proxy/documentation-proxy.config';
 import { DocumentationMenu } from '../../../ui/model/business/documentation-link';
-import { BreadcrumbService, HighlightService } from 'projects/angular-toolbox-demo-component-lib/src/lib/model/service';
-import { BreadcrumbItem, IconListItem } from 'projects/angular-toolbox-demo-component-lib/src/lib/model/business';
-import { AngularToolboxHrComponent, AngularToolboxIconListComponent, AngularToolboxPageTitleComponent } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
+import { AngularToolboxHrComponent, AngularToolboxIconListComponent, AngularToolboxPageTitleComponent, BreadcrumbService, HighlightService,  BreadcrumbItem, IconListItem } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
 
 @HttpMock(DOCUMENTATION_PROXY_CONFIG) 
 @Component({
@@ -58,7 +55,6 @@ export class DocumentationComponent extends AbstractIdentifiable implements OnIn
     this._subsciptionService.register(this,
       this._route.url.subscribe((segments: UrlSegment[])=> {
         const cursor: number = segments.length;
-        this._breadcrumb.removeAll().addItem(this._breadcrumb.buildItem("Resources", "resources"));
         if (cursor === 1) {
           this._subsciptionService.register(this,
             this._iconListService.getDocumentationList().subscribe((result: DocumentationMenu)=> {
@@ -70,9 +66,9 @@ export class DocumentationComponent extends AbstractIdentifiable implements OnIn
             })
           );
           this.isHomePage = true;
-          this._breadcrumb.addItem(
-            this._breadcrumb.buildItem("Documentation")
-          );
+          this._breadcrumb.removeAll();
+          this._breadcrumb.addItem(this._breadcrumb.buildItem("Resources", "resources"))
+                          .addItem(this._breadcrumb.buildItem("Documentation"));
           return;
         }
         const path: string = segments.slice(1).join("/");
@@ -103,6 +99,7 @@ export class DocumentationComponent extends AbstractIdentifiable implements OnIn
   private builBbreadcrumb(elm: HTMLElement): void {
     const rootPath: string = "resources/documentation";
     const breadcrumbItemList: BreadcrumbItem[] = [
+      this._breadcrumb.buildItem("Resources", "resources"),
       this._breadcrumb.buildItem("Documentation", rootPath)
     ];
     const navigationTree: HTMLObjectElement | null = elm.querySelector("#navigation-tree");
@@ -114,6 +111,7 @@ export class DocumentationComponent extends AbstractIdentifiable implements OnIn
         breadcrumbItemList.push(this._breadcrumb.buildItem(item.label, path))
       });
     }
+    this._breadcrumb.removeAll();
     breadcrumbItemList.forEach(item=> this._breadcrumb.addItem(item));
   }
 }

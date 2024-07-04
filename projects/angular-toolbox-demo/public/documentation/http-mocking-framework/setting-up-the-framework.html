@@ -17,10 +17,10 @@
             <li class="list-group-item active" aria-current="true">
                 Setting up the Framework
             </li>
-            <!--<li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','creating-mock-config'])">
+           <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','creating-mock-config'])">
                 Creating Mock Config</a>
             </li>
-            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','forcing-http-errors'])">
+             <!--<li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','forcing-http-errors'])">
                 Forcing HTTP Errors</a>
             </li>
             <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','use-cases'])">
@@ -42,9 +42,40 @@
     <hr class="mt-4">
 </header>
 
-<section class="col-xl-9">
+<section class="col-xl-9" id="setting-up-the-framework">
     <h3>Setting up the Framework</h3>
-    
+    <p>
+        One of the major advantages of the <em>HTTP Mocking Framework</em> is being able to mock HTTP
+        calls directly on production endpoints.
+    </p>
+    <p>
+        Before doing this, it is necessary to initialize the framework by the updating
+        the <code>XhrFactory</code> provider. You typically add the <code>httpMockFactory</code>
+        factory method in the <code>app.config.ts</code> file, as shown bellow:
+    </p>
+    <figure>
+        <figcaption>app.config.ts</figcaption>
+        <pre><code class="language-typescript">...
+import &#123 httpMockFactory &#125; from 'angular-toolbox';
+
+export const appConfig: ApplicationConfig = &#123
+  providers: [
+    provideZoneChangeDetection(&#123 eventCoalescing: true &#125;), 
+    provideRouter(routes),
+    provideHttpClient(),
+    // HTTP Mocking Framework initialization:
+    &#123 provide: XhrFactory, useFactory: httpMockFactory &#125;
+  ]
+&#125;;</code></pre></figure>
+<div class="alert alert-warning" role="alert">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+        <use xlink:href="#exclamationIcon"/>
+    </svg>
+    Remember that the HTTP Mocking Framework is a development tool.
+    <br>
+    You should never use this feature in production mode.
+</div>
+
 </section>
 
 <!-- We use a data object to store navigation tree structure-->

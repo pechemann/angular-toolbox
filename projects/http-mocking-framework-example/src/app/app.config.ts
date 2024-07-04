@@ -12,7 +12,7 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
 
-import { DARK_MODE_CONFIG, httpMockFactory } from 'angular-toolbox';
+import { DARK_MODE_CONFIG, httpMockFactory } from 'projects/angular-toolbox/src/public-api';
 import { XhrFactory } from '@angular/common';
 
 export const appConfig: ApplicationConfig = {

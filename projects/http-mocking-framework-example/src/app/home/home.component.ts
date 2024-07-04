@@ -7,11 +7,9 @@
  */
 
 import { Component } from '@angular/core';
-import { NavigateToUrlDirective } from 'angular-toolbox';
-import { AngularToolboxCodeViewportComponent, AngularToolboxGitSectionComponent, AngularToolboxHrComponent, AngularToolboxIconListComponent, AngularToolboxPageTitleComponent } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
-import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/lib/model/service';
+import { NavigateToUrlDirective } from 'projects/angular-toolbox/src/public-api';
+import { BreadcrumbService, IconListItem, AngularToolboxCodeViewportComponent, AngularToolboxGitSectionComponent, AngularToolboxHrComponent, AngularToolboxIconListComponent, AngularToolboxPageTitleComponent } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
 import { RouterModule } from '@angular/router';
-import { IconListItem } from 'projects/angular-toolbox-demo-component-lib/src/lib/model/business';
 
 @Component({
   selector: 'app-home',

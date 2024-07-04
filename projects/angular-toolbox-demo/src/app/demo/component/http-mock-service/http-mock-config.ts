@@ -7,7 +7,7 @@
  */
 
 import { HttpRequest } from "@angular/common/http";
-import { HttpMockConfig, httpResponseMock } from "angular-toolbox";
+import { HttpMockConfig, httpResponseMock } from 'projects/angular-toolbox/src/public-api';
 import { getTodo, Todo } from "../../util/http-mock/http-mock-util";
 
 export const config: HttpMockConfig = {

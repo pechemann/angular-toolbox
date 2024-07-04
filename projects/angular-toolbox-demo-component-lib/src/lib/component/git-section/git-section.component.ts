@@ -7,7 +7,7 @@
  */
 
 import { Component } from '@angular/core';
-import { NavigateToUrlDirective } from 'angular-toolbox';
+import { NavigateToUrlDirective } from 'projects/angular-toolbox/src/public-api';
 import { AngularToolboxCodeViewportComponent } from '../code-viewport/code-viewport.component';
 
 @Component({

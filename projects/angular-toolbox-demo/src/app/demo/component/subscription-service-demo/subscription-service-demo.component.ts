@@ -8,10 +8,10 @@
 
 import { Component, EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { CodeWrapper } from '../../../ui/model/business/code-wrapper';
-import { AbstractIdentifiable, SubscriptionService } from 'angular-toolbox';
+import { AbstractIdentifiable, SubscriptionService } from 'projects/angular-toolbox/src/public-api';
 import { DemoComponent } from '../../../ui/component/demo/demo.component';
 import { DocumentationLink } from '../../../ui/model/business/documentation-link';
-import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/lib/model/service';
+import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
 
 @Component({
   selector: 'app-subscription-service-demo',

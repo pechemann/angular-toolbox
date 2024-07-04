@@ -8,7 +8,7 @@
 
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, ViewChild } from '@angular/core';
-import { DarkModeService } from 'angular-toolbox';
+import { DarkModeService } from 'projects/angular-toolbox/src/public-api';
 
 const LIGHT: string = 'light';
 const DARK: string = 'dark';

@@ -7,6 +7,14 @@
 -->
 
 <nav class="page-menu col-xl-3 ps-4">
+    <section class="w-100 mb-4">
+        <h5 class="mb-4">On this page</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="#presentation" onclick="appBridge.goToAnchor(event)" title="Presentation">Presentation</a></li>
+            <li class="list-group-item"><a href="#mocking-api-calls" onclick="appBridge.goToAnchor(event)" title="API">Mocking API Calls</a></li>
+            <li class="list-group-item"><a href="#keep-it-simple" onclick="appBridge.goToAnchor(event)" title="Keep It Simple!">Keep It Simple!</a></li>
+        </ul>
+    </section>
     <aside class="w-100">
         <h5 class="mb-4">In this topic</h5>
         <ul class="list-group">
@@ -16,10 +24,10 @@
             <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','setting-up-the-framework'])">
                 Setting up the Framework
             </a></li>
-            <!--<li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','creating-mock-config'])">
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','creating-mock-config'])">
                 Creating Mock Config</a>
             </li>
-            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','forcing-http-errors'])">
+            <!--<li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','forcing-http-errors'])">
                 Forcing HTTP Errors</a>
             </li>
             <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','use-cases'])">
@@ -41,7 +49,7 @@
     <hr class="mt-4">
 </header>
 
-<section class="col-xl-9">
+<section class="col-xl-9" id="presentation">
     <h3>Presentation</h3>
     <p>
         Accessing back-end services is a core feature of most front-end applications.
@@ -60,8 +68,8 @@
 });</code></pre></figure>
     </p>
 </section>
-<section class="col-xl-9">
-    <h3>Mocking API calls</h3>
+<section class="col-xl-9" id="mocking-api-calls">
+    <h3>Mocking API Calls</h3>
     <p>
         API mocking is the creation of a simulated version of an API that mirrors the
         behaviour of an actual API.
@@ -89,7 +97,7 @@
         This is where the <em>HTTP Mocking Framework</em> comes in!
     </p>
 </section>
-<section class="col-xl-9">
+<section class="col-xl-9" id="keep-it-simple">
     <h3>Keep It Simple!</h3>
     <p>
         If you are familiar with developing <a href="nodejs.or" title="Node.js">Node.js</a> apps

@@ -7,7 +7,7 @@
  */
 
 import { HttpRequest, HttpStatusCode } from "@angular/common/http";
-import { HttpMockConfig, HttpMockError, httpResponseMock } from "angular-toolbox";
+import { HttpMockConfig, HttpMockError, httpResponseMock } from 'projects/angular-toolbox/src/public-api';
 import { DataStorage } from "./data-storage";
 import { validateUser } from "./validate-user";
 import { TodoDto } from "../model/business/dto/todo.dto";
