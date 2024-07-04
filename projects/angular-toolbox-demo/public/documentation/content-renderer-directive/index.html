@@ -20,7 +20,8 @@
 <header class="fs-5 col-xl-9 mb-4">
     <h2 class="mb-3"><code>ContentRendererDirective</code></h2>
     <p>
-        
+        The <code>ContentRendererDirective</code> class allows injection of any value into an HTML element container
+        (<code>div</code>, <code>button</code>, etc.).
     </p>
     <hr class="mt-4">
 </header>
@@ -45,12 +46,12 @@
         </thead>
         <tbody>
           <tr>
-            <td><code>renderContent</code></td>
+            <td><code>contentRenderer</code></td>
             <td>
-                
+                A directive declaration that provides dynamic injection capabilities to an HTML element.
             </td>
             <td>
-                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/render-content-directive/render-content'])" title="renderContent">
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/content-renderer-directive/content-renderer'])" title="contentRenderer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
                         <use href="#linkIcon"/>
                     </svg>
@@ -69,10 +70,10 @@
           <tr>
             <td><code>content</code></td>
             <td>
-                
+                The value to be rendered within the decorated HTML element.
             </td>
             <td>
-                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/render-content-directive/content'])" title="content">
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/content-renderer-directive/content'])" title="content">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
                         <use href="#linkIcon"/>
                     </svg>
@@ -91,10 +92,10 @@
             <tr>
               <td><code>rendered</code></td>
               <td>
-                
+                Dispatches events when the content of the decorated HTML element has been rendered.
               </td>
               <td>
-                  <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/render-content-directive/rendered'])" title="rendered">
+                  <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/content-renderer-directive/rendered'])" title="rendered">
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
                           <use href="#linkIcon"/>
                       </svg>
@@ -109,8 +110,8 @@
 <section class="col-xl-9 mb-4">
     <h3 id="example">Example</h3>
     <p>
-        The following code sample makes each row of a <code>table</code> element available
-        for keyboard navigation and allows to fire both type of events, <code>"click"</code> and <code>"enter"</code>:
+        The following code sample scrolls down the viewport of a logging console each time
+        a new log entry is added:
     </p>
     <div class="card">
         <div class="card-body">
@@ -118,36 +119,22 @@
             <figure>
                 <figcaption>HTML template:</figcaption>
                 <pre><code class="language-html">...
-&lt;tbody&gt;
-    &#64;for (user of users; track user.id) &#123;
-        &lt;tr buttonRole delegateClick (enter)="showModal(user)"&gt;
-            &lt;th scope="row"&gt;&#123;&#123; user.id &#125;&#125;&lt;/th&gt;
-            &lt;td&gt;&#123;&#123; user.firstName &#125;&#125;&lt;/td&gt;
-            &lt;td&gt;&#123;&#123; user.lastName &#125;&#125;&lt;/td&gt;
-            &lt;td&gt;&#123;&#123; user.email &#125;&#125;&lt;/td&gt;
-        &lt;/tr&gt;
+&lt;div class="log-renderer" contentRenderer (rendered)="logRendered($event)"&gt;
+    &#64;for (log of logList; track log) &#123;
+        &lt;span class="log"&gt;[&#123;&#123; log.timestamp &#125;&#125;][&#123;&#123; log.level &#125;&#125;] &#123;&#123; log.message &#125;&#125;&lt;/span&gt;
     &#125;
-&lt;/tbody&gt;
+&lt;/div&gt;
 ...</code></pre></figure>
             <figure>
                 <figcaption>Angular component:</figcaption>
-                <pre><code class="language-typescript">&#64;Component(&#123;
-    selector: 'app-render-content-directive',
-    standalone: true,
-    imports: [
-        ButtonRoleDirective
-    ],
-    templateUrl: './render-content-directive.component.html'
-&#125;)
-export class ButtonRoleDirectiveComponent &#123;
+                <pre><code class="language-typescript">protected logList: Log[] = [];
 
-    constructor(private _modal: ModalService)  &#123; &#125;
+public ngOnInit(): void &#123;
+    this.loggerService.onLog.subscribe((log: Log)=> this.logList.push(log));
+&#125;
 
-    protected users: User[] = USER_LIST_MOCK;
-    
-    protected showModal(user: User): void &#123;
-        this._modal.showModal(user);
-    &#125;
+protected logRendered(elm: HTMLElement): void &#123;
+    elm.scrollTop = elm.scrollHeight;
 &#125;</code></pre></figure>
 </section>
 

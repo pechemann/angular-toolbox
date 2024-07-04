@@ -1,0 +1,69 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation/content-renderer-directive'])" title="ContentRendererDirective">
+                    ContentRendererDirective
+                </a>
+            </li>
+        </ul>
+    </aside>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3"><code>contentRenderer</code> Directive Declaration</h2>
+    <p>
+        The <code>contentRenderer</code> directive declaration provides dynamic injection capabilities to an HTML element.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3>Description</h3>
+    <p>
+        The <code>contentRenderer</code> directive declaration provides the following functionalities to HTML elements:
+        <ul>
+            <li>enables injection of HTML child elements</li>
+            <li>enables detection of HTML content modification</li>
+        </ul>
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="example">Usage</h3>
+    <p>
+        The following code sample shows how to detect code injection within a <code>div</code> element:
+    </p>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title mb-2">Code</h5>
+            <figure>
+                <figcaption>HTML template:</figcaption>
+                <pre><code class="language-html">&lt;div contentRenderer [content]="htmlCode | safeHtml" (rendered)="onRendered($event)"&gt;&lt;/div&gt;</code></pre></figure>
+            <figure>
+                <figcaption>Angular component:</figcaption>
+                <pre><code class="language-typescript">protected htmlCode!:string;
+
+public ngOnInit(): void &#123;
+    this.htmlCode = `&lt;span&gt;Hello world!&lt;/span&gt;`;
+&#125;
+
+protected onRendered(elm: HTMLElement): void &#123;
+    console.log(elm.innerHTML);
+    // Outputs: &lt;span&gt;Hello world!&lt;/span&gt;
+&#125;</code></pre></figure>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+    data-tree="[{ 'label': 'ContentRendererDirective', 'path': 'content-renderer-directive' }, { 'label': 'contentRenderer Directive Declaration' }]">
+</object>

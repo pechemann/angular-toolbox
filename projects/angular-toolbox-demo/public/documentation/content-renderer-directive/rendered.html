@@ -1,0 +1,51 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation/content-renderer-directive'])" title="ContentRendererDirective">
+                    ContentRendererDirective
+                </a>
+            </li>
+        </ul>
+    </aside>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3"><code>ContentRendererDirective.rendered</code> Event</h2>
+    <p>
+        The <code>ContentRendererDirective.rendered</code> <code>EventEmitter</code> object fires events when the content
+        of the decorated HTML element is modified.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3>Signature</h3>
+    <pre><code class="language-typescript">readonly rendered: EventEmitter&lt;HTMLElement&gt;<boolean></code></pre>
+    <h5>Type</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>EventEmitter&lt;HTMLElement&gt;</code></dt>
+            <dd>
+                <p>
+                    Emits events containing the reference to the decorated the HTML element.
+                </p>
+            </dd>
+        </dl>
+    </div>
+</section>
+
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+    data-tree="[{ 'label': 'ContentRendererDirective', 'path': 'content-renderer-directive' }, { 'label': 'ContentRendererDirective.rendered Event' }]">
+</object>

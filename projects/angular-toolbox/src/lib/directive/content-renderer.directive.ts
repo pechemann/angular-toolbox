@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { Directive, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, HostBinding, Input, OnDestroy, OnInit, Output } from '@angular/core';
 
 /**
  * @private
@@ -19,7 +19,7 @@ const CHILD_LIST_TYPE: string = "childList";
  * available for DOM manipulation.
  */
 @Directive({
-  selector: '[renderContent]',
+  selector: '[contentRenderer]',
   standalone: true
 })
 export class ContentRendererDirective implements OnInit, OnDestroy {
@@ -35,13 +35,12 @@ export class ContentRendererDirective implements OnInit, OnDestroy {
   @Output()
   public readonly rendered: EventEmitter<HTMLElement> = new EventEmitter<HTMLElement>();
 
-  /**
+    /**
    * The value to be rendered within the HTML element.
    */
+  @HostBinding('innerHTML')
   @Input()
-  public set content(value: any) {
-    this._elmRef.nativeElement.innerHTML = value;
-  }
+  public content: any;
 
   /**
    * @private

@@ -68,7 +68,7 @@
                     </div>
                     <div class="card-body">
                         <div class="card-text d-flex flex-column log-viewport"
-                             renderContent (rendered)="logRendered($event)">
+                              contentRenderer (rendered)="logRendered($event)">
                             @for (log of logList; track log) {
                                 <span class="text-warning" [class.text-danger]="log.level === 1">[{{ log.timestamp | date:'medium' }}][{{ log.level === 0 ? 'DEBUG': 'ERROR' }}] {{ log.message }}</span>
                             }

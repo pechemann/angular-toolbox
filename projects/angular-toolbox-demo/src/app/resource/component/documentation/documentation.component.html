@@ -13,7 +13,7 @@
     </symbol>
 </svg>
 <main class="documentation">
-    @if(isHomePage) {
+    @if (isHomePage) {
         <atx-page-title label="Angular Toolbox Documentation">
             <p primary class="fs-5">
                 <em class="lib-name">Angular Toolbox</em> documentation has all the information you need to make your Angular project a smashing success.
@@ -38,7 +38,7 @@
         <atx-icon-list [itemList]="articles"/>
        </div>
     } @else {
-        <article renderContent [content]="page" (rendered)="pageRendered($event)"></article>
+        <article contentRenderer [content]="page | safeHtml" (rendered)="pageRendered($event)"></article>
     }
 </main>
     
