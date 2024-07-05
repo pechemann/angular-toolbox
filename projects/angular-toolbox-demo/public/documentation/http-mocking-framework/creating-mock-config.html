@@ -12,6 +12,9 @@
         <ul class="list-group">
             <li class="list-group-item"><a href="#creating-mock-config" onclick="appBridge.goToAnchor(event)" title="Creating Mock Config">Creating Mock Config</a></li>
             <li class="list-group-item"><a href="#basic-structure" onclick="appBridge.goToAnchor(event)" title="Basic Structure">Basic Structure</a></li>
+            <li class="list-group-item"><a href="#building-response-mock" onclick="appBridge.goToAnchor(event)" title="Building Response Mock">Building Response Mock</a></li>
+            <li class="list-group-item"><a href="#http-methods-interception" onclick="appBridge.goToAnchor(event)" title="HTTP Methods Interception">HTTP Methods Interception</a></li>
+            <li class="list-group-item"><a href="#http-error-responses" onclick="appBridge.goToAnchor(event)" title="HTTP Error Responses">HTTP Error Responses</a></li>
         </ul>
     </section>
     <aside class="w-100">
@@ -108,6 +111,82 @@ export const config: HttpMockConfig = &#123;
 
 </section>
 
+<section class="col-xl-9">
+    <h3 id="building-response-mock">Building Response Mock</h3>
+    <p>
+        Mock responses are objects of type <a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','http-response-mock'])"
+        title="HttpResponseMock Interface"><code>HttpResponseMock</code></a>.
+    </p>
+    <p>
+        The <code>httpResponseMock()</code> utility provides a convenient way to build <code>HttpResponseMock</code> objects
+        by chaining mehods of the <code>HttpResponseMockBuilder</code> class.
+    </p>
+    <p>
+        Using the <code>httpResponseMock()</code> method makes your core more readable and the build of HTTP responses easy.
+        The following sample code shows how to build a full HTTP response by using all methods of the <code>HttpResponseMockBuilder</code> class:
+    </p>
+    <figure>
+        <figcaption>HTTP Mock Response Sample</figcaption>
+        <pre><code class="language-typescript">const headers: HttpHeaders = new HttpHeaders();
+headers.set('Content-Type', 'application/json; charset=utf-8');
+// Full HttpMockConfig code is not reproduced
+get: &#123;
+    data: (req: HttpRequest&lt;any&gt;, params: any) =&gt;
+        httpResponseMock().headers(headers) // Adds HTTP headers (optional)
+                          .status(HttpStatusCode.Ok) // Sets HTTP status code (optional)
+                          .statusText("Ok") // Sets HTTP status text (optional)
+                          .delay(1000) // Emulates the delay before the server sends the response (optional)
+                          .body(&#123; foo: "foo", bar: "bar" &#125;) // Adds reponse body (optional)
+                          .response() // Builds an returns the HTTP response (required)
+&#125;</code></pre></figure>
+    
+    <h4 id="http-methods-interception">HTTP Methods Interception</h4>
+    <p>
+        All HTTP method interceptors are built from the same process.
+        Preceding example shows how to implement an interceptor to mock the <code>GET</code> method invocation.
+    </p>
+    <p>
+        Below is the list of all interceptors available through the <code>HttpMockEndpoint</code> interface:
+    </p>
+
+    <figcaption>All HTTP Mock Interceptors</figcaption>
+        <pre><code class="language-typescript">get: &#123; ... &#125;, // GET Method
+post: &#123; ... &#125;, // POST Method
+put: &#123; ... &#125;, // PUT Method
+delete: &#123; ... &#125;, // DELETE Method
+patch: &#123; ... &#125;, // PATCH Method
+head: &#123; ... &#125; // HEAD Method
+</code></pre></figure>
+
+    <h4 id="http-error-responses">HTTP Error Responses</h4>
+    <p>
+        Mock error responses are objects of type <a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','http-mock-error'])"
+        title="HttpMockError  Interface"><code>HttpMockError</code></a>.
+    </p>
+    <p>
+        To send an error response, simply pass an <code>HttpMockError</code> object as a parameter to the 
+        <code>response()</code> method.
+        <br>
+        The following sample code shows how to implement a basic error mechanism based on the HTTP
+        request parameters:
+    </p>
+    <figure>
+        <figcaption>HTTP Mock Error Sample</figcaption>
+        <pre><code class="language-typescript">const BAD_REQUEST_ERROR: HttpMockError = &#123;
+    status: HttpStatusCode.BadRequest, // Sets the error response HTTP status
+    statusText: "Bad Request" // Sets the error response status text
+&#125;;
+
+// Full HttpMockConfig code is not reproduced
+route: "/todos/:id",
+get: &#123;
+    data: (req: HttpRequest&lt;any&gt;, params: any) =&gt;
+           return httpResponseMock().response(params.id > 5 ? BAD_REQUEST_ERROR : null)
+&#125;</code></pre></figure>
+    <p>
+        Based on previous code, calling the URL <code>http://localhost:4200/todos/6</code> will return a <code>404</code> HTTP error.
+    </p>
+</section>
 
 
 <!-- We use a data object to store navigation tree structure-->

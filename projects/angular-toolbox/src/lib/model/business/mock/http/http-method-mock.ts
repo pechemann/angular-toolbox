@@ -16,8 +16,10 @@ import { HttpMockParameters } from "../../../../framework";
  */
 export interface HttpMethodMock {
 
-    /***
-     * Indicates whether to emulate progressive download (`true`), or not (`false`) .
+    /**
+     * @private
+     * Current progressive download mechanism will be replaced by a more efficient process.
+     * Indicates whether to emulate progressive download (`true`), or not (`false`).
      */
     progressive?: boolean;
     
