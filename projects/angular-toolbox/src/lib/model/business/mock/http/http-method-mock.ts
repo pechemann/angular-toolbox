@@ -32,9 +32,9 @@ export interface HttpMethodMock {
      * This method emulates a successful HTTP call response.
      * 
      * @param request The request associated with a HTTP call.
-     * @param parameters The rlist of parameters associated with the HTTP request.
+     * @param parameters The list of parameters associated with the HTTP request.
      * 
      * @returns A user-defined `HttpResponse` mock object.
      */
-    data?: (request: HttpRequest<any>, parameters?: HttpMockParameters)=> HttpResponseMock;
+    data: (request: HttpRequest<any>, parameters?: HttpMockParameters)=> HttpResponseMock;
 }

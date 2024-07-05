@@ -19,32 +19,32 @@ export interface HttpMockEndpoint {
     route: string;
 
     /**
-     * The mock configuration of HTTP `GET` method calls for specified route.
+     * The mock configuration of HTTP `GET` method calls for the specified route.
      */
     get?: HttpMethodMock;
     
     /**
-     * The mock configuration of HTTP `POST` method calls for specified route.
+     * The mock configuration of HTTP `POST` method calls for the specified route.
      */
     post?: HttpMethodMock;
     
     /**
-     * The mock configuration of HTTP `PUT` method calls for specified route.
+     * The mock configuration of HTTP `PUT` method calls for the specified route.
      */
     put?: HttpMethodMock;
     
     /**
-     * The mock configuration of HTTP `DELETE` method calls for specified route.
+     * The mock configuration of HTTP `DELETE` method calls for the specified route.
      */
     delete?: HttpMethodMock;
     
     /**
-     * The mock configuration of HTTP `PATCH` method calls for specified route.
+     * The mock configuration of HTTP `PATCH` method calls for the specified route.
      */
     patch?: HttpMethodMock;
     
     /**
-     * The mock configuration of HTTP `HEAD` method calls for specified route.
+     * The mock configuration of HTTP `HEAD` method calls for the specified route.
      */
     head?: HttpMethodMock;
 }

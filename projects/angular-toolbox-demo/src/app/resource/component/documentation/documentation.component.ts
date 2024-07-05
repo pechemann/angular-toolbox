@@ -37,7 +37,7 @@ export class DocumentationComponent extends AbstractIdentifiable implements OnIn
   protected articles!: IconListItem[];
 
   constructor(public versionService: VersionService,
-              //--> HttpMockService is declared only for @HttpForwardProxy reference:
+              //--> HttpMockService is declared only for @HttpMock reference:
               private _httpMockService: HttpMockService,
               private _breadcrumb: BreadcrumbService,
               private _http: HttpClient,
