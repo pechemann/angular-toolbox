@@ -1,0 +1,174 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework'])">
+                Presentation
+            </a>
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','setting-up-the-framework'])">
+                Setting up the Framework
+            </a></li>
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','creating-mock-config'])">
+                Creating Mock Config</a>
+            </li>
+            <li class="list-group-item active" aria-current="true">
+                Mock Config Declaration
+            </li>
+            <!--
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','the-proxy-anti-pattern'])">
+                The Proxy Anti-pattern</a>
+            </li>
+            -->
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','api'])">
+                API </a>
+            </li>
+        </ul>
+    </aside>
+    <section class="w-100 mb-4">
+        <h5 class="mb-4">On this page</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="#mock-config-declaration" onclick="appBridge.goToAnchor(event)" title="Mock Config Declaration">Mock Config Declaration</a></li>
+            <li class="list-group-item"><a href="#http-mock-service" onclick="appBridge.goToAnchor(event)" title="The HttpMockService Class">The <code>HttpMockService</code> Class</a></li>
+            <li class="list-group-item"><a href="#mocking-components" onclick="appBridge.goToAnchor(event)" title="Mocking Components">Mocking Components</a></li>
+        
+        </ul>
+    </section>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3">HTTP Mocking Framework</h2>
+    <p>
+        The <em class="lib-name">HTTP Mocking Framework</em> provides an easy-to-use and highly configurable
+        solution to mock HTTP responses to API calls sent from your Angular applications.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9">
+    <h3 id="mock-config-declaration">Mock Config Declaration</h3>
+    <p>
+        In the <a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','creating-mock-config'])"
+                title="Creating Mock Config">previous section</a>, we saw the basics of creating HTTP mock configs.
+        The current tutorial will show you different ways to declare them within your Angular app.
+    </p>
+    <p>
+        Keep in mind that the <em>HTTP Mocking Framework</em> focuses on granularity, to allow greater flexibility
+        in your HTTP mock strategies. Thus, each of the methods presented below meets a specific need.
+    </p>
+</section>
+
+<section class="col-xl-9">
+    <h3 id="http-mock-service">The <code>HttpMockService</code> Class</h3>
+    <p>
+        The <code>HttpMockService</code> class is the global entry point for all HTTP mock configs.
+        You typically use the <code>HttpMockServer.addConfig()</code> method to add a new <code>HttpMockConfig</code>
+        object to your application.
+        The following code shows how to declare the mock config for en entire application,
+        within the <code>AppComponent</code> class;
+    </p>
+    <figure>
+        <figcaption>app.component.ts</figcaption>
+        <pre><code class="language-typescript">import &#123; Component &#125; from '@angular/core';
+import &#123; HttpMockService &#125; from 'angular-toolbox';
+import &#123; mockConfig &#125; from './app-mock/http-mock-config';
+
+&#64;Component(&#123;
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    standalone: true
+&#125;)
+export class AppComponent &#123;&#125;
+
+    constructor(httpMockService: HttpMockService) &#123;
+        // HTTP mock config declaration
+        httpMockService.addConfig(mockConfig);
+    &#125;
+&#125;</code></pre></figure>
+    <p>
+        Then, you can use the <code>HttpMockServer.clearConfigs()</code> method to delete all
+        <code>HttpMockConfig</code> objects registered in your application:
+    </p>
+    <figure>
+        <pre><code class="language-typescript">this.httpMockService.clearConfigs();</code></pre></figure>
+    <p>
+        It is also possible to delete a specific <code>HttpMockConfig</code> object by passing its
+        ID to the <code>removeConfig()</code> method:
+    </p>
+    <figure>
+        <figcaption>Angular Component Sample:</figcaption>
+        <pre><code class="language-typescript">
+&#64;Component(&#123;
+    selector: 'app-my-component',
+    templateUrl: './my.component.html',
+    standalone: true
+&#125;)
+export class MyComponent implements OnDestroy &#123;
+
+    constructor(private httpMockService: HttpMockService) &#123;
+        this.httpMockService.addConfig(mockConfig);
+    &#125;
+
+    public ngOnDestroy(): void &#123;
+        this.httpMockService.removeConfig(mockConfig.id);
+    &#125;
+&#125;</code></pre></figure>
+    <p>
+        The <code>HttpMockService</code> class can be used anywhere from within your application, which provides
+        Developer a great flexibility.
+    </p>
+</section>
+
+<section class="col-xl-9">
+    <h3 id="mocking-components">Mocking Components</h3>
+    <p>
+        Instead of using global declarations, it may be useful to link a mock config with a specific component.
+    </p>
+    <p>
+        The <code>HttpMock</code> decorator allows to associate configurations to the lifecycle of a component.
+        It means that the config is loaded when the component is created and it is removed when the component is destroyed.
+    </p>
+    <p>
+        You must respect the rules below to use the <code>HttpMock</code> decorator:
+    </p>
+    <ul>
+        <li>the associated component must implement both, <code>OnInit</code> and <code>OnDestroy</code> interfaces</li>
+        <li>the associated component must provide injection token for the <code>HttpMockService</code> class</li>
+        <li><code>HttpMock</code> decorator must receive a <code>HttpMockConfig</code> object as parameter</li>
+    </ul>
+    <p>
+       The following component implementation shows how to use the <code>HttpMock</code> decorator
+       to let the <em>HTTP Mocking Framework</em> manage HTTP mocks lifecycles:
+    </p>
+
+    <figure>
+        <figcaption>todo.component.ts</figcaption>
+        <pre><code class="language-typescript">&#64;HttpMock(TODOS_MOCK_CONFIG)
+&#64;Component(&#123;
+  selector: 'app-todo',
+  standalone: true,
+  templateUrl: './todo.component.html'
+&#125;)
+export class TodoComponent implements OnInit, OnDestroy &#123;
+
+  constructor(private http: HttClient,
+              private mockService: HttpMockService) &#123;
+    this.http.get("./todos").subscribe(result =&gt; console.log(result));
+  &#125;
+  
+  public ngOnInit(): void &#123;&#125;
+  public ngOnDestroy(): void &#123;&#125;
+ &#125;</code></pre></figure>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'HTTP Mocking Framework', 'path': 'http-mocking-framework' }, { 'label': 'Mock Config Declaration' }]">
+</object>

@@ -63,7 +63,7 @@ export class HttpMockServiceComponent extends AbstractIdentifiable implements On
 /////////////////////////
 
 import { HttpRequest, HttpStatusCode } from "@angular/common/http";
-import { HttpMockConfig, httpResponseMock } from 'projects/angular-toolbox/src/public-api';
+import { HttpMockConfig, httpResponseMock } from 'angular-toolbox';
 import { Todo } from "../model/business";
 import { getTodo } from '../app-mock/http-mock-util';
 
@@ -116,7 +116,7 @@ import { provideHttpClient } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app-layout/app.component';
-import { HttpMockService, httpMockFactory } from 'projects/angular-toolbox/src/public-api';
+import { HttpMockService, httpMockFactory } from 'angular-toolbox';
 
 //=> HTTP mock config import
 import { config } from './app-mock/http-mock-config';
