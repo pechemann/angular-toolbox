@@ -8,12 +8,14 @@
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { SafeHtmlPipe, SubscriptionService, VersionService, AppBrigeService, AbstractIdentifiable, ContentRendererDirective } from 'projects/angular-toolbox/src/public-api';
+import { HttpMockService, SafeHtmlPipe, SubscriptionService, VersionService, AppBrigeService, AbstractIdentifiable, ContentRendererDirective, HttpMock } from 'projects/angular-toolbox/src/public-api';
 import { ActivatedRoute, UrlSegment } from '@angular/router';
 import { IconListService } from '../../../ui/model/service/icon-list-list.service';
+import { DOCUMENTATION_PROXY_CONFIG } from '../../proxy/documentation-proxy.config';
 import { DocumentationMenu } from '../../../ui/model/business/documentation-link';
 import { AngularToolboxHrComponent, AngularToolboxIconListComponent, AngularToolboxPageTitleComponent, BreadcrumbService, HighlightService, BreadcrumbItem, IconListItem } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
 
+@HttpMock(DOCUMENTATION_PROXY_CONFIG) 
 @Component({
   selector: 'app-documentation',
   standalone: true,
@@ -35,6 +37,8 @@ export class DocumentationComponent extends AbstractIdentifiable implements OnIn
   protected articles!: IconListItem[];
 
   constructor(public versionService: VersionService,
+              //--> HttpMockService is declared only for @HttpForwardProxy reference:
+              private _httpMockService: HttpMockService,
               private _breadcrumb: BreadcrumbService,
               private _http: HttpClient,
               private _subsciptionService: SubscriptionService,
@@ -47,7 +51,7 @@ export class DocumentationComponent extends AbstractIdentifiable implements OnIn
 
   public ngOnInit(): void {
     const headers: HttpHeaders = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
-    const origin: string = '/documentation';
+    const origin: string = 'https://pascalechemann.com/angular-toolbox/documentation';
     this._subsciptionService.register(this,
       this._route.url.subscribe((segments: UrlSegment[])=> {
         const cursor: number = segments.length;
