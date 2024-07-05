@@ -33,15 +33,6 @@
             </li>
         </ul>
     </aside>
-    <!--<section class="w-100">
-        <h5 class="mb-4">On this page</h5>
-        <ul class="list-group">
-            <li class="list-group-item"><a href="#mock-config-declaration" onclick="appBridge.goToAnchor(event)" title="Mock Config Declaration">Mock Config Declaration</a></li>
-            <li class="list-group-item"><a href="#http-mock-service" onclick="appBridge.goToAnchor(event)" title="The HttpMockService Class">The <code>HttpMockService</code> Class</a></li>
-            <li class="list-group-item"><a href="#mocking-components" onclick="appBridge.goToAnchor(event)" title="Mocking Components">Mocking Components</a></li>
-        
-        </ul>
-    </section>-->
 </nav>
 
 <header class="fs-5 col-xl-9 mb-4">
@@ -55,6 +46,45 @@
 
 <section class="col-xl-9">
     <h3>The Proxy Anti-pattern</h3>
+    <p>
+        It is often difficult to reconcile heterogeneous environments when developing Angular applications.
+        <br>
+        Especially when you deploy your applications in PHP environments.
+    </p>
+    <p>
+        One of the most common issue is to access the API when the front-end and backend are hosted on the same server.
+    </p>
+    <p>
+        Since the <em>HTTP Mocking Framework</em> provides an observable-based HTTP response mechanism,
+        it is possible to work around this problem by creating a forward proxy through the interception methods.
+    </p>
+    <p>
+        The following proxy config shows how to get users from a MySQL database without changing the URL declaration in Angular:
+    </p>
+    <figure>
+        <figcaption>user-mock.config.ts</figcaption>
+        <pre><code class="language-typescript">import &#123; HttpMockConfig, httpResponseMock &#125; from 'angular-toolbox';
+import &#123; Observable, from &#125; from 'rxjs';
+
+const getUserFromDB = (id: string): Observable&lt;any&gt; =&gt;
+                       from(fetch(`http://localhost:80/api/users/$&#123;id&#125;`));
+
+export const USER_PROXY_CONFIG: HttpMockConfig = &#123;
+    interceptors: [
+        &#123;
+            id: "users",
+            endpoints: [
+                &#123;
+                    route: "/api/users/:id",
+                    get: &#123;
+                        data: (req: any, params: any)=>
+                               httpResponseMock().body(getUserFromDB(params.id)).response()
+                    &#125;
+                &#125;
+            ]
+        &#125;
+    ]
+&#125;;</code></pre></figure>
 </section>
 
 <!-- We use a data object to store navigation tree structure-->

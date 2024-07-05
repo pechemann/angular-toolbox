@@ -59,15 +59,15 @@
     <figure>
         <figcaption>app.config.ts</figcaption>
         <pre><code class="language-typescript">...
-import &#123 httpMockFactory &#125; from 'angular-toolbox';
+import &#123; httpMockFactory &#125; from 'angular-toolbox';
 
-export const appConfig: ApplicationConfig = &#123
+export const appConfig: ApplicationConfig = &#123;
   providers: [
-    provideZoneChangeDetection(&#123 eventCoalescing: true &#125;), 
+    provideZoneChangeDetection(&#123; eventCoalescing: true &#125;), 
     provideRouter(routes),
     provideHttpClient(),
     // HTTP Mocking Framework initialization:
-    &#123 provide: XhrFactory, useFactory: httpMockFactory &#125;
+    &#123; provide: XhrFactory, useFactory: httpMockFactory &#125;
   ]
 &#125;;</code></pre></figure>
 <div class="alert alert-warning" role="alert">
