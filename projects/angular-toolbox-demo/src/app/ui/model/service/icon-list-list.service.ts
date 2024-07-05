@@ -36,8 +36,8 @@ export class IconListService {
     return [
       { label: "Angular Toolbox Resources",  urlTree: ['/resources'] },
       { label: "Angular Toolbox Quick Start Guide",  urlTree: ['/resources', 'documentation', 'quick-start-guide'] },
-      { label: "Angular Toolbox Documentation",  urlTree: ['/resources', 'documentation'] },
-      { label: "LICENSE",  urlTree: ['/resources', 'license'] }
+      { label: "HTTP Mocking Framework",  urlTree: ['/resources', 'documentation', 'http-mocking-framework'] },
+      { label: "Angular Toolbox Documentation",  urlTree: ['/resources', 'documentation'] }
     ];
   }
 
