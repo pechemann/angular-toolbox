@@ -60,7 +60,7 @@ export class ContentRendererDirective implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this._observer.observe(
       this._elmRef.nativeElement,
-      { attributes: true, childList: true, characterData: true }
+      { attributes: false, childList: true, characterData: false }
     );
   }
 }

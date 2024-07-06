@@ -7,15 +7,14 @@
  */
 
 import { Uuid } from "../../../../util";
-import { HTTP_MOCK_SERVICE, HttpMockService } from "../../../../model";
+import { HTTP_MOCK_SERVICE, HttpMockConfig, HttpMockService } from "../../../../model";
 
 /**
  * The definition function for the `@HttpMock` decorator.
  * 
- * @param config 
- * @returns 
+ * @param config The `HttpMockConfig` object used to initialize the HTTP Mocking Framework.
  */
-export const HttpMock: Function = (config: any): Function=> {
+export const HttpMock: Function = (config: HttpMockConfig): Function => {
     return (constructor: any)=> {
         const getMockService = (instance: any): HttpMockService => {
             const mockService: any = Object.values(instance).find((v: any)=> {

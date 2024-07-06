@@ -1,0 +1,121 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','api'])">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z"/>
+                    <path d="M8.646 6.646a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L10.293 9 8.646 7.354a.5.5 0 0 1 0-.708m-1.292 0a.5.5 0 0 0-.708 0l-2 2a.5.5 0 0 0 0 .708l2 2a.5.5 0 0 0 .708-.708L5.707 9l1.647-1.646a.5.5 0 0 0 0-.708"/>
+                </svg>
+                 API </a>
+            </li>
+           <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','creating-mock-config'])">
+                Creating Mock Config
+            </a>
+        </ul>
+    </aside>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3">HTTP Mocking Framework</h2>
+    <p>
+        The <em class="lib-name">HTTP Mocking Framework</em> provides an easy-to-use and highly configurable
+        solution to mock HTTP responses to API calls sent from your Angular applications.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9">
+    <h3><code>@HttpMock</code> Decorator</h3>
+    <p>
+        The <code>@HttpMock</code> decorator allows to associate configurations to the lifecycle of a component.
+        It means that the config is loaded when the component is created and it is removed when the component is destroyed.
+    </p>
+    <p>
+        You must respect the rules below to use the <code>@HttpMock</code> decorator:
+    </p>
+    <ul>
+        <li>the associated component must implement both, <code>OnInit</code> and <code>OnDestroy</code> interfaces</li>
+        <li>the associated component must provide injection token for the <code>HttpMockService</code> class</li>
+        <li><code>@HttpMock</code> decorator must receive a <code>HttpMockConfig</code> object as parameter</li>
+    </ul>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3>Usage</h3>
+    <p>
+        The following example shows how to import a <code>HttpMockConfig</code> with the <code>@HttpMock</code> decorator
+        and demonstrates the scope of this config declaration:
+    </p>
+    <figure>
+        <figcaption>todos-mock.config.ts</figcaption>
+        <pre><code class="language-typescript">const TODO_COLLECTION: Todo[] = [ ... ];
+
+export const TODOS_MOCK_CONFIG: HttpMockConfig = &#123;
+  origin: "http://my-awsome-company.com/api",
+  interceptors: [
+    &#123;
+      id: "todos",
+      endpoints: [
+        &#123;
+          route: "/todos",
+          get: &#123;
+            data: (req: HttpRequest&lt;any&gt;, params: any) =&gt;
+                   httpResponseMock().body(TODO_COLLECTION).response()
+          &#125;
+        &#125;
+      ]
+    &#125;
+  ]
+&#125;;</code></pre></figure>
+    <figure>
+        <figcaption>todo.component.ts</figcaption>
+        <pre><code class="language-typescript">&#64;HttpMock(TODOS_MOCK_CONFIG)
+&#64;Component(&#123;
+  selector: 'app-todo',
+  standalone: true,
+  templateUrl: './todo.component.html'
+&#125;)
+export class TodoComponent implements OnInit, OnDestroy &#123;
+
+  constructor(private http: HttClient,
+              private mockService: HttpMockService) &#123; &#125;
+  
+  public ngOnInit(): void &#123;
+    this.http.get("http://my-awsome-company.com/api/todos")
+             .subscribe(result =&gt; console.log(result));
+    // Ouputs the content of the TODO_COLLECTION constant
+  &#125;
+  
+  public ngOnDestroy(): void &#123;&#125;
+ &#125;</code></pre></figure>
+ <figure>
+    <figcaption>foo-bar.component.ts</figcaption>
+    <pre><code class="language-typescript">&#64;Component(&#123;
+  selector: 'app-foo-bar',
+  standalone: true,
+  templateUrl: './foo-bar.component.html'
+&#125;)
+export class FooBarComponent implements OnInit &#123;
+
+  constructor(private http: HttClient) &#123; &#125;
+
+  public ngOnInit(): void &#123;
+    this.http.get("http://my-awsome-company.com/api/todos").subscribe();
+    // Throws an HTTP error
+  &#125;
+&#125;</code></pre></figure>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'HTTP Mocking Framework', 'path': 'http-mocking-framework' }, { 'label': 'API', 'path': 'http-mocking-framework/api' }, { 'label': '@HttpMock Decorator' }]">
+</object>

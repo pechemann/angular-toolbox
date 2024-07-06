@@ -133,16 +133,16 @@ export class MyComponent implements OnDestroy &#123;
         Instead of using global declarations, it may be useful to link a mock config with a specific component.
     </p>
     <p>
-        The <code>HttpMock</code> decorator allows to associate configurations to the lifecycle of a component.
+        The <code>@HttpMock</code> decorator allows to associate configurations to the lifecycle of a component.
         It means that the config is loaded when the component is created and it is removed when the component is destroyed.
     </p>
     <p>
-        You must respect the rules below to use the <code>HttpMock</code> decorator:
+        You must respect the rules below to use the <code>@HttpMock</code> decorator:
     </p>
     <ul>
         <li>the associated component must implement both, <code>OnInit</code> and <code>OnDestroy</code> interfaces</li>
         <li>the associated component must provide injection token for the <code>HttpMockService</code> class</li>
-        <li><code>HttpMock</code> decorator must receive a <code>HttpMockConfig</code> object as parameter</li>
+        <li><code>@HttpMock</code> decorator must receive a <code>HttpMockConfig</code> object as parameter</li>
     </ul>
     <p>
        The following component implementation shows how to use the <code>HttpMock</code> decorator
