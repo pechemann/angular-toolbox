@@ -23,6 +23,7 @@ interface HttpMockEndpointStorage {
   methodMock: HttpMethodMock;
   regexp: RegExp;
   keys: Key[];
+  configId: string;
 }
 
 @Injectable({
@@ -43,14 +44,21 @@ export class HttpMockService {
   public addConfig(config: HttpMockConfig): void {
     const origin: string = config.origin || this.APP_ORIGIN;
     if (!config.id) config.id = Uuid.build();
-    config.interceptors.forEach((interceptor: HttpMockInterceptor) => this.extractConfig(interceptor, origin) );
+    const uuid: string = config.id?.toString();
+    config.interceptors.forEach((interceptor: HttpMockInterceptor) => this.extractConfig(interceptor, origin, uuid) );
   }
 
   public getAppOrigin(): string {
     return this.APP_ORIGIN;
   }
 
-  public removeConfig(id: Uuid): void { }
+  public removeConfig(id: Uuid): void {
+    const configId: string = id.toString();
+    this._configList.forEach((value: Map<string, HttpMockEndpointStorage[]>, key: string) => {
+      this.deleteConfigById(value, configId);
+      if (value.size === 0) this._configList.delete(key);
+    });
+  }
 
   public clearConfigs(): void {
     this._configList.clear();
@@ -92,7 +100,7 @@ export class HttpMockService {
     return params;
   }
 
-  private extractConfig(interceptor: HttpMockInterceptor, globalOrigin: string | undefined): void {
+  private extractConfig(interceptor: HttpMockInterceptor, globalOrigin: string | undefined, configId: string): void {
     const endpoints: HttpMockEndpoint[] = interceptor.endpoints;
     let origin: string | undefined = interceptor.origin;
     if (origin) this.checkOrigin(origin);
@@ -100,24 +108,23 @@ export class HttpMockService {
     if (!origin) throw new SyntaxError(`Origin not found for endpoint: ["${interceptor.id}"]`);
     if (!this._configList.has(origin)) this._configList.set(origin, new Map<string, HttpMockEndpointStorage[]>());
     endpoints.forEach((endpoint: HttpMockEndpoint) => {
-      this.extractEndpointConfig(origin, endpoint, HTTPMethodRef.GET);
-      this.extractEndpointConfig(origin, endpoint, HTTPMethodRef.POST);
-      this.extractEndpointConfig(origin, endpoint, HTTPMethodRef.PUT);
-      this.extractEndpointConfig(origin, endpoint, HTTPMethodRef.DELETE);
-      this.extractEndpointConfig(origin, endpoint, HTTPMethodRef.HEAD);
-      this.extractEndpointConfig(origin, endpoint, HTTPMethodRef.OPTIONS);
-      this.extractEndpointConfig(origin, endpoint, HTTPMethodRef.PATCH);
-      this.extractEndpointConfig(origin, endpoint, HTTPMethodRef.CONNECT);
-      this.extractEndpointConfig(origin, endpoint, HTTPMethodRef.TRACE);
+      this.extractEndpointConfig(origin, endpoint, HTTPMethodRef.GET, configId);
+      this.extractEndpointConfig(origin, endpoint, HTTPMethodRef.POST, configId);
+      this.extractEndpointConfig(origin, endpoint, HTTPMethodRef.PUT, configId);
+      this.extractEndpointConfig(origin, endpoint, HTTPMethodRef.DELETE, configId);
+      this.extractEndpointConfig(origin, endpoint, HTTPMethodRef.HEAD, configId);
+      this.extractEndpointConfig(origin, endpoint, HTTPMethodRef.OPTIONS, configId);
+      this.extractEndpointConfig(origin, endpoint, HTTPMethodRef.PATCH, configId);
+      this.extractEndpointConfig(origin, endpoint, HTTPMethodRef.CONNECT, configId);
+      this.extractEndpointConfig(origin, endpoint, HTTPMethodRef.TRACE, configId);
     });
   }
 
-  private extractEndpointConfig(origin: string, endpoint: HttpMockEndpoint, method: HTTPMethodRef): void {
+  private extractEndpointConfig(origin: string, endpoint: HttpMockEndpoint, method: HTTPMethodRef, configId: string): void {
     const ep: any = endpoint;
     if (!ep[method as any]) return;
     const originConfig: Map<string, HttpMockEndpointStorage[]> = this._configList.get(origin) as any;
     const route: string = endpoint.route;
-    // TODO: possibly use options parameter:
     const data: TokenData = stringToTokenData(route);
     const keys: Key[] = [];
     const regexp: RegExp = tokenDataToRegexp(data, keys, {});
@@ -126,11 +133,24 @@ export class HttpMockService {
     methodConfig.push({
       regexp: regexp,
       keys: keys,
-      methodMock: ep[method]
+      methodMock: ep[method],
+      configId: configId
     });
   }
 
   private checkOrigin(origin: string): void {
     if (origin.endsWith(DEFAULT_DELIMITER)) throw new SyntaxError(`Origin must not end with a / characted: ["${origin}"]`);
+  }
+  
+  private deleteConfigById(storageMap: Map<string, HttpMockEndpointStorage[]>, configId: string): void {
+    storageMap.forEach((storage: HttpMockEndpointStorage[], key: string) => {
+      const cleanedConfig: HttpMockEndpointStorage[] = this.cleanConfig(storage, configId);
+      if (cleanedConfig.length) storageMap.set(key, cleanedConfig);
+      else storageMap.delete(key);
+    });
+  }
+
+  private cleanConfig(storage: HttpMockEndpointStorage[], configId: string): HttpMockEndpointStorage[] {
+    return storage.filter((value: HttpMockEndpointStorage)=> value.configId !== configId);
   }
 }

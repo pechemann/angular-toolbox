@@ -6,6 +6,7 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
+import { Uuid } from "../../../../util";
 import { HTTP_MOCK_SERVICE, HttpMockService } from "../../../../model";
 
 /**
@@ -25,12 +26,14 @@ export const HttpMock: Function = (config: any): Function=> {
         //TODO: throw error when ngOnInit ngOnDestroy are not defined.
         const ngOnInit = constructor.prototype.ngOnInit;
         const ngOnDestroy = constructor.prototype.ngOnDestroy;
+        const uiid: Uuid = config.id || Uuid.build();
+        if (!config.id) config.id = uiid;
         constructor.prototype.ngOnInit = function() {
             getMockService(this).addConfig(config);
             ngOnInit.call(this);
         };
         constructor.prototype.ngOnDestroy = function() {
-            getMockService(this).clearConfigs();
+            getMockService(this).removeConfig(uiid);
             ngOnDestroy.call(this);
         };
     };
