@@ -10,6 +10,7 @@ import { Uuid } from "../../../../util";
 import { HTTP_MOCK_SERVICE, HttpMockService } from "../../../../model";
 
 /**
+ * The definition function for the `@HttpMock` decorator.
  * 
  * @param config 
  * @returns 
@@ -23,9 +24,10 @@ export const HttpMock: Function = (config: any): Function=> {
             if (!mockService) throw new ReferenceError("HttpMockService is not provided into component.");
             return mockService;
         };
-        //TODO: throw error when ngOnInit ngOnDestroy are not defined.
         const ngOnInit = constructor.prototype.ngOnInit;
+        if (!ngOnInit) throw new ReferenceError("Component must implement the OnInit interface.");
         const ngOnDestroy = constructor.prototype.ngOnDestroy;
+        if (!ngOnDestroy) throw new ReferenceError("Component must implement the OnDestroy interface.");
         const uiid: Uuid = config.id || Uuid.build();
         if (!config.id) config.id = uiid;
         constructor.prototype.ngOnInit = function() {

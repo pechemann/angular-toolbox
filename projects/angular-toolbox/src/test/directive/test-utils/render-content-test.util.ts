@@ -12,7 +12,7 @@ import { ContentRendererDirective } from "projects/angular-toolbox/src/public-ap
 export const INJECTED_HTML_CONTENT: string = '<span>Hello World!</span>';
 
 @Component({
-  template: `<div id="testElm" contentRenderer [content]="content" (rendered)="onRendered($event)"></div>`,
+  template: `<div id="testElm" contentRenderer [innerHTML]="content" (rendered)="onRendered($event)"></div>`,
   standalone: true,
   imports: [
     ContentRendererDirective

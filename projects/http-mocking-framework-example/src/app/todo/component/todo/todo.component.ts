@@ -120,6 +120,7 @@ export class TodoComponent extends AbstractIdentifiable implements OnInit, OnDes
   }
 
   protected logRendered(elm: HTMLElement): void {
+    console.log(elm)
     elm.scrollTop = elm.scrollHeight;
   }
 }

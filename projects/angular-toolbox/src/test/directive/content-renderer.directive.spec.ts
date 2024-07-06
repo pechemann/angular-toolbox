@@ -31,11 +31,11 @@ describe('RenderContentDirective', () => {
     expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('"content" attribute should inject content', () => {
+  it('"innerHTML" attribute should inject content', () => {
     expect((decoratedElm.firstChild)).toBeTruthy();
   });
 
-  it('injected content should refer to the value specified by the "content" attribute', () => {
+  it('injected content should refer to the value specified by the "innerHTML" attribute', () => {
     expect((decoratedElm.innerHTML)).toEqual(INJECTED_HTML_CONTENT);
   });
   
