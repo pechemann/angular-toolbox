@@ -160,11 +160,12 @@ export class MyComponent implements OnDestroy &#123;
 export class TodoComponent implements OnInit, OnDestroy &#123;
 
   constructor(private http: HttClient,
-              private mockService: HttpMockService) &#123;
+              private mockService: HttpMockService) &#123; &#125;
+  
+  public ngOnInit(): void &#123;
     this.http.get("./todos").subscribe(result =&gt; console.log(result));
   &#125;
   
-  public ngOnInit(): void &#123;&#125;
   public ngOnDestroy(): void &#123;&#125;
  &#125;</code></pre></figure>
 </section>
