@@ -1,0 +1,254 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','api'])">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z"/>
+                    <path d="M8.646 6.646a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L10.293 9 8.646 7.354a.5.5 0 0 1 0-.708m-1.292 0a.5.5 0 0 0-.708 0l-2 2a.5.5 0 0 0 0 .708l2 2a.5.5 0 0 0 .708-.708L5.707 9l1.647-1.646a.5.5 0 0 0 0-.708"/>
+                </svg>
+                 API </a>
+            </li>
+           <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','creating-mock-config'])">
+                Creating Mock Config
+            </a>
+        </ul>
+    </aside>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3">HTTP Mocking Framework</h2>
+    <p>
+        The <em class="lib-name">HTTP Mocking Framework</em> provides an easy-to-use and highly configurable
+        solution to mock HTTP responses to API calls sent from your Angular applications.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9">
+    <h3><code>HttpResponseMockBuilder</code> Class</h3>
+    <p>
+        A statefull builder for creating new <code>HttpResponseMock</code> instances.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="destroy"><code>HttpResponseMockBuilder.body()</code></h3>
+    <pre><code class="language-typescript">body(body: any): HttpResponseMockBuilder</code></pre>
+    <p>
+        Sets the body property of the new <code>HttpResponseMock</code> instance with the specified <code>body</code> value.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>body: any</code></dt>
+            <dd>
+                <p>
+                    The value used to set the body content of the new <code>HttpResponseMock</code> instance.
+                </p>
+            </dd>
+        </dl>
+    </div>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>HttpResponseMockBuilder</code>
+        <p>
+            The reference to this <code>HttpResponseMockBuilder</code> instance.
+        </p>
+    </div>
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="destroy"><code>HttpResponseMockBuilder.headers()</code></h3>
+    <pre><code class="language-typescript">headers(headers: HttpHeaders): HttpResponseMockBuilder</code></pre>
+    <p>
+        Sets the headers property of the new <code>HttpResponseMock</code> instance.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>headers: HttpHeaders</code></dt>
+            <dd>
+                <p>
+                    The value used to set the headers of the new <code>HttpResponseMock</code> instance.
+                    <br>
+                    See the <a href="https://angular.dev/api/common/http/HttpHeaders" title="HttpHeaders">HttpHeaders</a>
+                    reference for more details.
+                </p>
+            </dd>
+        </dl>
+    </div>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>HttpResponseMockBuilder</code>
+        <p>
+            The reference to this <code>HttpResponseMockBuilder</code> instance.
+        </p>
+    </div>
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="destroy"><code>HttpResponseMockBuilder.status()</code></h3>
+    <pre><code class="language-typescript">status(status: number): HttpResponseMockBuilder</code></pre>
+    <p>
+        Sets the status of the new <code>HttpResponseMock</code> instance.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>status: number</code></dt>
+            <dd>
+                <p>
+                    The value used to set the status of the new <code>HttpResponseMock</code> instance.
+                </p>
+            </dd>
+        </dl>
+    </div>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>HttpResponseMockBuilder</code>
+        <p>
+            The reference to this <code>HttpResponseMockBuilder</code> instance.
+        </p>
+    </div>
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="destroy"><code>HttpResponseMockBuilder.statusText()</code></h3>
+    <pre><code class="language-typescript">statusText(statusText: string): HttpResponseMockBuilder</code></pre>
+    <p>
+        Sets the status text of the new <code>HttpResponseMock</code> instance.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>statusText: string</code></dt>
+            <dd>
+                <p>
+                    The value used to set the status text of the new <code>HttpResponseMock</code> instance.
+                </p>
+            </dd>
+        </dl>
+    </div>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>HttpResponseMockBuilder</code>
+        <p>
+            The reference to this <code>HttpResponseMockBuilder</code> instance.
+        </p>
+    </div>
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="destroy"><code>HttpResponseMockBuilder.url()</code></h3>
+    <pre><code class="language-typescript">url(url: string | null): HttpResponseMockBuilder</code></pre>
+    <p>
+        Sets the url of the new <code>HttpResponseMock</code> instance.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>url: string | null</code></dt>
+            <dd>
+                <p>
+                    The value used to set the URL of the new <code>HttpResponseMock</code> instance.
+                    <br>
+                    Default value is <code>null</code>.
+                </p>
+            </dd>
+        </dl>
+    </div>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>HttpResponseMockBuilder</code>
+        <p>
+            The reference to this <code>HttpResponseMockBuilder</code> instance.
+        </p>
+    </div>
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="destroy"><code>HttpResponseMockBuilder.delay()</code></h3>
+    <pre><code class="language-typescript">delay(timer: number = 0): HttpResponseMockBuilder</code></pre>
+    <p>
+        Sets the delay before the <code>pseudo-server</code> sends the HTTP response.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>timer: number</code></dt>
+            <dd>
+                <p>
+                    The value used to set the delay before the server sends the HTTP response.
+                    <br>
+                    Maximum value is <code>10000</code> miliseconds (10 seconds).
+                    <br>
+                    Default value is <code>0</code>.
+                </p>
+            </dd>
+        </dl>
+    </div>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>HttpResponseMockBuilder</code>
+        <p>
+            The reference to this <code>HttpResponseMockBuilder</code> instance.
+        </p>
+    </div>
+    </p>
+</section>
+
+
+<section class="col-xl-9 mb-4">
+    <h3 id="destroy"><code>HttpResponseMockBuilder.response()</code></h3>
+    <pre><code class="language-typescript">response(error: HttpMockError | null = null): HttpResponseMock</code></pre>
+    <p>
+        Returns a new <code>HttpResponseMock</code> object, built from the properties set with the
+        this <code>HttpResponseMockBuilder</code> instance methods.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>error: HttpMockError | null</code></dt>
+            <dd>
+                <p>
+                    An optional HTTP error, used bay the <code>pseudo-server</code> to return an HTTP error.
+                    <br>
+                    When <code>null</code>, the server returns a successful HTTP response.
+                    <br>
+                    Default value is <code>null</code>.
+                </p>
+            </dd>
+        </dl>
+    </div>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>HttpResponseMock</code>
+        <p>
+            A new <code>HttpResponseMock</code> instance.
+            <br>
+            See the <a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','http-response-mock'])" title="HttpResponseMock">HttpResponseMock</a>
+            reference for more details.
+        </p>
+    </div>
+    </p>
+</section>
+
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'HTTP Mocking Framework', 'path': 'http-mocking-framework' }, { 'label': 'API', 'path': 'http-mocking-framework/api' }, { 'label': 'HttpMethodMock' }]">
+</object>

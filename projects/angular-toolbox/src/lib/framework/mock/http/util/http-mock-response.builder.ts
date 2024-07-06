@@ -105,7 +105,7 @@ export class HttpResponseMockBuilder {
     }
 
     /**
-     * Return a new `HttpResponseMock` instance, built from the properties specified with the
+     * Returns a new `HttpResponseMock` instance, built from the properties specified with the
      * `HttpResponseMockBuilder` methods.
      * 
      * @param error An optional value used to set the `error` property of the new `HttpResponseMock` instance.
