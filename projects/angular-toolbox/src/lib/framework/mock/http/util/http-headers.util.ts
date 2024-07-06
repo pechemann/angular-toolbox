@@ -8,7 +8,7 @@
 
 import { HttpHeaders } from "@angular/common/http";
 import { EMPTY_STRING } from "../../../../util";
-import { httpHeadersMock } from "./http-response-headers-mock.builder";
+import { httpHeadersMock } from "./http-headers-mock.builder";
 
 /**
  * @private

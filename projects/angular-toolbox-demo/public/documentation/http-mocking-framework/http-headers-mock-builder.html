@@ -1,0 +1,336 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','api'])">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z"/>
+                    <path d="M8.646 6.646a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L10.293 9 8.646 7.354a.5.5 0 0 1 0-.708m-1.292 0a.5.5 0 0 0-.708 0l-2 2a.5.5 0 0 0 0 .708l2 2a.5.5 0 0 0 .708-.708L5.707 9l1.647-1.646a.5.5 0 0 0 0-.708"/>
+                </svg>
+                 API </a>
+            </li>
+           <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','creating-mock-config'])">
+                Creating Mock Config
+            </a>
+        </ul>
+    </aside>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3">HTTP Mocking Framework</h2>
+    <p>
+        The <em class="lib-name">HTTP Mocking Framework</em> provides an easy-to-use and highly configurable
+        solution to mock HTTP responses to API calls sent from your Angular applications.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9">
+    <h3><code>HttpHeadersMockBuilder</code> Class</h3>
+    <p>
+        A statefull builder for creating new <code>HttpHeaders</code> instances.
+        <br>
+        See the <a href="https://angular.dev/api/common/http/HttpHeaders" title="HttpHeaders">HttpHeaders</a>
+        reference for more details.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3><code>HttpHeadersMockBuilder.cacheControl()</code></h3>
+    <pre><code class="language-typescript">cacheControl(value: string = "no-cache"): HttpHeadersMockBuilder</code></pre>
+    <p>
+        Sets the <code>"Cache-Control"</code> property of the new <code>HttpHeaders</code> instance.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>value: string</code></dt>
+            <dd>
+                <p>
+                    The value used to set the <code>"Cache-Control"</code> HTTP header value.
+                    <br>
+                    Set tos <code>"no-cache"</code> by default.
+                </p>
+            </dd>
+        </dl>
+    </div>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>HttpHeadersMockBuilder</code>
+        <p>
+            The reference to this <code>HttpHeadersMockBuilder</code> instance.
+        </p>
+    </div>
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3><code>HttpHeadersMockBuilder.contentType()</code></h3>
+    <pre><code class="language-typescript">contentType(value: string = "application/json; charset=utf-8"): HttpHeadersMockBuilder</code></pre>
+    <p>
+        Sets the <code>"Content-Type"</code> property of the new <code>HttpHeaders</code> instance.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>value: string</code></dt>
+            <dd>
+                <p>
+                    The value used to set the <code>"Content-Type"</code> HTTP header value.
+                    <br>
+                    Set to <code>"application/json; charset=utf-8"</code> by default.
+                </p>
+            </dd>
+        </dl>
+    </div>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>HttpHeadersMockBuilder</code>
+        <p>
+            The reference to this <code>HttpHeadersMockBuilder</code> instance.
+        </p>
+    </div>
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3><code>HttpHeadersMockBuilder.pragma()</code></h3>
+    <pre><code class="language-typescript">pragma(value: string = "no-cache"): HttpHeadersMockBuilder</code></pre>
+    <p>
+        Sets the <code>"Pragma"</code> property of the new <code>HttpHeaders</code> instance.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>value: string</code></dt>
+            <dd>
+                <p>
+                    The value used to set the <code>"Pragma"</code> HTTP header value.
+                    <br>
+                    Set to <code>"no-cache"</code> by default.
+                </p>
+            </dd>
+        </dl>
+    </div>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>HttpHeadersMockBuilder</code>
+        <p>
+            The reference to this <code>HttpHeadersMockBuilder</code> instance.
+        </p>
+    </div>
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3><code>HttpHeadersMockBuilder.priority()</code></h3>
+    <pre><code class="language-typescript">priority(value: string = "u=0, i"): HttpHeadersMockBuilder</code></pre>
+    <p>
+        Sets the <code>"Priority"</code> property of the new <code>HttpHeaders</code> instance.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>value: string</code></dt>
+            <dd>
+                <p>
+                    The value used to set the <code>"Priority"</code> HTTP header value.
+                    <br>
+                    Set to <code>"u=0, i"</code> by default.
+                </p>
+            </dd>
+        </dl>
+    </div>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>HttpHeadersMockBuilder</code>
+        <p>
+            The reference to this <code>HttpHeadersMockBuilder</code> instance.
+        </p>
+    </div>
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3><code>HttpHeadersMockBuilder.userAgent()</code></h3>
+    <pre><code class="language-typescript">userAgent(value: string | null = null): HttpHeadersMockBuilder</code></pre>
+    <p>
+        Sets the <code>"User-Agent"</code> property of the new <code>HttpHeaders</code> instance.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>value: string</code></dt>
+            <dd>
+                <p>
+                    The value used to set the <code>"User-Agent"</code> HTTP header value.
+                    <br>
+                    Uses the client user agent when <code>null</code> is passed as parameter
+                </p>
+            </dd>
+        </dl>
+    </div>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>HttpHeadersMockBuilder</code>
+        <p>
+            The reference to this <code>HttpHeadersMockBuilder</code> instance.
+        </p>
+    </div>
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3><code>HttpHeadersMockBuilder.acceptLanguage()</code></h3>
+    <pre><code class="language-typescript">acceptLanguage(value: string | null = null): HttpHeadersMockBuilder</code></pre>
+    <p>
+        Sets the <code>"Accept-Language"</code> property of the new <code>HttpHeaders</code> instance.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>value: string</code></dt>
+            <dd>
+                <p>
+                    The value used to set the <code>"Accept-Language"</code> HTTP header value.
+                    <br>
+                    Uses the client language when <code>null</code> is passed as parameter
+                </p>
+            </dd>
+        </dl>
+    </div>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>HttpHeadersMockBuilder</code>
+        <p>
+            The reference to this <code>HttpHeadersMockBuilder</code> instance.
+        </p>
+    </div>
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3><code>HttpHeadersMockBuilder.accept()</code></h3>
+    <pre><code class="language-typescript">accept(value: string = "*/*"): HttpHeadersMockBuilder</code></pre>
+    <p>
+        Sets the <code>"Accept"</code> property of the new <code>HttpHeaders</code> instance.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>value: string</code></dt>
+            <dd>
+                <p>
+                    The value used to set the <code>"Accept"</code> HTTP header value.
+                    <br>
+                    Set to <code>"*/*"</code> by default.
+                </p>
+            </dd>
+        </dl>
+    </div>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>HttpHeadersMockBuilder</code>
+        <p>
+            The reference to this <code>HttpHeadersMockBuilder</code> instance.
+        </p>
+    </div>
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3><code>HttpHeadersMockBuilder.acceptEncoding()</code></h3>
+    <pre><code class="language-typescript">acceptEncoding(value: string = "gzip, deflate, br, zstd"): HttpHeadersMockBuilder</code></pre>
+    <p>
+        Sets the <code>"Accept-Encoding"</code> property of the new <code>HttpHeaders</code> instance.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>value: string</code></dt>
+            <dd>
+                <p>
+                    The value used to set the <code>"Accept-Encoding"</code> HTTP header value.
+                    <br>
+                    Set to <code>"gzip, deflate, br, zstd"</code> by default.
+                </p>
+            </dd>
+        </dl>
+    </div>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>HttpHeadersMockBuilder</code>
+        <p>
+            The reference to this <code>HttpHeadersMockBuilder</code> instance.
+        </p>
+    </div>
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3><code>HttpHeadersMockBuilder.set()</code></h3>
+    <pre><code class="language-typescript">set(name: string, value: string | string[]): HttpHeadersMockBuilder</code></pre>
+    <p>
+        Sets or modifies a value of the new <code>HttpHeaders</code> instance.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>name: string</code></dt>
+            <dd>
+                <p>
+                    The header property name.
+                </p>
+            </dd>
+        </dl>
+        <dl>
+            <dt><code>value: string | string[]</code></dt>
+            <dd>
+                <p>
+                    Can be either a string, or an array of strings, used to to set/override for the given header.
+                </p>
+            </dd>
+        </dl>
+    </div>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>HttpHeadersMockBuilder</code>
+        <p>
+            The reference to this <code>HttpHeadersMockBuilder</code> instance.
+        </p>
+    </div>
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3><code>HttpHeadersMockBuilder.headers()</code></h3>
+    <pre><code class="language-typescript">headers(): HttpHeaders</code></pre>
+    <p>
+        Creates and returns a new <code>HttpHeaders</code> instance, built from the properties specified with the
+        methods of this <code>HttpHeadersMockBuilder</code> instance.
+    </p>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>HttpHeaders</code>
+        <p>
+            A new <code>HttpHeaders</code> instance.
+            <br>
+            See the <a href="https://angular.dev/api/common/http/HttpHeaders" title="HttpHeaders">HttpHeaders</a>
+            reference for more details.
+        </p>
+    </div>
+    </p>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'HTTP Mocking Framework', 'path': 'http-mocking-framework' }, { 'label': 'API', 'path': 'http-mocking-framework/api' }, { 'label': 'HttpHeadersMockBuilder' }]">
+</object>
