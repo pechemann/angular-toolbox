@@ -65,7 +65,6 @@
               }
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "projects/angular-toolbox-demo/src/styles.scss"
             ],
             "scripts": []
@@ -131,7 +130,6 @@
               }
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "projects/angular-toolbox-demo/src/styles.scss"
             ],
             "scripts": []
