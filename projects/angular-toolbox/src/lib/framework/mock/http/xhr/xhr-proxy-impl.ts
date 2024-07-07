@@ -12,6 +12,7 @@ import { DelegateXhr } from "./delegate-xhr";
 import { EMPTY_STRING } from "../../../../util";
 import { XhrBase } from "./xhr-base";
 import { RouteMockConfig } from "../config/route-mock-config";
+import { HTTPMethodRef } from "../util/http-method-ref.enum";
 
 /**
  * @private
@@ -120,9 +121,9 @@ export class XhrProxyImpl extends XhrBase implements XhrProxy {
     open(method: string, url: string | URL): void;
     open(method: string, url: string | URL, async: boolean, username?: string | null | undefined, password?: string | null | undefined): void;
     open(method: unknown, url: unknown, async?: unknown, username?: unknown, password?: unknown): void {
-        const m: string = (method as string).toString().toLowerCase();
+        const m: string = (method as string).toString().toUpperCase();
         const parsedUrl: URL = URL.canParse(url as string) ? new URL(url as string) : new URL(this._httpMockService.getAppOrigin() + url);
-        const config: RouteMockConfig | undefined = this._httpMockService.getRouteConfig(parsedUrl, m);
+        const config: RouteMockConfig | undefined = this._httpMockService.getRouteConfig(parsedUrl, m as HTTPMethodRef);
         if (this.XHR && this.XHR instanceof DelegateXhr) this.XHR.destroy();
         this.XHR = config ? new DelegateXhr(config) : new XMLHttpRequest();
         this.XHR.withCredentials = this.withCredentials;

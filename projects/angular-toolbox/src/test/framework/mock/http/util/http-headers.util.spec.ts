@@ -16,27 +16,27 @@ describe('HttpHeadersUtil', () => {
     expect(HttpHeadersUtil.createDefaultRequestHeaders()).toBeInstanceOf(HttpHeaders);
   });
 
-  it('createDefaultRequestHeaders() should return an instance of HttpHeaders whith "Cache-Control" set to "no-cache"', () => {
+  it('createDefaultRequestHeaders() should return an instance of HttpHeaders with "Cache-Control" set to "no-cache"', () => {
     const headers: HttpHeaders = HttpHeadersUtil.createDefaultRequestHeaders();
     expect(headers.get("Cache-Control")).toEqual("no-cache");
   });
 
-  it('createDefaultRequestHeaders() should return an instance of HttpHeaders whith "Accept-Encoding" set to "gzip, deflate, br, zstd"', () => {
+  it('createDefaultRequestHeaders() should return an instance of HttpHeaders with "Accept-Encoding" set to "gzip, deflate, br, zstd"', () => {
     const headers: HttpHeaders = HttpHeadersUtil.createDefaultRequestHeaders();
     expect(headers.get("Accept-Encoding")).toEqual("gzip, deflate, br, zstd");
   });
 
-  it('createDefaultRequestHeaders() should return an instance of HttpHeaders whith "Accept-Language" set to the browser language value', () => {
+  it('createDefaultRequestHeaders() should return an instance of HttpHeaders with "Accept-Language" set to the browser language value', () => {
     const headers: HttpHeaders = HttpHeadersUtil.createDefaultRequestHeaders();
     expect(headers.get("Accept-Language")).toEqual(navigator.language);
   });
 
-  it('createDefaultRequestHeaders() should return an instance of HttpHeaders whith "Priority" set to "u=0, i"', () => {
+  it('createDefaultRequestHeaders() should return an instance of HttpHeaders with "Priority" set to "u=0, i"', () => {
     const headers: HttpHeaders = HttpHeadersUtil.createDefaultRequestHeaders();
     expect(headers.get("Priority")).toEqual("u=0, i");
   });
 
-  it('createDefaultRequestHeaders() should return an instance of HttpHeaders whith "User-Agent" set to the browser userAgent value', () => {
+  it('createDefaultRequestHeaders() should return an instance of HttpHeaders with "User-Agent" set to the browser userAgent value', () => {
     const headers: HttpHeaders = HttpHeadersUtil.createDefaultRequestHeaders();
     expect(headers.get("User-Agent")).toEqual(navigator.userAgent);
   });
