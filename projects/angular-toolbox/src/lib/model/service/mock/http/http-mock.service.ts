@@ -132,11 +132,11 @@ export class HttpMockService {
   }
 
   /**
-   * Returns the `RouteMockConfig` object associated with the specified `URL` instance and HHTP method.
+   * Returns the `RouteMockConfig` object associated with the specified `URL` instance and HTTP method.
    * 
    * @param url The `URL` instance for which to find a route config.
-   * @param method The HHTP method for which to find a route config.
-   * @returns The `RouteMockConfig` object associated with the specified `URL` instance and HHTP method whether it exists;
+   * @param method The HTTP method for which to find a route config.
+   * @returns The `RouteMockConfig` object associated with the specified `URL` instance and HTTP method whether it exists;
    *          `undefined` otherwise.
    */
   public getRouteConfig(url: URL, method: HTTPMethodRef): RouteMockConfig | undefined {

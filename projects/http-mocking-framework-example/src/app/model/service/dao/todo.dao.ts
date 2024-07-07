@@ -15,6 +15,8 @@ import { LogLevel } from '../../business/log';
 import { Todo } from '../../business/todo';
 import { UpdateTodoDto } from '../../business/dto/update-todo.dto';
 
+const API_PATH: string = "https://my-awsome-company.com/todos/";
+
 @Injectable({
   providedIn: "root"
 })
@@ -24,7 +26,7 @@ export class TodoDao {
               private loggerService: LogerService) { }
 
   public getAll(userId: number): Observable<Todo[]> {
-    const endpoint: string = "https://my-awsome-company.com/todos/" + userId;
+    const endpoint: string = API_PATH + userId;
     this.logEndpoint("GET", endpoint);
     return this.http.get<any>(endpoint, { observe: 'response' }).pipe(
       map(response=> {
@@ -40,7 +42,7 @@ export class TodoDao {
   }
 
   public deleteAll(userId: number): Observable<any> {
-    const endpoint: string = "https://my-awsome-company.com/todos/" + userId;
+    const endpoint: string = API_PATH + userId;
     this.logEndpoint("DELETE", endpoint);
     return this.http.delete<any>(endpoint, { observe: 'response' }).pipe(
       tap(response => this.logResponse("DELETE", response)),
@@ -49,7 +51,7 @@ export class TodoDao {
   }
 
   public create(userId: number, title: string): Observable<Todo> {
-    const endpoint: string = `https://my-awsome-company.com/todos/${userId}/todo`;
+    const endpoint: string = `${API_PATH}${userId}/todo`;
     this.logEndpoint("POST", endpoint);
     return this.http.post<any>(endpoint, title, { observe: 'response' }).pipe(
       map(response => {
@@ -62,7 +64,7 @@ export class TodoDao {
   }
   
   public delete(userId: number, todoId: number): Observable<number> {
-    const endpoint: string = `https://my-awsome-company.com/todos/${userId}/todo/${todoId}`;
+    const endpoint: string = `${API_PATH}${userId}/todo/${todoId}`;
     this.logEndpoint("DELETE", endpoint);
     return this.http.delete<any>(endpoint, { observe: 'response' }).pipe(
       map(response => {
@@ -74,7 +76,7 @@ export class TodoDao {
   }
   
   public update(userId: number, todo: Todo): Observable<void> {
-    const endpoint: string = `https://my-awsome-company.com/todos/${userId}/todo/${todo.id}`;
+    const endpoint: string = `${API_PATH}${userId}/todo/${todo.id}`;
     const update: UpdateTodoDto = {
       title: todo.title,
       completed: todo.completed

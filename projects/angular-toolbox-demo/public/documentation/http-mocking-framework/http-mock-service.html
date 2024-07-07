@@ -1,0 +1,198 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','api'])">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z"/>
+                    <path d="M8.646 6.646a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L10.293 9 8.646 7.354a.5.5 0 0 1 0-.708m-1.292 0a.5.5 0 0 0-.708 0l-2 2a.5.5 0 0 0 0 .708l2 2a.5.5 0 0 0 .708-.708L5.707 9l1.647-1.646a.5.5 0 0 0 0-.708"/>
+                </svg>
+                 API </a>
+            </li>
+           <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','creating-mock-config'])">
+                Creating Mock Config
+            </a>
+        </ul>
+    </aside>
+    <section class="w-100">
+        <h5 class="mb-4">On this page</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="#add-config" onclick="appBridge.goToAnchor(event)" title="addConfig() method">addConfig() method</a></li>
+            <li class="list-group-item"><a href="#get-app-origin" onclick="appBridge.goToAnchor(event)" title="getAppOrigin() method">getAppOrigin() method</a></li>
+            <li class="list-group-item"><a href="#remove-config" onclick="appBridge.goToAnchor(event)" title="removeConfig() method">removeConfig() method</a></li>
+            <li class="list-group-item"><a href="#clear-configs" onclick="appBridge.goToAnchor(event)" title="removeConfig() method">clearConfigs() method</a></li>
+            <li class="list-group-item"><a href="#has-registered-config" onclick="appBridge.goToAnchor(event)" title="hasRegisteredConfig() method">hasRegisteredConfig() method</a></li>
+            <li class="list-group-item"><a href="#get-route-config" onclick="appBridge.goToAnchor(event)" title="getRouteConfig() method">getRouteConfig() method</a></li>
+        </ul>
+    </section>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3">HTTP Mocking Framework</h2>
+    <p>
+        The <em class="lib-name">HTTP Mocking Framework</em> provides an easy-to-use and highly configurable
+        solution to mock HTTP responses to API calls sent from your Angular applications.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9">
+    <h3><code>HttpMockService</code> Class</h3>
+    <p>
+        The <code>HttpMockService</code> class provides the API for managing
+        <a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','http-mock-config'])" title="HttpMockConfig Interface"><code>HttpMockConfig</code></a> objects.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="add-config"><code>HttpResponseMockBuilder.addConfig()</code></h3>
+    <pre><code class="language-typescript">addConfig(config: HttpMockConfig): Uuid</code></pre>
+    <p>
+        Adds the specified <code>HttpMockConfig</code> object to this <code>HttpMockService</code> instance.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>config: HttpMockConfig</code></dt>
+            <dd>
+                <p>
+                    The <code>HttpMockConfig</code> object to add to this <code>HttpMockService</code> instance.
+                </p>
+            </dd>
+        </dl>
+    </div>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>Uuid</code>
+        <p>
+            The <code>Uuid</code> instance associated with the added <code>HttpMockConfig</code> object.
+        </p>
+    </div>
+    <h5 class="mt-3">Exeptions</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>HttpMockServiceError</code></dt>
+            <dd>
+                <p>
+                    Thrown if a config has already been registered with the UUID of the specified <code>HttpMockConfig</code> object.
+                </p>
+            </dd>
+        </dl>
+        <dl>
+            <dt><code>SyntaxError</code></dt>
+            <dd>
+                <p>
+                    Thrown if an <code>origin</code> property declared within the specified <code>HttpMockConfig</code> object
+                    ends with a slash (<code>/</code>) character.
+                </p>
+            </dd>
+        </dl>
+    </div>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="get-app-origin"><code>HttpResponseMockBuilder.getAppOrigin()</code></h3>
+    <pre><code class="language-typescript">getAppOrigin(): string</code></pre>
+    <p>
+        Returns the current app URL origin.
+    </p>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>string</code>
+        <p>
+            A string that represents the current app URL origin.
+        </p>
+    </div>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="remove-config"><code>HttpResponseMockBuilder.removeConfig()</code></h3>
+    <pre><code class="language-typescript">removeConfig(uuid: Uuid): void</code></pre>
+    <p>
+        Removes the configuration registered with the specified UUID from this <code>HttpMockService</code> instance.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="clear-configs"><code>HttpResponseMockBuilder.clearConfigs()</code></h3>
+    <pre><code class="language-typescript">clearConfigs(): void</code></pre>
+    <p>
+        Removes all registred configurations from this <code>HttpMockService</code> instance.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="has-registered-config"><code>HttpResponseMockBuilder.hasRegisteredConfig()</code></h3>
+    <pre><code class="language-typescript">hasRegisteredConfig(uuid: Uuid): boolean</code></pre>
+    <p>
+        Returns a boolean value that indicates whether a config with the specified UUID has been registered
+        (<code>true</code>), or not (<code>false</code>).
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>uuid: Uuid</code></dt>
+            <dd>
+                <p>
+                    The UUID of the config to check.
+                </p>
+            </dd>
+        </dl>
+    </div>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>boolean</code>
+        <p>
+            <code>true</code> whether a config with the specified UUID has been registered; <code>false</code> otherwise.
+        </p>
+    </div>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="get-route-config"><code>HttpResponseMockBuilder.getRouteConfig()</code></h3>
+    <pre><code class="language-typescript">getRouteConfig(url: URL, method: HTTPMethodRef): RouteMockConfig | undefined</code></pre>
+    <p>
+        Returns the <code>RouteMockConfig</code> object associated with the specified
+        <code>URL</code> instance and HTTP method.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>url: URL</code></dt>
+            <dd>
+                <p>
+                    The <code>URL</code> instance for which to find a route config.
+                </p>
+            </dd>
+        </dl>
+        <dl>
+            <dt><code>method: HTTPMethodRef</code></dt>
+            <dd>
+                <p>
+                    The HTTP method for which to find a route config.
+                </p>
+            </dd>
+        </dl>
+    </div>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>RouteMockConfig | undefined</code>
+        <p>
+            The <code>RouteMockConfig</code> object associated with the specified <code>URL</code> instance and HTTP
+            method whether it exists; <code>undefined</code> otherwise.
+        </p>
+    </div>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'HTTP Mocking Framework', 'path': 'http-mocking-framework' }, { 'label': 'API', 'path': 'http-mocking-framework/api' }, { 'label': 'HttpMockService' }]">
+</object>
