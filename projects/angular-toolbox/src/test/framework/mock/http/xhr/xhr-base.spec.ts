@@ -6,14 +6,12 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { TestBed } from '@angular/core/testing';
 import { XhrBase } from '../../../../../lib/framework/mock/http/xhr/xhr-base';
 
 describe('XhrBase', () => {
   let baseClassInstance: XhrBase;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({});
+  beforeEach(() => {
     baseClassInstance = new XhrBase();
   });
 
@@ -39,5 +37,53 @@ describe('XhrBase', () => {
 
   it('should "DONE" equal to 4', () => {
     expect(baseClassInstance.DONE).toEqual(4);
+  });
+
+  it('should withCredentials to be false', () => {
+    expect(baseClassInstance.withCredentials).toBeFalse();
+  });
+
+  it('should timeout to be undefined', () => {
+    expect(baseClassInstance.timeout).toBeUndefined();
+  });
+  
+  it('should onabort to be null', () => {
+    expect(baseClassInstance.onabort).toBeNull();
+  });
+  
+  it('should onerror to be null', () => {
+    expect(baseClassInstance.onerror).toBeNull();
+  });
+  
+  it('should onload to be null', () => {
+    expect(baseClassInstance.onload).toBeNull();
+  });
+  
+  it('should onloadend to be null', () => {
+    expect(baseClassInstance.onloadend).toBeNull();
+  });
+  
+  it('should onloadstart to be null', () => {
+    expect(baseClassInstance.onloadstart).toBeNull();
+  });
+  
+  it('should onprogress to be null', () => {
+    expect(baseClassInstance.onprogress).toBeNull();
+  });
+  
+  it('should onreadystatechange to be null', () => {
+    expect(baseClassInstance.onreadystatechange).toBeNull();
+  });
+  
+  it('should ontimeout to be null', () => {
+    expect(baseClassInstance.ontimeout).toBeNull();
+  });
+  
+  it('getResponseHeader() should return null', () => {
+    expect(baseClassInstance.getResponseHeader("test")).toBeNull();
+  });
+  
+  it('overrideMimeType() should be defined', () => {
+    expect(baseClassInstance.overrideMimeType).toBeDefined();
   });
 });

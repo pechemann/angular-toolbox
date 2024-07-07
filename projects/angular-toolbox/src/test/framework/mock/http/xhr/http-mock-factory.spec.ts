@@ -13,8 +13,8 @@ import { XhrFactory } from '@angular/common';
 
 describe('httpMockFactory', () => {
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       providers: [
         HttpMockService,
         { provide: XhrFactory, useFactory: httpMockFactory }
