@@ -43,19 +43,6 @@ export class HttpHeadersMockBuilder {
         this.setHeader("Content-Type", value);
         return this;
     }
-    
-    /**
-     * Sets the `"Pragma"` property of the new `HttpHeaders` instance with the specified value.
-     * 
-     * @param value The value used to set the `"Pragma"` property of the new `HttpHeaders` instance.
-     * Default value is `"no-cache"`.
-     * 
-     * @returns A reference to this `HttpResponseMockBuilder` instance.
-     */
-    public pragma(value: string = "no-cache"): HttpHeadersMockBuilder {
-        this.setHeader("Pragma", value);
-        return this;
-    }
 
     /**
      * Sets the `"Priority"` property of the new `HttpHeaders` instance with the specified value.
@@ -149,7 +136,8 @@ export class HttpHeadersMockBuilder {
      * @private
      */
     private setHeader(name: string, value: string | string[]): void {
-        this._headers = this._headers.set(name, value);
+        const values: string = Array.isArray(value) ? value.join(", ") : value;
+        this._headers = this._headers.set(name, values);
     }
 }
 
