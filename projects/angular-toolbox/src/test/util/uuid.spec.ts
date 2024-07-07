@@ -69,6 +69,18 @@ describe('Uuid', () => {
     expect(Uuid.validate(crypto.randomUUID())).toBeTrue();
   });
   
+  it('equals() should return false when Uuid instances are different', () => {
+    const uuid1 = Uuid.build();
+    const uuid2 = Uuid.build();
+    expect(uuid1.equals(uuid2)).toBeFalse();
+  });
+  
+  it('equals() should return true when Uuid instances are identical', () => {
+    const uuid1 = Uuid.build();
+    const uuid2 = uuid1;
+    expect(uuid1.equals(uuid2)).toBeTrue();
+  });
+  
   it('toString() should return a string', () => {
     const uuid = Uuid.build();
     expect(typeof uuid.toString()).toEqual("string");

@@ -1,3 +1,3 @@
 
 export * from './http-mock-parameters';
-export * from './http-mock';
+export * from './http-mock.decorator';

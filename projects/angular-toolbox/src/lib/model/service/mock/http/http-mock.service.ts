@@ -37,14 +37,23 @@ export class HttpMockService {
    */
   public readonly type: string = HTTP_MOCK_SERVICE;
 
+  private _configIdList: Uuid[] = [];
+
   private _configList: Map<string, Map<string, HttpMockEndpointStorage[]>> = new Map<string, Map<string, HttpMockEndpointStorage[]>>();
 
   private readonly APP_ORIGIN: string = window.location.origin;
 
   public addConfig(config: HttpMockConfig): void {
     const origin: string = config.origin || this.APP_ORIGIN;
-    if (!config.id) config.id = Uuid.build();
-    const uuid: string = config.id?.toString();
+    let id: Uuid | undefined = config.id;
+    if (!id) {
+      id = Uuid.build();
+      config.id = id;
+    } else {
+      if (this.hasRegisteredConfig(id)) throw new Error() ;
+    }
+    this._configIdList.push(id);
+    const uuid: string = id.toString();
     config.interceptors.forEach((interceptor: HttpMockInterceptor) => this.extractConfig(interceptor, origin, uuid) );
   }
 
@@ -53,15 +62,22 @@ export class HttpMockService {
   }
 
   public removeConfig(id: Uuid): void {
+    if (!this.hasRegisteredConfig(id)) return;
     const configId: string = id.toString();
     this._configList.forEach((value: Map<string, HttpMockEndpointStorage[]>, key: string) => {
       this.deleteConfigById(value, configId);
       if (value.size === 0) this._configList.delete(key);
     });
+    this._configIdList.splice(this._configIdList.indexOf(id), 1);
   }
 
   public clearConfigs(): void {
     this._configList.clear();
+    this._configIdList.length = 0;
+  }
+
+  public hasRegisteredConfig(uuid: Uuid): boolean {
+    return this._configIdList.indexOf(uuid) !== -1;
   }
 
   public getRouteConfig(url: URL, method: string): RouteMockConfig | undefined {

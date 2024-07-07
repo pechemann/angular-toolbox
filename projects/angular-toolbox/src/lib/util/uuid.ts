@@ -64,6 +64,17 @@ export class Uuid implements Destroyable {
     public toString(): string {
         return this._uuid;
     }
+    
+    /**
+     * Compares the given `Uuid` instance with this `Uuid`.
+     * 
+     * @param uuid The `Uuid` instance to compare with this `Uuid`.
+     * 
+     * @returns `true` whether both `Uuid` instances are equal; `false` otherwise.
+     */
+    public equals(uuid: Uuid): boolean {
+        return this._uuid === uuid.toString();
+    }
 
     /**
      * Creates and returns a new `Uuid` instance.

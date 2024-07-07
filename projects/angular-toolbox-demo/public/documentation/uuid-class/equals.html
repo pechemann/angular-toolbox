@@ -20,23 +20,23 @@
 </nav>
 
 <header class="fs-5 col-xl-9 mb-4">
-    <h2 class="mb-3"><code>Uuid.validate()</code> Static Method</h2>
+    <h2 class="mb-3"><code>Uuid.equals()</code> Method</h2>
     <p>
-        The <code>Uuid.validate()</code> static method performs validation on the specified UUID string parameter.
+        The <code>Uuid.equals()</code> method compares the given <code>Uuid</code> instance with this <code>Uuid</code>.
     </p>
     <hr class="mt-4">
 </header>
 
 <section class="col-xl-9 mb-4">
     <h3>Signature</h3>
-    <pre><code class="language-typescript">static validate(uuid: string): boolean</code></pre>
+    <pre><code class="language-typescript">equals(uuid: Uuid): boolean</code></pre>
     <h5>Parameters</h5>
     <div class="border rounded p-3">
         <dl>
-            <dt><code>uuid: string</code></dt>
+            <dt><code>uuid: Uuid</code></dt>
             <dd>
                 <p>
-                    The UUID string on which to perform validation.
+                    The <code>Uuid</code> to compare with this <code>Uuid</code> instance.
                 </p>
             </dd>
         </dl>
@@ -45,14 +45,12 @@
     <div class="border rounded p-3">
         <code>boolean</code>
         <p>
-            <code>true</code> whether the <code>uuid</code> string parameter is valid; <code>false</code> otherwise.
-            <br>
-            See <a href="https://www.ietf.org/rfc/rfc4122.txt" title="RFC 4122">https://www.ietf.org/rfc/rfc4122.txt</a> for details.
+            <code>true</code> whether both <code>Uuid</code> instances are equal; <code>false</code> otherwise.
         </p>
     </div>
 </section>
 
 <!-- We use a data object to store navigation tree structure-->
 <object id="navigation-tree"
-        data-tree="[{ 'label': 'Uuid class', 'path': 'uuid-class' }, { 'label': 'Uuid.validate() static method' }]">
+        data-tree="[{ 'label': 'Uuid class', 'path': 'uuid-class' }, { 'label': 'Uuid.equals() method' }]">
 </object>
