@@ -6,7 +6,6 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { TestBed } from '@angular/core/testing';
 import { HttpResponseMockBuilder } from '../../../../../public-api';
 import { HttpHeaders, HttpStatusCode } from '@angular/common/http';
 
@@ -14,6 +13,7 @@ const BODY: string = 'Body test';
 const STATUS: number = HttpStatusCode.Accepted;
 const STATUS_TEXT: string = 'Status text test';
 const URL: string = '/test/url';
+const DELAY: number = 1500;
 const HEADERS: HttpHeaders = new HttpHeaders();
 const BODY_OBJ: any = { data: 'Body test' };
 
@@ -22,7 +22,6 @@ describe('HttpResponseMockBuilder', () => {
   let builder: HttpResponseMockBuilder;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
     builder = new HttpResponseMockBuilder();
   });
   
@@ -54,6 +53,10 @@ describe('HttpResponseMockBuilder', () => {
     expect(builder.response().statusText).toEqual("OK");
   });
 
+  it('response() method should create a HttpResponseMock with "delay" property set to "0"', () => {
+    expect(builder.delay().response().delay).toEqual(0);
+  });
+  
   it('body() method should set the "body" property of the response object', () => {
     expect(builder.body(BODY).response().body).toEqual(BODY);
   });
@@ -76,7 +79,6 @@ describe('HttpResponseMockBuilder', () => {
     builder.body(BODY_OBJ);
     expect(builder.response().body).toEqual(BODY_OBJ);
   });
-
 
   it('status() method should set the "status" property of the response object', () => {
     expect(builder.status(STATUS).response().status).toEqual(STATUS);
@@ -125,5 +127,17 @@ describe('HttpResponseMockBuilder', () => {
     expect(anotherHeaderSet).not.toEqual(HEADERS);
     builder.headers(anotherHeaderSet);
     expect(builder.response().headers).toEqual(anotherHeaderSet);
+  });
+  
+  it('delay() method should set the "delay" property of the response object', () => {
+    expect(builder.delay(DELAY).response().delay).toEqual(DELAY);
+  });
+  
+  it('delay() method should update the "delay" property of the response object', () => {
+    builder.delay(DELAY);
+    expect(builder.response().delay).toEqual(DELAY);
+    const anotherDelay: number = 2000;
+    builder.delay(anotherDelay);
+    expect(builder.response().delay).toEqual(anotherDelay);
   });
 });

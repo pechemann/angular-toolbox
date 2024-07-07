@@ -7,6 +7,7 @@
  */
 
 
+import { EMPTY_STRING } from "projects/angular-toolbox/src/public-api";
 import { HttpResponseMock } from "../../../../model";
 import { DataStorage } from "../core/data-storage";
 
@@ -27,7 +28,7 @@ export class DataStorageBuilder {
      */
     public static buildDataStorage(httpResponse: HttpResponseMock, data: any): DataStorage {
         // TODO: add support for different data types (string, Blob, etc.)
-        const stringifiedData: string = JSON.stringify(data);
+        const stringifiedData: string = data ? JSON.stringify(data) : EMPTY_STRING;
         return {
             httpResponse: httpResponse,
             loaded: 0,
