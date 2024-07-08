@@ -25,6 +25,17 @@ const MAX_TIMER: number = 10000;
 
 /**
  * @private
+ * Intenal "onreadystatechange" event.
+ */
+const READY_STATE_CHANGE_EVENT: Event = new Event("onreadystatechange");
+
+/**
+ * @private
+ */
+const EVT_PROPS_CONFIG: any =  { writable: false, value: this };
+
+/**
+ * @private
  * A utility class used as delegate of `XMLHttpRequest` functionalities when
  * a HTTP request is intercepted by the Mocking Framework .
  */
@@ -208,7 +219,7 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
      *          if no response has been received.
      */
     getAllResponseHeaders(): string {
-        return HttpHeadersUtil.stringify(this._dataStorage.httpResponse.headers);
+        return this._dataStorage ? HttpHeadersUtil.stringify(this._headers) : EMPTY_STRING;
     }
 
     /**
@@ -230,9 +241,13 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
                 if (error) return this.onError(error);
                 this.setReadyState(this.LOADING);
                 const response: HttpResponseMock = this._dataStorage.httpResponse;
-                const headers: HttpHeaders | undefined = response.headers;
-                this._headers = headers || new HttpHeaders();
-        
+                let headers: any = response.headers;
+                if (headers) {
+                    this._headers.keys().forEach((key: string)=> {
+                        headers = headers.set(key, this._headers.get(key) as any)
+                    });
+                    this._headers = headers;
+                }
                 if (!this._progressiveDownload) {
                     this._statusText = response.statusText || EMPTY_STRING;
                     this._status = response.status || 0;
@@ -250,7 +265,7 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
      * @param value The value to set as the body of the header.
      */
     setRequestHeader(name: string, value: string): void {
-        this._headers.append(name, value);
+        this._headers = this._headers.set(name, value);
     }
 
     /**
@@ -262,10 +277,11 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
         this._routeConfig = routeConfig;
         this._progressiveDownload = methodConfig.progressive || false;
         this.responseType = methodConfig.responseType || "";
-        this._headers = HttpHeadersUtil.createDefaultRequestHeaders();
+        this._headers = new HttpHeaders();
     }
     
     /**
+     * @private 
      * Internally used by the framework to delete a `DelegateXhr` instance.
      */
     public destroy(): void {
@@ -330,8 +346,8 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
      */
     private eventDispatch(type: string): void {
         const event: Event = new Event(type);
-        Object.defineProperty(event, 'target', {writable: false, value: this});
-        Object.defineProperty(event, 'currentTarget', {writable: false, value: this});
+        Object.defineProperty(event, 'target', EVT_PROPS_CONFIG);
+        Object.defineProperty(event, 'currentTarget', EVT_PROPS_CONFIG);
         this.dispatchEvent(event);
     }
 
@@ -351,6 +367,8 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
      */
     private setReadyState(state: number): void {
         this._readyState = state;
+        const event: any = this.onreadystatechange;
+        if (event) event.call(this, READY_STATE_CHANGE_EVENT);
     }
 
     /**

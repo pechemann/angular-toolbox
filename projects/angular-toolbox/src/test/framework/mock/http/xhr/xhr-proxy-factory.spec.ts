@@ -14,8 +14,8 @@ import { httpMockFactory } from '../../../../../lib/framework/mock/http/xhr/http
 describe('XhrProxyFactory', () => {
   let factory: XhrFactory;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       providers: [
         HttpMockService,
         { provide: XhrFactory, useFactory: httpMockFactory }
