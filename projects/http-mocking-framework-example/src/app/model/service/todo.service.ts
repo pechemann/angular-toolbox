@@ -7,7 +7,7 @@
  */
 
 import { Injectable } from '@angular/core';
-import { TodoDao } from './dao/todo.dao';
+import { TodoDas } from './das/todo.das';
 import { Observable } from 'rxjs';
 import { Todo } from '../business/todo';
 import { UserService } from './user.service';
@@ -17,31 +17,31 @@ import { UserService } from './user.service';
 })
 export class TodoService {
 
-  constructor(private todoDao: TodoDao,
+  constructor(private todoDas: TodoDas,
               private userService: UserService) { }
 
   public getTodoList(): Observable<Todo[]> {
     const currentuserid: number = this.userService.getUserId();
-    return this.todoDao.getAll(currentuserid);
+    return this.todoDas.getAll(currentuserid);
   }
 
   public deleteTodoList(): Observable<Todo[]> {
     const currentuserid: number = this.userService.getUserId();
-    return this.todoDao.deleteAll(currentuserid);
+    return this.todoDas.deleteAll(currentuserid);
   }
 
   public createTodo(title: string): Observable<Todo> {
     const currentuserid: number = this.userService.getUserId();
-    return this.todoDao.create(currentuserid, title);
+    return this.todoDas.create(currentuserid, title);
   }
 
   public deleteTodo(todo: Todo): Observable<number> {
     const currentuserid: number = this.userService.getUserId();
-    return this.todoDao.delete(currentuserid, todo.id);
+    return this.todoDas.delete(currentuserid, todo.id);
   }
   
   public updateTodo(todo: Todo): Observable<void> {
     const currentuserid: number = this.userService.getUserId();
-    return this.todoDao.update(currentuserid, todo);
+    return this.todoDas.update(currentuserid, todo);
   }
 }

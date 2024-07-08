@@ -20,7 +20,7 @@ const API_PATH: string = "https://my-awsome-company.com/todos/";
 @Injectable({
   providedIn: "root"
 })
-export class TodoDao {
+export class TodoDas {
 
   constructor(private http: HttpClient,
               private loggerService: LogerService) { }
