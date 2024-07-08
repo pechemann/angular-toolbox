@@ -13,7 +13,8 @@
         { "label": "AppBridgeService", "urlTree": [ "/resources", "documentation", "app-bridge-service" ] },
         { "label": "Uuid Class", "urlTree": [ "/resources", "documentation", "uuid-class" ] },
         { "label": "Identifiable Interface", "urlTree": [ "/resources", "documentation", "identifiable-interface" ] },
-        { "label": "Destroyable Interface", "urlTree": [ "/resources", "documentation", "destroyable-interface" ] }
+        { "label": "Destroyable Interface", "urlTree": [ "/resources", "documentation", "destroyable-interface" ] },
+        { "label": "Global Constants", "urlTree": [ "/resources", "documentation", "global-constants" ] }
     ],
     "articles": [
         { "label": "Angular Toolbox Principles" }
