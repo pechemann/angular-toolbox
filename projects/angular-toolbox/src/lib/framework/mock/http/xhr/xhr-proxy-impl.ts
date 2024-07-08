@@ -124,7 +124,6 @@ export class XhrProxyImpl extends XhrBase implements XhrProxy {
         const m: string = (method as string).toString().toLowerCase();
         const parsedUrl: URL = URL.canParse(url as string) ? new URL(url as string) : new URL(this._httpMockService.getAppOrigin() + url);
         const config: RouteMockConfig | undefined = this._httpMockService.getRouteConfig(parsedUrl, m as HTTPMethodRef);
-        console.log(parsedUrl.origin)
         if (this.XHR && this.XHR instanceof DelegateXhr) this.XHR.destroy();
         this.XHR = config ? new DelegateXhr(config) : new XMLHttpRequest();
         this.XHR.withCredentials = this.withCredentials;
