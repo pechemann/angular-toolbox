@@ -14,10 +14,7 @@
  * https://github.com/benlesh/event-target-polyfill/blob/master/LICENSE
  */
 
-/**
- * @private
- */
-const FUNCTION_TYPE: string = "function";
+import { FUNCTION } from "../../../../util";
 
 /**
  * @private
@@ -115,9 +112,9 @@ export class EventTargetImpl implements EventTarget {
             const listener: any = listnerEntry[0];
             const options: any = listnerEntry[1];
             // Listener functions must be executed with the EventTarget as the `this` context.
-            if (typeof listener === FUNCTION_TYPE) listener.call(this, event);
+            if (typeof listener === FUNCTION) listener.call(this, event);
             // Listener objects have their handleEvent method called, if they have one
-            else if (listener && typeof listener.handleEvent === FUNCTION_TYPE) listener.handleEvent(event);
+            else if (listener && typeof listener.handleEvent === FUNCTION) listener.handleEvent(event);
             if (options && options.once) listenersForType.delete(listener);
         }
         return true;

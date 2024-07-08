@@ -14,7 +14,7 @@
  * https://github.com/pillarjs/path-to-regexp/blob/master/LICENSE
  */
 
-import { EMPTY_STRING } from "../../../../util";
+import { EMPTY_STRING, STRING } from "../../../../util";
 import { CARRET, DOLLAR } from "./constants";
 import { Encode } from "./model/encode";
 import { escapeRegexpString } from "./escape-to-regexp-string";
@@ -42,8 +42,8 @@ export const tokenDataToRegexp: TokenDataRegExpFactory = (data: TokenData, keys:
   const keyToRegexp: DecodeKeyToString = toKeyRegexp(stringify, data.delimiter);
   let pattern: string = start ? CARRET : EMPTY_STRING;
   
-  for (const token of data.tokens) {
-    if (typeof token === "string") {
+  for (const token of data.tokens as any) {
+    if (typeof token === STRING) {
       pattern += stringify(token);
     } else {
       if (token.name) keys.push(token);
