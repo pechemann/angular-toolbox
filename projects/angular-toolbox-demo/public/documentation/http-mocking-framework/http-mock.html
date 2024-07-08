@@ -60,13 +60,13 @@
         <pre><code class="language-typescript">const TODO_COLLECTION: Todo[] = [ ... ];
 
 export const TODOS_MOCK_CONFIG: HttpMockConfig = &#123;
-  origin: "http://my-awsome-company.com/api",
+  origin: "http://my-awsome-company.com",
   interceptors: [
     &#123;
       id: "todos",
       endpoints: [
         &#123;
-          route: "/todos",
+          route: "/api/todos",
           get: &#123;
             data: (req: HttpRequest&lt;any&gt;, params: any) =&gt;
                    httpResponseMock().body(TODO_COLLECTION).response()

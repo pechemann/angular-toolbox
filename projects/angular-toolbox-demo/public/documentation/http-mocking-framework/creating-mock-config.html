@@ -88,13 +88,13 @@
         <pre><code class="language-typescript">import &#123; HttpMockConfig, httpResponseMock &#125; from 'angular-toolbox';
 
 export const config: HttpMockConfig = &#123;
-  origin: "http://my-awsome-company.com/api",
+  origin: "http://my-awsome-company.com",
   interceptors: [
     &#123;
       id: "sayHello",
       endpoints: [
         &#123;
-          route: "/sayHello/:name",
+          route: "/api/sayHello/:name",
           get: &#123;
             data: (req: HttpRequest&lt;any&gt;, params: any) =&gt;
                    httpResponseMock().body(`Hello $&#123;params.name&#125;!`).response()

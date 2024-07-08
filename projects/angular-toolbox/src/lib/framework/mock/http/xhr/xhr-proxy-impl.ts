@@ -124,6 +124,7 @@ export class XhrProxyImpl extends XhrBase implements XhrProxy {
         const m: string = (method as string).toString().toLowerCase();
         const parsedUrl: URL = URL.canParse(url as string) ? new URL(url as string) : new URL(this._httpMockService.getAppOrigin() + url);
         const config: RouteMockConfig | undefined = this._httpMockService.getRouteConfig(parsedUrl, m as HTTPMethodRef);
+        console.log(parsedUrl.origin)
         if (this.XHR && this.XHR instanceof DelegateXhr) this.XHR.destroy();
         this.XHR = config ? new DelegateXhr(config) : new XMLHttpRequest();
         this.XHR.withCredentials = this.withCredentials;
@@ -136,7 +137,7 @@ export class XhrProxyImpl extends XhrBase implements XhrProxy {
      * XMLHTTPRequest API
      */
     abort(): void {
-        if (this.XHR) this.XHR.abort();
+        if (this.XHR) return this.XHR.abort();
         XHR_ERROR("abort");
     }
 
@@ -176,7 +177,7 @@ export class XhrProxyImpl extends XhrBase implements XhrProxy {
      */
     send(body?: Document | XMLHttpRequestBodyInit | null | undefined): void {
         if (this.XHR) return this.XHR.send(body);
-        XHR_ERROR("removeEventListener");
+        XHR_ERROR("send");
     }
 
     /**
@@ -186,7 +187,16 @@ export class XhrProxyImpl extends XhrBase implements XhrProxy {
      */
     setRequestHeader(name: string, value: string): void {
         if (this.XHR) return this.XHR.setRequestHeader(name, value);
-        XHR_ERROR("removeEventListener");
+        XHR_ERROR("setRequestHeader");
+    }
+
+    /**
+     * @private
+     * 
+     * For Unit Testing only.
+     */
+    public instanceOf(classRef: any): boolean {
+        return this.XHR instanceof classRef;
     }
 
     /**

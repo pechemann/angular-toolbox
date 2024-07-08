@@ -26,27 +26,27 @@ describe('DelegateXhr', () => {
         expect(xhr).toBeTruthy();
     });
 
-    it('should response be null by default', () => {
+    it('response should be null by default', () => {
         expect(xhr.response).toBeNull();
     });
 
-    it('should status be 0 by default', () => {
+    it('status should be 0 by default', () => {
         expect(xhr.status).toEqual(0);
     });
 
-    it('should statusText be an empty string by default', () => {
+    it('statusText should be an empty string by default', () => {
         expect(xhr.statusText).toEqual(EMPTY_STRING);
     });
 
-    it('should readyState be UNSENT by default', () => {
+    it('readyState should be UNSENT by default', () => {
         expect(xhr.readyState).toEqual(xhr.UNSENT);
     });
 
-    it('should responseURL be undefined by default', () => {
+    it('responseURL should be undefined by default', () => {
         expect(xhr.responseURL).toBeUndefined();
     });
 
-    it('should responseText be an empty string by default', () => {
+    it('responseText should be an empty string by default', () => {
         expect(xhr.responseText).toEqual(EMPTY_STRING);
     });
 

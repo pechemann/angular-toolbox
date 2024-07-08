@@ -9,7 +9,7 @@
 import { HttpHeaders, HttpStatusCode } from '@angular/common/http';
 import { RouteMockConfig } from 'projects/angular-toolbox/src/lib/framework/mock/http/config/route-mock-config';
 import { HttpHeadersUtil } from 'projects/angular-toolbox/src/lib/framework/mock/http/util/http-headers.util';
-import { HttpMockError, httpResponseMock } from 'projects/angular-toolbox/src/public-api';
+import { HttpMockConfig, HttpMockError, httpResponseMock, Uuid } from 'projects/angular-toolbox/src/public-api';
 
 export const BODY: string = "Hello world!";
 export const BODY_SIZE = new Blob([JSON.stringify(BODY)]).size;
@@ -44,4 +44,22 @@ export const ROUTE_CONFIG_WITH_ERROR: RouteMockConfig = {
                                       .body(BODY).response(ERROR)
     },
     parameters: { id: "10" }
+};
+
+export const FOO_MOCK_CONFIG: HttpMockConfig = {
+  id: Uuid.build(),
+  origin: "http://www.foo-bar.com",
+  interceptors: [
+    {
+      id: "users",
+      endpoints: [
+        {
+          route: "/api/users/:id",
+          get: {
+            data: () => httpResponseMock().body(BODY).response()
+          }
+        }
+      ]
+    }
+  ]
 };
