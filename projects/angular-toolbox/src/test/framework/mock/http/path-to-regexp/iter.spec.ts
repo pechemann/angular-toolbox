@@ -14,7 +14,7 @@ import { ASTERISK, END, PLUS, QUESTION_MARK } from "../../../../../lib/framework
 
 describe('Iter', () => {
 
-    const tokens: LexToken[] = (TEST_SET.find(set => set.path === "/test/:id(\\d+)") as any).tokens;
+    const tokens: LexToken[] = (TEST_SET.find(set => set.path === "/test/:id(\\d+)") as any).lexTokenList;
     let iter: Iter;
 
     beforeEach(()=> {

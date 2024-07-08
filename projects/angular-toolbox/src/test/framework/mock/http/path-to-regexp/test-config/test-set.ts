@@ -19,13 +19,15 @@ import { EMPTY_STRING } from "../../../../../../lib/util";
 import { LexToken } from "../../../../../../lib/framework/mock/http/path-to-regexp/model/lex-token";
 import { ASTERISK, DEFAULT_DELIMITER, LEFT_CURLY_BRACE, PATTERN, PLUS, RIGHT_CURLY_BRACE } from "../../../../../../lib/framework/mock/http/path-to-regexp/constants";
 import { CHAR, END, NAME, QUESTION_MARK } from "../../../../../../lib/framework/mock/http/path-to-regexp/constants";
+import { Token } from "projects/angular-toolbox/src/lib/framework/mock/http/path-to-regexp/model/token";
 
 export type ParamData = Partial<Record<string, string | string[]>>;
 
 export interface TestSet {
     path: string;
     keys: Key[];
-    tokens: LexToken[];
+    lexTokenList: LexToken[];
+    tokenList: Token[],
     parametricTests?: Array<{
         input: ParamData | undefined;
         expected: string | null;
@@ -34,13 +36,16 @@ export interface TestSet {
 
 export const TEST_SET: TestSet[] = [
     {
-        path:DEFAULT_DELIMITER,
+        path: DEFAULT_DELIMITER,
         keys: [
-            { name:DEFAULT_DELIMITER, prefix: EMPTY_STRING, suffix: EMPTY_STRING, pattern: EMPTY_STRING, modifier: EMPTY_STRING },
+            { name: DEFAULT_DELIMITER, prefix: EMPTY_STRING, suffix: EMPTY_STRING, pattern: EMPTY_STRING, modifier: EMPTY_STRING },
         ],
-        tokens: [
+        lexTokenList: [
             { type: CHAR, index: 0, value: DEFAULT_DELIMITER },
             { type: END, index: 1, value: EMPTY_STRING }
+        ],
+        tokenList: [
+            DEFAULT_DELIMITER
         ]
     },
     {
@@ -48,10 +53,14 @@ export const TEST_SET: TestSet[] = [
         keys: [
             { name: "test", prefix: DEFAULT_DELIMITER, suffix: EMPTY_STRING, pattern: EMPTY_STRING, modifier: EMPTY_STRING },
         ],
-        tokens: [
+        lexTokenList: [
             { type: CHAR, index: 0, value: DEFAULT_DELIMITER },
             { type: NAME, index: 6, value: 'test' },
             { type: END, index: 6, value: EMPTY_STRING }
+        ],
+        tokenList: [
+            DEFAULT_DELIMITER,
+            { name: "test" }
         ]
     },
     {
@@ -59,23 +68,33 @@ export const TEST_SET: TestSet[] = [
         keys: [
             //{ name: "test", prefix: DEFAULT_DELIMITER, suffix: EMPTY_STRING, pattern: EMPTY_STRING, modifier: EMPTY_STRING },
         ],
-        tokens: [
+        lexTokenList: [
             { type: CHAR, index: 0, value: DEFAULT_DELIMITER },
             { type: NAME, index: 6, value: 'test' },
             { type: CHAR, index: 6, value: DEFAULT_DELIMITER },
             { type: END, index: 7, value: EMPTY_STRING }
+        ],
+        tokenList: [
+            DEFAULT_DELIMITER,
+            { name: "test", pattern: undefined },
+            DEFAULT_DELIMITER
         ]
     },
     {
-        path: "/:test?",
+        path: "/:test{/:bar}?",
         keys: [
 
         ],
-        tokens: [
+        lexTokenList: [
             { type: CHAR, index: 0, value: DEFAULT_DELIMITER },
             { type: NAME, index: 6, value: 'test' },
             { type: QUESTION_MARK, index: 6, value: QUESTION_MARK },
             { type: END, index: 7, value: EMPTY_STRING }
+        ],
+        tokenList: [
+            DEFAULT_DELIMITER,
+            { name: "test" },
+            { name: "bar", prefix: DEFAULT_DELIMITER, suffix: EMPTY_STRING, modifier: QUESTION_MARK, separator: DEFAULT_DELIMITER }
         ]
     },
     {
@@ -83,23 +102,33 @@ export const TEST_SET: TestSet[] = [
         keys: [
 
         ],
-        tokens: [
+        lexTokenList: [
             { type: CHAR, index: 0, value: DEFAULT_DELIMITER },
             { type: NAME, index: 6, value: 'test' },
             { type: PATTERN, index: 10, value: '.*' },
             { type: END, index: 10, value: EMPTY_STRING }
+        ],
+        tokenList: [
+            DEFAULT_DELIMITER,
+            { name: "test", pattern: ".*" }
         ]
     },
     {
-        path: "/:test*",
+        path: "/:test/*",
         keys: [
 
         ],
-        tokens: [
+        lexTokenList: [
             { type: CHAR, index: 0, value: DEFAULT_DELIMITER },
             { type: NAME, index: 6, value: 'test' },
             { type: ASTERISK, index: 6, value: ASTERISK },
             { type: END, index: 7, value: EMPTY_STRING }
+        ],
+        tokenList: [
+            DEFAULT_DELIMITER,
+            { name: "test", pattern: undefined },
+            DEFAULT_DELIMITER,
+            { name: "0", pattern: "[^/]*", modifier: "*", separator: "/" }
         ]
     },
     {
@@ -107,13 +136,16 @@ export const TEST_SET: TestSet[] = [
         keys: [
 
         ],
-        tokens: [
+        lexTokenList: [
             { type: LEFT_CURLY_BRACE, index: 0, value: LEFT_CURLY_BRACE },
             { type: CHAR, index: 1, value: DEFAULT_DELIMITER },
             { type: NAME, index: 10, value: "segment" },
             { type: RIGHT_CURLY_BRACE, index: 10, value: RIGHT_CURLY_BRACE },
             { type: PLUS, index: 11, value: PLUS },
             { type: END, index: 12, value: EMPTY_STRING }
+        ],
+        tokenList: [
+            { name: "segment", prefix: DEFAULT_DELIMITER, suffix: EMPTY_STRING, pattern: undefined, modifier: PLUS, separator: DEFAULT_DELIMITER }
         ]
     },
     {
@@ -121,7 +153,7 @@ export const TEST_SET: TestSet[] = [
         keys: [
 
         ],
-        tokens: [
+        lexTokenList: [
             { type: CHAR, index: 0, value: DEFAULT_DELIMITER },
             { type: CHAR, index: 1, value: 't' },
             { type: CHAR, index: 2, value: 'e' },
@@ -131,6 +163,10 @@ export const TEST_SET: TestSet[] = [
             { type: NAME, index: 9, value: 'id' },
             { type: PATTERN, index: 14, value: '\\d+' },
             { type: END, index: 14, value: EMPTY_STRING }
+        ],
+        tokenList: [
+            "/test/",
+            { name: "id", pattern: "\\d+" }
         ]
     },
     {
@@ -138,10 +174,14 @@ export const TEST_SET: TestSet[] = [
         keys: [
             { name: "0", prefix: DEFAULT_DELIMITER, suffix: EMPTY_STRING, pattern: EMPTY_STRING, modifier: EMPTY_STRING },
         ],
-        tokens: [
+        lexTokenList: [
             { type: CHAR, index: 0, value: DEFAULT_DELIMITER },
             { type: NAME, index: 3, value: '0' },
             { type: END, index: 3, value: EMPTY_STRING }
+        ],
+        tokenList: [
+            DEFAULT_DELIMITER,
+            { name: "0", pattern: undefined }
         ]
     },
     {
@@ -149,10 +189,14 @@ export const TEST_SET: TestSet[] = [
         keys: [
             { name: "_", prefix: DEFAULT_DELIMITER, suffix: EMPTY_STRING, pattern: EMPTY_STRING, modifier: EMPTY_STRING },
         ],
-        tokens: [
+        lexTokenList: [
             { type: CHAR, index: 0, value: DEFAULT_DELIMITER },
             { type: NAME, index: 3, value: '_' },
             { type: END, index: 3, value: EMPTY_STRING }
+        ],
+        tokenList: [
+            DEFAULT_DELIMITER,
+            { name: "_", pattern: undefined }
         ]
     },
     {
@@ -160,10 +204,14 @@ export const TEST_SET: TestSet[] = [
         keys: [
             { name: "café", prefix: DEFAULT_DELIMITER, suffix: EMPTY_STRING, pattern: EMPTY_STRING, modifier: EMPTY_STRING },
         ],
-        tokens: [
+        lexTokenList: [
             { type: CHAR, index: 0, value: DEFAULT_DELIMITER },
             { type: NAME, index: 6, value: 'café' },
             { type: END, index: 6, value: EMPTY_STRING }
+        ],
+        tokenList: [
+            DEFAULT_DELIMITER,
+            { name: "café", pattern: undefined }
         ]
     }
 ];
