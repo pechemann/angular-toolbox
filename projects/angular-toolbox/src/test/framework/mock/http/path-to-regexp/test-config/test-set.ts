@@ -26,6 +26,7 @@ export type ParamData = Partial<Record<string, string | string[]>>;
 export interface TestItem {
     expected: any;
     description?: string;
+    input?: any;
 }
 
 export interface TestSet {
@@ -33,10 +34,7 @@ export interface TestSet {
     keys: Key[];
     lexTokenList: LexToken[];
     tokenList: Token[],
-    parametricTests?: Array<{
-        input: ParamData | undefined;
-        expected: string | null;
-    }>;
+    integrationTestList?: TestItem[];
     keyRegexpList?: TestItem[];
     regexpSource: TestItem;
 }
@@ -56,7 +54,11 @@ export const TEST_SET: TestSet[] = [
             DEFAULT_DELIMITER
         ],
         keys: [],
-        regexpSource: { expected: "^\\/+(?:\\/+)?$" }
+        regexpSource: { expected: "^\\/+(?:\\/+)?$" },
+        integrationTestList: [
+            { input: DEFAULT_DELIMITER, expected: true },
+            { input: "/foo", expected: false }
+        ]
     },
     {
         path: "/:test",
@@ -75,7 +77,14 @@ export const TEST_SET: TestSet[] = [
         keyRegexpList: [
             { expected: "(?:([^\\/]+?))", description: "name only <test>"}
         ],
-        regexpSource: { expected: "^\\/+(?:([^\\/]+?))(?:\\/+)?$" }
+        regexpSource: { expected: "^\\/+(?:([^\\/]+?))(?:\\/+)?$" },
+        integrationTestList: [
+            { input: DEFAULT_DELIMITER, expected: false },
+            { input: "/foo", expected: true },
+            { input: "/573", expected: true },
+            { input: "/foo/", expected: true },
+            { input: "/foo/bar", expected: false }
+        ]
     },
     {
         path: "/:test/",
@@ -96,7 +105,14 @@ export const TEST_SET: TestSet[] = [
         keyRegexpList: [
             { expected: "(?:([^\\/]+?))", description: "name only <test>"}
         ],
-        regexpSource: { expected: "^\\/+(?:([^\\/]+?))\\/+(?:\\/+)?$" }
+        regexpSource: { expected: "^\\/+(?:([^\\/]+?))\\/+(?:\\/+)?$" },
+        integrationTestList: [
+            { input: DEFAULT_DELIMITER, expected: false },
+            { input: "/foo", expected: false },
+            { input: "/foo/", expected: true },
+            { input: "/14/", expected: true },
+            { input: "/foo/bar", expected: false }
+        ]
     },
     {
         path: "/:test{/:bar}?",
@@ -119,7 +135,16 @@ export const TEST_SET: TestSet[] = [
             { expected: "(?:([^\\/]+?))", description: "name only <test>"},
             { expected: "(?:\\/+([^\\/]+?))?", description: "name <bar> with prefix </>, suffix <>, modifier <?> and separator </>"}
         ],
-        regexpSource: { expected: "^\\/+(?:([^\\/]+?))(?:\\/+([^\\/]+?))?(?:\\/+)?$" }
+        regexpSource: { expected: "^\\/+(?:([^\\/]+?))(?:\\/+([^\\/]+?))?(?:\\/+)?$" },
+        integrationTestList: [
+            { input: DEFAULT_DELIMITER, expected: false },
+            { input: "/foo", expected: true },
+            { input: "/37", expected: true },
+            { input: "/foo/bar", expected: true },
+            { input: "/foo/bar/", expected: true },
+            { input: "/56/215", expected: true },
+            { input: "/foo/bar/test", expected: false }
+        ]
     },
     {
         path: "/:test(.*)",
@@ -139,7 +164,15 @@ export const TEST_SET: TestSet[] = [
         keyRegexpList: [
             { expected: "(?:(.*))", description: "name <test> with pattern <[.*]>"}
         ],
-        regexpSource: { expected: "^\\/+(?:(.*))(?:\\/+)?$" }
+        regexpSource: { expected: "^\\/+(?:(.*))(?:\\/+)?$" },
+        integrationTestList: [
+            { input: DEFAULT_DELIMITER, expected: true },
+            { input: "/foo", expected: true },
+            { input: "/foo/", expected: true },
+            { input: "/foo/bar", expected: true },
+            { input: "/128", expected: true },
+            { input: "/128\ntest", expected: false }
+        ]
     },
     {
         path: "/:test/*",
@@ -163,7 +196,16 @@ export const TEST_SET: TestSet[] = [
             { expected: "(?:([^\\/]+?))", description: "name only <test>"},
             { expected: "(?:((?:[^/]*)(?:\\/+(?:[^/]*))*))?", description: "name <0> with pattern <[^/]*>, modifier <*> and separator </>"},
         ],
-        regexpSource: { expected: "^\\/+(?:([^\\/]+?))\\/+(?:((?:[^/]*)(?:\\/+(?:[^/]*))*))?(?:\\/+)?$" }
+        regexpSource: { expected: "^\\/+(?:([^\\/]+?))\\/+(?:((?:[^/]*)(?:\\/+(?:[^/]*))*))?(?:\\/+)?$" },
+        integrationTestList: [
+            { input: DEFAULT_DELIMITER, expected: false },
+            { input: "/foo", expected: false },
+            { input: "/foo/", expected: true },
+            { input: "/foo/bar", expected: true },
+            { input: "/128", expected: false },
+            { input: "/128/foo", expected: true },
+            { input: "/128\ntest", expected: false }
+        ]
     },
     {
         path: "{/:segment}+",
@@ -184,7 +226,15 @@ export const TEST_SET: TestSet[] = [
         keyRegexpList: [
             { expected: "(?:\\/+((?:[^\\/]+?)(?:\\/+(?:[^\\/]+?))*))", description: "name <segment> with prefix </>, suffix <>, pattern <undefined>, modifier<+> and separator</>"}
         ],
-        regexpSource: { expected: "^(?:\\/+((?:[^\\/]+?)(?:\\/+(?:[^\\/]+?))*))(?:\\/+)?$" }
+        regexpSource: { expected: "^(?:\\/+((?:[^\\/]+?)(?:\\/+(?:[^\\/]+?))*))(?:\\/+)?$" },
+        integrationTestList: [
+            { input: DEFAULT_DELIMITER, expected: false },
+            { input: "/foo", expected: true },
+            { input: "/573", expected: true },
+            { input: "/foo/bar", expected: true },
+            { input: "/test/15", expected: true },
+            { input: "/test/15/bar", expected: true }
+        ]
     },
     {
         path: "/test/:id(\\d+)",
@@ -209,7 +259,20 @@ export const TEST_SET: TestSet[] = [
         keyRegexpList: [
             { expected: "(?:(\\\d+))", description: "name <id> with pattern <\d+>"}
         ],
-        regexpSource: { expected: "^\\/+test\\/+(?:(\\d+))(?:\\/+)?$" }
+        regexpSource: { expected: "^\\/+test\\/+(?:(\\d+))(?:\\/+)?$" },
+        integrationTestList: [
+            { input: DEFAULT_DELIMITER, expected: false },
+            { input: "/foo", expected: false },
+            { input: "/573", expected: false },
+            { input: "/test", expected: false },
+            { input: "/foo/bar", expected: false },
+            { input: "/test/", expected: false },
+            { input: "/test/foo", expected: false },
+            { input: "/test/15", expected: true },
+            { input: "/test/15/", expected: true },
+            { input: "/test/15/foo", expected: false },
+            { input: "/test/15/37", expected: false }
+        ]
     },
     {
         path: "/:0",
@@ -228,7 +291,14 @@ export const TEST_SET: TestSet[] = [
         keyRegexpList: [
             { expected: "(?:([^\\/]+?))", description: "name only <0>"}
         ],
-        regexpSource: { expected: "^\\/+(?:([^\\/]+?))(?:\\/+)?$" }
+        regexpSource: { expected: "^\\/+(?:([^\\/]+?))(?:\\/+)?$" },
+        integrationTestList: [
+            { input: DEFAULT_DELIMITER, expected: false },
+            { input: "/foo", expected: true },
+            { input: "/573", expected: true },
+            { input: "/foo/", expected: true },
+            { input: "/foo/bar", expected: false }
+        ]
     },
     {
         path: "/:_",
@@ -247,7 +317,14 @@ export const TEST_SET: TestSet[] = [
         keyRegexpList: [
             { expected: "(?:([^\\/]+?))", description: "name only <_>"}
         ],
-        regexpSource: { expected: "^\\/+(?:([^\\/]+?))(?:\\/+)?$" }
+        regexpSource: { expected: "^\\/+(?:([^\\/]+?))(?:\\/+)?$" },
+        integrationTestList: [
+            { input: DEFAULT_DELIMITER, expected: false },
+            { input: "/foo", expected: true },
+            { input: "/573", expected: true },
+            { input: "/foo/", expected: true },
+            { input: "/foo/bar", expected: false }
+        ]
     },
     {
         path: "/:café",
@@ -266,129 +343,13 @@ export const TEST_SET: TestSet[] = [
         keyRegexpList: [
             { expected: "(?:([^\\/]+?))", description: "name only <café>"}
         ],
-        regexpSource: { expected: "^\\/+(?:([^\\/]+?))(?:\\/+)?$" }
+        regexpSource: { expected: "^\\/+(?:([^\\/]+?))(?:\\/+)?$" },
+        integrationTestList: [
+            { input: DEFAULT_DELIMITER, expected: false },
+            { input: "/brésil", expected: true },
+            { input: "/brésil/", expected: true },
+            { input: "/14-brésil/", expected: true },
+            { input: "/brésil/14", expected: false }
+        ]
     }
 ];
-
-/*export const TEST_SET: TestSet[] = [
-    {
-        path:DEFAULT_DELIMITER,
-        tests: [
-            { input: undefined, expected:DEFAULT_DELIMITER },
-            { input: {}, expected:DEFAULT_DELIMITER },
-            { input: { id: "123" }, expected:DEFAULT_DELIMITER },
-        ],
-    },
-    {
-        path: "/test",
-        tests: [
-            { input: undefined, expected: "/test" },
-            { input: {}, expected: "/test" },
-            { input: { id: "123" }, expected: "/test" },
-        ],
-    },
-    {
-        path: "/test/",
-        tests: [
-            { input: undefined, expected: "/test/" },
-            { input: {}, expected: "/test/" },
-            { input: { id: "123" }, expected: "/test/" },
-        ],
-    },
-    {
-        path: "/:0",
-        tests: [
-            { input: undefined, expected: null },
-            { input: {}, expected: null },
-            { input: { 0: "123" }, expected: "/123" },
-        ],
-    },
-    {
-        path: "/:test",
-        tests: [
-            { input: undefined, expected: null },
-            { input: {}, expected: null },
-            { input: { test: "123" }, expected: "/123" },
-            { input: { test: "123/xyz" }, expected: "/123%2Fxyz" },
-        ],
-    },
-    {
-        path: "/:test",
-        tests: [
-            { input: undefined, expected: null },
-            { input: {}, expected: null },
-            { input: { test: "123" }, expected: "/123" },
-            { input: { test: "123/xyz" }, expected: "/123%2Fxyz" },
-        ],
-    },
-    {
-        path: "/:test",
-        tests: [
-            { input: undefined, expected: null },
-            { input: {}, expected: null },
-            { input: { test: "123" }, expected: "/123" },
-            { input: { test: "123/xyz" }, expected: "/123/xyz" },
-        ],
-    },
-    {
-        path: "/:test",
-        tests: [
-            { input: undefined, expected: null },
-            { input: {}, expected: null },
-            { input: { test: "123" }, expected: "/123" },
-            { input: { test: "123/xyz" }, expected: "/123%2Fxyz" },
-        ],
-    },
-    {
-        path: "/:test",
-        tests: [
-            { input: undefined, expected: null },
-            { input: {}, expected: null },
-            { input: { test: "123" }, expected: "/static" },
-            { input: { test: "123/xyz" }, expected: "/static" },
-        ],
-    },
-    {
-        path: "/:test?",
-        tests: [
-            { input: undefined, expected: EMPTY_STRING },
-            { input: {}, expected: EMPTY_STRING },
-            { input: { test: undefined }, expected: EMPTY_STRING },
-            { input: { test: "123" }, expected: "/123" },
-            { input: { test: "123/xyz" }, expected: null },
-        ],
-    },
-    {
-        path: "/:test(.*)",
-        tests: [
-            { input: undefined, expected: null },
-            { input: {}, expected: null },
-            { input: { test: EMPTY_STRING }, expected:DEFAULT_DELIMITER },
-            { input: { test: "123" }, expected: "/123" },
-            { input: { test: "123/xyz" }, expected: "/123/xyz" },
-        ],
-    },
-    {
-        path: "/:test*",
-        tests: [
-            { input: undefined, expected: EMPTY_STRING },
-            { input: {}, expected: EMPTY_STRING },
-            { input: { test: [] }, expected: EMPTY_STRING },
-            { input: { test: [EMPTY_STRING] }, expected: null },
-            { input: { test: ["123"] }, expected: "/123" },
-            { input: { test: "123/xyz" }, expected: null },
-            { input: { test: ["123", "xyz"] }, expected: "/123/xyz" },
-        ],
-    },
-    {
-        path: "/:test*",
-        tests: [
-            { input: undefined, expected: EMPTY_STRING },
-            { input: {}, expected: EMPTY_STRING },
-            { input: { test: EMPTY_STRING }, expected: null },
-            { input: { test: "123" }, expected: "/123" },
-            { input: { test: "123/xyz" }, expected: "/123/xyz" },
-            { input: { test: ["123", "xyz"] }, expected: null },
-        ],
-    },
-];*/
