@@ -16,11 +16,11 @@ import { ASTERISK } from "projects/angular-toolbox/src/lib/framework/mock/http/p
 describe('stringToTokenData', () => {
     
     TEST_SET.forEach((set: TestSet) => {
-        it('should return the waited array of token data', () => {
-            const path: string = set.path;
-            const tokenData: TokenData = stringToTokenData(path);
-            const resultArr: Token[] = tokenData.tokens;
-            const expectedArr: Token[] = set.tokenList;
+        const path: string = set.path;
+        const tokenData: TokenData = stringToTokenData(path);
+        const resultArr: Token[] = tokenData.tokens;
+        const expectedArr: Token[] = set.tokenList;
+        it(`should return the waited array of token data: route path=[${path}]`, () => {
             expect(resultArr.length === expectedArr.length).toBeTrue();
             resultArr.every((token, index) => expect(token).toEqual(expectedArr[index]));
         });

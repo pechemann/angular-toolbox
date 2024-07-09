@@ -23,6 +23,11 @@ import { Token } from "projects/angular-toolbox/src/lib/framework/mock/http/path
 
 export type ParamData = Partial<Record<string, string | string[]>>;
 
+export interface TestItem {
+    expected: any;
+    description?: string;
+}
+
 export interface TestSet {
     path: string;
     keys: Key[];
@@ -32,26 +37,31 @@ export interface TestSet {
         input: ParamData | undefined;
         expected: string | null;
     }>;
+    keyRegexpList?: TestItem[];
+    regexpSource: TestItem;
 }
 
+/**
+ * The more use cases we have, the better test coverageg will be:
+ * please add use cases here to complette.
+ */
 export const TEST_SET: TestSet[] = [
     {
         path: DEFAULT_DELIMITER,
-        keys: [
-            { name: DEFAULT_DELIMITER, prefix: EMPTY_STRING, suffix: EMPTY_STRING, pattern: EMPTY_STRING, modifier: EMPTY_STRING },
-        ],
         lexTokenList: [
             { type: CHAR, index: 0, value: DEFAULT_DELIMITER },
             { type: END, index: 1, value: EMPTY_STRING }
         ],
         tokenList: [
             DEFAULT_DELIMITER
-        ]
+        ],
+        keys: [],
+        regexpSource: { expected: "^\\/+(?:\\/+)?$" }
     },
     {
         path: "/:test",
         keys: [
-            { name: "test", prefix: DEFAULT_DELIMITER, suffix: EMPTY_STRING, pattern: EMPTY_STRING, modifier: EMPTY_STRING },
+            { name: "test", pattern: undefined }
         ],
         lexTokenList: [
             { type: CHAR, index: 0, value: DEFAULT_DELIMITER },
@@ -60,13 +70,17 @@ export const TEST_SET: TestSet[] = [
         ],
         tokenList: [
             DEFAULT_DELIMITER,
-            { name: "test" }
-        ]
+            { name: "test", pattern: undefined }
+        ],
+        keyRegexpList: [
+            { expected: "(?:([^\\/]+?))", description: "name only <test>"}
+        ],
+        regexpSource: { expected: "^\\/+(?:([^\\/]+?))(?:\\/+)?$" }
     },
     {
         path: "/:test/",
         keys: [
-            //{ name: "test", prefix: DEFAULT_DELIMITER, suffix: EMPTY_STRING, pattern: EMPTY_STRING, modifier: EMPTY_STRING },
+            { name: "test", pattern: undefined }
         ],
         lexTokenList: [
             { type: CHAR, index: 0, value: DEFAULT_DELIMITER },
@@ -78,12 +92,17 @@ export const TEST_SET: TestSet[] = [
             DEFAULT_DELIMITER,
             { name: "test", pattern: undefined },
             DEFAULT_DELIMITER
-        ]
+        ],
+        keyRegexpList: [
+            { expected: "(?:([^\\/]+?))", description: "name only <test>"}
+        ],
+        regexpSource: { expected: "^\\/+(?:([^\\/]+?))\\/+(?:\\/+)?$" }
     },
     {
         path: "/:test{/:bar}?",
         keys: [
-
+            { name: "test", pattern: undefined },
+            { name: "bar", prefix: DEFAULT_DELIMITER, suffix: EMPTY_STRING, modifier: QUESTION_MARK, separator: DEFAULT_DELIMITER }
         ],
         lexTokenList: [
             { type: CHAR, index: 0, value: DEFAULT_DELIMITER },
@@ -93,14 +112,19 @@ export const TEST_SET: TestSet[] = [
         ],
         tokenList: [
             DEFAULT_DELIMITER,
-            { name: "test" },
+            { name: "test", pattern: undefined },
             { name: "bar", prefix: DEFAULT_DELIMITER, suffix: EMPTY_STRING, modifier: QUESTION_MARK, separator: DEFAULT_DELIMITER }
-        ]
+        ],
+        keyRegexpList: [
+            { expected: "(?:([^\\/]+?))", description: "name only <test>"},
+            { expected: "(?:\\/+([^\\/]+?))?", description: "name <bar> with prefix </>, suffix <>, modifier <?> and separator </>"}
+        ],
+        regexpSource: { expected: "^\\/+(?:([^\\/]+?))(?:\\/+([^\\/]+?))?(?:\\/+)?$" }
     },
     {
         path: "/:test(.*)",
         keys: [
-
+            { name: "test", pattern: ".*" }
         ],
         lexTokenList: [
             { type: CHAR, index: 0, value: DEFAULT_DELIMITER },
@@ -111,12 +135,17 @@ export const TEST_SET: TestSet[] = [
         tokenList: [
             DEFAULT_DELIMITER,
             { name: "test", pattern: ".*" }
-        ]
+        ],
+        keyRegexpList: [
+            { expected: "(?:(.*))", description: "name <test> with pattern <[.*]>"}
+        ],
+        regexpSource: { expected: "^\\/+(?:(.*))(?:\\/+)?$" }
     },
     {
         path: "/:test/*",
         keys: [
-
+            { name: "test" },
+            { name: "0", pattern: "[^/]*", modifier: ASTERISK, separator: DEFAULT_DELIMITER }
         ],
         lexTokenList: [
             { type: CHAR, index: 0, value: DEFAULT_DELIMITER },
@@ -126,15 +155,20 @@ export const TEST_SET: TestSet[] = [
         ],
         tokenList: [
             DEFAULT_DELIMITER,
-            { name: "test", pattern: undefined },
+            { name: "test" },
             DEFAULT_DELIMITER,
-            { name: "0", pattern: "[^/]*", modifier: "*", separator: "/" }
-        ]
+            { name: "0", pattern: "[^/]*", modifier: ASTERISK, separator: DEFAULT_DELIMITER }
+        ],
+        keyRegexpList: [
+            { expected: "(?:([^\\/]+?))", description: "name only <test>"},
+            { expected: "(?:((?:[^/]*)(?:\\/+(?:[^/]*))*))?", description: "name <0> with pattern <[^/]*>, modifier <*> and separator </>"},
+        ],
+        regexpSource: { expected: "^\\/+(?:([^\\/]+?))\\/+(?:((?:[^/]*)(?:\\/+(?:[^/]*))*))?(?:\\/+)?$" }
     },
     {
         path: "{/:segment}+",
         keys: [
-
+            { name: "segment", prefix: DEFAULT_DELIMITER, suffix: EMPTY_STRING, pattern: undefined, modifier: PLUS, separator: DEFAULT_DELIMITER }
         ],
         lexTokenList: [
             { type: LEFT_CURLY_BRACE, index: 0, value: LEFT_CURLY_BRACE },
@@ -146,12 +180,16 @@ export const TEST_SET: TestSet[] = [
         ],
         tokenList: [
             { name: "segment", prefix: DEFAULT_DELIMITER, suffix: EMPTY_STRING, pattern: undefined, modifier: PLUS, separator: DEFAULT_DELIMITER }
-        ]
+        ],
+        keyRegexpList: [
+            { expected: "(?:\\/+((?:[^\\/]+?)(?:\\/+(?:[^\\/]+?))*))", description: "name <segment> with prefix </>, suffix <>, pattern <undefined>, modifier<+> and separator</>"}
+        ],
+        regexpSource: { expected: "^(?:\\/+((?:[^\\/]+?)(?:\\/+(?:[^\\/]+?))*))(?:\\/+)?$" }
     },
     {
         path: "/test/:id(\\d+)",
         keys: [
-
+            { name: "id", pattern: "\\d+" }
         ],
         lexTokenList: [
             { type: CHAR, index: 0, value: DEFAULT_DELIMITER },
@@ -167,12 +205,16 @@ export const TEST_SET: TestSet[] = [
         tokenList: [
             "/test/",
             { name: "id", pattern: "\\d+" }
-        ]
+        ],
+        keyRegexpList: [
+            { expected: "(?:(\\\d+))", description: "name <id> with pattern <\d+>"}
+        ],
+        regexpSource: { expected: "^\\/+test\\/+(?:(\\d+))(?:\\/+)?$" }
     },
     {
         path: "/:0",
         keys: [
-            { name: "0", prefix: DEFAULT_DELIMITER, suffix: EMPTY_STRING, pattern: EMPTY_STRING, modifier: EMPTY_STRING },
+            { name: "0", pattern: undefined }
         ],
         lexTokenList: [
             { type: CHAR, index: 0, value: DEFAULT_DELIMITER },
@@ -181,13 +223,17 @@ export const TEST_SET: TestSet[] = [
         ],
         tokenList: [
             DEFAULT_DELIMITER,
-            { name: "0", pattern: undefined }
-        ]
+            { name: "0", pattern: undefined}
+        ],
+        keyRegexpList: [
+            { expected: "(?:([^\\/]+?))", description: "name only <0>"}
+        ],
+        regexpSource: { expected: "^\\/+(?:([^\\/]+?))(?:\\/+)?$" }
     },
     {
         path: "/:_",
         keys: [
-            { name: "_", prefix: DEFAULT_DELIMITER, suffix: EMPTY_STRING, pattern: EMPTY_STRING, modifier: EMPTY_STRING },
+            { name: "_", pattern: undefined }
         ],
         lexTokenList: [
             { type: CHAR, index: 0, value: DEFAULT_DELIMITER },
@@ -197,12 +243,16 @@ export const TEST_SET: TestSet[] = [
         tokenList: [
             DEFAULT_DELIMITER,
             { name: "_", pattern: undefined }
-        ]
+        ],
+        keyRegexpList: [
+            { expected: "(?:([^\\/]+?))", description: "name only <_>"}
+        ],
+        regexpSource: { expected: "^\\/+(?:([^\\/]+?))(?:\\/+)?$" }
     },
     {
         path: "/:café",
         keys: [
-            { name: "café", prefix: DEFAULT_DELIMITER, suffix: EMPTY_STRING, pattern: EMPTY_STRING, modifier: EMPTY_STRING },
+            { name: "café", pattern: undefined }
         ],
         lexTokenList: [
             { type: CHAR, index: 0, value: DEFAULT_DELIMITER },
@@ -212,7 +262,11 @@ export const TEST_SET: TestSet[] = [
         tokenList: [
             DEFAULT_DELIMITER,
             { name: "café", pattern: undefined }
-        ]
+        ],
+        keyRegexpList: [
+            { expected: "(?:([^\\/]+?))", description: "name only <café>"}
+        ],
+        regexpSource: { expected: "^\\/+(?:([^\\/]+?))(?:\\/+)?$" }
     }
 ];
 

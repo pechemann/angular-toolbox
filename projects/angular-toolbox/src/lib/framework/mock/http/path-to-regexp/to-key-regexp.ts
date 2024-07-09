@@ -27,12 +27,10 @@ import { Key } from "./model/key";
  */
 export const toKeyRegexp: (stringify: Encode, delimiter: string)=> DecodeKeyToString = (stringify: Encode, delimiter: string): DecodeKeyToString => {
   const segmentPattern: string = `[^${escapeRegexpString(delimiter)}]+?`;
-
   return (key: Key): string => {
     const prefix: string = key.prefix ? stringify(key.prefix) : EMPTY_STRING;
     const suffix: string = key.suffix ? stringify(key.suffix) : EMPTY_STRING;
     const modifier = key.modifier || EMPTY_STRING;
-
     if (key.name) {
       const pattern: string = key.pattern || segmentPattern;
       if (key.modifier === PLUS || key.modifier === ASTERISK) {
@@ -42,7 +40,6 @@ export const toKeyRegexp: (stringify: Encode, delimiter: string)=> DecodeKeyToSt
       }
       return `(?:${prefix}(${pattern})${suffix})${modifier}`;
     }
-
     return `(?:${prefix}${suffix})${modifier}`;
   };
 }
