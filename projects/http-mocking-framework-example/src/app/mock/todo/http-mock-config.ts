@@ -10,8 +10,8 @@ import { HttpRequest, HttpStatusCode } from "@angular/common/http";
 import { HttpMockConfig, HttpMockError, httpResponseMock } from 'projects/angular-toolbox/src/public-api';
 import { DataStorage } from "./data-storage";
 import { validateUser } from "./validate-user";
-import { TodoDto } from "../model/business/dto/todo.dto";
-import { UpdateTodoDto } from "../model/business/dto/update-todo.dto";
+import { TodoDto } from "../../model/business/dto/todo.dto";
+import { UpdateTodoDto } from "../../model/business/dto/update-todo.dto";
 
 const DATA_STORAGE: DataStorage = new DataStorage();
 
@@ -32,7 +32,7 @@ export const TODOS_MOCK_CONFIG: HttpMockConfig = {
             id: "todoCollection",
             endpoints: [
                 {
-                    route: "/todos/:userId",
+                    route: "/api/todos/:userId",
                     get: {
                         data: (req: HttpRequest<TodoDto>, params: any)=> {
                             const responseMock = httpResponseMock();
@@ -58,7 +58,7 @@ export const TODOS_MOCK_CONFIG: HttpMockConfig = {
             id: "todo",
             endpoints: [
                 {
-                    route: "/todos/:userId/todo",
+                    route: "/api/todos/:userId/todo",
                     post: {
                         data: (req: HttpRequest<string>, params: any)=> {
                             const responseMock = httpResponseMock();
@@ -74,7 +74,7 @@ export const TODOS_MOCK_CONFIG: HttpMockConfig = {
                     }
                 },
                 {
-                    route: "/todos/:userId/todo/:id",
+                    route: "/api/todos/:userId/todo/:id",
                     put: {
                         data: (req: HttpRequest<UpdateTodoDto>, params: any)=> {
                             const responseMock = httpResponseMock();

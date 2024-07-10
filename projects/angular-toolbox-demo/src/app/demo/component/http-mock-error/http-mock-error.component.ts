@@ -10,7 +10,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { CodeWrapper } from '../../../ui/model/business/code-wrapper';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { config } from './http-mock-error-config';
-import { SubscriptionService, HttpMockService, AbstractIdentifiable } from 'projects/angular-toolbox/src/public-api';
+import { SubscriptionService, HttpMockService, IdentifiableComponent } from 'projects/angular-toolbox/src/public-api';
 import { DemoComponent } from '../../../ui/component/demo/demo.component';
 import { catchError, of } from 'rxjs';
 import { RouterModule } from '@angular/router';
@@ -26,7 +26,7 @@ import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/s
   ],
   templateUrl: './http-mock-error.component.html'
 })
-export class HttpMockErrorComponent extends AbstractIdentifiable implements OnDestroy {
+export class HttpMockErrorComponent extends IdentifiableComponent implements OnDestroy {
 
   protected error!: string;
 

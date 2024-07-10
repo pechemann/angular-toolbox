@@ -8,7 +8,7 @@
 
 import { Component, EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { CodeWrapper } from '../../../ui/model/business/code-wrapper';
-import { AbstractIdentifiable, SubscriptionService } from 'projects/angular-toolbox/src/public-api';
+import { IdentifiableComponent, SubscriptionService } from 'projects/angular-toolbox/src/public-api';
 import { DemoComponent } from '../../../ui/component/demo/demo.component';
 import { DocumentationLink } from '../../../ui/model/business/documentation-link';
 import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
@@ -21,7 +21,7 @@ import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/s
   ],
   templateUrl: './subscription-service-demo.component.html'
 })
-export class SubscriptionServiceComponent extends AbstractIdentifiable implements OnInit, OnDestroy {
+export class SubscriptionServiceComponent extends IdentifiableComponent implements OnInit, OnDestroy {
 
   protected eventEmiter_1: EventEmitter<string> = new EventEmitter<string>();
   protected eventEmiter_2: EventEmitter<string> = new EventEmitter<string>();

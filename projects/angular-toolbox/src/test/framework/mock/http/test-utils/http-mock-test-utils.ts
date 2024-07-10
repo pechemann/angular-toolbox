@@ -13,7 +13,7 @@ export const UUID: Uuid = Uuid.build();
 
 export const FOO_MOCK_CONFIG: HttpMockConfig = {
   id: UUID,
-  origin: "http://my-awsome-company.com/api",
+  origin: "https://my-awsome-company.com/api",
   interceptors: [
     {
       id: "foo",

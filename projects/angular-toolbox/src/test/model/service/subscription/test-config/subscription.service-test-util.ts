@@ -7,15 +7,15 @@
  */
 ;
 import { SubscriptionError } from '../../../../../lib/core/error/subscription-error';
-import { AbstractIdentifiable } from '../../../../../lib/core';
+import { IdentifiableComponent } from '../../../../../lib/core';
 
-class FakeService extends AbstractIdentifiable {
+class FakeService extends IdentifiableComponent {
   constructor() {
     super();
   }
 }
 
-class FakeComponent extends AbstractIdentifiable {
+class FakeComponent extends IdentifiableComponent {
   constructor() {
     super();
   }

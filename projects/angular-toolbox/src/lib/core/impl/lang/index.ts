@@ -1,1 +1,1 @@
-export * from './abstract-identifiable';
+export * from './identifiable-component';

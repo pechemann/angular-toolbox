@@ -29,6 +29,8 @@ import { RouterModule } from '@angular/router';
 export class HomeComponent {
 
   protected homelinks: IconListItem[] = [
+    { label: "SayHello Sample Application", urlTree: ["../say-hello"] },
+    { label: "SayHello Sample Application Video (YouTube)" },
     { label: "TODO Sample Application Deep Dive" },
     { label: "TODO Sample Application Video (YouTube)" },
     { label: "HTTP Mocking Framework Documentation (Online)", url: "https://pascalechemann.com/angular-toolbox/resources/documentation/http-mocking-framework" }

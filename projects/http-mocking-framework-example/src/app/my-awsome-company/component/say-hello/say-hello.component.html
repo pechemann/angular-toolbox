@@ -1,0 +1,53 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+ 
+<main>
+    <atx-page-title label="Say Hello! Sample Application">
+        <p primary class="fs-5">
+            The following sample application shows the concepts discussed in the
+            <em>HTTP Mocking Framework Basics</em>
+            video on the Angular Toolbox YouTube channel.
+        </p>
+    </atx-page-title>
+    <div class="container mb-5">
+        <div class="row">
+            <div class="col-8">
+                <h2 class="mb-5">
+                    My Awsome Company Ltd.
+                </h2>
+                <form class="card" (submit)="sendMessage($event)">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4">Welcome to our new service</h5>
+                        <div class="input-group">
+                            <input type="text" class="form-control" [(ngModel)]="nameInput" name="nameInput"
+                                   placeholder="Enter yout name" aria-label="Enter yout name" aria-describedby="sayHelloBtn">
+                            <button class="btn btn-primary" type="submit" id="sayHelloBtn">Introduce Yourself</button>
+                        </div>
+                        <div>
+                            <small class="ps-2"><em>(Omitting name value will return an HTTP error.)</em></small>
+                        </div>
+                    </div>
+                    @if (httpResponse) {
+                        <div class="alert alert-primary m-3" role="alert">
+                            {{ httpResponse }}
+                        </div>
+                    }
+                    @if (error) {
+                        <div class="alert alert-danger m-3" role="alert">
+                            Something wrong happened when submitting your name; please try again later.
+                        </div>
+                    }
+                </form>
+            </div>
+            <div class="col-4">
+                <img src="assets/lucy.webp" title="Lucy" class="img-thumbnail">
+            </div>
+        </div>
+            
+    </div>
+</main>

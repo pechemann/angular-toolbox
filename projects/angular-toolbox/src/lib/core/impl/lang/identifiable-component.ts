@@ -11,22 +11,15 @@ import { Uuid } from "../../../util";
 
 /**
  * @private
- * The abstract class that must be extended by objects to be indentified by the 
- * Angulat Toolbox Subscription Service.
+ * The base class that must be extended by objects to be indentified by the 
+ * Angular Toolbox Subscription Service.
  */
-export abstract class AbstractIdentifiable implements Identifiable {
+export class IdentifiableComponent implements Identifiable {
 
     /**
      * @private
      */
-    private readonly _uuid: Uuid;
-
-    /**
-     * @private
-     */
-    constructor() {
-        this._uuid = Uuid.build();
-    }
+    private readonly _uuid: Uuid = Uuid.build();
 
     /**
      * Returns the unique identifier for this object.

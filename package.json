@@ -1,6 +1,6 @@
 {
   "name": "angular-toolbox",
-  "version": "0.1.0",
+  "version": "0.9.0",
   "license": "SEE LICENSE IN LICENSE",
   "scripts": {
     "ng": "ng",
@@ -8,7 +8,7 @@
     "build": "ng build angular-toolbox --configuration production",
     "build-demo": "ng build angular-toolbox-demo --configuration production --base-href /angular-toolbox/",
     "start-http-mock-sample": "ng serve http-mocking-framework-example --open",
-    "test": "ng test"
+    "test": "ng test angular-toolbox"
   },
   "private": true,
   "dependencies": {

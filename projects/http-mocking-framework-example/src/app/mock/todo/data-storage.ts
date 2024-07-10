@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { TodoDto } from "../model/business/dto/todo.dto";
+import { TodoDto } from "../../model/business/dto/todo.dto";
 
 export class DataStorage {
 

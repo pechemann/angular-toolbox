@@ -9,8 +9,7 @@
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SubscriptionError } from '../../../core';
-import { AbstractIdentifiable } from '../../../core/impl';
-import { EMPTY_STRING } from '../../../util';
+import { IdentifiableComponent } from '../../../core/impl';
 import { Identifiable } from '../../business';
 
 @Injectable({
@@ -111,7 +110,7 @@ export class SubscriptionService {
     private getRef(ref: string | Identifiable): string {
         let targetRef: string;
         if (typeof ref === "string") targetRef = ref;
-        else if (ref instanceof AbstractIdentifiable) targetRef = ref.getID().toString();
+        else if (ref instanceof IdentifiableComponent) targetRef = ref.getID().toString();
         else throw new TypeError("ref must be of type of string or Identifiable");
         return targetRef;
     }

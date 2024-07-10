@@ -6,16 +6,16 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { AbstractIdentifiable } from '../../../../lib/core/impl';
+import { IdentifiableComponent } from '../../../../lib/core/impl';
 import { Identifiable, Uuid } from '../../../../public-api';
 
-class IdentifiableImpl extends AbstractIdentifiable {
+class IdentifiableImpl extends IdentifiableComponent {
   constructor() {
     super();
   }
 }
 
-describe('AbstractIdentifiable', () => {
+describe('IdentifiableComponent', () => {
 
   let impl: Identifiable;
 

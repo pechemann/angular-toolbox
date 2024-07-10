@@ -52,10 +52,10 @@
 <section class="col-xl-9">
     <h3 id="usage">Usage</h3>
     <p>
-        The easiest way to implement the <code>Identifiable</code> interface is to extend the abstract
-        <code>AbstractIdentifiable</code> class:
+        The easiest way to implement the <code>Identifiable</code> interface is to extend the
+        <code>IdentifiableComponent</code> class:
     </p>
-    <figure><pre><code class="language-typescript">export class MyObject extends AbstractIdentifiable implements Identifiable &#123;
+    <figure><pre><code class="language-typescript">export class MyObject extends IdentifiableComponent implements Identifiable &#123;
     constructor() &#123;
         super();
     &#125;

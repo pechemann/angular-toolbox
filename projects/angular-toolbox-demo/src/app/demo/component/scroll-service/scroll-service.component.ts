@@ -8,7 +8,7 @@
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CodeWrapper } from '../../../ui/model/business/code-wrapper';
-import { AbstractIdentifiable, ScrollService, SubscriptionService } from 'projects/angular-toolbox/src/public-api';
+import { IdentifiableComponent, ScrollService, SubscriptionService } from 'projects/angular-toolbox/src/public-api';
 import { DemoComponent } from '../../../ui/component/demo/demo.component';
 import { DocumentationLink } from '../../../ui/model/business/documentation-link';
 import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
@@ -21,7 +21,7 @@ import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/s
   ],
   templateUrl: './scroll-service.component.html'
 })
-export class ScrollServiceComponent extends AbstractIdentifiable implements OnInit, OnDestroy {
+export class ScrollServiceComponent extends IdentifiableComponent implements OnInit, OnDestroy {
 
   constructor(breadcrumb: BreadcrumbService,
               private _scrollService: ScrollService,

@@ -174,7 +174,7 @@
 &lt;/div&gt;</code></pre></figure>
             <figure>
                 <figcaption>Angular Component:</figcaption>
-                <pre><code class="language-typescript">export class SubscriptionServiceComponent extends AbstractIdentifiable implements OnInit, OnDestroy &#123;
+                <pre><code class="language-typescript">export class SubscriptionServiceComponent extends IdentifiableComponent implements OnInit, OnDestroy &#123;
 
     protected eventEmiter_1: EventEmitter<string> = new EventEmitter<string>();
     protected eventEmiter_2: EventEmitter<string> = new EventEmitter<string>();

@@ -20,5 +20,9 @@ export const routes: Routes = [ {
   {
     path: 'todo',
     loadComponent: () => import('./todo/component/todo/todo.component').then(mod => mod.TodoComponent)
+  },
+  {
+    path: 'say-hello',
+    loadComponent: () => import('./my-awsome-company/component/say-hello/say-hello.component').then(mod => mod.SayHelloComponent)
   }
 ];

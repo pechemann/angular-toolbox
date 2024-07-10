@@ -10,8 +10,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularToolboxPageTitleComponent, BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
 import { Todo } from '../../../model/business/todo';
 import { TodoService } from '../../../model/service/todo.service';
-import { TODOS_MOCK_CONFIG } from '../../../mock/http-mock-config';
-import { AbstractIdentifiable, ContentRendererDirective, EMPTY_STRING, HttpMockService, SubscriptionService, HttpMock } from 'projects/angular-toolbox/src/public-api';
+import { TODOS_MOCK_CONFIG } from '../../../mock/todo/http-mock-config';
+import { IdentifiableComponent, ContentRendererDirective, EMPTY_STRING, HttpMockService, SubscriptionService, HttpMock } from 'projects/angular-toolbox/src/public-api';
 import { UserService } from '../../../model/service/user.service';
 import { LogerService } from '../../../model/service/logger.service';
 import { Log } from '../../../model/business/log';
@@ -34,7 +34,7 @@ import { TodoItemAction, TodoItemActionType } from '../../model/business/todo-it
   templateUrl: './todo.component.html',
   styleUrl: './todo.component.scss'
 })
-export class TodoComponent extends AbstractIdentifiable implements OnInit, OnDestroy {
+export class TodoComponent extends IdentifiableComponent implements OnInit, OnDestroy {
 
   protected todoList: Todo[] | null = null;
   protected logList: Log[] = [];

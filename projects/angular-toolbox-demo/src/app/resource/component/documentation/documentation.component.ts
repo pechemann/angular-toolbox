@@ -8,7 +8,7 @@
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { HttpMockService, SafeHtmlPipe, SubscriptionService, VersionService, AppBrigeService, AbstractIdentifiable, ContentRendererDirective, HttpMock } from 'projects/angular-toolbox/src/public-api';
+import { HttpMockService, SafeHtmlPipe, SubscriptionService, VersionService, AppBrigeService, IdentifiableComponent, ContentRendererDirective, HttpMock } from 'projects/angular-toolbox/src/public-api';
 import { ActivatedRoute, UrlSegment } from '@angular/router';
 import { IconListService } from '../../../ui/model/service/icon-list-list.service';
 import { DOCUMENTATION_PROXY_CONFIG } from '../../proxy/documentation-proxy.config';
@@ -29,7 +29,7 @@ import { AngularToolboxHrComponent, AngularToolboxIconListComponent, AngularTool
   templateUrl: './documentation.component.html',
   styleUrl: './documentation.component.scss'
 })
-export class DocumentationComponent extends AbstractIdentifiable implements OnInit, OnDestroy {
+export class DocumentationComponent extends IdentifiableComponent implements OnInit, OnDestroy {
 
   protected page!: string;
   protected isHomePage: boolean = false;

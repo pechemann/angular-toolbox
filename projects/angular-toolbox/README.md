@@ -1,19 +1,23 @@
-# AngularToolbox
+# Angular Toolbox
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.0.
+<p align="center">
+  <img src="./src/assets/images/logos/angular-toolbox.png" alt="angular-toolbox-logo" width="120px" height="120px"/>
+  <br>
+  <i>A library that provides useful tools for Angular apps development.</i>
+</p>
 
-## Code scaffolding
+[![Angular Toolbox version](https://img.shields.io/badge/Angular%20Toolbox-beta:.0.9.0-%231E90FF.svg)]()
 
-Run `ng generate component component-name --project angular-toolbox` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project angular-toolbox`.
-> Note: Don't forget to add `--project angular-toolbox` or else it will be added to the default project in your `angular.json` file. 
+## License
+
+All Angular Toolbox material (not limited to this list), including source code, media files, examples, documentation are provided according to the license agreement in the LICENSE file.
+
+An online version of the LICENSE file is available on the [Angular Toolbox License](https://pascalechemann.com/angular-toolbox/resources/license) page.
+
 
 ## Build
 
-Run `ng build angular-toolbox` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Publishing
-
-After building your library with `ng build angular-toolbox`, go to the dist folder `cd dist/angular-toolbox` and run `npm publish`.
+Run `ng build angular-toolbox --configuration production` to build the project. The build artifacts will be stored in the `dist/angular-toolbox` directory.
 
 ## Running unit tests
 
@@ -21,4 +25,4 @@ Run `ng test angular-toolbox` to execute the unit tests via [Karma](https://karm
 
 ## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+To get more help on the Angular Toolbox project go check out the [Angular Toolbox Demo](https://pascalechemann.com/angular-toolbox) page.

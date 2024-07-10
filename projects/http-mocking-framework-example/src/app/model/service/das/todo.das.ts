@@ -15,7 +15,7 @@ import { LogLevel } from '../../business/log';
 import { Todo } from '../../business/todo';
 import { UpdateTodoDto } from '../../business/dto/update-todo.dto';
 
-const API_PATH: string = "https://my-awsome-company.com/todos/";
+const API_PATH: string = "https://my-awsome-company.com/api/todos/";
 
 @Injectable({
   providedIn: "root"
