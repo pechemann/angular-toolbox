@@ -10,6 +10,7 @@
     <section class="w-100">
         <h5 class="mb-4">On this page</h5>
         <ul class="list-group">
+            <li class="list-group-item"><a href="#constructor" onclick="appBridge.goToAnchor(event)" title="constructor">constructor</a></li>
             <li class="list-group-item"><a href="#getId" onclick="appBridge.goToAnchor(event)" title="getId()">getId()</a></li>
             <li class="list-group-item"><a href="#getClassRef" onclick="appBridge.goToAnchor(event)" title="getClassRef()">getClassRef()</a></li>
             <li class="list-group-item"><a href="#usage" onclick="appBridge.goToAnchor(event)" title="Usage">Usage</a></li>
@@ -21,8 +22,8 @@
                 </a>
             </li>
             <li class="list-group-item icon-item">
-                <a href="javascript:appBridge.navigate(['resources/documentation/identifiable-interface/identifiable-component'])" title="IdentifiableComponent Class">
-                    <code>IdentifiableComponent</code> Class
+                <a href="javascript:appBridge.navigate(['resources/documentation/identifiable-interface'])" title="Identifiable Interface">
+                    <code>Identifiable</code> Interface
                 </a>
             </li>
         </div>
@@ -30,15 +31,36 @@
 </nav>
 
 <header class="fs-5 col-xl-9 mb-4">
-    <h2 class="mb-3"><code>Identifiable</code> Interface</h2>
+    <h2 class="mb-3"><code>IdentifiableComponent</code> Class</h2>
     <p>
         <code>Identifiable</code> objects are components that can be identified by a unique <code>Uuid</code> instance identifier.
     </p>
+    
     <hr class="mt-4">
 </header>
 
 <section class="col-xl-9 mb-4">
-    <h3 id="getId"><code>Identifiable.getId()</code></h3>
+    <h3 id="constructor"><code>constructor</code></h3>
+    <pre><code class="language-typescript">constructor(classRef: string | undefined = undefined)</code></pre>
+    <p>
+        Creates a new <code>IdentifiableComponent</code> instance.
+    </p>
+    <h5 class="mt-3">Parameters</h5>
+    <div class="border rounded p-3">
+        <code>classRef: string | undefined</code>
+        <p>
+            A string that represent the class reference for this object.
+            This can be useful to workaround TypeScript compilation obfuscation.
+            <br>
+            When the value is <code>undefined</code>, the class reference is defined by the value of the constructor <code>name</code> property.
+            <br>
+            Default value is <code>undefined</code>.
+        </p>
+    </div>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="getId"><code>IdentifiableComponent.getId()</code></h3>
     <pre><code class="language-typescript">getId(): Uuid</code></pre>
     <p>
         Gets this unique identifier of this object.
@@ -55,7 +77,7 @@
 </section>
 
 <section class="col-xl-9 mb-4">
-    <h3 id="getClassRef"><code>Identifiable.getClassRef()</code></h3>
+    <h3 id="getClassRef"><code>IdentifiableComponent.getClassRef()</code></h3>
     <pre><code class="language-typescript">getClassRef(): string</code></pre>
     <p>
         Returns the class name reference of this object.
@@ -75,24 +97,19 @@
 
 <section class="col-xl-9">
     <h3 id="usage">Usage</h3>
-    <p>
-        The easiest way to implement the <code>Identifiable</code> interface is to extend the
-        <code>IdentifiableComponent</code> class:
-    </p>
-    <figure><pre><code class="language-typescript">export class MyObject extends IdentifiableComponent &#123;
+    <figure><pre><code class="language-typescript">export class MyObject extends IdentifiableComponent implements Identifiable &#123;
     constructor() &#123;
-        super();
+        super("MyObject");
     &#125;
 &#125;
 
 const myObj: Identifiable = new MyObject();
-console.log(myObj.getID());</code></pre></figure>
-        <p>
-            See <a href="javascript:appBridge.navigate(['resources/documentation/identifiable-interface/identifiable-component'])" title="IdentifiableComponent Class"><code>IdentifiableComponent</code></a> class for details.
-        </p>
+console.log(myObj.getClassref());
+// Output: MyObject
+</code></pre></figure>
 </section>
 
 <!-- We use a data object to store navigation tree structure-->
 <object id="navigation-tree"
-        data-tree="[{ 'label': 'Identifiable Interface' }]">
+        data-tree="[{ 'label': 'Identifiable Interface', 'path': 'identifiable-interface' }, { 'label': 'IdentifiableComponent Class' }]">
 </object>

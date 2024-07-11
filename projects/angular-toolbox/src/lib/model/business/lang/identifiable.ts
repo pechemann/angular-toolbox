@@ -19,4 +19,12 @@ export interface Identifiable {
      * @returns An instance of the `Uuid` class.
      */
     getID(): Uuid;
+    
+    /**
+     * Returns the class name reference of this object.
+     * This can be useful to workaround TypeScript compilation obfuscation.
+     * 
+     * @returns the class name reference of this object.
+     */
+    getClassRef(): string
 }
