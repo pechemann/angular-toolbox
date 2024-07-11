@@ -16,7 +16,7 @@ import { stringToTokenData } from '../../../../framework/mock/http/path-to-regex
 import { DEFAULT_DELIMITER } from '../../../../framework/mock/http/path-to-regexp/constants';
 import { Uuid } from '../../../../util';
 import { TokenData } from '../../../../framework/mock/http/path-to-regexp/token-data';
-import { HttpMockServiceError } from 'projects/angular-toolbox/src/public-api';
+import { HttpMockServiceError } from '../../../../core/error';
 
 /**
  * @private

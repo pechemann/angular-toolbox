@@ -7,7 +7,7 @@
  */
 
 
-import { EMPTY_STRING } from "projects/angular-toolbox/src/public-api";
+import { EMPTY_STRING } from "../../../../util";
 import { HttpResponseMock } from "../../../../model";
 import { DataStorage } from "../core/data-storage";
 
