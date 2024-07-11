@@ -10,7 +10,7 @@
     "start-http-mock-sample": "ng serve http-mocking-framework-example --open",
     "test": "ng test angular-toolbox"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@angular/animations": "^18.0.3",
     "@angular/common": "^18.0.3",
