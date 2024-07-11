@@ -11,6 +11,7 @@ import { SayHelloDto } from "../business/say-hello.dto";
 export class SayHelloDtoBuilder {
 
     public build(name: string): SayHelloDto {
-        return { message: `Hello ${name}!` };
+        const decodedName: string = decodeURIComponent(name);
+        return { message: `Hello ${ decodedName }!` };
     }
 }

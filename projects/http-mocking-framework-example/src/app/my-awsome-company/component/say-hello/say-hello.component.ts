@@ -47,7 +47,7 @@ export class SayHelloComponent extends IdentifiableComponent implements OnInit, 
                   next: (response: SayHelloDto) => this.httpResponse = response.message,
                   error: (e) => this.error = true
                })
-    )
+    );
   }
 
   public ngOnInit(): void {}

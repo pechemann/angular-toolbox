@@ -13,6 +13,12 @@
 npm install angular-toolbox
 ```
 
+## YouTube Channel
+
+For announcements and more content, please visit our YouTube channel at:
+
+https://www.youtube.com/@AngularToolbox
+
 ## Angular Toolbox Demo
 
 Quickly and easily get started with Angular Toolbox compiled, production-ready files with this barebones example featuring some basic Demo and helpful links.
