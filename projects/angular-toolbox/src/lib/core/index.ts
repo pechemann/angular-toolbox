@@ -1,3 +1,3 @@
 export * from './error';
 export * from './impl';
-export * from './subscription';
+export * from './abstract';

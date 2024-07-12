@@ -7,7 +7,7 @@
  */
 
 import { Inject, Injectable } from '@angular/core';
-import { VERSION_CONFIG, Version, VersionConfig } from '../../business';
+import { VERSION_CONFIG, Version, VersionConfig, VersionManager } from '../../business';
 import { VersionImpl } from '../../../core/impl/version/version.impl';
 
 /**
@@ -16,7 +16,7 @@ import { VersionImpl } from '../../../core/impl/version/version.impl';
 @Injectable({
   providedIn: 'root'
 })
-export class VersionService {
+export class VersionService implements VersionManager {
 
   /**
    * @private
