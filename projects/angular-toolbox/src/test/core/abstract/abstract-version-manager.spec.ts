@@ -9,7 +9,7 @@
 import { TestBed } from '@angular/core/testing';
 import { Version } from '../../../lib/model';
 import { VersionImpl } from '../../../lib/core/impl/version/version.impl';
-import { CustomVersionService, TEST_CONFIG } from './test-config/version.service-test-util';
+import { BUILD_TIMESTAMP, CustomVersionService, MAJOR, MINOR, PATCH, TEST_CONFIG } from './test-config/version.service-test-util';
 
 describe('AbstractVersionManager', () => {
   let service: CustomVersionService;
@@ -28,9 +28,17 @@ describe('AbstractVersionManager', () => {
     const version: Version = service.getVersion();
     expect(version.major).toBeInstanceOf(Number);
     expect(version.minor).toBeInstanceOf(Number);
-    expect(version.major).toBeInstanceOf(Number);
+    expect(version.patch).toBeInstanceOf(Number);
     expect(version.buildTimeStamp).toBeInstanceOf(Number);
     expect(version.toString()).toBeInstanceOf(String);
+  });
+
+  it('getVersion() should return the values passed to the config object', () => {
+    const version: Version = service.getVersion();
+    expect(version.major).toEqual(MAJOR);
+    expect(version.minor).toEqual(MINOR);
+    expect(version.patch).toEqual(PATCH);
+    expect(version.buildTimeStamp).toEqual(BUILD_TIMESTAMP);
   });
 
   it('getBuidTimestamp() should return a number', () => {

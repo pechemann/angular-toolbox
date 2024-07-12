@@ -27,7 +27,7 @@ describe('VersionService', () => {
     const version: Version = service.getVersion();
     expect(version.major).toBeInstanceOf(Number);
     expect(version.minor).toBeInstanceOf(Number);
-    expect(version.major).toBeInstanceOf(Number);
+    expect(version.patch).toBeInstanceOf(Number);
     expect(version.buildTimeStamp).toBeInstanceOf(Number);
     expect(version.toString()).toBeInstanceOf(String);
   });

@@ -11,11 +11,16 @@ import { VersionConfig } from '../../../../lib/model/business/version';
 import { AbstractVersionManager } from '../../../../lib/core';
 import { Inject, Injectable } from '@angular/core';
 
+export const MAJOR: number = 1;
+export const MINOR: number = 1;
+export const PATCH: number = 1;
+export const BUILD_TIMESTAMP: number = 1720783675326;
+
 export const TEST_CONFIG: VersionConfig = {
-  major: 1,
-  minor: 2,
-  patch: 1,
-  buildTimestamp: NaN
+  major: MAJOR,
+  minor: MINOR,
+  patch: PATCH,
+  buildTimestamp: BUILD_TIMESTAMP
 }
 
 @Injectable()
