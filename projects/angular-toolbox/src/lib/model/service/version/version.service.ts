@@ -7,8 +7,8 @@
  */
 
 import { Inject, Injectable } from '@angular/core';
-import { VERSION_CONFIG, Version, VersionConfig, VersionManager } from '../../business';
-import { VersionImpl } from '../../../core/impl/version/version.impl';
+import { VERSION_CONFIG, VersionConfig, VersionManager } from '../../business';
+import { AbstractVersionManager } from '../../../core';
 
 /**
  * A lightweight service that provides Semantic Versioning implementation for your Angular projects.
@@ -16,41 +16,13 @@ import { VersionImpl } from '../../../core/impl/version/version.impl';
 @Injectable({
   providedIn: 'root'
 })
-export class VersionService implements VersionManager {
-
-  /**
-   * @private
-   */
-  private readonly _version: Version;
+export class VersionService extends AbstractVersionManager implements VersionManager {
 
   /**
    * Creates a new VersionService instance.
    * @param config the reference to the VersionConfig provider.
    */
   constructor(@Inject(VERSION_CONFIG) config: VersionConfig) {
-    this._version = new VersionImpl(
-      config.major,
-      config.minor,
-      config.patch,
-      config.buildTimestamp
-    );
-  }
-
-  /**
-   * Returns the version of the associated Angular project.
-   * 
-   * @return the version of the associated Angular project.
-   */
-  public getVersion(): Version {
-    return this._version;
-  }
-  
-  /**
-   * Returns the build timestamp of the associated Angular project.
-   * 
-   * @return the  build timestamp of the associated Angular project.
-   */
-  public getBuildTimestamp(): number {
-    return this._version.buildTimeStamp;
+    super(config);
   }
 }
