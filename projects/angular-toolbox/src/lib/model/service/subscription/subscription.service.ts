@@ -7,7 +7,7 @@
  */
 
 import { Injectable } from '@angular/core';
-import { AbstractSubscription } from '../../../core';
+import { AbstractSubscriptionManager } from '../../../core';
 
 @Injectable({
     providedIn: 'root'
@@ -15,7 +15,7 @@ import { AbstractSubscription } from '../../../core';
 /**
  * A lightweight service that helps to manage unregistration issues of Angular subscriptions.
  */
-export class SubscriptionService extends AbstractSubscription {
+export class SubscriptionService extends AbstractSubscriptionManager {
 
     /**
      * @private

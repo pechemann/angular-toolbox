@@ -7,11 +7,11 @@
  */
 ;
 import { SubscriptionError } from '../../../../lib/core/error/subscription-error';
-import { AbstractSubscription, IdentifiableComponent } from '../../../../lib/core';
+import { AbstractSubscriptionManager, IdentifiableComponent } from '../../../../lib/core';
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class CustomSubscriptionService extends AbstractSubscription {
+export class CustomSubscriptionService extends AbstractSubscriptionManager {
   constructor() {
     super();
   }

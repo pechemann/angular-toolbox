@@ -15,7 +15,7 @@ import { STRING } from '../../util';
 /**
  * The abstract class for all services that implement the `SubscriptionManager` interface.
  */
-export abstract class AbstractSubscription implements SubscriptionManager {
+export abstract class AbstractSubscriptionManager implements SubscriptionManager {
 
     /**
      * @private

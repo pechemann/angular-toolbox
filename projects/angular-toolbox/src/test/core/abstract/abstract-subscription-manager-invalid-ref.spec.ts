@@ -10,7 +10,7 @@ import { TestBed } from '@angular/core/testing';
 import { Observable, interval } from 'rxjs';
 import { CustomSubscriptionService } from './test-config/subscription.service-test-util';
 
-describe('AbstractSubscription: invalid reference', () => {
+describe('AbstractSubscriptionManager: invalid reference', () => {
   const EXPECTED_ERROR: TypeError = new TypeError("ref must be of type of string or Identifiable");
   let service: CustomSubscriptionService;
   let observable: Observable<number>;

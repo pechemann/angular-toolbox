@@ -25,7 +25,7 @@
 </nav>
 
 <header class="fs-5 col-xl-9 mb-4">
-    <h2 class="mb-3"><code>AbstractSubscription</code> Class</h2>
+    <h2 class="mb-3"><code>AbstractSubscriptionManager</code> Class</h2>
     <div class="version-info text-end mb-4 me-3">
         <small>Since <span class="badge text-bg-warning rounded-pill">v 0.9.3</span></small>
     </div>
@@ -43,15 +43,15 @@
     </p>
     <p>
         You may want to implement a subscription management service with another scope <em>(e.g. to create a component library)</em>.
-        You can do that by simply extending the <code>AbstractSubscription</code> class.
+        You can do that by simply extending the <code>AbstractSubscriptionManager</code> class.
     </p>
     <h4>Signature</h4>
     <p>
-        The <code>AbstractSubscription</code> class implements the <code>SubscriptionManager</code> interface.
+        The <code>AbstractSubscriptionManager</code> class implements the <code>SubscriptionManager</code> interface.
         <br>
-        See the <a href="javascript:appBridge.navigate(['resources/documentation/subscription-service/subscription-manager'])" title="SubscriptionManager"><code>SubscriptionManager</code></a> interface API for details.
+        See the <a href="javascript:appBridge.navigate(['resources/documentation/subscription-service/subscription-manager'])" title="AbstractSubscriptionManager"><code>SubscriptionManager</code></a> interface API for details.
     </p>
-    <pre><code class="language-typescript">abstract class AbstractSubscription implements SubscriptionManager</code></pre>
+    <pre><code class="language-typescript">abstract class AbstractSubscriptionManager implements SubscriptionManager</code></pre>
 </section>
 
 <section class="col-xl-9 mb-4">
@@ -59,7 +59,7 @@
     <figure>
         <figcaption>Custom Subscription Service:</figcaption>
         <pre><code class="language-typescript">&#64;Injectable()
-export class CustomSubscriptionService extends AbstractSubscription &#123;
+export class CustomSubscriptionService extends AbstractSubscriptionManager &#123;
 
     constructor() &#123;
         super();
@@ -70,5 +70,5 @@ export class CustomSubscriptionService extends AbstractSubscription &#123;
 
 <!-- We use a data object to store navigation tree structure-->
 <object id="navigation-tree"
-        data-tree="[{ 'label': 'Subscription Service', 'path': 'subscription-service' }, { 'label': 'AbstractSubscription Class' }]">
+        data-tree="[{ 'label': 'Subscription Service', 'path': 'subscription-service' }, { 'label': 'AbstractSubscriptionManager Class' }]">
 </object>

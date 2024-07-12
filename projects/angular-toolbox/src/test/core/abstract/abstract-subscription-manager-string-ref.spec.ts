@@ -8,13 +8,15 @@
 
 import { TestBed } from '@angular/core/testing';
 import { Observable, interval } from 'rxjs';
-import { CustomSubscriptionService, FAKE_COMPONENT, FAKE_SERVICE, ILLEGAL_ACCESS_ERROR } from './test-config/subscription.service-test-util';
+import { CustomSubscriptionService, ILLEGAL_ACCESS_ERROR } from './test-config/subscription.service-test-util';
 
-describe('AbstractSubscription: Instantiable reference', () => {
+describe('AbstractSubscriptionManager: string reference', () => {
   let service: CustomSubscriptionService;
   let observable1: Observable<number>;
   let observable2: Observable<number>;
   let observable3: Observable<number>;
+  const ref1: string = 'ref1';
+  const ref2: string = 'ref2';
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -27,28 +29,32 @@ describe('AbstractSubscription: Instantiable reference', () => {
   });
 
   afterEach(() => {
-    service.clearAll(FAKE_COMPONENT);
-    service.clearAll(FAKE_SERVICE);
+    service.clearAll(ref1);
+    service.clearAll(ref2);
+  });
+
+  it('should create an instance', () => {
+    expect(service).toBeTruthy();
   });
   
   it('register() should return a reference to the CustomSubscriptionService instance', () => {
-    const result = service.register(FAKE_COMPONENT, observable1.subscribe());
+    const result = service.register(ref1, observable1.subscribe());
     expect(service).toEqual(result);
   });
   
   it('get() should return an array with the registered subscriptions', () => {
     const subscription1 = observable1.subscribe();
     const subscription2 = observable2.subscribe();
-    service.register(FAKE_COMPONENT, subscription1).register(FAKE_COMPONENT, subscription2);
-    const result = service.get(FAKE_COMPONENT) as any;
+    service.register(ref1, subscription1).register(ref1, subscription2);
+    const result = service.get(ref1) as any;
     expect(result[0]).toEqual(subscription1);
     expect(result[1]).toEqual(subscription2);
   });
 
   it('register() should create seperated storage for each references', () => {
     const subscription1 = observable1.subscribe();
-    service.register(FAKE_COMPONENT, subscription1).register(FAKE_SERVICE, subscription1);
-    expect(service.get(FAKE_COMPONENT)).not.toBe(service.get(FAKE_SERVICE));
+    service.register(ref1, subscription1).register(ref2, subscription1);
+    expect(service.get(ref1)).not.toBe(service.get(ref2));
   });
 
   it('append() should throw an error if register() method have not be called before', () => {
@@ -57,46 +63,46 @@ describe('AbstractSubscription: Instantiable reference', () => {
   });
   
   it('get() should return null whether ref does not exist', () => {
-    expect(service.get(FAKE_COMPONENT)).toBeNull();
+    expect(service.get(ref1)).toBeNull();
   });
   
   it('append() should register subscriptions with the reference passed to the register() method during the last invokation', () => {
     const subscription1 = observable1.subscribe();
     const subscription2 = observable2.subscribe();
-    service.register(FAKE_COMPONENT, subscription1).append(subscription2);
-    expect(service.get(FAKE_COMPONENT)).toContain(subscription2);
+    service.register(ref1, subscription1).append(subscription2);
+    expect(service.get(ref1)).toContain(subscription2);
   });
 
   it('clearAll() should return false whether ref does not exist', () => {
-    expect(service.clearAll(FAKE_COMPONENT)).toBeFalse();
+    expect(service.clearAll(ref1)).toBeFalse();
   });
   
   it('clearAll() should return true whether ref exists', () => {
-    service.register(FAKE_COMPONENT, observable1.subscribe());
-    expect(service.clearAll(FAKE_COMPONENT)).toBeTrue();
+    service.register(ref1, observable1.subscribe());
+    expect(service.clearAll(ref1)).toBeTrue();
   });
   
   it('clearAll() should unsubscribe all subscriptions for the specified reference', () => {
     const subscription1 = observable1.subscribe();
     expect((subscription1 as any).isStopped).toBeFalse();
-    service.register(FAKE_COMPONENT, subscription1);
-    service.clearAll(FAKE_COMPONENT);
+    service.register(ref1, subscription1);
+    service.clearAll(ref1);
     expect((subscription1 as any).isStopped).toBeTrue();
   });
   
   it('clearAll() should remove all subscriptions for the specified reference', () => {
     const subscription1 = observable1.subscribe();
-    service.register(FAKE_COMPONENT, subscription1);
-    service.clearAll(FAKE_COMPONENT);
-    expect(service.get(FAKE_COMPONENT)).toBeNull();
+    service.register(ref1, subscription1);
+    service.clearAll(ref1);
+    expect(service.get(ref1)).toBeNull();
   });
   
   it('clearAll() should preserve subscriptions for other references', () => {
     const subscription1 = observable1.subscribe();
     const subscription2 = observable2.subscribe();
-    service.register(FAKE_COMPONENT, subscription1).register(FAKE_SERVICE, subscription1).register(FAKE_SERVICE, subscription2);
-    service.clearAll(FAKE_COMPONENT);
-    const result = service.get(FAKE_SERVICE) as any;
+    service.register(ref1, subscription1).register(ref2, subscription1).register(ref2, subscription2);
+    service.clearAll(ref1);
+    const result = service.get(ref2) as any;
     expect(result[0]).toEqual(subscription1);
     expect(result[1]).toEqual(subscription2);
   });
@@ -104,8 +110,8 @@ describe('AbstractSubscription: Instantiable reference', () => {
   it('clearAll() should destroy reference to the last register() invokation for the specified reference', () => {
     const subscription1 = observable1.subscribe();
     const subscription2 = observable2.subscribe();
-    service.register(FAKE_COMPONENT, subscription1);
-    service.clearAll(FAKE_COMPONENT);
+    service.register(ref1, subscription1);
+    service.clearAll(ref1);
     expect(()=> service.append(subscription2)).toThrow(ILLEGAL_ACCESS_ERROR);
   });
   
@@ -113,11 +119,11 @@ describe('AbstractSubscription: Instantiable reference', () => {
     const subscription1 = observable1.subscribe();
     const subscription2 = observable2.subscribe();
     const subscription3 = observable3.subscribe();
-    service.register(FAKE_COMPONENT, subscription1);
-    service.register(FAKE_SERVICE, subscription2);
-    service.clearAll(FAKE_COMPONENT);
+    service.register(ref1, subscription1);
+    service.register(ref2, subscription2);
+    service.clearAll(ref1);
     service.append(subscription3);
-    const result = service.get(FAKE_SERVICE) as any;
+    const result = service.get(ref2) as any;
     expect(result[1]).toEqual(subscription3);
   });
 });
