@@ -8,7 +8,6 @@
 ;
 import { SubscriptionError } from '../../../../lib/core/error/subscription-error';
 import { AbstractSubscription, IdentifiableComponent } from '../../../../lib/core';
-import { SubscriptionManager } from '../../../../lib/model';
 import { Injectable } from '@angular/core';
 
 @Injectable()

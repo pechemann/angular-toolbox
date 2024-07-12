@@ -72,6 +72,19 @@
           </tr>
         </thead>
         <tbody>
+            <tr>
+                <td><code>SubscriptionManager</code></td>
+                <td>
+                    The <code>SubscriptionManager</code>interface defines the API that must be implemented by <em>Subscription Managment Services</em>.
+                </td>
+                <td>
+                    <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/subscription-service/subscription-manager'])" title="SubscriptionManager">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                            <use href="#linkIcon"/>
+                        </svg>
+                    </button>
+                </td>
+            </tr>
           <tr>
             <td><code>Identifiable</code></td>
             <td>
@@ -88,59 +101,19 @@
         </tbody>
         <thead>
           <tr>
-            <th scope="col">Method</th>
+            <th scope="col">Abstract Class</th>
             <th scope="col">Description</th>
             <th scope="col">Link</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><code>register()</code></td>
+            <td><code>AbstractSubscription</code></td>
             <td>
-                Stores a new <code>Subscription</code> instance associated with the specified object, or reference.
+                The abstract class for all services that implement the <code>SubscriptionManager</code> interface.
             </td>
             <td>
-                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/subscription-service/register'])" title="register()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
-                        <use href="#linkIcon"/>
-                    </svg>
-                </button>
-            </td>
-          </tr>
-          <tr>
-            <td><code>append()</code></td>
-            <td>
-                Stores a new <code>Subscription</code> instance, associated with the reference specified
-                by the last invokation of the <code>register() </code>method.
-            </td>
-            <td>
-                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/subscription-service/append'])" title="append()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
-                        <use href="#linkIcon"/>
-                    </svg>
-                </button>
-            </td>
-          </tr>
-          <tr>
-            <td><code>clearAll()</code></td>
-            <td>
-                Unsubscribes and removes all <code>Subscription</code> instances associated with the specified reference, or object.
-            </td>
-            <td>
-                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/subscription-service/clear-all'])" title="clearAll()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
-                        <use href="#linkIcon"/>
-                    </svg>
-                </button>
-            </td>
-          </tr>
-          <tr>
-            <td><code>get()</code></td>
-            <td>
-                Returns all <code>Subscription</code> instances associated with the specified reference, or object.
-            </td>
-            <td>
-                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/subscription-service/get'])" title="get()">
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/subscription-service/abstract-subscription'])" title="AbstractSubscription">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
                         <use href="#linkIcon"/>
                     </svg>

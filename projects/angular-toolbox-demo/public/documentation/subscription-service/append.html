@@ -11,6 +11,11 @@
         <h5 class="mb-4">In this topic</h5>
         <ul class="list-group">
             <li class="list-group-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation/subscription-service/subscription-manager'])" title="SubscriptionManager Interface                ">
+                    <code>SubscriptionManager Interface</code>
+                </a>
+            </li>
+            <li class="list-group-item">
                 <a href="javascript:appBridge.navigate(['resources/documentation/subscription-service'])" title="Subscription Service">
                     Subscription Service
                 </a>
@@ -20,21 +25,21 @@
 </nav>
 
 <header class="fs-5 col-xl-9 mb-4">
-    <h2 class="mb-3"><code>SubscriptionService.append()</code> Method</h2>
+    <h2 class="mb-3"><code>SubscriptionManager.append()</code> Method</h2>
     <p>
-        The <code>SubscriptionService.append()</code> method allows to register a new <code>Subscription</code>
+        The <code>SubscriptionManager.append()</code> method allows to register a new <code>Subscription</code>
         instance associated with the reference specified by the last <code>register()</code> method invokation.
     </p>
     <p>
         The <code>Subscription</code> will be unsubscribed when the 
-        <code>SubscriptionService.clearAll()</code> method will be invoked for the associated reference.
+        <code>SubscriptionManager.clearAll()</code> method will be invoked for the associated reference.
     </p>
     <hr class="mt-4">
 </header>
 
 <section class="col-xl-9 mb-4">
     <h3>Signature</h3>
-    <pre><code class="language-typescript">append(subscription: Subscription): SubscriptionService</code></pre>
+    <pre><code class="language-typescript">append(subscription: Subscription): SubscriptionManager</code></pre>
     <h5>Parameters</h5>
     <div class="border rounded p-3">
         <dl>
@@ -49,10 +54,10 @@
         </dl>
     </div>
     <h5 class="mt-3">Returns</h5>
-    <code>SubscriptionService</code>
+    <code>SubscriptionManager</code>
     <div class="border rounded p-3">
         <p>
-            A reference to the <code>SubscriptionService</code> instance.
+            A reference to the <code>SubscriptionManager</code> instance.
         </p>
     </div>
     <h5 class="mt-3">Exeptions</h5>
@@ -97,5 +102,5 @@
 
 <!-- We use a data object to store navigation tree structure-->
 <object id="navigation-tree"
-        data-tree="[{ 'label': 'Subscription Service', 'path': 'subscription-service' }, { 'label': 'SubscriptionService.append() method' }]">
+        data-tree="[{ 'label': 'Subscription Service', 'path': 'subscription-service' }, { 'label': 'SubscriptionManager Interface', 'path': 'subscription-service/subscription-manager' }, { 'label': 'append() method' }]">
 </object>
