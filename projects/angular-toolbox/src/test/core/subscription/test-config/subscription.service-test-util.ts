@@ -6,8 +6,17 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 ;
-import { SubscriptionError } from '../../../../../lib/core/error/subscription-error';
-import { IdentifiableComponent } from '../../../../../lib/core';
+import { SubscriptionError } from '../../../../lib/core/error/subscription-error';
+import { AbstractSubscription, IdentifiableComponent } from '../../../../lib/core';
+import { SubscriptionManager } from '../../../../lib/model';
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class CustomSubscriptionService extends AbstractSubscription {
+  constructor() {
+    super();
+  }
+}
 
 class FakeService extends IdentifiableComponent {
   constructor() {

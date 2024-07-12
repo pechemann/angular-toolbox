@@ -8,21 +8,22 @@
 
 import { TestBed } from '@angular/core/testing';
 import { Observable, interval } from 'rxjs';
-import {  SubscriptionService } from '../../../../lib/model';
-import { FAKE_COMPONENT, FAKE_SERVICE, ILLEGAL_ACCESS_ERROR } from '../../../core/subscription/test-config/subscription.service-test-util';
+import { CustomSubscriptionService, FAKE_COMPONENT, FAKE_SERVICE, ILLEGAL_ACCESS_ERROR } from './test-config/subscription.service-test-util';
 
-describe('SubscriptionService: Instantiable reference', () => {
-  let service: SubscriptionService;
+describe('AbstractSubscription: Instantiable reference', () => {
+  let service: CustomSubscriptionService;
   let observable1: Observable<number>;
   let observable2: Observable<number>;
   let observable3: Observable<number>;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [ CustomSubscriptionService ]
+    });
     observable1 = interval(400);
     observable2 = interval(300);
     observable3 = interval(100);
-    service = TestBed.inject(SubscriptionService);
+    service = TestBed.inject(CustomSubscriptionService);
   });
 
   afterEach(() => {
@@ -30,7 +31,7 @@ describe('SubscriptionService: Instantiable reference', () => {
     service.clearAll(FAKE_SERVICE);
   });
   
-  it('register() should return a reference to the SubscriptionService instance', () => {
+  it('register() should return a reference to the CustomSubscriptionService instance', () => {
     const result = service.register(FAKE_COMPONENT, observable1.subscribe());
     expect(service).toEqual(result);
   });
