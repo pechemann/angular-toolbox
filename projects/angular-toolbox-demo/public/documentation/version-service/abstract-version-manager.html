@@ -1,0 +1,80 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation/version-service/version-manager-interface'])" title="VersionManager Interface                ">
+                    <code>VersionManager Interface</code>
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation/version-service'])" title="Version Service">
+                    Version Service
+                </a>
+            </li>
+        </ul>
+    </aside>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3"><code>AbstractVersionManager</code> Class</h2>
+    <div class="version-info text-end mb-4 me-3">
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 0.9.3</span></small>
+    </div>
+    <p>
+        The abstract class for all services that implement the <code>VersionManager</code> interface.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3>Description</h3>
+    <p>
+        The scope of the <code>VersionService</code> class is set to <code>"root"</code>.
+        This means that all functionality of this service is shared between all components of your application.
+    </p>
+    <p>
+        You may want to implement a version management service with another scope <em>(e.g. to create a component library)</em>.
+        You can do that by simply extending the <code>AbstractVersionManager </code> class.
+    </p>
+    <h4>Signature</h4>
+    <p>
+        The <code>AbstractVersionManager </code> class implements the <code>VersionManager</code> interface.
+        <br>
+        See the <a href="javascript:appBridge.navigate(['resources/documentation/version-service/version-manager-interface'])" title="VersionManager"><code>VersionManager</code></a> interface API for details.
+    </p>
+    <pre><code class="language-typescript">abstract class AbstractVersionManager implements VersionManager</code></pre>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="presentation">Usage</h3>
+    <figure>
+        <figcaption>Custom Subscription Service:</figcaption>
+        <pre><code class="language-typescript">export const MY_LIB_VERSION_CONFIG: VersionConfig = &#123;
+    major: 2,
+    minor: 0,
+    patch: 3,
+    buildTimestamp: 1720783675326
+&#125;
+    
+&#64;Injectable()
+    export class CustomVersionService extends AbstractVersionManager &#123;
+    constructor(&#64;Inject(MY_LIB_VERSION_CONFIG) config: VersionConfig) &#123;
+        super(config);
+    &#125;
+&#125;</code></pre></figure>
+</section>
+
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'Version Service', 'path': 'version-service' }, { 'label': 'AbstractVersionManager  Class' }]">
+</object>

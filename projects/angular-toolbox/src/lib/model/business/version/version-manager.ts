@@ -9,7 +9,7 @@
 import { Version } from "./version";
 
 /**
- * The interface implemented by services that Specifie the semantic versioning of an Angular application.
+ * The interface implemented by services that specifie the semantic versioning of an Angular application.
  */
 export interface VersionManager {
 

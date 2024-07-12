@@ -1,0 +1,89 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+ 
+<nav class="page-menu col-xl-3 ps-4">
+    <section class="w-100">
+        <h5 class="mb-4">On this page</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="#major" onclick="appBridge.goToAnchor(event)" title="major">major</a></li>
+            <li class="list-group-item"><a href="#minor" onclick="appBridge.goToAnchor(event)" title="minor">minor</a></li>
+            <li class="list-group-item"><a href="#patch" onclick="appBridge.goToAnchor(event)" title="patch">patch</a></li>
+            <li class="list-group-item"><a href="#buildTimeStamp" onclick="appBridge.goToAnchor(event)" title="buildTimeStamp">buildTimeStamp</a></li>
+        </ul>
+        <ul class="list-group mt-4">
+            <li class="list-group-item icon-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation/version-service'])" title="Version Service">
+                    VersionService
+                </a>
+            </li>
+            <li class="list-group-item icon-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation/version-service/version-config-provider'])" title="VERSION_CONFIG Provider">
+                    VERSION_CONFIG Provider
+                </a>
+            </li>
+            <li class="list-group-item icon-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation'])" title="Documentation">
+                    Documentation
+                </a>
+            </li>
+        </div>
+    </section>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3"><code>VersionConfig</code> Interface</h2>
+    <p>
+        The <code>VersionConfig</code> interface provides the basic API to define a version config token.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="darkModeEnabled"><code>VersionConfig.major</code></h3>
+    <pre><code class="language-typescript">major = 0</code></pre>
+    <p>
+        Indicates the app version when you make incompatible API changes.
+        <br>
+        Default value is <code>0</code>.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="detectBrowserSettings"><code>VersionConfig.minor</code></h3>
+    <pre><code class="language-typescript">minor = 0</code></pre>
+    <p>
+        Indicates the app version when you add functionality in a backward compatible manner.
+        <br>
+        Default value is <code>0</code>.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="cssProperty"><code>VersionConfig.patch</code></h3>
+    <pre><code class="language-typescript">patch = 0</code></pre>
+    <p>
+        Indicates the app version when you make backward compatible bug fixes. 
+        <br>
+        Default value is <code>0</code>.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="storageKey"><code>VersionConfig.buildTimeStamp</code></h3>
+    <pre><code class="language-typescript">buildTimeStamp = NaN</code></pre>
+    <p>
+        Specifies the timestamp that corresponds to the build date for the app.
+        <br>
+        Default value is <code>NaN</code>.
+    </p>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+    data-tree="[{ 'label': 'Version Service', 'path': 'version-service' }, { 'label': 'VersionConfig Interface' }]">
+</object>

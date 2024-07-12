@@ -9,10 +9,10 @@
 <demo [title]="title" [presentation]="presentation" [srcCode]="srcCode" [documentation]="documentation">
     <p>
         Current Angular Toolbox Version:
-        <span class="badge text-bg-primary p-2">{{ versionService.getVersion().toString() }}</span>
+        <span class="badge text-bg-primary p-2 rounded-pill">{{ versionService.getVersion().toString() }}</span>
     </p>
     <p>
         Build Release Date:
-        <span class="badge text-bg-primary p-2">{{ versionService.getBuildTimestamp() | date }}</span>
+        <span class="badge text-bg-primary p-2 rounded-pill">{{ versionService.getBuildTimestamp() | date }}</span>
     </p>
 </demo>

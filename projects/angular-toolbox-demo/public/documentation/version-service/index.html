@@ -42,7 +42,7 @@
         it is important to provide such information to users.
     </p>
     <p>
-        The purpose of the <em class="lib-name">Angular Toolbox </em>version service is allow Developer
+        The purpose of the <em class="lib-name">Angular Toolbox </em>version service is to allow Developer
         to easily implement <em>Semantic Versioning</em> in their Angular apps.
     </p>
 </section>
@@ -71,42 +71,54 @@
                 </button>
             </td>
           </tr>
+          <tr>
+            <td><code>VersionConfig</code></td>
+            <td>
+                Provides the basic API that defines a version config token.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/version-service/version-config-interface'])" title="VersionConfig">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+            <tr>
+                <td><code>VersionManager</code></td>
+                <td>
+                    The interface implemented by services that specifie the semantic versioning of an Angular application.
+                </td>
+                <td>
+                    <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/version-service/version-manager-interface'])" title="VersionManager">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                            <use href="#linkIcon"/>
+                        </svg>
+                    </button>
+                </td>
+            </tr>
         </tbody>
         <thead>
-          <tr>
-            <th scope="col">Method</th>
-            <th scope="col">Description</th>
-            <th scope="col">Link</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>getVersion()</code></td>
-            <td>
-                Returns the version of your Angular app.
-            </td>
-            <td>
-                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/version-service/get-version'])" title="getVersion()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
-                        <use href="#linkIcon"/>
-                    </svg>
-                </button>
-            </td>
-          </tr>
-          <tr>
-            <td><code>getBuildTimestamp()</code></td>
-            <td>
-                Returns the build timestamp of your Angular app.
-            </td>
-            <td>
-                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/version-service/get-build-time-stamp'])" title="getBuildTimestamp()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
-                        <use href="#linkIcon"/>
-                    </svg>
-                </button>
-            </td>
-          </tr>
-        </tbody>
+            <tr>
+              <th scope="col">Class</th>
+              <th scope="col">Description</th>
+              <th scope="col">Link</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>AbstractVersionManager</code></td>
+              <td>
+                The abstract class for all services that implement the <code>VersionManager</code> interface.
+              </td>
+              <td>
+                  <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/version-service/abstract-version-manager'])" title="AbstractVersionManager">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                          <use href="#linkIcon"/>
+                      </svg>
+                  </button>
+              </td>
+            </tr>
+          </tbody>
         <thead>
             <tr>
               <th scope="col">Provider</th>
@@ -118,7 +130,7 @@
             <tr>
               <td><code>VERSION_CONFIG</code></td>
               <td>
-                  The default provider for the <code>VersionService</code> configuration.
+                  The default provider for the <code>VersionService</code> class configuration.
               </td>
               <td>
                   <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/version-service/version-config-provider'])" title="VERSION_CONFIG">

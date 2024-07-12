@@ -10,7 +10,7 @@ import { Version, VersionConfig, VersionManager } from "../../model";
 import { VersionImpl } from "../impl/version/version.impl";
 
 /**
- * A lightweight service that provides Semantic Versioning implementation for your Angular projects.
+ * The abstract class for all services that implement the `VersionManager` interface.
  */
 export abstract class AbstractVersionManager implements VersionManager {
 
@@ -20,7 +20,7 @@ export abstract class AbstractVersionManager implements VersionManager {
   private readonly _version: Version;
 
   /**
-   * Creates a new VersionService instance.
+   * Creates a new VersionManager object.
    * @param config the reference to the VersionConfig provider.
    */
   constructor(config: VersionConfig) {

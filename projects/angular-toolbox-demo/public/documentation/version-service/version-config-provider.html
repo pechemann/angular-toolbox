@@ -34,54 +34,17 @@
     <h2 class="mb-3"><code>VERSION_CONFIG</code> Provider</h2>
     <p>
         The default provider for the <code>VersionService</code> configuration.
-        You typically define the custom properties in the main <code>NgModule</code> declaration to initialize the app version.
     </p>
     <hr class="mt-4">
 </header>
 
 <section class="col-xl-9 mb-4">
-    <h3 id="darkModeEnabled"><code>VersionConfig.major</code></h3>
-    <pre><code class="language-typescript">major = 0</code></pre>
-    <p>
-        Indicates the app version when you make incompatible API changes.
-        <br>
-        Default value is <code>0</code>.
-    </p>
-</section>
-
-<section class="col-xl-9 mb-4">
-    <h3 id="detectBrowserSettings"><code>VersionConfig.minor</code></h3>
-    <pre><code class="language-typescript">minor = 0</code></pre>
-    <p>
-        Indicates the app version when you add functionality in a backward compatible manner.
-        <br>
-        Default value is <code>0</code>.
-    </p>
-</section>
-
-<section class="col-xl-9 mb-4">
-    <h3 id="cssProperty"><code>VersionConfig.patch</code></h3>
-    <pre><code class="language-typescript">patch = 0</code></pre>
-    <p>
-        Indicates the app version when you make backward compatible bug fixes. 
-        <br>
-        Default value is <code>0</code>.
-    </p>
-</section>
-
-<section class="col-xl-9 mb-4">
-    <h3 id="storageKey"><code>VersionConfig.buildTimeStamp</code></h3>
-    <pre><code class="language-typescript">buildTimeStamp = NaN</code></pre>
-    <p>
-        Specifies the timestamp that corresponds to the build date for the app.
-        <br>
-        Default value is <code>NaN</code>.
-    </p>
-</section>
-
-<section class="col-xl-9 mb-4">
     <h3 id="usage">Usage</h3>
 
+    <p>
+        You typically define the custom properties in the main <code>NgModule</code> declaration,
+        or the <code>ApplicationConfig</code> object, to initialize the app version.
+    </p>
 <figure>
     <figcaption>Angular NgModule:</figcaption>
     <pre><code class="language-typescript">@NgModule(&#123;
