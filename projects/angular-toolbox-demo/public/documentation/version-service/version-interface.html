@@ -14,6 +14,7 @@
             <li class="list-group-item"><a href="#minor" onclick="appBridge.goToAnchor(event)" title="minor">minor</a></li>
             <li class="list-group-item"><a href="#patch" onclick="appBridge.goToAnchor(event)" title="patch">patch</a></li>
             <li class="list-group-item"><a href="#buildTimeStamp" onclick="appBridge.goToAnchor(event)" title="buildTimeStamp">buildTimeStamp</a></li>
+            <li class="list-group-item"><a href="#metadata" onclick="appBridge.goToAnchor(event)" title="metadata">metadata</a></li>
             <li class="list-group-item"><a href="#toString" onclick="appBridge.goToAnchor(event)" title="toString()">toString()</a></li>
         </ul>
         <ul class="list-group mt-4">
@@ -69,6 +70,17 @@
     <pre><code class="language-typescript">buildTimeStamp: number</code></pre>
     <p>
         Specifies the timestamp that corresponds to the build date for this <code>Version</code> object.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="metadata"><code>Version.metadata</code></h3>
+    <div class="version-info text-end mb-4 me-3">
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 0.9.4</span></small>
+    </div>
+    <pre><code class="language-typescript">metadata: string</code></pre>
+    <p>
+        Specifies the associated metadata for this <code>Version</code> object.
     </p>
 </section>
 

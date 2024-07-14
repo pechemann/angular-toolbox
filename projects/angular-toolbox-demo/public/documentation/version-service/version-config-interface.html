@@ -13,6 +13,7 @@
             <li class="list-group-item"><a href="#major" onclick="appBridge.goToAnchor(event)" title="major">major</a></li>
             <li class="list-group-item"><a href="#minor" onclick="appBridge.goToAnchor(event)" title="minor">minor</a></li>
             <li class="list-group-item"><a href="#patch" onclick="appBridge.goToAnchor(event)" title="patch">patch</a></li>
+            <li class="list-group-item"><a href="#metadata" onclick="appBridge.goToAnchor(event)" title="metadata">metadata</a></li>
             <li class="list-group-item"><a href="#buildTimeStamp" onclick="appBridge.goToAnchor(event)" title="buildTimeStamp">buildTimeStamp</a></li>
         </ul>
         <ul class="list-group mt-4">
@@ -70,6 +71,19 @@
         Indicates the app version when you make backward compatible bug fixes. 
         <br>
         Default value is <code>0</code>.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="metadata"><code>VersionConfig.metadata</code></h3>
+    <div class="version-info text-end mb-4 me-3">
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 0.9.4</span></small>
+    </div>
+    <pre><code class="language-typescript">metadata: string = undefined</code></pre>
+    <p>
+        Indicates the metada associated with the current version (e.g: <code>beta.1</code>, <code>pre-release</code>, etc.). 
+        <br>
+        Default value is <code>undefined</code>.
     </p>
 </section>
 
