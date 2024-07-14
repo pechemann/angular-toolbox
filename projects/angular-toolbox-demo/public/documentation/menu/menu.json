@@ -14,7 +14,8 @@
         { "label": "Uuid Class", "urlTree": [ "/resources", "documentation", "uuid-class" ] },
         { "label": "Identifiable Interface", "urlTree": [ "/resources", "documentation", "identifiable-interface" ] },
         { "label": "Destroyable Interface", "urlTree": [ "/resources", "documentation", "destroyable-interface" ] },
-        { "label": "Global Constants", "urlTree": [ "/resources", "documentation", "global-constants" ] }
+        { "label": "Global Constants", "urlTree": [ "/resources", "documentation", "global-constants" ] },
+        { "label": "Safe HTML Pipe", "urlTree": [ "/resources", "documentation", "safe-html-pipe" ] }
     ],
     "articles": [
         { "label": "Angular Toolbox Principles" }

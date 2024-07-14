@@ -7,12 +7,26 @@
 -->
  
 <demo [title]="title" [presentation]="presentation" [srcCode]="srcCode" [documentation]="documentation">
-    <p>
-        Current Angular Toolbox Version:
-        <span class="badge text-bg-primary p-2 rounded-pill">{{ versionService.getVersion().toString() }}</span>
-    </p>
-    <p>
-        Build Release Date:
-        <span class="badge text-bg-primary p-2 rounded-pill">{{ versionService.getBuildTimestamp() | date }}</span>
-    </p>
+    <div>
+        <h5 class="mb-4">Angular Toolbox Library:</h5>
+        <ul>
+            <li class="d-flex gap-5">
+                <div>Version:</div> <div class="badge text-bg-primary p-2 rounded-pill">{{ versionService.getVersion().toString() }}</div>
+            </li>
+           <li class="d-flex gap-5">
+                <div>Build Release:</div> <div class="badge text-bg-primary p-2 rounded-pill">{{ versionService.getBuildTimestamp() | date }}</div>
+           </li>
+        </ul>
+    </div>
+    <div>
+        <h5 class="mb-4">Angular Toolbox Demo App:</h5>
+        <ul>
+            <li class="d-flex gap-5">
+                <div>Version:</div> <div class="badge text-bg-info p-2 rounded-pill">{{ appVersionService.getVersion().toString() }}</div>
+            </li>
+           <li class="d-flex gap-5">
+                <div>Build Release:</div> <div class="badge text-bg-info p-2 rounded-pill">{{ appVersionService.getBuildTimestamp() | date }}</div>
+           </li>
+        </ul>
+    </div>
 </demo>

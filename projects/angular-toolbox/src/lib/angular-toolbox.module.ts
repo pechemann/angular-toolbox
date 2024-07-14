@@ -7,9 +7,12 @@
  */
 
 import { NgModule } from '@angular/core';
+import { AngularToolboxVersionService } from './model/service/version/angular-toolbox-version.service';
 
 /**
  * @private
  */
-@NgModule()
+@NgModule({
+    providers: [ AngularToolboxVersionService ]
+})
 export class AngularToolboxModule { }

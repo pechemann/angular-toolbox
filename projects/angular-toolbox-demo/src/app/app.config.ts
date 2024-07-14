@@ -21,7 +21,7 @@ export const appConfig: ApplicationConfig = {
     { provide: XhrFactory, useFactory: httpMockFactory },
     { provide: DARK_MODE_CONFIG, useValue: { detectBrowserSettings: false, storageKey: "angular-toolbox-dark-mode" } },
     //--> Angular Toolbox lib version
-    { provide: VERSION_CONFIG, useValue: { major: 0, minor: 9, patch: 3, buildTimestamp: 1720784232966 } },
+    { provide: VERSION_CONFIG, useValue: { major: 1, minor: 0, patch: 0, buildTimestamp: 1720940519299 } },
     provideHttpClient()
   ]
 };

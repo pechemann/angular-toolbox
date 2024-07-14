@@ -10,7 +10,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 import { PipeTransform, Pipe } from "@angular/core";
 
 /**
- * A basic implementation of HTML sanitization pipe.
+ * A basic implementation of a HTML sanitization pipe.
  */
 @Pipe({
   name: 'safeHtml',

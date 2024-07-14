@@ -8,12 +8,13 @@
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { HttpMockService, SafeHtmlPipe, SubscriptionService, VersionService, AppBrigeService, IdentifiableComponent, ContentRendererDirective, HttpMock } from 'projects/angular-toolbox/src/public-api';
+import { HttpMockService, SafeHtmlPipe, SubscriptionService, AppBrigeService, IdentifiableComponent, ContentRendererDirective, HttpMock } from 'projects/angular-toolbox/src/public-api';
 import { ActivatedRoute, UrlSegment } from '@angular/router';
 import { IconListService } from '../../../ui/model/service/icon-list-list.service';
 import { DOCUMENTATION_PROXY_CONFIG } from '../../proxy/documentation-proxy.config';
 import { DocumentationMenu } from '../../../ui/model/business/documentation-link';
 import { AngularToolboxHrComponent, AngularToolboxIconListComponent, AngularToolboxPageTitleComponent, BreadcrumbService, HighlightService, BreadcrumbItem, IconListItem } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
+import { AngularToolboxVersionService } from 'projects/angular-toolbox/src/lib/model/service/version/angular-toolbox-version.service';
 
 @HttpMock(DOCUMENTATION_PROXY_CONFIG) 
 @Component({
@@ -26,6 +27,9 @@ import { AngularToolboxHrComponent, AngularToolboxIconListComponent, AngularTool
     AngularToolboxPageTitleComponent,
     AngularToolboxHrComponent
   ],
+  providers: [
+    AngularToolboxVersionService
+  ],
   templateUrl: './documentation.component.html',
   styleUrl: './documentation.component.scss'
 })
@@ -36,7 +40,7 @@ export class DocumentationComponent extends IdentifiableComponent implements OnI
   protected itemListCollection: IconListItem[][] = [];
   protected articles!: IconListItem[];
 
-  constructor(public versionService: VersionService,
+  constructor(public versionService: AngularToolboxVersionService,
               //--> HttpMockService is declared only for @HttpMock reference:
               private _httpMockService: HttpMockService,
               private _breadcrumb: BreadcrumbService,
