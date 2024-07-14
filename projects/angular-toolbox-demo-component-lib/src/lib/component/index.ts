@@ -10,7 +10,6 @@
  * Public API Surface of angular-toolbox-demo-component-lib
  */
 export * from './header/header.component';
-export * from './angular-toolbox-logo/angular-toolbox-logo.component';
 export * from './footer/footer.component';
 export * from './dark-mode/dark-mode.component';
 export * from './page-title/page-title.component';

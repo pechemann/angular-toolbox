@@ -11,6 +11,7 @@
  */
 
 export * from './lib/angular-toolbox.module';
+export * from './lib/component';
 export * from './lib/core';
 export * from './lib/directive';
 export * from './lib/framework';

@@ -7,7 +7,7 @@
  */
 
 import { Component, Input } from '@angular/core';
-import { AngularToolboxLogoComponent } from '../angular-toolbox-logo/angular-toolbox-logo.component';
+import { AngularToolboxLogoComponent } from 'projects/angular-toolbox/src/public-api';
 
 @Component({
   selector: 'atx-header',
