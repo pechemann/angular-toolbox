@@ -30,4 +30,9 @@ export interface VersionConfig {
      * Specifies the timestamp that corresponds to the build date for this config.
      */
     buildTimestamp: number;
+
+    /**
+     * An optional string that indicates additional labels for pre-release and build metadata.
+     */
+    metadata?: string;
 }

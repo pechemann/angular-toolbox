@@ -28,7 +28,8 @@ export abstract class AbstractVersionManager implements VersionManager {
       config.major,
       config.minor,
       config.patch,
-      config.buildTimestamp
+      config.buildTimestamp,
+      config.metadata
     );
   }
 

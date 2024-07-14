@@ -25,4 +25,8 @@ describe('DARK_MODE_CONFIG', () => {
   it('default buildTimestamp should be NaN', () => {
     expect(VERSION_CONFIG.buildTimestamp).toEqual(NaN);
   });
+
+  it('default metada should be undefined', () => {
+    expect(VERSION_CONFIG.metadata).toBeUndefined();
+  });
 });

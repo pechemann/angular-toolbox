@@ -32,6 +32,11 @@ export interface Version {
     buildTimeStamp: number;
 
     /**
+     * An optional string that indicates additional labels for pre-release and build metadata.
+     */
+    metadata?: string;
+
+    /**
      * Returns a string representation of this `Version` object.
      * 
      * @returns A string representation of this `Version` object.

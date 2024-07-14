@@ -15,17 +15,34 @@ export const MAJOR: number = 1;
 export const MINOR: number = 1;
 export const PATCH: number = 1;
 export const BUILD_TIMESTAMP: number = 1720783675326;
+export const METADATA: string = "beta";
 
 export const TEST_CONFIG: VersionConfig = {
   major: MAJOR,
   minor: MINOR,
   patch: PATCH,
   buildTimestamp: BUILD_TIMESTAMP
-}
+};
+
+export const TEST_CONFIG_WITH_METADATA: VersionConfig = {
+  major: MAJOR,
+  minor: MINOR,
+  patch: PATCH,
+  buildTimestamp: BUILD_TIMESTAMP,
+  metadata: METADATA
+};
 
 @Injectable()
 export class CustomVersionService extends AbstractVersionManager {
   constructor(@Inject(TEST_CONFIG) config: VersionConfig) {
+    super(config);
+  }
+}
+
+
+@Injectable()
+export class CustomVersionServiceWithMetadata extends AbstractVersionManager {
+  constructor(@Inject(TEST_CONFIG_WITH_METADATA) config: VersionConfig) {
     super(config);
   }
 }

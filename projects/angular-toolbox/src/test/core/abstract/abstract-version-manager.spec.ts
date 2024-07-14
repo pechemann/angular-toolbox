@@ -9,7 +9,7 @@
 import { TestBed } from '@angular/core/testing';
 import { Version } from '../../../lib/model';
 import { VersionImpl } from '../../../lib/core/impl/version/version.impl';
-import { BUILD_TIMESTAMP, CustomVersionService, MAJOR, MINOR, PATCH, TEST_CONFIG } from './test-config/version.service-test-util';
+import { BUILD_TIMESTAMP, CustomVersionService, CustomVersionServiceWithMetadata, MAJOR, METADATA, MINOR, PATCH, TEST_CONFIG, TEST_CONFIG_WITH_METADATA } from './test-config/version.service-test-util';
 
 describe('AbstractVersionManager', () => {
   let service: CustomVersionService;
@@ -47,5 +47,35 @@ describe('AbstractVersionManager', () => {
   
   it('getVersion() should return the specified Version object implementation', () => {
     expect(service.getVersion()).toBeInstanceOf(VersionImpl);
+  });
+  
+  it('getVersion().metadata should be undefined by default', () => {
+    const version: Version = service.getVersion();
+    expect(version.metadata).toBeUndefined();
+  });
+});
+
+describe('AbstractVersionManager with metadata', () => {
+  let service: CustomVersionServiceWithMetadata;
+
+  beforeEach(() => {
+    const testConfigProvider: any = { provide: TEST_CONFIG_WITH_METADATA, useValue: TEST_CONFIG_WITH_METADATA };
+    TestBed.configureTestingModule({ providers: [testConfigProvider, CustomVersionServiceWithMetadata] });
+    service = TestBed.inject(CustomVersionServiceWithMetadata);
+  });
+
+  it('getVersion() should return a Version object', () => {
+    const version: Version = service.getVersion();
+    expect(version.major).toBeInstanceOf(Number);
+    expect(version.minor).toBeInstanceOf(Number);
+    expect(version.patch).toBeInstanceOf(Number);
+    expect(version.buildTimeStamp).toBeInstanceOf(Number);
+    expect(version.metadata).toBeInstanceOf(String);
+    expect(version.toString()).toBeInstanceOf(String);
+  });
+  
+  it('getVersion().metadata return the value passed to the config object', () => {
+    const version: Version = service.getVersion();
+    expect(version.metadata).toEqual(METADATA);
   });
 });

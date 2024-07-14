@@ -7,6 +7,7 @@
  */
 
 import { Version } from "../../../model";
+import { EMPTY_STRING } from "../../../util";
 
 /**
  * @private
@@ -33,15 +34,21 @@ export class VersionImpl implements Version {
      * Specifies the timestamp that corresponds to the build date for this `Version` instance.
      */
     public readonly buildTimeStamp: number;
+    
+    /**
+     * An optional string that indicates additional labels for pre-release and build metadata.
+     */
+    public readonly metadata: string | undefined;
 
     /**
      * @private
      */
-    constructor(major: number, minor: number, patch: number, buildTimeStamp: number) {
+    constructor(major: number, minor: number, patch: number, buildTimeStamp: number, metadata?: string) {
         this.major = major;
         this.minor = minor;
         this.patch = patch;
         this.buildTimeStamp = buildTimeStamp;
+        this.metadata = metadata;
     }
 
     /**
@@ -52,6 +59,7 @@ export class VersionImpl implements Version {
      * @returns A string representation of this `VersionImpl` instance.
      */
     public toString(): string {
-        return `${this.major}.${this.minor}.${this.patch}`;
+        const m: string | undefined = this.metadata;
+        return `${this.major}.${this.minor}.${this.patch}${m ? "-" + m : EMPTY_STRING}`;
     }
 };

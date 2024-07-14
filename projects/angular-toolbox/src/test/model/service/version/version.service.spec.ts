@@ -29,6 +29,7 @@ describe('VersionService', () => {
     expect(version.minor).toBeInstanceOf(Number);
     expect(version.patch).toBeInstanceOf(Number);
     expect(version.buildTimeStamp).toBeInstanceOf(Number);
+    expect(version.metadata).toBeUndefined();
     expect(version.toString()).toBeInstanceOf(String);
   });
 
