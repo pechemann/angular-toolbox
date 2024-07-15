@@ -1,7 +1,7 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a [routerLink]="['home']" title="Home">Home</a></li>
-        @for(item of breadcrumb.getItemList(); track item.label) {
+        @for(item of breadcrumb.toArray(); track item.label) {
             <li class="breadcrumb-item">
                 @switch (item.path) {
                     @case (undefined) {

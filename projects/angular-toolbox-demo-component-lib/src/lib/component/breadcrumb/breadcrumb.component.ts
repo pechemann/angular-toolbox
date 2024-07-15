@@ -11,5 +11,6 @@ import { BreadcrumbService } from '../../model/service';
   templateUrl: './breadcrumb.component.html'
 })
 export class AngularToolboxBreadcrumbComponent {
+
   constructor(protected breadcrumb: BreadcrumbService) {}
 }
