@@ -1,0 +1,292 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <section class="w-100">
+        <h5 class="mb-4">On this page</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="#motivation" onclick="appBridge.goToAnchor(event)" title="motivation">Motivation</a></li>
+            <li class="list-group-item"><a href="#api" onclick="appBridge.goToAnchor(event)" title="API">API</a></li>
+            <li class="list-group-item"><a href="#example" onclick="appBridge.goToAnchor(event)" title="API">Example</a></li>
+        </ul>
+    </section>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3"><code>ArrayList</code> Class</h2>
+    <div class="version-info text-end mb-4 me-3">
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 0.9.5</span></small>
+    </div>
+    <p>
+        The <code>ArrayList</code> class uses a backing <code>Array</code> as the source of the data collection.
+        Items in the backing <code>Array</code> can be accessed and manipulated using the methods and properties
+        of the <code>ArrayList</code> instance. Operations on an <code>ArrayList</code> instance modify the data source.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="motivation">Motivation</h3>
+    <p>
+        
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="api">API</h3>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Event</th>
+            <th scope="col">Description</th>
+            <th scope="col">Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>ArrayListEvent</code></td>
+            <td>
+                The <code>ArrayListEvent</code> class represents an event that is dispatched when the associated
+                collection changes.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/array-list-class/array-list-event'])" title="ArrayListEvent">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+        </tbody>
+        <thead>
+          <tr>
+            <th scope="col">Property</th>
+            <th scope="col">Description</th>
+            <th scope="col">Link</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>change</code></td>
+                <td>
+                    Dispatches events each time the list is modified.
+                </td>
+                <td>
+                    <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/array-list-class/change'])" title="change">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                            <use href="#linkIcon"/>
+                        </svg>
+                    </button>
+                </td>
+              </tr>
+          <tr>
+            <td><code>length</code></td>
+            <td>
+                Gets the number of items in the list.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/array-list-class/length'])" title="length">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+        </tbody>
+        <thead>
+          <tr>
+            <th scope="col">Method</th>
+            <th scope="col">Description</th>
+            <th scope="col">Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>addAll()</code></td>
+            <td>
+                Adds a list of items to the current <code>ArrayList</code> instance.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/array-list-class/add-all'])" title="addAll()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <td><code>addItem()</code></td>
+            <td>
+                Adds the specified item to the end of the list.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/array-list-class/add-item'])" title="addItem()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <td><code>addItemAt()</code></td>
+            <td>
+                Adds the item at the specified index.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/array-list-class/add-item-at'])" title="addItemAt()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <td><code>getItemAt()</code></td>
+            <td>
+                Gets the item at the specified index.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/array-list-class/get-item-at'])" title="getItemAt()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <td><code>getItemIndex()</code></td>
+            <td>
+                Returns the index of the item if it is in the list.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/array-list-class/get-item-index'])" title="getItemIndex()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <td><code>removeAll()</code></td>
+            <td>
+                Removes all items from the list.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/array-list-class/remove-all'])" title="removeAll()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <td><code>removeItem()</code></td>
+            <td>
+                Removes the specified item from this list.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/array-list-class/remove-item'])" title="removeItem()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <td><code>removeItemAt()</code></td>
+            <td>
+                Removes the item at the specified index and returns it.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/array-list-class/remove-item-at'])" title="removeItemAt()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <td><code>toArray()</code></td>
+            <td>
+                Returns an array that is populated in the same order as this <code>ArrayList</code> instance.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/array-list-class/to-array'])" title="toArray()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="example">Example</h3>
+    <p>
+        The following code sample shows how to easily implement a breadcrumb service compatible with the
+        <a href="https://getbootstrap.com/" title="Bootstrap">Bootstrap</a> library:
+    </p>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title mb-2">Code</h5>
+            <figure>
+                <figcaption>app-component.html:</figcaption>
+                <pre><code class="language-html">&lt;nav aria-label="breadcrumb"&gt;
+    &lt;ol class="breadcrumb"&gt;
+        &lt;li class="breadcrumb-item"&gt;Home&lt;/li&gt;
+        &#64;for (item of breadcrumbDemoService.toArray(); track item) &#123;
+            &lt;li class="breadcrumb-item"&gt;{{ item }}&lt;/li&gt;
+        &#125;
+    &lt;/ol&gt;
+&lt;/nav&gt;</code></pre></figure>
+            <figure>
+                <figcaption>breadcrumb.service.ts:</figcaption>
+                <pre><code class="language-typescript">&#64;Injectable(&#123;
+    providedIn: 'root'
+&#125;)
+export class BreadcrumbService extends ArrayList&lt;string&gt; &#123;
+    constructor() &#123;
+        super();
+    &#125;
+&#125;</code></pre></figure>
+            <figure>
+    <figcaption>app.component.ts:</figcaption>
+    <pre><code class="language-typescript">&#64;Component(&#123;
+    selector: 'app',
+    standalone: true,
+    templateUrl: './app.component.html'
+&#125;)
+export class AppComponent &#123;
+    constructor(public breadcrumbService: BreadcrumbService) &#123; &#125;
+&#125;</code></pre></figure>
+            <figure>
+    <figcaption>documentation.component.ts:</figcaption>
+    <pre><code class="language-typescript">&#64;Component(&#123;
+    selector: 'app-doc',
+    standalone: true,
+    templateUrl: './documentation.component.html'
+&#125;)
+export class DocumentationComponent &#123;
+    constructor(public breadcrumbService: BreadcrumbService) &#123;
+        breadcrumbDemoService.removeAll().addAll([ "Resources", "Documentation" ]);
+    &#125;
+&#125;</code></pre></figure>
+        <p>
+            To see this sample in action, go to the demo section:
+        </p>
+        <button class="btn btn-primary btn-lg" onclick="appBridge.navigate(['demo/array-list'])" title="ArrayList Class Demo">
+            ArrayList Class Demo
+        </button>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'ArrayList Class' }]">
+</object>

@@ -19,7 +19,7 @@ export class IconListService {
 
   constructor(private _http: HttpClient) {}
 
-  public getHomeDemoList(): IconListItem[] {
+  public getDemoList(): IconListItem[] {
     return [
       { label: "HTTP Mock Service", urlTree: ["../demo", "http-mock-service"] },
       { label: "Subscription Service", urlTree: ["../demo", "subscription-service"] },
@@ -28,7 +28,8 @@ export class IconListService {
       { label: "ButtonRole Directive", urlTree: ["../demo", "button-role-directive"] },
       { label: "Dark Mode Service: Bootstrap Integration", urlTree: ["../demo", "dark-mode-service-bootstrap"] },
       { label: "Scroll Service", urlTree: ["../demo", "scroll-service"] },
-      { label: "Version Service", urlTree: ["../demo", "version-service"] }
+      { label: "Version Service", urlTree: ["../demo", "version-service"] },
+      { label: "ArrayList Class", urlTree: ["../demo", "array-list"] }
     ];
   }
 

@@ -41,6 +41,10 @@ const routes: Routes = [
   {
     path: 'http-mock-error',
     loadComponent: () => import('./component/http-mock-error/http-mock-error.component').then(mod => mod.HttpMockErrorComponent)
+  },
+  {
+    path: 'array-list',
+    loadComponent: () => import('./component/array-list/array-list.component').then(mod => mod.ArrayListComponent)
   }
 ];
 

@@ -7,7 +7,7 @@
  */
 
 import { Subscription } from "rxjs";
-import { ArrayList, ArrayListEvent } from "../../public-api";
+import { ArrayList, ArrayListEvent, ArrayListEventType } from "../../public-api";
 
 type Item = { id: number};
 
@@ -183,7 +183,7 @@ describe('ArrayListEvent', () => {
       { id: 3 }
     ];
     subscription = list.change.subscribe((event: ArrayListEvent<Item>)=> {
-      expect(event.type).toEqual(ArrayListEvent.ADD_ALL);
+      expect(event.type).toEqual(ArrayListEventType.ADD_ALL);
       expect(event.list).toEqual(list);
       done();
     });
@@ -193,7 +193,7 @@ describe('ArrayListEvent', () => {
   it('change should dispatch an ADD event when addItem() method is invoked', (done) => {
     const ITEM: Item = { id: 1 };
     subscription = list.change.subscribe((event: ArrayListEvent<Item>)=> {
-      expect(event.type).toEqual(ArrayListEvent.ADD);
+      expect(event.type).toEqual(ArrayListEventType.ADD);
       expect(event.list).toEqual(list);
       done();
     })
@@ -203,7 +203,7 @@ describe('ArrayListEvent', () => {
   it('change should dispatch an ADD event when addItemAt() method is invoked', (done) => {
     const ITEM: Item = { id: 1 };
     subscription = list.change.subscribe((event: ArrayListEvent<Item>)=> {
-      expect(event.type).toEqual(ArrayListEvent.ADD);
+      expect(event.type).toEqual(ArrayListEventType.ADD);
       expect(event.list).toEqual(list);
       done();
     })
@@ -217,8 +217,8 @@ describe('ArrayListEvent', () => {
       { id: 3 }
     ];
     subscription = list.change.subscribe((event: ArrayListEvent<Item>)=> {
-      if (event.type !== ArrayListEvent.REMOVE_ALL) return;
-      expect(event.type).toEqual(ArrayListEvent.REMOVE_ALL);
+      if (event.type !== ArrayListEventType.REMOVE_ALL) return;
+      expect(event.type).toEqual(ArrayListEventType.REMOVE_ALL);
       expect(event.list).toEqual(list);
       done();
     });
@@ -228,8 +228,8 @@ describe('ArrayListEvent', () => {
   
   it('change should dispatch a REMOVE event when removeItem() method is invoked', (done) => {
     subscription = list.change.subscribe((event: ArrayListEvent<Item>)=> {
-      if (event.type !== ArrayListEvent.REMOVE) return;
-      expect(event.type).toEqual(ArrayListEvent.REMOVE);
+      if (event.type !== ArrayListEventType.REMOVE) return;
+      expect(event.type).toEqual(ArrayListEventType.REMOVE);
       expect(event.list).toEqual(list);
       done();
     });
@@ -240,8 +240,8 @@ describe('ArrayListEvent', () => {
   
   it('change should dispatch a REMOVE event when removeItemAt() method is invoked', (done) => {
     subscription = list.change.subscribe((event: ArrayListEvent<Item>)=> {
-      if (event.type !== ArrayListEvent.REMOVE) return;
-      expect(event.type).toEqual(ArrayListEvent.REMOVE);
+      if (event.type !== ArrayListEventType.REMOVE) return;
+      expect(event.type).toEqual(ArrayListEventType.REMOVE);
       expect(event.list).toEqual(list);
       done();
     });

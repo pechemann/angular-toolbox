@@ -9,6 +9,7 @@
 import { EventEmitter } from "@angular/core";
 import { IdentifiableComponent } from "../core";
 import { ArrayListEvent } from "./array-list.event";
+import { ArrayListEventType } from "./array-list-event-type.enum";
 
 /**
  * The `ArrayList` class uses a backing `Array` as the source of the data collection. Items in the backing
@@ -25,7 +26,7 @@ export class ArrayList<T> extends IdentifiableComponent {
     public readonly change: EventEmitter<ArrayListEvent<T>> = new EventEmitter<ArrayListEvent<T>>();
 
     /**
-     * Get the number of items in the list.
+     * Gets the number of items in the list.
      */
     public get length(): number {
         return this.__list__.length;
@@ -54,12 +55,12 @@ export class ArrayList<T> extends IdentifiableComponent {
      */
     public addAll(addList: Array<T>): ArrayList<T> {
         this.__list__.push(...addList);
-        this.dispatchEvent(ArrayListEvent.ADD_ALL);
+        this.dispatchEvent(ArrayListEventType.ADD_ALL);
         return this;
     }
 
     /**
-     * Add the specified item to the end of the list.
+     * Adds the specified item to the end of the list.
      * 
      * @param item The item to add.
      * 
@@ -67,12 +68,12 @@ export class ArrayList<T> extends IdentifiableComponent {
      */
     public addItem(item: T): ArrayList<T> {
         this.__list__.push(item);
-        this.dispatchEvent(ArrayListEvent.ADD);
+        this.dispatchEvent(ArrayListEventType.ADD);
         return this;
     }
 
     /**
-     * Add the item at the specified index.
+     * Adds the item at the specified index.
      *
      * @param item The item to place at the index.
      * @param index The index at which to place the item.
@@ -84,23 +85,23 @@ export class ArrayList<T> extends IdentifiableComponent {
         const len: number = this.__list__.length;
         if (index > len) throw new RangeError (`index exceeds the number of list elements. Index must not exceed ${len}.`);
         this.__list__.splice(index, 0, item);
-        this.dispatchEvent(ArrayListEvent.ADD);
+        this.dispatchEvent(ArrayListEventType.ADD);
         return this;
     }
 
     /**
-     * Get the item at the specified index.
+     * Gets the item at the specified index.
      *
      * @param index The index in the list from which to retrieve the item.
      * 
      * @returns The item at that index, `undefined` if there is none.
      */
-    public getItemAt(index: number): T {
+    public getItemAt(index: number): T | undefined {
         return this.__list__[index];
     }
 
     /**
-     * Return the index of the item if it is in the list.
+     * Returns the index of the item if it is in the list.
      * 
      * @param item The item to find.
      * 
@@ -111,13 +112,13 @@ export class ArrayList<T> extends IdentifiableComponent {
     }
 
     /**
-     * Remove all items from the list.
+     * Removes all items from the list.
      * 
      * @return A reference to this `ArrayList` instance.
      */
     public removeAll(): ArrayList<T> {
         this.__list__.length = 0;
-        this.dispatchEvent(ArrayListEvent.REMOVE_ALL);
+        this.dispatchEvent(ArrayListEventType.REMOVE_ALL);
         return this;
     }
 
@@ -132,26 +133,26 @@ export class ArrayList<T> extends IdentifiableComponent {
         const idx: number = this.getItemIndex(item);
         if (idx === -1) return false;
         this.__list__.splice(idx, 1);
-        this.dispatchEvent(ArrayListEvent.REMOVE);
+        this.dispatchEvent(ArrayListEventType.REMOVE);
         return true;
     }
 
     /**
-     * Remove the item at the specified index and return it.
+     * Removes the item at the specified index and returns it.
      * Any items that were after this index are now one index earlier.
      * 
      * @param index The index from which to remove the item.
 
      * @returns The item that was removed.
      */
-    public removeItemAt(index: number): T {
+    public removeItemAt(index: number): T | undefined {
         const result: T = this.__list__.splice(index, 1)[0];
-        this.dispatchEvent(ArrayListEvent.REMOVE);
+        this.dispatchEvent(ArrayListEventType.REMOVE);
         return result;
     }
 
     /**
-     * Return an array that is populated in the same order as this `ArrayList` instance.
+     * Returns an array that is populated in the same order as this `ArrayList` instance.
      * 
      * @returns An array that is populated in the same order as this `ArrayList` instance.
      */
@@ -162,7 +163,7 @@ export class ArrayList<T> extends IdentifiableComponent {
     /**
      * @private
      */
-    private dispatchEvent(type: string): void {
+    private dispatchEvent(type: ArrayListEventType): void {
         const event: ArrayListEvent<T> = new ArrayListEvent<T>(type, this);
         this.change.emit(event);
     }

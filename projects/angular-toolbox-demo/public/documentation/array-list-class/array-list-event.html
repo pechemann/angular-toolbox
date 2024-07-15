@@ -1,0 +1,88 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation/array-list-class'])" title="ArrayList Class">
+                    ArrayList Class
+                </a>
+            </li>
+        </ul>
+    </aside>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3"><code>ArrayListEvent</code> Event</h2>
+    <p>
+        The <code>ArrayListEvent</code> class represents an event that is dispatched when the associated
+        collection changes.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3>Event Types</h3>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Event Type</th>
+            <th scope="col">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>ArrayListEventType.ADD_ALL</code></td>
+            <td>
+                The type of event associated with the <code>ArrayList.addAll()</code> action. 
+            </td>
+          </tr>
+          <tr>
+            <td><code>ArrayListEventType.ADD</code></td>
+            <td>
+                The type of event associated with the <code>ArrayList.addItem()</code>, or <code>ArrayList.addItemAt()</code> actions. 
+            </td>
+          </tr>
+          <tr>
+            <td><code>ArrayListEventType.REMOVE_ALL</code></td>
+            <td>
+                The type of event associated with the <code>ArrayList.removeAll()</code> action. 
+            </td>
+          </tr>
+          <tr>
+            <td><code>ArrayListEventType.REMOVE</code></td>
+            <td>
+                The type of event associated with the <code>ArrayList.remove()</code>, or <code>ArrayList.removeAt()</code> actions. 
+            </td>
+          </tr>
+        </tbody>
+      </table>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 ><code>ArrayListEvent.type</code></h3>
+    <pre><code class="language-typescript">readonly type: ArrayListEventType</code></pre>
+    <p>
+        The type of this event. 
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 ><code>ArrayListEvent.list</code></h3>
+    <pre><code class="language-typescript">readonly list: ArrayList&lt;T&gt;</code></pre>
+    <p>
+        The reference to the <code>ArrayList</code> instance that dispatches this event. 
+    </p>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+    data-tree="[{ 'label': 'ArrayList Class', 'path': 'array-list-class' }, { 'label': 'ArrayListEvent Event' }]">
+</object>

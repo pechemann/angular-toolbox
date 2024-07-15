@@ -11,8 +11,8 @@
         <h5 class="mb-4">In this topic</h5>
         <ul class="list-group">
             <li class="list-group-item">
-                <a href="javascript:appBridge.navigate(['resources/documentation/content-renderer-directive'])" title="ContentRendererDirective">
-                    ContentRendererDirective
+                <a href="javascript:appBridge.navigate(['resources/documentation/array-list-class'])" title="ArrayList Class">
+                    ArrayList Class
                 </a>
             </li>
         </ul>
@@ -20,24 +20,25 @@
 </nav>
 
 <header class="fs-5 col-xl-9 mb-4">
-    <h2 class="mb-3"><code>ContentRendererDirective.rendered</code> Event</h2>
+    <h2 class="mb-3"><code>ArrayList.change</code> Property</h2>
     <p>
-        The <code>ContentRendererDirective.rendered</code> <code>EventEmitter</code> object fires events when the content
-        of the decorated HTML element is modified.
+        The <code>ArrayList.change</code> event emitter dispatches events each time the <code>ArrayList</code>
+        object is modified.
     </p>
     <hr class="mt-4">
 </header>
 
 <section class="col-xl-9 mb-4">
     <h3>Signature</h3>
-    <pre><code class="language-typescript">readonly rendered: EventEmitter&lt;HTMLElement&gt;</code></pre>
+    <pre><code class="language-typescript">readonly change: EventEmitter&lt;ArrayListEvent&lt;T&gt;&gt;</code></pre>
     <h5>Type</h5>
     <div class="border rounded p-3">
         <dl>
-            <dt><code>EventEmitter&lt;HTMLElement&gt;</code></dt>
+            <dt><code>EventEmitter&lt;ArrayListEvent&lt;T&gt;&gt;</code></dt>
             <dd>
                 <p>
-                    Emits events containing the reference to the decorated the HTML element.
+                    Emits events containing the reference to an <code>ArrayListEvent</code> object that represents the
+                    action responsible for dispatching this event.
                 </p>
             </dd>
         </dl>
@@ -47,5 +48,5 @@
 
 <!-- We use a data object to store navigation tree structure-->
 <object id="navigation-tree"
-    data-tree="[{ 'label': 'ContentRendererDirective', 'path': 'content-renderer-directive' }, { 'label': 'ContentRendererDirective.rendered Event' }]">
+    data-tree="[{ 'label': 'ArrayList Class', 'path': 'array-list-class' }, { 'label': 'ArrayList.change Property' }]">
 </object>

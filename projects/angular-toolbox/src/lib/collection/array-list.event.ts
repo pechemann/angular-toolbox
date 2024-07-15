@@ -7,53 +7,30 @@
  */
 
 import { ArrayList } from "./array-list";
+import { ArrayListEventType } from "./array-list-event-type.enum";
 
 /**
- * The `ArrayList` class uses a backing `Array` as the source of the data collection. Items in the backing
- * `Array` can be accessed and manipulated using the methods and properties of the `ArrayList` instance.
- * Operations on an `ArrayList` instance modify the data source.
- * 
- * You typically use the `ArrayList` class as base class for services that persist data in the User Interface.
+ * The `ArrayListEvent` class represents an event that is dispatched when the associated collection changes.
  */
 export class ArrayListEvent<T> {
 
     /**
-     * The type of event associated with the `ArrayList.addAll` action. 
-     */
-    public static ADD_ALL: string = "addAll";
-
-    /**
-     * The type of event associated with the `ArrayList.addItem`, or `ArrayList.addItemAt` actions. 
-     */
-    public static ADD: string = "add";
-
-    /**
-     * The type of event associated with the `ArrayList.removeAll` action. 
-     */
-    public static REMOVE_ALL: string = "removeAll";
-
-    /**
-     * The type of event associated with the `ArrayList.remove`, or `ArrayList.removeAt` actions. 
-     */
-    public static REMOVE: string = "remove";
-
-    /**
      * The type of this event.
      */
-    public readonly type: any;
+    public readonly type: ArrayListEventType;
     
     /**
-     * The reference to the `ArrayLis` instance that dispateches this event.
+     * The reference to the `ArrayList` instance that dispatches this event.
      */
     public readonly list: ArrayList<T>;
     
     /**
-     * Represents events dispatched by the `ArrayLis` class.
+     * Represents events dispatched by the `ArrayList` class.
      * 
      * @param type The type of the event.
-     * @param list The reference to the `ArrayLis` instance that dispateches this event.
+     * @param list The reference to the `ArrayList` instance that dispatches this event.
      */
-    constructor(type: any, list: ArrayList<T>) {
+    constructor(type: ArrayListEventType, list: ArrayList<T>) {
         this.type = type;
         this.list = list;
     }

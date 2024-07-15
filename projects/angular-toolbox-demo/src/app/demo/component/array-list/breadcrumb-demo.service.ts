@@ -6,6 +6,12 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-export * from './array-list';
-export * from './array-list.event';
-export * from './array-list-event-type.enum';
+import { Injectable } from '@angular/core';
+import { ArrayList } from 'projects/angular-toolbox/src/public-api';
+
+@Injectable()
+export class BreadcrumbDemoService extends ArrayList<string> {
+  constructor() {
+    super();
+  }
+}
