@@ -18,7 +18,7 @@ const LAYERS_VERSION_CONFIG: VersionConfig = {
   major: 0,
   minor: 9,
   patch: 5,
-  buildTimestamp: 1720937502057,
+  buildTimestamp: 1721047710956,
   metadata: "beta"
 };
 
