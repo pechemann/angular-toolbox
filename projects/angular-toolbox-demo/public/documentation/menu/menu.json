@@ -16,7 +16,8 @@
         { "label": "Destroyable Interface", "urlTree": [ "/resources", "documentation", "destroyable-interface" ] },
         { "label": "Global Constants", "urlTree": [ "/resources", "documentation", "global-constants" ] },
         { "label": "Safe HTML Pipe", "urlTree": [ "/resources", "documentation", "safe-html-pipe" ] },
-        { "label": "ArrayList class", "urlTree": [ "/resources", "documentation", "array-list-class" ] }
+        { "label": "ArrayList class", "urlTree": [ "/resources", "documentation", "array-list-class" ] },
+        { "label": "NetworkInformation Interface" }
     ],
     "articles": [
         { "label": "Angular Toolbox Principles" }

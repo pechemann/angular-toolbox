@@ -34,7 +34,7 @@ Angular Toolbox comes with a powerful and easy-to-use HTTP mocking framework.
 Run the following command to start the **HTTP Mocking Framework Demo** application:
 
 ```
-ng serve http-mocking-framework-example --open"
+ng serve http-mocking-framework-example --open
 ```
 
 A video presentation of the "HTTP Mocking Framework" is available on the *Angular Toolbox YouTube Channel* at:

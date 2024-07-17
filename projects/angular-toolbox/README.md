@@ -1,12 +1,8 @@
 # Angular Toolbox
 
-<p align="center">
-  <img src="https://pascalechemann.com/angular-toolbox/logo/angular-toolbox.png" alt="angular-toolbox-logo" width="120px" height="120px"/>
-  <br>
-  <i>A library that provides useful tools for Angular apps development.</i>
-</p>
+A library that provides useful tools for Angular apps development.
 
-[![Angular Toolbox version](https://img.shields.io/badge/Angular%20Toolbox-beta:.0.9.5-%231E90FF.svg)]()
+[![Angular Toolbox version](https://img.shields.io/badge/Angular%20Toolbox-beta:.0.10.0-%231E90FF.svg)]()
 
 ## License
 
