@@ -24,6 +24,12 @@ export interface NetworkInformation extends EventTarget {
      * rounded to the nearest multiple of 25 kilobits per seconds.
      */
     readonly downlink: number;
+
+    /**
+     * Returns the maximum downlink speed, in megabits per second (Mbps),
+     * for the underlying connection technology.
+     */
+    readonly downlinkMax: number;
     
     /**
      * Returns the effective type of the connection meaning one of the `EffectiveConnectionType` enum.

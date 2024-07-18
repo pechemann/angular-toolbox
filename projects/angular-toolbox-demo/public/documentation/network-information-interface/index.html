@@ -11,6 +11,7 @@
         <h5 class="mb-4">On this page</h5>
         <ul class="list-group">
             <li class="list-group-item"><a href="#downlink" onclick="appBridge.goToAnchor(event)" title="downlink">downlink</a></li>
+            <li class="list-group-item"><a href="#downlinkMax" onclick="appBridge.goToAnchor(event)" title="downlinkMax">downlinkMax</a></li>
             <li class="list-group-item"><a href="#effectiveType" onclick="appBridge.goToAnchor(event)" title="effectiveType">effectiveType</a></li>
             <li class="list-group-item"><a href="#type" onclick="appBridge.goToAnchor(event)" title="type">type</a></li>
             <li class="list-group-item"><a href="#rtt" onclick="appBridge.goToAnchor(event)" title="rtt">rtt</a></li>
@@ -55,6 +56,21 @@
 </section>
 
 <section class="col-xl-9 mb-4">
+    <h3 id="downlinkMax"><code>NetworkInformation.downlinkMax</code></h3>
+    <div class="version-info text-end mb-4 me-3" title="Experimental. Expect behavior to change in the future.">
+        <small>Experimental</span></small>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M.102 2.223A3.004 3.004 0 0 0 3.78 5.897l6.341 6.252A3.003 3.003 0 0 0 13 16a3 3 0 1 0-.851-5.878L5.897 3.781A3.004 3.004 0 0 0 2.223.1l2.141 2.142L4 4l-1.757.364zm13.37 9.019.528.026.287.445.445.287.026.529L15 13l-.242.471-.026.529-.445.287-.287.445-.529.026L13 15l-.471-.242-.529-.026-.287-.445-.445-.287-.026-.529L11 13l.242-.471.026-.529.445-.287.287-.445.529-.026L13 11z"/>
+        </svg>
+    </div>
+    <pre><code class="language-typescript">readonly downlinkMax: number</code></pre>
+    <p>
+        Returns the maximum downlink speed, in megabits per second (Mbps), for the underlying
+        connection technology.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
     <h3 id="effectiveType"><code>NetworkInformation.effectiveType</code></h3>
     <pre><code class="language-typescript">readonly effectiveType: EffectiveConnectionType</code></pre>
     <p>
@@ -66,6 +82,12 @@
 
 <section class="col-xl-9 mb-4">
     <h3 id="type"><code>NetworkInformation.type</code></h3>
+    <div class="version-info text-end mb-4 me-3" title="Experimental. Expect behavior to change in the future.">
+        <small>Experimental</span></small>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M.102 2.223A3.004 3.004 0 0 0 3.78 5.897l6.341 6.252A3.003 3.003 0 0 0 13 16a3 3 0 1 0-.851-5.878L5.897 3.781A3.004 3.004 0 0 0 2.223.1l2.141 2.142L4 4l-1.757.364zm13.37 9.019.528.026.287.445.445.287.026.529L15 13l-.242.471-.026.529-.445.287-.287.445-.529.026L13 15l-.471-.242-.529-.026-.287-.445-.445-.287-.026-.529L11 13l.242-.471.026-.529.445-.287.287-.445.529-.026L13 11z"/>
+        </svg>
+    </div>
     <pre><code class="language-typescript">readonly type: ConnectionType</code></pre>
     <p>
         Returns the type of connection a device is using to communicate with the network.
