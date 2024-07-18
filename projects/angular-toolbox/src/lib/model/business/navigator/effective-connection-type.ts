@@ -7,7 +7,7 @@
  */
 
 /**
- * The effective type of connection as defined by the `NetworkInformation.effectiveType`property.
+ * The effective type of connection as defined by the `NetworkInformation.effectiveType` property.
  */
 export type EffectiveConnectionType =
    '2g'

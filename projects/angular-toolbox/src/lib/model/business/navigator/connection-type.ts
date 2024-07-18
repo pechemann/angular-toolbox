@@ -7,7 +7,7 @@
  */
 
 /**
- * The type of connection as defined by the `NetworkInformation.type`property.
+ * The type of connection as defined by the `NetworkInformation.type` property.
  */
 export type ConnectionType =
     'bluetooth'

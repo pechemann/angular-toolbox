@@ -1,0 +1,140 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+ 
+<nav class="page-menu col-xl-3 ps-4">
+    <section class="w-100">
+        <h5 class="mb-4">On this page</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="#downlink" onclick="appBridge.goToAnchor(event)" title="downlink">downlink</a></li>
+            <li class="list-group-item"><a href="#effectiveType" onclick="appBridge.goToAnchor(event)" title="effectiveType">effectiveType</a></li>
+            <li class="list-group-item"><a href="#type" onclick="appBridge.goToAnchor(event)" title="type">type</a></li>
+            <li class="list-group-item"><a href="#rtt" onclick="appBridge.goToAnchor(event)" title="rtt">rtt</a></li>
+            <li class="list-group-item"><a href="#saveData" onclick="appBridge.goToAnchor(event)" title="saveData">saveData</a></li>
+            <li class="list-group-item"><a href="#onchange" onclick="appBridge.goToAnchor(event)" title="onchange">onchange</a></li>
+            <li class="list-group-item"><a href="#EffectiveConnectionType" onclick="appBridge.goToAnchor(event)" title="EffectiveConnectionType"><code>EffectiveConnectionType</code></a></li>
+            <li class="list-group-item"><a href="#ConnectionType" onclick="appBridge.goToAnchor(event)" title="ConnectionType"><code>ConnectionType</code></a></li>
+        </ul>
+        <ul class="list-group mt-4">
+            <li class="list-group-item icon-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation'])" title="Documentation">
+                    Documentation
+                </a>
+            </li>
+        </div>
+    </section>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3"><code>NetworkInformation</code> Interface</h2>
+    <div class="version-info text-end mb-4 me-3">
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 0.10.0</span></small>
+    </div>
+    <p>
+        The <code>NetworkInformation</code> interface of the Network Information API provides
+        information about the connection a device is using to communicate with the network
+        and provides a means for scripts to be notified if the connection type changes.
+        The <code>NetworkInformation</code> interface cannot be instantiated. It is instead
+        accessed through the connection property of the <code>Navigator</code> interface or 
+        the <code>WorkerNavigator</code> interface.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="downlink"><code>NetworkInformation.downlink</code></h3>
+    <pre><code class="language-typescript">readonly downlink: number</code></pre>
+    <p>
+        Returns the effective bandwidth estimate in megabits per second, rounded to the nearest
+        multiple of 25 kilobits per seconds.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="effectiveType"><code>NetworkInformation.effectiveType</code></h3>
+    <pre><code class="language-typescript">readonly effectiveType: EffectiveConnectionType</code></pre>
+    <p>
+        Returns the effective type of the connection meaning one of the <code>EffectiveConnectionType</code>
+        enum.  This value is determined using a combination of recently observed round-trip time and
+        downlink values.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="type"><code>NetworkInformation.type</code></h3>
+    <pre><code class="language-typescript">readonly type: ConnectionType</code></pre>
+    <p>
+        Returns the type of connection a device is using to communicate with the network.
+        It will be one of the <code>ConnectionType</code> enum.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="rtt"><code>NetworkInformation.rtt</code></h3>
+    <pre><code class="language-typescript">readonly rtt: number</code></pre>
+    <p>
+        Returns the estimated effective round-trip time of the current connection,
+        rounded to the nearest multiple of 25 milliseconds.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="saveData"><code>NetworkInformation.saveData</code></h3>
+    <pre><code class="language-typescript">readonly saveData: boolean</code></pre>
+    <p>
+        Returns <code>true</code> whether the user has set a reduced data usage option on the user agent.
+        <code>false</code> otherwise.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="onchange"><code>NetworkInformation.onchange</code></h3>
+    <pre><code class="language-typescript">onchange: EventListener</code></pre>
+    <p>
+        The event that is fired when connection information changes.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="EffectiveConnectionType"><code>EffectiveConnectionType</code></h3>
+    <p>
+        The effective type of connection as defined by the <code>NetworkInformation.effectiveType</code> property.
+        <br>
+        Possible values are:
+    </p>
+    <ul>
+        <li><code>2g</code></li>
+        <li><code>3g</code></li>
+        <li><code>4g</code></li>
+        <li><code>slow-2g</code></li>
+    </ul>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="ConnectionType"><code>ConnectionType</code></h3>
+    <p>
+        The type of connection as defined by the <code>NetworkInformation.type</code> property.
+        <br>
+        Possible values are:
+    </p>
+    <ul>
+        <li><code>bluetooth</code></li>
+        <li><code>cellular</code></li>
+        <li><code>ethernet</code></li>
+        <li><code>mixed</code></li>
+        <li><code>none</code></li>
+        <li><code>other</code></li>
+        <li><code>unknown</code></li>
+        <li><code>wifi</code></li>
+        <li><code>wimax</code></li>
+    </ul>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'EffectiveConnectionType Interface' }]">
+</object>

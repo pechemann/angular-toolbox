@@ -33,7 +33,7 @@ export interface NetworkInformation extends EventTarget {
 
     /**
      * Returns the type of connection a device is using to communicate with the network.
-     * It will be one of the `ConnectionType` enum
+     * It will be one of the `ConnectionType` enum.
      */
     readonly type: ConnectionType;
     
@@ -44,7 +44,7 @@ export interface NetworkInformation extends EventTarget {
     readonly rtt: number;
 
     /**
-     * Returns `true` iwhether the user has set a reduced data usage option on the user agent.
+     * Returns `true` whether the user has set a reduced data usage option on the user agent.
      * `false` otherwise.
      */
     readonly saveData: boolean;
