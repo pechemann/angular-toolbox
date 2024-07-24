@@ -14,7 +14,6 @@ import { DARK_MODE_CONFIG, VERSION_CONFIG, httpMockFactory } from 'projects/angu
 import { provideHttpClient } from '@angular/common/http';
 import { XhrFactory } from '@angular/common';
 
-
 const scrollConfig: InMemoryScrollingOptions = {
   scrollPositionRestoration: 'top',
   anchorScrolling: 'enabled',
