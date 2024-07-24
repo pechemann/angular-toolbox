@@ -54,12 +54,12 @@ export interface BatteryManager extends EventTarget {
      * 
      * @param event A generic `Event`.
      */
-    chargingtimechange(event: Event): void;
+    onchargingtimechange(event: Event): void;
 
     /**
      * Fired when the battery level (the `level` property) is updated.
      * 
      * @param event A generic `Event`.
      */
-    dischargingtimechange(event: Event): void;
+    ondischargingtimechange(event: Event): void;
 }
