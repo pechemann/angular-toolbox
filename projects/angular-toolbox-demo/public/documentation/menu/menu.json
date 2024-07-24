@@ -17,7 +17,8 @@
         { "label": "Global Constants", "urlTree": [ "/resources", "documentation", "global-constants" ] },
         { "label": "Safe HTML Pipe", "urlTree": [ "/resources", "documentation", "safe-html-pipe" ] },
         { "label": "ArrayList class", "urlTree": [ "/resources", "documentation", "array-list-class" ] },
-        { "label": "NetworkInformation Interface", "urlTree": [ "/resources", "documentation", "network-information-interface" ] }
+        { "label": "NetworkInformation Interface", "urlTree": [ "/resources", "documentation", "network-information-interface" ] },
+        { "label": "BatteryManager Interface", "urlTree": [ "/resources", "documentation", "battery-manager" ] }
     ],
     "articles": [
         { "label": "Angular Toolbox Principles" }
