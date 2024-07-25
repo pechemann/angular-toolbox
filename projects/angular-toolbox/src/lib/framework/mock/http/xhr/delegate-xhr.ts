@@ -233,31 +233,36 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
         const httpResponseMock: HttpResponseMock = (rc.methodConfig as any).data(request, rc.parameters);
         let timer: number = httpResponseMock.delay || 0;
         if (timer > MAX_TIMER) timer = MAX_TIMER;
-        this._loadSubscription = this.loadData(httpResponseMock).subscribe((data: any) => {
-            this._dataStorage = DataStorageBuilder.buildDataStorage(httpResponseMock, data);
-            const error: HttpMockError | null = this._dataStorage.httpResponse.error;
-            setTimeout(()=> {
-                this.setReadyState(this.HEADERS_RECEIVED);
-                if (error) return this.onError(error);
-                this.setReadyState(this.LOADING);
-                const response: HttpResponseMock = this._dataStorage.httpResponse;
-                let headers: any = response.headers;
-                if (headers) {
-                    this._headers.keys().forEach((key: string)=> {
-                        headers = headers.set(key, this._headers.get(key) as any)
-                    });
-                    this._headers = headers;
-                }
-                if (!this._progressiveDownload) {
-                    this._statusText = response.statusText || EMPTY_STRING;
-                    this._status = response.status || 0;
-                    return this.onLoadComplete();
-                }
-                this.doProgressiveDownload();
-            }, timer);
+        this._loadSubscription = this.loadData(httpResponseMock).subscribe({
+            next: (data: any) => {
+                this.setDataStorage(httpResponseMock, data);
+                const error: HttpMockError | null = this._dataStorage.httpResponse.error;
+                setTimeout(()=> {
+                    this.setReadyState(this.HEADERS_RECEIVED);
+                    if (error) return this.onError(error);
+                    this.setReadyState(this.LOADING);
+                    const response: HttpResponseMock = this._dataStorage.httpResponse;
+                    let headers: any = response.headers;
+                    if (headers) {
+                        this._headers.keys().forEach((key: string)=> {
+                            headers = headers.set(key, this._headers.get(key) as any)
+                        });
+                        this._headers = headers;
+                    }
+                    if (!this._progressiveDownload) {
+                        this._statusText = response.statusText || EMPTY_STRING;
+                        this._status = response.status || 0;
+                        return this.onLoadComplete();
+                    }
+                    this.doProgressiveDownload();
+                }, timer);
+            },
+            error: (err: any) => {
+                this.setDataStorage(httpResponseMock);
+                this.onError(err);
+            }
         });
     }
-
     /**
      * Sets the value of an HTTP request header.
      * 
@@ -276,7 +281,7 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
         const methodConfig: HttpMethodMock = routeConfig.methodConfig;
         this._routeConfig = routeConfig;
         this._progressiveDownload = methodConfig.progressive || false;
-        this.responseType = methodConfig.responseType || "";
+        this.responseType = methodConfig.responseType || EMPTY_STRING as any;
         this._headers = new HttpHeaders();
     }
     
@@ -377,5 +382,11 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
     private loadData(httpResponseMock: HttpResponseMock): Observable<any> {
         const responseBody: any | Observable<any> = httpResponseMock.body;
         return (responseBody instanceof Observable) ? responseBody : of(responseBody);
+    }
+    /**
+     * @private 
+     */
+    private setDataStorage(responseMock: HttpResponseMock, data: any = null): void {
+        this._dataStorage =  DataStorageBuilder.buildDataStorage(responseMock, data);
     }
 }

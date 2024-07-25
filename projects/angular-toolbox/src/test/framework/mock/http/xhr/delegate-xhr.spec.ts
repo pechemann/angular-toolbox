@@ -9,10 +9,16 @@
 import { HTTPMethodRef } from 'projects/angular-toolbox/src/lib/framework/mock/http/util/http-method-ref.enum';
 import { DelegateXhr } from 'projects/angular-toolbox/src/lib/framework/mock/http/xhr/delegate-xhr';
 import { EMPTY_STRING, httpResponseMock } from 'projects/angular-toolbox/src/public-api';
-import { BODY, BODY_SIZE, ERROR, HTTP_STATUS, I_M_A_TEA_POT, ROUTE_CONFIG, ROUTE_CONFIG_WITH_ERROR, URL } from './util/delegate-xhr-test-util';
+import { BODY, BODY_SIZE, ERROR, HTTP_ERROR, HTTP_STATUS, I_M_A_TEA_POT, OBSERVABLE_ERROR_CONFIG, OBSERVABLE_MOCK_CONFIG, ROUTE_CONFIG, ROUTE_CONFIG_WITH_ERROR, URL } from './util/delegate-xhr-test-util';
 import { RouteMockConfig } from 'projects/angular-toolbox/src/lib/framework/mock/http/config/route-mock-config';
 import { HttpRequest } from '@angular/common/http';
 import { ProgressEventMock } from 'projects/angular-toolbox/src/lib/framework/mock/http/event/progress-event-mock';
+
+const EXPECTED_HEADERS: string = `Cache-Control: no-cache
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: ${navigator.language}
+Priority: u=0, i
+User-Agent: ${navigator.userAgent}`;
 
 describe('DelegateXhr', () => {
 
@@ -196,15 +202,10 @@ describe('DelegateXhr', () => {
     });
 
     it('getAllResponseHeaders() should return the response header values when the send() method is invoked', (done) => {
-        const expected: string = `Cache-Control: no-cache
-Accept-Encoding: gzip, deflate, br, zstd
-Accept-Language: ${navigator.language}
-Priority: u=0, i
-User-Agent: ${navigator.userAgent}`;
         xhr.open(HTTPMethodRef.GET, URL);
         xhr.send();
         setTimeout(()=> {
-            expect(xhr.getAllResponseHeaders()).toEqual(expected);
+            expect(xhr.getAllResponseHeaders()).toEqual(EXPECTED_HEADERS);
             done();
         }, 100);
     });
@@ -339,5 +340,42 @@ describe('DelegateXhr: error response', () => {
             expect(xhr.dispatchEvent).toHaveBeenCalledWith(expected);
             done();
         }, 100);
+    });
+});
+
+
+describe('DelegateXhr: observable responses', () => {
+
+    let xhr: DelegateXhr;
+
+    it('send() should return the correct response when using Observables', (done) => {
+        xhr = new DelegateXhr(OBSERVABLE_MOCK_CONFIG);
+        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.onreadystatechange = ()=> {
+            const readyState = xhr.readyState;
+            if (readyState === xhr.DONE) {
+                expect(xhr.status).toEqual(HTTP_STATUS);
+                expect(xhr.statusText).toEqual(I_M_A_TEA_POT);
+                expect(xhr.responseURL).toEqual(URL);
+                expect(xhr.responseText).toEqual(JSON.stringify(BODY));
+                expect(xhr.getAllResponseHeaders()).toEqual(EXPECTED_HEADERS);
+                done();
+            }
+        };
+        xhr.send();
+    });
+
+    it('send() should send correct error status when Observables throw an error', (done) => {
+        xhr = new DelegateXhr(OBSERVABLE_ERROR_CONFIG);
+        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.onreadystatechange = ()=> {
+            const readyState = xhr.readyState;
+            if (readyState === xhr.DONE) {
+                expect(xhr.status).toEqual(HTTP_ERROR.status);
+                expect(xhr.statusText).toEqual(HTTP_ERROR.statusText);
+                done();
+            }
+        };
+        xhr.send();
     });
 });

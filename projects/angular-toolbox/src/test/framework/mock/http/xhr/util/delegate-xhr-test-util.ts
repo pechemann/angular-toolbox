@@ -6,10 +6,11 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { HttpHeaders, HttpStatusCode } from '@angular/common/http';
+import { HttpErrorResponse, HttpHeaders, HttpStatusCode } from '@angular/common/http';
 import { RouteMockConfig } from 'projects/angular-toolbox/src/lib/framework/mock/http/config/route-mock-config';
 import { HttpHeadersUtil } from 'projects/angular-toolbox/src/lib/framework/mock/http/util/http-headers.util';
 import { HttpMockConfig, HttpMockError, httpResponseMock, Uuid } from 'projects/angular-toolbox/src/public-api';
+import { of, throwError } from 'rxjs';
 
 export const BODY: string = "Hello world!";
 export const BODY_SIZE = new Blob([JSON.stringify(BODY)]).size;
@@ -62,4 +63,26 @@ export const FOO_MOCK_CONFIG: HttpMockConfig = {
       ]
     }
   ]
+};
+
+export const OBSERVABLE_MOCK_CONFIG: RouteMockConfig = {
+  methodConfig: {
+      responseType: "text",
+      data: () => httpResponseMock().status(HTTP_STATUS)
+                                    .statusText(I_M_A_TEA_POT)
+                                    .url(URL)
+                                    .headers(HTTP_HEADERS)
+                                    .body(of(BODY)).response()
+  },
+  parameters: {}
+};
+
+export const HTTP_ERROR = new HttpErrorResponse({ error: "HTTP Error", status: 500, statusText: "Internal Server Error" });
+
+export const OBSERVABLE_ERROR_CONFIG: RouteMockConfig = {
+  methodConfig: {
+      responseType: "text",
+      data: () => httpResponseMock().body(throwError(() => HTTP_ERROR)).response()
+  },
+  parameters: {}
 };
