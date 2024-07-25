@@ -258,6 +258,7 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
                 }, timer);
             },
             error: (err: any) => {
+                this.setReadyState(this.HEADERS_RECEIVED);
                 this.setDataStorage(httpResponseMock);
                 this.onError(err);
             }

@@ -347,7 +347,7 @@ describe('DelegateXhr: error response', () => {
 describe('DelegateXhr: observable responses', () => {
 
     let xhr: DelegateXhr;
-
+    
     it('send() should return the correct response when using Observables', (done) => {
         xhr = new DelegateXhr(OBSERVABLE_MOCK_CONFIG);
         xhr.open(HTTPMethodRef.GET, URL);
@@ -359,6 +359,20 @@ describe('DelegateXhr: observable responses', () => {
                 expect(xhr.responseURL).toEqual(URL);
                 expect(xhr.responseText).toEqual(JSON.stringify(BODY));
                 expect(xhr.getAllResponseHeaders()).toEqual(EXPECTED_HEADERS);
+                done();
+            }
+        };
+        xhr.send();
+    });
+
+    it('send() should set readyState successivly to HEADERS_RECEIVED and DONE, when an error occurs with Observable objects', (done) => {
+        xhr = new DelegateXhr(OBSERVABLE_ERROR_CONFIG);
+        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.onreadystatechange = ()=> {
+            const readyState = xhr.readyState;
+            if (readyState === xhr.LOADING) fail('LOADING cannot be set whith error responses');
+            if (readyState === xhr.DONE) {
+                expect(xhr.readyState).toEqual(xhr.DONE);
                 done();
             }
         };
