@@ -36,10 +36,5 @@ export enum FetchClientResponseType {
      * Allows to return the response as a promise that resolves with a `String`.
      * The response is always decoded using UTF-8.
      */
-    TEXT = "text",
-
-    /**
-     * Allows to return the response whithout any transformation.
-     */
-    RESPONSE = "response"
+    TEXT = "text"
 }

@@ -38,12 +38,12 @@ export class FetchClientBuilder {
     /**
      * @private
      */
-    private static buildResponseStrategy(response: Response, responseType: FetchClientResponseType): Promise<any> | Response {
+    private static buildResponseStrategy(response: Response, responseType: FetchClientResponseType): Promise<any>{
         if (responseType === FetchClientResponseType.JSON) return response.json();
         if (responseType === FetchClientResponseType.BLOB) return response.blob();
         if (responseType === FetchClientResponseType.FORM_DATA) return response.formData();
         if (responseType === FetchClientResponseType.ARRAY_BUFFER) return response.arrayBuffer();
         if (responseType === FetchClientResponseType.TEXT) return response.text();
-        return response;
+        return response.json();
     }
 }
