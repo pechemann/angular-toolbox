@@ -17,11 +17,11 @@ import { FetchClientResponseType } from "./fetch-client-response-type.enum";
 export class FetchClientBuilder {
 
     /**
-     * Builds and returns a new `FetchClient` objects.
+     * Builds and returns a new `FetchClient` object.
      * 
      * @param input The definition of the resource to fetch.
      * @param init The object containing options to configure the request.
-     * @param responseType Specifies the type of resppnse for the resource to fetch.
+     * @param responseType Specifies the type of response for the resource to fetch.
      * 
      * @returns A new `FetchClient` object.
      */
