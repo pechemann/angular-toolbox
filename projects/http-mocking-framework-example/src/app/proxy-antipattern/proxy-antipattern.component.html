@@ -1,0 +1,140 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+ 
+<main>
+    <atx-page-title label="Proxy Antipattern Sample Application">
+        <p primary class="fs-5">
+            The following sample application shows the concepts discussed in the
+            <em>HTTP Mocking Proxy Antipattern video</em> on the Angular Toolbox YouTube channel.
+        </p>
+    </atx-page-title>
+    <div class="container mb-5">
+        <div class="row">
+            <div class="col-8">
+                <h2 class="mb-4 border rounded p-3">
+                    My Awsome Company Ltd.
+                </h2>
+                <div class="container mb-5">
+                    <div class="row mb-5">
+                        <div class="col-md-6 col-sm-12 mb-3">
+                            <div class="fs-5 mb-2">
+                                Get Message:
+                            </div>
+                            <div class="btn-group btn-group-lg" role="group">
+                                <button type="button" class="btn btn-outline-success" (click)="getValidMessage()">
+                                    Valid
+                                </button>
+                                <button type="button" class="btn btn-outline-danger" (click)="getInvalidMessage()">
+                                    Invalid
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="fs-5 mb-2">
+                                Post Message
+                            </div>
+                            <div class="btn-group btn-group-lg" role="group">
+                                <button type="button" class="btn btn-outline-success" (click)="postValidMessage()">
+                                    Valid
+                                </button>
+                                <button type="button" class="btn btn-outline-danger" (click)="postInvalidMessage()">
+                                    Invalid
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="card text-bg-dark mb-3">
+                            @if (error) {
+                                <div class="card-header border-bottom">
+                                    The API returned the following error:
+                                </div>
+                                <div class="card-body text-danger">
+                                    <div>
+                                        Status: {{ error.status }}
+                                    </div>
+                                    <div>
+                                        Status text: {{ error.statusText }}
+                                    </div>
+                                </div>
+                            } @else if (message) {
+                                <div class="card-header border-bottom">
+                                    The API returned the following message:
+                                </div>
+                                <div class="card-body text-info">
+                                    @if (message.status) {
+                                        <div>
+                                            Status: {{ message.status }}
+                                        </div>
+                                        <div>
+                                            Status text: {{ message.statusText }}
+                                        </div>
+                                    } @else {
+                                        <pre>{{ message }}</pre>
+                                    }
+                                    
+                                </div>
+                            } @else {
+                                <div class="card-header">
+                                    No result
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <img src="assets/lucy.webp" title="Lucy" class="img-thumbnail">
+            </div>
+        </div>
+    </div>
+    <section>
+        <div class="alert alert-info" role="alert">
+            <h5>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M1 0 0 1l2.2 3.081a1 1 0 0 0 .815.419h.07a1 1 0 0 1 .708.293l2.675 2.675-2.617 2.654A3.003 3.003 0 0 0 0 13a3 3 0 1 0 5.878-.851l2.654-2.617.968.968-.305.914a1 1 0 0 0 .242 1.023l3.27 3.27a.997.997 0 0 0 1.414 0l1.586-1.586a.997.997 0 0 0 0-1.414l-3.27-3.27a1 1 0 0 0-1.023-.242L10.5 9.5l-.96-.96 2.68-2.643A3.005 3.005 0 0 0 16 3q0-.405-.102-.777l-2.14 2.141L12 4l-.364-1.757L13.777.102a3 3 0 0 0-3.675 3.68L7.462 6.46 4.793 3.793a1 1 0 0 1-.293-.707v-.071a1 1 0 0 0-.419-.814zm9.646 10.646a.5.5 0 0 1 .708 0l2.914 2.915a.5.5 0 0 1-.707.707l-2.915-2.914a.5.5 0 0 1 0-.708M3 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026z"/>
+                </svg>
+                Instructions
+            </h5>
+            <p>
+                Please follow the instructions below to make this example work:
+            </p>
+            <ul>
+                <li>
+                    You must have a PHP server installed on your local machine.
+                </li>
+                <li>
+                    Create a project directory called <code>angular-toolbox</code> into your server.
+                </li>
+                <li>
+                    Copy the folder <code>api/message</code> and its content from the <code>php</code>
+                    directory to the <code>angular-toolbox</code> directory on your server.
+                </li>
+                <li>
+                    Create a virtual host in yout PHP server with the host name <code>angular-toolbox</code>.
+                </li>
+                <li>
+                    Start the PHP server.
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section class="mt-5">
+        <h3>Video</h3>
+        <div class="d-flex gap-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" fill="#FF0000" class="bi-youtube" viewBox="0 0 16 16">
+                <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z"/>
+            </svg>
+            <p>
+                See the detailed video on our YouTube channel:
+                <br>
+                <a title="Angular Toolbox: HTTP Mocking Framework" href="https://youtu.be/zN0SEgovFbc">https://youtu.be/zN0SEgovFbc</a>
+            </p>
+        </div>
+    </section>
+</main>

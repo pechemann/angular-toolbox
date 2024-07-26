@@ -153,7 +153,8 @@ export class HttpMockService {
       if (regexp.test(route)) {
         result = {
           methodConfig: methodMap.methodMock,
-          parameters: this.buildParameters(regexp, methodMap.keys, route)
+          parameters: this.buildParameters(regexp, methodMap.keys, route),
+          searchParams: url.searchParams
         };
         break;
       }

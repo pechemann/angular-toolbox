@@ -6,7 +6,7 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { HttpHeaders, HttpRequest, HttpStatusCode } from "@angular/common/http";
+import { HttpHeaders, HttpParams, HttpRequest, HttpStatusCode } from "@angular/common/http";
 import { XhrProxy, HttpResponseMock, HttpMethodMock, HttpMockError } from "../../../../model";
 import { ProgressEventMock } from "../event/progress-event-mock";
 import { EMPTY_STRING } from "../../../../util";
@@ -228,7 +228,7 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
      * @param body A body of data to be sent in the XHR request.
      */
     send(body?: Document | XMLHttpRequestBodyInit | null | undefined): void {
-        const request: HttpRequest<any> = new HttpRequest<any>(this._method as string, this._url as any, body);
+        const request: HttpRequest<any> = this.buildHttpRequest(body);
         const rc: RouteMockConfig = this._routeConfig;
         const httpResponseMock: HttpResponseMock = (rc.methodConfig as any).data(request, rc.parameters);
         let timer: number = httpResponseMock.delay || 0;
@@ -258,7 +258,6 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
                 }, timer);
             },
             error: (err: any) => {
-                this.setReadyState(this.HEADERS_RECEIVED);
                 this.setDataStorage(httpResponseMock);
                 this.onError(err);
             }
@@ -384,10 +383,21 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
         const responseBody: any | Observable<any> = httpResponseMock.body;
         return (responseBody instanceof Observable) ? responseBody : of(responseBody);
     }
+
     /**
      * @private 
      */
     private setDataStorage(responseMock: HttpResponseMock, data: any = null): void {
         this._dataStorage =  DataStorageBuilder.buildDataStorage(responseMock, data);
+    }
+    
+    /**
+     * @private 
+     */
+    private buildHttpRequest(body: any): HttpRequest<any> {
+        let params: HttpParams = new HttpParams();
+        const it: IterableIterator<[string, string]> = (this._routeConfig.searchParams as any).entries();
+        for (const pair of it) params = params.set(pair[0], pair[1]);
+        return new HttpRequest<any>(this._method as string, this._url as any, body, { params: params });
     }
 }

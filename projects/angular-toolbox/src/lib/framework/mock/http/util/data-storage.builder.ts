@@ -24,7 +24,7 @@ export class DataStorageBuilder {
      * @param httpResponse The `HttpResponseMock` to be stored by the framework.
      * @param data The data of the HTTP response to be stored by the framework.
      * 
-     * @returns A new `DataStorage` objects.
+     * @returns A new `DataStorage` object.
      */
     public static buildDataStorage(httpResponse: HttpResponseMock, data: any): DataStorage {
         // TODO: add support for different data types (string, Blob, etc.)

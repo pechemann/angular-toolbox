@@ -31,4 +31,11 @@ export interface RouteMockConfig {
      * The list of URI parameters associated with the current HTTP call.
      */
     parameters: HttpMockParameters | null;
+        
+    /**
+     * @private
+     * 
+     * The list of URI search parameters associated with the current HTTP call.
+     */
+    searchParams: URLSearchParams;
 }

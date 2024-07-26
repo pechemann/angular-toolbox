@@ -108,7 +108,19 @@ export const config: HttpMockConfig = &#123;
        Thus, calling the URL <code>http://my-awsome-company.com/api/sayHello/John</code>
        from angular  will return <code>"Hello John!"</code>.
     </p>
-
+    <div class="alert alert-info" role="alert">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16">
+            <use xlink:href="#infoIcon"/>
+        </svg>
+        The <em>HTTP Mocking Framework</em> uses the algorithm of the <a href="https://www.npmjs.com/package/path-to-regexp" title="path-to-regexp">path-to-regexp</a>
+        project for matching the route paths.
+        <br>
+        See the <a href="https://github.com/pillarjs/path-to-regexp?tab=readme-ov-file#parameters" title="path-to-regexp documentation">path-to-regexp documentation</a>
+        for all the possibilities in defining route paths.
+        <br><br>
+        <a href="https://forbeslindesay.github.io/express-route-tester/" title="Express Route Tester">Express Route Tester</a>
+        is a handy tool for testing basic routes.
+    </div>
 </section>
 
 <section class="col-xl-9">

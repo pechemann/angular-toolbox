@@ -12,6 +12,31 @@ import { HttpHeadersUtil } from 'projects/angular-toolbox/src/lib/framework/mock
 import { HttpMockConfig, HttpMockError, httpResponseMock, Uuid } from 'projects/angular-toolbox/src/public-api';
 import { of, throwError } from 'rxjs';
 
+class UrlSearchParamsMock extends Map<any, any> implements URLSearchParams {
+  constructor(map?: Map<string,any>) {
+    super(map);
+  }
+  append(): void {}
+  getAll(): any[] { return [] }
+  sort(): void {}
+  override forEach(): void {}
+}
+
+export const buildUrlSearchParamsMock = (...data: any): URLSearchParams=> {
+  let instance: URLSearchParams;
+  const len = data.length;
+  if (len) {
+    const map: Map<string, string> = new Map();
+    let i: number = 0;
+    for (; i <= data.length - 1; ++i) {
+      const pair = data[i];
+      map.set(pair[0], pair[1]);
+    }
+    instance = new UrlSearchParamsMock(map);
+  } else instance = new UrlSearchParamsMock();
+  return instance;
+};
+
 export const BODY: string = "Hello world!";
 export const BODY_SIZE = new Blob([JSON.stringify(BODY)]).size;
 export const I_M_A_TEA_POT: string = "I'm a teapot";
@@ -27,7 +52,8 @@ export const ROUTE_CONFIG: RouteMockConfig = {
                                       .headers(HTTP_HEADERS)
                                       .body(BODY).response()
     },
-    parameters: { id: "10" }
+    parameters: { id: "10" },
+    searchParams: buildUrlSearchParamsMock()
 };
 
 export const ERROR: HttpMockError = {
@@ -44,7 +70,8 @@ export const ROUTE_CONFIG_WITH_ERROR: RouteMockConfig = {
                                       .headers(HTTP_HEADERS)
                                       .body(BODY).response(ERROR)
     },
-    parameters: { id: "10" }
+    parameters: { id: "10" },
+    searchParams: buildUrlSearchParamsMock()
 };
 
 export const FOO_MOCK_CONFIG: HttpMockConfig = {
@@ -74,7 +101,8 @@ export const OBSERVABLE_MOCK_CONFIG: RouteMockConfig = {
                                     .headers(HTTP_HEADERS)
                                     .body(of(BODY)).response()
   },
-  parameters: {}
+  parameters: {},
+  searchParams: buildUrlSearchParamsMock()
 };
 
 export const HTTP_ERROR = new HttpErrorResponse({ error: "HTTP Error", status: 500, statusText: "Internal Server Error" });
@@ -84,5 +112,6 @@ export const OBSERVABLE_ERROR_CONFIG: RouteMockConfig = {
       responseType: "text",
       data: () => httpResponseMock().body(throwError(() => HTTP_ERROR)).response()
   },
-  parameters: {}
+  parameters: {},
+  searchParams: buildUrlSearchParamsMock()
 };

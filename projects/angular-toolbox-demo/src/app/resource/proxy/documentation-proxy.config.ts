@@ -11,7 +11,7 @@ import { HttpMockConfig, httpResponseMock } from 'projects/angular-toolbox/src/p
 import { Observable, from } from 'rxjs';
 
 const getBody = (path: string): Observable<string>=> {
-    return from(fetch(`http://localhost:4200/documentation/${path}`).then(x => x.text()));
+    return from(fetch(`http://localhost:4200/documentation/${path}`).then(r => r.text()));
 }
 
 export const DOCUMENTATION_PROXY_CONFIG: HttpMockConfig = {

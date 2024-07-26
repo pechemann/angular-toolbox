@@ -24,5 +24,9 @@ export const routes: Routes = [ {
   {
     path: 'say-hello',
     loadComponent: () => import('./my-awsome-company/component/say-hello/say-hello.component').then(mod => mod.SayHelloComponent)
+  },
+  {
+    path: 'proxy-antipattern',
+    loadComponent: () => import('./proxy-antipattern/proxy-antipattern.component').then(mod => mod.ProxyAntipatternComponent)
   }
 ];

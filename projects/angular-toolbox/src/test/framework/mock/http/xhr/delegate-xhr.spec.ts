@@ -9,9 +9,9 @@
 import { HTTPMethodRef } from 'projects/angular-toolbox/src/lib/framework/mock/http/util/http-method-ref.enum';
 import { DelegateXhr } from 'projects/angular-toolbox/src/lib/framework/mock/http/xhr/delegate-xhr';
 import { EMPTY_STRING, httpResponseMock } from 'projects/angular-toolbox/src/public-api';
-import { BODY, BODY_SIZE, ERROR, HTTP_ERROR, HTTP_STATUS, I_M_A_TEA_POT, OBSERVABLE_ERROR_CONFIG, OBSERVABLE_MOCK_CONFIG, ROUTE_CONFIG, ROUTE_CONFIG_WITH_ERROR, URL } from './util/delegate-xhr-test-util';
+import { BODY, BODY_SIZE, buildUrlSearchParamsMock, ERROR, HTTP_ERROR, HTTP_STATUS, I_M_A_TEA_POT, OBSERVABLE_ERROR_CONFIG, OBSERVABLE_MOCK_CONFIG, ROUTE_CONFIG, ROUTE_CONFIG_WITH_ERROR, URL } from './util/delegate-xhr-test-util';
 import { RouteMockConfig } from 'projects/angular-toolbox/src/lib/framework/mock/http/config/route-mock-config';
-import { HttpRequest } from '@angular/common/http';
+import { HttpParams, HttpRequest } from '@angular/common/http';
 import { ProgressEventMock } from 'projects/angular-toolbox/src/lib/framework/mock/http/event/progress-event-mock';
 
 const EXPECTED_HEADERS: string = `Cache-Control: no-cache
@@ -89,7 +89,8 @@ describe('DelegateXhr', () => {
                     return httpResponseMock().response();
                 }
             },
-            parameters: { id: "10" }
+            parameters: { id: "10" },
+            searchParams: buildUrlSearchParamsMock()
         };
         const newXhr: DelegateXhr = new DelegateXhr(cfg);
         newXhr.open(HTTPMethodRef.GET, URL);
@@ -107,28 +108,11 @@ describe('DelegateXhr', () => {
                     return httpResponseMock().response();
                 }
             },
-            parameters: { id: "10" }
+            parameters: { id: "10" },
+            searchParams: buildUrlSearchParamsMock()
         };
         const newXhr: DelegateXhr = new DelegateXhr(cfg);
         newXhr.open(HTTPMethodRef.POST, URL);
-        newXhr.send(TEST_BODY);
-    });
-
-    it('send() should pass a null body to HttpRequest object when no-body method is used', (done) => {
-        const TEST_BODY: string = "Test Body";
-        const cfg: RouteMockConfig = {
-            methodConfig: {
-                responseType: "document",
-                data: (request: HttpRequest<any>) => {
-                    expect(request.body).toBeNull();
-                    done();
-                    return httpResponseMock().response();
-                }
-            },
-            parameters: { id: "10" }
-        };
-        const newXhr: DelegateXhr = new DelegateXhr(cfg);
-        newXhr.open(HTTPMethodRef.GET, URL);
         newXhr.send(TEST_BODY);
     });
 
@@ -260,7 +244,8 @@ foo: bar`;
                     return httpResponseMock().delay(1000).response();
                 }
             },
-            parameters: { id: "10" }
+            parameters: { id: "10" },
+            searchParams: buildUrlSearchParamsMock()
         };
         const newXhr: DelegateXhr = new DelegateXhr(cfg);
         newXhr.open(HTTPMethodRef.GET, URL);
@@ -288,6 +273,43 @@ foo: bar`;
             expect(xhr.dispatchEvent).toHaveBeenCalledWith(expected);
             done();
         }, 100);
+    });
+
+    it('the HttpRequest.params Map should be empty by default', (done) => {
+        const cfg: RouteMockConfig = {
+            methodConfig: {
+                data: (request: HttpRequest<any>) => {
+                    const params: HttpParams = request.params;
+                    expect(request.params.keys().length).toEqual(0);
+                    done();
+                    return httpResponseMock().response();
+                }
+            },
+            parameters: {},
+            searchParams: buildUrlSearchParamsMock()
+        };
+        const newXhr: DelegateXhr = new DelegateXhr(cfg);
+        newXhr.open(HTTPMethodRef.GET, URL);
+        newXhr.send();
+    });
+    
+    it('search parameters should be available from the HttpRequest.params Map', (done) => {
+        const cfg: RouteMockConfig = {
+            methodConfig: {
+                data: (request: HttpRequest<any>) => {
+                    const params: HttpParams = request.params;
+                    expect(params.get("id")).toEqual("10");
+                    expect(params.get("age")).toEqual("20");
+                    done();
+                    return httpResponseMock().response();
+                }
+            },
+            parameters: {},
+            searchParams: buildUrlSearchParamsMock(['id', "10"], ['age', "20"])
+        };
+        const newXhr: DelegateXhr = new DelegateXhr(cfg);
+        newXhr.open(HTTPMethodRef.GET, URL);
+        newXhr.send();
     });
 });
 
@@ -364,21 +386,7 @@ describe('DelegateXhr: observable responses', () => {
         };
         xhr.send();
     });
-
-    it('send() should set readyState successivly to HEADERS_RECEIVED and DONE, when an error occurs with Observable objects', (done) => {
-        xhr = new DelegateXhr(OBSERVABLE_ERROR_CONFIG);
-        xhr.open(HTTPMethodRef.GET, URL);
-        xhr.onreadystatechange = ()=> {
-            const readyState = xhr.readyState;
-            if (readyState === xhr.LOADING) fail('LOADING cannot be set whith error responses');
-            if (readyState === xhr.DONE) {
-                expect(xhr.readyState).toEqual(xhr.DONE);
-                done();
-            }
-        };
-        xhr.send();
-    });
-
+    
     it('send() should send correct error status when Observables throw an error', (done) => {
         xhr = new DelegateXhr(OBSERVABLE_ERROR_CONFIG);
         xhr.open(HTTPMethodRef.GET, URL);

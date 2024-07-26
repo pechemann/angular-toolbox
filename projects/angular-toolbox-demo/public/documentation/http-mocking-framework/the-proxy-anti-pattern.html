@@ -45,7 +45,7 @@
 </header>
 
 <section class="col-xl-9">
-    <h3>The Proxy Anti-pattern</h3>
+    <h3 id="proxy-anti-pattern">The Proxy Anti-pattern</h3>
     <p>
         It is often difficult to reconcile heterogeneous environments when developing Angular applications.
         <br>
@@ -68,6 +68,53 @@ import &#123; Observable, from &#125; from 'rxjs';
 
 const getUserFromDB = (id: string): Observable&lt;any&gt; =&gt;
                        from(fetch(`http://localhost:80/api/users/$&#123;id&#125;`));
+
+export const USER_PROXY_CONFIG: HttpMockConfig = &#123;
+    interceptors: [
+        &#123;
+            id: "users",
+            endpoints: [
+                &#123;
+                    route: "/api/users/:id",
+                    get: &#123;
+                        data: (req: any, params: any)=>
+                               httpResponseMock().body(getUserFromDB(params.id)).response()
+                    &#125;
+                &#125;
+            ]
+        &#125;
+    ]
+&#125;;</code></pre></figure>
+</section>
+
+
+<section class="col-xl-9">
+    <h3 id="FetchClient">The <code>FetchClient</code> Utility</h3>
+    <p>
+        The Fetch API is not compatible with the native Angular HTTP engine.
+        It means that sending HTTP responses and errors to Angular is a complex and unituitive process.
+    </p>
+    <p>
+        The <em>HTTP Mocking Framework</em> provide an easy-to-use tool that allows developers to deal with the Fetch API issues.
+    </p>
+    <p>
+        The <code>FetchClient</code> interface allows to create objects that are consumed by the
+        <code>HttpResponseMockBuilder.body()</code> method.
+        The built-in <code>FetchClient</code> mechanism helps resolve HTTP responses and error handling to ensure
+        isofunctionality between local and remote APIs.
+    </p>
+    <p>
+        This process is completely transparent to the developer. 
+        You just have to use the FetchClientBuilder class to create new <code>FetchClient</code>
+        implementations with the specified parameters.
+    </p>
+    <figure>
+        <figcaption>user-mock.config.ts</figcaption>
+        <pre><code class="language-typescript">import &#123; HttpMockConfig, httpResponseMock, FetchClient, FetchClientBuilder &#125; from 'angular-toolbox';
+
+// Basic FetchClient sample usage:
+const getUserFromDB = (id: string): FetchClient => 
+      FetchClientBuilder.buildFetchClient(`http://localhost:80/api/users/$&#123;id&#125;`);
 
 export const USER_PROXY_CONFIG: HttpMockConfig = &#123;
     interceptors: [
