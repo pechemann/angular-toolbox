@@ -27,7 +27,8 @@ export class FetchClientBuilder {
      */
     public static buildFetchClient(input: RequestInfo | URL, init: RequestInit | null = null, responseType: FetchClientResponseType = FetchClientResponseType.JSON): FetchClient {
         return from(fetch(input, init || undefined).then((response: Response) => {
-            if (response.ok) return FetchClientBuilder.buildResponseStrategy(response, responseType);
+            const rspType: FetchClientResponseType = responseType;
+            if (response.ok) return rspType !== FetchClientResponseType.RESPONSE ? FetchClientBuilder.buildResponseStrategy(response, rspType) : response;
             throw new HttpErrorResponse({
                 status: response.status,
                 statusText: response.statusText

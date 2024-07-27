@@ -29,4 +29,8 @@ describe('FetchClientResponseType', () => {
   it('FetchClientResponseType.TEXT should be "text"', () => {
     expect(FetchClientResponseType.TEXT).toEqual("text");
   });
+
+  it('FetchClientResponseType.RESPONSE should be "response"', () => {
+    expect(FetchClientResponseType.RESPONSE).toEqual("response");
+  });
 });

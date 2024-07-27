@@ -157,4 +157,22 @@ describe('FetchClientBuilder', () => {
       }
     })
   });
+  
+  it('FetchClientResponseType.RESPONSE response type should return the response object as expected', (done) => {
+    const response = buildOkResponse(null);
+    spyOn(window, 'fetch').and.resolveTo(response);
+    const sub: Subscription = FetchClientBuilder.buildFetchClient(
+      '/foo/bar/9',
+      null,
+      FetchClientResponseType.RESPONSE
+    ).subscribe({
+      next: value => {
+        expect(value).toBeInstanceOf(Response);
+        expect(value.status).toEqual(response.status);
+        expect(value.statusText).toEqual(response.statusText);
+        sub.unsubscribe();
+        done();
+      }
+    })
+  });
 });

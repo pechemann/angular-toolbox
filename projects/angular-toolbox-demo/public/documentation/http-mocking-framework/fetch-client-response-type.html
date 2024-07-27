@@ -62,7 +62,6 @@
     <table class="table table-striped">
         <thead>
           <tr>
-            <th scope="col">Constant</th>
             <th scope="col">Value</th>
             <th scope="col">Description</th>
           </tr>
@@ -70,39 +69,45 @@
         <tbody>
           <tr>
             <td><code>ARRAY_BUFFER</code></td>
-            <td><code>"arrayBuffer"</code></td>
             <td>
               Allows to return the response as a promise that resolves with an <code>ArrayBuffer</code>.
             </td>
           </tr>
           <tr>
             <td><code>BLOB</code></td>
-            <td><code>"blob"</code></td>
             <td>
               Allows to return the response as a promise that resolves with a <code>Blob</code>.
             </td>
           </tr>
           <tr>
             <td><code>FORM_DATA</code></td>
-            <td><code>"formData"</code></td>
             <td>
               Allows to return the response as a promise that resolves with a <code>FormData</code> object.
             </td>
           </tr>
           <tr>
             <td><code>JSON</code></td>
-            <td><code>"json"</code></td>
             <td>
               Allows to return the response as a promise which resolves with the result of parsing the body text as JSON.
             </td>
           </tr>
           <tr>
             <td><code>TEXT</code></td>
-            <td><code>"text"</code></td>
             <td>
               Allows to return the response as a promise that resolves with a <code>String</code>.
               <br>
               The response is always decoded using UTF-8.
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <code>RESPONSE</code>
+
+            </td>
+            <td>
+              A special type that allows to return the response as a promise that resolves with the original <code>Response</code> object.
+              <br>
+              <small>Since <span class="badge text-bg-warning rounded-pill">v 0.11.2</span></small>
             </td>
           </tr>
         </tbody>
