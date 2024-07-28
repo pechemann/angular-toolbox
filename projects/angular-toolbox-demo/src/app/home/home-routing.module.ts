@@ -12,7 +12,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./home/home.component').then(mod => mod.HomeComponent)
+    loadComponent: () => import('./component/home.component').then(mod => mod.HomeComponent)
   }
 ];
 

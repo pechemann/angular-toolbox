@@ -13,7 +13,7 @@
             barebones example featuring some basic Demo and helpful links. Install all our examples to get started.
         </p>
         <div secondary class="text-center">
-            <img height="150" src="qrcode/demo-qrcode.svg">
+            <img height="150" src="assets/qrcode/demo-qrcode.svg">
         </div>
     </atx-page-title>
     <div class="mb-4 row g-5">
@@ -49,6 +49,21 @@
                 <a title="Angular Toolbox YouTube Channel" href="https://www.youtube.com/&#64;AngularToolbox">https://www.youtube.com/&#64;AngularToolbox</a>
             </p>
         </div>
+        <nav class="youtube-links mb-5 mt-3">
+            <ul class="d-flex gap-3">
+                @for(item of youtubeLinks; track item.link) {
+                    <li>
+                        <a [href]="item.link" [title]="item.title">
+                            <img [ngSrc]="'assets/youtube/' + item.img + '.webp'" [title]="item.title" width="246" height="138"
+                                 class="border rounded">
+                            <h6>{{ item.title }}</h6>
+                        </a>
+
+                    </li>
+                }
+            </ul>
+
+        </nav>
     </div>
     <div class="mb-5">
         <h2>About this Application</h2>

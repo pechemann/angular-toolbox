@@ -1,0 +1,18 @@
+.youtube-links {
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    li {
+        width: 246px;
+    }
+    h6 {
+        margin: 5px;
+        text-align: center;
+        max-height: 40px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+    }
+}
