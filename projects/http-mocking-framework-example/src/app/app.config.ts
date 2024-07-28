@@ -7,7 +7,7 @@
  */
 
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { InMemoryScrollingOptions, provideRouter, withInMemoryScrolling } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
@@ -15,11 +15,18 @@ import { provideHttpClient } from '@angular/common/http';
 import { DARK_MODE_CONFIG, httpMockFactory } from 'projects/angular-toolbox/src/public-api';
 import { XhrFactory } from '@angular/common';
 
+
+const scrollConfig: InMemoryScrollingOptions = {
+  scrollPositionRestoration: 'top',
+  anchorScrolling: 'enabled',
+};
+
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideHttpClient(),
-    provideRouter(routes),
+    provideRouter(routes, withInMemoryScrolling(scrollConfig)),
     { provide: XhrFactory, useFactory: httpMockFactory },
     { provide: DARK_MODE_CONFIG, useValue: { detectBrowserSettings: false, storageKey: "http-mocking-sample-dark-mode" } }
   ]

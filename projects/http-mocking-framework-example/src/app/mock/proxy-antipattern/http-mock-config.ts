@@ -35,10 +35,7 @@ export const MESSAGE_PROXY_MOCK_CONFIG: HttpMockConfig = {
                         data: (req: HttpRequest<any>)=> {
                             return httpResponseMock().body(postMessage(req.body)).response();
                         }
-                    }
-                },
-                {
-                    route: "/api/message",
+                    },
                     get: {
                         data: (req: HttpRequest<any>)=> {
                             const id: string = req.params.get("id") as any;
