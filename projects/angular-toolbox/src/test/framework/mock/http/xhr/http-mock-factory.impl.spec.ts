@@ -10,6 +10,7 @@ import { TestBed } from '@angular/core/testing';
 import { HttpMockService } from '../../../../../lib/model/service/mock/http/http-mock.service';
 import { XhrProxyFactoryImpl } from '../../../../../lib/framework/mock/http/xhr/http-mock-factory.impl';
 import { XhrProxyImpl } from 'projects/angular-toolbox/src/lib/framework/mock/http/xhr/xhr-proxy-impl';
+import { DOCUMENT } from '@angular/common';
 
 describe('XhrProxyFactoryImpl', () => {
 
@@ -18,7 +19,7 @@ describe('XhrProxyFactoryImpl', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        HttpMockService
+        { provide: HttpMockService, deps: [DOCUMENT] }
       ]
     });
     mockService = TestBed.inject(HttpMockService);

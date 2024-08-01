@@ -11,12 +11,17 @@ import { HttpMockConfig, HttpMockService } from '../../../../../lib/model';
 import { getEmptyMockConfig, EMPTY_MOCK_CONFIG_WITH_ID, INVALID_ORIGIN, VALID_ORIGIN, MOCK_CONFIG } from './http-mock.service.util';
 import { HttpMockServiceError, Uuid } from 'projects/angular-toolbox/src/public-api';
 import { HTTPMethodRef } from 'projects/angular-toolbox/src/lib/framework/mock/http/util/http-method-ref.enum';
+import { DOCUMENT } from '@angular/common';
 
 describe('HttpMockService', () => {
   let service: HttpMockService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [
+        { provide: HttpMockService, deps: [DOCUMENT] }
+      ]
+    });
     service = TestBed.inject(HttpMockService);
   });
 

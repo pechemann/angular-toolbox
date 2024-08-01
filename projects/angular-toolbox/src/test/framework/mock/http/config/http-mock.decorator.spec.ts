@@ -9,6 +9,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { getInvalidComponentOnDestroy, getInvalidComponentOnInit, InvalidComponentMockService, FooComponent, UUID } from "../test-utils/http-mock-test-utils";
 import { HttpMockService, Uuid } from "projects/angular-toolbox/src/public-api";
+import { DOCUMENT } from "@angular/common";
 
 describe('HttpMock', () => {
 
@@ -18,7 +19,7 @@ describe('HttpMock', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             providers: [
-                HttpMockService
+                { provide: HttpMockService, deps: [DOCUMENT] }
             ]
         }).compileComponents()
         service = TestBed.inject(HttpMockService)

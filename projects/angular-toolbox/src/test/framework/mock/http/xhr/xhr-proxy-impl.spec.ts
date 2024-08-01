@@ -12,6 +12,7 @@ import { EMPTY_STRING, HttpMockService } from 'projects/angular-toolbox/src/publ
 import { FOO_MOCK_CONFIG, URL } from './util/delegate-xhr-test-util';
 import { XhrProxyImpl } from 'projects/angular-toolbox/src/lib/framework/mock/http/xhr/xhr-proxy-impl';
 import { TestBed } from '@angular/core/testing';
+import { DOCUMENT } from '@angular/common';
 
 const getError = (invokator: string): Error=> {
     return new Error(`Attempt to call ${invokator}() method before calling open().`)
@@ -24,7 +25,7 @@ describe('XhrProxyImpl', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
-                HttpMockService
+                { provide: HttpMockService, deps: [DOCUMENT] }
             ]
         });
         configService = TestBed.inject(HttpMockService);

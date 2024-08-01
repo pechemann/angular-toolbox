@@ -99,11 +99,13 @@ export class HttpMockingFrameworkConfigManager implements Destroyable {
      */
     public destroy(): void {
         const cfg: HttpMockingFrameworkConfig = this._config;
-        if (cfg && !cfg.disableVisualFlag) this._document;
-        const doc: Document = this._config as any;
-        const flag: HTMLDivElement = doc.getElementById(FLAG_ID) as any;
-        flag.onmouseover = flag.onmouseout =null;
-        doc.removeChild(flag);
+        if (cfg && cfg.disableVisualFlag) return;
+        const doc: Document = this._document;
+        const flag: HTMLElement | null = doc.getElementById(FLAG_ID);
+        if (flag) {
+            flag.onmouseover = flag.onmouseout =null;
+            doc.body.removeChild(flag);
+        }
     }
 
     /**
