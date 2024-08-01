@@ -7,11 +7,12 @@
  */
 
 import { TestBed } from '@angular/core/testing';
-import { HttpMockConfig, HttpMockService } from '../../../../../lib/model';
+import { HTTP_MOCKING_FRAMEWORK_CONFIG, HttpMockConfig, HttpMockingFrameworkConfig, HttpMockProductionPolicy, HttpMockService } from '../../../../../lib/model';
 import { getEmptyMockConfig, EMPTY_MOCK_CONFIG_WITH_ID, INVALID_ORIGIN, VALID_ORIGIN, MOCK_CONFIG } from './http-mock.service.util';
 import { HttpMockServiceError, Uuid } from 'projects/angular-toolbox/src/public-api';
 import { HTTPMethodRef } from 'projects/angular-toolbox/src/lib/framework/mock/http/util/http-method-ref.enum';
 import { DOCUMENT } from '@angular/common';
+import { HttpMockingFrameworkConfigManager } from 'projects/angular-toolbox/src/lib/util/http-mocking-framework-config.manager';
 
 describe('HttpMockService', () => {
   let service: HttpMockService;
@@ -152,5 +153,84 @@ describe('HttpMockService', () => {
     expect(result.parameters.id).toEqual("1");
     result = service.getRouteConfig(testUrl2, HTTPMethodRef.DELETE);
     expect(result.parameters.id).toEqual("25");
+  });
+  
+  it('configMmanager should return and instance of the HttpMockingFrameworkConfigManager class', () => {
+    expect(service.configMmanager).toBeInstanceOf(HttpMockingFrameworkConfigManager);
+  });
+});
+
+describe('HttpMockService: config test', () => {
+
+  // Since the HttpMockingFrameworkConfigManager is instanciated in the constructor,
+  // we just need to cover its instance invokations by the service.
+  let service: HttpMockService;
+
+  beforeEach(() => {
+    const config: HttpMockingFrameworkConfig = {
+      disableVisualFlag: true,
+      productionPolicy: HttpMockProductionPolicy.WARNING
+    }
+    TestBed.configureTestingModule({
+      providers: [
+        { provide: HTTP_MOCKING_FRAMEWORK_CONFIG, useValue: config },
+        { provide: HttpMockService, deps: [DOCUMENT, HTTP_MOCKING_FRAMEWORK_CONFIG] }
+      ]
+    });
+    service = TestBed.inject(HttpMockService);
+  });
+
+  it('configMmanager.disableVisualFlag should return the value provided by the config object', () => {
+    expect(service.configMmanager.disableVisualFlag).toBeTrue();
+  });
+  
+  it('configMmanager.productionPolicy should return the value provided by the config object', () => {
+    expect(service.configMmanager.productionPolicy).toEqual(HttpMockProductionPolicy.WARNING);
+  });
+  
+  it('addConfig() should invoke the checkPolicy() method of the config manager object', () => {
+    const manager: HttpMockingFrameworkConfigManager = service.configMmanager;
+    spyOn(manager, "checkPolicy");
+    service.addConfig(EMPTY_MOCK_CONFIG_WITH_ID);
+    expect(manager.checkPolicy).toHaveBeenCalled();
+  });
+  
+  it('ngOnDestroy() should invoke the checkPolicy() method of the config manager object', () => {
+    const manager: HttpMockingFrameworkConfigManager = service.configMmanager;
+    spyOn(manager, "checkPolicy");
+    service.ngOnDestroy();
+    expect(manager.checkPolicy).toHaveBeenCalled();
+  });
+  
+  it('removeConfig() should invoke the checkPolicy() method of the config manager object', () => {
+    const manager: HttpMockingFrameworkConfigManager = service.configMmanager;
+    const id: Uuid = service.addConfig(EMPTY_MOCK_CONFIG_WITH_ID);
+    spyOn(manager, "checkPolicy");
+    service.removeConfig(id);
+    expect(manager.checkPolicy).toHaveBeenCalled();
+  });
+  
+  it('clearConfigs() should invoke the checkPolicy() method of the config manager object', () => {
+    const manager: HttpMockingFrameworkConfigManager = service.configMmanager;
+    spyOn(manager, "checkPolicy");
+    service.clearConfigs();
+    expect(manager.checkPolicy).toHaveBeenCalled();
+  });
+
+  it('clearConfigs() should invoke the checkPolicy() method of the config manager object', () => {
+    const manager: HttpMockingFrameworkConfigManager = service.configMmanager;
+    spyOn(manager, "checkPolicy");
+    service.clearConfigs();
+    expect(manager.checkPolicy).toHaveBeenCalled();
+  });
+  
+  it('getRouteConfig() should invoke the checkPolicy() method of the config manager object with the specified rout path and HTTP method', () => {
+    const manager: HttpMockingFrameworkConfigManager = service.configMmanager;
+    const route: string = "/test/1";
+    const testUrl: URL = new URL(VALID_ORIGIN + route);
+    service.addConfig(MOCK_CONFIG);
+    spyOn(manager, "checkPolicy");
+    service.getRouteConfig(testUrl, HTTPMethodRef.DELETE);
+    expect(manager.checkPolicy).toHaveBeenCalledWith(route, HTTPMethodRef.DELETE);
   });
 });

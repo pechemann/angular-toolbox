@@ -76,21 +76,13 @@ export class HttpMockService extends IdentifiableComponent implements OnDestroy 
    * The reference to the èHttpMockingFrameworkConfigManager` instance.
    */
   private readonly _configMmanager: HttpMockingFrameworkConfigManager;
-  
-  /**
-   * Returns the value specified by the `disableVisualFlag` of the `HttpMockingFrameworkConfig` provider,
-   * or `false` when no provider is defined.
-   */
-  public get disableVisualFlag(): boolean {
-    return this._configMmanager.disableVisualFlag;
-  }
 
   /**
-   * Returns the value specified by the `productionPolicy` of the `HttpMockingFrameworkConfig` provider,
-   * or `HttpMockProductionPolicy.ERROR` when no provider is defined.
+   * Returns the vreference to the `HttpMockingFrameworkConfigManager` instance,
+   * associated with this service.
    */
-  public get productionPolicy(): HttpMockProductionPolicy {
-    return this._configMmanager.productionPolicy;
+  public get configMmanager(): HttpMockingFrameworkConfigManager {
+    return this._configMmanager;
   }
 
   /**
@@ -109,6 +101,7 @@ export class HttpMockService extends IdentifiableComponent implements OnDestroy 
    * @private
    */
   public ngOnDestroy(): void {
+    this._configMmanager.checkPolicy();
     this._configMmanager.destroy();
   }
 
@@ -120,6 +113,7 @@ export class HttpMockService extends IdentifiableComponent implements OnDestroy 
    */
   public addConfig(config: HttpMockConfig): Uuid {
     const origin: string = config.origin || this.APP_ORIGIN;
+    this._configMmanager.checkPolicy();
     this.checkOrigin(origin);
     let id: Uuid | undefined = config.id;
     if (!id) {
@@ -149,6 +143,7 @@ export class HttpMockService extends IdentifiableComponent implements OnDestroy 
    * @param uuid The UUID of the configuration to remove.
    */
   public removeConfig(uuid: Uuid): void {
+    this._configMmanager.checkPolicy();
     if (!this.hasRegisteredConfig(uuid)) return;
     const configId: string = uuid.toString();
     this._configList.forEach((value: Map<string, HttpMockEndpointStorage[]>, key: string) => {
@@ -162,6 +157,7 @@ export class HttpMockService extends IdentifiableComponent implements OnDestroy 
    * Removes all registred configurations from this `HttpMockService` instance.
    */
   public clearConfigs(): void {
+    this._configMmanager.checkPolicy();
     this._configList.clear();
     this._configIdList.length = 0;
   }
