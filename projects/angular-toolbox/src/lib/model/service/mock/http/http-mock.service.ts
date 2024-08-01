@@ -6,7 +6,7 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { Inject, Injectable, OnDestroy, Optional } from '@angular/core';
+import { Inject, Injectable, isDevMode, OnDestroy, Optional } from '@angular/core';
 import { HttpMockInterceptor, HttpMockConfig, HttpMethodMock, HttpMockEndpoint, HTTP_MOCKING_FRAMEWORK_CONFIG, HttpMockProductionPolicy } from '../../../business';
 import { HTTPMethodRef } from '../../../../framework/mock/http/util/http-method-ref.enum';
 import { tokenDataToRegexp } from '../../../../framework/mock/http/path-to-regexp/token-data-to-regexp';
@@ -102,7 +102,7 @@ export class HttpMockService extends IdentifiableComponent implements OnDestroy 
    */
   constructor(@Inject(DOCUMENT) document: Document, @Optional() @Inject(HTTP_MOCKING_FRAMEWORK_CONFIG) config: HttpMockingFrameworkConfig) {
     super(HTTP_MOCK_SERVICE);
-    this._configMmanager = new HttpMockingFrameworkConfigManager(document, config);
+    this._configMmanager = new HttpMockingFrameworkConfigManager(document, isDevMode(), config);
   }
 
   /**

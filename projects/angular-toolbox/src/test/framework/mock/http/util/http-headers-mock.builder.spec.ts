@@ -7,7 +7,6 @@
  */
 
 import { HttpHeadersMockBuilder } from '../../../../../public-api';
-import { HttpHeaders } from '@angular/common/http';
 
 describe('HttpResponseMockBuilder', () => {
 

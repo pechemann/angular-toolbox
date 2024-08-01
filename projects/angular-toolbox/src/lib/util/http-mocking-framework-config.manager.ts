@@ -6,7 +6,6 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { isDevMode } from "@angular/core";
 import { Destroyable, HttpMockProductionPolicy } from "../model";
 import { HttpMockingFrameworkConfig } from "../model/business/mock/http/config/http-mocking-framework-config";
 import { HttpMockServiceError } from "../core";
@@ -40,7 +39,7 @@ export class HttpMockingFrameworkConfigManager implements Destroyable {
     /**
      * @private
      */
-    private _config!: HttpMockingFrameworkConfig;
+    private _config?: HttpMockingFrameworkConfig;
     
     /**
      * @private
@@ -57,7 +56,7 @@ export class HttpMockingFrameworkConfigManager implements Destroyable {
      * or `false` when no provider is defined.
      */
     public get disableVisualFlag(): boolean {
-        const cfg: HttpMockingFrameworkConfig = this._config;
+        const cfg: HttpMockingFrameworkConfig | undefined = this._config;
         return cfg && cfg.disableVisualFlag ? cfg.disableVisualFlag : false;
     }
 
@@ -74,11 +73,11 @@ export class HttpMockingFrameworkConfigManager implements Destroyable {
      * Creates and Initializes the manager with the specified config.
      * 
      * @param document The reference to the `Document` object, injected by Angular.
+     * @param isDevMode Indicates wheter Angular runs in development mode (`true`), or in production mode (`false`).
      * @param config The `HttpMockingFrameworkConfi` provider.
      */
-    constructor(document: Document, config: HttpMockingFrameworkConfig) {
-        const isProdMode: boolean = !isDevMode();
-        this._isProdMode = isProdMode;
+    constructor(document: Document, isDevMode: boolean, config?: HttpMockingFrameworkConfig) {
+        this._isProdMode = !isDevMode;
         this._document = document;
         this._config = config;
         this._prodPolicy = config && config.productionPolicy !== undefined ? config.productionPolicy : HttpMockProductionPolicy.ERROR;
@@ -86,6 +85,13 @@ export class HttpMockingFrameworkConfigManager implements Destroyable {
         this.createVisualFlag(document, config);
     }
     
+    /**
+     * Apply a strategy depending on the current production policy and environment.
+     * @param route An optional parameter used when the methhod is associated to a HTTP request.
+     *              Must be the representation of the intercepted route path.
+     * @param method An optional parameter used when the methhod is associated to a HTTP request.
+     *               Must be the representation of the intercepted HTTP method.
+     */
     public checkPolicy(route?: string, method: HTTPMethodRef | undefined = undefined): void {
         if (!this._isProdMode) return;
         if (this._prodPolicy === HttpMockProductionPolicy.ERROR) throw POLICY_ERROR;
@@ -98,8 +104,10 @@ export class HttpMockingFrameworkConfigManager implements Destroyable {
      * @private
      */
     public destroy(): void {
-        const cfg: HttpMockingFrameworkConfig = this._config;
-        if (cfg && cfg.disableVisualFlag) return;
+        const cfg: HttpMockingFrameworkConfig | undefined = this._config;
+        const noFlag: boolean = (cfg && cfg.disableVisualFlag) === true;
+        this._config = null as any;
+        if (noFlag)  return;
         const doc: Document = this._document;
         const flag: HTMLElement | null = doc.getElementById(FLAG_ID);
         if (flag) {
@@ -111,7 +119,7 @@ export class HttpMockingFrameworkConfigManager implements Destroyable {
     /**
      * @private
      */
-    private createVisualFlag(document: Document, config: HttpMockingFrameworkConfig): void {
+    private createVisualFlag(document: Document, config?: HttpMockingFrameworkConfig): void {
         if (config && config.disableVisualFlag) return;
         const flag: HTMLDivElement = document.createElement("div");
         const text: Text = document.createTextNode("HTTP Mocking Framwork");
