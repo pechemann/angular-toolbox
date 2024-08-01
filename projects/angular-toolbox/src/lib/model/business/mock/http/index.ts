@@ -6,3 +6,4 @@ export * from './http-mock-interceptor';
 export * from './http-mock-error';
 export * from './xhr-proxy';
 export * from './fetch-client';
+export * from './config';

@@ -6,8 +6,8 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { Injectable } from '@angular/core';
-import { HttpMockInterceptor, HttpMockConfig, HttpMethodMock, HttpMockEndpoint } from '../../../business';
+import { Inject, Injectable, Optional } from '@angular/core';
+import { HttpMockInterceptor, HttpMockConfig, HttpMethodMock, HttpMockEndpoint, HTTP_MOCKING_FRAMEWORK_CONFIG } from '../../../business';
 import { HTTPMethodRef } from '../../../../framework/mock/http/util/http-method-ref.enum';
 import { tokenDataToRegexp } from '../../../../framework/mock/http/path-to-regexp/token-data-to-regexp';
 import { RouteMockConfig } from '../../../../framework/mock/http/config/route-mock-config';
@@ -17,6 +17,9 @@ import { DEFAULT_DELIMITER } from '../../../../framework/mock/http/path-to-regex
 import { Uuid } from '../../../../util';
 import { TokenData } from '../../../../framework/mock/http/path-to-regexp/token-data';
 import { HttpMockServiceError } from '../../../../core/error';
+import { DOCUMENT } from '@angular/common';
+import { HttpMockingFrameworkConfigManager } from '../../../../util/http-mocking-framework-config.manager';
+import { HttpMockingFrameworkConfig } from '../../../business/mock/http/config/http-mocking-framework-config';
 
 /**
  * @private
@@ -66,6 +69,25 @@ export class HttpMockService {
    * The reference to the current app URL origin.
    */
   private readonly APP_ORIGIN: string = window.location.origin;
+
+  /**
+   * @private
+   * The reference to the èHttpMockingFrameworkConfigManager` instance.
+   */
+  private readonly configMmanager: HttpMockingFrameworkConfigManager;
+
+  /**
+   * @private
+   * Creates a new `HttpMockService` instance.
+   * 
+   * @param _document The reference to the app document.
+   * @param config The optional config provider for the HTTP Mocking Framework.
+   */
+  constructor(@Inject(DOCUMENT) document: Document, @Optional() @Inject(HTTP_MOCKING_FRAMEWORK_CONFIG) config: HttpMockingFrameworkConfig) {
+    const manager: HttpMockingFrameworkConfigManager = new HttpMockingFrameworkConfigManager();
+    manager.init(document, config);
+    this.configMmanager = manager;
+  }
 
   /**
    * Adds the specified `HttpMockConfig` object to this `HttpMockService` instance.
