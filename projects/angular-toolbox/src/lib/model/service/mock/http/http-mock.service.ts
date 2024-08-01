@@ -6,8 +6,8 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { Inject, Injectable, Optional } from '@angular/core';
-import { HttpMockInterceptor, HttpMockConfig, HttpMethodMock, HttpMockEndpoint, HTTP_MOCKING_FRAMEWORK_CONFIG } from '../../../business';
+import { Inject, Injectable, OnDestroy, Optional } from '@angular/core';
+import { HttpMockInterceptor, HttpMockConfig, HttpMethodMock, HttpMockEndpoint, HTTP_MOCKING_FRAMEWORK_CONFIG, HttpMockProductionPolicy } from '../../../business';
 import { HTTPMethodRef } from '../../../../framework/mock/http/util/http-method-ref.enum';
 import { tokenDataToRegexp } from '../../../../framework/mock/http/path-to-regexp/token-data-to-regexp';
 import { RouteMockConfig } from '../../../../framework/mock/http/config/route-mock-config';
@@ -20,6 +20,7 @@ import { HttpMockServiceError } from '../../../../core/error';
 import { DOCUMENT } from '@angular/common';
 import { HttpMockingFrameworkConfigManager } from '../../../../util/http-mocking-framework-config.manager';
 import { HttpMockingFrameworkConfig } from '../../../business/mock/http/config/http-mocking-framework-config';
+import { IdentifiableComponent } from '../../../../core';
 
 /**
  * @private
@@ -44,7 +45,7 @@ interface HttpMockEndpointStorage {
 @Injectable({
   providedIn: 'root'
 })
-export class HttpMockService {
+export class HttpMockService extends IdentifiableComponent implements OnDestroy {
 
   /**
    * @private
@@ -74,7 +75,23 @@ export class HttpMockService {
    * @private
    * The reference to the èHttpMockingFrameworkConfigManager` instance.
    */
-  private readonly configMmanager: HttpMockingFrameworkConfigManager;
+  private readonly _configMmanager: HttpMockingFrameworkConfigManager;
+  
+  /**
+   * Returns the value specified by the `disableVisualFlag` of the `HttpMockingFrameworkConfig` provider,
+   * or `false` when no provider is defined.
+   */
+  public get disableVisualFlag(): boolean {
+    return this._configMmanager.disableVisualFlag;
+  }
+
+  /**
+   * Returns the value specified by the `productionPolicy` of the `HttpMockingFrameworkConfig` provider,
+   * or `HttpMockProductionPolicy.ERROR` when no provider is defined.
+   */
+  public get productionPolicy(): HttpMockProductionPolicy {
+    return this._configMmanager.productionPolicy;
+  }
 
   /**
    * @private
@@ -84,9 +101,15 @@ export class HttpMockService {
    * @param config The optional config provider for the HTTP Mocking Framework.
    */
   constructor(@Inject(DOCUMENT) document: Document, @Optional() @Inject(HTTP_MOCKING_FRAMEWORK_CONFIG) config: HttpMockingFrameworkConfig) {
-    const manager: HttpMockingFrameworkConfigManager = new HttpMockingFrameworkConfigManager();
-    manager.init(document, config);
-    this.configMmanager = manager;
+    super(HTTP_MOCK_SERVICE);
+    this._configMmanager = new HttpMockingFrameworkConfigManager(document, config);
+  }
+
+  /**
+   * @private
+   */
+  public ngOnDestroy(): void {
+    this._configMmanager.destroy();
   }
 
   /**
@@ -164,6 +187,7 @@ export class HttpMockService {
   public getRouteConfig(url: URL, method: HTTPMethodRef): RouteMockConfig | undefined {
     const urlConfigList: Map<string, HttpMockEndpointStorage[]> | undefined = this._configList.get(url.origin);
     const route: string = url.pathname;
+    this._configMmanager.checkPolicy(route, method);
     let result: RouteMockConfig | undefined = undefined;
     if (!urlConfigList) return result;
     const methodList: HttpMockEndpointStorage[] | undefined = urlConfigList.get(method);

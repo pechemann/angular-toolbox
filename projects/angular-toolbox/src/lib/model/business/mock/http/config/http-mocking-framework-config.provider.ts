@@ -6,6 +6,7 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
+import { HttpMockProductionPolicy } from "./http-mock-production-policy.enum";
 import { HttpMockingFrameworkConfig } from "./http-mocking-framework-config";
 
 /**
@@ -15,7 +16,7 @@ import { HttpMockingFrameworkConfig } from "./http-mocking-framework-config";
  * @NgModule({
  * ...
  * providers: [
- *   { provide: HTTP_MOCKING_FRAMEWORK_CONFIG, useValue: { disableVisualFlag: false } }
+ *   { provide: HTTP_MOCKING_FRAMEWORK_CONFIG, useValue: { disableVisualFlag: true, productionPolicy: HttpMockProductionPolicy.WARNING } }
  * ],
  * ...
  * });
@@ -24,7 +25,13 @@ export const HTTP_MOCKING_FRAMEWORK_CONFIG: HttpMockingFrameworkConfig = {
     
     /**
      * Indicates whether the visual flag is visible (`false`), or not (`true`).
-     * Default value is `true`.
+     * Default value is `false`.
      */
-    disableVisualFlag: true
+    disableVisualFlag: false,
+
+    /**
+     * Indicates the behavior of the framework when it is used in production mode.
+     * Default value is `HttpMockProductionPolicy.ERROR`.
+     */
+    productionPolicy: HttpMockProductionPolicy.ERROR
 };
