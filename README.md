@@ -1,6 +1,6 @@
 # Angular Toolbox
 <p align="center">
-  <img src="https://pascalechemann.com/angular-toolbox/logo/angular-toolbox.png" alt="angular-toolbox-logo" width="120px" height="120px"/>
+  <img src="https://pascalechemann.com/angular-toolbox/assets/logo/angular-toolbox.png" alt="angular-toolbox-logo" width="120px" height="120px"/>
   <br>
   <i>A library that provides useful tools for Angular apps development.</i>
 </p>
