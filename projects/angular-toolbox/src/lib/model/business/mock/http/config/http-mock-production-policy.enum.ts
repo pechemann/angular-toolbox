@@ -18,7 +18,7 @@ export enum HttpMockProductionPolicy {
     SILENT = 0,
 
     /**
-     * Indicates that the framework send a warning message to the console when a request is intercetped in producion mode.
+     * Indicates that the framework has to send a warning message to the console when a request is intercetped in producion mode.
      */
     WARNING = 1,
 

@@ -1,0 +1,123 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100 mb-4">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework'])">
+                Presentation
+            </a>
+            </li>
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','setting-up-the-framework'])">
+                Setting up the Framework
+            </a>
+            </li>
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','creating-mock-config'])">
+                Creating Mock Config</a>
+            </li>
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','mock-config-declaration'])">
+                Mock Config Declaration</a>
+            </li>
+            <li class="list-group-item">
+                Progressive Downloads (W.I.P.)
+            </li>
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','the-proxy-anti-pattern'])">
+                The Proxy Anti-pattern</a>
+            </li>
+            <li class="list-group-item active" aria-current="true">
+                Config Provider
+            </li>
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','api'])">
+                API </a>
+            </li>
+        </ul>
+    </aside>
+    <section class="w-100">
+        <h5 class="mb-4">On this page</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="#philosophy" onclick="appBridge.goToAnchor(event)" title="HTTP Mocking Framework Philosophy">HTTP Mocking Framework Philosophy</a></li>
+            <li class="list-group-item"><a href="#config-provider" onclick="appBridge.goToAnchor(event)" title="Config Provider">Config Provider</a></li>
+            <li class="list-group-item"><a href="#disable-visual-flag" onclick="appBridge.goToAnchor(event)" title="Disabling the visual flag">Disabling the visual flag</a></li>
+            <li class="list-group-item"><a href="#prevent-production-exceptions" onclick="appBridge.goToAnchor(event)" title="Prevent Production Exceptions">Prevent Production Exceptions</a></li>
+        </ul>
+    </section>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3">HTTP Mocking Framework</h2>
+    <p>
+        The <em class="lib-name">HTTP Mocking Framework</em> provides an easy-to-use and highly configurable
+        solution to mock HTTP responses to API calls sent from your Angular applications.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9" id="philosophy">
+    <h3>HTTP Mocking Framework Philosophy</h3>
+    <p>
+        The<em> HTTP Mocking Framework</em> has been designed as a <em>development tool</em>.
+        The goal of the framework is to intercept HTTP requests in order to return mock objects.
+        So it is not a good practice to use it in a production environment, even though it is possible to do so.
+    </p>
+    <p>
+        Since the framework is fully seamless, it is easy to include it in the build without realizing it.
+        To prevent such an issue, the framework provides several safeguards. By default, the framework:
+    </p>
+    <ul>
+        <li>
+           displays a visual flag  when it runs <em>(a red ribbon on the top of the app)</em>
+        </li>
+        <li>
+            throws an exception when it runs in production mode
+        </li>
+    </ul>
+</section>
+
+<section class="col-xl-9" id="config-provider">
+    <h3>Config Provider</h3>
+    <p>
+        If you still need to deploy the framework in a production environment, it is possible to disable protections
+        by using the <em> HTTP Mocking Framework</em> <a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','http-mocking-framework-config-provider'])">config provider</a>.
+    </p>
+    <p>
+        You can declare custom config, according to the <a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','http-mocking-framework-config-interface'])">HttpMockingFrameworkConfig</a>
+        interface API, in the app providers list:
+    </p>
+    <figure>
+        <figcaption>app.config.ts</figcaption>
+        <pre><code class="language-typescript">providers: [
+    ...
+    &#123;
+        provide: HTTP_MOCKING_FRAMEWORK_CONFIG,
+        useValue: { disableVisualFlag: true, productionPolicy: HttpMockProductionPolicy.WARNING } 
+    &#125;
+    ...
+ ]</code></pre></figure>
+    <h4 id="disable-visual-flag">Disabling the visual flag</h4>
+    <p>
+        The <code>disableVisualFlag</code> property allows to disable the visual flag. 
+        If set to <code>true</code>, the visual flag will not be displayed.
+        <br>
+        (Default value is <code>false</code>.)
+    </p>
+    <h4 id="prevent-production-exceptions">Prevent Production Exceptions</h4>
+    <p>
+        The <code>productionPolicy</code> property allows to manage the framework behavior when it runs in production environment: 
+    </p>
+    <ul>
+        <li>when set to <code>HttpMockProductionPolicy.ERROR</code>, the default value, an error is thrown</li>
+        <li>when set to <code>HttpMockProductionPolicy.WARNING</code>, a warning message is sent to the console each time the framework is accessed</li>
+        <li>when set to <code>HttpMockProductionPolicy.SILENT</code>, no error is thrown and no message is sent to the console</li>
+    </ul>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'HTTP Mocking Framework', 'path': 'http-mocking-framework' }, { 'label': 'Config Provider' }]">
+</object>

@@ -31,6 +31,9 @@
             <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','the-proxy-anti-pattern'])">
                 The Proxy Anti-pattern</a>
             </li>
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','config-provider'])">
+                Config Provider</a>
+            </li>
             <li class="list-group-item active" aria-current="true">
                 API
             </li>
@@ -162,6 +165,19 @@
                 </button>
             </td>
           </tr>
+          <tr>
+            <td><code>HttpMockingFrameworkConfig</code></td>
+            <td>
+                Defines properties for the HTTP Mocking framework configuration.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/http-mocking-framework/http-mocking-framework-config-interface'])" title="HttpMockingFrameworkConfig">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
         </tbody>
         <thead>
             <tr>
@@ -250,6 +266,20 @@
                     </button>
                 </td>
             </tr>
+            <tr>
+                <td><code>HttpMockProductionPolicy</code></td>
+                <td>
+                    Defines the possible values for the <code>productionPolicy</code> property of the
+                    <code>HttpMockingFrameworkConfig</code> interface.
+                </td>
+                <td>
+                    <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/http-mocking-framework/http-mock-production-policy'])" title="HttpMockProductionPolicy">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                            <use href="#linkIcon"/>
+                        </svg>
+                    </button>
+                </td>
+            </tr>
         </tbody>
         <thead>
             <tr>
@@ -288,6 +318,28 @@
                 </td>
                 <td>
                     <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/http-mocking-framework/http-mock'])" title="@HttpMock">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                            <use href="#linkIcon"/>
+                        </svg>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+        <thead>
+            <tr>
+              <th scope="col">Provider</th>
+              <th scope="col">Description</th>
+              <th scope="col">Link</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>HTTP_MOCKING_FRAMEWORK_CONFIG</code></td>
+                <td>
+                    The default provider for the HTTP Mocking Framework configuration.
+                </td>
+                <td>
+                    <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/http-mocking-framework/http-mocking-framework-config-provider'])" title="HTTP_MOCKING_FRAMEWORK_CONFIG">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
                             <use href="#linkIcon"/>
                         </svg>
