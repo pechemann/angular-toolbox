@@ -45,6 +45,10 @@ const routes: Routes = [
   {
     path: 'array-list',
     loadComponent: () => import('./component/array-list/array-list.component').then(mod => mod.ArrayListComponent)
+  },
+  {
+    path: 'logging-framework',
+    loadComponent: () => import('./component/logging-framework/logging-framework.component').then(mod => mod.LoggingFrameworkComponent)
   }
 ];
 

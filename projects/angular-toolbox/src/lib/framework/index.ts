@@ -1,3 +1,3 @@
 
 export * from './mock/http';
-export * from './log';
+export * from './logging';

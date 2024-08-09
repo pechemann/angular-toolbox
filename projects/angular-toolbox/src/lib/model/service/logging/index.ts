@@ -1,1 +1,1 @@
-export * from './atx-logger-service';
+export * from './logger-service';

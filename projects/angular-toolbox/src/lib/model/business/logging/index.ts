@@ -1,3 +1,3 @@
-export * from "./atx-log-connector";
-export * from "./atx-log";
-export * from "./atx-logger";
+export * from "./log-connector";
+export * from "./log";
+export * from "./logger";
