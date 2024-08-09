@@ -54,6 +54,11 @@ const S_LOG_MSG: string = "atx-log-message";
 /**
  * @private
  */
+const S_LOG_METADA: string = "atx-log-metadata";
+
+/**
+ * @private
+ */
 const STYLE_ID: string = 'atx-log-container-style';
 
 /**
@@ -135,10 +140,13 @@ export class HtmlLogConnector implements LogConnector {
             this.getSpan(`[${LogUtil.dateToHHMMSS(log.timestamp)}]`, S_LOG_TIME)
         );
         d.appendChild(
-            this.getSpan(`[${log.caller}]: `, S_LOG_CALLER)
+            this.getSpan(`[${log.caller}]`, S_LOG_CALLER)
         );
         d.appendChild(
-            this.getSpan(log.message, S_LOG_MSG)
+            this.getSpan(`[${log.message}]`, S_LOG_MSG)
+        );
+        d.appendChild(
+            this.getSpan(LogUtil.metadataToString(log.metadata), S_LOG_METADA)
         );
         return d;
     }
@@ -168,7 +176,7 @@ export class HtmlLogConnector implements LogConnector {
     private injectStyle() {
         const style: HTMLStyleElement = document.createElement('style');
         style.id = STYLE_ID;
-        style.innerHTML = ".atx-log-container{width:100%;background:black;font-family:monospace;font-size:14px;padding:10px 12px}.atx-log{color:white}.atx-error-log{color:red}.atx-warn-log{color:gold}";
+        style.innerHTML = ".atx-log-container{width:100%;background:black;font-family:monospace;font-size:14px;padding:10px 12px}.atx-log{color:white}.atx-error-log{color:red}.atx-warn-log{color:gold}.atx-log-metadata{color:#469afa}";
         this._tgt.classList.add("atx-log-container");
         this.getHead().appendChild(style);
     }

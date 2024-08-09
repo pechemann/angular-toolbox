@@ -6,10 +6,9 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { HtmlLogConnector, LogBuilder, LogLevel, LogUtil, EMPTY_STRING } from "projects/angular-toolbox/src/public-api";
+import { HtmlLogConnector, LogBuilder, LogLevel, LogUtil } from "projects/angular-toolbox/src/public-api";
 
 const TIMESTAMP_REGEXP: RegExp = /\[\d{2}:\d{2}:\d{2}]/;
-const CALLER_REGEXP: RegExp = /\[.+\]:\s/;
 
 const CALLER: string = "testSuite";
 const LOG_MESSAGE: string = "Log message";
@@ -105,7 +104,6 @@ describe('HtmlLogConnector', () => {
         const htmlLog = htmlTarget.children.item(0);
         const calNode = htmlLog?.querySelector(".atx-log-caller");
         const callerNodeString: string = calNode?.innerHTML as any;
-        expect(CALLER_REGEXP.test(callerNodeString)).toBeTrue();
         expect(callerNodeString.includes(CALLER)).toBeTrue();
     });
 
@@ -114,7 +112,7 @@ describe('HtmlLogConnector', () => {
         connector.sendLog(buildLog(LogLevel.LOG));
         const htmlLog = htmlTarget.children.item(0);
         const msgNode = htmlLog?.querySelector(".atx-log-message");
-        expect(msgNode?.innerHTML).toEqual(LOG_MESSAGE);
+        expect(msgNode?.innerHTML.includes(LOG_MESSAGE)).toBeTrue();
     });
 
     it('sendLog() should process logs and display them into the HTML renderer with the right structure if log level is LogLevel.WARNING', () => {

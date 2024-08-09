@@ -39,9 +39,13 @@ export class LoggingFrameworkComponent extends IdentifiableComponent implements 
   protected logIndex: number = 0;
 
   protected sendLog(type: string): void {
-    if (type === "log") return this._loggingService.log(this.getClassRef(), "Log message - log #" + ++this.logIndex);
-    if (type === "warn") return this._loggingService.warn(this.getClassRef(), "Warning message - log #" + ++this.logIndex);
-    this._loggingService.error(this.getClassRef(), "Error message - log #" + ++this.logIndex);
+    const metadata: any = {
+      logIndex: ++this.logIndex,
+      customId: crypto.randomUUID()
+    };
+    if (type === "log") return this._loggingService.log(this.getClassRef(), "Log message", metadata);
+    if (type === "warn") return this._loggingService.warn(this.getClassRef(), "Warning message", metadata);
+    this._loggingService.error(this.getClassRef(), "Error message", metadata);
   }
 
   protected documentation: DocumentationLink = {
@@ -71,9 +75,13 @@ export class LoggingFrameworkComponent extends IdentifiableComponent implements 
   constructor(private logger: LoggerService) {}
 
   protected sendLog(type: string): void {
-    if (type === "log") return this.logger.log(this.getClassRef(), "Log message - log #" + ++this.logIndex);
-    if (type === "warn") return this.logger.warn(this.getClassRef(), "Warning message - log #" + ++this.logIndex);
-    this.logger.error(this.getClassRef(), "Error message - log #" + ++this.logIndex);
+    const metadata: any = {
+      logIndex: ++this.logIndex,
+      customId: crypto.randomUUID()
+    };
+    if (type === "log") return this._loggingService.log(this.getClassRef(), "Log message", metadata);
+    if (type === "warn") return this._loggingService.warn(this.getClassRef(), "Warning message", metadata);
+    this._loggingService.error(this.getClassRef(), "Error message", metadata);
   }
 
   public ngOnInit(): void {
