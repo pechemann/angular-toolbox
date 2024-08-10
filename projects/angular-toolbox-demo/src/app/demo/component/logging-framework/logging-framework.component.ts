@@ -31,7 +31,7 @@ export class LoggingFrameworkComponent extends IdentifiableComponent implements 
               private _loggingService: LoggerService) {
     super();
     breadcrumb.removeAll()
-              .addItem(breadcrumb.buildItem("Demo"))
+              .addItem(breadcrumb.buildItem("Demo", "/demo"))
               .addItem(breadcrumb.buildItem("Logging Framework"));
   }
 

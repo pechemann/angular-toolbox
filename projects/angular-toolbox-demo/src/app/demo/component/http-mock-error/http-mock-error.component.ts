@@ -36,7 +36,7 @@ export class HttpMockErrorComponent extends IdentifiableComponent implements OnD
               breadcrumb: BreadcrumbService) {
     super();
     breadcrumb.removeAll()
-              .addItem(breadcrumb.buildItem("Demo"))
+              .addItem(breadcrumb.buildItem("Demo", "/demo"))
               .addItem(breadcrumb.buildItem("HTTP Mock Error"));
     this._httpMockService.addConfig(config);
   }

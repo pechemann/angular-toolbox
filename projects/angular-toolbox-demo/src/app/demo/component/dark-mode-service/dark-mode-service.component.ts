@@ -32,7 +32,7 @@ export class DarkModeServiceComponent implements OnDestroy {
   constructor(public darkModeService: DarkModeService,
               breadcrumb: BreadcrumbService) {
     breadcrumb.removeAll()
-              .addItem(breadcrumb.buildItem("Demo"))
+              .addItem(breadcrumb.buildItem("Demo", "/demo"))
               .addItem(breadcrumb.buildItem("Dark Mode Service"));
     this._darkModeEnabled = this.darkModeService.darkModeEnabled();
     this.darkModeService.disableDarkMode();

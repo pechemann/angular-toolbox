@@ -28,7 +28,7 @@ export class ScrollServiceComponent extends IdentifiableComponent implements OnI
               private _subscription: SubscriptionService) {
     super();
     breadcrumb.removeAll()
-      .addItem(breadcrumb.buildItem("Demo"))
+      .addItem(breadcrumb.buildItem("Demo", "/demo"))
       .addItem(breadcrumb.buildItem("Dark Mode Service"));
   }
 

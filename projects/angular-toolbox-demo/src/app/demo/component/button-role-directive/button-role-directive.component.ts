@@ -34,7 +34,7 @@ export class ButtonRoleDirectiveComponent {
 
   constructor(breadcrumb: BreadcrumbService) {
     breadcrumb.removeAll()
-              .addItem(breadcrumb.buildItem("Demo"))
+              .addItem(breadcrumb.buildItem("Demo", "/demo"))
               .addItem(breadcrumb.buildItem("ButtonRole Directive"));
   }
 

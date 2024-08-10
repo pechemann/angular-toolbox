@@ -33,7 +33,7 @@ export class VersionServiceComponent {
               public versionService: AngularToolboxVersionService,
               breadcrumb: BreadcrumbService) {
     breadcrumb.removeAll()
-              .addItem(breadcrumb.buildItem("Demo"))
+              .addItem(breadcrumb.buildItem("Demo", "/demo"))
               .addItem(breadcrumb.buildItem("Version Service"));
   }
 

@@ -33,7 +33,7 @@ export class SubscriptionServiceComponent extends IdentifiableComponent implemen
               breadcrumb: BreadcrumbService) {
     super();
     breadcrumb.removeAll()
-              .addItem(breadcrumb.buildItem("Demo"))
+              .addItem(breadcrumb.buildItem("Demo", "/demo"))
               .addItem(breadcrumb.buildItem("Subscription Service"));
   }
 

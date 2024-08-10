@@ -33,7 +33,7 @@ export class ArrayListComponent {
   constructor(breadcrumb: BreadcrumbService,
               public breadcrumbDemoService: BreadcrumbDemoService) {
     breadcrumb.removeAll()
-              .addItem(breadcrumb.buildItem("Demo"))
+              .addItem(breadcrumb.buildItem("Demo", "/demo"))
               .addItem(breadcrumb.buildItem("ArrayList Class"));
   }
 

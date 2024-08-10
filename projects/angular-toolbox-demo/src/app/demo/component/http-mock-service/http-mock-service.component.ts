@@ -36,7 +36,7 @@ export class HttpMockServiceComponent extends IdentifiableComponent implements O
               breadcrumb: BreadcrumbService) {
     super();
     breadcrumb.removeAll()
-              .addItem(breadcrumb.buildItem("Demo"))
+              .addItem(breadcrumb.buildItem("Demo", "/demo"))
               .addItem(breadcrumb.buildItem("HTTP Mock Service"));
     this._httpMockService.addConfig(config);
   }
