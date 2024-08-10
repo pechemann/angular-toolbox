@@ -3,6 +3,7 @@
         { "label": "Quick Start Guide", "urlTree": [ "/resources", "documentation", "quick-start-guide" ] },
         { "label": "HTTP Mocking Framework", "urlTree": [ "/resources", "documentation", "http-mocking-framework" ] },
         { "label": "SubscriptionService", "urlTree": [ "/resources", "documentation", "subscription-service" ] },
+        { "label": "Logging Framework", "urlTree": [ "/resources", "documentation", "logging-framework" ] },
         { "label": "DarkModeService", "urlTree": [ "/resources", "documentation", "dark-mode-service" ] },
         { "label": "ButtonRoleDirective", "urlTree": [ "/resources", "documentation", "button-role-directive" ] },
         { "label": "AnchorLinkDirective", "urlTree": [ "/resources", "documentation", "anchor-link-directive" ] },
