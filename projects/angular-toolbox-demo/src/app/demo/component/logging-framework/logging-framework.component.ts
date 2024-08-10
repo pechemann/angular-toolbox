@@ -13,6 +13,8 @@ import { DemoComponent } from '../../../ui/component/demo/demo.component';
 import { DocumentationLink } from '../../../ui/model/business/documentation-link';
 import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
 
+const CALLER: string = "Logging Console Demo";
+
 @Component({
   selector: 'app-logging-framework-demo',
   standalone: true,
@@ -42,9 +44,9 @@ export class LoggingFrameworkComponent extends IdentifiableComponent implements 
       logIndex: ++this.logIndex,
       customId: crypto.randomUUID()
     };
-    if (type === "log") return this._loggingService.log(this.getClassRef(), "Log button click", metadata);
-    if (type === "warn") return this._loggingService.warn(this.getClassRef(), "Warning button click");
-    this._loggingService.error(this.getClassRef(), "Error button click");
+    if (type === "log") return this._loggingService.log(CALLER, "Log button click", metadata);
+    if (type === "warn") return this._loggingService.warn(CALLER, "Warning button click");
+    this._loggingService.error(CALLER, "Error button click");
   }
 
   protected copyLogs(): void {

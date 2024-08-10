@@ -16,6 +16,7 @@ import { RouteMockConfig } from "../config/route-mock-config";
 import { Observable, Subscription, of } from "rxjs";
 import { DataStorage } from "../core/data-storage";
 import { DataStorageBuilder } from "../util/data-storage.builder";
+import { HttpMockLoggingService } from "../logging";
 
 /**
  * @private
@@ -235,6 +236,7 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
         if (timer > MAX_TIMER) timer = MAX_TIMER;
         this._loadSubscription = this.loadData(httpResponseMock).subscribe({
             next: (data: any) => {
+                this._logger.log();
                 this.setDataStorage(httpResponseMock, data);
                 const error: HttpMockError | null = this._dataStorage.httpResponse.error;
                 setTimeout(()=> {
@@ -260,6 +262,7 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
             error: (err: any) => {
                 this.setDataStorage(httpResponseMock);
                 this.onError(err);
+                this._logger.error();
             }
         });
     }
@@ -276,7 +279,9 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
     /**
      * @private 
      */
-    constructor(routeConfig: RouteMockConfig) {
+    constructor(routeConfig: RouteMockConfig,
+                private _logger: HttpMockLoggingService
+    ) {
         super();
         const methodConfig: HttpMethodMock = routeConfig.methodConfig;
         this._routeConfig = routeConfig;

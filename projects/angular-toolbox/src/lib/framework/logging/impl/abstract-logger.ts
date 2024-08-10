@@ -6,7 +6,7 @@
  * fthe LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { Log, LogConnector, Logger } from "../../../model";
+import { Log, LogConnector, Logger, TransactionalLogger } from "../../../model";
 import { LogLevel } from "../../../util";
 import { DefaultLogConnector } from "../connector";
 import { LogBuilder } from "../util";
@@ -19,7 +19,7 @@ export const DEFAULT_LOG_CONNECTOR: LogConnector = new DefaultLogConnector();
 /**
  * The base class for all `Logger` objects.
  */
-export abstract class AbstractLogger implements Logger {
+export abstract class AbstractLogger implements Logger, TransactionalLogger {
 
   /**
    * The list of logs sent to this logger.
@@ -32,21 +32,15 @@ export abstract class AbstractLogger implements Logger {
   protected logConnector: LogConnector = DEFAULT_LOG_CONNECTOR;
 
   /**
-   * Sets a new log connector this logger.
-   *  
-   * @param value The reference to the new log connector associated with this logger.
-   *              If `null` the logger uses the instance defined by the `DEFAULT_LOG_CONNECTOR` constant.
+   * @inheritdoc
    */
   public setLogConnector(value: LogConnector | null): void  {
-    if (this.logConnector) this.logConnector.destroy();
     this.logConnector = value || DEFAULT_LOG_CONNECTOR;
     this.logConnector.init(this.logs);
   }
   
   /**
-   * Returns the reference to the log connector associated with this logger.
-   * 
-   * @returns The log connector associated with this logger.
+   * @inheritdoc
    */
   public getLogConnector(): LogConnector {
     return this.logConnector;
@@ -78,6 +72,10 @@ export abstract class AbstractLogger implements Logger {
    */
   public warn(caller: string | any, msg: string, metadata?: any): void {
     this.addLog(caller, msg, LogLevel.WARNING, metadata);
+  }
+
+  public destroy(): void {
+    this.logConnector = null as any;
   }
 
   /**

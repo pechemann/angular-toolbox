@@ -13,6 +13,7 @@ import { EMPTY_STRING } from "../../../../util";
 import { XhrBase } from "./xhr-base";
 import { RouteMockConfig } from "../config/route-mock-config";
 import { HTTPMethodRef } from "../util/http-method-ref.enum";
+import { HttpMockLoggingService } from "../logging";
 
 /**
  * @private
@@ -125,7 +126,7 @@ export class XhrProxyImpl extends XhrBase implements XhrProxy {
         const parsedUrl: URL = URL.canParse(url as string) ? new URL(url as string) : new URL(this._httpMockService.getAppOrigin() + url);
         const config: RouteMockConfig | undefined = this._httpMockService.getRouteConfig(parsedUrl, m as HTTPMethodRef);
         if (this.XHR && this.XHR instanceof DelegateXhr) this.XHR.destroy();
-        this.XHR = config ? new DelegateXhr(config) : new XMLHttpRequest();
+        this.XHR = config ? new DelegateXhr(config, this._logger) : new XMLHttpRequest();
         this.XHR.withCredentials = this.withCredentials;
         this.XHR.open(m.toString(), parsedUrl.toString());
     }
@@ -201,7 +202,8 @@ export class XhrProxyImpl extends XhrBase implements XhrProxy {
     /**
      * @private
      */
-    constructor(private _httpMockService: HttpMockService) {
+    constructor(private _httpMockService: HttpMockService,
+                private _logger: HttpMockLoggingService) {
         super();
     }
 }

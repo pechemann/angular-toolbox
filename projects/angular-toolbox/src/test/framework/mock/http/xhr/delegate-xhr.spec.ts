@@ -8,11 +8,12 @@
 
 import { HTTPMethodRef } from 'projects/angular-toolbox/src/lib/framework/mock/http/util/http-method-ref.enum';
 import { DelegateXhr } from 'projects/angular-toolbox/src/lib/framework/mock/http/xhr/delegate-xhr';
-import { EMPTY_STRING, httpResponseMock } from 'projects/angular-toolbox/src/public-api';
+import { EMPTY_STRING, HttpMockLoggingService, httpResponseMock } from 'projects/angular-toolbox/src/public-api';
 import { BODY, BODY_SIZE, buildUrlSearchParamsMock, ERROR, HTTP_ERROR, HTTP_STATUS, I_M_A_TEA_POT, OBSERVABLE_ERROR_CONFIG, OBSERVABLE_MOCK_CONFIG, ROUTE_CONFIG, ROUTE_CONFIG_WITH_ERROR, URL } from './util/delegate-xhr-test-util';
 import { RouteMockConfig } from 'projects/angular-toolbox/src/lib/framework/mock/http/config/route-mock-config';
 import { HttpParams, HttpRequest } from '@angular/common/http';
 import { ProgressEventMock } from 'projects/angular-toolbox/src/lib/framework/mock/http/event/progress-event-mock';
+import { TestBed } from '@angular/core/testing';
 
 const EXPECTED_HEADERS: string = `Cache-Control: no-cache
 Accept-Encoding: gzip, deflate, br, zstd
@@ -23,9 +24,14 @@ User-Agent: ${navigator.userAgent}`;
 describe('DelegateXhr', () => {
 
     let xhr: DelegateXhr;
+    let logger: HttpMockLoggingService;
 
     beforeEach(() => {
-        xhr = new DelegateXhr(ROUTE_CONFIG);
+        TestBed.configureTestingModule({
+            providers: [HttpMockLoggingService]
+        });
+        logger = TestBed.inject(HttpMockLoggingService);
+        xhr = new DelegateXhr(ROUTE_CONFIG, logger);
     })
 
     it('should create a new instance', () => {
@@ -92,7 +98,7 @@ describe('DelegateXhr', () => {
             parameters: { id: "10" },
             searchParams: buildUrlSearchParamsMock()
         };
-        const newXhr: DelegateXhr = new DelegateXhr(cfg);
+        const newXhr: DelegateXhr = new DelegateXhr(cfg, logger);
         newXhr.open(HTTPMethodRef.GET, URL);
         newXhr.send();
     });
@@ -111,7 +117,7 @@ describe('DelegateXhr', () => {
             parameters: { id: "10" },
             searchParams: buildUrlSearchParamsMock()
         };
-        const newXhr: DelegateXhr = new DelegateXhr(cfg);
+        const newXhr: DelegateXhr = new DelegateXhr(cfg, logger);
         newXhr.open(HTTPMethodRef.POST, URL);
         newXhr.send(TEST_BODY);
     });
@@ -247,7 +253,7 @@ foo: bar`;
             parameters: { id: "10" },
             searchParams: buildUrlSearchParamsMock()
         };
-        const newXhr: DelegateXhr = new DelegateXhr(cfg);
+        const newXhr: DelegateXhr = new DelegateXhr(cfg, logger);
         newXhr.open(HTTPMethodRef.GET, URL);
         newXhr.send();
         const interval = setInterval(()=> {
@@ -288,7 +294,7 @@ foo: bar`;
             parameters: {},
             searchParams: buildUrlSearchParamsMock()
         };
-        const newXhr: DelegateXhr = new DelegateXhr(cfg);
+        const newXhr: DelegateXhr = new DelegateXhr(cfg, logger);
         newXhr.open(HTTPMethodRef.GET, URL);
         newXhr.send();
     });
@@ -307,7 +313,7 @@ foo: bar`;
             parameters: {},
             searchParams: buildUrlSearchParamsMock(['id', "10"], ['age', "20"])
         };
-        const newXhr: DelegateXhr = new DelegateXhr(cfg);
+        const newXhr: DelegateXhr = new DelegateXhr(cfg, logger);
         newXhr.open(HTTPMethodRef.GET, URL);
         newXhr.send();
     });
@@ -316,9 +322,14 @@ foo: bar`;
 describe('DelegateXhr: error response', () => {
 
     let xhr: DelegateXhr;
+    let logger: HttpMockLoggingService;
 
     beforeEach(() => {
-        xhr = new DelegateXhr(ROUTE_CONFIG_WITH_ERROR);
+        TestBed.configureTestingModule({
+            providers: [HttpMockLoggingService]
+        });
+        logger = TestBed.inject(HttpMockLoggingService);
+        xhr = new DelegateXhr(ROUTE_CONFIG_WITH_ERROR, logger);
     });
 
     it('send() should set readyState successivly to HEADERS_RECEIVED and DONE, when an error occurs', (done) => {
@@ -369,9 +380,17 @@ describe('DelegateXhr: error response', () => {
 describe('DelegateXhr: observable responses', () => {
 
     let xhr: DelegateXhr;
-    
+    let logger: HttpMockLoggingService;
+
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            providers: [HttpMockLoggingService]
+        });
+        logger = TestBed.inject(HttpMockLoggingService);
+    });
+
     it('send() should return the correct response when using Observables', (done) => {
-        xhr = new DelegateXhr(OBSERVABLE_MOCK_CONFIG);
+        xhr = new DelegateXhr(OBSERVABLE_MOCK_CONFIG, logger);
         xhr.open(HTTPMethodRef.GET, URL);
         xhr.onreadystatechange = ()=> {
             const readyState = xhr.readyState;
@@ -388,7 +407,7 @@ describe('DelegateXhr: observable responses', () => {
     });
     
     it('send() should send correct error status when Observables throw an error', (done) => {
-        xhr = new DelegateXhr(OBSERVABLE_ERROR_CONFIG);
+        xhr = new DelegateXhr(OBSERVABLE_ERROR_CONFIG, logger);
         xhr.open(HTTPMethodRef.GET, URL);
         xhr.onreadystatechange = ()=> {
             const readyState = xhr.readyState;

@@ -47,14 +47,6 @@ describe('BaseLogger', () => {
         expect(logger.getLogConnector()).toBe(DEFAULT_LOG_CONNECTOR);
     });
 
-    it('setLogConnector() should destroy the previous log connector instance', () => {
-        const initialConnector: LogConnector = logger.getLogConnector();
-        spyOn(initialConnector, "destroy");
-        const connector: LogConnector = new ConsoleLogConnector();
-        logger.setLogConnector(connector);
-        expect(initialConnector.destroy).toHaveBeenCalled();
-    });
-
     it('setLogConnector() should inititialize log connector instance with the log list', () => {
         const logs: Log[] = logger.getLogs();
         const connector: LogConnector = new ConsoleLogConnector();
@@ -116,5 +108,12 @@ describe('BaseLogger', () => {
         logger.warn(CALLER, LOG_MESSAGE);
         const log: Log = logger.getLogs()[0];
         expect(connector.sendLog).toHaveBeenCalledWith(log);
+    });
+    
+    it('destroy() should set the log connector internal reference to null', () => {
+        const connector: LogConnector = new ConsoleLogConnector();
+        logger.setLogConnector(connector);
+        logger.destroy();
+        expect(logger.getLogConnector()).toBeNull();
     });
 });

@@ -22,6 +22,7 @@
         { "label": "BatteryManager Interface", "urlTree": [ "/resources", "documentation", "battery-manager" ] }
     ],
     "articles": [
-        { "label": "Angular Toolbox Principles" }
+        { "label": "Angular Toolbox Principles" },
+        { "label": "Library Vs. Application Service", "urlTree": [ "/resources", "documentation", "lib-vs-app-service" ] }
     ]
 }

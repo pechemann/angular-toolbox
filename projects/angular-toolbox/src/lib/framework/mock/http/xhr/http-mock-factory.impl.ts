@@ -9,6 +9,7 @@
 import { XhrFactory } from "@angular/common";
 import { HttpMockService } from "../../../../model/service/mock/http/http-mock.service";
 import { XhrProxyImpl } from "./xhr-proxy-impl";
+import { HttpMockLoggingService } from "../logging";
 
 /**
  * @private
@@ -19,7 +20,8 @@ export class XhrProxyFactoryImpl extends XhrFactory {
     /**
      * @private
      */
-    constructor(private _httpMockService: HttpMockService) {
+    constructor(private _httpMockService: HttpMockService,
+                private _logger: HttpMockLoggingService) {
         super();
     }
 
@@ -27,6 +29,6 @@ export class XhrProxyFactoryImpl extends XhrFactory {
      * @private
      */
     public build(): XMLHttpRequest {
-        return new XhrProxyImpl(this._httpMockService);
+        return new XhrProxyImpl(this._httpMockService, this._logger);
     }
 }

@@ -9,6 +9,7 @@
 import { inject } from "@angular/core";
 import { HttpMockService } from "../../../../model/service/mock/http/http-mock.service";
 import { XhrProxyFactoryImpl } from "./http-mock-factory.impl";
+import { HttpMockLoggingService } from "../logging";
 
 /**
  * A factory function that creates and returns a new `XhrFactory` object.
@@ -16,5 +17,5 @@ import { XhrProxyFactoryImpl } from "./http-mock-factory.impl";
  * @returns A new `XhrFactory` object.
  */
 export const httpMockFactory = ()=> {
-    return new XhrProxyFactoryImpl(inject(HttpMockService));
+    return new XhrProxyFactoryImpl(inject(HttpMockService), inject(HttpMockLoggingService));
 }

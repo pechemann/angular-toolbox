@@ -8,7 +8,7 @@
 
 import { HTTPMethodRef } from 'projects/angular-toolbox/src/lib/framework/mock/http/util/http-method-ref.enum';
 import { DelegateXhr } from 'projects/angular-toolbox/src/lib/framework/mock/http/xhr/delegate-xhr';
-import { EMPTY_STRING, HttpMockService } from 'projects/angular-toolbox/src/public-api';
+import { EMPTY_STRING, HttpMockLoggingService, HttpMockService } from 'projects/angular-toolbox/src/public-api';
 import { FOO_MOCK_CONFIG, URL } from './util/delegate-xhr-test-util';
 import { XhrProxyImpl } from 'projects/angular-toolbox/src/lib/framework/mock/http/xhr/xhr-proxy-impl';
 import { TestBed } from '@angular/core/testing';
@@ -21,6 +21,7 @@ describe('XhrProxyImpl', () => {
 
     let xhr: XhrProxyImpl;
     let configService: HttpMockService;
+    let logger: HttpMockLoggingService;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -29,7 +30,8 @@ describe('XhrProxyImpl', () => {
             ]
         });
         configService = TestBed.inject(HttpMockService);
-        xhr = new XhrProxyImpl(configService);
+        logger = TestBed.inject(HttpMockLoggingService);
+        xhr = new XhrProxyImpl(configService, logger);
     });
 
     it('should create a new instance', () => {
@@ -102,15 +104,18 @@ describe('XhrProxyImpl: native XMLHttpRequest implementation', () => {
 
     let xhr: XhrProxyImpl;
     let configService: HttpMockService;
+    let logger: HttpMockLoggingService;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
-                HttpMockService
+                HttpMockService,
+                HttpMockLoggingService
             ]
         });
         configService = TestBed.inject(HttpMockService);
-        xhr = new XhrProxyImpl(configService);
+        logger = TestBed.inject(HttpMockLoggingService);
+        xhr = new XhrProxyImpl(configService, logger);
     });
 
     it('calling open() should not fail', () => {
@@ -206,16 +211,19 @@ describe('XhrProxyImpl: DelegateXhr implementation', () => {
 
     let xhr: XhrProxyImpl;
     let configService: HttpMockService;
+    let logger: HttpMockLoggingService;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
-                HttpMockService
+                HttpMockService,
+                HttpMockLoggingService
             ]
         });
         configService = TestBed.inject(HttpMockService);
         configService.addConfig(FOO_MOCK_CONFIG);
-        xhr = new XhrProxyImpl(configService);
+        logger = TestBed.inject(HttpMockLoggingService);
+        xhr = new XhrProxyImpl(configService, logger);
     });
 
     afterEach(() => {
