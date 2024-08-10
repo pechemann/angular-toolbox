@@ -1,0 +1,28 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+ 
+<svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+    <symbol id="linkIcon" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z"/>
+        <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z"/>
+    </symbol>
+</svg>
+<main class="documentation">
+    <atx-page-title label="Angular Toolbox Documentation">
+        <p primary class="fs-5">
+            <em class="lib-name">Angular Demo</em> documentation has all the information you need to make your Angular project a smashing success.
+        </p>
+        <div secondary class="d-flex justify-content-end align-items-end h-100">
+        </div>
+    </atx-page-title>
+    <h2 class="mb-4">All Angular Toolbox Samples</h2>
+    <div class="row">
+        <atx-icon-list [itemList]="iconListService.getDemoList()"/>
+    </div>
+</main>
+    

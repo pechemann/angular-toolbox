@@ -44,6 +44,11 @@ const S_LOG_TIME: string = "atx-log-time";
 /**
  * @private
  */
+const S_LOG_LEVEL: string = "atx-log-level";
+
+/**
+ * @private
+ */
 const S_LOG_CALLER: string = "atx-log-caller";
 
 /**
@@ -138,6 +143,9 @@ export class HtmlLogConnector implements LogConnector {
         d.classList.add(this.getCssClassName(log.level));
         d.appendChild(
             this.getSpan(`[${LogUtil.dateToHHMMSS(log.timestamp)}]`, S_LOG_TIME)
+        );
+        d.appendChild(
+            this.getSpan(`[${LogUtil.getLevelString(log.level)}]`, S_LOG_LEVEL)
         );
         d.appendChild(
             this.getSpan(`[${log.caller}]`, S_LOG_CALLER)

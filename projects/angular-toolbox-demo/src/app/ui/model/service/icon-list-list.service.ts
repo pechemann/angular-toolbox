@@ -19,6 +19,16 @@ export class IconListService {
 
   constructor(private _http: HttpClient) {}
 
+  public geHometDemoList(): IconListItem[] {
+    return [
+      { label: "HTTP Mock Service", urlTree: ["../demo", "http-mock-service"] },
+      { label: "Subscription Service", urlTree: ["../demo", "subscription-service"] },
+      { label: "Logging Framework", urlTree: ["../demo", "logging-framework"] },
+      { label: "Dark Mode Service", urlTree: ["../demo", "dark-mode-service"] },
+      { label: "ArrayList Class", urlTree: ["../demo", "array-list"] }
+    ];
+  }
+
   public getDemoList(): IconListItem[] {
     return [
       { label: "HTTP Mock Service", urlTree: ["../demo", "http-mock-service"] },

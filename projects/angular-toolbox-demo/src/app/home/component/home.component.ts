@@ -12,6 +12,7 @@ import { AnchorLinklDirective } from 'projects/angular-toolbox/src/public-api';
 import { AngularToolboxCodeViewportComponent, AngularToolboxGitSectionComponent, AngularToolboxHrComponent, AngularToolboxIconListComponent, AngularToolboxPageTitleComponent, BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
 import { NgOptimizedImage } from '@angular/common';
 import { YouTubeLink } from '../model/youtube-link';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +24,8 @@ import { YouTubeLink } from '../model/youtube-link';
     AngularToolboxPageTitleComponent,
     AngularToolboxIconListComponent,
     AngularToolboxHrComponent,
-    NgOptimizedImage
+    NgOptimizedImage,
+    RouterModule
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'

@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { HtmlLogConnector, LogBuilder, LogLevel, LogUtil } from "projects/angular-toolbox/src/public-api";
+import { HtmlLogConnector, LogBuilder, LogLevel, LogUtil, ERROR_STRING, LOG_STRING, WARNING_STRING } from "projects/angular-toolbox/src/public-api";
 
 const TIMESTAMP_REGEXP: RegExp = /\[\d{2}:\d{2}:\d{2}]/;
 
@@ -85,6 +85,7 @@ describe('HtmlLogConnector', () => {
         connector.sendLog(buildLog(LogLevel.LOG));
         const htmlLog = htmlTarget.children.item(0);
         expect(htmlLog?.classList.contains("atx-log")).toBeTrue();
+        expect(htmlLog?.querySelector(".atx-log-level")).toBeTruthy();
         expect(htmlLog?.querySelector(".atx-log-time")).toBeTruthy();
         expect(htmlLog?.querySelector(".atx-log-caller")).toBeTruthy();
         expect(htmlLog?.querySelector(".atx-log-message")).toBeTruthy();
@@ -115,24 +116,28 @@ describe('HtmlLogConnector', () => {
         expect(msgNode?.innerHTML.includes(LOG_MESSAGE)).toBeTrue();
     });
 
+    it('sendLog() should process logs and display them into the HTML renderer with the right structure if log level is LogLevel.LOG', () => {
+        connector = new HtmlLogConnector(htmlTarget, false);
+        connector.sendLog(buildLog(LogLevel.LOG));
+        const htmlLog = htmlTarget.children.item(0);
+        const logLevelNode = htmlLog?.querySelector(".atx-log-level");
+        expect(logLevelNode?.innerHTML).toEqual(`[${LOG_STRING}]`);
+    });
+
     it('sendLog() should process logs and display them into the HTML renderer with the right structure if log level is LogLevel.WARNING', () => {
         connector = new HtmlLogConnector(htmlTarget, false);
         connector.sendLog(buildLog(LogLevel.WARNING));
         const htmlLog = htmlTarget.children.item(0);
-        expect(htmlLog?.classList.contains("atx-warn-log")).toBeTrue();
-        expect(htmlLog?.querySelector(".atx-log-time")).toBeTruthy();
-        expect(htmlLog?.querySelector(".atx-log-caller")).toBeTruthy();
-        expect(htmlLog?.querySelector(".atx-log-message")).toBeTruthy();
+        const logLevelNode = htmlLog?.querySelector(".atx-log-level");
+        expect(logLevelNode?.innerHTML).toEqual(`[${WARNING_STRING}]`);
     });
 
     it('sendLog() should process logs and display them into the HTML renderer with the right structure if log level is LogLevel.ERROR', () => {
         connector = new HtmlLogConnector(htmlTarget, false);
         connector.sendLog(buildLog(LogLevel.ERROR));
         const htmlLog = htmlTarget.children.item(0);
-        expect(htmlLog?.classList.contains("atx-error-log")).toBeTrue();
-        expect(htmlLog?.querySelector(".atx-log-time")).toBeTruthy();
-        expect(htmlLog?.querySelector(".atx-log-caller")).toBeTruthy();
-        expect(htmlLog?.querySelector(".atx-log-message")).toBeTruthy();
+        const logLevelNode = htmlLog?.querySelector(".atx-log-level");
+        expect(logLevelNode?.innerHTML).toEqual(`[${ERROR_STRING}]`);
     });
 
     it('clearLogs() should remove logs to the HTML renderer element', () => {

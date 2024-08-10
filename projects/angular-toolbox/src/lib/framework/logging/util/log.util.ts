@@ -9,16 +9,12 @@
 import { formatDate } from "@angular/common";
 import { Log } from "../../../model";
 import { LogLevel, EMPTY_STRING, OBJECT, STRING } from "../../../util";
+import { ERROR_STRING, LOG_STRING, WARNING_STRING } from "./log.constant";
 
 /**
  * @private
  */
 const TS_FMT: string = "HH:MM:SS";
-
-/**
- * @private
- */
-const ERROR_STRING: string = "[ERROR]";
 
 /**
  * @private
@@ -59,15 +55,29 @@ export class LogUtil {
      * @returns The formatted log list.
      */
     public static logListToString(logList: Log[]): string {
-        const len: number = logList.length - 1;
+        const len: number = logList.length - 1,
+              getLevelString = LogUtil.getLevelString;
         let logs: string = EMPTY_STRING,
-            i: number = 0;
+            i: number = 0,
+            levelTxt: string = EMPTY_STRING;
         for(; i <= len; ++i) {
             const log: Log = logList[i];
-            const errorTxt: string = log.level === LogLevel.LOG ? EMPTY_STRING : ERROR_STRING;
-            logs += `[${LogUtil.dateToHHMMSS(log.timestamp)}]${errorTxt}[${log.caller}][${log.message}][${LogUtil.metadataToString(log.metadata)}]\n`;
+            logs += `[${LogUtil.dateToHHMMSS(log.timestamp)}][${getLevelString(log.level)}][${log.caller}][${log.message}]${LogUtil.metadataToString(log.metadata)}\n`;
         }
         return logs;
+    }
+
+    /**
+     * Turns the specified log level into a human redeable string.
+     * 
+     * @param level The log level to format.
+     * @returns The formatted log level.
+     */
+    public static getLevelString(level: LogLevel): string {
+        if (level === LogLevel.LOG) return LOG_STRING;
+        if (level === LogLevel.WARNING) return WARNING_STRING;
+        if (level === LogLevel.ERROR) return ERROR_STRING;
+        return EMPTY_STRING;
     }
 
     /**

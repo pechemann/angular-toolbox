@@ -13,7 +13,6 @@ import { DemoComponent } from '../../../ui/component/demo/demo.component';
 import { DocumentationLink } from '../../../ui/model/business/documentation-link';
 import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
 
-
 @Component({
   selector: 'app-logging-framework-demo',
   standalone: true,
@@ -43,9 +42,13 @@ export class LoggingFrameworkComponent extends IdentifiableComponent implements 
       logIndex: ++this.logIndex,
       customId: crypto.randomUUID()
     };
-    if (type === "log") return this._loggingService.log(this.getClassRef(), "Log message", metadata);
-    if (type === "warn") return this._loggingService.warn(this.getClassRef(), "Warning message", metadata);
-    this._loggingService.error(this.getClassRef(), "Error message", metadata);
+    if (type === "log") return this._loggingService.log(this.getClassRef(), "Log button click", metadata);
+    if (type === "warn") return this._loggingService.warn(this.getClassRef(), "Warning button click");
+    this._loggingService.error(this.getClassRef(), "Error button click");
+  }
+
+  protected copyLogs(): void {
+    this._loggingService.getLogConnector().copyLogs();
   }
 
   protected documentation: DocumentationLink = {
@@ -53,35 +56,25 @@ export class LoggingFrameworkComponent extends IdentifiableComponent implements 
     commands: ['/resources', 'documentation', 'logging-framework']
   };
   protected title: string = "Logging Framework Demo";
-  protected presentation: string = "A lightweight, but prowerfull and flexible framework, that .....";
+  protected presentation: string = "A lightweight, but prowerfull and flexible, framework for managing app logs.";
   protected srcCode: CodeWrapper = {
-    html: [`<div #consoleViewport class="console-viewport"></div>
-<section>
-    <h6>Send log:</h6>
-    <div class="btn-group">
-        <button (click)="sendLog('log')">Log</button>
-        <button (click)="sendLog('warn')">Warning</button>
-        <button (click)="sendLog('error')">Error</button>
-    </div>
+    html: [`<section>
+  <header>
+    <h6>Console</h6>
+    <button (click)="copyLogs()">Copy Logs</button>
+  </header>
+  <main #consoleViewport></main>
 </section>`]
     ,
-    typescript: [`export class LoggingFrameworkDemoComponent implements AfterViewInit, OnDestroy {
+    typescript: [`export class LoggingConsoleComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild("consoleViewport")
   private console!: ElementRef<HTMLDivElement>;
-
-  protected logIndex: number = 0;
     
   constructor(private logger: LoggerService) {}
 
-  protected sendLog(type: string): void {
-    const metadata: any = {
-      logIndex: ++this.logIndex,
-      customId: crypto.randomUUID()
-    };
-    if (type === "log") return this._loggingService.log(this.getClassRef(), "Log message", metadata);
-    if (type === "warn") return this._loggingService.warn(this.getClassRef(), "Warning message", metadata);
-    this._loggingService.error(this.getClassRef(), "Error message", metadata);
+  protected copyLogs(): void {
+    this.logger.getLogConnector().copyLogs();
   }
 
   public ngOnInit(): void {
@@ -102,5 +95,6 @@ export class LoggingFrameworkComponent extends IdentifiableComponent implements 
 
   public ngOnDestroy(): void {
     this._loggingService.setLogConnector(null);
+    this._loggingService.getLogs().length = 0;
   }
 }

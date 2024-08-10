@@ -11,6 +11,10 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
+    path: '',
+    loadComponent: () => import('./component/demo-home/demo-home.component').then(mod => mod.DemoHomeComponent)
+  },
+  {
     path: 'dark-mode-service',
     loadComponent: () => import('./component/dark-mode-service/dark-mode-service.component').then(mod => mod.DarkModeServiceComponent)
   },
