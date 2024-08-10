@@ -56,7 +56,7 @@ export class LoggingFrameworkComponent extends IdentifiableComponent implements 
     commands: ['/resources', 'documentation', 'logging-framework']
   };
   protected title: string = "Logging Framework Demo";
-  protected presentation: string = "A lightweight, but prowerfull and flexible, framework for managing app logs.";
+  protected presentation: string = "A lightweight, but powerful and flexible, framework for managing app logs.";
   protected srcCode: CodeWrapper = {
     html: [`<section>
   <header>
