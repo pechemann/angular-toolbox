@@ -77,7 +77,7 @@ export class LoggingFrameworkComponent extends IdentifiableComponent implements 
     this.logger.getLogConnector().copyLogs();
   }
 
-  public ngOnInit(): void {
+  public ngAfterViewInit(): void {
     const connector: LogConnector = new HtmlLogConnector(this.console.nativeElement);
     this.logger.setLogConnector(connector);
   }
