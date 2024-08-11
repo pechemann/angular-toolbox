@@ -10,7 +10,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { CodeWrapper } from '../../../ui/model/business/code-wrapper';
 import { HttpClient } from '@angular/common/http';
 import { config } from './http-mock-config';
-import { SubscriptionService, HttpMockService, IdentifiableComponent } from 'projects/angular-toolbox/src/public-api';
+import { SubscriptionService, HttpMockService, IdentifiableComponent, HttpMockLoggingService, ConsoleLogConnector } from 'projects/angular-toolbox/src/public-api';
 import { DemoComponent } from '../../../ui/component/demo/demo.component';
 import { RouterModule } from '@angular/router';
 import { DocumentationLink } from '../../../ui/model/business/documentation-link';
@@ -33,12 +33,14 @@ export class HttpMockServiceComponent extends IdentifiableComponent implements O
   constructor(private _http: HttpClient,
               private _httpMockService: HttpMockService,
               private _subscription: SubscriptionService,
+              private _logger: HttpMockLoggingService,
               breadcrumb: BreadcrumbService) {
     super();
     breadcrumb.removeAll()
               .addItem(breadcrumb.buildItem("Demo", "/demo"))
               .addItem(breadcrumb.buildItem("HTTP Mock Service"));
     this._httpMockService.addConfig(config);
+    _logger.setLogConnector(new ConsoleLogConnector());
   }
 
   protected documentation: DocumentationLink = {

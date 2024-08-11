@@ -9,7 +9,7 @@
 import { XhrFactory } from "@angular/common";
 import { HttpMockService } from "../../../../model/service/mock/http/http-mock.service";
 import { XhrProxyImpl } from "./xhr-proxy-impl";
-import { HttpMockLoggingService } from "../logging";
+import { HttpMockLoggingService } from "../../../../model";
 
 /**
  * @private

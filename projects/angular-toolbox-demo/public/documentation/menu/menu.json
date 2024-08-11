@@ -23,6 +23,6 @@
     ],
     "articles": [
         { "label": "Angular Toolbox Principles" },
-        { "label": "Library Vs. Application Service", "urlTree": [ "/resources", "documentation", "lib-vs-app-service" ] }
+        { "label": "Library Vs. Application Services", "urlTree": [ "/resources", "documentation", "lib-vs-app-services" ] }
     ]
 }

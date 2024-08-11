@@ -7,7 +7,7 @@
  */
 
 import { HttpHeaders, HttpParams, HttpRequest, HttpStatusCode } from "@angular/common/http";
-import { XhrProxy, HttpResponseMock, HttpMethodMock, HttpMockError } from "../../../../model";
+import { XhrProxy, HttpResponseMock, HttpMethodMock, HttpMockError, HttpMockLoggingService, HttpRequestMetadata } from "../../../../model";
 import { ProgressEventMock } from "../event/progress-event-mock";
 import { EMPTY_STRING } from "../../../../util";
 import { XhrBase } from "./xhr-base";
@@ -16,7 +16,7 @@ import { RouteMockConfig } from "../config/route-mock-config";
 import { Observable, Subscription, of } from "rxjs";
 import { DataStorage } from "../core/data-storage";
 import { DataStorageBuilder } from "../util/data-storage.builder";
-import { HttpMockLoggingService } from "../logging";
+import { HttpMockLoggingMetadataBuilder } from "../logging/http-mock-logging-metadata.builder";
 
 /**
  * @private
@@ -34,6 +34,11 @@ const READY_STATE_CHANGE_EVENT: Event = new Event("onreadystatechange");
  * @private
  */
 const EVT_PROPS_CONFIG: any =  { writable: false, value: this };
+
+/**
+ * @private
+ */
+const buildMetadata: Function = HttpMockLoggingMetadataBuilder.build;
 
 /**
  * @private
@@ -87,7 +92,7 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
      * 
      * Internal storage for the HTTP request `headers`.
      */
-    private _headers: HttpHeaders = null as any;
+    private _requestHeaders: HttpHeaders = null as any;
 
     /**
      * @private
@@ -178,7 +183,7 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
      *
      * @see https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseType
      */
-    responseType: XMLHttpRequestResponseType = "";
+    responseType: XMLHttpRequestResponseType = EMPTY_STRING as any;
 
     /**
      * Initializes a newly-created request, or re-initializes an existing one.
@@ -220,7 +225,11 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
      *          if no response has been received.
      */
     getAllResponseHeaders(): string {
-        return this._dataStorage ? HttpHeadersUtil.stringify(this._headers) : EMPTY_STRING;
+        let result: string = EMPTY_STRING;
+        if (this._readyState < this.HEADERS_RECEIVED) return result;
+        const respHeaders: HttpHeaders | undefined = this._dataStorage?.httpResponse.headers;
+        if (respHeaders) result = HttpHeadersUtil.stringify(respHeaders)
+        return result;
     }
 
     /**
@@ -229,6 +238,7 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
      * @param body A body of data to be sent in the XHR request.
      */
     send(body?: Document | XMLHttpRequestBodyInit | null | undefined): void {
+        const requestMetadata: HttpRequestMetadata = { startTime: Date.now(), endTime: NaN };
         const request: HttpRequest<any> = this.buildHttpRequest(body);
         const rc: RouteMockConfig = this._routeConfig;
         const httpResponseMock: HttpResponseMock = (rc.methodConfig as any).data(request, rc.parameters);
@@ -236,33 +246,24 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
         if (timer > MAX_TIMER) timer = MAX_TIMER;
         this._loadSubscription = this.loadData(httpResponseMock).subscribe({
             next: (data: any) => {
-                this._logger.log();
-                this.setDataStorage(httpResponseMock, data);
+                this.setDataStorage(httpResponseMock, requestMetadata, data);
                 const error: HttpMockError | null = this._dataStorage.httpResponse.error;
                 setTimeout(()=> {
                     this.setReadyState(this.HEADERS_RECEIVED);
-                    if (error) return this.onError(error);
+                    if (error) return this.onError(request, error);
                     this.setReadyState(this.LOADING);
                     const response: HttpResponseMock = this._dataStorage.httpResponse;
-                    let headers: any = response.headers;
-                    if (headers) {
-                        this._headers.keys().forEach((key: string)=> {
-                            headers = headers.set(key, this._headers.get(key) as any)
-                        });
-                        this._headers = headers;
-                    }
                     if (!this._progressiveDownload) {
                         this._statusText = response.statusText || EMPTY_STRING;
                         this._status = response.status || 0;
-                        return this.onLoadComplete();
+                        return this.onLoadComplete(request);
                     }
-                    this.doProgressiveDownload();
+                    this.doProgressiveDownload(request);
                 }, timer);
             },
             error: (err: any) => {
-                this.setDataStorage(httpResponseMock);
-                this.onError(err);
-                this._logger.error();
+                this.setDataStorage(httpResponseMock, requestMetadata);
+                this.onError(request, err);
             }
         });
     }
@@ -273,21 +274,20 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
      * @param value The value to set as the body of the header.
      */
     setRequestHeader(name: string, value: string): void {
-        this._headers = this._headers.set(name, value);
+        this._requestHeaders = this._requestHeaders.set(name, value);
     }
 
     /**
      * @private 
      */
     constructor(routeConfig: RouteMockConfig,
-                private _logger: HttpMockLoggingService
-    ) {
+                private _logger: HttpMockLoggingService) {
         super();
         const methodConfig: HttpMethodMock = routeConfig.methodConfig;
         this._routeConfig = routeConfig;
         this._progressiveDownload = methodConfig.progressive || false;
         this.responseType = methodConfig.responseType || EMPTY_STRING as any;
-        this._headers = new HttpHeaders();
+        this._requestHeaders = new HttpHeaders();
     }
     
     /**
@@ -296,7 +296,7 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
      */
     public destroy(): void {
         this._routeConfig = null as any;
-        this._headers = null as any;
+        this._requestHeaders = null as any;
         this._dataStorage = null as any;
         if (this._loadSubscription) {
             this._loadSubscription.unsubscribe();
@@ -307,11 +307,11 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
     /**
      * @private 
      */
-    private doProgressiveDownload(): void {
+    private doProgressiveDownload(request: HttpRequest<any>): void {
         const total: number = this._dataStorage.total;
         if (total <= 200) {
             console.warn("[Angular Toolbox]: Body content is too small for emulating progressive download! Minimum size is 200 octets.");
-            return this.onLoadComplete();
+            return this.onLoadComplete(request);
         }
         // TODO: ameliorate the following process:
         const self: DelegateXhr = this;
@@ -324,7 +324,7 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
             if (cursor > total) {
                 cursor = total;
                 clearInterval(idx);
-                self.onLoadComplete();
+                self.onLoadComplete(request);
             } else {
                 this._dataStorage.loaded = cursor;
                 self.dispatchProgressEvent();
@@ -332,23 +332,31 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
         }, 100);
     }
 
-    /**
-     * @private
-     */
-    private onLoadComplete(): void {
-        this._dataStorage.loaded = this._dataStorage.total;
-        this.setReadyState(this.DONE);
-        this.dispatchProgressEvent("load");
+    private finalizeRequestMetadata(): HttpRequestMetadata {
+        const metadata: HttpRequestMetadata = this._dataStorage.requestMetadata;
+        metadata.endTime = Date.now();
+        return metadata;
     }
 
     /**
      * @private
      */
-    private onError(error: HttpMockError): void {
+    private onLoadComplete(request: HttpRequest<any>): void {
+        this._dataStorage.loaded = this._dataStorage.total;
+        this.setReadyState(this.DONE);
+        this.dispatchProgressEvent("load");
+        this._logger.log(buildMetadata(this, request, this.finalizeRequestMetadata()));
+    }
+
+    /**
+     * @private
+     */
+    private onError(request: HttpRequest<any>, error: HttpMockError): void {
         this._status = error.status;
         this._statusText = error.statusText;
         this.setReadyState(this.DONE);
         this.dispatchProgressEvent("error");
+        this._logger.error(buildMetadata(this, request, this.finalizeRequestMetadata()));
     }
 
     /**
@@ -392,8 +400,8 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
     /**
      * @private 
      */
-    private setDataStorage(responseMock: HttpResponseMock, data: any = null): void {
-        this._dataStorage =  DataStorageBuilder.buildDataStorage(responseMock, data);
+    private setDataStorage(responseMock: HttpResponseMock, requestMetadata: HttpRequestMetadata, data: any = null): void {
+        this._dataStorage = DataStorageBuilder.buildDataStorage(responseMock, data, requestMetadata);
     }
     
     /**
@@ -403,6 +411,14 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
         let params: HttpParams = new HttpParams();
         const it: IterableIterator<[string, string]> = (this._routeConfig.searchParams as any).entries();
         for (const pair of it) params = params.set(pair[0], pair[1]);
-        return new HttpRequest<any>(this._method as string, this._url as any, body, { params: params });
+        const init: any = {
+            params: params,
+            headers: this._requestHeaders,
+            withCredentials: this.withCredentials,
+            responseType: this.responseType,
+            reportProgress: this.hasEventListener("progress")
+            // context, transferCache: not used by Angular at this level of API
+        };
+        return new HttpRequest<any>(this._method as string, this._url as any, body, init);
     }
 }

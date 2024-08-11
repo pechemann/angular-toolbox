@@ -7,13 +7,12 @@
  */
 
 import { HttpMockService } from "../../../../model/service/mock/http/http-mock.service";
-import { XhrProxy } from "../../../../model";
+import { HttpMockLoggingService, XhrProxy } from "../../../../model";
 import { DelegateXhr } from "./delegate-xhr";
 import { EMPTY_STRING } from "../../../../util";
 import { XhrBase } from "./xhr-base";
 import { RouteMockConfig } from "../config/route-mock-config";
 import { HTTPMethodRef } from "../util/http-method-ref.enum";
-import { HttpMockLoggingService } from "../logging";
 
 /**
  * @private

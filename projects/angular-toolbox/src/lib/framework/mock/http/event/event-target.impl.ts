@@ -85,6 +85,7 @@ export class EventTargetImpl implements EventTarget {
         if (ll.has(type)) {
             const listenersForType: Map<any, any> = ll.get(type);
             if (listenersForType.has(listener)) listenersForType.delete(listener);
+            if (listenersForType.size === 0) ll.delete(type);
         }
     }
 
@@ -116,8 +117,20 @@ export class EventTargetImpl implements EventTarget {
             // Listener objects have their handleEvent method called, if they have one
             else if (listener && typeof listener.handleEvent === FUNCTION) listener.handleEvent(event);
             if (options && options.once) listenersForType.delete(listener);
+            if (listenersForType.size === 0) ll.delete(type);
         }
         return true;
+    }
+
+    /**
+     * Checks whether the `EventTarget` object has any listeners registered for a specific type of event.
+     * 
+     * @param type The type of event.
+     * 
+     * @return  A value of `true` if a listener of the specified type is registered; `false` otherwise.
+     */
+    public hasEventListener(type: string): boolean {
+        return this._listenerList.has(type);
     }
 
     /**

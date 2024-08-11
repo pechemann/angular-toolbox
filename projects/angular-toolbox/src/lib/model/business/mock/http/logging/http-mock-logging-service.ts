@@ -7,8 +7,9 @@
  */
 
 import { Injectable, OnDestroy } from "@angular/core";
-import { HttpMockLogger } from "./http-mock-logger";
-import { LogConnector, TransactionalLogger } from "projects/angular-toolbox/src/public-api";
+import { LogConnector, TransactionalLogger } from "../../../logging";
+import { HttpMockLoggingMetadata } from "./http-mock-logging-metadata";
+import { HttpMockLogger } from "../../../../../framework/mock/http/logging/http-mock-logger";
 
 /**
  * @private
@@ -54,14 +55,14 @@ export class HttpMockLoggingService implements TransactionalLogger, OnDestroy {
      * 
      * @param metadata 
      */
-    public log(metadata?: any): void {
+    public log(metadata?: HttpMockLoggingMetadata): void {
         this._logger.log(CALLER, RESPONSE_MESSAGE, metadata);
     }
 
     /**
      * @inheritdoc
      */
-    public error(metadata?: any): void {
+    public error(metadata?: HttpMockLoggingMetadata): void {
         this._logger.error(CALLER, ERROR_MESSAGE, metadata);
     }
     

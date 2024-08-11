@@ -83,7 +83,6 @@ describe('EventTargetImpl', () => {
     evtTgt.dispatchEvent(new Event(CUSTOM_EVENT_TYPE));
     evtTgt.dispatchEvent(new Event(CUSTOM_EVENT_TYPE));
     expect(console.log).toHaveBeenCalledOnceWith(CUSTOM_EVENT_TYPE);
-
     evtTgt.removeEventListener(CUSTOM_EVENT_TYPE, listener1);
   });
   
@@ -93,6 +92,28 @@ describe('EventTargetImpl', () => {
     evtTgt.dispatchEvent(new Event(CUSTOM_EVENT_TYPE));
     expect(console.log).toHaveBeenCalledOnceWith(HELLO_WORLD);
     evtTgt.removeEventListener(CUSTOM_EVENT_TYPE, listener4);
+  });
+  
+  it('hasEventListener() should return false no event is registered for the specified type', () => {
+    expect(evtTgt.hasEventListener(CUSTOM_EVENT_TYPE)).toBeFalse();
+  });
+  
+  it('hasEventListener() should return true when an event is registered for the specified type', () => {
+    evtTgt.addEventListener(CUSTOM_EVENT_TYPE, listener1);
+    expect(evtTgt.hasEventListener(CUSTOM_EVENT_TYPE)).toBeTrue();
+    evtTgt.removeEventListener(CUSTOM_EVENT_TYPE, listener1);
+  });
+  
+  it('hasEventListener() should return false when a registered event of the specified type has been removed', () => {
+    evtTgt.addEventListener(CUSTOM_EVENT_TYPE, listener1);
+    evtTgt.removeEventListener(CUSTOM_EVENT_TYPE, listener1);
+    expect(evtTgt.hasEventListener(CUSTOM_EVENT_TYPE)).toBeFalse();
+  });
+  
+  it('hasEventListener() should return false when a registered event of the specified type, with options.once set to true, has been removed', () => {
+    evtTgt.addEventListener(CUSTOM_EVENT_TYPE, listener1, { once: true });
+    evtTgt.dispatchEvent(new Event(CUSTOM_EVENT_TYPE));
+    expect(evtTgt.hasEventListener(CUSTOM_EVENT_TYPE)).toBeFalse();
   });
 });
 

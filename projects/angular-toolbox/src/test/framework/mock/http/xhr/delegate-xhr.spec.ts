@@ -21,6 +21,11 @@ Accept-Language: ${navigator.language}
 Priority: u=0, i
 User-Agent: ${navigator.userAgent}`;
 
+//--> We use a delay before calling the done method to ensure the DelegateXhr
+// instance is not deleted before the async mocked response process is complete:
+// we use [setTimeout(done, DESTROY_DELAY)] each time the send method is involved.
+const DESTROY_DELAY: number = 150;
+
 describe('DelegateXhr', () => {
 
     let xhr: DelegateXhr;
@@ -81,8 +86,15 @@ describe('DelegateXhr', () => {
         expect(xhr.readyState).toEqual(xhr.OPENED);
     });
 
-    it('getAllResponseHeaders() should return an empty string by default', () => {
-       expect(xhr.getAllResponseHeaders()).toEqual(EMPTY_STRING);
+    it('getAllResponseHeaders() should return an empty string by default before calling the send method', () => {
+        expect(xhr.getAllResponseHeaders()).toEqual(EMPTY_STRING);
+    });
+
+    it('getAllResponseHeaders() should return an empty string by default after calling the send method', (done) => {
+        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.send();
+        expect(xhr.getAllResponseHeaders()).toEqual(EMPTY_STRING);
+        setTimeout(done, DESTROY_DELAY);
     });
 
     it('send() should pass a null body to HttpRequest object by default', (done) => {
@@ -91,7 +103,7 @@ describe('DelegateXhr', () => {
                 responseType: "document",
                 data: (request: HttpRequest<any>) => {
                     expect(request.body).toBeNull();
-                    done();
+                    setTimeout(done, DESTROY_DELAY);
                     return httpResponseMock().response();
                 }
             },
@@ -110,7 +122,7 @@ describe('DelegateXhr', () => {
                 responseType: "document",
                 data: (request: HttpRequest<any>) => {
                     expect(request.body).toEqual(TEST_BODY);
-                    done();
+                    setTimeout(done, DESTROY_DELAY);
                     return httpResponseMock().response();
                 }
             },
@@ -122,12 +134,12 @@ describe('DelegateXhr', () => {
         newXhr.send(TEST_BODY);
     });
 
-    it('send() should set response with the reponse body parameter', (done) => {
+   it('send() should set response with the reponse body parameter', (done) => {
         xhr.open(HTTPMethodRef.GET, URL);
         xhr.send();
         setTimeout(()=> {
             expect(xhr.response).toEqual(BODY);
-            done();
+            setTimeout(done, DESTROY_DELAY);
         }, 100);
     });
 
@@ -157,7 +169,7 @@ describe('DelegateXhr', () => {
             if (readyState === currentState + 1) currentState = readyState;
             if (currentState === xhr.DONE) {
                 expect(xhr.readyState).toEqual(xhr.DONE);
-                done();
+                setTimeout(done, DESTROY_DELAY);
             }
         };
         xhr.send();
@@ -191,15 +203,6 @@ describe('DelegateXhr', () => {
         }, 100);
     });
 
-    it('getAllResponseHeaders() should return the response header values when the send() method is invoked', (done) => {
-        xhr.open(HTTPMethodRef.GET, URL);
-        xhr.send();
-        setTimeout(()=> {
-            expect(xhr.getAllResponseHeaders()).toEqual(EXPECTED_HEADERS);
-            done();
-        }, 100);
-    });
-
     it('abort() should set ready state to UNSENT', () => {
         xhr.open(HTTPMethodRef.GET, URL);
         xhr.abort();
@@ -218,27 +221,6 @@ describe('DelegateXhr', () => {
         xhr.open(HTTPMethodRef.GET, URL);
         xhr.abort();
         expect(xhr.status).toEqual(0);
-    });
-
-    it('setRequestHeader() should do nothing before the send() method invokaton', () => {
-        xhr.setRequestHeader("foo", "bar");
-        expect(xhr.getAllResponseHeaders()).toEqual(EMPTY_STRING);
-    });
-
-    it('setRequestHeader() should add headers after the send() method invokaton', (done) => {
-        const expected: string = `Cache-Control: no-cache
-Accept-Encoding: gzip, deflate, br, zstd
-Accept-Language: ${navigator.language}
-Priority: u=0, i
-User-Agent: ${navigator.userAgent}
-foo: bar`;
-        xhr.setRequestHeader("foo", "bar");
-        xhr.open(HTTPMethodRef.GET, URL);
-        xhr.send();
-        setTimeout(()=> {
-            expect(xhr.getAllResponseHeaders()).toEqual(expected);
-            done();
-        }, 100);
     });
 
     it('DONE state should be invoked after the specified delay duration', (done) => {
@@ -280,43 +262,6 @@ foo: bar`;
             done();
         }, 100);
     });
-
-    it('the HttpRequest.params Map should be empty by default', (done) => {
-        const cfg: RouteMockConfig = {
-            methodConfig: {
-                data: (request: HttpRequest<any>) => {
-                    const params: HttpParams = request.params;
-                    expect(request.params.keys().length).toEqual(0);
-                    done();
-                    return httpResponseMock().response();
-                }
-            },
-            parameters: {},
-            searchParams: buildUrlSearchParamsMock()
-        };
-        const newXhr: DelegateXhr = new DelegateXhr(cfg, logger);
-        newXhr.open(HTTPMethodRef.GET, URL);
-        newXhr.send();
-    });
-    
-    it('search parameters should be available from the HttpRequest.params Map', (done) => {
-        const cfg: RouteMockConfig = {
-            methodConfig: {
-                data: (request: HttpRequest<any>) => {
-                    const params: HttpParams = request.params;
-                    expect(params.get("id")).toEqual("10");
-                    expect(params.get("age")).toEqual("20");
-                    done();
-                    return httpResponseMock().response();
-                }
-            },
-            parameters: {},
-            searchParams: buildUrlSearchParamsMock(['id', "10"], ['age', "20"])
-        };
-        const newXhr: DelegateXhr = new DelegateXhr(cfg, logger);
-        newXhr.open(HTTPMethodRef.GET, URL);
-        newXhr.send();
-    });
 });
 
 describe('DelegateXhr: error response', () => {
@@ -329,6 +274,7 @@ describe('DelegateXhr: error response', () => {
             providers: [HttpMockLoggingService]
         });
         logger = TestBed.inject(HttpMockLoggingService);
+        console.log("inject")
         xhr = new DelegateXhr(ROUTE_CONFIG_WITH_ERROR, logger);
     });
 
@@ -339,7 +285,7 @@ describe('DelegateXhr: error response', () => {
             if (readyState === xhr.LOADING) fail('LOADING cannot be set whith error responses');
             if (readyState === xhr.DONE) {
                 expect(xhr.readyState).toEqual(xhr.DONE);
-                done();
+                setTimeout(done, DESTROY_DELAY);
             }
         };
         xhr.send();
@@ -350,7 +296,7 @@ describe('DelegateXhr: error response', () => {
         xhr.send();
         setTimeout(()=> {
             expect(xhr.status).toEqual(ERROR.status);
-            done();
+            setTimeout(done, DESTROY_DELAY);
         }, 100);
     });
 
@@ -359,7 +305,7 @@ describe('DelegateXhr: error response', () => {
         xhr.send();
         setTimeout(()=> {
             expect(xhr.statusText).toEqual(ERROR.statusText);
-            done();
+            setTimeout(done, DESTROY_DELAY);
         }, 100);
     });
 
@@ -371,11 +317,10 @@ describe('DelegateXhr: error response', () => {
         xhr.send();
         setTimeout(()=> {
             expect(xhr.dispatchEvent).toHaveBeenCalledWith(expected);
-            done();
+            setTimeout(done, DESTROY_DELAY);
         }, 100);
     });
 });
-
 
 describe('DelegateXhr: observable responses', () => {
 
@@ -400,7 +345,7 @@ describe('DelegateXhr: observable responses', () => {
                 expect(xhr.responseURL).toEqual(URL);
                 expect(xhr.responseText).toEqual(JSON.stringify(BODY));
                 expect(xhr.getAllResponseHeaders()).toEqual(EXPECTED_HEADERS);
-                done();
+                setTimeout(done, DESTROY_DELAY);
             }
         };
         xhr.send();
@@ -414,9 +359,223 @@ describe('DelegateXhr: observable responses', () => {
             if (readyState === xhr.DONE) {
                 expect(xhr.status).toEqual(HTTP_ERROR.status);
                 expect(xhr.statusText).toEqual(HTTP_ERROR.statusText);
-                done();
+                setTimeout(done, DESTROY_DELAY);
             }
         };
+        xhr.send();
+    });
+});
+
+describe('DelegateXhr: request object', () => {
+
+    let xhr: DelegateXhr;
+    let logger: HttpMockLoggingService;
+
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            providers: [HttpMockLoggingService]
+        });
+        logger = TestBed.inject(HttpMockLoggingService);
+    });
+    
+    it('the HttpRequest.params Map should be empty by default', (done) => {
+        const cfg: RouteMockConfig = {
+            methodConfig: {
+                data: (request: HttpRequest<any>) => {
+                    const params: HttpParams = request.params;
+                    expect(request.params.keys().length).toEqual(0);
+                    setTimeout(done, DESTROY_DELAY);
+                    return httpResponseMock().response();
+                }
+            },
+            parameters: {},
+            searchParams: buildUrlSearchParamsMock()
+        };
+        xhr = new DelegateXhr(cfg, logger);
+        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.send();
+    });
+    
+    it('search parameters should be available from the HttpRequest.params Map', (done) => {
+        const cfg: RouteMockConfig = {
+            methodConfig: {
+                data: (request: HttpRequest<any>) => {
+                    const params: HttpParams = request.params;
+                    expect(params.get("id")).toEqual("10");
+                    expect(params.get("age")).toEqual("20");
+                    setTimeout(done, DESTROY_DELAY);
+                    return httpResponseMock().response();
+                }
+            },
+            parameters: {},
+            searchParams: buildUrlSearchParamsMock(['id', "10"], ['age', "20"])
+        };
+        xhr = new DelegateXhr(cfg, logger);
+        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.send();
+    });
+
+    it('HttpRequest object should not have any request headers by default', (done) => {
+        const cfg: RouteMockConfig = {
+            methodConfig: {
+                data: (request: HttpRequest<any>) => {
+                    expect(request.headers.keys().length).toEqual(0);
+                    setTimeout(done, DESTROY_DELAY);
+                    return httpResponseMock().response();
+                }
+            },
+            parameters: {},
+            searchParams: buildUrlSearchParamsMock()
+        };
+        xhr = new DelegateXhr(cfg, logger);
+        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.send();
+    });
+
+    it('setRequestHeader() should add headers to the HttpRequest object after the send() method invokaton', (done) => {
+        const cfg: RouteMockConfig = {
+            methodConfig: {
+                data: (request: HttpRequest<any>) => {
+                    expect(request.headers.get("Cache-Control")).toEqual("no-cache");
+                    expect(request.headers.get("Accept-Encoding")).toEqual("gzip, deflate, br, zstd");
+                    setTimeout(done, DESTROY_DELAY);
+                    return httpResponseMock().response();
+                }
+            },
+            parameters: {},
+            searchParams: buildUrlSearchParamsMock()
+        };
+        xhr = new DelegateXhr(cfg, logger);
+        xhr.setRequestHeader("Cache-Control", "no-cache");
+        xhr.setRequestHeader("Accept-Encoding", "gzip, deflate, br, zstd");
+        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.send();
+    });
+    
+    it('setRequestHeader() should add headers to the HttpRequest object after the send() method invokaton', (done) => {
+        const cfg: RouteMockConfig = {
+            methodConfig: {
+                data: (request: HttpRequest<any>) => {
+                    expect(request.headers.get("Cache-Control")).toEqual("no-cache");
+                    expect(request.headers.get("Accept-Encoding")).toEqual("gzip, deflate, br, zstd");
+                    setTimeout(done, DESTROY_DELAY);
+                    return httpResponseMock().response();
+                }
+            },
+            parameters: {},
+            searchParams: buildUrlSearchParamsMock()
+        };
+        xhr = new DelegateXhr(cfg, logger);
+        xhr.setRequestHeader("Cache-Control", "no-cache");
+        xhr.setRequestHeader("Accept-Encoding", "gzip, deflate, br, zstd");
+        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.send();
+    });
+
+    it('withCredentials should be false by default', (done) => {
+        const cfg: RouteMockConfig = {
+            methodConfig: {
+                data: (request: HttpRequest<any>) => {
+                    expect(request.withCredentials).toBeFalse();
+                    setTimeout(done, DESTROY_DELAY);
+                    return httpResponseMock().response();
+                }
+            },
+            parameters: {},
+            searchParams: buildUrlSearchParamsMock()
+        };
+        xhr = new DelegateXhr(cfg, logger);
+        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.send();
+    });
+
+    it('withCredentials should correspond to the xhr.withCredentials value', (done) => {
+        const cfg: RouteMockConfig = {
+            methodConfig: {
+                data: (request: HttpRequest<any>) => {
+                    expect(request.withCredentials).toBeTrue();
+                    setTimeout(done, DESTROY_DELAY);
+                    return httpResponseMock().response();
+                }
+            },
+            parameters: {},
+            searchParams: buildUrlSearchParamsMock()
+        };
+        xhr = new DelegateXhr(cfg, logger);
+        xhr.withCredentials = true;
+        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.send();
+    });
+    
+    it('responseType should be an empty string by default, but set to "json" by Angular', (done) => {
+        const cfg: RouteMockConfig = {
+            methodConfig: {
+                data: (request: HttpRequest<any>) => {
+                    expect(request.responseType).toEqual( "json");
+                    setTimeout(done, DESTROY_DELAY);
+                    return httpResponseMock().response();
+                }
+            },
+            parameters: {},
+            searchParams: buildUrlSearchParamsMock()
+        };
+        xhr = new DelegateXhr(cfg, logger);
+        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.send();
+    });
+
+    it('responseType should correspond to the xhr.responseType value', (done) => {
+        const cfg: RouteMockConfig = {
+            methodConfig: {
+                data: (request: HttpRequest<any>) => {
+                    expect(request.responseType).toEqual("arraybuffer");
+                    setTimeout(done, DESTROY_DELAY);
+                    return httpResponseMock().response();
+                }
+            },
+            parameters: {},
+            searchParams: buildUrlSearchParamsMock()
+        };
+        xhr = new DelegateXhr(cfg, logger);
+        xhr.responseType = "arraybuffer";
+        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.send();
+    });
+
+    it('reportProgress should be false by default', (done) => {
+        const cfg: RouteMockConfig = {
+            methodConfig: {
+                data: (request: HttpRequest<any>) => {
+                    expect(request.reportProgress).toBeFalse();
+                    setTimeout(done, DESTROY_DELAY);
+                    return httpResponseMock().response();
+                }
+            },
+            parameters: {},
+            searchParams: buildUrlSearchParamsMock()
+        };
+        xhr = new DelegateXhr(cfg, logger);
+        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.send();
+    });
+
+    it('reportProgress should be true when usin progress event listeners', (done) => {
+        const cfg: RouteMockConfig = {
+            methodConfig: {
+                data: (request: HttpRequest<any>) => {
+                    expect(request.reportProgress).toBeTrue();
+                    xhr.removeEventListener("progress", mockEvt);
+                    setTimeout(done, DESTROY_DELAY);
+                    return httpResponseMock().response();
+                }
+            },
+            parameters: {},
+            searchParams: buildUrlSearchParamsMock()
+        };
+        const mockEvt = ()=> {};
+        xhr = new DelegateXhr(cfg, logger);
+        xhr.addEventListener("progress", mockEvt);
+        xhr.open(HTTPMethodRef.GET, URL);
         xhr.send();
     });
 });
