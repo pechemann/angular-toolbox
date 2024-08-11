@@ -8,4 +8,8 @@
 
 import { AbstractLogger } from "../../../logging";
 
+/**
+ * @private
+ * The `Logger` implementation used by the `HttpMockLoggingService` class to manage logs.
+ */
 export class HttpMockLogger extends AbstractLogger {}

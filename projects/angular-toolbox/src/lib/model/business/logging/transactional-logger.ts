@@ -6,7 +6,7 @@
  * fthe LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { Destroyable } from "angular-toolbox";
+import { Destroyable } from "../lang";
 import { LogConnector } from "./log-connector";
 
 /**
