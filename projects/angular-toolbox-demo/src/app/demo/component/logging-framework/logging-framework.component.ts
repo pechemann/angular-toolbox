@@ -12,6 +12,7 @@ import { HtmlLogConnector, LogConnector, LoggerService, IdentifiableComponent } 
 import { DemoComponent } from '../../../ui/component/demo/demo.component';
 import { DocumentationLink } from '../../../ui/model/business/documentation-link';
 import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
+import { FormsModule } from '@angular/forms';
 
 const CALLER: string = "Logging Console Demo";
 
@@ -19,7 +20,8 @@ const CALLER: string = "Logging Console Demo";
   selector: 'app-logging-framework-demo',
   standalone: true,
   imports: [
-    DemoComponent
+    DemoComponent,
+    FormsModule
   ],
   templateUrl: './logging-framework.component.html',
   styleUrl: 'logging-framework.component.scss'
@@ -30,7 +32,7 @@ export class LoggingFrameworkComponent extends IdentifiableComponent implements 
   private _console!: ElementRef<HTMLDivElement>;
 
   constructor(breadcrumb: BreadcrumbService,
-              private _loggingService: LoggerService) {
+              protected logger: LoggerService) {
     super();
     breadcrumb.removeAll()
               .addItem(breadcrumb.buildItem("Demo", "/demo"))
@@ -44,14 +46,14 @@ export class LoggingFrameworkComponent extends IdentifiableComponent implements 
       logIndex: ++this.logIndex,
       customId: crypto.randomUUID()
     };
-    if (type === "info") return this._loggingService.info(CALLER, "Log button click", metadata);
-    if (type === "config") return this._loggingService.config(CALLER, "Log button click", metadata);
-    if (type === "warn") return this._loggingService.warn(CALLER, "Warning button click");
-    this._loggingService.error(CALLER, "Error button click");
+    if (type === "info") return this.logger.info(CALLER, "Log button click", metadata);
+    if (type === "config") return this.logger.config(CALLER, "Log button click", metadata);
+    if (type === "warn") return this.logger.warn(CALLER, "Warning button click");
+    this.logger.error(CALLER, "Error button click");
   }
 
   protected copyLogs(): void {
-    this._loggingService.getLogConnector().copyLogs();
+    this.logger.getLogConnector().copyLogs();
   }
 
   protected documentation: DocumentationLink = {
@@ -64,6 +66,13 @@ export class LoggingFrameworkComponent extends IdentifiableComponent implements 
     html: [`<section>
   <header>
     <h6>Console</h6>
+    <select [(ngModel)]="logger.minLogLevel">
+      <option value="0">INFO</option>
+      <option value="1">CONFIG</option>
+      <option value="2">WARNING</option>
+      <option value="3">ERROR</option>
+      <option value="4">OFF</option>
+    </select>
     <button (click)="copyLogs()">Copy Logs</button>
   </header>
   <main #consoleViewport></main>
@@ -74,7 +83,7 @@ export class LoggingFrameworkComponent extends IdentifiableComponent implements 
   @ViewChild("consoleViewport")
   private console!: ElementRef<HTMLDivElement>;
     
-  constructor(private logger: LoggerService) {}
+  constructor(protected logger: LoggerService) {}
 
   protected copyLogs(): void {
     this.logger.getLogConnector().copyLogs();
@@ -93,11 +102,11 @@ export class LoggingFrameworkComponent extends IdentifiableComponent implements 
 
   public ngAfterViewInit(): void {
     const logConnector: LogConnector = new HtmlLogConnector(this._console.nativeElement);
-    this._loggingService.setLogConnector(logConnector);
+    this.logger.setLogConnector(logConnector);
   }
 
   public ngOnDestroy(): void {
-    this._loggingService.setLogConnector(null);
-    this._loggingService.getLogs().length = 0;
+    this.logger.setLogConnector(null);
+    this.logger.getLogs().length = 0;
   }
 }

@@ -5,6 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be ound in
  * fthe LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
+import { LogLevel } from "../../../util";
 import { Log } from "./log";
 
 /**
@@ -12,6 +13,11 @@ import { Log } from "./log";
  */
 export interface Logger {
 
+    /**
+     * Defines the minimum log lovel at which logs must be processed.
+     */
+    minLogLevel: LogLevel;
+    
     /**
      * Returns the list of logs processed by this logging service.
      */

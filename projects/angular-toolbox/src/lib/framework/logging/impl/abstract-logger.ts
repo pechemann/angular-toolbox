@@ -22,6 +22,11 @@ export const DEFAULT_LOG_CONNECTOR: LogConnector = new DefaultLogConnector();
 export abstract class AbstractLogger implements Logger, TransactionalLogger {
 
   /**
+   * @inheritdoc
+   */
+  public minLogLevel: LogLevel = LogLevel.INFO;
+
+  /**
    * The list of logs sent to this logger.
    */
   protected logs: Log[] = [];
@@ -88,7 +93,8 @@ export abstract class AbstractLogger implements Logger, TransactionalLogger {
   /**
    * @private
    */
-  private addLog(caller: string | any, msg: string, level: LogLevel, metadata?: any) {
+  private addLog(caller: string | any, msg: string, level: LogLevel, metadata?: any): void {
+    if (level < this.minLogLevel) return;
     const log: Log = LogBuilder.build(caller, msg, level, metadata);
     this.logs.push(log);
     this.logConnector.sendLog(log);

@@ -103,6 +103,14 @@ describe('BaseLogger', () => {
         expect(connector.sendLog).toHaveBeenCalledWith(log);
     });
     
+    it('config() should send the log to the log connector', () => {
+        const connector: LogConnector = logger.getLogConnector();
+        spyOn(connector, "sendLog");
+        logger.config(CALLER, LOG_MESSAGE);
+        const log: Log = logger.getLogs()[0];
+        expect(connector.sendLog).toHaveBeenCalledWith(log);
+    });
+    
     it('error() should send the log to the log connector', () => {
         const connector: LogConnector = logger.getLogConnector();
         spyOn(connector, "sendLog");
@@ -124,5 +132,76 @@ describe('BaseLogger', () => {
         logger.setLogConnector(connector);
         logger.destroy();
         expect(logger.getLogConnector()).toBeNull();
+    });
+    
+    it('minLogLevel should be LogLevel.INFO by default', () => {
+        expect(logger.minLogLevel).toEqual(LogLevel.INFO);
+    });
+    
+    it('log should not be sent to the log connector when minLogLevel is LogLevel.OFF', () => {
+        const connector: LogConnector = logger.getLogConnector();
+        spyOn(connector, "sendLog");
+        logger.minLogLevel = LogLevel.OFF;
+        logger.info(CALLER, LOG_MESSAGE);
+        logger.config(CALLER, LOG_MESSAGE);
+        logger.warn(CALLER, LOG_MESSAGE);
+        logger.error(CALLER, LOG_MESSAGE);
+        expect(connector.sendLog).not.toHaveBeenCalled();
+    });
+    
+    it('only ERROR logs should be sent to the log connector when minLogLevel is LogLevel.ERROR', () => {
+        const connector: LogConnector = logger.getLogConnector();
+        spyOn(connector, "sendLog");
+        logger.minLogLevel = LogLevel.ERROR;
+        logger.info(CALLER, LOG_MESSAGE);
+        logger.config(CALLER, LOG_MESSAGE);
+        logger.warn(CALLER, LOG_MESSAGE);
+        logger.error(CALLER, LOG_MESSAGE);
+        expect(connector.sendLog).toHaveBeenCalledTimes(1);
+        logger.getLogs().forEach(log=> {
+            expect(log.level).toBeGreaterThanOrEqual(LogLevel.ERROR);
+        });
+    });
+    
+    it('only ERROR and WARNING logs should be sent to the log connector when minLogLevel is LogLevel.WARNING', () => {
+        const connector: LogConnector = logger.getLogConnector();
+        spyOn(connector, "sendLog");
+        logger.minLogLevel = LogLevel.WARNING;
+        logger.info(CALLER, LOG_MESSAGE);
+        logger.config(CALLER, LOG_MESSAGE);
+        logger.warn(CALLER, LOG_MESSAGE);
+        logger.error(CALLER, LOG_MESSAGE);
+        expect(connector.sendLog).toHaveBeenCalledTimes(2);
+        logger.getLogs().forEach(log=> {
+            expect(log.level).toBeGreaterThanOrEqual(LogLevel.WARNING);
+        });
+    });
+    
+    it('only ERROR, WARNING and CONFIG logs should be sent to the log connector when minLogLevel is LogLevel.CONFIG', () => {
+        const connector: LogConnector = logger.getLogConnector();
+        spyOn(connector, "sendLog");
+        logger.minLogLevel = LogLevel.CONFIG;
+        logger.info(CALLER, LOG_MESSAGE);
+        logger.config(CALLER, LOG_MESSAGE);
+        logger.warn(CALLER, LOG_MESSAGE);
+        logger.error(CALLER, LOG_MESSAGE);
+        expect(connector.sendLog).toHaveBeenCalledTimes(3);
+        logger.getLogs().forEach(log=> {
+            expect(log.level).toBeGreaterThanOrEqual(LogLevel.CONFIG);
+        });
+    });
+    
+    it('all logs should be sent to the log connector when minLogLevel is LogLevel.INFO', () => {
+        const connector: LogConnector = logger.getLogConnector();
+        spyOn(connector, "sendLog");
+        logger.minLogLevel = LogLevel.INFO;
+        logger.info(CALLER, LOG_MESSAGE);
+        logger.config(CALLER, LOG_MESSAGE);
+        logger.warn(CALLER, LOG_MESSAGE);
+        logger.error(CALLER, LOG_MESSAGE);
+        expect(connector.sendLog).toHaveBeenCalledTimes(4);
+        logger.getLogs().forEach(log=> {
+            expect(log.level).toBeGreaterThanOrEqual(LogLevel.INFO);
+        });
     });
 });

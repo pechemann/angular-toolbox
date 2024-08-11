@@ -30,5 +30,10 @@ export enum LogLevel {
     /**
      * Indicates that the log message represents an error.
      */
-    ERROR = 3
+    ERROR = 3,
+    
+    /**
+     * A special level used by loggers to prevent logs to be processed.
+     */
+    OFF = 4
 }

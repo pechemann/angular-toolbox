@@ -10,6 +10,10 @@ import { LogLevel } from '../../public-api';
 
 describe('LogLevel', () => {
   
+  it('LogLevel.OFF should be 4', () => {
+    expect(LogLevel.OFF).toEqual(4);
+  });
+
   it('LogLevel.INFO should be 0', () => {
     expect(LogLevel.INFO).toEqual(0);
   });
