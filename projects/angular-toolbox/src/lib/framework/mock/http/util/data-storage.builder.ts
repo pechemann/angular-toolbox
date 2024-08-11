@@ -8,7 +8,7 @@
 
 
 import { EMPTY_STRING } from "../../../../util";
-import { HttpRequestMetadata, HttpResponseMock } from "../../../../model";
+import { HttpMockRequestMetadata, HttpResponseMock } from "../../../../model";
 import { DataStorage } from "../core/data-storage";
 
 /**
@@ -23,10 +23,11 @@ export class DataStorageBuilder {
      * 
      * @param httpResponse The `HttpResponseMock` to be stored by the framework.
      * @param data The data of the HTTP response to be stored by the framework.
+     * @param metadata The metadata of the HTTP mock request to be stored by the framework.
      * 
      * @returns A new `DataStorage` object.
      */
-    public static buildDataStorage(httpResponse: HttpResponseMock, data: any, requestMetadata: HttpRequestMetadata): DataStorage {
+    public static buildDataStorage(httpResponse: HttpResponseMock, data: any, metadata: HttpMockRequestMetadata): DataStorage {
         // TODO: add support for different data types (string, Blob, etc.)
         const stringifiedData: string = data ? JSON.stringify(data) : EMPTY_STRING;
         return {
@@ -35,7 +36,7 @@ export class DataStorageBuilder {
             total: data ? new Blob([stringifiedData]).size : 0,
             data: data,
             stringifiedData: stringifiedData,
-            requestMetadata: requestMetadata
+            requestMetadata: metadata
         };
     }
 }

@@ -9,7 +9,7 @@
 import { formatDate } from "@angular/common";
 import { Log } from "../../../model";
 import { LogLevel, EMPTY_STRING, OBJECT, STRING } from "../../../util";
-import { ERROR_STRING, LOG_STRING, WARNING_STRING } from "./log.constant";
+import { LOG_CONFIG_STRING, LOG_ERROR_STRING, LOG_INFO_STRING, LOG_WARNING_STRING } from "./log.constant";
 
 /**
  * @private
@@ -74,9 +74,10 @@ export class LogUtil {
      * @returns The formatted log level.
      */
     public static getLevelString(level: LogLevel): string {
-        if (level === LogLevel.LOG) return LOG_STRING;
-        if (level === LogLevel.WARNING) return WARNING_STRING;
-        if (level === LogLevel.ERROR) return ERROR_STRING;
+        if (level === LogLevel.INFO) return LOG_INFO_STRING;
+        if (level === LogLevel.CONFIG) return LOG_CONFIG_STRING;
+        if (level === LogLevel.WARNING) return LOG_WARNING_STRING;
+        if (level === LogLevel.ERROR) return LOG_ERROR_STRING;
         return EMPTY_STRING;
     }
 

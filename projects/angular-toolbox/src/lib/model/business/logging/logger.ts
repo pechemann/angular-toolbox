@@ -18,13 +18,22 @@ export interface Logger {
     getLogs(): Log[];
 
     /**
-     * Sends a log message to the service.
+     * Sends an information log message to the service.
      * 
      * @param caller The reference to the caller that sends the log.
      * @param message The log message.
      * @param metadata Optionale metadata associated with this log.
      */
-    log(caller: string | any, message: string, metadata?: any): void;
+    info(caller: string | any, message: string, metadata?: any): void;
+
+    /**
+     * Sends a config log message to the service.
+     * 
+     * @param caller The reference to the caller that sends the log.
+     * @param message The log message.
+     * @param metadata Optionale metadata associated with this log.
+     */
+    config(caller: string | any, message: string, metadata?: any): void;
 
     /**
      * Sends an error log to the service.

@@ -15,15 +15,20 @@ export enum LogLevel {
     /**
      * Indicates that the log is a basic information message.
      */
-    LOG = 0,
-    
+    INFO = 0,
+        
+    /**
+     * Indicates that the log represents a config message.
+     */
+    CONFIG = 1,
+
     /**
      * Indicates that the log is a warning message.
      */
-    WARNING = 1,
+    WARNING = 2,
 
     /**
      * Indicates that the log message represents an error.
      */
-    ERROR = 2
+    ERROR = 3
 }

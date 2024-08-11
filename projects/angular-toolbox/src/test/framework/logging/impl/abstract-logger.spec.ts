@@ -59,12 +59,21 @@ describe('BaseLogger', () => {
         expect(logger.getLogs().length).toEqual(0);
     });
 
-    it('log() should add a log with level LogLevel.LOG and the specified parameters to the list of logs', () => {
-        logger.log(CALLER, LOG_MESSAGE, METADATA);
+    it('info() should add a log with level LogLevel.INFO and the specified parameters to the list of logs', () => {
+        logger.info(CALLER, LOG_MESSAGE, METADATA);
         const log: Log = logger.getLogs()[0];
         expect(log.caller).toEqual(CALLER);
         expect(log.message).toEqual(LOG_MESSAGE);
-        expect(log.level).toEqual(LogLevel.LOG);
+        expect(log.level).toEqual(LogLevel.INFO);
+        expect(log.metadata).toBe(METADATA);
+    });
+    
+    it('config() should add a log with level LogLevel.CONFIG and the specified parameters to the list of logs', () => {
+        logger.config(CALLER, LOG_MESSAGE, METADATA);
+        const log: Log = logger.getLogs()[0];
+        expect(log.caller).toEqual(CALLER);
+        expect(log.message).toEqual(LOG_MESSAGE);
+        expect(log.level).toEqual(LogLevel.CONFIG);
         expect(log.metadata).toBe(METADATA);
     });
     
@@ -86,10 +95,10 @@ describe('BaseLogger', () => {
         expect(log.metadata).toBe(METADATA);
     });
     
-    it('log() should send the log to the log connector', () => {
+    it('info() should send the log to the log connector', () => {
         const connector: LogConnector = logger.getLogConnector();
         spyOn(connector, "sendLog");
-        logger.log(CALLER, LOG_MESSAGE);
+        logger.info(CALLER, LOG_MESSAGE);
         const log: Log = logger.getLogs()[0];
         expect(connector.sendLog).toHaveBeenCalledWith(log);
     });

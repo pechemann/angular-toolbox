@@ -24,7 +24,12 @@ const SPAN: string = "span";
 /**
  * @private
  */
-const S_LOG: string = "atx-log";
+const S_LOG_INFO: string = "atx-log";
+
+/**
+ * @private
+ */
+const S_LOG_CONFIG: string = "atx-config-log";
 
 /**
  * @private
@@ -163,7 +168,8 @@ export class HtmlLogConnector implements LogConnector {
      * @private
      */
     private getCssClassName(level: LogLevel) : string {
-        if (level === LogLevel.LOG) return S_LOG;
+        if (level === LogLevel.INFO) return S_LOG_INFO;
+        if (level === LogLevel.CONFIG) return S_LOG_CONFIG;
         if (level === LogLevel.ERROR) return S_LOG_ERROR;
         return S_WARN;
     }
@@ -184,7 +190,7 @@ export class HtmlLogConnector implements LogConnector {
     private injectStyle() {
         const style: HTMLStyleElement = document.createElement('style');
         style.id = STYLE_ID;
-        style.innerHTML = ".atx-log-container{width:100%;background:black;font-family:monospace;font-size:14px;padding:10px 12px}.atx-log{color:white}.atx-error-log{color:red}.atx-warn-log{color:gold}.atx-log-metadata{color:#469afa}";
+        style.innerHTML = ".atx-log-container{width:100%;background:black;font-family:monospace;font-size:14px;padding:10px 12px}.atx-log,.atx-config-log{color:white}.atx-error-log{color:red}.atx-warn-log{color:gold}.atx-log-metadata{color:#469afa}";
         this._tgt.classList.add("atx-log-container");
         this.getHead().appendChild(style);
     }

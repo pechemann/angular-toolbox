@@ -25,7 +25,7 @@ export class LogBuilder {
      * 
      * @returns A new `Log` object
      */
-    public static build(caller: string, message: string, level: LogLevel = LogLevel.LOG, metadata?: any): Log {
+    public static build(caller: string, message: string, level: LogLevel = LogLevel.INFO, metadata?: any): Log {
         return new LogImpl(caller, message, level, metadata);
     }
 }

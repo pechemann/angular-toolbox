@@ -44,7 +44,8 @@ export class LoggingFrameworkComponent extends IdentifiableComponent implements 
       logIndex: ++this.logIndex,
       customId: crypto.randomUUID()
     };
-    if (type === "log") return this._loggingService.log(CALLER, "Log button click", metadata);
+    if (type === "info") return this._loggingService.info(CALLER, "Log button click", metadata);
+    if (type === "config") return this._loggingService.config(CALLER, "Log button click", metadata);
     if (type === "warn") return this._loggingService.warn(CALLER, "Warning button click");
     this._loggingService.error(CALLER, "Error button click");
   }

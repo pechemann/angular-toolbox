@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { HtmlLogConnector, LogBuilder, LogLevel, LogUtil, ERROR_STRING, LOG_STRING, WARNING_STRING } from "projects/angular-toolbox/src/public-api";
+import { HtmlLogConnector, LogBuilder, LogLevel, LogUtil, LOG_ERROR_STRING, LOG_INFO_STRING, LOG_WARNING_STRING, LOG_CONFIG_STRING } from "projects/angular-toolbox/src/public-api";
 
 const TIMESTAMP_REGEXP: RegExp = /\[\d{2}:\d{2}:\d{2}]/;
 
@@ -68,7 +68,7 @@ describe('HtmlLogConnector', () => {
         connector = new HtmlLogConnector(htmlTarget, false);
         const logSpy = spyOn(connector, "sendLog");
         connector.init([
-            buildLog(LogLevel.LOG),
+            buildLog(LogLevel.INFO),
             buildLog(LogLevel.ERROR)
         ]);
         expect(logSpy).toHaveBeenCalledTimes(2);
@@ -76,13 +76,13 @@ describe('HtmlLogConnector', () => {
     
     it('sendLog() should display logs into the HTML renderer', () => {
         connector = new HtmlLogConnector(htmlTarget, false);
-        connector.sendLog(buildLog(LogLevel.LOG));
+        connector.sendLog(buildLog(LogLevel.INFO));
         expect(htmlTarget.children.length).toEqual(1);
     });
 
     it('sendLog() should process logs and display them into the HTML renderer with the right structure', () => {
         connector = new HtmlLogConnector(htmlTarget, false);
-        connector.sendLog(buildLog(LogLevel.LOG));
+        connector.sendLog(buildLog(LogLevel.INFO));
         const htmlLog = htmlTarget.children.item(0);
         expect(htmlLog?.classList.contains("atx-log")).toBeTrue();
         expect(htmlLog?.querySelector(".atx-log-level")).toBeTruthy();
@@ -93,7 +93,7 @@ describe('HtmlLogConnector', () => {
 
     it('sendLog() should render logs with well formated timestamps', () => {
         connector = new HtmlLogConnector(htmlTarget, false);
-        connector.sendLog(buildLog(LogLevel.LOG));
+        connector.sendLog(buildLog(LogLevel.INFO));
         const htmlLog = htmlTarget.children.item(0);
         const tsNode = htmlLog?.querySelector(".atx-log-time");
         expect(TIMESTAMP_REGEXP.test(tsNode?.innerHTML as any)).toBeTrue();
@@ -101,7 +101,7 @@ describe('HtmlLogConnector', () => {
 
     it('sendLog() should render logs with well formated caller reference', () => {
         connector = new HtmlLogConnector(htmlTarget, false);
-        connector.sendLog(buildLog(LogLevel.LOG));
+        connector.sendLog(buildLog(LogLevel.INFO));
         const htmlLog = htmlTarget.children.item(0);
         const calNode = htmlLog?.querySelector(".atx-log-caller");
         const callerNodeString: string = calNode?.innerHTML as any;
@@ -110,18 +110,26 @@ describe('HtmlLogConnector', () => {
 
     it('sendLog() should render logs with well formated message reference', () => {
         connector = new HtmlLogConnector(htmlTarget, false);
-        connector.sendLog(buildLog(LogLevel.LOG));
+        connector.sendLog(buildLog(LogLevel.INFO));
         const htmlLog = htmlTarget.children.item(0);
         const msgNode = htmlLog?.querySelector(".atx-log-message");
         expect(msgNode?.innerHTML.includes(LOG_MESSAGE)).toBeTrue();
     });
 
-    it('sendLog() should process logs and display them into the HTML renderer with the right structure if log level is LogLevel.LOG', () => {
+    it('sendLog() should process logs and display them into the HTML renderer with the right structure if log level is LogLevel.INFO', () => {
         connector = new HtmlLogConnector(htmlTarget, false);
-        connector.sendLog(buildLog(LogLevel.LOG));
+        connector.sendLog(buildLog(LogLevel.INFO));
         const htmlLog = htmlTarget.children.item(0);
         const logLevelNode = htmlLog?.querySelector(".atx-log-level");
-        expect(logLevelNode?.innerHTML).toEqual(`[${LOG_STRING}]`);
+        expect(logLevelNode?.innerHTML).toEqual(`[${LOG_INFO_STRING}]`);
+    });
+
+    it('sendLog() should process logs and display them into the HTML renderer with the right structure if log level is LogLevel.CONFIG', () => {
+        connector = new HtmlLogConnector(htmlTarget, false);
+        connector.sendLog(buildLog(LogLevel.CONFIG));
+        const htmlLog = htmlTarget.children.item(0);
+        const logLevelNode = htmlLog?.querySelector(".atx-log-level");
+        expect(logLevelNode?.innerHTML).toEqual(`[${LOG_CONFIG_STRING}]`);
     });
 
     it('sendLog() should process logs and display them into the HTML renderer with the right structure if log level is LogLevel.WARNING', () => {
@@ -129,7 +137,7 @@ describe('HtmlLogConnector', () => {
         connector.sendLog(buildLog(LogLevel.WARNING));
         const htmlLog = htmlTarget.children.item(0);
         const logLevelNode = htmlLog?.querySelector(".atx-log-level");
-        expect(logLevelNode?.innerHTML).toEqual(`[${WARNING_STRING}]`);
+        expect(logLevelNode?.innerHTML).toEqual(`[${LOG_WARNING_STRING}]`);
     });
 
     it('sendLog() should process logs and display them into the HTML renderer with the right structure if log level is LogLevel.ERROR', () => {
@@ -137,12 +145,12 @@ describe('HtmlLogConnector', () => {
         connector.sendLog(buildLog(LogLevel.ERROR));
         const htmlLog = htmlTarget.children.item(0);
         const logLevelNode = htmlLog?.querySelector(".atx-log-level");
-        expect(logLevelNode?.innerHTML).toEqual(`[${ERROR_STRING}]`);
+        expect(logLevelNode?.innerHTML).toEqual(`[${LOG_ERROR_STRING}]`);
     });
 
     it('clearLogs() should remove logs to the HTML renderer element', () => {
         connector = new HtmlLogConnector(htmlTarget, false);
-        connector.sendLog(buildLog(LogLevel.LOG));
+        connector.sendLog(buildLog(LogLevel.INFO));
         connector.sendLog(buildLog(LogLevel.ERROR));
         connector.clearLogs();
         expect(htmlTarget.children.length).toEqual(0);
@@ -152,7 +160,7 @@ describe('HtmlLogConnector', () => {
         const clipboard = navigator.clipboard;
         const spy = spyOn(clipboard, 'writeText');
         connector = new HtmlLogConnector(htmlTarget, false);
-        connector.sendLog(buildLog(LogLevel.LOG));
+        connector.sendLog(buildLog(LogLevel.INFO));
         connector.sendLog(buildLog(LogLevel.ERROR));
         connector.copyLogs();
         expect(spy).toHaveBeenCalled();
@@ -163,7 +171,7 @@ describe('HtmlLogConnector', () => {
         const spy = spyOn(LogUtil, 'logListToString');
         spyOn(navigator.clipboard, 'writeText');
         connector = new HtmlLogConnector(htmlTarget, false);
-        connector.sendLog(buildLog(LogLevel.LOG));
+        connector.sendLog(buildLog(LogLevel.INFO));
         connector.sendLog(buildLog(LogLevel.ERROR));
         connector.copyLogs();
         expect(spy).toHaveBeenCalled();

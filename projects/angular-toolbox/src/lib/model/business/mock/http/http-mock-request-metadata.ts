@@ -7,9 +7,9 @@
  */
 
 /**
- * Defines the config of a HTTP response mock object.
+ * Defines the the metadata associated to an HTTP mock request.
  */
-export interface HttpRequestMetadata {
+export interface HttpMockRequestMetadata {
 
     /**
      * The response body. Can be either an object, or an `Observable` instance.

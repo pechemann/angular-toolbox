@@ -265,7 +265,7 @@ describe('DelegateXhr', () => {
 });
 
 describe('DelegateXhr: error response', () => {
-
+    
     let xhr: DelegateXhr;
     let logger: HttpMockLoggingService;
 
@@ -274,7 +274,6 @@ describe('DelegateXhr: error response', () => {
             providers: [HttpMockLoggingService]
         });
         logger = TestBed.inject(HttpMockLoggingService);
-        console.log("inject")
         xhr = new DelegateXhr(ROUTE_CONFIG_WITH_ERROR, logger);
     });
 

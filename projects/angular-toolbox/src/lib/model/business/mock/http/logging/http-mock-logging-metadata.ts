@@ -7,7 +7,7 @@
  */
 
 import { HttpRequest, HttpResponse } from "@angular/common/http";
-import { HttpRequestMetadata } from "../http-request-metadata";
+import { HttpMockRequestMetadata } from "../http-mock-request-metadata";
 
 /**
  * The markup interface for all log metadata of the HTTP Mocking Framework.
@@ -15,5 +15,5 @@ import { HttpRequestMetadata } from "../http-request-metadata";
 export interface HttpMockLoggingMetadata {
     request: HttpRequest<any>;
     response: HttpResponse<any>;
-    requestMetadata: HttpRequestMetadata;
+    requestMetadata: HttpMockRequestMetadata;
 }

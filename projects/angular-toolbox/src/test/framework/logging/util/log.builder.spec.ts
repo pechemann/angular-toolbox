@@ -28,9 +28,9 @@ describe('LogBuilder', () => {
         expect(log1).not.toBe(log2);
     });
     
-    it('default log level should be LogLevel.LOG', () => {
+    it('default log level should be LogLevel.INFO', () => {
         const log: Log = LogBuilder.build(CALLER, LOG_MESSAGE);
-        expect(log.level).toEqual(LogLevel.LOG);
+        expect(log.level).toEqual(LogLevel.INFO);
     });
     
     it('default log metadata should be undefined', () => {

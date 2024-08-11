@@ -32,7 +32,8 @@ export class ConsoleLogConnector implements LogConnector {
      */
     public sendLog(log: Log): void {
         const level: LogLevel = log.level;
-        if (level === LogLevel.LOG) return console.log(log);
+        if (level === LogLevel.INFO) return console.info(log);
+        if (level === LogLevel.CONFIG) return console.log(log);
         if (level === LogLevel.ERROR) return console.error(log) ;
         console.warn(log);
     }

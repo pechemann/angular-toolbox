@@ -24,40 +24,60 @@ describe('ConsoleLogConnector', () => {
     
     it('destroy() should do nothing', () => {
         spyOn(console, "log");
+        spyOn(console, "info");
         spyOn(console, "warn");
         spyOn(console, "error");
         expect(connector.destroy()).toBe(void 0);
         expect(console.log).not.toHaveBeenCalled();
+        expect(console.info).not.toHaveBeenCalled();
         expect(console.warn).not.toHaveBeenCalled();
         expect(console.error).not.toHaveBeenCalled();
     });
     
     it('copyLogs() should do nothing', () => {
         spyOn(console, "log");
+        spyOn(console, "info");
         spyOn(console, "warn");
         spyOn(console, "error");
         expect(connector.copyLogs()).toBe(void 0);
         expect(console.log).not.toHaveBeenCalled();
+        expect(console.info).not.toHaveBeenCalled();
         expect(console.warn).not.toHaveBeenCalled();
         expect(console.error).not.toHaveBeenCalled();
     });
     
     it('init() should do nothing if list is empty', () => {
         spyOn(console, "log");
+        spyOn(console, "info");
         spyOn(console, "warn");
         spyOn(console, "error");
         connector.init([]);
         expect(console.log).not.toHaveBeenCalled();
         expect(console.warn).not.toHaveBeenCalled();
+        expect(console.info).not.toHaveBeenCalled();
         expect(console.error).not.toHaveBeenCalled();
     });
     
-    it('init() should send log to the console if a log is specified with LogLevel.LOG', () => {
+    it('init() should send log to the console if a log is specified with LogLevel.INFO', () => {
         spyOn(console, "log");
         spyOn(console, "warn");
+        spyOn(console, "info");
         spyOn(console, "error");
-        connector.init([buildLog(LogLevel.LOG)]);
+        connector.init([buildLog(LogLevel.INFO)]);
+        expect(console.info).toHaveBeenCalled();
+        expect(console.log).not.toHaveBeenCalled();
+        expect(console.warn).not.toHaveBeenCalled();
+        expect(console.error).not.toHaveBeenCalled();
+    });
+    
+    it('init() should send log to the console if a log is specified with LogLevel.CONFIG', () => {
+        spyOn(console, "log");
+        spyOn(console, "warn");
+        spyOn(console, "info");
+        spyOn(console, "error");
+        connector.init([buildLog(LogLevel.CONFIG)]);
         expect(console.log).toHaveBeenCalled();
+        expect(console.info).not.toHaveBeenCalled();
         expect(console.warn).not.toHaveBeenCalled();
         expect(console.error).not.toHaveBeenCalled();
     });
@@ -65,29 +85,47 @@ describe('ConsoleLogConnector', () => {
     it('init() should send warning to the console if a log is specified with LogLevel.WARNING', () => {
         spyOn(console, "log");
         spyOn(console, "warn");
+        spyOn(console, "info");
         spyOn(console, "error");
         connector.init([buildLog(LogLevel.WARNING)]);
         expect(console.log).not.toHaveBeenCalled();
         expect(console.warn).toHaveBeenCalled();
+        expect(console.info).not.toHaveBeenCalled();
         expect(console.error).not.toHaveBeenCalled();
     });
     
     it('init() should send error to the console if a log is specified with LogLevel.ERROR', () => {
         spyOn(console, "log");
         spyOn(console, "warn");
+        spyOn(console, "info");
         spyOn(console, "error");
         connector.init([buildLog(LogLevel.ERROR)]);
         expect(console.log).not.toHaveBeenCalled();
         expect(console.warn).not.toHaveBeenCalled();
+        expect(console.info).not.toHaveBeenCalled();
         expect(console.error).toHaveBeenCalled();
     });
     
-    it('sendLog() should send log to the console if a log is specified with LogLevel.LOG', () => {
+    it('sendLog() should send log to the console if a log is specified with LogLevel.INFO', () => {
         spyOn(console, "log");
         spyOn(console, "warn");
+        spyOn(console, "info");
         spyOn(console, "error");
-        connector.sendLog(buildLog(LogLevel.LOG));
+        connector.sendLog(buildLog(LogLevel.INFO));
+        expect(console.info).toHaveBeenCalled();
+        expect(console.log).not.toHaveBeenCalled();
+        expect(console.warn).not.toHaveBeenCalled();
+        expect(console.error).not.toHaveBeenCalled();
+    });
+    
+    it('sendLog() should send log to the console if a log is specified with LogLevel.CONFIG', () => {
+        spyOn(console, "log");
+        spyOn(console, "warn");
+        spyOn(console, "info");
+        spyOn(console, "error");
+        connector.sendLog(buildLog(LogLevel.CONFIG));
         expect(console.log).toHaveBeenCalled();
+        expect(console.info).not.toHaveBeenCalled();
         expect(console.warn).not.toHaveBeenCalled();
         expect(console.error).not.toHaveBeenCalled();
     });
@@ -95,9 +133,11 @@ describe('ConsoleLogConnector', () => {
     it('sendLog() should send warning to the console if a log is specified with LogLevel.WARNING', () => {
         spyOn(console, "log");
         spyOn(console, "warn");
+        spyOn(console, "info");
         spyOn(console, "error");
         connector.sendLog(buildLog(LogLevel.WARNING));
         expect(console.log).not.toHaveBeenCalled();
+        expect(console.info).not.toHaveBeenCalled();
         expect(console.warn).toHaveBeenCalled();
         expect(console.error).not.toHaveBeenCalled();
     });
@@ -105,9 +145,11 @@ describe('ConsoleLogConnector', () => {
     it('sendLog() should send error to the console if a log is specified with LogLevel.ERROR', () => {
         spyOn(console, "log");
         spyOn(console, "warn");
+        spyOn(console, "info");
         spyOn(console, "error");
         connector.sendLog(buildLog(LogLevel.ERROR));
         expect(console.log).not.toHaveBeenCalled();
+        expect(console.info).not.toHaveBeenCalled();
         expect(console.warn).not.toHaveBeenCalled();
         expect(console.error).toHaveBeenCalled();
     });

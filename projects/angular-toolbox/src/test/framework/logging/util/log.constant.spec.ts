@@ -6,19 +6,19 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { ERROR_STRING, LOG_STRING, WARNING_STRING } from "projects/angular-toolbox/src/public-api";
+import { LOG_ERROR_STRING, LOG_INFO_STRING, LOG_WARNING_STRING } from "projects/angular-toolbox/src/public-api";
 
 describe('Log constants', () => {
   
-  it('LOG_STRING constant should be equal to "LOG"', () => {
-    expect(LOG_STRING).toBe("LOG");
+  it('LOG_STRING constant should be equal to "INFO"', () => {
+    expect(LOG_INFO_STRING).toBe("INFO");
   });
 
   it('WARNING_STRING constant should be equal to "WARNING"', () => {
-    expect(WARNING_STRING).toBe("WARNING");
+    expect(LOG_WARNING_STRING).toBe("WARNING");
   });
 
   it('ERROR_STRING constant should be equal to "ERROR"', () => {
-    expect(ERROR_STRING).toBe("ERROR");
+    expect(LOG_ERROR_STRING).toBe("ERROR");
   });
 });

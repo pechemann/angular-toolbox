@@ -55,8 +55,8 @@ export class HttpMockLoggingService implements TransactionalLogger, OnDestroy {
      * 
      * @param metadata 
      */
-    public log(metadata?: HttpMockLoggingMetadata): void {
-        this._logger.log(CALLER, RESPONSE_MESSAGE, metadata);
+    public info(metadata?: HttpMockLoggingMetadata): void {
+        this._logger.info(CALLER, RESPONSE_MESSAGE, metadata);
     }
 
     /**

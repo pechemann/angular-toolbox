@@ -10,15 +10,19 @@ import { LogLevel } from '../../public-api';
 
 describe('LogLevel', () => {
   
-  it('LogLevel.LOG should be 0', () => {
-    expect(LogLevel.LOG).toEqual(0);
+  it('LogLevel.INFO should be 0', () => {
+    expect(LogLevel.INFO).toEqual(0);
   });
 
-  it('LogLevel.LOG should be 1', () => {
-    expect(LogLevel.WARNING).toEqual(1);
+  it('LogLevel.CONFIG should be 0', () => {
+    expect(LogLevel.CONFIG).toEqual(1);
+  });
+
+  it('LogLevel.WARNING should be 1', () => {
+    expect(LogLevel.WARNING).toEqual(2);
   });
 
   it('LogLevel.ERROR should be 2', () => {
-    expect(LogLevel.ERROR).toEqual(2);
+    expect(LogLevel.ERROR).toEqual(3);
   });
 });

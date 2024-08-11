@@ -56,8 +56,15 @@ export abstract class AbstractLogger implements Logger, TransactionalLogger {
   /**
    * @inheritdoc
    */
-  public log(caller: string | any, msg: string, metadata?: any): void {
-    this.addLog(caller, msg, LogLevel.LOG, metadata);
+  public info(caller: string | any, msg: string, metadata?: any): void {
+    this.addLog(caller, msg, LogLevel.INFO, metadata);
+  }
+
+  /**
+   * @inheritdoc
+   */
+  public config(caller: string | any, msg: string, metadata?: any): void {
+    this.addLog(caller, msg, LogLevel.CONFIG, metadata);
   }
 
   /**

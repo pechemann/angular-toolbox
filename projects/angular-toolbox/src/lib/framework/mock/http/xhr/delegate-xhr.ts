@@ -7,7 +7,7 @@
  */
 
 import { HttpHeaders, HttpParams, HttpRequest, HttpStatusCode } from "@angular/common/http";
-import { XhrProxy, HttpResponseMock, HttpMethodMock, HttpMockError, HttpMockLoggingService, HttpRequestMetadata } from "../../../../model";
+import { XhrProxy, HttpResponseMock, HttpMethodMock, HttpMockError, HttpMockLoggingService, HttpMockRequestMetadata } from "../../../../model";
 import { ProgressEventMock } from "../event/progress-event-mock";
 import { EMPTY_STRING } from "../../../../util";
 import { XhrBase } from "./xhr-base";
@@ -238,7 +238,7 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
      * @param body A body of data to be sent in the XHR request.
      */
     send(body?: Document | XMLHttpRequestBodyInit | null | undefined): void {
-        const requestMetadata: HttpRequestMetadata = { startTime: Date.now(), endTime: NaN };
+        const requestMetadata: HttpMockRequestMetadata = { startTime: Date.now(), endTime: NaN };
         const request: HttpRequest<any> = this.buildHttpRequest(body);
         const rc: RouteMockConfig = this._routeConfig;
         const httpResponseMock: HttpResponseMock = (rc.methodConfig as any).data(request, rc.parameters);
@@ -332,8 +332,8 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
         }, 100);
     }
 
-    private finalizeRequestMetadata(): HttpRequestMetadata {
-        const metadata: HttpRequestMetadata = this._dataStorage.requestMetadata;
+    private finalizeRequestMetadata(): HttpMockRequestMetadata {
+        const metadata: HttpMockRequestMetadata = this._dataStorage.requestMetadata;
         metadata.endTime = Date.now();
         return metadata;
     }
@@ -345,7 +345,7 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
         this._dataStorage.loaded = this._dataStorage.total;
         this.setReadyState(this.DONE);
         this.dispatchProgressEvent("load");
-        this._logger.log(buildMetadata(this, request, this.finalizeRequestMetadata()));
+        this._logger.info(buildMetadata(this, request, this.finalizeRequestMetadata()));
     }
 
     /**
@@ -400,7 +400,7 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
     /**
      * @private 
      */
-    private setDataStorage(responseMock: HttpResponseMock, requestMetadata: HttpRequestMetadata, data: any = null): void {
+    private setDataStorage(responseMock: HttpResponseMock, requestMetadata: HttpMockRequestMetadata, data: any = null): void {
         this._dataStorage = DataStorageBuilder.buildDataStorage(responseMock, data, requestMetadata);
     }
     

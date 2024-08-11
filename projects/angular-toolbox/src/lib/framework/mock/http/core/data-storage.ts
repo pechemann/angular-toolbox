@@ -6,7 +6,7 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { HttpResponseMock, HttpRequestMetadata } from "../../../../model";
+import { HttpResponseMock, HttpMockRequestMetadata } from "../../../../model";
 
 /**
  * @private
@@ -47,5 +47,5 @@ export interface DataStorage {
      * @private
      * The metadata associated to the HTTP request.
      */
-    requestMetadata: HttpRequestMetadata;
+    requestMetadata: HttpMockRequestMetadata;
 }

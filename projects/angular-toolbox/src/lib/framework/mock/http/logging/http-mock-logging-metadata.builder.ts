@@ -7,7 +7,7 @@
  */
 
 import { HttpRequest, HttpResponse } from "@angular/common/http";
-import { XhrProxy, HttpMockLoggingMetadata, HttpRequestMetadata } from "../../../../model";
+import { XhrProxy, HttpMockLoggingMetadata, HttpMockRequestMetadata } from "../../../../model";
 
 /**
  * @private
@@ -19,7 +19,7 @@ export class HttpMockLoggingMetadataBuilder {
      * @private
      * Creates and returns a new `HttpMockLoggingMetadata` object.
      */
-    public static build(xhr: XhrProxy, request: HttpRequest<any>, requestMetadata: HttpRequestMetadata): HttpMockLoggingMetadata {
+    public static build(xhr: XhrProxy, request: HttpRequest<any>, requestMetadata: HttpMockRequestMetadata): HttpMockLoggingMetadata {
         const responseInit: any = {
             body: xhr.response,
             status: xhr.status,
