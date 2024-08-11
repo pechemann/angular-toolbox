@@ -7,9 +7,8 @@
  */
 
 import { Injectable, OnDestroy } from "@angular/core";
-import { LogConnector, TransactionalLogger } from "../../../logging";
-import { HttpMockLoggingMetadata } from "./http-mock-logging-metadata";
 import { HttpMockLogger } from "../../../../../framework/mock/http/logging/http-mock-logger";
+import { TransactionalLogger, HttpMockLoggingMetadata, LogConnector, Log } from "../../../../business";
 
 /**
  * @private
@@ -52,18 +51,27 @@ export class HttpMockLoggingService implements TransactionalLogger, OnDestroy {
     }
 
     /**
+     * Processes information logs with the specified metadata.
      * 
-     * @param metadata 
+     * @param metadata The metadata associated with the HTTP method to log.
+     * 
+     * @return The log for the specified metadata.
      */
-    public info(metadata?: HttpMockLoggingMetadata): void {
+    public info(metadata?: HttpMockLoggingMetadata): Log {
         this._logger.info(CALLER, RESPONSE_MESSAGE, metadata);
+        return this.getLastLog();
     }
 
     /**
-     * @inheritdoc
+     * Processes error logs with the specified metadata.
+     * 
+     * @param metadata The metadata associated with the HTTP method to log.
+     * 
+     * @return The log for the specified metadata.
      */
-    public error(metadata?: HttpMockLoggingMetadata): void {
+    public error(metadata?: HttpMockLoggingMetadata): Log {
         this._logger.error(CALLER, ERROR_MESSAGE, metadata);
+        return this.getLastLog();
     }
     
     /**
@@ -93,5 +101,13 @@ export class HttpMockLoggingService implements TransactionalLogger, OnDestroy {
      */
     public ngOnDestroy(): void {
         this.destroy();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    private getLastLog(): Log {
+        const logs: Log[] = this._logger.getLogs();
+        return logs[logs.length - 1];
     }
 }

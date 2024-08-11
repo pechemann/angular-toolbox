@@ -12,6 +12,11 @@ import { HttpHeadersUtil } from 'projects/angular-toolbox/src/lib/framework/mock
 import { HttpMockConfig, HttpMockError, httpResponseMock, Uuid } from 'projects/angular-toolbox/src/public-api';
 import { of, throwError } from 'rxjs';
 
+//--> We use a delay before calling the done method to ensure the DelegateXhr
+// instance is not deleted before the async mocked response process is complete:
+// we use [setTimeout(done, DESTROY_DELAY)] each time the send method is involved.
+export const DESTROY_DELAY: number = 150;
+
 class UrlSearchParamsMock extends Map<any, any> implements URLSearchParams {
   constructor(map?: Map<string,any>) {
     super(map);

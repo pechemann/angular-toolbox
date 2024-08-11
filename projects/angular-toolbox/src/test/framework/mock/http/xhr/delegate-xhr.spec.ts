@@ -9,22 +9,18 @@
 import { HTTPMethodRef } from 'projects/angular-toolbox/src/lib/framework/mock/http/util/http-method-ref.enum';
 import { DelegateXhr } from 'projects/angular-toolbox/src/lib/framework/mock/http/xhr/delegate-xhr';
 import { EMPTY_STRING, HttpMockLoggingService, httpResponseMock } from 'projects/angular-toolbox/src/public-api';
-import { BODY, BODY_SIZE, buildUrlSearchParamsMock, ERROR, HTTP_ERROR, HTTP_STATUS, I_M_A_TEA_POT, OBSERVABLE_ERROR_CONFIG, OBSERVABLE_MOCK_CONFIG, ROUTE_CONFIG, ROUTE_CONFIG_WITH_ERROR, URL } from './util/delegate-xhr-test-util';
+import { BODY, BODY_SIZE, buildUrlSearchParamsMock, ERROR, HTTP_ERROR, HTTP_STATUS, I_M_A_TEA_POT, OBSERVABLE_ERROR_CONFIG, OBSERVABLE_MOCK_CONFIG, ROUTE_CONFIG, ROUTE_CONFIG_WITH_ERROR, URL, DESTROY_DELAY } from './util/delegate-xhr-test-util';
 import { RouteMockConfig } from 'projects/angular-toolbox/src/lib/framework/mock/http/config/route-mock-config';
 import { HttpParams, HttpRequest } from '@angular/common/http';
 import { ProgressEventMock } from 'projects/angular-toolbox/src/lib/framework/mock/http/event/progress-event-mock';
 import { TestBed } from '@angular/core/testing';
+import { HttpMockLoggingMetadataBuilder } from 'projects/angular-toolbox/src/lib/framework/mock/http/logging/http-mock-logging-metadata.builder';
 
 const EXPECTED_HEADERS: string = `Cache-Control: no-cache
 Accept-Encoding: gzip, deflate, br, zstd
 Accept-Language: ${navigator.language}
 Priority: u=0, i
 User-Agent: ${navigator.userAgent}`;
-
-//--> We use a delay before calling the done method to ensure the DelegateXhr
-// instance is not deleted before the async mocked response process is complete:
-// we use [setTimeout(done, DESTROY_DELAY)] each time the send method is involved.
-const DESTROY_DELAY: number = 150;
 
 describe('DelegateXhr', () => {
 
@@ -576,5 +572,76 @@ describe('DelegateXhr: request object', () => {
         xhr.addEventListener("progress", mockEvt);
         xhr.open(HTTPMethodRef.GET, URL);
         xhr.send();
+    });
+});
+
+
+describe('DelegateXhr: logging', () => {
+
+    let xhr: DelegateXhr;
+    let logger: HttpMockLoggingService;
+
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            providers: [HttpMockLoggingService]
+        });
+        logger = TestBed.inject(HttpMockLoggingService);
+    });
+    
+    it('direct response should send info log to the logger when the HTTP response is available', (done) => {
+        spyOn(logger, "info");
+        xhr = new DelegateXhr(ROUTE_CONFIG, logger);
+        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.send();
+        setTimeout(()=> {
+            expect(logger.info).toHaveBeenCalled();
+            setTimeout(done, DESTROY_DELAY);
+        }, 100);
+    });
+    
+    it('direct response should send error log to the logger when the HTTP response is available', (done) => {
+        spyOn(logger, "error");
+        xhr = new DelegateXhr(ROUTE_CONFIG_WITH_ERROR, logger);
+        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.send();
+        setTimeout(()=> {
+            expect(logger.error).toHaveBeenCalled();
+            setTimeout(done, DESTROY_DELAY);
+        }, 100);
+    });
+    
+    it('observable response should send info log to the logger when the HTTP response is available', (done) => {
+        spyOn(logger, "info");
+        xhr = new DelegateXhr(OBSERVABLE_MOCK_CONFIG, logger);
+        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.send();
+        setTimeout(()=> {
+            expect(logger.info).toHaveBeenCalled();
+            setTimeout(done, DESTROY_DELAY);
+        }, 100);
+    });
+    
+    it('observable response should send error log to the logger when the HTTP response is available', (done) => {
+        spyOn(logger, "error");
+        xhr = new DelegateXhr(OBSERVABLE_ERROR_CONFIG, logger);
+        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.send();
+        setTimeout(()=> {
+            expect(logger.error).toHaveBeenCalled();
+            setTimeout(done, DESTROY_DELAY);
+        }, 100);
+    });
+    
+    it('should invove the HttpMockLoggingMetadataBuilder.build() method the send error log to the logger', (done) => {
+        // This ensures that correct metadata are sent to the logger since the
+        // HttpMockLoggingMetadataBuilder.build() has its own test suite:
+        spyOn(HttpMockLoggingMetadataBuilder, "build");
+        xhr = new DelegateXhr(OBSERVABLE_ERROR_CONFIG, logger);
+        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.send();
+        setTimeout(()=> {
+            expect(HttpMockLoggingMetadataBuilder.build).toHaveBeenCalled();
+            setTimeout(done, DESTROY_DELAY);
+        }, 100);
     });
 });

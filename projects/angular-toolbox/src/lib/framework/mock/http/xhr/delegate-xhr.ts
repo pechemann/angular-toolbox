@@ -7,7 +7,7 @@
  */
 
 import { HttpHeaders, HttpParams, HttpRequest, HttpStatusCode } from "@angular/common/http";
-import { XhrProxy, HttpResponseMock, HttpMethodMock, HttpMockError, HttpMockLoggingService, HttpMockRequestMetadata } from "../../../../model";
+import { XhrProxy, HttpResponseMock, HttpMethodMock, HttpMockError, HttpMockLoggingService, HttpMockRequestMetadata, HttpMockLoggingMetadata } from "../../../../model";
 import { ProgressEventMock } from "../event/progress-event-mock";
 import { EMPTY_STRING } from "../../../../util";
 import { XhrBase } from "./xhr-base";
@@ -34,11 +34,6 @@ const READY_STATE_CHANGE_EVENT: Event = new Event("onreadystatechange");
  * @private
  */
 const EVT_PROPS_CONFIG: any =  { writable: false, value: this };
-
-/**
- * @private
- */
-const buildMetadata: Function = HttpMockLoggingMetadataBuilder.build;
 
 /**
  * @private
@@ -345,7 +340,7 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
         this._dataStorage.loaded = this._dataStorage.total;
         this.setReadyState(this.DONE);
         this.dispatchProgressEvent("load");
-        this._logger.info(buildMetadata(this, request, this.finalizeRequestMetadata()));
+        this._logger.info(this.buildMetadata(request));
     }
 
     /**
@@ -356,7 +351,14 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
         this._statusText = error.statusText;
         this.setReadyState(this.DONE);
         this.dispatchProgressEvent("error");
-        this._logger.error(buildMetadata(this, request, this.finalizeRequestMetadata()));
+        this._logger.error(this.buildMetadata(request));
+    }
+
+    /**
+     * @private
+     */
+    private buildMetadata(request: HttpRequest<any>): HttpMockLoggingMetadata {
+        return HttpMockLoggingMetadataBuilder.build(this, request, this.finalizeRequestMetadata());
     }
 
     /**
