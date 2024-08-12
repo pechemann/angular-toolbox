@@ -8,6 +8,7 @@
 
 import { HttpRequest, HttpResponse } from "@angular/common/http";
 import { XhrProxy, HttpMockLoggingMetadata, HttpMockRequestMetadata } from "../../../../model";
+import { HttpHeadersUtil } from "../util/http-headers.util";
 
 /**
  * @private
@@ -25,7 +26,7 @@ export class HttpMockLoggingMetadataBuilder {
             status: xhr.status,
             statusText: xhr.statusText,
             url: xhr.responseURL,
-            headers: xhr.getAllResponseHeaders()
+            headers: HttpHeadersUtil.encode(xhr.getAllResponseHeaders())
         };
         const response: HttpResponse<any> = new HttpResponse(responseInit);
         return {

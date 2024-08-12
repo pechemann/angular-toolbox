@@ -145,8 +145,8 @@ export class XhrProxyImpl extends XhrBase implements XhrProxy {
      * 
      * XMLHTTPRequest API
      */
-    getAllResponseHeaders(): string {
-        return this.XHR ? this.XHR.getAllResponseHeaders() : EMPTY_STRING;
+    getAllResponseHeaders(): any {
+        return this.XHR ? this.XHR.getAllResponseHeaders() : null;
     }
 
     /**

@@ -12,9 +12,12 @@
 export interface HttpMockRequestMetadata {
 
     /**
-     * The response body. Can be either an object, or an `Observable` instance.
+     * Indicates the starting time of the HTTP request.
      */
-    startTime: number;
+    start: number;
 
-    endTime: number;
+    /**
+     * Indicates the duration of the HTTP request.
+     */
+    duration: number;
 }

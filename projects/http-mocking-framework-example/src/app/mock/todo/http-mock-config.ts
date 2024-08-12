@@ -38,6 +38,7 @@ export const TODOS_MOCK_CONFIG: HttpMockConfig = {
                             const responseMock = httpResponseMock();
                             const userId: number = parseInt(params.userId);
                             if (validateUser(userId)) return responseMock.body( DATA_STORAGE.getTodoCollection(userId) )
+                                                                         .defaultHeaders()
                                                                          .response();
                             return responseMock.response(NOT_FOUND_ERROR);
                         }
@@ -47,6 +48,7 @@ export const TODOS_MOCK_CONFIG: HttpMockConfig = {
                             const responseMock = httpResponseMock();
                             const userId: number = parseInt(params.userId);
                             if (validateUser(userId)) return responseMock.body( DATA_STORAGE.deteteTodoCollection(userId) )
+                                                                         .defaultHeaders()
                                                                          .response();
                             return responseMock.response(NOT_FOUND_ERROR);
                         }
@@ -67,6 +69,7 @@ export const TODOS_MOCK_CONFIG: HttpMockConfig = {
                             if (!validateUser(userId)) return responseMock.response(NOT_FOUND_ERROR);
                             const dto: TodoDto = DATA_STORAGE.addTodo(userId, req.body);
                             return responseMock.body( dto )
+                                               .defaultHeaders()
                                                .status(HttpStatusCode.Created)
                                                .statusText("Created")
                                                .response();
@@ -85,6 +88,7 @@ export const TODOS_MOCK_CONFIG: HttpMockConfig = {
                             const dto: UpdateTodoDto = JSON.parse(req.body as any);
                             const result: boolean = DATA_STORAGE.updateTodo(userId, id, dto.title, dto.completed);
                             if (result) return responseMock.body( null )
+                                                           .defaultHeaders()
                                                            .status(HttpStatusCode.NoContent)
                                                            .statusText("No Content")
                                                            .response();
@@ -99,6 +103,7 @@ export const TODOS_MOCK_CONFIG: HttpMockConfig = {
                             const id: number = parseInt(params.id);
                             const result: boolean = DATA_STORAGE.deleteTodo(userId, id);
                             if (result) return responseMock.body( id )
+                                                           .defaultHeaders()
                                                            .status(HttpStatusCode.Accepted)
                                                            .statusText("Accepted")
                                                            .response();

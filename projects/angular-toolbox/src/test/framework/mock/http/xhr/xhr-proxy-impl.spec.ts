@@ -9,7 +9,7 @@
 import { HTTPMethodRef } from 'projects/angular-toolbox/src/lib/framework/mock/http/util/http-method-ref.enum';
 import { DelegateXhr } from 'projects/angular-toolbox/src/lib/framework/mock/http/xhr/delegate-xhr';
 import { EMPTY_STRING, HttpMockLoggingService, HttpMockService } from 'projects/angular-toolbox/src/public-api';
-import { FOO_MOCK_CONFIG, URL } from './util/delegate-xhr-test-util';
+import { FOO_MOCK_CONFIG, URL_STRING } from './util/delegate-xhr-test-util';
 import { XhrProxyImpl } from 'projects/angular-toolbox/src/lib/framework/mock/http/xhr/xhr-proxy-impl';
 import { TestBed } from '@angular/core/testing';
 import { DOCUMENT } from '@angular/common';
@@ -71,8 +71,8 @@ describe('XhrProxyImpl', () => {
         expect(xhr.instanceOf(DelegateXhr)).toBeFalse();
     });
 
-    it('getAllResponseHeaders() should return an empty string by default', () => {
-        expect(xhr.getAllResponseHeaders()).toEqual(EMPTY_STRING);
+    it('getAllResponseHeaders() should return null by default', () => {
+        expect(xhr.getAllResponseHeaders()).toBeNull();
     });
     
     it('setting responseType should throw an error by default', () => {
@@ -120,16 +120,16 @@ describe('XhrProxyImpl: native XMLHttpRequest implementation', () => {
 
     it('calling open() should not fail', () => {
         //Angular only uses the first 2 parameters of the open method. 
-        expect(xhr.open(HTTPMethodRef.GET, URL)).toBeUndefined();
+        expect(xhr.open(HTTPMethodRef.GET, URL_STRING)).toBeUndefined();
     });
 
     it('instanceOf(XMLHttpRequest) should return true when using the native XMLHttpRequest implementation', () => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         expect(xhr.instanceOf(XMLHttpRequest)).toBeTrue();
     });
 
     it('instanceOf(DelegateXhr) should return true when using the native XMLHttpRequest implementation', () => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         expect(xhr.instanceOf(DelegateXhr)).toBeFalse();
     });
 
@@ -140,68 +140,68 @@ describe('XhrProxyImpl: native XMLHttpRequest implementation', () => {
      * XMLHttpRequest implementation.
      **************************************************************/ 
 
-    it('response should be an empty string because URL does not exist', () => {
-        xhr.open(HTTPMethodRef.GET, URL);
+    it('response should be an empty string because URL_STRING does not exist', () => {
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         expect(xhr.response).toEqual(EMPTY_STRING);
     });
 
     it('status should be 0 by default', () => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         expect(xhr.status).toEqual(0);
     });
 
     it('statusText should be an empty string by default', () => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         expect(xhr.statusText).toEqual(EMPTY_STRING);
     });
 
     it('readyState should be OPENED', () => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         expect(xhr.readyState).toEqual(xhr.OPENED);
     });
 
     it('responseURL should be an empty string by default', () => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         expect(xhr.responseURL).toEqual(EMPTY_STRING);
     });
 
     it('responseText should be an empty string by default', () => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         expect(xhr.responseText).toEqual(EMPTY_STRING);
     });
 
     it('responseType should be an empty string by default', () => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         expect(xhr.responseType).toEqual(EMPTY_STRING);
     });
 
     it('calling setRequestHeader() should not fail', () => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         expect(()=> xhr.setRequestHeader("foo", "bar")).toBeTruthy();
     });
 
     it('calling abort() should not fail', () => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         expect(xhr.abort()).toBeUndefined();
     });
     
     it('setting responseType should not fail', () => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         expect(()=> xhr.responseType = 'blob').toBeTruthy();
     });
 
     it('calling addEventListener() should not fail', () => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         expect(()=> xhr.addEventListener("test", ()=>{})).toBeTruthy();
     });
 
     it('calling removeEventListener() should not fail', () => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         expect(()=> xhr.removeEventListener("test", ()=>{})).toBeTruthy();
     });
 
     it('calling send() should not fail', () => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         expect(()=> xhr.send()).toBeTruthy();
     });
 });
@@ -232,16 +232,16 @@ describe('XhrProxyImpl: DelegateXhr implementation', () => {
 
     it('calling open() should not fail', () => {
         //Angular only uses the first 2 parameters of the open method. 
-        expect(xhr.open(HTTPMethodRef.GET, URL)).toBeUndefined();
+        expect(xhr.open(HTTPMethodRef.GET, URL_STRING)).toBeUndefined();
     });
 
     it('instanceOf(XMLHttpRequest) should return true when using the native XMLHttpRequest implementation', () => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         expect(xhr.instanceOf(XMLHttpRequest)).toBeFalse();
     });
 
     it('instanceOf(DelegateXhr) should return true when using the native XMLHttpRequest implementation', () => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         expect(xhr.instanceOf(DelegateXhr)).toBeTrue();
     });
 
@@ -253,67 +253,67 @@ describe('XhrProxyImpl: DelegateXhr implementation', () => {
      **************************************************************/ 
 
     it('response should be null because, it the default DelegateXhr implementation', () => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         expect(xhr.response).toBeNull();
     });
 
     it('status should be 0 by default', () => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         expect(xhr.status).toEqual(0);
     });
 
     it('statusText should be an empty string by default', () => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         expect(xhr.statusText).toEqual(EMPTY_STRING);
     });
 
     it('readyState should be OPENED', () => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         expect(xhr.readyState).toEqual(xhr.OPENED);
     });
 
-    it('responseURL should be the value of the mock URL, because it the default DelegateXhr implementation', () => {
-        xhr.open(HTTPMethodRef.GET, URL);
-        expect(xhr.responseURL).toEqual(URL);
+    it('responseURL should be the value of the mock URL_STRING, because it the default DelegateXhr implementation', () => {
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
+        expect(xhr.responseURL).toEqual(URL_STRING);
     });
 
     it('responseText should be an empty string by default', () => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         expect(xhr.responseText).toEqual(EMPTY_STRING);
     });
 
     it('responseType should be an empty string by default', () => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         expect(xhr.responseType).toEqual(EMPTY_STRING);
     });
 
     it('calling setRequestHeader() should not fail', () => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         expect(()=> xhr.setRequestHeader("foo", "bar")).toBeTruthy();
     });
 
     it('calling abort() should not fail', () => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         expect(xhr.abort()).toBeUndefined();
     });
     
     it('setting responseType should not fail', () => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         expect(()=> xhr.responseType = 'blob').toBeTruthy();
     });
 
     it('calling addEventListener() should not fail', () => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         expect(()=> xhr.addEventListener("test", ()=>{})).toBeTruthy();
     });
 
     it('calling removeEventListener() should not fail', () => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         expect(()=> xhr.removeEventListener("test", ()=>{})).toBeTruthy();
     });
 
     it('calling send() should not fail', () => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         expect(()=> xhr.send()).toBeTruthy();
     });
 });

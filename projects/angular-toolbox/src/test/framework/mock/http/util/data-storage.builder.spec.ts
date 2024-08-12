@@ -13,7 +13,7 @@ import { EMPTY_STRING, HttpMockRequestMetadata, HttpResponseMock } from "project
 
 const STATUS: number = HttpStatusCode.Accepted;
 const STATUS_TEXT: string = 'Status text test';
-const URL: string = '/test/url';
+const URL_STRING: string = '/test/url';
 const DELAY: number = 1500;
 const HEADERS: HttpHeaders = new HttpHeaders();
 const BODY_OBJ: any = { data: 'Body test' };
@@ -23,14 +23,14 @@ const RESPONSE_MOCK: HttpResponseMock = {
   headers: HEADERS,
   status: STATUS,
   statusText: STATUS_TEXT,
-  url: URL,
+  url: URL_STRING,
   error: null,
   delay: DELAY
 };
 
 const REQUEST_METADATA: HttpMockRequestMetadata = {
-  endTime: 0,
-  startTime: 0
+  duration: 0,
+  start: 0
 };
 
 describe('DataStorageBuilder', () => {

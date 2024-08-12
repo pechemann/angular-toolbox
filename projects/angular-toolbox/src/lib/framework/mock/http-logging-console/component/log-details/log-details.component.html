@@ -1,0 +1,78 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+ 
+@if (hasLog) {
+    <header>
+        <menu>
+            <li role="button" (click)="changeSection(0)"><span [class.selected]="currSection === 0">Headers</span></li>
+            @if (request.body) {
+                <li role="button" (click)="changeSection(1)"><span [class.selected]="currSection === 1">Payload</span></li>
+            }
+            <li role="button" (click)="changeSection(2)"><span [class.selected]="currSection === 2">Preview</span></li>
+            <li role="button" (click)="changeSection(3)"><span [class.selected]="currSection === 3">Response</span></li>
+            <li role="button" (click)="changeSection(4)"><span [class.selected]="currSection === 4">Timing</span></li>
+            <li role="button" (click)="close.emit()" title="Close" class="close-btn">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                </svg>
+            </li>
+        </menu>
+    </header>
+    <main>
+        @if (currSection === 0) {
+            <details>
+                <summary>General</summary>
+                <section>
+                    <dl>
+                        <dt>Request URL:</dt>
+                        <dd>{{ request.url }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Request Method:</dt>
+                        <dd>{{ request.method }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Status Code:</dt>
+                        <dd>
+                            <svg [ngStyle]="{ fill: response.status < 400 ? 'green' : 'red' }" 
+                                 width="13" height="13" viewBox="0 0 16 16">
+                                <circle cx="8" cy="8" r="8"/>
+                            </svg>
+                            {{ response.status }} {{ response.statusText }}
+                        </dd>
+                    </dl>
+                </section>
+            </details>
+            <details>
+                <summary>Response Headers</summary>
+                <section>
+                    @for( item of response.headers.keys(); track item) {
+                        <dl>
+                            <dt>{{ item }}</dt>
+                            <dd>{{ response.headers.get(item) }}</dd>
+                        </dl>
+                        
+                    }
+                </section>
+            </details>
+            <details>
+                <summary>Request Headers</summary>
+                <section>
+                    @for( item of request.headers.keys(); track item) {
+                        <dl>
+                            <dt>{{ item }}</dt>
+                            <dd>{{ request.headers.get(item) }}</dd>
+                        </dl>
+                    }
+                </section>
+            </details>
+        } @else if (currSection === 3) {
+            {{ stringify(response.body) }}
+        }
+    </main>
+}

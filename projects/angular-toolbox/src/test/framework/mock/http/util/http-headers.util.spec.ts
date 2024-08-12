@@ -45,13 +45,23 @@ describe('HttpHeadersUtil', () => {
     expect(HttpHeadersUtil.stringify(undefined)).toEqual(EMPTY_STRING);
   });
   
-  it('stringify() should return well fromated string for the specified header', () => {
+  it('stringify() should return well formated string for the specified header', () => {
     const headers: HttpHeaders = HttpHeadersUtil.createDefaultRequestHeaders();
-    const expected: string = `Cache-Control: no-cache
-Accept-Encoding: gzip, deflate, br, zstd
-Accept-Language: ${navigator.language}
-Priority: u=0, i
-User-Agent: ${navigator.userAgent}`;
+    const expected: string = `Cache-Control: no-cache\r\nAccept-Encoding: gzip, deflate, br, zstd\r\nAccept-Language: ${navigator.language}\r\nPriority: u=0, i\r\nUser-Agent: ${navigator.userAgent}`;
     expect(HttpHeadersUtil.stringify(headers)).toEqual(expected);
+  });
+  
+  it('encode() should return null when the string parameter is null', () => {
+    expect(HttpHeadersUtil.encode(null)).toBeNull();
+  });
+  
+  it('encode() should return a HttpHeaders object with the specified values', () => {
+    const src: string = `Cache-Control: no-cache\r\nAccept-Encoding: gzip, deflate, br, zstd\r\nAccept-Language: ${navigator.language}\r\nPriority: u=0, i\r\nUser-Agent: ${navigator.userAgent}`;
+    const headers = HttpHeadersUtil.encode(src);
+    headers?.keys().forEach(key=> {
+      const value = headers.get(key) as any;
+      expect(src.includes(key)).toBeTrue();
+      expect(src.includes(value)).toBeTrue();
+    })
   });
 });

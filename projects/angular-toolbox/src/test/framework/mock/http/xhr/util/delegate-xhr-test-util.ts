@@ -45,7 +45,7 @@ export const buildUrlSearchParamsMock = (...data: any): URLSearchParams=> {
 export const BODY: string = "Hello world!";
 export const BODY_SIZE = new Blob([JSON.stringify(BODY)]).size;
 export const I_M_A_TEA_POT: string = "I'm a teapot";
-export const URL: string = "http://www.foo-bar.com/api/users/10";
+export const URL_STRING: string = "http://www.foo-bar.com/api/users/10";
 export const HTTP_HEADERS: HttpHeaders = HttpHeadersUtil.createDefaultRequestHeaders();
 export const HTTP_STATUS: HttpStatusCode = HttpStatusCode.ImATeapot;
 export const ROUTE_CONFIG: RouteMockConfig = {
@@ -53,7 +53,7 @@ export const ROUTE_CONFIG: RouteMockConfig = {
         responseType: "document",
         data: () => httpResponseMock().status(HTTP_STATUS)
                                       .statusText(I_M_A_TEA_POT)
-                                      .url(URL)
+                                      .url(URL_STRING)
                                       .headers(HTTP_HEADERS)
                                       .body(BODY).response()
     },
@@ -71,7 +71,7 @@ export const ROUTE_CONFIG_WITH_ERROR: RouteMockConfig = {
         responseType: "document",
         data: () => httpResponseMock().status(HTTP_STATUS)
                                       .statusText(I_M_A_TEA_POT)
-                                      .url(URL)
+                                      .url(URL_STRING)
                                       .headers(HTTP_HEADERS)
                                       .body(BODY).response(ERROR)
     },
@@ -102,7 +102,7 @@ export const OBSERVABLE_MOCK_CONFIG: RouteMockConfig = {
       responseType: "text",
       data: () => httpResponseMock().status(HTTP_STATUS)
                                     .statusText(I_M_A_TEA_POT)
-                                    .url(URL)
+                                    .url(URL_STRING)
                                     .headers(HTTP_HEADERS)
                                     .body(of(BODY)).response()
   },

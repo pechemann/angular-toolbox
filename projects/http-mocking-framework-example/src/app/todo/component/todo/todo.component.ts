@@ -120,7 +120,6 @@ export class TodoComponent extends IdentifiableComponent implements OnInit, OnDe
   }
 
   protected logRendered(elm: HTMLElement): void {
-    console.log(elm)
     elm.scrollTop = elm.scrollHeight;
   }
 }

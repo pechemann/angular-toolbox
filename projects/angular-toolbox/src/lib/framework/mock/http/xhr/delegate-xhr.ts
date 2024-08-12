@@ -219,12 +219,11 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
      * @returns All the response headers, separated by CRLF, as a string, or returns `null`
      *          if no response has been received.
      */
-    getAllResponseHeaders(): string {
-        let result: string = EMPTY_STRING;
-        if (this._readyState < this.HEADERS_RECEIVED) return result;
+    getAllResponseHeaders(): any {
+        if (this._readyState < this.HEADERS_RECEIVED) return null;
         const respHeaders: HttpHeaders | undefined = this._dataStorage?.httpResponse.headers;
-        if (respHeaders) result = HttpHeadersUtil.stringify(respHeaders)
-        return result;
+        if (respHeaders) return HttpHeadersUtil.stringify(respHeaders);
+        return null;
     }
 
     /**
@@ -233,7 +232,7 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
      * @param body A body of data to be sent in the XHR request.
      */
     send(body?: Document | XMLHttpRequestBodyInit | null | undefined): void {
-        const requestMetadata: HttpMockRequestMetadata = { startTime: Date.now(), endTime: NaN };
+        const requestMetadata: HttpMockRequestMetadata = { start: Date.now(), duration: NaN };
         const request: HttpRequest<any> = this.buildHttpRequest(body);
         const rc: RouteMockConfig = this._routeConfig;
         const httpResponseMock: HttpResponseMock = (rc.methodConfig as any).data(request, rc.parameters);
@@ -262,6 +261,7 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
             }
         });
     }
+
     /**
      * Sets the value of an HTTP request header.
      * 
@@ -328,8 +328,9 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
     }
 
     private finalizeRequestMetadata(): HttpMockRequestMetadata {
-        const metadata: HttpMockRequestMetadata = this._dataStorage.requestMetadata;
-        metadata.endTime = Date.now();
+        const ds: DataStorage = this._dataStorage;
+        const metadata: HttpMockRequestMetadata = ds.requestMetadata;
+        metadata.duration = Date.now() - metadata.start;
         return metadata;
     }
 

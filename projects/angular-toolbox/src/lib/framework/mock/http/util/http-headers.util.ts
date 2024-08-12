@@ -14,7 +14,7 @@ import { httpHeadersMock } from "./http-headers-mock.builder";
  * @private
  * Internal reference to a new line character.
  */
-const NL: string = "\n";
+const CRLF: string = "\r\n";
 
 /**
  * @private
@@ -37,9 +37,23 @@ export class HttpHeadersUtil {
         const keys: string[] = headers.keys();
         const last: number = keys.length - 1;
         keys.forEach((key: string, index: number)=> {
-            result += `${key}: ${headers.getAll(key)}${index !== last ? NL : EMPTY_STRING}`;
+            result += `${key}: ${headers.getAll(key)}${index !== last ? CRLF : EMPTY_STRING}`;
         });
         return result;
+    }
+    
+    /**
+     * @private
+     * Returns a `HttpHeaders` object built from the string returns by the `XMLHttpRequest.getAllResponseHeaders()` method,
+     * or `null` wheher  `XMLHttpRequest.getAllResponseHeaders()` return `null`.
+     * 
+     * @param value The string to turn into a `HttpHeaders `object.
+     * 
+     * @returns A `HttpHeaders` object, or `null`.
+     */
+    public static encode(value: string | null): HttpHeaders | null {
+        if (value === null) return null;
+        return new HttpHeaders(value);
     }
     
     /**

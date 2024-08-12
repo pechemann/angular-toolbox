@@ -9,18 +9,14 @@
 import { HTTPMethodRef } from 'projects/angular-toolbox/src/lib/framework/mock/http/util/http-method-ref.enum';
 import { DelegateXhr } from 'projects/angular-toolbox/src/lib/framework/mock/http/xhr/delegate-xhr';
 import { EMPTY_STRING, HttpMockLoggingService, httpResponseMock } from 'projects/angular-toolbox/src/public-api';
-import { BODY, BODY_SIZE, buildUrlSearchParamsMock, ERROR, HTTP_ERROR, HTTP_STATUS, I_M_A_TEA_POT, OBSERVABLE_ERROR_CONFIG, OBSERVABLE_MOCK_CONFIG, ROUTE_CONFIG, ROUTE_CONFIG_WITH_ERROR, URL, DESTROY_DELAY } from './util/delegate-xhr-test-util';
+import { BODY, BODY_SIZE, buildUrlSearchParamsMock, ERROR, HTTP_ERROR, HTTP_STATUS, I_M_A_TEA_POT, OBSERVABLE_ERROR_CONFIG, OBSERVABLE_MOCK_CONFIG, ROUTE_CONFIG, ROUTE_CONFIG_WITH_ERROR, URL_STRING, DESTROY_DELAY } from './util/delegate-xhr-test-util';
 import { RouteMockConfig } from 'projects/angular-toolbox/src/lib/framework/mock/http/config/route-mock-config';
 import { HttpParams, HttpRequest } from '@angular/common/http';
 import { ProgressEventMock } from 'projects/angular-toolbox/src/lib/framework/mock/http/event/progress-event-mock';
 import { TestBed } from '@angular/core/testing';
 import { HttpMockLoggingMetadataBuilder } from 'projects/angular-toolbox/src/lib/framework/mock/http/logging/http-mock-logging-metadata.builder';
 
-const EXPECTED_HEADERS: string = `Cache-Control: no-cache
-Accept-Encoding: gzip, deflate, br, zstd
-Accept-Language: ${navigator.language}
-Priority: u=0, i
-User-Agent: ${navigator.userAgent}`;
+const EXPECTED_HEADERS: string = `Cache-Control: no-cache\r\nAccept-Encoding: gzip, deflate, br, zstd\r\nAccept-Language: ${navigator.language}\r\nPriority: u=0, i\r\nUser-Agent: ${navigator.userAgent}`;
 
 describe('DelegateXhr', () => {
 
@@ -73,23 +69,23 @@ describe('DelegateXhr', () => {
      **************************************************************/
     
     it('open() should return the same value as the config', () => {
-        xhr.open(HTTPMethodRef.GET, URL);
-        expect(xhr.responseURL).toEqual(URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
+        expect(xhr.responseURL).toEqual(URL_STRING);
     });
 
     it('open() should set ready state to OPENED', () => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         expect(xhr.readyState).toEqual(xhr.OPENED);
     });
 
-    it('getAllResponseHeaders() should return an empty string by default before calling the send method', () => {
-        expect(xhr.getAllResponseHeaders()).toEqual(EMPTY_STRING);
+    it('getAllResponseHeaders() should return null by default before calling the send method', () => {
+        expect(xhr.getAllResponseHeaders()).toBeNull();
     });
 
-    it('getAllResponseHeaders() should return an empty string by default after calling the send method', (done) => {
-        xhr.open(HTTPMethodRef.GET, URL);
+    it('getAllResponseHeaders() should return null by default after calling the send method', (done) => {
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         xhr.send();
-        expect(xhr.getAllResponseHeaders()).toEqual(EMPTY_STRING);
+        expect(xhr.getAllResponseHeaders()).toBeNull();
         setTimeout(done, DESTROY_DELAY);
     });
 
@@ -107,7 +103,7 @@ describe('DelegateXhr', () => {
             searchParams: buildUrlSearchParamsMock()
         };
         const newXhr: DelegateXhr = new DelegateXhr(cfg, logger);
-        newXhr.open(HTTPMethodRef.GET, URL);
+        newXhr.open(HTTPMethodRef.GET, URL_STRING);
         newXhr.send();
     });
 
@@ -126,12 +122,12 @@ describe('DelegateXhr', () => {
             searchParams: buildUrlSearchParamsMock()
         };
         const newXhr: DelegateXhr = new DelegateXhr(cfg, logger);
-        newXhr.open(HTTPMethodRef.POST, URL);
+        newXhr.open(HTTPMethodRef.POST, URL_STRING);
         newXhr.send(TEST_BODY);
     });
 
    it('send() should set response with the reponse body parameter', (done) => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         xhr.send();
         setTimeout(()=> {
             expect(xhr.response).toEqual(BODY);
@@ -140,7 +136,7 @@ describe('DelegateXhr', () => {
     });
 
     it('send() should set status with the reponse status parameter', (done) => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         xhr.send();
         setTimeout(()=> {
             expect(xhr.status).toEqual(HTTP_STATUS);
@@ -149,7 +145,7 @@ describe('DelegateXhr', () => {
     });
 
     it('send() should set statusText with the reponse statusText parameter', (done) => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         xhr.send();
         setTimeout(()=> {
             expect(xhr.statusText).toEqual(I_M_A_TEA_POT);
@@ -159,7 +155,7 @@ describe('DelegateXhr', () => {
 
     it('send() should set readyState successivly to HEADERS_RECEIVED, LOADING and DONE, when no error occurs', (done) => {
         let currentState: number = xhr.OPENED;
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         xhr.onreadystatechange = ()=> {
             const readyState = xhr.readyState;
             if (readyState === currentState + 1) currentState = readyState;
@@ -172,16 +168,16 @@ describe('DelegateXhr', () => {
     });
 
     it('send() should set responseURL with the reponse url parameter', (done) => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         xhr.send();
         setTimeout(()=> {
-            expect(xhr.responseURL).toEqual(URL);
+            expect(xhr.responseURL).toEqual(URL_STRING);
             done();
         }, 100);
     });
 
     it('send() should set responseText with the reponse text parameter', (done) => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         xhr.send();
         setTimeout(()=> {
             expect(xhr.responseText).toEqual(JSON.stringify(BODY));
@@ -191,7 +187,7 @@ describe('DelegateXhr', () => {
 
     it('send() should set responseType with the reponse responseType parameter', (done) => {
         const responseType: any = ROUTE_CONFIG.methodConfig.responseType;
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         xhr.send();
         setTimeout(()=> {
             expect(xhr.responseType).toEqual(responseType);
@@ -200,21 +196,21 @@ describe('DelegateXhr', () => {
     });
 
     it('abort() should set ready state to UNSENT', () => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         xhr.abort();
         expect(xhr.readyState).toEqual(xhr.UNSENT);
     });
 
     it('abort() should dispatch an event of type abort', () => {
         const expected: Event = new Event("abort");
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         spyOn(xhr, "dispatchEvent");
         xhr.abort();
         expect(xhr.dispatchEvent).toHaveBeenCalledWith(expected);
     });
 
     it('abort() should set status to 0', () => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         xhr.abort();
         expect(xhr.status).toEqual(0);
     });
@@ -232,7 +228,7 @@ describe('DelegateXhr', () => {
             searchParams: buildUrlSearchParamsMock()
         };
         const newXhr: DelegateXhr = new DelegateXhr(cfg, logger);
-        newXhr.open(HTTPMethodRef.GET, URL);
+        newXhr.open(HTTPMethodRef.GET, URL_STRING);
         newXhr.send();
         const interval = setInterval(()=> {
             start += 100;
@@ -251,7 +247,7 @@ describe('DelegateXhr', () => {
         expected.total = BODY_SIZE;
         expected.loaded = BODY_SIZE;
         spyOn(xhr, "dispatchEvent");
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         xhr.send();
         setTimeout(()=> {
             expect(xhr.dispatchEvent).toHaveBeenCalledWith(expected);
@@ -274,7 +270,7 @@ describe('DelegateXhr: error response', () => {
     });
 
     it('send() should set readyState successivly to HEADERS_RECEIVED and DONE, when an error occurs', (done) => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         xhr.onreadystatechange = ()=> {
             const readyState = xhr.readyState;
             if (readyState === xhr.LOADING) fail('LOADING cannot be set whith error responses');
@@ -287,7 +283,7 @@ describe('DelegateXhr: error response', () => {
     });
 
     it('send() should set status with the error status', (done) => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         xhr.send();
         setTimeout(()=> {
             expect(xhr.status).toEqual(ERROR.status);
@@ -296,7 +292,7 @@ describe('DelegateXhr: error response', () => {
     });
 
     it('send() should set statusText with the error status text', (done) => {
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         xhr.send();
         setTimeout(()=> {
             expect(xhr.statusText).toEqual(ERROR.statusText);
@@ -308,7 +304,7 @@ describe('DelegateXhr: error response', () => {
         const expected: ProgressEventMock = new ProgressEventMock("error");
         expected.total = BODY_SIZE;
         spyOn(xhr, "dispatchEvent");
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         xhr.send();
         setTimeout(()=> {
             expect(xhr.dispatchEvent).toHaveBeenCalledWith(expected);
@@ -331,13 +327,13 @@ describe('DelegateXhr: observable responses', () => {
 
     it('send() should return the correct response when using Observables', (done) => {
         xhr = new DelegateXhr(OBSERVABLE_MOCK_CONFIG, logger);
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         xhr.onreadystatechange = ()=> {
             const readyState = xhr.readyState;
             if (readyState === xhr.DONE) {
                 expect(xhr.status).toEqual(HTTP_STATUS);
                 expect(xhr.statusText).toEqual(I_M_A_TEA_POT);
-                expect(xhr.responseURL).toEqual(URL);
+                expect(xhr.responseURL).toEqual(URL_STRING);
                 expect(xhr.responseText).toEqual(JSON.stringify(BODY));
                 expect(xhr.getAllResponseHeaders()).toEqual(EXPECTED_HEADERS);
                 setTimeout(done, DESTROY_DELAY);
@@ -348,7 +344,7 @@ describe('DelegateXhr: observable responses', () => {
     
     it('send() should send correct error status when Observables throw an error', (done) => {
         xhr = new DelegateXhr(OBSERVABLE_ERROR_CONFIG, logger);
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         xhr.onreadystatechange = ()=> {
             const readyState = xhr.readyState;
             if (readyState === xhr.DONE) {
@@ -387,7 +383,7 @@ describe('DelegateXhr: request object', () => {
             searchParams: buildUrlSearchParamsMock()
         };
         xhr = new DelegateXhr(cfg, logger);
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         xhr.send();
     });
     
@@ -406,7 +402,7 @@ describe('DelegateXhr: request object', () => {
             searchParams: buildUrlSearchParamsMock(['id', "10"], ['age', "20"])
         };
         xhr = new DelegateXhr(cfg, logger);
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         xhr.send();
     });
 
@@ -423,7 +419,7 @@ describe('DelegateXhr: request object', () => {
             searchParams: buildUrlSearchParamsMock()
         };
         xhr = new DelegateXhr(cfg, logger);
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         xhr.send();
     });
 
@@ -443,7 +439,7 @@ describe('DelegateXhr: request object', () => {
         xhr = new DelegateXhr(cfg, logger);
         xhr.setRequestHeader("Cache-Control", "no-cache");
         xhr.setRequestHeader("Accept-Encoding", "gzip, deflate, br, zstd");
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         xhr.send();
     });
     
@@ -463,7 +459,7 @@ describe('DelegateXhr: request object', () => {
         xhr = new DelegateXhr(cfg, logger);
         xhr.setRequestHeader("Cache-Control", "no-cache");
         xhr.setRequestHeader("Accept-Encoding", "gzip, deflate, br, zstd");
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         xhr.send();
     });
 
@@ -480,7 +476,7 @@ describe('DelegateXhr: request object', () => {
             searchParams: buildUrlSearchParamsMock()
         };
         xhr = new DelegateXhr(cfg, logger);
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         xhr.send();
     });
 
@@ -498,7 +494,7 @@ describe('DelegateXhr: request object', () => {
         };
         xhr = new DelegateXhr(cfg, logger);
         xhr.withCredentials = true;
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         xhr.send();
     });
     
@@ -515,7 +511,7 @@ describe('DelegateXhr: request object', () => {
             searchParams: buildUrlSearchParamsMock()
         };
         xhr = new DelegateXhr(cfg, logger);
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         xhr.send();
     });
 
@@ -533,7 +529,7 @@ describe('DelegateXhr: request object', () => {
         };
         xhr = new DelegateXhr(cfg, logger);
         xhr.responseType = "arraybuffer";
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         xhr.send();
     });
 
@@ -550,7 +546,7 @@ describe('DelegateXhr: request object', () => {
             searchParams: buildUrlSearchParamsMock()
         };
         xhr = new DelegateXhr(cfg, logger);
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         xhr.send();
     });
 
@@ -570,7 +566,7 @@ describe('DelegateXhr: request object', () => {
         const mockEvt = ()=> {};
         xhr = new DelegateXhr(cfg, logger);
         xhr.addEventListener("progress", mockEvt);
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         xhr.send();
     });
 });
@@ -591,7 +587,7 @@ describe('DelegateXhr: logging', () => {
     it('direct response should send info log to the logger when the HTTP response is available', (done) => {
         spyOn(logger, "info");
         xhr = new DelegateXhr(ROUTE_CONFIG, logger);
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         xhr.send();
         setTimeout(()=> {
             expect(logger.info).toHaveBeenCalled();
@@ -602,7 +598,7 @@ describe('DelegateXhr: logging', () => {
     it('direct response should send error log to the logger when the HTTP response is available', (done) => {
         spyOn(logger, "error");
         xhr = new DelegateXhr(ROUTE_CONFIG_WITH_ERROR, logger);
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         xhr.send();
         setTimeout(()=> {
             expect(logger.error).toHaveBeenCalled();
@@ -613,7 +609,7 @@ describe('DelegateXhr: logging', () => {
     it('observable response should send info log to the logger when the HTTP response is available', (done) => {
         spyOn(logger, "info");
         xhr = new DelegateXhr(OBSERVABLE_MOCK_CONFIG, logger);
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         xhr.send();
         setTimeout(()=> {
             expect(logger.info).toHaveBeenCalled();
@@ -624,7 +620,7 @@ describe('DelegateXhr: logging', () => {
     it('observable response should send error log to the logger when the HTTP response is available', (done) => {
         spyOn(logger, "error");
         xhr = new DelegateXhr(OBSERVABLE_ERROR_CONFIG, logger);
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         xhr.send();
         setTimeout(()=> {
             expect(logger.error).toHaveBeenCalled();
@@ -637,7 +633,7 @@ describe('DelegateXhr: logging', () => {
         // HttpMockLoggingMetadataBuilder.build() has its own test suite:
         spyOn(HttpMockLoggingMetadataBuilder, "build");
         xhr = new DelegateXhr(OBSERVABLE_ERROR_CONFIG, logger);
-        xhr.open(HTTPMethodRef.GET, URL);
+        xhr.open(HTTPMethodRef.GET, URL_STRING);
         xhr.send();
         setTimeout(()=> {
             expect(HttpMockLoggingMetadataBuilder.build).toHaveBeenCalled();
