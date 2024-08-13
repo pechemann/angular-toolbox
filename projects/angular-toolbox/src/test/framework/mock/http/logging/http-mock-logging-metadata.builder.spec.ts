@@ -32,7 +32,8 @@ describe('HttpMockLoggingMetadataBuilder', () => {
     logger = TestBed.inject(HttpMockLoggingService);
     requestMetadata = {
       start: timestamp,
-      duration: timestamp + 1000
+      duration: timestamp + 1000,
+      url: new URL(URL_STRING)
     };
   });
 

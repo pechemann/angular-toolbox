@@ -1,0 +1,42 @@
+/**
+ * @license
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be found in
+ * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+ */
+
+@import "../../../styles/console";
+
+:host {
+   display: block;
+   font-family: monospace;
+   font-size: 13px;
+}
+
+summary:hover {
+   background-color: var(--dark-gray);
+}
+
+summary {
+   padding-left: 6px;
+}
+
+atx-json-viewer-panel {
+   padding-left: 26px;
+}
+
+.atx-prop-label {
+   font-weight: 700;
+   color: blueviolet;
+}
+
+.atx-string {
+   font-weight: 700;
+   color: indianred;
+}
+
+.atx-string::before,
+.atx-string::after {
+   content: '"';
+}

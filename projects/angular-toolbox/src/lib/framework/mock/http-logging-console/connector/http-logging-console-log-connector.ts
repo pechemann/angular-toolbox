@@ -21,7 +21,7 @@ export class HttpLoggingConsoleLogConnector implements LogConnector {
      */
     public readonly logs: Log[] = [];
 
-    public readonly change: EventEmitter<void> = new EventEmitter(true);
+    public readonly change: EventEmitter<Log> = new EventEmitter(true);
 
     /**
      * @inheritdoc
@@ -42,7 +42,7 @@ export class HttpLoggingConsoleLogConnector implements LogConnector {
         const level: LogLevel = log.level;
         if (level === LogLevel.INFO || LogLevel.ERROR) {
             this.logs.push(log);
-            this.change.emit();
+            this.change.emit(log);
         } 
     }
 

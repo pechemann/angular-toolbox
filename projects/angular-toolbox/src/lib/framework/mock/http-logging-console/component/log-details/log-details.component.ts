@@ -10,12 +10,14 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 import { Log } from '../../../../../model';
 import { NgStyle } from '@angular/common';
 import { HttpRequest, HttpResponse } from '@angular/common/http';
+import { AtxJsonViewerComponent } from '../renderer/json-viewer/json-viewer.component';
 
 @Component({
   selector: 'atx-logging-console-details',
   standalone: true,
   imports: [
-    NgStyle
+    NgStyle,
+    AtxJsonViewerComponent
   ],
   templateUrl: './log-details.component.html',
   styleUrl: './log-details.component.scss',

@@ -232,7 +232,11 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
      * @param body A body of data to be sent in the XHR request.
      */
     send(body?: Document | XMLHttpRequestBodyInit | null | undefined): void {
-        const requestMetadata: HttpMockRequestMetadata = { start: Date.now(), duration: NaN };
+        const requestMetadata: HttpMockRequestMetadata = {
+            start: Date.now(),
+            duration: NaN,
+            url: new URL(this._url as any)
+        };
         const request: HttpRequest<any> = this.buildHttpRequest(body);
         const rc: RouteMockConfig = this._routeConfig;
         const httpResponseMock: HttpResponseMock = (rc.methodConfig as any).data(request, rc.parameters);

@@ -13,15 +13,18 @@ import { IdentifiableComponent } from '../../../../../core';
 import { AtxLogDetailsComponent } from '../log-details/log-details.component';
 import { SizeUtil } from '../../util/size.util';
 import { AtxConsoleFooterComponent } from '../console-footer/console-footer.component';
-
-const SLASH: string = "/";
+import { AtxConsoleMenuComponent } from '../console-menu/console-menu.component';
+import { AtxConsoleAction } from '../../model/business/atx-console-action';
+import { AtxConsoleActionType } from '../../model/business/atx-console-action-type';
+import { UrlUtil } from '../../util/url.util';
 
 @Component({
   selector: 'atx-logging-console',
   standalone: true,
   imports: [
     AtxLogDetailsComponent,
-    AtxConsoleFooterComponent
+    AtxConsoleFooterComponent,
+    AtxConsoleMenuComponent
   ],
   templateUrl: './http-logging-console.component.html',
   styleUrl: './http-logging-console.component.scss',
@@ -32,16 +35,20 @@ export class AtxLoggingConsoleComponent extends IdentifiableComponent implements
   protected connector: HttpLoggingConsoleLogConnector;
   protected selectedLog: Log | null = null;
   protected cumulativeSize: number = 0;
+  protected logs: Log[] = [];
 
   constructor(protected logger: HttpMockLoggingService,
-              cdr: ChangeDetectorRef,
+              private _cdr: ChangeDetectorRef,
               private _subscribe: SubscriptionService) {
     super();
     const connector: HttpLoggingConsoleLogConnector = new HttpLoggingConsoleLogConnector();
     this.connector = connector;
     logger.setLogConnector(connector);
     this._subscribe.register(this,
-      connector.change.subscribe(()=> cdr.detectChanges())
+      connector.change.subscribe((log: Log)=> {
+        this.addLog(log);
+        _cdr.detectChanges();
+      })
     );
   }
 
@@ -53,19 +60,37 @@ export class AtxLoggingConsoleComponent extends IdentifiableComponent implements
     this.selectedLog = log;
   }
 
-  protected clearLogs(): void {
-    this.logger.clearLogs();
-    this.logSelect(null);
+  protected getResourceName(log: Log): string {
+    return UrlUtil.getResourceName(log);
   }
-
-  protected getResource(log: Log): string {
-    const url: string = log.metadata.request.url;
-    return url.substring(url.lastIndexOf(SLASH) + 1);
+  
+  protected getResourcePath(log: Log): string {
+    return UrlUtil.getResourcePath(log);
   }
   
   protected getSize(log: Log): string {
     const size: number = SizeUtil.getSize(log.metadata.response.body);
     this.cumulativeSize += size;
     return SizeUtil.sizeToString(size);
+  }
+
+  protected checkFilters(log: Log): boolean {
+    return true;
+  }
+
+  protected userAction(action: AtxConsoleAction): void {
+    switch(action.type) {
+      case AtxConsoleActionType.CLEAR_LOGS : this.clearLogs(); break;
+    }
+  }
+
+  private addLog(log: Log): void {
+    this.logs.push(log);
+  }
+  
+  private clearLogs(): void {
+    this.logger.clearLogs();
+    this.logSelect(null);
+    this.logs.length = 0;
   }
 }

@@ -48,4 +48,14 @@ export class MonitoringComponent extends IdentifiableComponent implements OnInit
     if (!this.selectedAction) return;
     this.subscriptionService.register(this, this.selectedAction.invoker().subscribe());
   }
+
+  protected sendRandomHttpRequests(): void {
+    const apiConfig: MonitoringApiDescriptor[] = this.apiConfig.API;
+    const len: number = apiConfig.length;
+    let actionNum: number = 4;
+    do {
+      const descriptor: MonitoringApiDescriptor = apiConfig[(Math.random() * len) | 0];
+      this.subscriptionService.register(this, descriptor.invoker().subscribe());
+    } while (actionNum-- > 1);
+  }
 }

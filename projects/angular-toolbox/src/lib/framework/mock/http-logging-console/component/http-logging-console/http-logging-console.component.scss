@@ -14,19 +14,6 @@
     margin: 0;
 }
 
-menu {
-    li {
-        padding: 6px;
-    }
-    li:hover {
-        background-color: var(--dark-gray);
-    }
-    background-color: var(--light-gray);
-    border-bottom: 1px solid var(--border-color);
-    position: absolute;
-    width: 100%;
-}
-
 #log-list-vieport {
     position: absolute;
     width: 100%;
@@ -41,7 +28,7 @@ menu {
 .request-list-wrapper {  
     height: 100%;
     flex-grow: 1;
-    overflow-y: auto;
+    overflow: hidden auto;
     border: 1px solid var(--border-color);
 }
 
@@ -64,6 +51,11 @@ menu {
     thead {
         position: sticky;
         top: 0;
+    }
+
+    tbody tr {
+        max-height: 46px;
+        overflow: hidden;
     }
 }
 

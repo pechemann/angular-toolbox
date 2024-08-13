@@ -1,0 +1,27 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+@if (data) {
+    @if (data.children) {
+        <details>
+            <summary>
+                @if (data.label) {
+                    <span class="atx-prop-label">{{ data.label }}</span>:
+                    <span [ngClass]="data.type">{{ data.value }}</span>
+                } @else {
+                    {{ data.value }}
+                }
+            </summary>
+            @for (item of data.children; track item) {
+                <atx-json-viewer-panel [data]="item"/>
+            }
+        </details>
+    } @else {
+        <span class="atx-prop-label">{{ data.label }}</span>: <span [ngClass]="data.type">{{ data.value }}</span>
+    }
+}

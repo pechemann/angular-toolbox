@@ -71,6 +71,8 @@
                     }
                 </section>
             </details>
+        } @else if (currSection === 2) {
+            <atx-json-viewer [data]="response.body"/>
         } @else if (currSection === 3) {
             {{ stringify(response.body) }}
         }

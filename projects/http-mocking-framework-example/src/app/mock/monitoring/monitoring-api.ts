@@ -9,12 +9,14 @@
 import { HttpClient } from "@angular/common/http";
 import { Uuid } from "projects/angular-toolbox/src/public-api";
 import { Observable } from "rxjs";
-import { TOKEN } from "./http-mock-data";
+import { CREATED_ITEM_DTO, TOKEN, UPDATE_ITEM_DTO } from "./http-mock-data";
+
+const randomId = (): string=> Uuid.build().toString();
 
 export interface MonitoringApiDescriptor {
     label: string,
     description: string,
-    id: Uuid,
+    id: string,
     invoker: ()=> Observable<any>
 }
 
@@ -29,16 +31,34 @@ export class MonitoringApi {
     private initAPI(): MonitoringApiDescriptor[] {
         return [
             {
-                label: "Basic GET",
-                description: "Performs a basic HTTP call with the GET method and returns a successful response status code without any body content attached.",
-                id: Uuid.build(),
-                invoker: ()=> this.http.get("https://my-awsome-company.com/api/monitoring")
+                label: "GET / REST",
+                description: "Performs a HTTP REST operation with the GET method and returns the response depending on the state of the remote data storage.",
+                id: randomId(),
+                invoker: ()=> this.http.get("https://my-awsome-company.com/api/monitoring/" + CREATED_ITEM_DTO.id)
             },
             {
-                label: "Basic POST",
-                description: "Performs a basic HTTP call with the POST method and returns a successful response status code with a body content attached.",
-                id: Uuid.build(),
+                label: "POST / REST",
+                description: "Performs a HTTP REST operation with the POST method and returns the response depending on the state of the remote data storage.",
+                id: randomId(),
                 invoker: ()=> this.http.post<any>("https://my-awsome-company.com/api/monitoring", TOKEN)
+            },
+            {
+                label: "PUT / REST",
+                description: "Performs a HTTP REST operation with the PUT method and returns the response depending on the state of the remote data storage.",
+                id: randomId(),
+                invoker: ()=> this.http.put<any>("https://my-awsome-company.com/api/monitoring/" + CREATED_ITEM_DTO.id, UPDATE_ITEM_DTO)
+            },
+            {
+                label: "DELETE / REST",
+                description: "Performs a HTTP REST operation with the DELETE method and returns the response depending on the state of the remote data storage.",
+                id: randomId(),
+                invoker: ()=> this.http.delete<any>("https://my-awsome-company.com/api/monitoring/" + CREATED_ITEM_DTO.id)
+            },
+            {
+                label: "GET / JSON",
+                description: "Performs a HTTP operation with the GET method and returns a JSON object with a complex structure.",
+                id: randomId(),
+                invoker: ()=> this.http.get<any>("https://my-awsome-company.com/api/monitoring/actors")
             }
         ];
     }

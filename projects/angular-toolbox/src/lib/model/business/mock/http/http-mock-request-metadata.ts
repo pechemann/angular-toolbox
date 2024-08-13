@@ -20,4 +20,9 @@ export interface HttpMockRequestMetadata {
      * Indicates the duration of the HTTP request.
      */
     duration: number;
+
+    /**
+     * The reference to the `URL` object for the HTTP request.
+     */
+    url: URL;
 }
