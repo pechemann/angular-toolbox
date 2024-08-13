@@ -37,9 +37,13 @@ th {
     padding: 0 0 0 6px;
     background-color: var(--background-color);
     border-bottom: 1px solid var(--border-color);
-    border-right: 1px solid var(--border-color);
+
     position: sticky;
     top: 0;
+}
+
+th:not(:last-child) {
+    border-right: 1px solid var(--border-color);
 }
 
 td {
