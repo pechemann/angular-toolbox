@@ -32,11 +32,18 @@ atx-json-viewer-panel {
 }
 
 .atx-string {
-   font-weight: 700;
    color: indianred;
 }
 
 .atx-string::before,
 .atx-string::after {
    content: '"';
+}
+
+.atx-boolean, .atx-null, .atx-number {
+   color: mediumblue;
+}
+
+.atx-boolean, .atx-null {
+   font-weight: 700;
 }

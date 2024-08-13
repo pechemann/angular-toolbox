@@ -20,18 +20,31 @@ export class DataUtil {
         if (primitive === STRING) type = "atx-string";
         else if (primitive === NUMBER) type = "atx-number";
         else if (primitive === BOOLEAN) type = "atx-boolean";
-        else if (Array.isArray(obj)) type = "atx-array";
-        else if (obj === null) type = "atx-null";
+        else if (Array.isArray(obj)) {
+            const rawValue: string = JSON.stringify(obj);
+            let len: number = obj.length - 1;
+            let idx: number = 0;
+            type = "atx-array";
+            value = rawValue.length > 50 ? rawValue.substring(0, 46) + '...]' : rawValue;
+            children = [];
+            for (; len >= 0; len--) {
+                children.push(DataUtil.parseJson(obj[len], String(idx)));
+                idx++;
+            }
+        } else if (obj === null) {
+            type = "atx-null";
+            value = "null";
+        }
         else {
             const keys: string[] = Object.keys(obj);
+            const rawValue: string = JSON.stringify(obj);
             let len: number = keys.length - 1;
             children = [];
             for (; len >= 0; len--) {
                 const key: string = keys[len];
                 children.push(DataUtil.parseJson(obj[key], key));
             }
-            value = JSON.stringify(obj)
-            console.log(keys)
+            value = rawValue.length > 50 ? rawValue.substring(0, 46) + '...}' : rawValue;
         }
         console.log(obj)
         return {
