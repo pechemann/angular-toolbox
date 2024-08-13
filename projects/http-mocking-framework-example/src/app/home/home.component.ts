@@ -33,6 +33,7 @@ export class HomeComponent {
     { label: "SayHello Sample Application Video (YouTube)", url: "https://youtu.be/zN0SEgovFbc?si=LOFZJ9vkNAf3rNcz" },
     { label: "Proxy Antipattern", urlTree: ["../proxy-antipattern"] },
     { label: "Proxy Antipattern Video (YouTube)", url: "https://youtu.be/pSsugUwgCLc?si=8EueuKK8gnC6d9za" },
+    { label: "Monitoring sample Application", urlTree: ["../monitoring"] },
     { label: "HTTP Mocking Framework Documentation (Online)", url: "https://pascalechemann.com/angular-toolbox/resources/documentation/http-mocking-framework" }
   ];
 

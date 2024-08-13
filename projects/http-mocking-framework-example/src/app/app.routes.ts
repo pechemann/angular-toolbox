@@ -28,5 +28,9 @@ export const routes: Routes = [ {
   {
     path: 'proxy-antipattern',
     loadComponent: () => import('./proxy-antipattern/proxy-antipattern.component').then(mod => mod.ProxyAntipatternComponent)
+  },
+  {
+    path: 'monitoring',
+    loadComponent: () => import('./monitoring/component/monitoring.component').then(mod => mod.MonitoringComponent)
   }
 ];

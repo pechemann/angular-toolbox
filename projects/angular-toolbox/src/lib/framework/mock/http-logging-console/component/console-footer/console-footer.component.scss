@@ -5,10 +5,15 @@
  * Use of this source code is governed by an MIT-style license that can be found in
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
+ 
+ @import "../../styles/console";
 
-import { Observable } from "rxjs";
-
-/**
- * The markup interface for `Observable` object built from the Fetch API.
- */
-export abstract class FetchClient extends Observable<any> {}
+ footer {
+    background-color: var(--light-gray);
+    border-top: 1px solid var(--border-color);
+    margin-top: 6px;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}

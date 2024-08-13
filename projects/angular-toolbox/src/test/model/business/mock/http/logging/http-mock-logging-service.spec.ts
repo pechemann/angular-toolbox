@@ -71,10 +71,36 @@ describe('HttpMockLoggingService', () => {
         expect(sendInfo).toThrowError();
         expect(sendError).toThrowError();
     });
+
+    it('size should return 0 by default', () => {
+        expect(service.size).toEqual(0);
+    });
+    
+    it('size should return the number of logs processed by this logger', () => {
+        const metadata: any = {};
+        service.info(metadata);
+        service.error(metadata);
+        expect(service.size).toEqual(2);
+    });
     
     it('ngOnDestroy() shouldinvoke the destoy() method', () => {
         spyOn(service, "destroy");
         service.ngOnDestroy();
         expect(service.destroy).toHaveBeenCalled();
+    });
+
+    it('clearLogs() should invoke the clearLogs() method of the internal connector', () => {
+        const connector = service.getLogConnector();
+        spyOn(connector, "clearLogs");
+        service.clearLogs();
+        expect(connector.clearLogs).toHaveBeenCalled();
+    });
+
+    it('clearLogs() should remove all logs', () => {
+        const metadata: any = {};
+        service.info(metadata);
+        service.error(metadata);
+        service.clearLogs();
+        expect(service.size).toEqual(0);
     });
 });

@@ -127,6 +127,12 @@ describe('BaseLogger', () => {
         expect(connector.sendLog).toHaveBeenCalledWith(log);
     });
     
+    it('destroy() should invoke the clearLogs() method', () => {
+        spyOn(logger, "clearLogs");
+        logger.destroy();
+        expect(logger.clearLogs).toHaveBeenCalled();
+    });
+    
     it('destroy() should set the log connector internal reference to null', () => {
         const connector: LogConnector = new ConsoleLogConnector();
         logger.setLogConnector(connector);
@@ -203,5 +209,14 @@ describe('BaseLogger', () => {
         logger.getLogs().forEach(log=> {
             expect(log.level).toBeGreaterThanOrEqual(LogLevel.INFO);
         });
+    });
+    
+    it('clearLogs() should remove all logs', () => {
+        logger.info(CALLER, LOG_MESSAGE);
+        logger.config(CALLER, LOG_MESSAGE);
+        logger.warn(CALLER, LOG_MESSAGE);
+        logger.error(CALLER, LOG_MESSAGE);
+        logger.clearLogs();
+        expect(logger.getLogs().length).toEqual(0);
     });
 });

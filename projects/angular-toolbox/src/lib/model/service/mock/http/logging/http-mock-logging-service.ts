@@ -39,6 +39,13 @@ const ERROR_MESSAGE: string = "HTTP error";
 export class HttpMockLoggingService implements TransactionalLogger, OnDestroy {
 
     /**
+     * Returns the number of logs currently processed by this logger.
+     */
+    public get size(): number {
+        return this._logger.getLogs().length;
+    }
+
+    /**
      * The `HttpMockLogger` instance encapsulated by this service.
      */
     private _logger: HttpMockLogger;
@@ -72,6 +79,14 @@ export class HttpMockLoggingService implements TransactionalLogger, OnDestroy {
     public error(metadata?: HttpMockLoggingMetadata): Log {
         this._logger.error(CALLER, ERROR_MESSAGE, metadata);
         return this.getLastLog();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public clearLogs(): void {
+        this._logger.clearLogs();
+        this._logger.getLogConnector().clearLogs();
     }
     
     /**

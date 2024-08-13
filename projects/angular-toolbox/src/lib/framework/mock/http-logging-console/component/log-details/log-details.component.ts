@@ -12,7 +12,7 @@ import { NgStyle } from '@angular/common';
 import { HttpRequest, HttpResponse } from '@angular/common/http';
 
 @Component({
-  selector: 'atx-log-details',
+  selector: 'atx-logging-console-details',
   standalone: true,
   imports: [
     NgStyle
@@ -21,12 +21,13 @@ import { HttpRequest, HttpResponse } from '@angular/common/http';
   styleUrl: './log-details.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LogDetailsComponent {
+export class AtxLogDetailsComponent {
 
   @Output()
   public readonly close: EventEmitter<void> = new EventEmitter(true);
 
   protected hasLog: boolean = false;
+  protected hasPayload: boolean = false;
   protected request!: HttpRequest<any>;
   protected response!: HttpResponse<any>;
 
@@ -37,9 +38,10 @@ export class LogDetailsComponent {
       this.hasLog = true;
       this.request = metadata.request;
       this.response = metadata.response;
+      this.hasPayload = (this.request.params.keys().length > 0 || this.request.body !== null);
       return;
     }
-    this.hasLog = false;
+    this.hasLog = this.hasPayload = false;
     this.request = null as any;
     this.response = null as any;
   }

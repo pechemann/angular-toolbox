@@ -58,4 +58,9 @@ export interface Logger {
      * @param metadata Optionale metadata associated with this log.
      */
     warn(caller: string | any, message: string, metadata?: any): void;
+    
+    /**
+     * Removes all the logs that have been processed by this logger.
+     */
+    clearLogs(): void;
 }

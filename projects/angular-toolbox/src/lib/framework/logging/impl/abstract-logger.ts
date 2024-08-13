@@ -86,8 +86,19 @@ export abstract class AbstractLogger implements Logger, TransactionalLogger {
     this.addLog(caller, msg, LogLevel.WARNING, metadata);
   }
 
+  /**
+   * @inheritdoc
+   */
   public destroy(): void {
     this.logConnector = null as any;
+    this.clearLogs();
+  }
+
+  /**
+   * @inheritdoc
+   */
+  public clearLogs(): void {
+    this.logs.length = 0;
   }
 
   /**

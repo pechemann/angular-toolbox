@@ -13,17 +13,33 @@
     --background-color: aliceblue;
     --selected-color: #d9eeff;
     --selected-error-color: lavenderblush;
+    --light-gray: whitesmoke;
+    --dark-gray: gainsboro;
+    color: black;
+    background-color: white;
+    display: block;
+}
+
+menu {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    list-style: none;
 }
 
 table {
-    border: 1px solid var(--border-color);
     border-collapse: collapse;
 }
 
 th {
-    padding: 6px;
+    padding: 0 0 0 6px;
     background-color: var(--background-color);
-    border: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
 }
 
 td {
@@ -48,5 +64,19 @@ tr:nth-child(even):not(.selected-row) {
 }
 
 tr:hover {
-    background-color: whitesmoke;
+    background-color: var(--light-gray);
+}
+.header-btn {
+    padding: 4px;
+    margin-left: auto;
+}
+
+.header-btn:hover {
+    background-color: var(--selected-color);
+}
+
+.menu-separator {
+    width: 0;
+    height: 16px;
+    border-right: 2px solid var(--dark-gray);
 }

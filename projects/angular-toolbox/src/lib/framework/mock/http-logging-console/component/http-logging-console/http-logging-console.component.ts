@@ -10,34 +10,38 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from
 import { HttpMockLoggingService, Log, SubscriptionService } from '../../../../../model';
 import { HttpLoggingConsoleLogConnector } from '../../connector/http-logging-console-log-connector';
 import { IdentifiableComponent } from '../../../../../core';
-import { LogDetailsComponent } from '../log-details/log-details.component';
+import { AtxLogDetailsComponent } from '../log-details/log-details.component';
+import { SizeUtil } from '../../util/size.util';
+import { AtxConsoleFooterComponent } from '../console-footer/console-footer.component';
 
 const SLASH: string = "/";
 
 @Component({
-  selector: 'atx-http-logging-console',
+  selector: 'atx-logging-console',
   standalone: true,
   imports: [
-    LogDetailsComponent
+    AtxLogDetailsComponent,
+    AtxConsoleFooterComponent
   ],
   templateUrl: './http-logging-console.component.html',
   styleUrl: './http-logging-console.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HttpLoggingConsoleComponent extends IdentifiableComponent implements OnDestroy {
+export class AtxLoggingConsoleComponent extends IdentifiableComponent implements OnDestroy {
 
   protected connector: HttpLoggingConsoleLogConnector;
   protected selectedLog: Log | null = null;
+  protected cumulativeSize: number = 0;
 
   constructor(protected logger: HttpMockLoggingService,
-              private _cdr: ChangeDetectorRef,
+              cdr: ChangeDetectorRef,
               private _subscribe: SubscriptionService) {
     super();
     const connector: HttpLoggingConsoleLogConnector = new HttpLoggingConsoleLogConnector();
     this.connector = connector;
     logger.setLogConnector(connector);
     this._subscribe.register(this,
-      connector.change.subscribe(()=> _cdr.detectChanges())
+      connector.change.subscribe(()=> cdr.detectChanges())
     );
   }
 
@@ -45,8 +49,13 @@ export class HttpLoggingConsoleComponent extends IdentifiableComponent implement
     this._subscribe.clearAll(this);
   }
   
-  protected logSelect(log: Log): void {
+  protected logSelect(log: Log | null): void {
     this.selectedLog = log;
+  }
+
+  protected clearLogs(): void {
+    this.logger.clearLogs();
+    this.logSelect(null);
   }
 
   protected getResource(log: Log): string {
@@ -55,12 +64,8 @@ export class HttpLoggingConsoleComponent extends IdentifiableComponent implement
   }
   
   protected getSize(log: Log): string {
-    const body: any = log.metadata.response.body;
-    let size: number = 0;
-    if (body) {
-      const blob: Blob = new Blob(log.metadata.response.body);
-      size = blob.size;
-    }
-    return size + " B";
+    const size: number = SizeUtil.getSize(log.metadata.response.body);
+    this.cumulativeSize += size;
+    return SizeUtil.sizeToString(size);
   }
 }

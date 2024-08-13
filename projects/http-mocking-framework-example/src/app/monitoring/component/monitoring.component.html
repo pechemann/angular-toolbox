@@ -1,0 +1,55 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+ 
+<main>
+    <atx-page-title label="Monitoring Sample Application">
+        <p primary class="fs-5">
+            
+        </p>
+    </atx-page-title>
+    <div class="container mb-5">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        @if (selectedAction) {
+                            <h5 class="card-title">{{ selectedAction.label }}</h5>
+                            <p class="card-text">{{ selectedAction.description }}</p>
+                            <button role="button" class="btn btn-primary" (click)="sendHttpRequest()">
+                                Send HTTP Request
+                            </button>
+                        } @else {
+                            Please select an action...
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <form>
+                    <div class="input-group input-group mb-5">
+                        <label class="input-group-text d-flex gap-2" for="actionSelect">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M6 3.5A1.5 1.5 0 0 1 7.5 2h1A1.5 1.5 0 0 1 10 3.5v1A1.5 1.5 0 0 1 8.5 6v1H14a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0v-1A.5.5 0 0 1 2 7h5.5V6A1.5 1.5 0 0 1 6 4.5zM8.5 5a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5zM0 11.5A1.5 1.5 0 0 1 1.5 10h1A1.5 1.5 0 0 1 4 11.5v1A1.5 1.5 0 0 1 2.5 14h-1A1.5 1.5 0 0 1 0 12.5zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm4.5.5A1.5 1.5 0 0 1 7.5 10h1a1.5 1.5 0 0 1 1.5 1.5v1A1.5 1.5 0 0 1 8.5 14h-1A1.5 1.5 0 0 1 6 12.5zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm4.5.5a1.5 1.5 0 0 1 1.5-1.5h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z"/>
+                            </svg>
+                            Select Action
+                        </label>
+                        <select class="form-select" id="actionSelect" (change)="actionSelect($event)">
+                            <option value="-1" selected>Choose...</option>
+                            @for (action of apiConfig.API; track action.id ) {
+                                <option [value]="action.id">{{ action.label }}</option>
+                            }
+                        </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container mb-5 border rounded p-0">
+        <atx-logging-console/>
+    </div>
+</main>

@@ -7,7 +7,7 @@
  */
 
 import { HttpHeaders, HttpParams, HttpRequest, HttpStatusCode } from "@angular/common/http";
-import { XhrProxy, HttpResponseMock, HttpMethodMock, HttpMockError, HttpMockLoggingService, HttpMockRequestMetadata, HttpMockLoggingMetadata } from "../../../../model";
+import { XhrProxy, HttpResponseMock, HttpMethodMock, HttpMockError, HttpMockLoggingService, HttpMockRequestMetadata, HttpMockLoggingMetadata, FetchClient } from "../../../../model";
 import { ProgressEventMock } from "../event/progress-event-mock";
 import { EMPTY_STRING } from "../../../../util";
 import { XhrBase } from "./xhr-base";

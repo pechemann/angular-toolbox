@@ -8,19 +8,19 @@
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HttpLoggingConsoleComponent } from './http-logging-console.component';
+import { AtxLoggingConsoleComponent } from './http-logging-console.component';
 
 describe('HttpLoggingConsoleComponent', () => {
-  let component: HttpLoggingConsoleComponent;
-  let fixture: ComponentFixture<HttpLoggingConsoleComponent>;
+  let component: AtxLoggingConsoleComponent;
+  let fixture: ComponentFixture<AtxLoggingConsoleComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpLoggingConsoleComponent]
+      imports: [AtxLoggingConsoleComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(HttpLoggingConsoleComponent);
+    fixture = TestBed.createComponent(AtxLoggingConsoleComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
