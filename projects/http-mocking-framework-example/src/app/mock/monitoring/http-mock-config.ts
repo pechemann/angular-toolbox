@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { HttpStatusCode } from '@angular/common/http';
+import { HttpRequest, HttpStatusCode } from '@angular/common/http';
 import { HttpMockConfig, httpResponseMock, HttpResponseMockBuilder } from 'projects/angular-toolbox/src/public-api';
 import { COMPLEX_JSON, CREATED_ITEM_DTO, DELETED_ITEM_DTO, EMPTY_ITEM_DTO, UPDATE_ITEM_DTO } from './http-mock-data';
 import { ItemDto } from './http-mock-business';
@@ -77,7 +77,11 @@ export const MONITORING_MOCK_CONFIG: HttpMockConfig = {
                 {
                     route: "/api/monitoring/actors",
                     get: {
-                        data: ()=> httpResponseMock().defaultHeaders().body(COMPLEX_JSON).response()
+                        data: (request: HttpRequest<any>)=> {
+                            const builder: HttpResponseMockBuilder = httpResponseMock().defaultHeaders();
+                            const age: string | null = request.params?.get("age");
+                            return builder.body(age ? COMPLEX_JSON.actors[1] : COMPLEX_JSON.actors).response();
+                        }   
                     }
                 }
             ]

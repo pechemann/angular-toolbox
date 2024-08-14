@@ -20,6 +20,14 @@
                         @if (selectedAction) {
                             <h5 class="card-title">{{ selectedAction.label }}</h5>
                             <p class="card-text">{{ selectedAction.description }}</p>
+                            <dl>
+                                <dt>Resource path</dt>
+                                <dd>
+                                    <code>
+                                        {{ selectedAction.route }}
+                                    </code>
+                                </dd>
+                            </dl>
                             <button role="button" class="btn btn-primary" (click)="sendHttpRequest()">
                                 Send HTTP Request
                             </button>

@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
 -->
 
-@if (hasLog) {
+@if (currLog) {
     <header>
         <menu>
             <li role="button" (click)="changeSection(0)"><span [class.selected]="currSection === 0">Headers</span></li>
@@ -71,10 +71,20 @@
                     }
                 </section>
             </details>
-        } @else if (currSection === 2) {
+        }  @else if (currSection === 1) {
+            <atx-payload-renderer [log]="currLog"/>
+        }  @else if (currSection === 2) {
             <atx-json-viewer [data]="response.body"/>
         } @else if (currSection === 3) {
-            {{ stringify(response.body) }}
+            <section class="raw-response">
+                @if (response.body !== null) {
+                    {{ stringify(response.body) }}
+                }
+            </section>
+        } @else if (currSection === 4) {
+            <section class="timing-view">
+                W.I.P.
+            </section>
         }
     </main>
 }

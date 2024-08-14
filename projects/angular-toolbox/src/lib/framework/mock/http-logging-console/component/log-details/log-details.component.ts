@@ -11,13 +11,15 @@ import { Log } from '../../../../../model';
 import { NgStyle } from '@angular/common';
 import { HttpRequest, HttpResponse } from '@angular/common/http';
 import { AtxJsonViewerComponent } from '../renderer/json-viewer/json-viewer.component';
+import { AtxPayloadRendererComponent } from '../renderer/payload-renderer/payload-renderer.component';
 
 @Component({
   selector: 'atx-logging-console-details',
   standalone: true,
   imports: [
     NgStyle,
-    AtxJsonViewerComponent
+    AtxJsonViewerComponent,
+    AtxPayloadRendererComponent
   ],
   templateUrl: './log-details.component.html',
   styleUrl: './log-details.component.scss',
@@ -28,22 +30,22 @@ export class AtxLogDetailsComponent {
   @Output()
   public readonly close: EventEmitter<void> = new EventEmitter(true);
 
-  protected hasLog: boolean = false;
+  protected currLog: Log | null = null;
   protected hasPayload: boolean = false;
   protected request!: HttpRequest<any>;
   protected response!: HttpResponse<any>;
 
   @Input()
   public set log(value: Log | null) {
+    this.currLog = value
     if (value) {
       const metadata: any = value.metadata; 
-      this.hasLog = true;
       this.request = metadata.request;
       this.response = metadata.response;
-      this.hasPayload = (this.request.params.keys().length > 0 || this.request.body !== null);
+      this.checkPayload();
       return;
     }
-    this.hasLog = this.hasPayload = false;
+    this.hasPayload = false;
     this.request = null as any;
     this.response = null as any;
   }
@@ -57,4 +59,8 @@ export class AtxLogDetailsComponent {
   protected stringify(obj: any): string {
     return JSON.stringify(obj);
   };
+
+  private checkPayload(): void {
+    this.hasPayload = (this.request.params.keys().length > 0 || this.request.body !== null);
+  }
 }

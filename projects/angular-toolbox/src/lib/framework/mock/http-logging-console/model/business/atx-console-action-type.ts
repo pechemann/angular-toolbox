@@ -8,5 +8,7 @@
 
 export enum AtxConsoleActionType {
 
-    CLEAR_LOGS = 0
+    CLEAR_LOGS = 0,
+    EXPORT_LOGS = 1,
+    IMPORT_LOGS = 2
 }

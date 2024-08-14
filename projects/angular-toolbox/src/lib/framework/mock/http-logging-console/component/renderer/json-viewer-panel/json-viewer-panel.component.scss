@@ -26,6 +26,10 @@ atx-json-viewer-panel {
    padding-left: 26px;
 }
 
+.primitive {
+   margin-left: 20px;
+}
+
 .atx-prop-label {
    font-weight: 700;
    color: blueviolet;
@@ -40,10 +44,13 @@ atx-json-viewer-panel {
    content: '"';
 }
 
-.atx-boolean, .atx-null, .atx-number {
+.atx-boolean,
+.atx-null,
+.atx-number {
    color: mediumblue;
 }
 
-.atx-boolean, .atx-null {
+.atx-boolean,
+.atx-null {
    font-weight: 700;
 }

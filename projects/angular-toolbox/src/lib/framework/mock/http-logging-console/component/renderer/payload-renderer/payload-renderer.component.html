@@ -1,0 +1,34 @@
+
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+@if (queryParams) {
+    <details>
+        <summary>
+           Query String Parameters
+        </summary>
+        <div class="content">
+            @for (item of queryParams; track item) {
+                <dl>
+                    <dt>{{ item.key }}:</dt>
+                    <dd>{{ item.value }}</dd>
+                </dl>
+            }
+        </div>
+    </details>
+}
+@if (json) {
+    <details>
+        <summary>
+            Request Payload
+        </summary>
+        <div class="content">
+            <atx-json-viewer [data]="json"/>
+        </div>
+    </details>
+}         

@@ -20,12 +20,14 @@ import { AtxConsoleActionType } from '../../model/business/atx-console-action-ty
 })
 export class AtxConsoleMenuComponent {
 
+  protected readonly actionList: any = AtxConsoleActionType;
+
   @Output()
   public action: EventEmitter<AtxConsoleAction> = new EventEmitter(true);
 
   constructor(protected logger: HttpMockLoggingService) {}
 
-  protected clearLogs(): void {
-    this.action.emit({ type: AtxConsoleActionType.CLEAR_LOGS} );
+  protected sendAction(type: AtxConsoleActionType): void {
+    this.action.emit({ type: type } );
   }
 }

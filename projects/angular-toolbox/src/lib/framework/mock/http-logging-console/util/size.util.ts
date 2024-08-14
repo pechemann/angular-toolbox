@@ -32,6 +32,6 @@ export class SizeUtil {
         if (size < 1024) return size + B;
         size = size / 1024;
         if (size < 1024) return size + KB;
-        return size / 1024 + MB;
+        return (size / 1024).toFixed(2) + MB;
     }
 }
