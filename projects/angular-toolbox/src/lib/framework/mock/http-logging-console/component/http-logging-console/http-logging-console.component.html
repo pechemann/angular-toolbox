@@ -32,7 +32,7 @@
                 </tr>
             </thead>
             <tbody>
-                @for (log of logs; track log.timestamp) {
+                @for (log of logs; track log) {
                     @if (checkFilters(log)) {
                         <tr [class.error-row]="log.metadata.response.status >= 400" role="button" (click)="logSelect(log)"
                             [class.selected-row]="selectedLog === log">
@@ -54,7 +54,6 @@
                             }
                         </tr>
                     }
-
                 }
             </tbody>
         </table>

@@ -7,11 +7,12 @@
  */
 
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { Log } from '../../../../../model';
+import { HttpMockRequestMetadata, Log } from '../../../../../model';
 import { NgStyle } from '@angular/common';
 import { HttpRequest, HttpResponse } from '@angular/common/http';
 import { AtxJsonViewerComponent } from '../renderer/json-viewer/json-viewer.component';
 import { AtxPayloadRendererComponent } from '../renderer/payload-renderer/payload-renderer.component';
+import { AtxTimingRendererComponent } from '../renderer/timing-renderer/timing-renderer.component';
 
 @Component({
   selector: 'atx-logging-console-details',
@@ -19,7 +20,8 @@ import { AtxPayloadRendererComponent } from '../renderer/payload-renderer/payloa
   imports: [
     NgStyle,
     AtxJsonViewerComponent,
-    AtxPayloadRendererComponent
+    AtxPayloadRendererComponent,
+    AtxTimingRendererComponent
   ],
   templateUrl: './log-details.component.html',
   styleUrl: './log-details.component.scss',
@@ -34,6 +36,7 @@ export class AtxLogDetailsComponent {
   protected hasPayload: boolean = false;
   protected request!: HttpRequest<any>;
   protected response!: HttpResponse<any>;
+  protected requestMetadata!: HttpMockRequestMetadata;
 
   @Input()
   public set log(value: Log | null) {
@@ -42,12 +45,14 @@ export class AtxLogDetailsComponent {
       const metadata: any = value.metadata; 
       this.request = metadata.request;
       this.response = metadata.response;
+      this.requestMetadata = metadata.requestMetadata;
       this.checkPayload();
       return;
     }
     this.hasPayload = false;
     this.request = null as any;
     this.response = null as any;
+    this.requestMetadata = null as any;
   }
 
   protected currSection: number = 0;

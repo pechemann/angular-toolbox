@@ -17,6 +17,11 @@ export interface HttpMockRequestMetadata {
     start: number;
 
     /**
+     * Indicates the how much time the request is stalled befaore the data loading starts.
+     */
+    stalled: number;
+    
+    /**
      * Indicates the duration of the HTTP request.
      */
     duration: number;

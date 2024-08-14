@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { HttpResponseMockBuilder } from '../../../../../public-api';
+import { HTTP_MOCK_MAX_DELAY, HttpResponseMockBuilder } from '../../../../../public-api';
 import { HttpHeaders, HttpStatusCode } from '@angular/common/http';
 
 const BODY: string = 'Body test';
@@ -53,8 +53,10 @@ describe('HttpResponseMockBuilder', () => {
     expect(builder.response().statusText).toEqual("OK");
   });
 
-  it('response() method should create a HttpResponseMock with "delay" property set to "0"', () => {
-    expect(builder.delay().response().delay).toEqual(0);
+  it('response() method should create a HttpResponseMock with random "delay" by default between 0 and HTTP_MOCK_MAX_DELAY', () => {
+    const d = builder.delay().response().delay;
+    expect(d).toBeGreaterThanOrEqual(0);
+    expect(d).toBeLessThanOrEqual(HTTP_MOCK_MAX_DELAY);
   });
   
   it('body() method should set the "body" property of the response object', () => {

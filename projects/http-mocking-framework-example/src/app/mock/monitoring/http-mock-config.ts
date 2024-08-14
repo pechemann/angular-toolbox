@@ -13,7 +13,7 @@ import { ItemDto } from './http-mock-business';
 
 const DATA_STORAGE: any = {
     item: null
-}
+};
 
 export const MONITORING_MOCK_CONFIG: HttpMockConfig = {
     origin: "https://my-awsome-company.com",
@@ -25,7 +25,7 @@ export const MONITORING_MOCK_CONFIG: HttpMockConfig = {
                     route: "/api/monitoring",
                     post: {
                         data: ()=> {
-                            const builder: HttpResponseMockBuilder = httpResponseMock().defaultHeaders();
+                            const builder: HttpResponseMockBuilder = httpResponseMock().defaultHeaders().delay();
                             if (DATA_STORAGE.item)  builder.status(HttpStatusCode.Conflict).statusText("Conflict");
                             else {
                                 DATA_STORAGE.item = EMPTY_ITEM_DTO;
@@ -39,7 +39,7 @@ export const MONITORING_MOCK_CONFIG: HttpMockConfig = {
                     route: "/api/monitoring/:id",
                     put: {
                         data: ()=> {
-                            const builder: HttpResponseMockBuilder = httpResponseMock().defaultHeaders();
+                            const builder: HttpResponseMockBuilder = httpResponseMock().defaultHeaders().delay();
                             if (DATA_STORAGE.item) {
                                 DATA_STORAGE.item = UPDATE_ITEM_DTO;
                                 builder.status(HttpStatusCode.NoContent).statusText("No Content");
@@ -50,7 +50,7 @@ export const MONITORING_MOCK_CONFIG: HttpMockConfig = {
                     },
                     get: {
                         data: ()=> {
-                            const builder: HttpResponseMockBuilder = httpResponseMock().defaultHeaders();
+                            const builder: HttpResponseMockBuilder = httpResponseMock().defaultHeaders().delay();
                             const item: ItemDto | null = DATA_STORAGE.item;
                             if (item) builder.status(HttpStatusCode.Ok).statusText("Ok").body(item);
                             else builder.status(HttpStatusCode.NotFound).statusText("Not Found");
@@ -59,7 +59,7 @@ export const MONITORING_MOCK_CONFIG: HttpMockConfig = {
                     },
                     delete: {
                         data: ()=> {
-                            const builder: HttpResponseMockBuilder = httpResponseMock().defaultHeaders();
+                            const builder: HttpResponseMockBuilder = httpResponseMock().defaultHeaders().delay();
                             if (DATA_STORAGE.item) {
                                 DATA_STORAGE.item = null;
                                 builder.status(HttpStatusCode.Ok).statusText("Ok").body(DELETED_ITEM_DTO);
@@ -78,7 +78,7 @@ export const MONITORING_MOCK_CONFIG: HttpMockConfig = {
                     route: "/api/monitoring/actors",
                     get: {
                         data: (request: HttpRequest<any>)=> {
-                            const builder: HttpResponseMockBuilder = httpResponseMock().defaultHeaders();
+                            const builder: HttpResponseMockBuilder = httpResponseMock().defaultHeaders().delay();
                             const age: string | null = request.params?.get("age");
                             return builder.body(age ? COMPLEX_JSON.actors[1] : COMPLEX_JSON.actors).response();
                         }   

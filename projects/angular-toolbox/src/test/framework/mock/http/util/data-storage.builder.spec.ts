@@ -31,6 +31,7 @@ const RESPONSE_MOCK: HttpResponseMock = {
 const REQUEST_METADATA: HttpMockRequestMetadata = {
   duration: 0,
   start: 0,
+  stalled: 0,
   url: new URL(URL_STRING)
 };
 

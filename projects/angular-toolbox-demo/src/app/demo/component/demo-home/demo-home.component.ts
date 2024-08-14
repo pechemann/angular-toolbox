@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AngularToolboxIconListComponent, AngularToolboxPageTitleComponent, BreadcrumbService, IconListItem } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
+import { AngularToolboxIconListComponent, AngularToolboxPageTitleComponent, BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
 import { IconListService } from '../../../ui/model/service/icon-list-list.service';
 import { AngularToolboxLogoComponent } from 'projects/angular-toolbox/src/public-api';
 

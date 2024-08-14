@@ -46,7 +46,6 @@ export class DataUtil {
             }
             value = rawValue.length > 50 ? rawValue.substring(0, 46) + '...}' : rawValue;
         }
-        console.log(obj)
         return {
             label: label,
             type: type,

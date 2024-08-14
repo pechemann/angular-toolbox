@@ -9,6 +9,7 @@
 import { HttpHeaders, HttpStatusCode } from "@angular/common/http";
 import { HttpMockError, HttpResponseMock } from "../../../../model";
 import { HttpHeadersUtil } from "./http-headers.util";
+import { HTTP_MOCK_MAX_DELAY } from "./http-mock-max-delay";
 
 /**
  * @private
@@ -117,8 +118,8 @@ export class HttpResponseMockBuilder {
      * 
      * @returns A reference to this `HttpResponseMockBuilder` instance.
      */
-    public delay(timer: number = 0): HttpResponseMockBuilder {
-        this._response.delay = timer;
+    public delay(timer: number = NaN): HttpResponseMockBuilder {
+        this._response.delay = (isNaN(timer) ? HTTP_MOCK_MAX_DELAY - Math.random() * HTTP_MOCK_MAX_DELAY : timer) | 0;
         return this;
     }
 

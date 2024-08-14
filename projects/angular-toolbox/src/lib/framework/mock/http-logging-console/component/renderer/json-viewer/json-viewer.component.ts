@@ -28,6 +28,5 @@ export class AtxJsonViewerComponent {
   public set data(value: any) {
     if (!value) return;
     this.parsedData = DataUtil.parseJson(value);
-    console.log(value);
   }
 }

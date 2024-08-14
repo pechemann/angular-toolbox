@@ -182,7 +182,7 @@
 
 <section class="col-xl-9 mb-4">
     <h3 id="destroy"><code>HttpResponseMockBuilder.delay()</code></h3>
-    <pre><code class="language-typescript">delay(timer: number = 0): HttpResponseMockBuilder</code></pre>
+    <pre><code class="language-typescript">delay(timer: number = NaN): HttpResponseMockBuilder</code></pre>
     <p>
         Sets the delay before the <code>pseudo-server</code> sends the HTTP response.
     </p>
@@ -194,9 +194,16 @@
                 <p>
                     The value used to set the delay before the server sends the HTTP response.
                     <br>
-                    Maximum value is <code>10000</code> miliseconds (10 seconds).
+                    Minimum value is <code>0</code> miliseconds.
                     <br>
-                    Default value is <code>0</code>.
+                    Maximum value is <code>HTTP_MOCK_MAX_DELAY</code> (10 seconds).
+                </p>
+                <p>
+                    When set to <code>NaN</code>, the builder creates a random value between
+                    <code>0 </code> and <code>HTTP_MOCK_MAX_DELAY</code>.
+                </p>
+                <p>
+                    Default value is <code>NaN</code>.
                 </p>
             </dd>
         </dl>

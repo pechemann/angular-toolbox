@@ -7,7 +7,7 @@
  */
 
 import { HttpHeaders, HttpParams, HttpRequest, HttpStatusCode } from "@angular/common/http";
-import { XhrProxy, HttpResponseMock, HttpMethodMock, HttpMockError, HttpMockLoggingService, HttpMockRequestMetadata, HttpMockLoggingMetadata, FetchClient } from "../../../../model";
+import { XhrProxy, HttpResponseMock, HttpMethodMock, HttpMockError, HttpMockLoggingService, HttpMockRequestMetadata, HttpMockLoggingMetadata } from "../../../../model";
 import { ProgressEventMock } from "../event/progress-event-mock";
 import { EMPTY_STRING } from "../../../../util";
 import { XhrBase } from "./xhr-base";
@@ -17,12 +17,8 @@ import { Observable, Subscription, of } from "rxjs";
 import { DataStorage } from "../core/data-storage";
 import { DataStorageBuilder } from "../util/data-storage.builder";
 import { HttpMockLoggingMetadataBuilder } from "../logging/http-mock-logging-metadata.builder";
-
-/**
- * @private
- * The maximum value for a delayed HTTP response.
- */
-const MAX_TIMER: number = 10000;
+import { HttpMockResponseDelayUtil } from "../util/http-mock-response-delay.util";
+import { ResponseDelay } from "../core/response-delay";
 
 /**
  * @private
@@ -232,16 +228,18 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
      * @param body A body of data to be sent in the XHR request.
      */
     send(body?: Document | XMLHttpRequestBodyInit | null | undefined): void {
-        const requestMetadata: HttpMockRequestMetadata = {
-            start: Date.now(),
-            duration: NaN,
-            url: new URL(this._url as any)
-        };
+        const start: number = this.now();
         const request: HttpRequest<any> = this.buildHttpRequest(body);
         const rc: RouteMockConfig = this._routeConfig;
         const httpResponseMock: HttpResponseMock = (rc.methodConfig as any).data(request, rc.parameters);
-        let timer: number = httpResponseMock.delay || 0;
-        if (timer > MAX_TIMER) timer = MAX_TIMER;
+        const responseDelay: ResponseDelay = HttpMockResponseDelayUtil.getResponseDelay(httpResponseMock.delay || 0);
+        const timer: number = responseDelay.duration;
+        const requestMetadata: HttpMockRequestMetadata = {
+            start: start,
+            stalled: responseDelay.stalled,
+            duration: timer,
+            url: new URL(this._url as any)
+        };
         this._loadSubscription = this.loadData(httpResponseMock).subscribe({
             next: (data: any) => {
                 this.setDataStorage(httpResponseMock, requestMetadata, data);
@@ -334,7 +332,8 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
     private finalizeRequestMetadata(): HttpMockRequestMetadata {
         const ds: DataStorage = this._dataStorage;
         const metadata: HttpMockRequestMetadata = ds.requestMetadata;
-        metadata.duration = Date.now() - metadata.start;
+        const duration: number = this.now() - metadata.start;
+        if (duration > metadata.duration) metadata.duration = duration;
         return metadata;
     }
 
@@ -427,5 +426,9 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
             // context, transferCache: not used by Angular at this level of API
         };
         return new HttpRequest<any>(this._method as string, this._url as any, body, init);
+    }
+
+    private now(): number {
+        return Date.now();
     }
 }

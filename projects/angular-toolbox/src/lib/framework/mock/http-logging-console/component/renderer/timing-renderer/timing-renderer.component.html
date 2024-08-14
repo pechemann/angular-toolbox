@@ -1,0 +1,32 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+@if (hasData) {
+    <dl>
+        <dt>Connection start</dt>
+        <dd>{{ start | date: 'short' }}</dd>
+    </dl>
+    <dl>
+        <dt>Request/Response</dt>
+        <dd class="timeline">
+            <div>
+                <div [attr.style]="'width:' + downloadStart + '%'">
+                    stalled
+                    <div class="stalled"></div>
+                    <div class="time">{{ downloadStart }} ms</div>
+                </div>
+                <div [attr.style]="'width:' + downloadLength + '%;margin-left:' + downloadStart + '%'">
+                    download
+                    <div class="download" [class.error]="error"></div>
+                    <div class="time">{{ duration }} ms</div>
+                </div>
+            </div>
+        </dd>
+    </dl>
+}
+
