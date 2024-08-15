@@ -286,10 +286,9 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
     constructor(routeConfig: RouteMockConfig,
                 private _logger: HttpMockLoggingService) {
         super();
-        const methodConfig: HttpMethodMock = routeConfig.methodConfig;
         this._routeConfig = routeConfig;
-        this._progressiveDownload = methodConfig.progressive || false;
-        this.responseType = methodConfig.responseType || EMPTY_STRING as any;
+        // routeConfig.methodConfig.downloadManager
+        this._progressiveDownload = false;
         this._requestHeaders = new HttpHeaders();
     }
     

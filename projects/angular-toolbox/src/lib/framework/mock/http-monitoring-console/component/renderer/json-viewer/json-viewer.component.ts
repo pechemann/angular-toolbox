@@ -8,7 +8,7 @@
 
 import { Component, Input } from '@angular/core';
 import { AtxJsonViewerPanelComponent } from '../json-viewer-panel/json-viewer-panel.component';
-import { AtxConsoleJsonProp } from '../../../model/business/atx-console-json-prop';
+import { AtxConsoleJson } from '../../../model/business/atx-console-json';
 import { DataUtil } from '../../../util/data.util';
 
 @Component({
@@ -22,7 +22,7 @@ import { DataUtil } from '../../../util/data.util';
 })
 export class AtxJsonViewerComponent {
 
-  protected parsedData: AtxConsoleJsonProp | null = null;
+  protected parsedData: AtxConsoleJson | null = null;
 
   @Input()
   public set data(value: any) {

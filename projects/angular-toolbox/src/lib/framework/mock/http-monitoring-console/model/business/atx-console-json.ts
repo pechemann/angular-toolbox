@@ -6,15 +6,15 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { ConsoleType } from "../../util/console-type";
+import { ConsoleTypeClass } from "../../util/console-type-class";
 
-export interface AtxConsoleJsonProp {
+export interface AtxConsoleJson {
 
     label?: string;
 
     value: any;
 
-    type: ConsoleType;
+    typeClass: ConsoleTypeClass;
 
-    children?: AtxConsoleJsonProp[];
+    children?: AtxConsoleJson[];
 }

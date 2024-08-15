@@ -50,7 +50,6 @@ export const HTTP_HEADERS: HttpHeaders = HttpHeadersUtil.createDefaultRequestHea
 export const HTTP_STATUS: HttpStatusCode = HttpStatusCode.ImATeapot;
 export const ROUTE_CONFIG: RouteMockConfig = {
     methodConfig: {
-        responseType: "document",
         data: () => httpResponseMock().status(HTTP_STATUS)
                                       .statusText(I_M_A_TEA_POT)
                                       .url(URL_STRING)
@@ -68,7 +67,6 @@ export const ERROR: HttpMockError = {
 
 export const ROUTE_CONFIG_WITH_ERROR: RouteMockConfig = {
     methodConfig: {
-        responseType: "document",
         data: () => httpResponseMock().status(HTTP_STATUS)
                                       .statusText(I_M_A_TEA_POT)
                                       .url(URL_STRING)
@@ -99,7 +97,6 @@ export const FOO_MOCK_CONFIG: HttpMockConfig = {
 
 export const OBSERVABLE_MOCK_CONFIG: RouteMockConfig = {
   methodConfig: {
-      responseType: "text",
       data: () => httpResponseMock().status(HTTP_STATUS)
                                     .statusText(I_M_A_TEA_POT)
                                     .url(URL_STRING)
@@ -114,7 +111,6 @@ export const HTTP_ERROR = new HttpErrorResponse({ error: "HTTP Error", status: 5
 
 export const OBSERVABLE_ERROR_CONFIG: RouteMockConfig = {
   methodConfig: {
-      responseType: "text",
       data: () => httpResponseMock().body(throwError(() => HTTP_ERROR)).response()
   },
   parameters: {},

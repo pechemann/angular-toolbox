@@ -8,7 +8,7 @@
 
 import { HttpRequest, HttpStatusCode } from '@angular/common/http';
 import { HttpMockConfig, httpResponseMock, HttpResponseMockBuilder } from 'projects/angular-toolbox/src/public-api';
-import { COMPLEX_JSON, CREATED_ITEM_DTO, DELETED_ITEM_DTO, EMPTY_ITEM_DTO, NOT_FOUND_ERROR, UNAUTHORIZED_ERROR, UPDATE_ITEM_DTO, VALID_PASSWORD } from './http-mock-data';
+import { COMPLEX_JSON, CREATED_ITEM_DTO, DELETED_ITEM_DTO, EMPTY_ITEM_DTO, NOT_FOUND_ERROR, TEXT_DATA, UNAUTHORIZED_ERROR, UPDATE_ITEM_DTO, VALID_PASSWORD } from './http-mock-data';
 import { ItemDto } from './http-mock-business';
 
 const DATA_STORAGE: any = {
@@ -104,6 +104,18 @@ export const MONITORING_MOCK_CONFIG: HttpMockConfig = {
                     }
                 }
             ]
-        }
+        },
+        {
+            id: "dataTypes",
+            endpoints: [
+                {
+                    route: "/api/monitoring/data-types/text",
+                    get: {
+                        data: (request: HttpRequest<any>)=>
+                            httpResponseMock().defaultHeaders().delay().body(TEXT_DATA).response()
+                    }
+                }
+            ]
+        },
     ]
 };

@@ -7,8 +7,8 @@
  */
 
 import { Component, Input } from '@angular/core';
-import { AtxConsoleJsonProp } from '../../../model/business/atx-console-json-prop';
 import { CommonModule } from '@angular/common';
+import { AtxConsoleJson } from '../../../model/business/atx-console-json';
 
 @Component({
   selector: 'atx-json-viewer-panel',
@@ -22,5 +22,5 @@ import { CommonModule } from '@angular/common';
 export class AtxJsonViewerPanelComponent {
 
   @Input()
-  public data: AtxConsoleJsonProp | null = null;
+  public data: AtxConsoleJson | null = null;
 }

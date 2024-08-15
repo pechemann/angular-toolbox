@@ -6,10 +6,10 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Uuid } from "projects/angular-toolbox/src/public-api";
 import { Observable } from "rxjs";
-import { CREATED_ITEM_DTO, EMAIL_SAMPLE, TOKEN, UPDATE_ITEM_DTO, VALID_PASSWORD } from "./http-mock-data";
+import { CREATED_ITEM_DTO, EMAIL_SAMPLE, TEXT_DATA, TOKEN, UPDATE_ITEM_DTO, VALID_PASSWORD } from "./http-mock-data";
 
 const randomId = (): string=> Uuid.build().toString();
 
@@ -104,11 +104,26 @@ export class MonitoringApi {
                 id: randomId(),
                 invoker: ()=> {
                     const body: FormData = new FormData();
-                    const file = new File(["foo"], "foo.txt", {
+                    const file = new File([TEXT_DATA], "lorem-ipsum.txt", {
                         type: "text/plain",
                     });
-                    body.append('file', file, "foo.txt");
+                    body.append('lorem-ipsum', file, "lorem-ipsum.txt");
                     return this.http.post<any>("https://my-awsome-company.com/api/monitoring/upload/", body);
+                }
+            },
+            {
+                label: "GET / Text",
+                route: "/api/monitoring/data-types/text/",
+                description: "Performs a HTTP operation with the GET method and returns a text file.",
+                id: randomId(),
+                invoker: ()=> {
+                    const httpOptions: any = {
+                        headers: new HttpHeaders({
+                          'Content-Type': 'text/plain; charset=utf-8'
+                        }),
+                        responseType: 'text'
+                      };
+                    return this.http.get<string>("https://my-awsome-company.com/api/monitoring/data-types/text/", httpOptions)
                 }
             }
         ];

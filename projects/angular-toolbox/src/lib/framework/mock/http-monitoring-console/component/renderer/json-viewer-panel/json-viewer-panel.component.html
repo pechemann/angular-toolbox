@@ -12,7 +12,7 @@
             <summary>
                 @if (data.label) {
                     <span class="atx-prop-label">{{ data.label }}</span>:
-                    <span [ngClass]="data.type">{{ data.value }}</span>
+                    <span [ngClass]="data.typeClass">{{ data.value }}</span>
                 } @else {
                     {{ data.value }}
                 }
@@ -23,7 +23,7 @@
         </details>
     } @else {
         <div class="primitive">
-            <span class="atx-prop-label">{{ data.label }}</span>: <span [ngClass]="data.type">{{ data.value }}</span>
+            <span class="atx-prop-label">{{ data.label }}</span>: <span [ngClass]="data.typeClass">{{ data.value }}</span>
         </div>
     }
 }

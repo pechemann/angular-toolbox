@@ -58,12 +58,7 @@ describe('DelegateXhr', () => {
     it('responseText should be an empty string by default', () => {
         expect(xhr.responseText).toEqual(EMPTY_STRING);
     });
-
-    it('responseType should return the same value as the config anyway', () => {
-        const responseType: string = ROUTE_CONFIG.methodConfig.responseType as any;
-        expect(xhr.responseType).toEqual(responseType);
-    });
-
+    
     /**************************************************************
      * Angular only uses the first 2 parameters of the open method. 
      **************************************************************/
@@ -92,7 +87,6 @@ describe('DelegateXhr', () => {
     it('send() should pass a null body to HttpRequest object by default', (done) => {
         const cfg: RouteMockConfig = {
             methodConfig: {
-                responseType: "document",
                 data: (request: HttpRequest<any>) => {
                     expect(request.body).toBeNull();
                     setTimeout(done, DESTROY_DELAY);
@@ -111,7 +105,6 @@ describe('DelegateXhr', () => {
         const TEST_BODY: string = "Test Body";
         const cfg: RouteMockConfig = {
             methodConfig: {
-                responseType: "document",
                 data: (request: HttpRequest<any>) => {
                     expect(request.body).toEqual(TEST_BODY);
                     setTimeout(done, DESTROY_DELAY);
@@ -185,16 +178,6 @@ describe('DelegateXhr', () => {
         }, 100);
     });
 
-    it('send() should set responseType with the reponse responseType parameter', (done) => {
-        const responseType: any = ROUTE_CONFIG.methodConfig.responseType;
-        xhr.open(HTTPMethodRef.GET, URL_STRING);
-        xhr.send();
-        setTimeout(()=> {
-            expect(xhr.responseType).toEqual(responseType);
-            done();
-        }, 100);
-    });
-
     it('abort() should set ready state to UNSENT', () => {
         xhr.open(HTTPMethodRef.GET, URL_STRING);
         xhr.abort();
@@ -219,8 +202,7 @@ describe('DelegateXhr', () => {
         let start: number = 0;
         const cfg: RouteMockConfig = {
             methodConfig: {
-                responseType: "document",
-                data: (request: HttpRequest<any>) => {
+                data: () => {
                     return httpResponseMock().delay(1000).response();
                 }
             },

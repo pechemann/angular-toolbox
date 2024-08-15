@@ -19,15 +19,9 @@ export interface HttpMethodMock {
     /**
      * @private
      * Current progressive download mechanism will be replaced by a more efficient process.
-     * Indicates whether to emulate progressive download (`true`), or not (`false`).
      */
-    progressive?: boolean;
+    downloadManager?: any;
     
-    /**
-     * An enumerated string value specifying the type of data contained in the response.
-     */
-    responseType?: XMLHttpRequestResponseType;
-
     /**
      * This method emulates a successful HTTP call response.
      * 

@@ -6,12 +6,14 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-export enum ConsoleType {
+export enum ConsoleBodyType {
 
-    OBJECT = "atx-object",
-    STRING = "atx-string",
-    NUMBER= "atx-number",
-    BOOLEAN= "atx-boolean",
-    ARRAY= "atx-array",
-    NULL= "atx-null"
+    INVALID = -1,
+    NULL = 0,
+    JSON = 1,
+    TEXT = 2,
+    BLOB = 3,
+    FORM_DATA = 4,
+    ARRAY_BUFFER = 5
+    
 }

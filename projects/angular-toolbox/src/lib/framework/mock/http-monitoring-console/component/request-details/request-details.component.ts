@@ -37,6 +37,7 @@ export class AtxRequestDetailsComponent {
   protected request!: HttpRequest<any>;
   protected response!: HttpResponse<any>;
   protected requestMetadata!: HttpMockRequestMetadata;
+  protected bodyType:any = null;
 
   @Input()
   public set log(value: Log | null) {
@@ -48,6 +49,7 @@ export class AtxRequestDetailsComponent {
       this.requestMetadata = metadata.requestMetadata;
       this.checkPayload();
       this._cdr.detectChanges();
+      console.log(typeof this.response.body)
       return;
     }
     this.hasPayload = false;
