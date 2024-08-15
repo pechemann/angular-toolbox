@@ -10,7 +10,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AtxMonitoringConsoleComponent } from './http-monitoring-console.component';
 
-describe('HttpLoggingConsoleComponent', () => {
+describe('AtxMonitoringConsoleComponent', () => {
   let component: AtxMonitoringConsoleComponent;
   let fixture: ComponentFixture<AtxMonitoringConsoleComponent>;
 

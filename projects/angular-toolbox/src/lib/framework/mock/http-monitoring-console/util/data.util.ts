@@ -6,8 +6,7 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { BOOLEAN } from 'angular-toolbox';
-import { NUMBER, STRING } from '../../../../util';
+import { BOOLEAN, NUMBER, STRING } from '../../../../util';
 import { AtxConsoleJsonProp } from '../model/business/atx-console-json-prop';
 
 export class DataUtil {

@@ -46,9 +46,7 @@ export class AtxMonitoringConsoleComponent extends IdentifiableComponent impleme
     const connector: HttpMonitoringConsoleLogConnector = new HttpMonitoringConsoleLogConnector();
     this.connector = connector;
     logger.setLogConnector(connector);
-    this._subscribe.register(this,
-      connector.change.subscribe((log: Log)=> this.addLog(log) )
-    );
+    this._subscribe.register(this, connector.change.subscribe((log: Log)=> this.addLog(log)));
   }
 
   public ngOnDestroy(): void {
@@ -77,8 +75,7 @@ export class AtxMonitoringConsoleComponent extends IdentifiableComponent impleme
   }
 
   protected getStatus(log: Log): string | number { const response: HttpResponse<any> | null = log.metadata.response;
-    if (response) 
-      return response.status;
+    if (response) return response.status;
     return "prefetch";
   }
 
@@ -121,7 +118,7 @@ export class AtxMonitoringConsoleComponent extends IdentifiableComponent impleme
   private clearLogs(): void {
     this.logger.clearLogs();
     this.logSelect(null);
-    this.logs.length = 0;
+    this.cumulativeSize = this.logs.length = 0;
   }
 
   private exportLogs(): void {

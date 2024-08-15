@@ -10,7 +10,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AtxRequestDetailsComponent } from './request-details.component';
 
-describe('LogDetailsComponent', () => {
+describe('AtxRequestDetailsComponent', () => {
   let component: AtxRequestDetailsComponent;
   let fixture: ComponentFixture<AtxRequestDetailsComponent>;
 

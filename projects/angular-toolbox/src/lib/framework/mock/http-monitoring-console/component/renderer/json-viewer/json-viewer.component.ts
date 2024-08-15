@@ -26,7 +26,10 @@ export class AtxJsonViewerComponent {
 
   @Input()
   public set data(value: any) {
-    if (!value) return;
+    if (value) {
+      this.parsedData = null;
+      return;
+    }
     this.parsedData = DataUtil.parseJson(value);
   }
 }
