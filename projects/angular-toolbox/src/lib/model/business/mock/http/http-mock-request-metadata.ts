@@ -6,10 +6,17 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
+import { Uuid } from "../../../../util";
+
 /**
  * Defines the the metadata associated to an HTTP mock request.
  */
 export interface HttpMockRequestMetadata {
+
+    /**
+     * The unique ID associated with the HTTP request.
+     */
+    id: Uuid;
 
     /**
      * Indicates the starting time of the HTTP request.

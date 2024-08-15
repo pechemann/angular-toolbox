@@ -7,9 +7,9 @@
  */
 
 import { HttpHeaders, HttpParams, HttpRequest, HttpStatusCode } from "@angular/common/http";
-import { XhrProxy, HttpResponseMock, HttpMethodMock, HttpMockError, HttpMockLoggingService, HttpMockRequestMetadata, HttpMockLoggingMetadata } from "../../../../model";
+import { XhrProxy, HttpResponseMock, HttpMethodMock, HttpMockError, HttpMockLoggingService, HttpMockRequestMetadata, HttpMockLoggingMetadata, HttpMockLoggingPrefetchMetadata } from "../../../../model";
 import { ProgressEventMock } from "../event/progress-event-mock";
-import { EMPTY_STRING } from "../../../../util";
+import { EMPTY_STRING, Uuid } from "../../../../util";
 import { XhrBase } from "./xhr-base";
 import { HttpHeadersUtil } from "../util/http-headers.util";
 import { RouteMockConfig } from "../config/route-mock-config";
@@ -238,8 +238,14 @@ export class DelegateXhr extends XhrBase implements XhrProxy {
             start: start,
             stalled: responseDelay.stalled,
             duration: timer,
-            url: new URL(this._url as any)
+            url: new URL(this._url as any),
+            id: Uuid.build()
         };
+        const prefetchMetadata: HttpMockLoggingPrefetchMetadata = {
+            request: request,
+            requestMetadata: requestMetadata
+        };
+        this._logger.prefetch(prefetchMetadata);
         this._loadSubscription = this.loadData(httpResponseMock).subscribe({
             next: (data: any) => {
                 this.setDataStorage(httpResponseMock, requestMetadata, data);

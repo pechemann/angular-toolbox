@@ -8,7 +8,7 @@
 
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { HttpMockLoggingService, Log, SubscriptionService } from '../../../../../model';
-import { LogLevel } from '../../../../../util';
+import { LogLevel, Uuid } from '../../../../../util';
 import { HttpLoggingConsoleLogConnector } from '../../connector/http-logging-console-log-connector';
 import { IdentifiableComponent } from '../../../../../core';
 import { AtxLogDetailsComponent } from '../log-details/log-details.component';
@@ -18,6 +18,7 @@ import { AtxConsoleMenuComponent } from '../console-menu/console-menu.component'
 import { AtxConsoleAction } from '../../model/business/atx-console-action';
 import { AtxConsoleActionType } from '../../model/business/atx-console-action-type';
 import { UrlUtil } from '../../util/url.util';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'atx-logging-console',
@@ -46,10 +47,7 @@ export class AtxLoggingConsoleComponent extends IdentifiableComponent implements
     this.connector = connector;
     logger.setLogConnector(connector);
     this._subscribe.register(this,
-      connector.change.subscribe((log: Log)=> {
-        this.addLog(log);
-        _cdr.detectChanges();
-      })
+      connector.change.subscribe((log: Log)=> this.addLog(log) )
     );
   }
 
@@ -70,8 +68,30 @@ export class AtxLoggingConsoleComponent extends IdentifiableComponent implements
   }
   
   protected getSize(log: Log): string {
-    const size: number = SizeUtil.getSize(log.metadata.response.body);
-    return SizeUtil.sizeToString(size);
+    const response: HttpResponse<any> | null = log.metadata.response;
+    if (response) {
+      const size: number = SizeUtil.getSize(response.body);
+      return SizeUtil.sizeToString(size);
+    }
+    return "---";
+  }
+
+  protected getStatus(log: Log): string | number { const response: HttpResponse<any> | null = log.metadata.response;
+    if (response) 
+      return response.status;
+    return "prefetch";
+  }
+
+  protected getTime(log: Log): string {
+    const response: HttpResponse<any> | null = log.metadata.response;
+    if (response) return log.metadata.requestMetadata.duration + " ms";
+    return "---";
+  }
+
+  protected isError(log: Log): boolean {
+    const response: HttpResponse<any> | null = log.metadata.response;
+    if (response) return response.status >= 400;
+    return false;
   }
 
   protected checkFilters(log: Log): boolean {
@@ -83,14 +103,18 @@ export class AtxLoggingConsoleComponent extends IdentifiableComponent implements
       case AtxConsoleActionType.CLEAR_LOGS : this.clearLogs(); break;
       case AtxConsoleActionType.EXPORT_LOGS: this.exportLogs(); break;
       case AtxConsoleActionType.IMPORT_LOGS: this.importLogs(); break;
-      
     }
   }
 
   private addLog(log: Log): void {
-    const size: number = SizeUtil.getSize(log.metadata.response.body);
-    this.logs.push(log);
-    this.cumulativeSize += size;
+    if (log.level !== LogLevel.CONFIG) {
+      const size: number = SizeUtil.getSize(log.metadata.response.body);
+      const id: Uuid = log.metadata.requestMetadata.id;
+      this.cumulativeSize += size;
+      const idx = this.logs.findIndex(prefetch => prefetch.metadata.requestMetadata.id === id);
+      this.logs.splice(idx, 1, log);
+    } else this.logs.push(log);
+    this._cdr.detectChanges();
   }
   
   private clearLogs(): void {

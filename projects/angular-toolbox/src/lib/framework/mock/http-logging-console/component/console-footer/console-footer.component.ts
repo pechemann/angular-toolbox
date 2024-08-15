@@ -7,7 +7,6 @@
  */
 
 import { Component, Input } from '@angular/core';
-import { HttpMockLoggingService } from 'projects/angular-toolbox/src/public-api';
 import { SizeUtil } from '../../util/size.util';
 
 @Component({
@@ -26,5 +25,6 @@ export class AtxConsoleFooterComponent {
     this.size = SizeUtil.sizeToString(value);
   }
 
-  constructor(protected logger: HttpMockLoggingService) {}
+  @Input()
+  public numLogs: number = 0;
 }

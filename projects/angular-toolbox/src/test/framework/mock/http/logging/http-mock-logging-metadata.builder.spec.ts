@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { HttpMockLoggingService, HttpMockRequestMetadata } from 'projects/angular-toolbox/src/public-api';
+import { HttpMockLoggingService, HttpMockRequestMetadata, Uuid } from 'projects/angular-toolbox/src/public-api';
 import { TestBed } from '@angular/core/testing';
 import { DESTROY_DELAY, ROUTE_CONFIG, URL_STRING } from '../xhr/util/delegate-xhr-test-util';
 import { DelegateXhr } from 'projects/angular-toolbox/src/lib/framework/mock/http/xhr/delegate-xhr';
@@ -31,6 +31,7 @@ describe('HttpMockLoggingMetadataBuilder', () => {
     });
     logger = TestBed.inject(HttpMockLoggingService);
     requestMetadata = {
+      id: Uuid.build(),
       start: timestamp,
       stalled: 100,
       duration: 600,

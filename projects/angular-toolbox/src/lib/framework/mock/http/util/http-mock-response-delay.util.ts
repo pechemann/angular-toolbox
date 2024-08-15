@@ -23,9 +23,11 @@ export class HttpMockResponseDelayUtil {
      * @returns A `ResponseDelay` object.
      */
     public static getResponseDelay(timer: number): ResponseDelay {
-        const duration: number = (timer <= HTTP_MOCK_MAX_DELAY) ? timer : HTTP_MOCK_MAX_DELAY;
+        let duration: number = timer;
+        if (timer < 0) duration = 0;
+        if (timer > HTTP_MOCK_MAX_DELAY) duration = HTTP_MOCK_MAX_DELAY;
         return {
-            stalled: (timer > 0 ? Math.random() * duration : 0) | 0,
+            stalled: Math.random() * duration,
             duration: duration
         };
     }

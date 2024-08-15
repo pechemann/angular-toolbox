@@ -8,7 +8,7 @@
 
 import { Injectable, OnDestroy } from "@angular/core";
 import { HttpMockLogger } from "../../../../../framework/mock/http/logging/http-mock-logger";
-import { TransactionalLogger, HttpMockLoggingMetadata, LogConnector, Log } from "../../../../business";
+import { TransactionalLogger, HttpMockLoggingMetadata, LogConnector, Log, HttpMockLoggingPrefetchMetadata } from "../../../../business";
 
 /**
  * @private
@@ -27,6 +27,12 @@ const RESPONSE_MESSAGE: string = "HTTP response";
  * The "message" reference for all error logs of the HTTP Mocking Framework.
  */
 const ERROR_MESSAGE: string = "HTTP error";
+
+/**
+ * @private
+ * The "message" reference for all prefetch logs of the HTTP Mocking Framework.
+ */
+const CONFIG_MESSAGE: string = "HTTP prefetch";
 
 /**
  * @private
@@ -64,7 +70,7 @@ export class HttpMockLoggingService implements TransactionalLogger, OnDestroy {
      * 
      * @return The log for the specified metadata.
      */
-    public info(metadata?: HttpMockLoggingMetadata): Log {
+    public info(metadata: HttpMockLoggingMetadata): Log {
         this._logger.info(CALLER, RESPONSE_MESSAGE, metadata);
         return this.getLastLog();
     }
@@ -76,9 +82,18 @@ export class HttpMockLoggingService implements TransactionalLogger, OnDestroy {
      * 
      * @return The log for the specified metadata.
      */
-    public error(metadata?: HttpMockLoggingMetadata): Log {
+    public error(metadata: HttpMockLoggingMetadata): Log {
         this._logger.error(CALLER, ERROR_MESSAGE, metadata);
         return this.getLastLog();
+    }
+
+    /**
+     * 
+     * 
+     * @param metadata The metadata associated with the HTTP method to log.
+     */
+    public prefetch(metadata: HttpMockLoggingPrefetchMetadata): void {
+        this._logger.config(CALLER, CONFIG_MESSAGE, metadata);
     }
 
     /**

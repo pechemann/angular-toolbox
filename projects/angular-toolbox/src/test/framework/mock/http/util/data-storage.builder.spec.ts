@@ -9,7 +9,7 @@
 import { HttpHeaders, HttpStatusCode } from "@angular/common/http";
 import { DataStorage } from "projects/angular-toolbox/src/lib/framework/mock/http/core/data-storage";
 import { DataStorageBuilder } from "projects/angular-toolbox/src/lib/framework/mock/http/util/data-storage.builder";
-import { EMPTY_STRING, HttpMockRequestMetadata, HttpResponseMock } from "projects/angular-toolbox/src/public-api";
+import { EMPTY_STRING, HttpMockRequestMetadata, HttpResponseMock, Uuid } from "projects/angular-toolbox/src/public-api";
 
 const STATUS: number = HttpStatusCode.Accepted;
 const STATUS_TEXT: string = 'Status text test';
@@ -29,6 +29,7 @@ const RESPONSE_MOCK: HttpResponseMock = {
 };
 
 const REQUEST_METADATA: HttpMockRequestMetadata = {
+  id: Uuid.build(),
   duration: 0,
   start: 0,
   stalled: 0,

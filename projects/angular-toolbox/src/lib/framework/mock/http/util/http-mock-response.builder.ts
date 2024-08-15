@@ -118,8 +118,41 @@ export class HttpResponseMockBuilder {
      * 
      * @returns A reference to this `HttpResponseMockBuilder` instance.
      */
-    public delay(timer: number = NaN): HttpResponseMockBuilder {
-        this._response.delay = (isNaN(timer) ? HTTP_MOCK_MAX_DELAY - Math.random() * HTTP_MOCK_MAX_DELAY : timer) | 0;
+    public delay(timer?: number): HttpResponseMockBuilder;
+    
+    /**
+     * Sets the `delay` property of the new `HttpResponseMock` instance with the specified `timer` duration.
+     * Maximum value is `10000` miliseconds (10 seconds).
+     * 
+     * @param timer The value used to set the `delay` property of the new `HttpResponseMock` instance.
+     * 
+     * @returns A reference to this `HttpResponseMockBuilder` instance.
+     */
+    public delay(min?: number, max?: number): HttpResponseMockBuilder;
+
+    /**
+     * @private
+     * Overload implementation 
+     */
+    public delay(...arg: any): HttpResponseMockBuilder {
+        if (arg.length <= 1) {
+            let timer: number = arg[0] || NaN;
+            if (isNaN(timer)) {
+                this._response.delay = HTTP_MOCK_MAX_DELAY - Math.random() * HTTP_MOCK_MAX_DELAY;
+                return this;
+            }
+            if (timer > HTTP_MOCK_MAX_DELAY) {
+                this._response.delay = HTTP_MOCK_MAX_DELAY;
+                return this;
+            }
+            if (timer < 0) timer = 0;
+            this._response.delay = timer;
+            return this;
+        }
+        let min: number = arg[0], max: number = arg[1];
+        if (max > HTTP_MOCK_MAX_DELAY) max = HTTP_MOCK_MAX_DELAY;
+        if (min < 0 || min > max) min = 0;
+        this._response.delay = Math.floor(Math.random() * (max - min) + min);
         return this;
     }
 

@@ -216,6 +216,44 @@
         </p>
     </div>
     </p>
+    <pre><code class="language-typescript">delay(min: number, max: number): HttpResponseMockBuilder</code></pre>
+    <div class="text-end mb-4 me-3 my-0 py-0">
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 0.11.4</span></small>
+    </div>
+    <p>
+        Sets the delay before the <code>pseudo-server</code> sends the HTTP response.
+        The delay is a random number between the <code>min</code> and <code>max</code> values
+        that represents a timestamp, in milliseconds.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>min: number</code></dt>
+            <dd>
+                <p>
+                    The minimum value used used to define the random delay.
+                    <br>
+                    Minimum value is <code>0</code> miliseconds.
+                </p>
+            </dd>
+            <dt><code>max: number</code></dt>
+            <dd>
+                <p>
+                    The maximum value used used to define the random delay.
+                    <br>
+                    Maximum value is <code>HTTP_MOCK_MAX_DELAY</code> (10 seconds).
+                </p>
+            </dd>
+        </dl>
+    </div>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>HttpResponseMockBuilder</code>
+        <p>
+            The reference to this <code>HttpResponseMockBuilder</code> instance.
+        </p>
+    </div>
+    </p>
 </section>
 
 

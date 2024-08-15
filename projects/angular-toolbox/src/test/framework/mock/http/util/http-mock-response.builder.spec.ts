@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { HTTP_MOCK_MAX_DELAY, HttpResponseMockBuilder } from '../../../../../public-api';
+import { HTTP_MOCK_MAX_DELAY, HttpResponseMockBuilder, NUMBER } from '../../../../../public-api';
 import { HttpHeaders, HttpStatusCode } from '@angular/common/http';
 
 const BODY: string = 'Body test';
@@ -53,10 +53,8 @@ describe('HttpResponseMockBuilder', () => {
     expect(builder.response().statusText).toEqual("OK");
   });
 
-  it('response() method should create a HttpResponseMock with random "delay" by default between 0 and HTTP_MOCK_MAX_DELAY', () => {
-    const d = builder.delay().response().delay;
-    expect(d).toBeGreaterThanOrEqual(0);
-    expect(d).toBeLessThanOrEqual(HTTP_MOCK_MAX_DELAY);
+  it('response() method should create a HttpResponseMock with default "delay" equal to 0', () => {
+    expect(builder.response().delay).toEqual(0);
   });
   
   it('body() method should set the "body" property of the response object', () => {
@@ -141,5 +139,49 @@ describe('HttpResponseMockBuilder', () => {
     const anotherDelay: number = 2000;
     builder.delay(anotherDelay);
     expect(builder.response().delay).toEqual(anotherDelay);
+  });
+
+  it('delay() method should create a random value by default', () => {
+    builder.delay();
+    const delay = builder.response().delay;
+    expect(typeof delay).toEqual(NUMBER);
+  });
+
+  it('delay() method should create a random value greater than, or equal to 0', () => {
+    builder.delay();
+    expect(builder.response().delay).toBeGreaterThanOrEqual(0);
+  });
+
+  it('delay() method should create a random value lower than, or equal to HTTP_MOCK_MAX_DELAY', () => {
+    builder.delay();
+    expect(builder.response().delay).toBeLessThanOrEqual(HTTP_MOCK_MAX_DELAY);
+  });
+  
+  it('delay() method should create a value equal to 0 when timer is lower than 0', () => {
+    builder.delay(-5);
+    expect(builder.response().delay).toEqual(0);
+  });
+  
+  it('delay() method should create a value equal to HTTP_MOCK_MAX_DELAY when timer is greater than HTTP_MOCK_MAX_DELAY', () => {
+    builder.delay(HTTP_MOCK_MAX_DELAY + 10);
+    expect(builder.response().delay).toEqual(HTTP_MOCK_MAX_DELAY);
+  });
+  
+  it('delay(min, max) method should create a random value between min and max', () => {
+    const min = 10;
+    const max = 1000;
+    builder.delay(min, max);
+    const delay = builder.response().delay;
+    expect(delay).toBeGreaterThanOrEqual(min);
+    expect(delay).toBeLessThanOrEqual(max);
+  });
+
+  it('delay(min, max) method should create a random value between min and max even if min is lower than 0 and max is greater than HTTP_MOCK_MAX_DELAY', () => {
+    const min = -10;
+    const max = HTTP_MOCK_MAX_DELAY + 10;
+    builder.delay(min, max);
+    const delay = builder.response().delay;
+    expect(delay).toBeGreaterThanOrEqual(0);
+    expect(delay).toBeLessThanOrEqual(HTTP_MOCK_MAX_DELAY);
   });
 });
