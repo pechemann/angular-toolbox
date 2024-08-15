@@ -40,7 +40,7 @@ const CONFIG_MESSAGE: string = "HTTP prefetch";
  * The utility service that manages the HTTP Mocking Framework logs.
  */
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'platform'
 })
 export class HttpMockLoggingService implements TransactionalLogger, OnDestroy {
 

@@ -8,31 +8,36 @@
 
 import { BOOLEAN, NUMBER, STRING } from '../../../../util';
 import { AtxConsoleJsonProp } from '../model/business/atx-console-json-prop';
+import { ConsoleType } from './console-type';
+
+const NULL: string = "null";
+const ARR_END: string = '...]';
+const OBJ_END: string = '...}'
 
 export class DataUtil {
 
     public static parseJson(obj: any, label?: string): AtxConsoleJsonProp {
         const primitive: string = typeof obj;
-        let type: string = "atx-object",
+        let type: ConsoleType = ConsoleType.OBJECT,
             value: any = obj,
             children: any = null;
-        if (primitive === STRING) type = "atx-string";
-        else if (primitive === NUMBER) type = "atx-number";
-        else if (primitive === BOOLEAN) type = "atx-boolean";
+        if (primitive === STRING) type = ConsoleType.STRING;
+        else if (primitive === NUMBER) type = ConsoleType.NUMBER;
+        else if (primitive === BOOLEAN) type = ConsoleType.BOOLEAN;
         else if (Array.isArray(obj)) {
             const rawValue: string = JSON.stringify(obj);
             let len: number = obj.length - 1;
             let idx: number = 0;
-            type = "atx-array";
-            value = rawValue.length > 50 ? rawValue.substring(0, 46) + '...]' : rawValue;
+            type = ConsoleType.ARRAY;
+            value = rawValue.length > 50 ? rawValue.substring(0, 46) + ARR_END : rawValue;
             children = [];
             for (; len >= 0; len--) {
                 children.push(DataUtil.parseJson(obj[len], String(idx)));
                 idx++;
             }
         } else if (obj === null) {
-            type = "atx-null";
-            value = "null";
+            type = ConsoleType.NULL;
+            value = NULL;
         }
         else {
             const keys: string[] = Object.keys(obj);
@@ -43,7 +48,7 @@ export class DataUtil {
                 const key: string = keys[len];
                 children.push(DataUtil.parseJson(obj[key], key));
             }
-            value = rawValue.length > 50 ? rawValue.substring(0, 46) + '...}' : rawValue;
+            value = rawValue.length > 50 ? rawValue.substring(0, 46) + OBJ_END : rawValue;
         }
         return {
             label: label,

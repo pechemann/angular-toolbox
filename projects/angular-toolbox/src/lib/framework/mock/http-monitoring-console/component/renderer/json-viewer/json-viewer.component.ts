@@ -26,7 +26,7 @@ export class AtxJsonViewerComponent {
 
   @Input()
   public set data(value: any) {
-    if (value) {
+    if (!value) {
       this.parsedData = null;
       return;
     }

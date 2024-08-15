@@ -6,15 +6,12 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { ConsoleType } from "../../util/console-type";
+export enum ConsoleType {
 
-export interface AtxConsoleJsonProp {
-
-    label?: string;
-
-    value: any;
-
-    type: ConsoleType;
-
-    children?: AtxConsoleJsonProp[];
+    OBJECT = "atx-object",
+    STRING = "atx-string",
+    NUMBER= "atx-number",
+    BOOLEAN= "atx-boolean",
+    ARRAY= "atx-array",
+    NULL= "atx-null"
 }

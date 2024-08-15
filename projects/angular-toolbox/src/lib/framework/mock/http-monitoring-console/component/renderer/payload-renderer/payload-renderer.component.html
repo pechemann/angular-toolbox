@@ -31,4 +31,17 @@
             <atx-json-viewer [data]="json"/>
         </div>
     </details>
-}         
+} @else if (formData) {
+    <details>
+        <summary>
+            Form Data
+        </summary>
+        <div class="content">
+            <ul>
+                @for (entry of formData; track entry) {
+                    <li>[ {{ entry }} ]</li>
+                }
+            </ul>
+        </div>
+    </details>
+}      

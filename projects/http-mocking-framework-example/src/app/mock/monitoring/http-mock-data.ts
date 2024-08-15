@@ -15,9 +15,9 @@ export const NOT_FOUND_ERROR: HttpMockError = {
     statusText: "Not Found"
 };
 
-export const BAD_REQUEST_ERROR: HttpMockError = {
-    status: HttpStatusCode.BadRequest,
-    statusText: "Bad Request"
+export const UNAUTHORIZED_ERROR: HttpMockError = {
+    status: HttpStatusCode.Unauthorized,
+    statusText: "Unauthorized"
 };
 
 export const TOKEN: Token = {
@@ -82,3 +82,6 @@ export const COMPLEX_JSON: any = {
         }
     ]
 };
+
+export const EMAIL_SAMPLE: string = "ryo.saeba@city-hunter.com";
+export const VALID_PASSWORD: string = "xyz";
