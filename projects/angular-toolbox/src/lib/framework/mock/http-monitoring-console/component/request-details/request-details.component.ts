@@ -6,7 +6,7 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 import { HttpMockRequestMetadata, Log } from '../../../../../model';
 import { NgStyle } from '@angular/common';
 import { HttpRequest, HttpResponse } from '@angular/common/http';
@@ -47,15 +47,19 @@ export class AtxRequestDetailsComponent {
       this.response = metadata.response;
       this.requestMetadata = metadata.requestMetadata;
       this.checkPayload();
+      this._cdr.detectChanges();
       return;
     }
     this.hasPayload = false;
     this.request = null as any;
     this.response = null as any;
     this.requestMetadata = null as any;
+    this._cdr.detectChanges();
   }
 
   protected currSection: number = 0;
+
+  constructor(private _cdr: ChangeDetectorRef) {}
 
   protected changeSection(idx: number): void {
     this.currSection = idx;

@@ -113,6 +113,7 @@ export class AtxMonitoringConsoleComponent extends IdentifiableComponent impleme
       this.cumulativeSize += size;
       const idx = this.logs.findIndex(prefetch => prefetch.metadata.requestMetadata.id === id);
       this.logs.splice(idx, 1, log);
+      if (this.selectedLog?.metadata.requestMetadata.id === id) this.selectedLog = log;
     } else this.logs.push(log);
     this._cdr.detectChanges();
   }

@@ -39,11 +39,18 @@
                     <dl>
                         <dt>Status Code:</dt>
                         <dd>
-                            <svg [ngStyle]="{ fill: response.status < 400 ? 'green' : 'red' }" 
-                                 width="13" height="13" viewBox="0 0 16 16">
-                                <circle cx="8" cy="8" r="8"/>
-                            </svg>
-                            {{ response.status }} {{ response.statusText }}
+                            @if (response) {
+                                <svg [ngStyle]="{ fill: response.status < 400 ? 'green' : 'red' }" 
+                                    width="13" height="13" viewBox="0 0 16 16">
+                                    <circle cx="8" cy="8" r="8"/>
+                                </svg>
+                                {{ response.status }} {{ response.statusText }}
+                            } @else {
+                                <svg fill="orange" width="13" height="13" viewBox="0 0 16 16">
+                                    <circle cx="8" cy="8" r="8"/>
+                                </svg>
+                                prefetch
+                            }
                         </dd>
                     </dl>
                 </section>
@@ -51,12 +58,14 @@
             <details>
                 <summary>Response Headers</summary>
                 <section>
-                    @for( item of response.headers.keys(); track item) {
-                        <dl>
-                            <dt>{{ item }}</dt>
-                            <dd>{{ response.headers.get(item) }}</dd>
-                        </dl>
-                        
+                    @if (response) {
+                        @for( item of response.headers.keys(); track item) {
+                            <dl>
+                                <dt>{{ item }}</dt>
+                                <dd>{{ response.headers.get(item) }}</dd>
+                            </dl>
+                            
+                        }
                     }
                 </section>
             </details>
@@ -71,17 +80,17 @@
                     }
                 </section>
             </details>
-        }  @else if (currSection === 1) {
+        } @else if (currSection === 1) {
             <atx-payload-renderer [log]="currLog"/>
-        }  @else if (currSection === 2) {
+        } @else if (currSection === 2 && response) {
             <atx-json-viewer [data]="response.body"/>
-        } @else if (currSection === 3) {
+        } @else if (currSection === 3 && response) {
             <section class="raw-response">
                 @if (response.body !== null) {
                     {{ stringify(response.body) }}
                 }
             </section>
-        } @else if (currSection === 4) {
+        } @else if (currSection === 4 && response) {
             <section class="timing-view">
                 <atx-timing-renderer [data]="currLog"/>
             </section>
