@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularToolboxPageTitleComponent, BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
-import { HttpMock, HttpMockService, Log, AtxLoggingConsoleComponent, SubscriptionService, IdentifiableComponent } from 'projects/angular-toolbox/src/public-api';
+import { HttpMock, HttpMockService, Log, AtxMonitoringConsoleComponent, SubscriptionService, IdentifiableComponent } from 'projects/angular-toolbox/src/public-api';
 import { MONITORING_MOCK_CONFIG } from '../../mock/monitoring/http-mock-config';
 import { MonitoringApi, MonitoringApiDescriptor } from '../../mock/monitoring/monitoring-api';
 import { HttpClient } from '@angular/common/http';
@@ -11,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
   standalone: true,
   imports: [
     AngularToolboxPageTitleComponent,
-    AtxLoggingConsoleComponent
+    AtxMonitoringConsoleComponent
   ],
   templateUrl: './monitoring.component.html',
   styleUrl: './monitoring.component.scss'

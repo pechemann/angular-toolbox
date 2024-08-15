@@ -15,7 +15,7 @@ import { AtxPayloadRendererComponent } from '../renderer/payload-renderer/payloa
 import { AtxTimingRendererComponent } from '../renderer/timing-renderer/timing-renderer.component';
 
 @Component({
-  selector: 'atx-logging-console-details',
+  selector: 'atx-monitoring-console-details',
   standalone: true,
   imports: [
     NgStyle,
@@ -23,11 +23,11 @@ import { AtxTimingRendererComponent } from '../renderer/timing-renderer/timing-r
     AtxPayloadRendererComponent,
     AtxTimingRendererComponent
   ],
-  templateUrl: './log-details.component.html',
-  styleUrl: './log-details.component.scss',
+  templateUrl: './request-details.component.html',
+  styleUrl: './request-details.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AtxLogDetailsComponent {
+export class AtxRequestDetailsComponent {
 
   @Output()
   public readonly close: EventEmitter<void> = new EventEmitter(true);

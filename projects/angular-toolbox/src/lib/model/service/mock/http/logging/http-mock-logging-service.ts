@@ -88,7 +88,8 @@ export class HttpMockLoggingService implements TransactionalLogger, OnDestroy {
     }
 
     /**
-     * 
+     * Processes a special kind of logs that are used to indicate that a HTTP operation
+     * started and no response is available yet.
      * 
      * @param metadata The metadata associated with the HTTP method to log.
      */

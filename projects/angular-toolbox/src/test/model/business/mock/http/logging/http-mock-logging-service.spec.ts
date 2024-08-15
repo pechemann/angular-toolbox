@@ -103,4 +103,11 @@ describe('HttpMockLoggingService', () => {
         service.clearLogs();
         expect(service.size).toEqual(0);
     });
+    
+    it('prefetch() should send log to the log connector', () => {
+        spyOn(DEFAULT_LOG_CONNECTOR, "sendLog");
+        const metadata: any = {};
+        service.prefetch(metadata);
+        expect(DEFAULT_LOG_CONNECTOR.sendLog).toHaveBeenCalled();
+    });
 });

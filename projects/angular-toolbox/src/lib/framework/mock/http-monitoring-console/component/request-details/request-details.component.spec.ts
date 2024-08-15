@@ -8,19 +8,19 @@
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AtxLogDetailsComponent } from './log-details.component';
+import { AtxRequestDetailsComponent } from './request-details.component';
 
 describe('LogDetailsComponent', () => {
-  let component: AtxLogDetailsComponent;
-  let fixture: ComponentFixture<AtxLogDetailsComponent>;
+  let component: AtxRequestDetailsComponent;
+  let fixture: ComponentFixture<AtxRequestDetailsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AtxLogDetailsComponent]
+      imports: [AtxRequestDetailsComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AtxLogDetailsComponent);
+    fixture = TestBed.createComponent(AtxRequestDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

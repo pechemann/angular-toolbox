@@ -9,9 +9,9 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { HttpMockLoggingService, Log, SubscriptionService } from '../../../../../model';
 import { LogLevel, Uuid } from '../../../../../util';
-import { HttpLoggingConsoleLogConnector } from '../../connector/http-logging-console-log-connector';
+import { HttpMonitoringConsoleLogConnector } from '../../connector/http-monitoring-console-log-connector';
 import { IdentifiableComponent } from '../../../../../core';
-import { AtxLogDetailsComponent } from '../log-details/log-details.component';
+import { AtxRequestDetailsComponent } from '../request-details/request-details.component';
 import { SizeUtil } from '../../util/size.util';
 import { AtxConsoleFooterComponent } from '../console-footer/console-footer.component';
 import { AtxConsoleMenuComponent } from '../console-menu/console-menu.component';
@@ -21,20 +21,20 @@ import { UrlUtil } from '../../util/url.util';
 import { HttpResponse } from '@angular/common/http';
 
 @Component({
-  selector: 'atx-logging-console',
+  selector: 'atx-http-monitoring-console',
   standalone: true,
   imports: [
-    AtxLogDetailsComponent,
+    AtxRequestDetailsComponent,
     AtxConsoleFooterComponent,
     AtxConsoleMenuComponent,
   ],
-  templateUrl: './http-logging-console.component.html',
-  styleUrl: './http-logging-console.component.scss',
+  templateUrl: './http-monitoring-console.component.html',
+  styleUrl: './http-monitoring-console.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AtxLoggingConsoleComponent extends IdentifiableComponent implements OnDestroy {
+export class AtxMonitoringConsoleComponent extends IdentifiableComponent implements OnDestroy {
 
-  protected connector: HttpLoggingConsoleLogConnector;
+  protected connector: HttpMonitoringConsoleLogConnector;
   protected selectedLog: Log | null = null;
   protected cumulativeSize: number = 0;
   protected logs: Log[] = [];
@@ -43,7 +43,7 @@ export class AtxLoggingConsoleComponent extends IdentifiableComponent implements
               private _cdr: ChangeDetectorRef,
               private _subscribe: SubscriptionService) {
     super();
-    const connector: HttpLoggingConsoleLogConnector = new HttpLoggingConsoleLogConnector();
+    const connector: HttpMonitoringConsoleLogConnector = new HttpMonitoringConsoleLogConnector();
     this.connector = connector;
     logger.setLogConnector(connector);
     this._subscribe.register(this,

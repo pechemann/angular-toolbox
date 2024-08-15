@@ -14,7 +14,7 @@ import { LogLevel } from "../../../../util";
  * An implementation of the `LogConnector` class that sends logs to the HTTP
  * mocking console component.
  */
-export class HttpLoggingConsoleLogConnector implements LogConnector {
+export class HttpMonitoringConsoleLogConnector implements LogConnector {
 
     /**
      * 
