@@ -61,7 +61,7 @@ export class DataUtil {
     
     public static getBodyType(obj: any): ConsoleBodyType {
         const primitive: string = typeof obj;
-        if (obj) return ConsoleBodyType.NULL;
+        if (obj === null || obj === undefined) return ConsoleBodyType.NULL;
         if (primitive === STRING) return ConsoleBodyType.TEXT;
         if (obj instanceof Blob) return ConsoleBodyType.BLOB;
         if (obj instanceof FormData) return ConsoleBodyType.FORM_DATA;

@@ -10,6 +10,8 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@a
 import { Log } from '../../../../../../model';
 import { HttpParams, HttpRequest } from '@angular/common/http';
 import { AtxJsonViewerComponent } from '../json-viewer/json-viewer.component';
+import { DataUtil } from '../../../util/data.util';
+import { ConsoleBodyType } from '../../../util/console-body-type';
 
 @Component({
   selector: 'atx-payload-renderer',
@@ -33,18 +35,16 @@ export class AtxPayloadRendererComponent {
     const params: HttpParams = request.params;
     const paramsKeys: string[] = params.keys();
     const body: any = request.body;
-    this.json = null;
+    const bodyType: ConsoleBodyType = DataUtil.getBodyType(body);
     this.queryParams = this.formData = this.json = null;
     if (paramsKeys.length > 0) {
       this.queryParams = [];
       paramsKeys.forEach(key=> this.queryParams?.push( { key: key, value: params.get(key) } ));
     }
-    if (body) {
-      if (body instanceof FormData) {
-        this.formData = Array.from(body);
-      } else {
-        this.json = JSON.parse(body);
-      }
+    if (bodyType === ConsoleBodyType.FORM_DATA) {
+      this.formData = Array.from(body);
+    } else if (bodyType === ConsoleBodyType.TEXT) {
+      this.json = JSON.parse(body);
     }
     this._cdr.detectChanges();
   }

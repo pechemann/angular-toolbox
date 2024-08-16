@@ -125,6 +125,15 @@ export class MonitoringApi {
                       };
                     return this.http.get<string>("https://my-awsome-company.com/api/monitoring/data-types/text/", httpOptions)
                 }
+            },
+            {
+                label: "GET / PHP Error",
+                route: "/api/monitoring/data-types/php-error/",
+                description: "Performs a HTTP operation with the GET method and returns a PHP error document.",
+                id: randomId(),
+                invoker: ()=> {
+                    return this.http.get<string>("https://my-awsome-company.com/api/monitoring/data-types/php-error/")
+                }
             }
         ];
     }

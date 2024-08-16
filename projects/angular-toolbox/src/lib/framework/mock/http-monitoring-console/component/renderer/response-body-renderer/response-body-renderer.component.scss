@@ -7,23 +7,3 @@
  */
 
 @import "../../../styles/console";
-
-details {
-    border: 1px solid var(--border-color);
-}
-
-summary {
-    font-weight: bold;
-    padding: 4px 6px;
-}
-
-summary:hover {
-    background-color: var(--dark-gray);
-}
-
-dl {
-    display: flex;
-    gap: 6px;
-    margin: 0;
-    margin-left: 20px;
-}

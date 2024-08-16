@@ -83,17 +83,13 @@
         } @else if (currSection === 1) {
             <atx-payload-renderer [log]="currLog"/>
         } @else if (currSection === 2 && response) {
-            <atx-json-viewer [data]="response.body"/>
+            <atx-response-preview-renderer [data]="response.body"/>
         } @else if (currSection === 3 && response) {
             <section class="raw-response">
-                @if (response.body !== null) {
-                    {{ stringify(response.body) }}
-                }
+                <atx-response-body-renderer [data]="response.body"/>
             </section>
         } @else if (currSection === 4 && response) {
-            <section class="timing-view">
-                <atx-timing-renderer [data]="currLog"/>
-            </section>
+            <atx-timing-renderer [data]="currLog"/>
         }
     </main>
 }

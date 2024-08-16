@@ -8,19 +8,19 @@
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AtxPayloadRendererComponent } from './payload-renderer.component';
+import { AtxResponseBodyRendererComponent } from './response-body-renderer.component';
 
-describe('AtxPayloadRendererComponent', () => {
-  let component: AtxPayloadRendererComponent;
-  let fixture: ComponentFixture<AtxPayloadRendererComponent>;
+describe('AtxResponseBodyRendererComponent', () => {
+  let component: AtxResponseBodyRendererComponent;
+  let fixture: ComponentFixture<AtxResponseBodyRendererComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AtxPayloadRendererComponent]
+      imports: [AtxResponseBodyRendererComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AtxPayloadRendererComponent);
+    fixture = TestBed.createComponent(AtxResponseBodyRendererComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

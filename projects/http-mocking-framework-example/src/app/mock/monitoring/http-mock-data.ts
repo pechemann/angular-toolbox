@@ -87,3 +87,9 @@ export const EMAIL_SAMPLE: string = "ryo.saeba@city-hunter.com";
 export const VALID_PASSWORD: string = "xyz";
 
 export const TEXT_DATA: string = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+
+export const PHP_ERROR: string = `<html><head></head><body><br>
+<font size="1"><table class="xdebug-error xe-parse-error" dir="ltr" border="1" cellspacing="0" cellpadding="1">
+<tbody><tr><th align="left" bgcolor="#f57900" colspan="5"><span style="background-color: #cc0000; color: #fce94f; font-size: x-large;">( ! )</span> Parse error: syntax error, unexpected token "=" in C:\\wamp64\\www\\angular-toolbox\\foo\\bar\\index.php on line <i>13</i></th></tr>
+</tbody></table></font>
+</body></html>`;

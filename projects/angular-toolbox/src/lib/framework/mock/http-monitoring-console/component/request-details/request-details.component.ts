@@ -13,6 +13,8 @@ import { HttpRequest, HttpResponse } from '@angular/common/http';
 import { AtxJsonViewerComponent } from '../renderer/json-viewer/json-viewer.component';
 import { AtxPayloadRendererComponent } from '../renderer/payload-renderer/payload-renderer.component';
 import { AtxTimingRendererComponent } from '../renderer/timing-renderer/timing-renderer.component';
+import { AtxResponsePreviewRendererComponent } from '../renderer/response-preview-renderer/response-preview-renderer.component';
+import { AtxResponseBodyRendererComponent } from '../renderer/response-body-renderer/response-body-renderer.component';
 
 @Component({
   selector: 'atx-monitoring-console-details',
@@ -21,7 +23,9 @@ import { AtxTimingRendererComponent } from '../renderer/timing-renderer/timing-r
     NgStyle,
     AtxJsonViewerComponent,
     AtxPayloadRendererComponent,
-    AtxTimingRendererComponent
+    AtxTimingRendererComponent,
+    AtxResponsePreviewRendererComponent,
+    AtxResponseBodyRendererComponent
   ],
   templateUrl: './request-details.component.html',
   styleUrl: './request-details.component.scss',
@@ -37,19 +41,18 @@ export class AtxRequestDetailsComponent {
   protected request!: HttpRequest<any>;
   protected response!: HttpResponse<any>;
   protected requestMetadata!: HttpMockRequestMetadata;
-  protected bodyType:any = null;
 
   @Input()
   public set log(value: Log | null) {
     this.currLog = value
     if (value) {
       const metadata: any = value.metadata; 
-      this.request = metadata.request;
+      const request: any = metadata.request; 
+      this.request = request;
       this.response = metadata.response;
       this.requestMetadata = metadata.requestMetadata;
-      this.checkPayload();
+      this.checkPayload(request);
       this._cdr.detectChanges();
-      console.log(typeof this.response.body)
       return;
     }
     this.hasPayload = false;
@@ -67,11 +70,8 @@ export class AtxRequestDetailsComponent {
     this.currSection = idx;
   }
 
-  protected stringify(obj: any): string {
-    return JSON.stringify(obj);
-  };
-
-  private checkPayload(): void {
-    this.hasPayload = (this.request.params.keys().length > 0 || this.request.body !== null);
+  private checkPayload(request: any): void {
+    const hasBody: boolean = (request.body !== null && request !== undefined); 
+    this.hasPayload = (request.params.keys().length > 0 || hasBody);
   }
 }
