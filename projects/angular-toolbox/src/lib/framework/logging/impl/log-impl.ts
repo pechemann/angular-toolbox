@@ -6,8 +6,7 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { Log } from "../../../model";
-import { LogLevel } from "../../../util";
+import { Log, LogLevel } from "../../../model";
 
 /**
  * The default implementation of the `Log` interface.

@@ -6,7 +6,7 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { LogLevel } from "../../../util";
+import { LogLevel } from "./log-level.enum";
 
 /**
  * Represents a log in the Angular Toolbox framework.

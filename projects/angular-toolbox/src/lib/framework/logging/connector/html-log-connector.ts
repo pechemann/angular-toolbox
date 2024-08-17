@@ -6,8 +6,8 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { Log, LogConnector } from "../../../model";
-import { EMPTY_STRING, LogLevel } from "../../../util";
+import { Log, LogConnector, LogLevel } from "../../../model";
+import { EMPTY_STRING } from "../../../util";
 import { LogUtil } from "../util";
 
 /**

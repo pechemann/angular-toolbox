@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { LogLevel } from '../../public-api';
+import { LogLevel } from '../../../../public-api';
 
 describe('LogLevel', () => {
   

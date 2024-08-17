@@ -7,8 +7,7 @@
  */
 
 import { EventEmitter } from "@angular/core";
-import { Log, LogConnector } from "../../../../model";
-import { LogLevel } from "../../../../util";
+import { Log, LogConnector, LogLevel } from "../../../../model";
 
 /**
  * An implementation of the `LogConnector` class that sends logs to the HTTP

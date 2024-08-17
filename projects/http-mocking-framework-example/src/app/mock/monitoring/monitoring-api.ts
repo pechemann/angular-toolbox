@@ -32,19 +32,20 @@ export class MonitoringApi {
     private initAPI(): MonitoringApiDescriptor[] {
         return [
             {
-                label: "GET / REST",
-                route: "/api/monitoring" + CREATED_ITEM_DTO.id,
-                description: "Performs a HTTP REST operation with the GET method and returns the response depending on the state of the remote data storage.",
-                id: randomId(),
-                invoker: ()=> this.http.get("https://my-awsome-company.com/api/monitoring/" + CREATED_ITEM_DTO.id)
-            },
-            {
                 label: "POST / REST",
                 route: "/api/monitoring",
                 description: "Performs a HTTP REST operation with the POST method and returns the response depending on the state of the remote data storage.",
                 id: randomId(),
                 invoker: ()=> this.http.post<any>("https://my-awsome-company.com/api/monitoring/", TOKEN)
             },
+            {
+                label: "GET / REST",
+                route: "/api/monitoring" + CREATED_ITEM_DTO.id,
+                description: "Performs a HTTP REST operation with the GET method and returns the response depending on the state of the remote data storage.",
+                id: randomId(),
+                invoker: ()=> this.http.get("https://my-awsome-company.com/api/monitoring/" + CREATED_ITEM_DTO.id)
+            },
+            
             {
                 label: "PUT / REST",
                 route: "/api/monitoring/" + CREATED_ITEM_DTO.id,

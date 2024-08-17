@@ -7,8 +7,8 @@
  */
 
 import { formatDate } from "@angular/common";
-import { Log } from "../../../model";
-import { LogLevel, EMPTY_STRING, OBJECT, STRING } from "../../../util";
+import { Log, LogLevel} from "../../../model";
+import { EMPTY_STRING, OBJECT, STRING } from "../../../util";
 import { LOG_CONFIG_STRING, LOG_ERROR_STRING, LOG_INFO_STRING, LOG_WARNING_STRING } from "./log.constant";
 
 /**

@@ -7,8 +7,8 @@
  */
 
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
-import { HttpMockLoggingService, Log, SubscriptionService } from '../../../../../model';
-import { LogLevel, Uuid } from '../../../../../util';
+import { HttpMockLoggingService, Log, SubscriptionService, LogLevel } from '../../../../../model';
+import { Uuid } from '../../../../../util';
 import { HttpMonitoringConsoleLogConnector } from '../../connector/http-monitoring-console-log-connector';
 import { IdentifiableComponent } from '../../../../../core';
 import { AtxRequestDetailsComponent } from '../request-details/request-details.component';
@@ -19,6 +19,7 @@ import { AtxConsoleAction } from '../../model/business/atx-console-action';
 import { AtxConsoleActionType } from '../../model/business/atx-console-action-type';
 import { UrlUtil } from '../../util/url.util';
 import { HttpResponse } from '@angular/common/http';
+import { AtxLogIoService } from '../../model/service/atx-log-io.service';
 
 @Component({
   selector: 'atx-http-monitoring-console',
@@ -27,6 +28,9 @@ import { HttpResponse } from '@angular/common/http';
     AtxRequestDetailsComponent,
     AtxConsoleFooterComponent,
     AtxConsoleMenuComponent,
+  ],
+  providers: [
+    AtxLogIoService
   ],
   templateUrl: './http-monitoring-console.component.html',
   styleUrl: './http-monitoring-console.component.scss',
@@ -41,7 +45,8 @@ export class AtxMonitoringConsoleComponent extends IdentifiableComponent impleme
 
   constructor(protected logger: HttpMockLoggingService,
               private _cdr: ChangeDetectorRef,
-              private _subscribe: SubscriptionService) {
+              private _subscribe: SubscriptionService,
+              private _ioSvc: AtxLogIoService) {
     super();
     const connector: HttpMonitoringConsoleLogConnector = new HttpMonitoringConsoleLogConnector();
     this.connector = connector;
@@ -122,46 +127,8 @@ export class AtxMonitoringConsoleComponent extends IdentifiableComponent impleme
   }
 
   private exportLogs(): void {
-    /*const exportData = {
-      logs: this.connector.logs,
-      date: Date.now()
-    };
-    const a = document.createElement("a");
-    const file = new Blob([JSON.stringify(exportData)], { type: 'application/json' });
-    a.href = URL.createObjectURL(file);
-    a.download = "logs.hmfl";
-    a.click();*/
+    this._ioSvc.exportToFile(this.logs);
   }
 
-  private importLogs(): void {
-    /*const input = document.createElement("input");
-    const logger = this.logger;
-    input.setAttribute("type", "file");
-    input.onchange = (event: any)=> {
-      const fileList = event.target.files;
-      const file: File = fileList[0];
-      if (file) {
-        var reader = new FileReader();
-        reader.readAsText(file, "UTF-8");
-        reader.onload = function (evt) {
-          const result: string = reader.result as any;
-          const resultLogData = JSON.parse(result);
-          console.log(resultLogData)
-          resultLogData.logs.forEach((log: Log) => {
-            const level = log.level;
-            const metadata = log.metadata;
-            if (level === LogLevel.INFO) logger.info(metadata);
-            else if (level === LogLevel.ERROR) logger.error(metadata);
-            else {
-              // log level error
-            }
-          });
-        }
-        reader.onerror = function (e) {
-          console.log(e)
-        }
-      }
-    }
-    input.click();*/
-  }
+  private importLogs(): void {}
 }

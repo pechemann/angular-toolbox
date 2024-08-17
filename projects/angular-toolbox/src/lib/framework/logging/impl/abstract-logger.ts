@@ -6,8 +6,7 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { Log, LogConnector, Logger, TransactionalLogger } from "../../../model";
-import { LogLevel } from "../../../util";
+import { Log, LogConnector, Logger, TransactionalLogger, LogLevel } from "../../../model";
 import { DefaultLogConnector } from "../connector";
 import { LogBuilder } from "../util";
 
