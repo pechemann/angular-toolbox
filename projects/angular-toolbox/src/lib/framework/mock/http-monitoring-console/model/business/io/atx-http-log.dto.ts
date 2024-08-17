@@ -7,6 +7,7 @@
  */
 
 import { LogLevel } from "../../../../../../model";
+import { AtxHttpLogMetadataDto } from "./atx-http-log-metadata.dto";
 
 export interface AtxHttpLogDto {
     
@@ -23,5 +24,5 @@ export interface AtxHttpLogDto {
     /**
      * Metada associated with the original log.
      */
-    metadata: any;
+    metadata: AtxHttpLogMetadataDto;
 }

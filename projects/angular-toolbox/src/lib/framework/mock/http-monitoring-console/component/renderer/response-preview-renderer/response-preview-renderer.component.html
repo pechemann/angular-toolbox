@@ -15,7 +15,7 @@
             <atx-json-viewer [data]="json"/>
         </section>
     } @else if (imgUrl) {
-        <section class="content">
+        <section class="content img-preview">
                 <div>
                     <img [src]="imgUrl" (load)="revokeObjectURL()" [alt]="resourceName" [title]="resourceName">
                 </div>

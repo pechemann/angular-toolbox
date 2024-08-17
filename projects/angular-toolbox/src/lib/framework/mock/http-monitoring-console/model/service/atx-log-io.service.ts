@@ -8,24 +8,32 @@
 
 import { Injectable } from "@angular/core";
 import { Log } from '../../../../../model';
-import { LogConverter } from "../../util/log-converter";
-import { AtxHttpLogDto } from "../business/dto/atx-http-log.dto";
+import { LogConverter } from "./io/log-converter";
+import { AtxHttpLogDto } from "../business/io/atx-http-log.dto";
+import { HMFL } from "../business/io/hmfl";
 
 @Injectable()
 export class AtxLogIoService {
 
-    public exportToFile(logs: Log[]): void {
-      const logDtoList: AtxHttpLogDto[] = [];
-      let cursor: number = logs.length - 1;
-      for(; cursor >= 0; cursor--) logDtoList.push(LogConverter.logToDto(logs[cursor]));
-      const exportData = {
-        logs: logDtoList,
-        date: Date.now()
-      };
-      const a = document.createElement("a");
-      const file = new Blob([JSON.stringify(exportData)], { type: 'application/json' });
-      a.href = URL.createObjectURL(file);
-      a.download = "logs.hmfl";
-      a.click();
-    }
+  private readonly _converter: LogConverter;
+
+  constructor() {
+    this._converter = new LogConverter();
+  }
+
+  public exportToFile(logs: Log[]): void {
+    const logDtoList: AtxHttpLogDto[] = [];
+    let cursor: number = logs.length - 1;
+    for (; cursor >= 0; cursor--) logDtoList.push(this._converter.logToDto(logs[cursor]));
+    const exportData: HMFL = {
+      logs: logDtoList,
+      timestamp: Date.now()
+    };
+    const a: HTMLAnchorElement = document.createElement("a");
+    const file: Blob = new Blob([JSON.stringify(exportData)], { type: 'application/json' });
+    a.href = URL.createObjectURL(file);
+    //a.download = "logs.hmfl";
+    a.download = "logs.json";
+    a.click();
+  }
 }
