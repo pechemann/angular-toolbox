@@ -9,30 +9,7 @@
 import { Injectable, OnDestroy } from "@angular/core";
 import { HttpMockLogger } from "../../../../../framework/mock/http/logging/http-mock-logger";
 import { TransactionalLogger, HttpMockLoggingMetadata, LogConnector, Log, HttpMockLoggingPrefetchMetadata } from "../../../../business";
-
-/**
- * @private
- * The "caller" reference for all logs of the HTTP Mocking Framework.
- */
-const CALLER: string = "HTTP Mocking Framework";
-
-/**
- * @private
- * The "message" reference for all valid logs of the HTTP Mocking Framework.
- */
-const RESPONSE_MESSAGE: string = "HTTP response";
-
-/**
- * @private
- * The "message" reference for all error logs of the HTTP Mocking Framework.
- */
-const ERROR_MESSAGE: string = "HTTP error";
-
-/**
- * @private
- * The "message" reference for all prefetch logs of the HTTP Mocking Framework.
- */
-const CONFIG_MESSAGE: string = "HTTP prefetch";
+import { HttpMockLoggingConstant } from "../../../../business/logging/http-mock-logging-constant.enum";
 
 /**
  * @private
@@ -71,7 +48,7 @@ export class HttpMockLoggingService implements TransactionalLogger, OnDestroy {
      * @return The log for the specified metadata.
      */
     public info(metadata: HttpMockLoggingMetadata): Log {
-        this._logger.info(CALLER, RESPONSE_MESSAGE, metadata);
+        this._logger.info(HttpMockLoggingConstant.CALLER, HttpMockLoggingConstant.RESPONSE_MESSAGE, metadata);
         return this.getLastLog();
     }
 
@@ -83,7 +60,7 @@ export class HttpMockLoggingService implements TransactionalLogger, OnDestroy {
      * @return The log for the specified metadata.
      */
     public error(metadata: HttpMockLoggingMetadata): Log {
-        this._logger.error(CALLER, ERROR_MESSAGE, metadata);
+        this._logger.error(HttpMockLoggingConstant.CALLER, HttpMockLoggingConstant.ERROR_MESSAGE, metadata);
         return this.getLastLog();
     }
 
@@ -94,7 +71,7 @@ export class HttpMockLoggingService implements TransactionalLogger, OnDestroy {
      * @param metadata The metadata associated with the HTTP method to log.
      */
     public prefetch(metadata: HttpMockLoggingPrefetchMetadata): void {
-        this._logger.config(CALLER, CONFIG_MESSAGE, metadata);
+        this._logger.config(HttpMockLoggingConstant.CALLER, HttpMockLoggingConstant.CONFIG_MESSAGE, metadata);
     }
 
     /**

@@ -6,6 +6,7 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
+import { HttpMockLoggingConstant } from 'projects/angular-toolbox/src/lib/model/business/logging/http-mock-logging-constant.enum';
 import { ConsoleLogConnector, DEFAULT_LOG_CONNECTOR, HttpMockLoggingService, Log, LogConnector, LogLevel } from 'projects/angular-toolbox/src/public-api';
 
 describe('HttpMockLoggingService', () => {
@@ -48,18 +49,18 @@ describe('HttpMockLoggingService', () => {
     it('info() should return the expected log', () => {
         const metadata: any = {};
         const log: Log = service.info(metadata);
-        expect(log.caller).toEqual("HTTP Mocking Framework");
+        expect(log.caller).toEqual(HttpMockLoggingConstant.CALLER);
         expect(log.level).toEqual(LogLevel.INFO);
-        expect(log.message).toEqual("HTTP response");
+        expect(log.message).toEqual(HttpMockLoggingConstant.RESPONSE_MESSAGE);
         expect(log.metadata).toBe(metadata);
     });
     
     it('error() should return the expected log', () => {
         const metadata: any = {};
         const log: Log = service.error(metadata);
-        expect(log.caller).toEqual("HTTP Mocking Framework");
+        expect(log.caller).toEqual(HttpMockLoggingConstant.CALLER);
         expect(log.level).toEqual(LogLevel.ERROR);
-        expect(log.message).toEqual("HTTP error");
+        expect(log.message).toEqual(HttpMockLoggingConstant.ERROR_MESSAGE);
         expect(log.metadata).toBe(metadata);
     });
     
