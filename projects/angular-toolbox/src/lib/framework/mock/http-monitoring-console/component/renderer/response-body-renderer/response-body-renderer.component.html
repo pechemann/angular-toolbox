@@ -8,7 +8,35 @@
 -->
 
 @if (body) {
-    @if (text) {
-        <section class="content">{{ text }}</section>
-    }   
+    <section class="content">
+        @if (text) {
+            {{ text }}
+        } @else if (blob) {
+            <dl>
+                <dt>Binary data:</dt>
+                <dd>Blob</dd>
+            </dl>
+            <dl>
+                <dt>ize:</dt>
+                <dd>{{ blob.size }}</dd>
+            </dl>
+            <dl>
+                <dt>type:</dt>
+                <dd>{{ blob.type }}</dd>
+            </dl>
+        } @else if (arrayBuffer) {
+            <dl>
+                <dt>Binary data:</dt>
+                <dd>Array Buffer</dd>
+            </dl>
+            <dl>
+                <dt>byte length:</dt>
+                <dd>{{ arrayBuffer.byteLength }}</dd>
+            </dl>
+        } @else {
+            <div class="center-content">
+                <strong>This request has no data available</strong>
+            </div>
+        }
+    </section>
 }

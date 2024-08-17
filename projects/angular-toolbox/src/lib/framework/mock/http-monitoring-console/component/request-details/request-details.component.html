@@ -83,7 +83,7 @@
         } @else if (currSection === 1) {
             <atx-payload-renderer [log]="currLog"/>
         } @else if (currSection === 2 && response) {
-            <atx-response-preview-renderer [data]="response.body"/>
+            <atx-response-preview-renderer [data]="response"/>
         } @else if (currSection === 3 && response) {
             <section class="raw-response">
                 <atx-response-body-renderer [data]="response.body"/>

@@ -27,15 +27,20 @@ export class AtxResponseBodyRendererComponent {
 
   protected text: string | null = null;
   protected body: any = null;
+  protected blob: Blob | null = null;
+  protected arrayBuffer: ArrayBuffer | null = null;
+  
 
   @Input()
   public set data (value: any) {
     this.body = value;
-    this.text = null;
+    this.text = this.blob = this.arrayBuffer = null;
     if (value) {
       const bodyType: ConsoleBodyType = DataUtil.getBodyType(value);
       if (bodyType === ConsoleBodyType.TEXT) this.text = value;
       else if (bodyType === ConsoleBodyType.JSON) this.text = JSON.stringify(value);
+      else if (bodyType === ConsoleBodyType.BLOB) this.blob = value;
+      else if (bodyType === ConsoleBodyType.ARRAY_BUFFER) this.arrayBuffer = value;
     }
     this._cdr.detectChanges();
   }

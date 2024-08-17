@@ -16,7 +16,10 @@ const SLASH: string = "/";
 export class UrlUtil {
 
     public static getResourceName(log: Log): string {
-        let pathname: string = log.metadata.requestMetadata.url.pathname;
+        return UrlUtil.getResourceNameFromPath(UrlUtil.getResourcePath(log));
+    }
+
+    public static getResourceNameFromPath(pathname: string): string {
         const pos: number = pathname.length - 1;
         if (pathname.lastIndexOf(SLASH) === pos) pathname = pathname.substring(0, pos);
         return pathname.substring(pathname.lastIndexOf(SLASH) + 1);

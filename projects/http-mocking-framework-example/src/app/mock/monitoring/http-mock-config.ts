@@ -6,9 +6,9 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { HttpRequest, HttpStatusCode } from '@angular/common/http';
-import { HttpMockConfig, httpResponseMock, HttpResponseMockBuilder } from 'projects/angular-toolbox/src/public-api';
-import { COMPLEX_JSON, CREATED_ITEM_DTO, DELETED_ITEM_DTO, EMPTY_ITEM_DTO, NOT_FOUND_ERROR, PHP_ERROR, TEXT_DATA, UNAUTHORIZED_ERROR, UPDATE_ITEM_DTO, VALID_PASSWORD } from './http-mock-data';
+import { HttpHeaders, HttpRequest, HttpStatusCode } from '@angular/common/http';
+import { httpHeadersMock, HttpMockConfig, httpResponseMock, HttpResponseMockBuilder } from 'projects/angular-toolbox/src/public-api';
+import { COMPLEX_JSON, CREATED_ITEM_DTO, DELETED_ITEM_DTO, EMPTY_ITEM_DTO, getPngBlobData, getArrayBufferData, NOT_FOUND_ERROR, PHP_ERROR, TEXT_DATA, UNAUTHORIZED_ERROR, UPDATE_ITEM_DTO, VALID_PASSWORD } from './http-mock-data';
 import { ItemDto } from './http-mock-business';
 
 const DATA_STORAGE: any = {
@@ -111,18 +111,43 @@ export const MONITORING_MOCK_CONFIG: HttpMockConfig = {
                 {
                     route: "/api/monitoring/data-types/text",
                     get: {
-                        data: (request: HttpRequest<any>)=>
-                            httpResponseMock().defaultHeaders().delay().body(TEXT_DATA).response()
+                        data: ()=> httpResponseMock().defaultHeaders().delay().body(TEXT_DATA).response()
                     }
                 },
                 {
-                    route: "/api/monitoring/data-types/php-error",
+                    route: "/api/monitoring/data-types/png",
                     get: {
-                        data: (request: HttpRequest<any>)=>
-                            httpResponseMock().defaultHeaders().delay().body(PHP_ERROR).response()
+                        data: ()=> {
+                            const headers: HttpHeaders =
+                                httpHeadersMock().contentType('application/octet-stream; image/png').headers();
+                            return httpResponseMock().headers(headers).delay().body(getPngBlobData()).response()
+                        }
+                            
+                    }
+                },
+                {
+                    route: "/api/monitoring/data-types/binary",
+                    get: {
+                        data: ()=> {
+                            const headers: HttpHeaders =
+                                httpHeadersMock().contentType('application/octet-stream;').headers();
+                            return httpResponseMock().headers(headers).delay().body(getArrayBufferData()).response()
+                        }
+                            
                     }
                 }
             ]
         },
+        {
+            id: "php",
+            endpoints: [
+                {
+                    route: "/api/monitoring/php-error",
+                    get: {
+                        data: ()=> httpResponseMock().defaultHeaders().delay().body(PHP_ERROR).response()
+                    }
+                }
+            ]
+        }
     ]
 };

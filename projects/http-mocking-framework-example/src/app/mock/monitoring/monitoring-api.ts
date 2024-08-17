@@ -60,20 +60,6 @@ export class MonitoringApi {
                 invoker: ()=> this.http.delete<any>("https://my-awsome-company.com/api/monitoring/" + CREATED_ITEM_DTO.id)
             },
             {
-                label: "GET / JSON",
-                route: "/api/monitoring/actors",
-                description: "Performs a HTTP operation with the GET method and returns a JSON object with a complex structure.",
-                id: randomId(),
-                invoker: ()=> this.http.get<any>("https://my-awsome-company.com/api/monitoring/actors/")
-            },
-            {
-                label: "GET / Parameters",
-                route: "/api/monitoring/actors/?age=53",
-                description: "Performs a HTTP operation with the GET method and returns a JSON object.",
-                id: randomId(),
-                invoker: ()=> this.http.get<any>("https://my-awsome-company.com/api/monitoring/actors/?age=53")
-            },
-            {
                 label: "POST / Form Data",
                 route: "/api/monitoring/login/",
                 description: "Performs a HTTP operation with the POST method to send login form data.",
@@ -112,27 +98,67 @@ export class MonitoringApi {
                 }
             },
             {
+                label: "GET / JSON",
+                route: "/api/monitoring/actors",
+                description: "Performs a HTTP operation with the GET method and returns a JSON object with a complex structure.",
+                id: randomId(),
+                invoker: ()=> this.http.get<any>("https://my-awsome-company.com/api/monitoring/actors/")
+            },
+            {
+                label: "GET / JSON / Parameters",
+                route: "/api/monitoring/actors/?age=53",
+                description: "Performs a HTTP operation with the GET method and returns a JSON object.",
+                id: randomId(),
+                invoker: ()=> this.http.get<any>("https://my-awsome-company.com/api/monitoring/actors/?age=53")
+            },
+            {
                 label: "GET / Text",
                 route: "/api/monitoring/data-types/text/",
                 description: "Performs a HTTP operation with the GET method and returns a text file.",
                 id: randomId(),
                 invoker: ()=> {
                     const httpOptions: any = {
-                        headers: new HttpHeaders({
-                          'Content-Type': 'text/plain; charset=utf-8'
-                        }),
+                        headers: new HttpHeaders(),
                         responseType: 'text'
                       };
                     return this.http.get<string>("https://my-awsome-company.com/api/monitoring/data-types/text/", httpOptions)
                 }
             },
             {
+                label: "GET / Blob",
+                route: "/api/monitoring/data-types/png/",
+                description: "Performs a HTTP operation with the GET method and returns a png image as a Blob.",
+                id: randomId(),
+                invoker: ()=> {
+                    const httpOptions: any = {
+                        headers: new HttpHeaders(),
+                        responseType: 'blob'
+                      };
+                    return this.http.get<string>("https://my-awsome-company.com/api/monitoring/data-types/png/", httpOptions)
+                }
+            },
+            {
+                label: "GET / ArrayBuffer",
+                route: "/api/monitoring/data-types/binary/",
+                description: "Performs a HTTP operation with the GET method and returns an ArrayBuffer object.",
+                id: randomId(),
+                invoker: ()=> {
+                    const httpOptions: any = {
+                        headers: new HttpHeaders(),
+                        responseType: 'arraybuffer'
+                      };
+                    return this.http.get<string>("https://my-awsome-company.com/api/monitoring/data-types/binary/", httpOptions)
+                }
+            },
+
+
+            {
                 label: "GET / PHP Error",
-                route: "/api/monitoring/data-types/php-error/",
+                route: "/api/monitoring/php-error/",
                 description: "Performs a HTTP operation with the GET method and returns a PHP error document.",
                 id: randomId(),
                 invoker: ()=> {
-                    return this.http.get<string>("https://my-awsome-company.com/api/monitoring/data-types/php-error/")
+                    return this.http.get<string>("https://my-awsome-company.com/api/monitoring/php-error/")
                 }
             }
         ];

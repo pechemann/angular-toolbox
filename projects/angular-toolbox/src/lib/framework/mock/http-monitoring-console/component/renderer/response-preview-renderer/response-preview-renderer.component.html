@@ -7,12 +7,22 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
 -->
 
-@if (body) {
+@if (response) {
     @if (text) {
         <section class="content" [innerHTML]="text | safeHtml "></section>
     } @else if (json) {
         <section class="content">
             <atx-json-viewer [data]="json"/>
         </section>
-    }      
+    } @else if (imgUrl) {
+        <section class="content">
+                <div>
+                    <img [src]="imgUrl" (load)="revokeObjectURL()" [alt]="resourceName" [title]="resourceName">
+                </div>
+        </section>
+    } @else {
+        <section class="content center-content">
+            <strong>Preview not available</strong>
+        </section>
+    }
 }
