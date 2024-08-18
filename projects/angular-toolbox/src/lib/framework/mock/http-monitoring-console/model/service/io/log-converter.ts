@@ -24,7 +24,7 @@ export class LogConverter {
 
     public dtoToLog(dto: AtxHttpLogDto): Log {
         const level: LogLevel = dto.level;
-        const log = {
+        const log: Log = {
             caller: HttpMockLoggingConstant.CALLER,
             level: level,
             timestamp: dto.timestamp,

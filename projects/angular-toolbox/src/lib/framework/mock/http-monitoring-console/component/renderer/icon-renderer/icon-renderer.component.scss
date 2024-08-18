@@ -1,0 +1,34 @@
+/**
+ * @license
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be found in
+ * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+ */
+ 
+:host {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    min-width: 24px;
+}
+
+.spinner {
+    margin-left: auto;
+    width: 20px;
+    height: 20px;
+
+    svg {
+        animation: spinnerRotation 1.5s linear infinite;
+    }
+}
+
+@keyframes spinnerRotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

@@ -19,9 +19,18 @@ export class HttpResponseConverter {
             headers: HttpHeadersConverter.headersToDto(response.headers),
             status: response.status,
             statusText: response.statusText,
-            url: response.url,
-            ok: response.ok,
-            type: response.type
+            url: response.url
         }
+    }
+
+    public static buildHttpResponse(dto: AtxHttpResponseDto): HttpResponse<any> {
+        const init: any = {
+            body: BodyConverter.dtoToBody(dto.body),
+            headers: HttpHeadersConverter.dtoToHeaders(dto.headers),
+            status: dto.status,
+            statusText: dto.statusText,
+            url: dto.url
+        };
+        return new HttpResponse(init);
     }
 }

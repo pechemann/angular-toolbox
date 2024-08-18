@@ -26,12 +26,12 @@ export class HttpHeadersConverter {
     }
 
     public static dtoToHeaders(headersDto: AtxHeaderDto[]): HttpHeaders {
-        const headers: HttpHeaders = new HttpHeaders();
+        let headers: HttpHeaders = new HttpHeaders();
         let cursor: number = headersDto.length - 1;
         for(; cursor >= 0; cursor--) {
             const entry: AtxHeaderDto = headersDto[cursor];
             const value: string[] | null = entry.value;
-            if (value) headers.append(entry.name, value);
+            if (value) headers = headers.append(entry.name, value);
             
         }
         return headers;

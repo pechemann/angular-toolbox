@@ -14,7 +14,5 @@ export interface AtxHttpResponseDto {
     status: number;
     statusText: string;
     url: string | null;
-    ok: boolean;
-    type: number;
     body: AtxBodyDto;
 }

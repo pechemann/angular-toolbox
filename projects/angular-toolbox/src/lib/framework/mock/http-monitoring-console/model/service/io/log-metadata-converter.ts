@@ -22,11 +22,11 @@ export class LogMetadataConverter {
         };
     }
 
-    public static dtoToMetadata(metadata: AtxHttpLogMetadataDto): HttpMockLoggingMetadata {
+    public static dtoToMetadata(dto: AtxHttpLogMetadataDto): HttpMockLoggingMetadata {
         return {
-            request: null as any,
-            response: null as any,
-            requestMetadata: RequestMetadataConverter.dtoToRequestMetadata(metadata.requestMetadata)
+            request: HttpRequestConverter.buildHttpRequest(dto.request),
+            response: HttpResponseConverter.buildHttpResponse(dto.response),
+            requestMetadata: RequestMetadataConverter.dtoToRequestMetadata(dto.requestMetadata)
         };
     }
 }

@@ -20,6 +20,12 @@ import { AtxConsoleActionType } from '../../model/business/atx-console-action-ty
 import { UrlUtil } from '../../util/url.util';
 import { HttpResponse } from '@angular/common/http';
 import { AtxLogIoService } from '../../model/service/atx-log-io.service';
+import { ATX_IS_IMPORTED_LOG } from '../../model/business/atx-is-imported-log';
+import { AtxIconRendererComponent } from '../renderer/icon-renderer/icon-renderer.component';
+
+const TPL_DASH: string = "---";
+const PREFETCH: string = "prefetch";
+const MS_SUFIX: string = " ms";
 
 @Component({
   selector: 'atx-http-monitoring-console',
@@ -28,6 +34,7 @@ import { AtxLogIoService } from '../../model/service/atx-log-io.service';
     AtxRequestDetailsComponent,
     AtxConsoleFooterComponent,
     AtxConsoleMenuComponent,
+    AtxIconRendererComponent
   ],
   providers: [
     AtxLogIoService
@@ -76,24 +83,28 @@ export class AtxMonitoringConsoleComponent extends IdentifiableComponent impleme
       const size: number = SizeUtil.getSize(response.body);
       return SizeUtil.sizeToString(size);
     }
-    return "---";
+    return TPL_DASH;
   }
 
   protected getStatus(log: Log): string | number { const response: HttpResponse<any> | null = log.metadata.response;
     if (response) return response.status;
-    return "prefetch";
+    return PREFETCH;
   }
 
   protected getTime(log: Log): string {
     const response: HttpResponse<any> | null = log.metadata.response;
-    if (response) return log.metadata.requestMetadata.duration + " ms";
-    return "---";
+    if (response) return log.metadata.requestMetadata.duration + MS_SUFIX;
+    return TPL_DASH;
   }
 
   protected isError(log: Log): boolean {
     const response: HttpResponse<any> | null = log.metadata.response;
     if (response) return response.status >= 400;
     return false;
+  }
+
+  protected isImported(log: Log): boolean {
+    return log.metadata.request?.context.get(ATX_IS_IMPORTED_LOG);
   }
 
   protected checkFilters(log: Log): boolean {
@@ -114,7 +125,7 @@ export class AtxMonitoringConsoleComponent extends IdentifiableComponent impleme
       const id: Uuid = log.metadata.requestMetadata.id;
       this.cumulativeSize += size;
       const idx = this.logs.findIndex(prefetch => prefetch.metadata.requestMetadata.id === id);
-      this.logs.splice(idx, 1, log);
+      idx > -1 ? this.logs.splice(idx, 1, log) : this.logs.push(log);
       if (this.selectedLog?.metadata.requestMetadata.id === id) this.selectedLog = log;
     } else this.logs.push(log);
     this._cdr.detectChanges();
@@ -127,8 +138,10 @@ export class AtxMonitoringConsoleComponent extends IdentifiableComponent impleme
   }
 
   private exportLogs(): void {
-    this._ioSvc.exportToFile(this.logs);
+    this._ioSvc.exportFile(this.logs);
   }
 
-  private importLogs(): void {}
+  private importLogs(): void {
+    this._ioSvc.importFile();
+  }
 }

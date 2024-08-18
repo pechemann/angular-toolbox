@@ -72,23 +72,3 @@ atx-console-footer {
     width: 100%;
     bottom: 0;
 }
-
-.spinner {
-    margin-left: auto;
-    width: 20px;
-    height: 20px;
-
-    svg {
-        animation: spinnerRotation 1.5s linear infinite;
-    }
-}
-
-@keyframes spinnerRotation {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-}
