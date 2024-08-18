@@ -8,12 +8,13 @@
 
 import { AtxHttpRequestDto } from "./atx-http-request.dto.js";
 import { AtxHttpRequestMetadataDto } from "./atx-http-request-metadata.dto.ts.js";
+import { AtxHttpResponseDto } from "./atx-http-response.dto.js";
 
 export interface AtxHttpLogMetadataDto {
     
     request: AtxHttpRequestDto;
 
-    response: any;
+    response: AtxHttpResponseDto;
 
     /**
      * The request metada associated with the original log.

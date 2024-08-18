@@ -8,20 +8,21 @@
 
 import { HttpRequest } from "@angular/common/http";
 import { AtxHttpRequestDto } from "../../business/io/atx-http-request.dto";
+import { HttpHeadersConverter } from "./log-headers-converter";
+import { BodyConverter } from "./body-converter";
 
 export class HttpRequestConverter {
 
     public static buildRequestDto(request: HttpRequest<any>): AtxHttpRequestDto {
         return {
-            body: request.body,
+            body: BodyConverter.bodyToDto(request.body),
             reportProgress: request.reportProgress,
             withCredentials: request.withCredentials,
             responseType: request.responseType,
             method: request.method,
             urlWithParams: request.urlWithParams,
-            headers: [],
-            params: request.params.toString(),
-            context: []
+            headers: HttpHeadersConverter.headersToDto(request.headers),
+            params: request.params.toString() 
         }
     }
 }

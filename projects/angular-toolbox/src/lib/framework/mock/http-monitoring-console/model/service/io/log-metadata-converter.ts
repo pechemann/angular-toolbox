@@ -10,13 +10,14 @@ import { HttpMockLoggingMetadata } from "../../../../../../model";
 import { AtxHttpLogMetadataDto } from "../../business/io/atx-http-log-metadata.dto";
 import { RequestMetadataConverter } from "./request-metadata-converter";
 import { HttpRequestConverter } from "./http-request-converter";
+import { HttpResponseConverter } from "./http-response-converter";
 
 export class LogMetadataConverter {
 
     public static metadataToDto(metadata: HttpMockLoggingMetadata): AtxHttpLogMetadataDto {
         return {
             request: HttpRequestConverter.buildRequestDto(metadata.request),
-            response: metadata.response,
+            response: HttpResponseConverter.buildResponseDto(metadata.response),
             requestMetadata: RequestMetadataConverter.requestMetadataToDto(metadata.requestMetadata)
         };
     }
@@ -24,7 +25,7 @@ export class LogMetadataConverter {
     public static dtoToMetadata(metadata: AtxHttpLogMetadataDto): HttpMockLoggingMetadata {
         return {
             request: null as any,
-            response: metadata.response,
+            response: null as any,
             requestMetadata: RequestMetadataConverter.dtoToRequestMetadata(metadata.requestMetadata)
         };
     }
