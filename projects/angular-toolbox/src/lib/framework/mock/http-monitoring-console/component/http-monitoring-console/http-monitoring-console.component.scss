@@ -25,6 +25,12 @@
     bottom: 34px;
 }
 
+#icon-collection {
+    visibility: hidden;
+    width: 0;
+    height: 0;
+}
+
 .request-list-wrapper {
     height: 100%;
     flex-grow: 1;
