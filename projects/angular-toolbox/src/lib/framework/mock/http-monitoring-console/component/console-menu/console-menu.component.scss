@@ -13,11 +13,15 @@ menu {
     li {
         padding: 6px;
     }
-    li:hover {
+    li:hover:not(.disabled) {
         background-color: var(--dark-gray);
     }
     background-color: var(--light-gray);
     position: absolute;
     width: 100%;
     border-bottom: 1px solid var(--border-color);
+
+    .disabled {
+        opacity: 0.25;
+    }
 }

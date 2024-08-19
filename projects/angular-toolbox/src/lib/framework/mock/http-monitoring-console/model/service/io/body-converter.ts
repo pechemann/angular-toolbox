@@ -22,8 +22,6 @@ export class BodyConverter {
     }
 
     public static dtoToBody(dto: AtxBodyDto): any {
-        const data: any = dto.data;
-        const bodyType: ConsoleBodyType = dto.type;
-        return data;
+        return BodySerializer.unserialize(dto.data, dto.type);
     }
 }

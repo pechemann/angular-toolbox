@@ -24,7 +24,10 @@ export class AtxLogIoService {
   public exportFile(logs: Log[]): void {
     const logDtoList: AtxHttpLogDto[] = [];
     let cursor: number = logs.length - 1;
-    for (; cursor >= 0; cursor--) logDtoList.push(this._converter.logToDto(logs[cursor]));
+    for (; cursor >= 0; cursor--) {
+      const log: Log = logs[cursor];
+      if (log.level !== LogLevel.CONFIG) logDtoList.push(this._converter.logToDto(log));
+    }
     const exportData: HMFL = {
       logs: logDtoList,
       timestamp: Date.now()
@@ -56,7 +59,6 @@ export class AtxLogIoService {
           for (; cursor >= 0; cursor--) {
             const log: Log = converter.dtoToLog(logs[cursor]);
             const metadata: HttpMockLoggingMetadata = log.metadata;
-            console.log(metadata)
             const level: LogLevel = log.level;
             if (level === LogLevel.INFO) logger.info(metadata);
             else if (level === LogLevel.ERROR) logger.error(metadata);

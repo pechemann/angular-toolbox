@@ -15,5 +15,6 @@ export interface AtxHttpRequestDto {
     responseType: string;
     method: string;
     headers: AtxHeaderDto[];
-    urlWithParams: string;
+    url: string;
+    params: string;
 }
