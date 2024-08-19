@@ -2,7 +2,7 @@
 
 A library that provides useful tools for Angular apps development.
 
-[![Angular Toolbox version](https://img.shields.io/badge/Angular%20Toolbox-beta:.0.11.4-%231E90FF.svg)]()
+[![Angular Toolbox version](https://img.shields.io/badge/Angular%20Toolbox-beta:.0.12.0-%231E90FF.svg)]()
 
 ## License
 

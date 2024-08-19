@@ -9,7 +9,7 @@
 import { inject } from "@angular/core";
 import { HttpMockService } from "../../../../model/service/mock/http/http-mock.service";
 import { XhrProxyFactoryImpl } from "./http-mock-factory.impl";
-import { HttpMockLoggingService } from "projects/angular-toolbox/src/public-api";
+import { HttpMockLoggingService } from "../../../../model";
 
 /**
  * A factory function that creates and returns a new `XhrFactory` object.
