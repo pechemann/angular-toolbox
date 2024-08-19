@@ -37,7 +37,7 @@ Run the following command to start the **HTTP Mocking Framework Demo** applicati
 ng serve http-mocking-framework-example --open
 ```
 
-A video presentation of the "HTTP Mocking Framework" is available on the *Angular Toolbox YouTube Channel* at:
+A video presentation of the "HTTP Mocking Framework" is available on the *Angular Toolbox YouTube Channel* [here](https://www.youtube.com/watch?v=zN0SEgovFbc).
 
 
 ## Online Help
