@@ -46,6 +46,15 @@ describe('LogUtil', () => {
         expect(TIME_REGEXP.test(formated)).toBeTrue();
     });
 
+    it('dateToHHMMSS() should create a string that correspind to the timestamp', () => {
+        const now: number = Date.now();
+        const formated: string[] = LogUtil.dateToHHMMSS(now).split(":");
+        const expected: Date = new Date(now);
+        expect(parseInt(formated[0])).toEqual(expected.getHours());
+        expect(parseInt(formated[1])).toEqual(expected.getMinutes());
+        expect(parseInt(formated[2])).toEqual(expected.getSeconds());
+    });
+
     it('metadataToString() should format a metadata object correctly', () => {
         const expected: string = '[foo="FOO", bar="BAR", num=0, nested=[id=null, data=undefined]]';
         const formated: string = LogUtil.metadataToString(METADATA);

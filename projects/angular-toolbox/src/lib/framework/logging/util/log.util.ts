@@ -14,7 +14,7 @@ import { LOG_CONFIG_STRING, LOG_ERROR_STRING, LOG_INFO_STRING, LOG_WARNING_STRIN
 /**
  * @private
  */
-const TS_FMT: string = "HH:MM:SS";
+const TS_FMT: string = "hh:mm:ss";
 
 /**
  * @private

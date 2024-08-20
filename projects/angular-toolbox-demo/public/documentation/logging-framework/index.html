@@ -13,35 +13,17 @@
             <li class="list-group-item active" aria-current="true">
                 Presentation
             </li>
-            <!--<li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','setting-up-the-framework'])">
-                Setting up the Framework
-            </a></li>
-            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','creating-mock-config'])">
-                Creating Mock Config</a>
-            </li>
-            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','mock-config-declaration'])">
-                Mock Config Declaration</a>
-            </li>
-            <li class="list-group-item">
-                Progressive Downloads (W.I.P.)
-            </li>
-            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','the-proxy-anti-pattern'])">
-                The Proxy Anti-pattern</a>
-            </li>
-            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','config-provider'])">
-                Config Provider</a>
-            </li>
-            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','api'])">
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/logging-framework','api'])">
                 API</a>
-            </li>-->
+            </li>
         </ul>
     </aside>
     <section class="w-100">
         <h5 class="mb-4">On this page</h5>
         <ul class="list-group">
             <li class="list-group-item"><a href="#presentation" onclick="appBridge.goToAnchor(event)" title="Presentation">Presentation</a></li>
-            <!--<li class="list-group-item"><a href="#mocking-api-calls" onclick="appBridge.goToAnchor(event)" title="API">Mocking API Calls</a></li>
-            <li class="list-group-item"><a href="#keep-it-simple" onclick="appBridge.goToAnchor(event)" title="Keep It Simple!">Keep It Simple!</a></li>-->
+            <li class="list-group-item"><a href="#principles" onclick="appBridge.goToAnchor(event)" title="Principles">Principles</a></li>
+            <li class="list-group-item"><a href="#sample" onclick="appBridge.goToAnchor(event)" title="Principles">Real Life Example</a></li>
         </ul>
     </section>
 </nav>
@@ -52,7 +34,7 @@
         The <em class="lib-name">ATX Logging Framework</em> provides an easy-to-use and highly configurable
         solution to add a logging system to your Angular libraries and applications.
     </p>
-    <small>Since <span class="badge text-bg-warning rounded-pill">v 0.11.4</span></small>
+    <small>Since <span class="badge text-bg-warning rounded-pill">v 0.12.0</span></small>
     <hr class="mt-4">
 </header>
 
@@ -61,22 +43,54 @@
     <p>
         Work in progress...
     </p>
-    <!--<p>
-        Accessing back-end services is a core feature of most front-end applications.
-        Thus, Angular includes the <code>HttpClient</code> service class as an integrated
-        HTTP exchange mechanism.
+</section>
+
+
+<section class="col-xl-9" id="principles">
+    <h3>Principles</h3>
+    <p>
+        The philosophy of the <em class="lib-name">ATX Logging Framework</em> is mainly
+        based around two interfaces, which allow to clearly separate concerns:
+    </p>
+    <ul>
+        <li><code>Logger</code>: responsible for managing and transmitting logs to log connectors</li>
+        <li><code>LogConnector</code> responsible for processing logs transmitted by the logger</li>
+    </ul>
+    <p>
+        The <code>Logger</code> interface provides a high-level implementation through the service
+        <code>LoggerService</code> class. If needed, Developers can create specific implementations,
+        simply by extending the <code>AbstractLogger</code> class (e.g. for creating API level loggers).
     </p>
     <p>
-        The Angular HTTP engine is built on top of <a href="https://rxjs.dev/guide/observable" title="Observable">RXJS <code>Observable</code></a>,
-        which provides an elegant way to fetch data over HTTP requests.
-        <br>
-        For example, to fetch configuration data from a hypothetical API using the <code>HttpClient.get()</code> method:
-        <figure>
-            <figcaption>Example from Angular documentation:</figcaption>
-            <pre><code class="language-typescript">http.get<Config>('/api/config').subscribe(config => {
-    // process the configuration.
-});</code></pre></figure>
-    </p>-->
+        The <code>LogConnector</code> interface allows you to define the behavior of logs based on the business of the application.
+        For example, a connector could be responsible for sending error logs to the server while ignoring information logs.
+    </p>
+    <p>
+        The <em class="lib-name">ATX Logging Framework</em> provides 3 implementations of the <code>LogConnector</code> interface.
+    </p>
+    <ul>
+        <li><code>DefaultLogConnector</code>: does not perform any operation on the logs.
+            It allows to make the log system silent again without having to modify the business code of the application.
+            <em>(This is the default implementation.)</em>
+        </li>
+        <li><code>ConsoleLogConnector</code>: sends all logs to the JavaScript console.</em></li>
+        <li><code>HtmlLogConnector</code>: sends all logs to the HTML element specified by the developer.
+            Logs rendering is similar to a standard command console.
+        </li>
+    </ul>
+    <p>
+        This design guarantees both, great simplicity of use and unlimited flexibility.
+        For example, you can to create a connector that instantiates other connectors, to perform differentiated processing.
+        Such a model is much more efficient than a log engine based on collections of different stacked loggers.
+    </p>
+</section>
+
+
+<section class="col-xl-9" id="sample">
+    <h3>Real Life Example</h3>
+    <p>
+        Work in progress...
+    </p>
 </section>
 <!--<section class="col-xl-9" id="mocking-api-calls">
     <h3>Mocking API Calls</h3>
