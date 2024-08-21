@@ -56,6 +56,10 @@ export class LoggingFrameworkComponent extends IdentifiableComponent implements 
     this.logger.getLogConnector().copyLogs();
   }
 
+  protected clearLogs(): void {
+    this.logger.getLogConnector().clearLogs();
+  }
+
   protected documentation: DocumentationLink = {
     label: "Logging Framework",
     commands: ['/resources', 'documentation', 'logging-framework']
@@ -66,6 +70,7 @@ export class LoggingFrameworkComponent extends IdentifiableComponent implements 
     html: [`<section>
   <header>
     <h6>Console</h6>
+    <label>Min level:</label>
     <select [(ngModel)]="logger.minLogLevel">
       <option value="0">INFO</option>
       <option value="1">CONFIG</option>
@@ -74,28 +79,41 @@ export class LoggingFrameworkComponent extends IdentifiableComponent implements 
       <option value="4">OFF</option>
     </select>
     <button (click)="copyLogs()">Copy Logs</button>
+    <button (click)="clearLogs()">Clear Logs</button>
   </header>
   <main #consoleViewport></main>
 </section>`]
     ,
-    typescript: [`export class LoggingConsoleComponent implements AfterViewInit, OnDestroy {
+    typescript: [`@Component({
+  selector: 'logging-console',
+  standalone: true,
+  templateUrl: './logging-console.component.html'
+})
+export class LoggingConsoleComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild("consoleViewport")
   private console!: ElementRef<HTMLDivElement>;
+  private connector: any;
     
   constructor(protected logger: LoggerService) {}
 
   protected copyLogs(): void {
-    this.logger.getLogConnector().copyLogs();
+    this.connector.copyLogs();
+  }
+
+  protected clearLogs(): void {
+    this.connector.clearLogs();
   }
 
   public ngAfterViewInit(): void {
     const connector: LogConnector = new HtmlLogConnector(this.console.nativeElement);
     this.logger.setLogConnector(connector);
+    this.connector = connector;
   }
 
   public ngOnDestroy(): void {
     this.logger.setLogConnector(null);
+    this.connector = null;
   }
 }`]
   };
