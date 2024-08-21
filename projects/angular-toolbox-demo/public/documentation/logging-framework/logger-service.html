@@ -1,0 +1,91 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100 mb-4">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation/logging-framework'])">Presentation</a>
+                
+            </li>
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/logging-framework','api'])">
+                API</a>
+            </li>
+        </ul>
+    </aside>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3">Angular Toolbox Logging Framework</h2>
+    <p>
+        The <em class="lib-name">ATX Logging Framework</em> provides an easy-to-use and highly configurable
+        solution to add a logging system to your Angular libraries and applications.
+    </p>
+    <small>Since <span class="badge text-bg-warning rounded-pill">v 0.12.0</span></small>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9">
+    <h3><code>LoggerService</code> Service</h3>
+    <p>
+        A convenient high-level singleton that extends the <code>AbstractLogger</code> class.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="usage">Usage</h3>
+    <p>
+        The following application shows how to integrate the Angular Toolbox logging API.
+        In this example the <code>"root"</code> level logger service is configured to send logs to the JavaScript console.
+    </p>
+    <p>
+        Please note that the <code>ATX_LOGGER_CONFIG</code> provider is optional.
+        If not provided (default settings), the logs are not processed.
+    </p>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title mb-2">Code</h5>
+            <figure>
+                <figcaption>App component:</figcaption>
+                <pre><code class="language-typescript">export const appConfig: ApplicationConfig = {
+    providers: [
+        // Other providers here...
+        { provide: ATX_LOGGER_CONFIG, useValue: { dataConnector: new ConsoleLogConnector() } }
+    ]
+};</code></pre></figure>
+            <figure>
+                <figcaption>Angular component:</figcaption>
+                <pre><code class="language-typescript">@Component({
+selector: 'app-custom-view',
+    standalone: true,
+    templateUrl: './custom.component.html'
+})
+export class CustomComponent extends IdentifiableComponent implements OnInit, OnDestroy {
+    
+    @Input()
+    public injectedData!: CustomData;
+    
+    constructor(private logger: LoggerService) {
+        super("CustomComponent");
+    }
+    
+    public ngOnInit(): void {
+        this.logger.config(this.classRef(), "custom component created", this.injectedData);
+    }
+    
+    public ngOnDestroy(): void {
+        this.logger.info(this.classRef(), "custom component destroyed");
+    }
+}</code></pre></figure>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'ATX Logging Framework', 'path': 'logging-framework' }, { 'label': 'API', 'path': 'logging-framework/api' }, { 'label': 'LoggerService' }]">
+</object>

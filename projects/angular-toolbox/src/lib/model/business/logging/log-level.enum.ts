@@ -8,7 +8,6 @@
 
 /**
  * Defines the level of an Angular Toolbox log.
- * 
  */
 export enum LogLevel {
 

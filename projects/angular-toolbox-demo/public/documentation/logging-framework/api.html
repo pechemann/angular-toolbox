@@ -1,0 +1,289 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100 mb-4">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation/logging-framework'])">Presentation</a>
+                
+            </li>
+            <li class="list-group-item active" aria-current="true">API</a></li>
+        </ul>
+    </aside>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3">Angular Toolbox Logging Framework</h2>
+    <p>
+        The <em class="lib-name">ATX Logging Framework</em> provides an easy-to-use and highly configurable
+        solution to add a logging system to your Angular libraries and applications.
+    </p>
+    <small>Since <span class="badge text-bg-warning rounded-pill">v 0.12.0</span></small>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9" id="setting-up-the-framework">
+    <h3>API</h3>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Interface</th>
+            <th scope="col">Description</th>
+            <th scope="col">Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>Logger</code></td>
+            <td>
+                The base interface of all logging services in the ATX logging framework.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/logging-framework/logger'])" title="Logger">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <td><code>Log</code></td>
+            <td>
+                Represents a log in the Angular Toolbox framework.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/logging-framework/log'])" title="Log">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <td><code>TransactionalLogger</code></td>
+            <td>
+                Transactional loggers allow to create proxy via the <code>LogConnector</code> interface to send logs to third-party tools.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/logging-framework/transactional-logger'])" title="TransactionalLogger">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <td><code>LogConnector</code></td>
+            <td>
+                The markup interface for Angular Toolbox log connectors.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/logging-framework/log-connector'])" title="LogConnector">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <td><code>LoggerConfig</code></td>
+            <td>
+                Defines properties for the <code>LoggerService</code> singleton configuration.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/logging-framework/logger-config'])" title="LoggerConfig">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+        </tbody>
+        <thead>
+            <tr>
+              <th scope="col">Utility</th>
+              <th scope="col">Description</th>
+              <th scope="col">Link</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>LogBuilder</code></td>
+                <td>
+                    A static builder that creates new <code>Log</code> objects.
+                </td>
+                <td>
+                    <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/logging-framework/log-builder'])" title="LogBuilder">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                            <use href="#linkIcon"/>
+                        </svg>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td><code>LogUtil</code></td>
+                <td>
+                    A convenient utility class for formatting logs.
+                </td>
+                <td>
+                    <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/logging-framework/log-util'])" title="LogBuilder">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                            <use href="#linkIcon"/>
+                        </svg>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td><code>LogLevel</code></td>
+                <td>
+                    Defines the level of an Angular Toolbox log.
+                </td>
+                <td>
+                    <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/logging-framework/log-level'])" title="LogLevel">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                            <use href="#linkIcon"/>
+                        </svg>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+        <thead>
+            <tr>
+              <th scope="col">Service</th>
+              <th scope="col">Description</th>
+              <th scope="col">Link</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>LoggerService</code></td>
+                <td>
+                    A convenient high-level singleton that extends the <code>AbstractLogger</code> class.
+                </td>
+                <td>
+                    <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/logging-framework/logger-service'])" title="LoggerService">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                            <use href="#linkIcon"/>
+                        </svg>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td><code>AbstractLogger</code></td>
+                <td>
+                    The base class for all <code>Logger</code> objects.
+                </td>
+                <td>
+                    <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/logging-framework/abstract-logger'])" title="AbstractLogger">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                            <use href="#linkIcon"/>
+                        </svg>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+        <thead>
+            <tr>
+              <th scope="col">Connector</th>
+              <th scope="col">Description</th>
+              <th scope="col">Link</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>DefaultLogConnector</code></td>
+                <td>
+                    The default ATX log connector. Allows to process logs silently.
+                    <br>
+                    This can be useful for removing logs from production environments, if needed.
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><code>ConsoleLogConnector</code></td>
+                <td>
+                    An implementation of the <code>LogConnector</code> interface that sends logs to the 
+                    JavaScript native <code>console</code> object.
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><code>HtmlLogConnector</code></td>
+                <td>
+                    An implementation of the <code>LogConnector</code> interface that processes logs as HTML renderable elements.
+                </td>
+                <td>
+                    <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/logging-framework/html-log-connector'])" title="HtmlLogConnector">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                            <use href="#linkIcon"/>
+                        </svg>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+        <thead>
+            <tr>
+              <th scope="col">Provider</th>
+              <th scope="col">Description</th>
+              <th scope="col">Link</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>DEFAULT_LOG_CONNECTOR</code></td>
+                <td>
+                    A convenient immutable instance of the <code>DefaultLogConnector</code> class.
+                </td>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td><code>ATX_LOGGER_CONFIG</code></td>
+                <td>
+                    The default provider for the <code>LoggerService</code> singleton configuration.
+                </td>
+                <td>
+                    <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/logging-framework/atx-logger-config-provider'])" title="ATX_LOGGER_CONFIG">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                            <use href="#linkIcon"/>
+                        </svg>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+        <thead>
+            <tr>
+              <th scope="col">Constant</th>
+              <th scope="col">Description</th>
+              <th scope="col">Link</th>
+            </tr>
+        </thead>
+        <tbody>
+           <tr>
+                <td><code>ATX constant strings</code></td>
+                <td>
+                    A list of constants used as core references by the ATX Logging Framework.
+                </td>
+                <td>
+                    <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/logging-framework/atx-constant-strings'])" title="ATX constant strings">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                            <use href="#linkIcon"/>
+                        </svg>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+      </table>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'ATX Logging Framework', 'path': 'logging-framework' }, { 'label': 'API' }]">
+</object>

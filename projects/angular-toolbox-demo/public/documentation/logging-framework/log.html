@@ -1,0 +1,95 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100 mb-4">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation/logging-framework'])">Presentation</a>
+                
+            </li>
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/logging-framework','api'])">
+                API</a>
+            </li>
+        </ul>
+    </aside>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3">Angular Toolbox Logging Framework</h2>
+    <p>
+        The <em class="lib-name">ATX Logging Framework</em> provides an easy-to-use and highly configurable
+        solution to add a logging system to your Angular libraries and applications.
+    </p>
+    <small>Since <span class="badge text-bg-warning rounded-pill">v 0.12.0</span></small>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9">
+    <h3><code>Log</code> Interface</h3>
+    <p>
+        The <code>Log</code> interface defines the base API for of all logs of the the ATX logging framework.
+    </p>
+</section>
+
+
+<section class="col-xl-9 mb-4">
+    <h3 id="destroy"><code>Log.caller</code></h3>
+    <pre><code class="language-typescript">readonly caller: string</code></pre>
+    <p>
+        Provides a human readable reference for the invoker associated with this log.
+    </p>
+</section>
+
+
+<section class="col-xl-9 mb-4">
+    <h3 id="destroy"><code>Log.message</code></h3>
+    <pre><code class="language-typescript">readonly message: string</code></pre>
+    <p>
+        The message associated with this log.
+    </p>
+</section>
+
+
+<section class="col-xl-9 mb-4">
+    <h3 id="destroy"><code>Log.level</code></h3>
+    <pre><code class="language-typescript">readonly level: LogLevel</code></pre>
+    <p>
+        The criticality level of this log.
+        <br>
+        See the <a href="javascript:appBridge.navigate(['resources/documentation/logging-framework','log-level'])"><code>LogLevel</code></a> enum reference for details.
+    </p>
+</section>
+
+
+<section class="col-xl-9 mb-4">
+    <h3 id="destroy"><code>Log.timestamp</code></h3>
+    <pre><code class="language-typescript">readonly timestamp: number</code></pre>
+    <p>
+        The timestamp at which the log has been created.
+        (The number of milliseconds elapsed since the epoch, which is defined as the midnight at the beginning of January 1, 1970, UTC.)
+    </p>
+</section>
+
+
+<section class="col-xl-9 mb-4">
+    <h3 id="destroy"><code>Log.metadata</code></h3>
+    <pre><code class="language-typescript">readonly metadata?: any</code></pre>
+    <p>
+        Optional metada associated with this log.
+        <br>
+        Metadata are vanilla JavaScript objects, set by Developer to provide custom objects representations.
+    </p>
+</section>
+
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'ATX Logging Framework', 'path': 'logging-framework' }, { 'label': 'API', 'path': 'logging-framework/api' }, { 'label': 'Log' }]">
+</object>

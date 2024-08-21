@@ -1,0 +1,87 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+  <aside class="w-100 mb-4">
+      <h5 class="mb-4">In this topic</h5>
+      <ul class="list-group">
+          <li class="list-group-item">
+              <a href="javascript:appBridge.navigate(['resources/documentation/logging-framework'])">Presentation</a>
+              
+          </li>
+          <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/logging-framework','api'])">
+            API</a>
+        </li>
+      </ul>
+  </aside>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+  <h2 class="mb-3">Angular Toolbox Logging Framework</h2>
+  <p>
+      The <em class="lib-name">ATX Logging Framework</em> provides an easy-to-use and highly configurable
+      solution to add a logging system to your Angular libraries and applications.
+  </p>
+  <small>Since <span class="badge text-bg-warning rounded-pill">v 0.12.0</span></small>
+  <hr class="mt-4">
+</header>
+
+<section class="col-xl-9">
+  <h3><code>LogLevel</code> Enum</h3>
+  <p>
+    Defines the level of an Angular Toolbox log.
+  </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Vamue</th>
+            <th scope="col">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>INFO</code></td>
+            <td>
+              Indicates that the log is a basic information message.
+            </td>
+          </tr>
+          <tr>
+            <td><code>CONFIG</code></td>
+            <td>
+              Indicates that the log represents a config message.
+            </td>
+          </tr>
+          <tr>
+            <td><code>WARNING</code></td>
+            <td>
+              Indicates that the log is a warning message.
+            </td>
+          </tr>
+          <tr>
+            <td><code>ERROR</code></td>
+            <td>
+              Indicates that the log message represents an error.
+            </td>
+          </tr>
+          <tr>
+            <td><code>OFF</code></td>
+            <td>
+              A special level used by loggers to prevent logs to be processed.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'ATX Logging Framework', 'path': 'logging-framework' }, { 'label': 'API', 'path': 'logging-framework/api' }, { 'label': 'LogLevel' }]">
+</object>

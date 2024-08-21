@@ -89,7 +89,7 @@ export class LoggingFrameworkComponent extends IdentifiableComponent implements 
   standalone: true,
   templateUrl: './logging-console.component.html'
 })
-export class LoggingConsoleComponent implements AfterViewInit, OnDestroy {
+export class LoggingConsoleComponent implements AfterViewInit {
 
   @ViewChild("consoleViewport")
   private console!: ElementRef<HTMLDivElement>;
@@ -109,11 +109,6 @@ export class LoggingConsoleComponent implements AfterViewInit, OnDestroy {
     const connector: LogConnector = new HtmlLogConnector(this.console.nativeElement);
     this.logger.setLogConnector(connector);
     this.connector = connector;
-  }
-
-  public ngOnDestroy(): void {
-    this.logger.setLogConnector(null);
-    this.connector = null;
   }
 }`]
   };

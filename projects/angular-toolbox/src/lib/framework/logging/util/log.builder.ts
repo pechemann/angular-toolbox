@@ -22,7 +22,7 @@ export class LogBuilder {
      * @param level The level of the new log.
      * @param metadata The optional metadata associated with the new log.
      * 
-     * @returns A new `Log` object
+     * @returns A new `Log` object.
      */
     public static build(caller: string, message: string, level: LogLevel = LogLevel.INFO, metadata?: any): Log {
         return new LogImpl(caller, message, level, metadata);

@@ -1,0 +1,106 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100 mb-4">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation/logging-framework'])">Presentation</a>
+                
+            </li>
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/logging-framework','api'])">
+                API</a>
+            </li>
+        </ul>
+    </aside>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3">Angular Toolbox Logging Framework</h2>
+    <p>
+        The <em class="lib-name">ATX Logging Framework</em> provides an easy-to-use and highly configurable
+        solution to add a logging system to your Angular libraries and applications.
+    </p>
+    <small>Since <span class="badge text-bg-warning rounded-pill">v 0.12.0</span></small>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9">
+    <h3><code>LogConnector</code> Interface</h3>
+    <p>
+        The markup interface for Angular Toolbox log connectors.
+        <br>
+        ATX log connectors are controllers that apply specific processing to logs (e.g sending logs to a data base, etc.).
+    </p>
+</section>
+
+
+<section class="col-xl-9 mb-4">
+    <h3 id="destroy"><code>LogConnector.init()</code></h3>
+    <pre><code class="language-typescript">init(logList: Log[]): void</code></pre>
+    <p>
+        Initializes the controller.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>logList: Log[]</code></dt>
+            <dd>
+                <p>
+                    A list of logs used to initialize this connector.
+                </p>
+            </dd>
+        </dl>
+    </div>
+</section>
+
+
+<section class="col-xl-9 mb-4">
+    <h3 id="destroy"><code>LogConnector.clearLogs()</code></h3>
+    <pre><code class="language-typescript">clearLogs(): void</code></pre>
+    <p>
+        Removes all logs from this connector.
+    </p>
+</section>
+
+
+<section class="col-xl-9 mb-4">
+    <h3 id="destroy"><code>LogConnector.sendLog()</code></h3>
+    <pre><code class="language-typescript">sendLog(log: Log): void</code></pre>
+    <p>
+        Sends the specified log to this connector for processing.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>log: Log</code></dt>
+            <dd>
+                <p>
+                    The log to process.
+                </p>
+            </dd>
+        </dl>
+    </div>
+</section>
+
+
+<section class="col-xl-9 mb-4">
+    <h3 id="destroy"><code>LogConnector.copyLogs()</code></h3>
+    <pre><code class="language-typescript">copyLogs(): void</code></pre>
+    <p>
+        Creates a copy of all logs processed by this connector.
+        The way the logs are copied depends on the connector implementation.
+    </p>
+</section>
+
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'ATX Logging Framework', 'path': 'logging-framework' }, { 'label': 'API', 'path': 'logging-framework/api' }, { 'label': 'LogConnector' }]">
+</object>

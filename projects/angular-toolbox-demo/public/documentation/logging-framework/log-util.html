@@ -1,0 +1,152 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100 mb-4">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation/logging-framework'])">Presentation</a>
+                
+            </li>
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/logging-framework','api'])">
+                API</a>
+            </li>
+        </ul>
+    </aside>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3">Angular Toolbox Logging Framework</h2>
+    <p>
+        The <em class="lib-name">ATX Logging Framework</em> provides an easy-to-use and highly configurable
+        solution to add a logging system to your Angular libraries and applications.
+    </p>
+    <small>Since <span class="badge text-bg-warning rounded-pill">v 0.12.0</span></small>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9">
+    <h3><code>LogUtil</code> Class</h3>
+    <p>
+        A convenient utility class for formatting logs.
+    </p>
+</section>
+
+
+<section class="col-xl-9 mb-4">
+    <h3 id="destroy"><code>LogUtil.logListToString()</code></h3>
+    <pre><code class="language-typescript">static logListToString(logList: Log[]): string</code></pre>
+    <p>
+       Serializes the specified lis of <code>Log</code> objects.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>logList: Log[]</code></dt>
+            <dd>
+                <p>
+                    The list of logs to turn into a human redeable string.
+                </p>
+            </dd>
+        </dl>
+    </div>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>string</code>
+        <p>
+            The serialized log list.
+        </p>
+    </div>
+</section>
+
+
+<section class="col-xl-9 mb-4">
+    <h3 id="destroy"><code>LogUtil.getLevelString()</code></h3>
+    <pre><code class="language-typescript">static getLevelString(level: LogLevel): string</code></pre>
+    <p>
+        Turns the specified log level into a human redeable string.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>level: LogLevel</code></dt>
+            <dd>
+                <p>
+                    The log level to format.
+                </p>
+            </dd>
+        </dl>
+    </div>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>string</code>
+        <p>
+            The formatted log level as specified by the <a href="javascript:appBridge.navigate(['resources/documentation/atx-constant-strings'])">ATX constant strings</a>.
+        </p>
+    </div>
+</section>
+
+
+<section class="col-xl-9 mb-4">
+    <h3 id="destroy"><code>LogUtil.metadataToString()</code></h3>
+    <pre><code class="language-typescript">static metadataToString(obj: any): string</code></pre>
+    <p>
+        Serializes the specified metadata object.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>obj: any</code></dt>
+            <dd>
+                <p>
+                    The metadata object to format. It should be a vanilla JavaScript object.
+                </p>
+            </dd>
+        </dl>
+    </div>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>string</code>
+        <p>
+            A string that represents the specified metadata object.
+        </p>
+    </div>
+</section>
+
+
+<section class="col-xl-9 mb-4">
+    <h3 id="destroy"><code>LogUtil.dateToHHMMSS()</code></h3>
+    <pre><code class="language-typescript">static dateToHHMMSS(timestamp: number): string</code></pre>
+    <p>
+        Returns a string that represents the specified timestamp under the form of <code>"hh:mm:ss"</code>.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>timestamp: number</code></dt>
+            <dd>
+                <p>
+                    The timestamp to format.
+                </p>
+            </dd>
+        </dl>
+    </div>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>string</code>
+        <p>
+            A string that represents the specified timestamp under the form of <code>"hh:mm:ss"</code>.
+        </p>
+    </div>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'ATX Logging Framework', 'path': 'logging-framework' }, { 'label': 'API', 'path': 'logging-framework/api' }, { 'label': 'LogUtil' }]">
+</object>

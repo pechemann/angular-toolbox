@@ -9,7 +9,7 @@
 import { Log, LogConnector, LogLevel } from "../../../model";
 
 /**
- * An implementation of the `LogConnector` class that sends logs to the JavaScript
+ * An implementation of the `LogConnector` interface that sends logs to the JavaScript
  * native `console` object.
  */
 export class ConsoleLogConnector implements LogConnector {

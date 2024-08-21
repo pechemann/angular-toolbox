@@ -10,7 +10,7 @@ import { Destroyable } from "../lang";
 import { LogConnector } from "./log-connector";
 
 /**
- * TTransactional loggers allow to create proxy via the `LogConnector` interface
+ * Transactional loggers allow to create proxy via the `LogConnector` interface
  * to send logs to third-party tools.
  */
 export interface TransactionalLogger extends Destroyable {
@@ -21,7 +21,7 @@ export interface TransactionalLogger extends Destroyable {
    * @param value The reference to the new log connector associated with this transactional logger.
    *              If `null` the logger uses the instance defined by the `DEFAULT_LOG_CONNECTOR` constant.
    */
-  setLogConnector(value: LogConnector | null): void ;
+  setLogConnector(value: LogConnector | null): void;
   
   /**
    * Returns the reference to the log connector associated with this transactional logger.

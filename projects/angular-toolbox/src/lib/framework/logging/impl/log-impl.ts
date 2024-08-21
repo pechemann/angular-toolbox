@@ -9,6 +9,8 @@
 import { Log, LogLevel } from "../../../model";
 
 /**
+ * @private
+ * 
  * The default implementation of the `Log` interface.
  */
 export class LogImpl implements Log {
@@ -39,6 +41,7 @@ export class LogImpl implements Log {
     public readonly metadata: any;
 
     /**
+     * @private
      * Creates a new `LogImpl` instance.
      * 
      * @param caller Ahuman readable reference for the invoker associated with this log.

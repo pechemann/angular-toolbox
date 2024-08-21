@@ -111,10 +111,10 @@ export class LogUtil {
     }
     
     /**
-     * Returns a string that represents the specified timestamp in form `"HH:MM:SS"`.
+     * Returns a string that represents the specified timestamp under the form of `"hh:mm:ss"`.
      * 
      * @param timestamp The timestamp to format.
-     * @returns A string that represents the specified timestamp in form `"HH:MM:SS"`.
+     * @returns A string that represents the specified timestamp under the form of `"hh:mm:ss"`.
      */
     public static dateToHHMMSS(timestamp: number): string {
         return formatDate(timestamp, TS_FMT, LOCALE);

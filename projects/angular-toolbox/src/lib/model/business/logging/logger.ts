@@ -28,7 +28,7 @@ export interface Logger {
      * 
      * @param caller The reference to the caller that sends the log.
      * @param message The log message.
-     * @param metadata Optionale metadata associated with this log.
+     * @param metadata Optional metadata associated with this log.
      */
     info(caller: string | any, message: string, metadata?: any): void;
 
@@ -37,7 +37,7 @@ export interface Logger {
      * 
      * @param caller The reference to the caller that sends the log.
      * @param message The log message.
-     * @param metadata Optionale metadata associated with this log.
+     * @param metadata Optional metadata associated with this log.
      */
     config(caller: string | any, message: string, metadata?: any): void;
 
@@ -46,16 +46,16 @@ export interface Logger {
      * 
      * @param caller The reference to the caller that sends the log.
      * @param message The log message.
-     * @param metadata Optionale metadata associated with this log.
+     * @param metadata Optional metadata associated with this log.
      */
     error(caller: string | any, message: string, metadata?: any): void;
 
     /**
-     * Sends an warning log to the service.
+     * Sends a warning log to the service.
      * 
      * @param caller The reference to the caller that sends the log.
      * @param message The log message.
-     * @param metadata Optionale metadata associated with this log.
+     * @param metadata Optional metadata associated with this log.
      */
     warn(caller: string | any, message: string, metadata?: any): void;
     

@@ -1,0 +1,72 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100 mb-4">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation/logging-framework'])">Presentation</a>
+                
+            </li>
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/logging-framework','api'])">
+              API</a>
+          </li>
+        </ul>
+    </aside>
+  </nav>
+  
+  <header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3">Angular Toolbox Logging Framework</h2>
+    <p>
+        The <em class="lib-name">ATX Logging Framework</em> provides an easy-to-use and highly configurable
+        solution to add a logging system to your Angular libraries and applications.
+    </p>
+    <small>Since <span class="badge text-bg-warning rounded-pill">v 0.12.0</span></small>
+    <hr class="mt-4">
+  </header>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3"><code>ATX_LOGGER_CONFIG</code> Provider</h2>
+    <p>
+        The default provider for the <code>LoggerService</code> singleton configuration.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="usage">Usage</h3>
+
+    <p>
+        You typically define the custom properties in the main <code>NgModule</code> declaration,
+        or the <code>ApplicationConfig</code> object, to initialize the app version.
+    </p>
+<figure>
+    <figcaption>Angular NgModule:</figcaption>
+    <pre><code class="language-typescript">@NgModule(&#123;
+    declarations: [
+        AppComponent
+    ],
+    providers: [
+        &#123;
+            provide: ATX_LOGGER_CONFIG,
+            useValue: &#123; logConnector: new ConsoleLogConnetor() &#125;
+        &#125;
+    ],
+    imports: [
+        BrowserModule
+    ],
+    bootstrap: [AppComponent]
+&#125;)
+export class AppModule &#123; &#125;</code></pre></figure>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+data-tree="[{ 'label': 'ATX Logging Framework', 'path': 'logging-framework' }, { 'label': 'API', 'path': 'logging-framework/api' }, { 'label': 'ATX_LOGGER_CONFIG Provider' }]">
+</object>
