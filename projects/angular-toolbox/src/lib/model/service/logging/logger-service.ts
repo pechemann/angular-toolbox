@@ -6,8 +6,9 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { Injectable } from "@angular/core";
+import { Inject, Injectable, Optional } from "@angular/core";
 import { AbstractLogger } from "../../../framework";
+import { ATX_LOGGER_CONFIG, LogConnector, LoggerConfig } from "../../business";
 
 /**
  * A convenient high-level singleton that implements the `Logger` interface.
@@ -15,4 +16,16 @@ import { AbstractLogger } from "../../../framework";
 @Injectable({
     providedIn: 'root'
 })
-export class LoggerService extends AbstractLogger {}
+export class LoggerService extends AbstractLogger {
+
+    /**
+     * @private
+     */
+    constructor(@Inject(ATX_LOGGER_CONFIG) @Optional() config: LoggerConfig) {
+        super();
+        if (config) {
+            const connector: LogConnector | undefined = config.logConnector;
+            if (connector) this.setLogConnector(connector);
+        }
+    }
+}

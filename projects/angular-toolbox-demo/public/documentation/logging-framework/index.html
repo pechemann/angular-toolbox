@@ -23,6 +23,7 @@
         <ul class="list-group">
             <li class="list-group-item"><a href="#presentation" onclick="appBridge.goToAnchor(event)" title="Presentation">Presentation</a></li>
             <li class="list-group-item"><a href="#principles" onclick="appBridge.goToAnchor(event)" title="Principles">Principles</a></li>
+            <li class="list-group-item"><a href="#usage" onclick="appBridge.goToAnchor(event)" title="Usage">Usage</a></li>
             <li class="list-group-item"><a href="#sample" onclick="appBridge.goToAnchor(event)" title="Principles">Real Life Example</a></li>
         </ul>
     </section>
@@ -41,7 +42,13 @@
 <section class="col-xl-9" id="presentation">
     <h3>Presentation</h3>
     <p>
-        Work in progress...
+        Logging APIs facilitate software servicing and maintenance at customer sites by producing log reports
+        suitable for analysis. They capture information such as security failures, configuration errors and/or
+        bugs in the  library or application.
+    </p>
+    <p>
+        The <em class="lib-name">Angular Toolbox</em> framework includes an easy-to-use,
+        yet powerful logging API that covers all development needs.
     </p>
 </section>
 
@@ -66,7 +73,7 @@
         For example, a connector could be responsible for sending error logs to the server while ignoring information logs.
     </p>
     <p>
-        The <em class="lib-name">ATX Logging Framework</em> provides 3 implementations of the <code>LogConnector</code> interface.
+        The <em class="lib-name">ATX Logging Framework</em> provides three implementations of the <code>LogConnector</code> interface.
     </p>
     <ul>
         <li><code>DefaultLogConnector</code>: does not perform any operation on the logs.
@@ -86,65 +93,73 @@
 </section>
 
 
-<section class="col-xl-9" id="sample">
-    <h3>Real Life Example</h3>
+<section class="col-xl-9 mb-4">
+    <h3 id="usage">Usage</h3>
     <p>
-        Work in progress...
-    </p>
-</section>
-<!--<section class="col-xl-9" id="mocking-api-calls">
-    <h3>Mocking API Calls</h3>
-    <p>
-        API mocking is the creation of a simulated version of an API that mirrors the
-        behaviour of an actual API.
+        The following application shows how to integrate the Angular Toolbox logging API.
+        In this example the <code>"root"</code> level logger service is configured to send logs to the JavaScript console.
     </p>
     <p>
-        A common use case is where front-end developers need to create new features,
-        based on backend APIs made by other development teams.
-        This is a recurring problem that all Angular developers have to face!
+        Please not that the <code>ATX_LOGGER_CONFIG</code> provider is optional.
+        If not provided (default settings), the logs are not processed.
     </p>
-    <p>
-        Ideally, the <em>data access layer</em> should never be changed when mocking APIs.
-        It means that the URI endpoint in the following sample must not be modified during all developement process:
-        <figure>
-            <pre><code class="language-typescript">http.get<Config>('https://my-domain.com/api/data').subscribe(config => {
-    // process the data.
-});</code></pre></figure>
-    </p>
-    <p>
-        You may argue that you can change a single URL, but what if several developers
-        create different services in separated parts of an app?
-        <br>
-        Unfortunately, Angular does not offer a native solution to overcome this problem.
-    </p>
-    <p class="lead">
-        This is where the <em>HTTP Mocking Framework</em> comes in!
-    </p>
-</section>
-<section class="col-xl-9" id="keep-it-simple">
-    <h3>Keep It Simple!</h3>
-    <p>
-        If you are familiar with developing <a href="nodejs.or" title="Node.js">Node.js</a> apps
-        created with <a href="https://expressjs.com/" title=">Express.js">Express.js</a>,
-        handling the <em>HTTP Mocking Framework</em> will be straightforward.
-    </p>
-    <p>
-        The only difficulty is to correctly set URL patterns, as you usually do with the Angular router.
-        <br>
-        The following sample code shows how to write a basic config that will intercept all HTTP calls
-        for URLs on the form <code>http://localhost:4200/todos/:id</code> with the <code>GET</code> method:
-    </p>
-    <figure>
-        <pre><code class="language-typescript">const getTodo = (id: string) => { ... }
-...
-{
-    route: "/todos/:id",
-    get: {
-        data: (req: HttpRequest<any>, params: any) => 
-               httpResponseMock().body( getTodo(params.id) ).response();
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title mb-2">Code</h5>
+            <figure>
+                <figcaption>App component:</figcaption>
+                <pre><code class="language-typescript">export const appConfig: ApplicationConfig = {
+    providers: [
+        // Other providers here...
+        { provide: ATX_LOGGER_CONFIG, useValue: { dataConnector: new ConsoleLogConnector() } }
+    ]
+};</code></pre></figure>
+            <figure>
+                <figcaption>Angular component:</figcaption>
+                <pre><code class="language-typescript">@Component({
+selector: 'app-custom-view',
+    standalone: true,
+    templateUrl: './custom.component.html'
+})
+export class CustomComponent extends IdentifiableComponent implements OnInit, OnDestroy {
+    
+    @Input()
+    public injectedData!: CustomData;
+    
+    constructor(private logger: LoggerService) {
+        super("CustomComponent");
+    }
+    
+    public ngOnInit(): void {
+        this.logger.config(this.classRef(), "custom component created", this.injectedData);
+    }
+    
+    public ngOnDestroy(): void {
+        this.logger.info(this.classRef(), "custom component destroyed");
     }
 }</code></pre></figure>
-</section>-->
+</section>
+
+<section class="col-xl-9" id="sample">
+    <h3>Real Life Example</h3>
+    <div class="d-flex gap-2">
+        <img src="https://pascalechemann.com/layers-project/assets/common/layers-icon.webp" title="Layers Player" width="128px" height="128px"/>
+        <div class="pt-4">
+            <p>
+                The <a href="https://pascalechemann.com/layers-project/">Layers Player Project</a> uses the <em>ATX Logging Framework</em> to manage all logs of the 
+                <em>Layers Platform</em> (including the <em>Layers Video Editor</em> and the <em>Layers Social Platform</em>).
+            </p>
+            <p>
+                The <em>Layers Player</em> logging system allows you to disable metadata rendering by setting the
+                <code>verbose</code> custom property. By default, metadata is not processed, ensuring optimal performance.
+            </p>
+            <p>
+                Please visit the <a href="https://pascalechemann.com/layers-project/demo/layers-debug-demo/" title="Layers Debug Console">Layers Debug Console</a>
+                demo to see it in action.
+            </p>
+        </div>
+    </p>
+</section>
 
 <!-- We use a data object to store navigation tree structure-->
 <object id="navigation-tree"
