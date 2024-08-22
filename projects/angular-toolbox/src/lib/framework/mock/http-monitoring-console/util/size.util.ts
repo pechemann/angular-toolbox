@@ -31,7 +31,7 @@ export class SizeUtil {
     public static sizeToString(size: number): string {
         if (size < 1024) return size + B;
         size = size / 1024;
-        if (size < 1024) return size + KB;
+        if (size < 1024) return size.toFixed(2) + KB;
         return (size / 1024).toFixed(2) + MB;
     }
 }
