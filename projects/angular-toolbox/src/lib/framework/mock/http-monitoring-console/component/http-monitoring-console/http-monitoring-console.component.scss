@@ -38,36 +38,6 @@
     border: 1px solid var(--border-color);
 }
 
-#request-list {
-    user-select: none;
-
-    tbody tr td:first-of-type {
-        display: flex;
-        gap: 6px;
-    }
-
-    svg {
-        margin-top: 2px;
-    }
-
-    .name-header {
-        display: flex;
-        align-items: center;
-    }
-
-    width: 100%;
-
-    thead {
-        position: sticky;
-        top: 0;
-    }
-
-    .resource-cell {
-        max-height: 40px;
-        overflow: hidden;
-    }
-}
-
 #selected-log-viewport {
     height: 100%;
     width: 80%;

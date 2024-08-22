@@ -8,7 +8,7 @@
 
 import { Injectable } from "@angular/core";
 import { HttpMockLoggingMetadata, HttpMockLoggingService, Log, LogLevel } from '../../../../../model';
-import { LogConverter } from "./io/log-converter";
+import { LogConverter } from "../../util/io/log-converter";
 import { AtxHttpLogDto } from "../business/io/atx-http-log.dto";
 import { HMFL } from "../business/io/hmfl";
 

@@ -7,10 +7,10 @@
  */
 
 import { HttpContext, HttpParams, HttpParamsOptions, HttpRequest } from "@angular/common/http";
-import { AtxHttpRequestDto } from "../../business/io/atx-http-request.dto";
+import { AtxHttpRequestDto } from "../../model/business/io/atx-http-request.dto";
 import { HttpHeadersConverter } from "./log-headers-converter";
 import { BodyConverter } from "./body-converter";
-import { ATX_IS_IMPORTED_LOG } from "../../business/atx-is-imported-log";
+import { ATX_IS_IMPORTED_LOG } from "../../model/business/atx-is-imported-log";
 
 export class HttpRequestConverter {
 

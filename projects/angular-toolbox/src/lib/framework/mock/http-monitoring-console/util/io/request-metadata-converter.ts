@@ -6,9 +6,9 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { HttpMockRequestMetadata } from "../../../../../../model";
-import { AtxHttpRequestMetadataDto } from "../../business/io/atx-http-request-metadata.dto.ts";
-import { Uuid } from "../../../../../../util";
+import { HttpMockRequestMetadata } from "../../../../../model";
+import { AtxHttpRequestMetadataDto } from "../../model/business/io/atx-http-request-metadata.dto.ts";
+import { Uuid } from "../../../../../util";
 
 export class RequestMetadataConverter {
 

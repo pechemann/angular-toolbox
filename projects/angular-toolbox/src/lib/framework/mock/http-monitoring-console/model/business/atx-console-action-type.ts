@@ -10,5 +10,7 @@ export enum AtxConsoleActionType {
 
     CLEAR_LOGS = 0,
     EXPORT_LOGS = 1,
-    IMPORT_LOGS = 2
+    IMPORT_LOGS = 2,
+    LOG_SELECT = 3,
+    CLOSE_DETAILS_PANEL = 4
 }

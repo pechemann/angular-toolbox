@@ -6,9 +6,9 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { HttpMockLoggingConstant } from "../../../../../../model/business/logging/http-mock-logging-constant.enum";
-import { Log, LogLevel } from "../../../../../../model";
-import { AtxHttpLogDto } from "../../business/io/atx-http-log.dto";
+import { HttpMockLoggingConstant } from "../../../../../model/business/logging/http-mock-logging-constant.enum";
+import { Log, LogLevel } from "../../../../../model";
+import { AtxHttpLogDto } from "../../model/business/io/atx-http-log.dto";
 import { LogMessageUtil } from "./log-message.util";
 import { LogMetadataConverter } from "./log-metadata-converter";
 

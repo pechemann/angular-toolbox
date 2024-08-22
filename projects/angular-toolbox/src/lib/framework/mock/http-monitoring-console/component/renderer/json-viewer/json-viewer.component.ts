@@ -6,7 +6,7 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { AtxJsonViewerPanelComponent } from '../json-viewer-panel/json-viewer-panel.component';
 import { AtxConsoleJson } from '../../../model/business/atx-console-json';
 import { DataUtil } from '../../../util/data.util';
@@ -18,7 +18,8 @@ import { DataUtil } from '../../../util/data.util';
     AtxJsonViewerPanelComponent
   ],
   templateUrl: './json-viewer.component.html',
-  styleUrl: './json-viewer.component.scss'
+  styleUrl: './json-viewer.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AtxJsonViewerComponent {
 

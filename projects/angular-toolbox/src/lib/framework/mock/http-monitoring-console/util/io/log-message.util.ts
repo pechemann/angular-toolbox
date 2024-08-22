@@ -6,8 +6,8 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { HttpMockLoggingConstant } from "../../../../../../model/business/logging/http-mock-logging-constant.enum";
-import { LogLevel } from "../../../../../../model";
+import { HttpMockLoggingConstant } from "../../../../../model/business/logging/http-mock-logging-constant.enum";
+import { LogLevel } from "../../../../../model";
 
 export class LogMessageUtil {
     

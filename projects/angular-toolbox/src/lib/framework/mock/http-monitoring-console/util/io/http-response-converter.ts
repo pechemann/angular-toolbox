@@ -8,7 +8,7 @@
 
 import { HttpResponse } from "@angular/common/http";
 import { HttpHeadersConverter } from "./log-headers-converter";
-import { AtxHttpResponseDto } from "../../business/io/atx-http-response.dto";
+import { AtxHttpResponseDto } from "../../model/business/io/atx-http-response.dto";
 import { BodyConverter } from "./body-converter";
 
 export class HttpResponseConverter {

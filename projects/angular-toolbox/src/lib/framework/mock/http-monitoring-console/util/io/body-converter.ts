@@ -6,9 +6,9 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { ConsoleBodyType } from "../../../util/console-body-type";
-import { DataUtil } from "../../../util/data.util";
-import { AtxBodyDto } from "../../business/io/atx-body-dto";
+import { ConsoleBodyType } from "../console-body-type";
+import { DataUtil } from "../data.util";
+import { AtxBodyDto } from "../../model/business/io/atx-body-dto";
 import { BodySerializer } from "./body-serializer";
 
 export class BodyConverter {

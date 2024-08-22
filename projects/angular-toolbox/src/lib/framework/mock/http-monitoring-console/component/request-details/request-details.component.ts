@@ -6,7 +6,7 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { HttpMockRequestMetadata, Log } from '../../../../../model';
 import { NgStyle } from '@angular/common';
 import { HttpRequest, HttpResponse } from '@angular/common/http';
@@ -15,6 +15,8 @@ import { AtxPayloadRendererComponent } from '../renderer/payload-renderer/payloa
 import { AtxTimingRendererComponent } from '../renderer/timing-renderer/timing-renderer.component';
 import { AtxResponsePreviewRendererComponent } from '../renderer/response-preview-renderer/response-preview-renderer.component';
 import { AtxResponseBodyRendererComponent } from '../renderer/response-body-renderer/response-body-renderer.component';
+import { AtxUserActionService } from '../../model/service/atx-user-action.service';
+import { AtxConsoleActionType } from '../../model/business/atx-console-action-type';
 
 @Component({
   selector: 'atx-monitoring-console-details',
@@ -33,9 +35,6 @@ import { AtxResponseBodyRendererComponent } from '../renderer/response-body-rend
 })
 export class AtxRequestDetailsComponent {
 
-  @Output()
-  public readonly close: EventEmitter<void> = new EventEmitter(true);
-
   protected currLog: Log | null = null;
   protected hasPayload: boolean = false;
   protected request!: HttpRequest<any>;
@@ -44,7 +43,7 @@ export class AtxRequestDetailsComponent {
 
   @Input()
   public set log(value: Log | null) {
-    this.currLog = value
+    this.currLog = value;
     if (value) {
       const metadata: any = value.metadata; 
       const request: any = metadata.request; 
@@ -62,9 +61,11 @@ export class AtxRequestDetailsComponent {
     this._cdr.detectChanges();
   }
 
+  protected readonly actionType: any = AtxConsoleActionType;
   protected currSection: number = 0;
 
-  constructor(private _cdr: ChangeDetectorRef) {}
+  constructor(protected action: AtxUserActionService,
+              private _cdr: ChangeDetectorRef) {}
 
   protected changeSection(idx: number): void {
     this.currSection = idx;

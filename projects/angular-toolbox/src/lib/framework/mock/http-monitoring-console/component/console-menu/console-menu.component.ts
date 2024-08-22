@@ -6,28 +6,19 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { Component, EventEmitter, Output } from '@angular/core';
-import { HttpMockLoggingService } from '../../../../../model';
-import { AtxConsoleAction } from '../../model/business/atx-console-action';
+import { Component } from '@angular/core';
 import { AtxConsoleActionType } from '../../model/business/atx-console-action-type';
+import { AtxUserActionService } from '../../model/service/atx-user-action.service';
 
 @Component({
   selector: 'atx-console-menu',
   standalone: true,
-  imports: [],
   templateUrl: './console-menu.component.html',
   styleUrl: './console-menu.component.scss'
 })
 export class AtxConsoleMenuComponent {
 
-  protected readonly actionList: any = AtxConsoleActionType;
+  protected readonly actionType: any = AtxConsoleActionType;
 
-  @Output()
-  public action: EventEmitter<AtxConsoleAction> = new EventEmitter(true);
-
-  constructor(protected logger: HttpMockLoggingService) {}
-
-  protected sendAction(type: AtxConsoleActionType): void {
-    this.action.emit({ type: type } );
-  }
+  constructor(protected action: AtxUserActionService) {}
 }

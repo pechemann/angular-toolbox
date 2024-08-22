@@ -1,0 +1,50 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+<table id="request-list" >
+    <thead>
+        <tr>
+            <th class="name-header">
+                Name
+                <div role="button" title="Expand" class="header-btn" (click)="action.sendAction(actionType.CLOSE_DETAILS_PANEL)">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                        @if (this.state.selectedLog) {
+                            <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8m-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5"/>
+                        }
+                    </svg>
+                </div>
+            </th>
+            @if (!this.state.selectedLog) {
+                <th>Status</th>
+                <th>Size</th>
+                <th>Time</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @for (log of this.state.logs; track log.metadata.requestMetadata.id) {
+            @if (checkFilters(log)) {
+                <tr [class.error-row]="isError(log)" role="button" (click)="action.sendAction(actionType.LOG_SELECT, log)"
+                    [class.selected-row]="this.state.selectedLog === log">
+                    <td [title]="getResourcePath(log)">
+                        <atx-icon-renderer [data]="log"/>
+                        <div class="resource-cell">
+                            {{ getResourceName(log) }}
+                            <br>
+                            {{ getResourcePath(log) }}
+                        </div>
+                    </td>
+                    @if (!this.state.selectedLog) {
+                        <td>{{ getStatus(log) }}</td>
+                        <td>{{ getSize(log) }}</td>
+                        <td>{{ getTime(log) }}</td>
+                    }
+                </tr>
+            }
+        }
+    </tbody>
+</table>

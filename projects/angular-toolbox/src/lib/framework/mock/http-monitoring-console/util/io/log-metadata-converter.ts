@@ -6,8 +6,8 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { HttpMockLoggingMetadata } from "../../../../../../model";
-import { AtxHttpLogMetadataDto } from "../../business/io/atx-http-log-metadata.dto";
+import { HttpMockLoggingMetadata } from "../../../../../model";
+import { AtxHttpLogMetadataDto } from "../../model/business/io/atx-http-log-metadata.dto";
 import { RequestMetadataConverter } from "./request-metadata-converter";
 import { HttpRequestConverter } from "./http-request-converter";
 import { HttpResponseConverter } from "./http-response-converter";

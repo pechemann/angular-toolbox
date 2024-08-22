@@ -1,0 +1,39 @@
+/**
+ * @license
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be found in
+ * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+ */
+ 
+ @import "../../../styles/console";
+
+#request-list {
+    user-select: none;
+
+    tbody tr td:first-of-type {
+        display: flex;
+        gap: 6px;
+    }
+
+    svg {
+        margin-top: 2px;
+    }
+
+    .name-header {
+        display: flex;
+        align-items: center;
+    }
+
+    width: 100%;
+
+    thead {
+        position: sticky;
+        top: 0;
+    }
+
+    .resource-cell {
+        max-height: 40px;
+        overflow: hidden;
+    }
+}

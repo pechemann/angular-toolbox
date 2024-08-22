@@ -6,25 +6,16 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { Component, Input } from '@angular/core';
-import { SizeUtil } from '../../util/size.util';
+import { Component } from '@angular/core';
+import { AtxMonitoringConsoleState } from '../../model/service/atx-monitoring-console.state';
 
 @Component({
   selector: 'atx-console-footer',
   standalone: true,
-  imports: [],
   templateUrl: './console-footer.component.html',
   styleUrl: './console-footer.component.scss'
 })
 export class AtxConsoleFooterComponent {
 
-  protected size: string = "0 B";
-
-  @Input()
-  public set cumulativeSize(value: number) {
-    this.size = SizeUtil.sizeToString(value);
-  }
-
-  @Input()
-  public numLogs: number = 0;
+  constructor(protected state: AtxMonitoringConsoleState) {}
 }

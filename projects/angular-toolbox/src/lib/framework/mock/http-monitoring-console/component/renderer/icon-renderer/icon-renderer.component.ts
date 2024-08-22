@@ -6,7 +6,7 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Log } from '../../../../../../model';
 import { ATX_IS_IMPORTED_LOG } from '../../../model/business/atx-is-imported-log';
 import { ConsoleBodyType } from '../../../util/console-body-type';
@@ -16,9 +16,9 @@ import { HttpResponse } from '@angular/common/http';
 @Component({
   selector: 'atx-icon-renderer',
   standalone: true,
-  imports: [],
   templateUrl: './icon-renderer.component.html',
-  styleUrl: './icon-renderer.component.scss'
+  styleUrl: './icon-renderer.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AtxIconRendererComponent {
 

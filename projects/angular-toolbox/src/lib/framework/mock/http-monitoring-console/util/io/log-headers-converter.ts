@@ -7,7 +7,7 @@
  */
 
 import { HttpHeaders } from "@angular/common/http";
-import { AtxHeaderDto } from "../../business/io/atx-header-dto";
+import { AtxHeaderDto } from "../../model/business/io/atx-header-dto";
 
 export class HttpHeadersConverter {
 

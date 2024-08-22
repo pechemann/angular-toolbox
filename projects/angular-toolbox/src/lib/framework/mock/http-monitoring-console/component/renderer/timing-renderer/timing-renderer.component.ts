@@ -6,7 +6,7 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { HttpMockRequestMetadata, Log } from '../../../../../../model';
 import { DatePipe, NgStyle } from '@angular/common';
 
@@ -18,7 +18,8 @@ import { DatePipe, NgStyle } from '@angular/common';
     NgStyle
   ],
   templateUrl: './timing-renderer.component.html',
-  styleUrl: './timing-renderer.component.scss'
+  styleUrl: './timing-renderer.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AtxTimingRendererComponent {
 

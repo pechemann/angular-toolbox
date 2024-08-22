@@ -6,62 +6,18 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
 -->
 
-<atx-console-menu (action)="userAction($event)"/>
-
+<atx-console-menu/>
 <div id="log-list-vieport">
-    <div class="request-list-wrapper" [class.reduced-request-list]="selectedLog">
-        <table id="request-list" >
-            <thead>
-                <tr>
-                    <th class="name-header">
-                        Name
-                        <div role="button" (click)="selectedLog = null" title="Expand" class="header-btn">
-                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-                                @if (selectedLog) {
-                                    <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8m-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5"/>
-                                }
-                            </svg>
-                        </div>
-                    </th>
-                    @if (!selectedLog) {
-                        <th>Status</th>
-                        <th>Size</th>
-                        <th>Time</th>
-                    }
-                </tr>
-            </thead>
-            <tbody>
-                @for (log of logs; track log.metadata.requestMetadata.id) {
-                    @if (checkFilters(log)) {
-                        <tr [class.error-row]="isError(log)" role="button" (click)="logSelect(log)"
-                            [class.selected-row]="selectedLog === log">
-                            <td [title]="getResourcePath(log)">
-                                <atx-icon-renderer [data]="log"/>
-                                <div class="resource-cell">
-                                    {{ getResourceName(log) }}
-                                    <br>
-                                    {{ getResourcePath(log) }}
-                                </div>
-                            </td>
-                            @if (!selectedLog) {
-                                <td>{{ getStatus(log) }}</td>
-                                <td>{{ getSize(log) }}</td>
-                                <td>{{ getTime(log) }}</td>
-                            }
-                        </tr>
-                    }
-                }
-            </tbody>
-        </table>
+    <div class="request-list-wrapper" [class.reduced-request-list]="state.selectedLog">
+        <atx-request-list-renderer />
     </div>
-    @if (selectedLog) {
+    @if (state.selectedLog) {
         <div id="selected-log-viewport">
-            <atx-monitoring-console-details [log]="selectedLog" (close)="logSelect(null)"/>
+            <atx-monitoring-console-details [log]="state.selectedLog"/>
         </div>
     }
 </div>
-
-<atx-console-footer [cumulativeSize]="cumulativeSize" [numLogs]="logs.length"/>
+<atx-console-footer/>
 
 <svg id="icon-collection">
     <symbol id="json-icon" viewBox="0 0 16 16">

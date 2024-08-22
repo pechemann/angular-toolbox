@@ -6,7 +6,7 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AtxConsoleJson } from '../../../model/business/atx-console-json';
 
@@ -17,7 +17,8 @@ import { AtxConsoleJson } from '../../../model/business/atx-console-json';
     CommonModule
   ],
   templateUrl: './json-viewer-panel.component.html',
-  styleUrl: './json-viewer-panel.component.scss'
+  styleUrl: './json-viewer-panel.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AtxJsonViewerPanelComponent {
 
