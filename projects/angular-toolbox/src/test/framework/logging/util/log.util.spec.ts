@@ -50,7 +50,9 @@ describe('LogUtil', () => {
         const now: number = Date.now();
         const formated: string[] = LogUtil.dateToHHMMSS(now).split(":");
         const expected: Date = new Date(now);
-        expect(parseInt(formated[0])).toEqual(expected.getHours());
+        const currHours: number = expected.getHours();
+        const expectedHours: number = currHours > 12 ? currHours - 12 : currHours;
+        expect(parseInt(formated[0])).toEqual(expectedHours);
         expect(parseInt(formated[1])).toEqual(expected.getMinutes());
         expect(parseInt(formated[2])).toEqual(expected.getSeconds());
     });

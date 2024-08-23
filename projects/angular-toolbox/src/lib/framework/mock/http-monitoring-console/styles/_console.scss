@@ -6,18 +6,24 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
+ 
 :host {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 13px;
     --border-color: lightblue;
     --background-color: aliceblue;
     --selected-color: #d9eeff;
     --selected-error-color: lavenderblush;
     --light-gray: whitesmoke;
     --dark-gray: gainsboro;
+    display: block;
+}
+
+:host, table {
+    padding: 0;
+    margin: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 12px;
     color: black;
     background-color: white;
-    display: block;
 }
 
 menu {

@@ -12,17 +12,19 @@
     position: relative;
     padding: 0;
     margin: 0;
+    overflow: hidden;
 }
 
 #log-list-vieport {
     position: absolute;
-    width: 100%;
     display: flex;
     flex-direction: row;
     gap: 6px;
     padding: 6px;
     top: 34px;
     bottom: 34px;
+    left: 0;
+    right: 0;
 }
 
 #icon-collection {

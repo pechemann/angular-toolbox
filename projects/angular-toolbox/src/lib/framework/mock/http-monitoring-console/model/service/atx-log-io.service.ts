@@ -17,7 +17,8 @@ export class AtxLogIoService {
 
   private readonly _converter: LogConverter;
 
-  constructor(private _logger: HttpMockLoggingService) {
+  constructor(private _logger: HttpMockLoggingService
+  ) {
     this._converter = new LogConverter();
   }
 

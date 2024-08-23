@@ -10,32 +10,36 @@ import { EventEmitter } from "@angular/core";
 import { Log, LogConnector, LogLevel } from "../../../../model";
 
 /**
+ * @private
  * An implementation of the `LogConnector` class that sends logs to the HTTP
  * mocking console component.
  */
 export class HttpMonitoringConsoleLogConnector implements LogConnector {
 
     /**
-     * 
+     * @private
      */
     public readonly logs: Log[] = [];
 
+    /**
+     * @private
+     */
     public readonly change: EventEmitter<Log> = new EventEmitter(true);
 
     /**
-     * @inheritdoc
+     * @private
      */
     public destroy(): void {}
     
     /**
-     * @inheritdoc
+     * @private
      */
     public init(logList: Log[]): void {
         this.logs.push(...logList);
     }
 
     /**
-     * @inheritdoc
+     * @private
      */
     public sendLog(log: Log): void {
         const level: LogLevel = log.level;
@@ -44,13 +48,14 @@ export class HttpMonitoringConsoleLogConnector implements LogConnector {
     }
 
     /**
-     * @inheritdoc
+     * @private
      */
     public clearLogs(): void {
         this.logs.length = 0;
     }
 
     /**
+     * @private
      * Not supported.
      */
     public copyLogs(): void {}

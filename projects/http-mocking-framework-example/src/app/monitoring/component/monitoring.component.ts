@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularToolboxPageTitleComponent, BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
-import { HttpMock, HttpMockService, Log, AtxMonitoringConsoleComponent, SubscriptionService, IdentifiableComponent } from 'projects/angular-toolbox/src/public-api';
+import { HttpMock, HttpMockService, Log, AtxMonitoringConsoleComponent, SubscriptionService, IdentifiableComponent, AtxHttpMockConsoleService } from 'projects/angular-toolbox/src/public-api';
 import { MONITORING_MOCK_CONFIG } from '../../mock/monitoring/http-mock-config';
 import { MonitoringApi, MonitoringApiDescriptor } from '../../mock/monitoring/monitoring-api';
 import { HttpClient } from '@angular/common/http';
@@ -25,7 +25,8 @@ export class MonitoringComponent extends IdentifiableComponent implements OnInit
   constructor(breadcrumb: BreadcrumbService,
               private subscriptionService: SubscriptionService,
               httpClient: HttpClient,
-              private mockService: HttpMockService) {
+              private mockService: HttpMockService,
+              private console: AtxHttpMockConsoleService) {
     super();
     breadcrumb.removeAll()
               .addItem(breadcrumb.buildItem("Monitoring Sample Application"));
@@ -33,7 +34,9 @@ export class MonitoringComponent extends IdentifiableComponent implements OnInit
   }
 
   public ngOnInit(): void {
+    this.console.showConsole();
   }
+
 
   public ngOnDestroy(): void {
     this.subscriptionService.clearAll(this);

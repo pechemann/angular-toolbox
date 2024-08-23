@@ -15,6 +15,10 @@ const NULL: string = "null";
 const ARR_END: string = '...]';
 const OBJ_END: string = '...}'
 
+/**
+ * @private
+ * A utility class for managing metadata objects.
+ */
 export class DataUtil {
 
     public static parseJson(obj: any, label?: string): AtxConsoleJson {

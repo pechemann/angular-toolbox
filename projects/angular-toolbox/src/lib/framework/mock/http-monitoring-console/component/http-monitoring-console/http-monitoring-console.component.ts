@@ -6,7 +6,7 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
 import { AtxRequestDetailsComponent } from '../request-details/request-details.component';
 import { AtxConsoleFooterComponent } from '../console-footer/console-footer.component';
 import { AtxConsoleMenuComponent } from '../console-menu/console-menu.component';
@@ -34,7 +34,9 @@ import { AtxUserActionService } from '../../model/service/atx-user-action.servic
     AtxLogIoService,
     AtxMonitoringConsoleController,
     AtxUserActionService
-  ]
+  ],
+  encapsulation: ViewEncapsulation.ShadowDom
+  
 })
 export class AtxMonitoringConsoleComponent {
 

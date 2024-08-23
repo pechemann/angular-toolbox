@@ -30,6 +30,7 @@ export class SizeUtil {
     /**
      * @private
      * Returns the size of the specified object in bytes.
+     * 
      * @param obj The object for which to get the size.
      * @returns The size of the specified object.
      */
@@ -40,6 +41,7 @@ export class SizeUtil {
     
     /**
      * @private
+     * 
      * Returns the string representation of the specified size.
      * @param size The size, in bytes, for which to get the string representation.
      * @returns The string representation of the specified size.
