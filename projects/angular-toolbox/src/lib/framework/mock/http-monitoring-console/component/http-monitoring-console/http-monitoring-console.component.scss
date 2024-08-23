@@ -40,6 +40,10 @@
     border: 1px solid var(--border-color);
 }
 
+.reduced-request-list {
+    min-width: 250px;
+}
+
 #selected-log-viewport {
     height: 100%;
     width: 80%;

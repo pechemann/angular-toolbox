@@ -21,4 +21,8 @@ export class AtxConsoleMenuComponent {
   protected readonly actionType: any = AtxConsoleActionType;
 
   constructor(protected action: AtxUserActionService) {}
+
+  protected onFileSelect(event: any): void {
+    this.action.sendAction(AtxConsoleActionType.IMPORT_LOGS, event.target.files);
+  }
 }

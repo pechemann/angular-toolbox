@@ -40,36 +40,29 @@ export class AtxLogIoService {
     a.click();
   }
 
-  public importFile(): void {
-    const input: HTMLInputElement = document.createElement("input");
+  public importFile(fileList: FileList): void {
     const converter: LogConverter = this._converter;
     const logger: HttpMockLoggingService = this._logger;
-    input.setAttribute("type", "file");
-    input.setAttribute("accept", ".hmfl");
-    input.onchange = (event: any)=> {
-      const fileList = event.target.files;
-      const file: File = fileList[0];
-      if (file) {
-        var reader = new FileReader();
-        reader.readAsText(file, "UTF-8");
-        reader.onload = function (evt) {
-          const result: string = reader.result as any;
-          const resultLogData: HMFL = JSON.parse(result);
-          const logs: AtxHttpLogDto[] = resultLogData.logs;
-          let cursor: number = logs.length - 1;
-          for (; cursor >= 0; cursor--) {
-            const log: Log = converter.dtoToLog(logs[cursor]);
-            const metadata: HttpMockLoggingMetadata = log.metadata;
-            const level: LogLevel = log.level;
-            if (level === LogLevel.INFO) logger.info(metadata);
-            else if (level === LogLevel.ERROR) logger.error(metadata);
-          };
-        }
-        reader.onerror = function (e) {
-          console.log(e)
-        }
+    const file: File = fileList[0];
+    if (file) {
+      const reader: FileReader = new FileReader();
+      reader.readAsText(file, "UTF-8");
+      reader.onload = function (evt) {
+        const result: string = reader.result as any;
+        const resultLogData: HMFL = JSON.parse(result);
+        const logs: AtxHttpLogDto[] = resultLogData.logs;
+        let cursor: number = logs.length - 1;
+        for (; cursor >= 0; cursor--) {
+          const log: Log = converter.dtoToLog(logs[cursor]);
+          const metadata: HttpMockLoggingMetadata = log.metadata;
+          const level: LogLevel = log.level;
+          if (level === LogLevel.INFO) logger.info(metadata);
+          else if (level === LogLevel.ERROR) logger.error(metadata);
+        };
+      }
+      reader.onerror = function (e) {
+        console.log(e)
       }
     }
-    input.click();
   }
 }

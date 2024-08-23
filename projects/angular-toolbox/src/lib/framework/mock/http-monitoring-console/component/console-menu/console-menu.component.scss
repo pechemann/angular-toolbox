@@ -24,4 +24,9 @@ menu {
     .disabled {
         opacity: 0.25;
     }
+
+    input[type=file] {
+        display: none;
+        width:0;
+    }
 }

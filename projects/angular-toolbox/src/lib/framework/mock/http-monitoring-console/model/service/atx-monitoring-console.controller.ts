@@ -55,7 +55,7 @@ export class AtxMonitoringConsoleController extends IdentifiableComponent implem
     switch(action.type) {
       case AtxConsoleActionType.CLEAR_LOGS : this.clearLogs(); break;
       case AtxConsoleActionType.EXPORT_LOGS: this.exportLogs(); break;
-      case AtxConsoleActionType.IMPORT_LOGS: this._ioSvc.importFile(); break;
+      case AtxConsoleActionType.IMPORT_LOGS: this._ioSvc.importFile(action.data); break;
       case AtxConsoleActionType.LOG_SELECT: this._state.selectLog(action.data); break;
       case AtxConsoleActionType.CLOSE_DETAILS_PANEL: this._state.selectLog(null); break;
     }

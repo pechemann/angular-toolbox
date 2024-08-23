@@ -18,7 +18,7 @@ export class AtxHttpMockConsoleService implements OnDestroy {
 
   constructor(private _appRef: ApplicationRef) { }
 
-  public showConsole(): Window | null {
+  public open(): Window | null {
     const features: string = "left=100,top=100,width=800,height=450,popup=true,directories=no,titlebar=no,scrollbars=no,toolbar=no,location=no,status=no,menubar=no";
     const popup: WindowProxy | null = window.open('', '_blank', features);
     this._window = popup;
@@ -28,10 +28,14 @@ export class AtxHttpMockConsoleService implements OnDestroy {
     return popup;
   }
 
-  public ngOnDestroy(): void {
+  public close(): void {
     if (!this._window) return;
     //this._appRef.detachView()
     this._window.close();
     this._window = null;
+  }
+
+  public ngOnDestroy(): void {
+    this.close();
   }
 }
