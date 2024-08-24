@@ -12,6 +12,9 @@ import { LogConverter } from "../../util/io/log-converter";
 import { AtxHttpLogDto } from "../business/io/atx-http-log.dto";
 import { HMFL } from "../business/io/hmfl";
 
+const BLOB_TYPE: any = { type: 'application/json' };
+const UTF8: any = "UTF-8";
+
 @Injectable()
 export class AtxLogIoService {
 
@@ -33,7 +36,7 @@ export class AtxLogIoService {
       timestamp: Date.now()
     };
     const a: HTMLAnchorElement = document.createElement("a");
-    const file: Blob = new Blob([JSON.stringify(exportData)], { type: 'application/json' });
+    const file: Blob = new Blob([JSON.stringify(exportData)], BLOB_TYPE);
     a.href = URL.createObjectURL(file);
     a.download = "logs.hmfl";
     a.click();
@@ -43,14 +46,16 @@ export class AtxLogIoService {
     const converter: LogConverter = this._converter;
     const logger: HttpMockLoggingService = this._logger;
     const file: File = fileList[0];
+    const killReader: Function = this.killReader;
     if (file) {
       const reader: FileReader = new FileReader();
-      reader.readAsText(file, "UTF-8");
-      reader.onload = function (evt) {
+      reader.readAsText(file, UTF8);
+      reader.onload = ()=> {
         const result: string = reader.result as any;
         const resultLogData: HMFL = JSON.parse(result);
         const logs: AtxHttpLogDto[] = resultLogData.logs;
         let cursor: number = logs.length - 1;
+        killReader(reader);
         for (; cursor >= 0; cursor--) {
           const log: Log = converter.dtoToLog(logs[cursor]);
           const metadata: HttpMockLoggingMetadata = log.metadata;
@@ -59,9 +64,15 @@ export class AtxLogIoService {
           else if (level === LogLevel.ERROR) logger.error(metadata);
         };
       }
-      reader.onerror = function (e) {
+      reader.onerror = (e)=> {
+        killReader(reader);
         console.log(e)
       }
     }
+  }
+
+  private killReader(reader: FileReader): void {
+    reader.onload = null;
+    reader.onerror = null;
   }
 }
