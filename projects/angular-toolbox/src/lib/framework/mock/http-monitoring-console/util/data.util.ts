@@ -21,6 +21,15 @@ const OBJ_END: string = '...}'
  */
 export class DataUtil {
 
+    /**
+     * @private
+     * Parses the specified object and returns a `AtxConsoleJson` tree that represents
+     * the structure of parsed object.
+     * 
+     * @param obj The object to parse.
+     * @param label An optional `label` used to set the label property of the `AtxConsoleJson` object.
+     * @returns a `AtxConsoleJson` tree object.
+     */
     public static parseJson(obj: any, label?: string): AtxConsoleJson {
         const primitive: string = typeof obj;
         let type: ConsoleTypeClass = ConsoleTypeClass.OBJECT,
@@ -63,6 +72,13 @@ export class DataUtil {
           }
     }
     
+    /**
+     * @private
+     * Returns a constant of the ConsoleBodyType enum, depending on the type of the specified object.
+     * 
+     * @param obj The object for wich to get the type.
+     * @returns A constant of the ConsoleBodyType enum.
+     */
     public static getBodyType(obj: any): ConsoleBodyType {
         const primitive: string = typeof obj;
         if (obj === null || obj === undefined) return ConsoleBodyType.NULL;
@@ -70,6 +86,7 @@ export class DataUtil {
         if (obj instanceof Blob) return ConsoleBodyType.BLOB;
         if (obj instanceof FormData) return ConsoleBodyType.FORM_DATA;
         if (obj instanceof ArrayBuffer) return ConsoleBodyType.ARRAY_BUFFER;
+        if (Array.isArray(obj)) return ConsoleBodyType.ARRAY;
         if (primitive === OBJECT) return ConsoleBodyType.JSON;
         return ConsoleBodyType.INVALID;
     }

@@ -6,14 +6,57 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
+/**
+ * @private
+ * The list of object types used to qualify parsed objects.
+ */
 export enum ConsoleBodyType {
 
+    /**
+     * @private
+     * Indicates that the type of object is not supported.
+     */
     INVALID = -1,
-    NULL = 0,
-    JSON = 1,
-    TEXT = 2,
-    BLOB = 3,
-    FORM_DATA = 4,
-    ARRAY_BUFFER = 5
     
+    /**
+     * @private
+     * Indicates that the object is null.
+     */
+    NULL = 0,
+
+    /**
+     * @private
+     * Indicates that the object is a Json.
+     */
+    JSON = 1,
+
+    /**
+     * @private
+     * Indicates that the object is a string.
+     */
+    TEXT = 2,
+
+    /**
+     * @private
+     * Indicates that the object is a Blob instance.
+     */
+    BLOB = 3,
+
+    /**
+     * @private
+     * Indicates that the object is a FormData instance.
+     */
+    FORM_DATA = 4,
+
+    /**
+     * @private
+     * Indicates that the object is an ArrayBuffer instance.
+     */
+    ARRAY_BUFFER = 5,
+
+    /**
+     * @private
+     * Indicates that the object is an Array.
+     */
+    ARRAY = 6
 }
