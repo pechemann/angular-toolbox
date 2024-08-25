@@ -6,10 +6,11 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
+import { AtxBodyDto } from "./atx-body-dto";
 import { AtxHeaderDto } from "./atx-header-dto";
 
 export interface AtxHttpRequestDto {
-    body: any;
+    body: AtxBodyDto;
     reportProgress: boolean;
     withCredentials: boolean;
     responseType: string;

@@ -6,12 +6,13 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
+import { HttpStatusCode } from "@angular/common/http";
 import { AtxBodyDto } from "./atx-body-dto";
 import { AtxHeaderDto } from "./atx-header-dto";
 
 export interface AtxHttpResponseDto {
     headers: AtxHeaderDto[];
-    status: number;
+    status: HttpStatusCode;
     statusText: string;
     url: string | null;
     body: AtxBodyDto;

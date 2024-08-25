@@ -11,8 +11,19 @@ import { HttpHeadersConverter } from "./log-headers-converter";
 import { AtxHttpResponseDto } from "../../model/business/io/atx-http-response.dto";
 import { BodyConverter } from "./body-converter";
 
+/**
+ * @private
+ * A utility class that converts `HttpResponse` instances into `AtxHttpResponseDto` objects.
+ */
 export class HttpResponseConverter {
 
+    /**
+     * @private
+     * Converts a `HttpResponse` instance into an `AtxHttpResponseDto` object.
+     * 
+     * @param request The `HttpResponse` instance to convert.
+     * @returns A new `AtxHttpResponseDto` object.
+     */
     public static buildResponseDto(response: HttpResponse<any>): AtxHttpResponseDto {
         return {
             body: BodyConverter.bodyToDto(response.body),
@@ -23,6 +34,13 @@ export class HttpResponseConverter {
         }
     }
 
+    /**
+     * @private
+     * Converts an `AtxHttpResponseDto` object into a `HttpResponse` instance.
+     * 
+     * @param request The `AtxHttpResponseDto` object to convert.
+     * @returns A new `HttpResponse` instance.
+     */
     public static buildHttpResponse(dto: AtxHttpResponseDto): HttpResponse<any> {
         const init: any = {
             body: BodyConverter.dtoToBody(dto.body),

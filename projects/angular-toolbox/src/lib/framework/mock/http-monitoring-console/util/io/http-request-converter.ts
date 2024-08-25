@@ -14,7 +14,7 @@ import { ATX_IS_IMPORTED_LOG } from "../../model/business/atx-is-imported-log";
 
 /**
  * @private
- * A utility class that converts `HttpRequest` instances into an `AtxHttpRequestDto` objects.
+ * A utility class that converts `HttpRequest` instances into `AtxHttpRequestDto` objects.
  */
 export class HttpRequestConverter {
 

@@ -40,4 +40,9 @@ describe('SizeUtil', () => {
         expect(SizeUtil.sizeToString(860.3698554 * 1024)).toEqual("860.37 KB");
         expect(SizeUtil.sizeToString(860.89284357 * 1024 * 1024)).toEqual("860.89 MB");
     });
+
+    it('SizeUtil.INITIAL_SIZE should equal toe "0 B"', () => {
+        expect(SizeUtil.INITIAL_SIZE).toEqual("0 B");
+    });
+    
 });

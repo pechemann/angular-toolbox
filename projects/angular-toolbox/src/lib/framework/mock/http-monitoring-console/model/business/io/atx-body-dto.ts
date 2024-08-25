@@ -6,9 +6,11 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
+import { ConsoleBodyType } from "../../../util/console-body-type";
+
 export interface AtxBodyDto {
 
-    type: number;
+    type: ConsoleBodyType;
 
     data: string | null;
 }

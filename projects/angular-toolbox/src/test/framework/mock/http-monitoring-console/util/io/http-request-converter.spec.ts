@@ -41,7 +41,6 @@ describe('HttpRequestConverter', () => {
         }
         return dto;
     };
-    dto: 
 
     it('buildRequestDto() should return an AtxHttpRequestDto object', () => {
         const request = buildRequest();

@@ -31,7 +31,7 @@ export class AtxMonitoringConsoleState {
   };
 
   private _selectedLog: Log | null = null;
-  private _cumulativeSize: string = "0 B";
+  private _cumulativeSize: string = SizeUtil.INITIAL_SIZE;
   private _logs: Log[] = [];
   private _size: number = 0; 
 
@@ -41,7 +41,7 @@ export class AtxMonitoringConsoleState {
       const id: Uuid = log.metadata.requestMetadata.id;
       this._size += size;
       this._cumulativeSize = SizeUtil.sizeToString(this._size);
-      const idx = this._logs.findIndex(prefetch => prefetch.metadata.requestMetadata.id === id);
+      const idx: number = this._logs.findIndex(prefetch => prefetch.metadata.requestMetadata.id === id);
       idx > -1 ? this._logs.splice(idx, 1, log) : this._logs.push(log);
       if (this.selectedLog?.metadata.requestMetadata.id === id) this._selectedLog = log;
     } else this._logs.push(log);
@@ -50,6 +50,7 @@ export class AtxMonitoringConsoleState {
   public clearLogs(): void {
     this._selectedLog = null;
     this._size = this._logs.length = 0;
+    this._cumulativeSize = SizeUtil.INITIAL_SIZE;
   }
 
   public selectLog(log: Log | null): void {

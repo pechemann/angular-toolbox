@@ -28,6 +28,11 @@ const MB: string = " MB";
 export class SizeUtil {
 
     /**
+     * The string reference to the initial data size.
+     */
+    public static readonly INITIAL_SIZE: string = "0 B";
+
+    /**
      * @private
      * Returns the size of the specified object in bytes.
      * 
