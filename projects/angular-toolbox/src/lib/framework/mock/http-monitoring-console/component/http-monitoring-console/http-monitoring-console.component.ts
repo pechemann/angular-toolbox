@@ -44,6 +44,5 @@ export class AtxMonitoringConsoleComponent {
               private _ctrl: AtxMonitoringConsoleController,
               private _io: AtxLogIoService,
               private _input: AtxUserActionService,
-              private _cdr: ChangeDetectorRef) {
-  }
+              private _cdr: ChangeDetectorRef) {}
 }

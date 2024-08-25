@@ -29,7 +29,9 @@ export class HttpMonitoringConsoleLogConnector implements LogConnector {
     /**
      * @private
      */
-    public destroy(): void {}
+    public destroy(): void {
+        this.clearLogs();
+    }
     
     /**
      * @private

@@ -12,8 +12,19 @@ import { HttpHeadersConverter } from "./log-headers-converter";
 import { BodyConverter } from "./body-converter";
 import { ATX_IS_IMPORTED_LOG } from "../../model/business/atx-is-imported-log";
 
+/**
+ * @private
+ * A utility class that converts `HttpRequest` instances into an `AtxHttpRequestDto` objects.
+ */
 export class HttpRequestConverter {
 
+    /**
+     * @private
+     * Converts a `HttpRequest` instance into an `AtxHttpRequestDto` object.
+     * 
+     * @param request The `HttpRequest` instance to convert.
+     * @returns A new `AtxHttpRequestDto` object.
+     */
     public static buildRequestDto(request: HttpRequest<any>): AtxHttpRequestDto {
         return {
             body: BodyConverter.bodyToDto(request.body),
@@ -27,6 +38,13 @@ export class HttpRequestConverter {
         }
     }
     
+    /**
+     * @private
+     * Converts an `AtxHttpRequestDto` object into a `HttpRequest` instance.
+     * 
+     * @param request The `AtxHttpRequestDto` object to convert.
+     * @returns A new `HttpRequest` instance.
+     */
     public static buildHttpRequest(dto: AtxHttpRequestDto): HttpRequest<any> {
         const ctx: HttpContext = new HttpContext();
         const paramsOpt: HttpParamsOptions = {
