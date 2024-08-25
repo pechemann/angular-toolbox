@@ -11,26 +11,36 @@ import { Log, LogLevel } from "../../../../../model";
 import { AtxHttpLogDto } from "../../model/business/io/atx-http-log.dto";
 import { LogMessageUtil } from "./log-message.util";
 import { LogMetadataConverter } from "./log-metadata-converter";
+import { LogBuilder } from "../../../../../framework";
 
+/**
+ * @private
+ * A utility class that converts `Log` objects into `AtxHttpLogDto` objects.
+ */
 export class LogConverter {
 
+    /**
+     * @private
+     * Converts a `object` object into an `AtxHttpLogDto` object.
+     * 
+     * @param request The `Log` object to convert.
+     * @returns A new `AtxHttpLogDto` object.
+     */
     public logToDto(log: Log): AtxHttpLogDto {
         return {
             level: log.level,
             timestamp: log.timestamp,
             metadata: LogMetadataConverter.metadataToDto(log.metadata)
-        }
+        };
     }
 
     public dtoToLog(dto: AtxHttpLogDto): Log {
         const level: LogLevel = dto.level;
-        const log: Log = {
-            caller: HttpMockLoggingConstant.CALLER,
-            level: level,
-            timestamp: dto.timestamp,
-            message: LogMessageUtil.getMessageFromLevel(level),
-            metadata: LogMetadataConverter.dtoToMetadata(dto.metadata)
-        }
-        return log;
+        return LogBuilder.build(
+            HttpMockLoggingConstant.CALLER,
+            LogMessageUtil.getMessageFromLevel(level),
+            level,
+            LogMetadataConverter.dtoToMetadata(dto.metadata)
+        );
     }
 }
