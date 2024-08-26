@@ -9,8 +9,19 @@
 import { HttpHeaders } from "@angular/common/http";
 import { AtxHeaderDto } from "../../model/business/io/atx-header-dto";
 
+/**
+ * @private
+ * A utility class that converts `HttpHeaders` instances into lists of `AtxHeaderDto` objects.
+ */
 export class HttpHeadersConverter {
 
+    /**
+     * @private
+     * Converts a `HttpHeaders` instance into a list of `AtxHeaderDto` object.
+     * 
+     * @param headers The `HttpHeaders` instance to convert.
+     * @returns A new `AtxHeaderDto` object.
+     */
     public static headersToDto(headers: HttpHeaders): AtxHeaderDto[] {
         const dtoList: AtxHeaderDto[] = [];
         const keys: string[] = headers.keys();
@@ -25,6 +36,13 @@ export class HttpHeadersConverter {
         return dtoList;
     }
 
+    /**
+     * @private
+     * Converts a list of `AtxHeaderDto` objects into a `HttpHeaders` instance.
+     * 
+     * @param headersDto The list of `AtxHeaderDto` objects to convert.
+     * @returns A new `HttpHeaders` instance.
+     */
     public static dtoToHeaders(headersDto: AtxHeaderDto[]): HttpHeaders {
         let headers: HttpHeaders = new HttpHeaders();
         let cursor: number = headersDto.length - 1;

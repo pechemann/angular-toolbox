@@ -10,8 +10,19 @@ import { HttpMockRequestMetadata } from "../../../../../model";
 import { AtxHttpRequestMetadataDto } from "../../model/business/io/atx-http-request-metadata.dto.ts";
 import { Uuid } from "../../../../../util";
 
+/**
+ * @private
+ * A utility class that converts `HttpMockRequestMetadata` objects into `AtxHttpRequestMetadataDto` objects.
+ */
 export class RequestMetadataConverter {
 
+    /**
+     * @private
+     * Converts a `HttpMockRequestMetadata` object into an `AtxHttpRequestMetadataDto` object.
+     * 
+     * @param headers The `HttpMockRequestMetadata` object to convert.
+     * @returns A new `AtxHttpRequestMetadataDto` object.
+     */
     public static requestMetadataToDto(metadata: HttpMockRequestMetadata): AtxHttpRequestMetadataDto {
         return {
             duration: metadata.duration,
@@ -22,13 +33,20 @@ export class RequestMetadataConverter {
         };
     }
     
-    public static dtoToRequestMetadata(metadata: AtxHttpRequestMetadataDto): HttpMockRequestMetadata {
+    /**
+     * @private
+     * Converts an `AtxHttpRequestMetadataDto` object into a `HttpMockRequestMetadata` object.
+     * 
+     * @param headersDto The `AtxHttpRequestMetadataDto` objects to convert.
+     * @returns A new `HttpMockRequestMetadata` objects.
+     */
+    public static dtoToRequestMetadata(dto: AtxHttpRequestMetadataDto): HttpMockRequestMetadata {
         return {
-            duration: metadata.duration,
-            id: Uuid.fromString(metadata.id),
-            stalled: metadata.stalled,
-            start: metadata.start,
-            url: new URL(metadata.url)
+            duration: dto.duration,
+            id: Uuid.fromString(dto.id),
+            stalled: dto.stalled,
+            start: dto.start,
+            url: new URL(dto.url)
         };
     }
 }

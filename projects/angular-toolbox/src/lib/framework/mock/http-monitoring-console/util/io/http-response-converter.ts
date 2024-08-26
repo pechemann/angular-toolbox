@@ -21,7 +21,7 @@ export class HttpResponseConverter {
      * @private
      * Converts a `HttpResponse` instance into an `AtxHttpResponseDto` object.
      * 
-     * @param request The `HttpResponse` instance to convert.
+     * @param response The `HttpResponse` instance to convert.
      * @returns A new `AtxHttpResponseDto` object.
      */
     public static buildResponseDto(response: HttpResponse<any>): AtxHttpResponseDto {
@@ -38,7 +38,7 @@ export class HttpResponseConverter {
      * @private
      * Converts an `AtxHttpResponseDto` object into a `HttpResponse` instance.
      * 
-     * @param request The `AtxHttpResponseDto` object to convert.
+     * @param dto The `AtxHttpResponseDto` object to convert.
      * @returns A new `HttpResponse` instance.
      */
     public static buildHttpResponse(dto: AtxHttpResponseDto): HttpResponse<any> {

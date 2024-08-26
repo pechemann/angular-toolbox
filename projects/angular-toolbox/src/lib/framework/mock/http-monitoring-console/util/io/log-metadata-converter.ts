@@ -12,8 +12,19 @@ import { RequestMetadataConverter } from "./request-metadata-converter";
 import { HttpRequestConverter } from "./http-request-converter";
 import { HttpResponseConverter } from "./http-response-converter";
 
+/**
+ * @private
+ * A utility class that converts `HttpMockLoggingMetadata` objects into `AtxHttpLogMetadataDto` objects.
+ */
 export class LogMetadataConverter {
 
+    /**
+     * @private
+     * Converts a `HttpMockLoggingMetadata` object into an `AtxHttpLogMetadataDto` object.
+     * 
+     * @param headers The `HttpMockLoggingMetadata` object to convert.
+     * @returns A new `AtxHttpLogMetadataDto` object.
+     */
     public static metadataToDto(metadata: HttpMockLoggingMetadata): AtxHttpLogMetadataDto {
         return {
             request: HttpRequestConverter.buildRequestDto(metadata.request),
@@ -22,6 +33,13 @@ export class LogMetadataConverter {
         };
     }
 
+    /**
+     * @private
+     * Converts an `AtxHttpLogMetadataDto` object into a `HttpMockLoggingMetadata` object.
+     * 
+     * @param headersDto The `AtxHttpLogMetadataDto` objects to convert.
+     * @returns A new `HttpMockLoggingMetadata` objects.
+     */
     public static dtoToMetadata(dto: AtxHttpLogMetadataDto): HttpMockLoggingMetadata {
         return {
             request: HttpRequestConverter.buildHttpRequest(dto.request),

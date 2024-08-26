@@ -18,7 +18,7 @@ const UTF8: any = "UTF-8";
 @Injectable()
 export class AtxLogIoService {
 
-  private readonly _converter: LogConverter;
+  private _converter: LogConverter;
 
   constructor(private _logger: HttpMockLoggingService) {
     this._converter = new LogConverter();

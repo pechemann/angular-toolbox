@@ -35,7 +35,11 @@ export class AtxMonitoringConsoleController extends IdentifiableComponent implem
   }
 
   public ngOnDestroy(): void {
+    this.clearLogs();
     this._subscribe.clearAll(this);
+    this._logger.setLogConnector(null);
+    this.connector.destroy();
+    this.connector = null as any;
   }
 
   private clearLogs(): void {

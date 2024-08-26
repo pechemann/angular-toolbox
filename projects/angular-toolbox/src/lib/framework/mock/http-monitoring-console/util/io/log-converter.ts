@@ -23,7 +23,7 @@ export class LogConverter {
      * @private
      * Converts a `object` object into an `AtxHttpLogDto` object.
      * 
-     * @param request The `Log` object to convert.
+     * @param log The `Log` object to convert.
      * @returns A new `AtxHttpLogDto` object.
      */
     public logToDto(log: Log): AtxHttpLogDto {
@@ -34,6 +34,13 @@ export class LogConverter {
         };
     }
 
+    /**
+     * @private
+     * Converts an `AtxHttpLogDto` object into a `Log` object.
+     * 
+     * @param dto The `AtxHttpLogDto` object to convert.
+     * @returns A new `Log` object.
+     */
     public dtoToLog(dto: AtxHttpLogDto): Log {
         const level: LogLevel = dto.level;
         return LogBuilder.build(

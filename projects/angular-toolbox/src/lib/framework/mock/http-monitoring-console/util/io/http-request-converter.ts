@@ -42,7 +42,7 @@ export class HttpRequestConverter {
      * @private
      * Converts an `AtxHttpRequestDto` object into a `HttpRequest` instance.
      * 
-     * @param request The `AtxHttpRequestDto` object to convert.
+     * @param dto The `AtxHttpRequestDto` object to convert.
      * @returns A new `HttpRequest` instance.
      */
     public static buildHttpRequest(dto: AtxHttpRequestDto): HttpRequest<any> {
