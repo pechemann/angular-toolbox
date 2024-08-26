@@ -12,7 +12,7 @@ import { AtxUserActionService } from "projects/angular-toolbox/src/lib/framework
 describe('AtxUserActionService', () => {
     let service: AtxUserActionService;
     
-    beforeEach(async () => {
+    beforeEach(() => {
         service = new AtxUserActionService();
     });
     
