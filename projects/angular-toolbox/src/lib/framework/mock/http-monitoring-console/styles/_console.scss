@@ -103,3 +103,7 @@ th {
     display: flex;
     justify-content: center;
 }
+
+summary {
+    user-select: none;
+}

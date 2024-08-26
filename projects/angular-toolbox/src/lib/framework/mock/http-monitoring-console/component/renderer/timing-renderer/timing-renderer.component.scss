@@ -8,11 +8,6 @@
 
  @import "../../../styles/console";
 
- .timeline {
-    width: 100%;
-    margin-top: 6px;
-}
-
 .download, .stalled {
     width: 100%;
     height: 10px;
@@ -33,4 +28,18 @@
 
 .error {
     background-color: red;
+}
+
+dl {
+    margin: 0 0 10px 0;
+}
+
+dt {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+dd {
+    width: calc(100% - 40px);
+    margin-left: 20px;
 }

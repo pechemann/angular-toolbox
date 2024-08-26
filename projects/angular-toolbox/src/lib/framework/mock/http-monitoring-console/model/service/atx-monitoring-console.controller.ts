@@ -16,11 +16,21 @@ import { AtxConsoleAction } from "../business/atx-console-action";
 import { AtxConsoleActionType } from "../business/atx-console-action-type";
 import { AtxUserActionService } from "./atx-user-action.service";
 
+/**
+ * @private
+ * The service that manages user interactions with an `AtxMonitoringConsoleComponent` instance.
+ */
 @Injectable()
 export class AtxMonitoringConsoleController extends IdentifiableComponent implements OnDestroy {
 
+  /**
+   * @private
+   */
   protected connector: HttpMonitoringConsoleLogConnector;
 
+  /**
+   * @private
+   */
   constructor(private _logger: HttpMockLoggingService,
               private _state: AtxMonitoringConsoleState,
               private _ioSvc: AtxLogIoService,
@@ -37,6 +47,9 @@ export class AtxMonitoringConsoleController extends IdentifiableComponent implem
     this._logger.setLogConnector(connector);
   }
 
+  /**
+   * @private
+   */
   public ngOnDestroy(): void {
     this._subscribe.clearAll(this);
     this._logger.setLogConnector(null);
@@ -44,19 +57,31 @@ export class AtxMonitoringConsoleController extends IdentifiableComponent implem
     this.connector = null as any;
   }
 
+  /**
+   * @private
+   */
   private clearLogs(): void {
     this._logger.clearLogs();
     this._state.clearLogs();
   }
   
+  /**
+   * @private
+   */
   private exportLogs(): void {
     this._ioSvc.exportFile(this._state.logs);
   }
   
+  /**
+   * @private
+   */
   private addLog(log: Log): void {
     this._state.addLog(log);
   }
   
+  /**
+   * @private
+   */
   private onAction(action: AtxConsoleAction): void {
     switch(action.type) {
       case AtxConsoleActionType.CLEAR_LOGS : this.clearLogs(); break;
