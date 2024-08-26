@@ -6,7 +6,7 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { AtxRequestDetailsComponent } from '../request-details/request-details.component';
 import { AtxConsoleFooterComponent } from '../console-footer/console-footer.component';
 import { AtxConsoleMenuComponent } from '../console-menu/console-menu.component';
@@ -43,6 +43,5 @@ export class AtxMonitoringConsoleComponent {
   constructor(protected state: AtxMonitoringConsoleState,
               private _ctrl: AtxMonitoringConsoleController,
               private _io: AtxLogIoService,
-              private _input: AtxUserActionService,
-              private _cdr: ChangeDetectorRef) {}
+              private _input: AtxUserActionService) {}
 }

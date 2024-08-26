@@ -35,6 +35,10 @@ export class AtxMonitoringConsoleState {
   private _logs: Log[] = [];
   private _size: number = 0; 
 
+  public init(logs: Log[]): void {
+    this._logs.push(...logs);
+  }
+
   public addLog(log: Log): void {
     if (log.level !== LogLevel.CONFIG) {
       const size: number = SizeUtil.getSize(log.metadata.response.body);

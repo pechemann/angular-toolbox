@@ -8,6 +8,7 @@
 
 import { ApplicationRef, Injectable, OnDestroy } from "@angular/core";
 import { AtxMonitoringConsoleComponent } from "../../../../../framework/mock/http-monitoring-console";
+import { EMPTY_STRING } from "../../../../../util";
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class AtxHttpMockConsoleService implements OnDestroy {
 
   public open(): Window | null {
     const features: string = "left=100,top=100,width=800,height=450,popup=true,directories=no,titlebar=no,scrollbars=no,toolbar=no,location=no,status=no,menubar=no";
-    const popup: WindowProxy | null = window.open('', '_blank', features);
+    const popup: WindowProxy | null = window.open(EMPTY_STRING, '_blank', features);
     this._window = popup;
     if (!popup) return null;
     popup.document.title = "HTTP Mocking Framework Console";
