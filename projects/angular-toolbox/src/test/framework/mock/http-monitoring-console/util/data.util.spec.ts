@@ -40,10 +40,6 @@ describe('DataUtil', () => {
         expect(DataUtil.getBodyType(ab)).toEqual(ConsoleBodyType.ARRAY_BUFFER);
     });
 
-    it('getBodyType() should return ConsoleBodyType.ARRAY when object is an array', () => {
-        expect(DataUtil.getBodyType([])).toEqual(ConsoleBodyType.ARRAY);
-    });
-
     it('getBodyType() should return ConsoleBodyType.JSON when object is a javascript object', () => {
         const json: any = { foo: "bar" };
         expect(DataUtil.getBodyType(json)).toEqual(ConsoleBodyType.JSON);

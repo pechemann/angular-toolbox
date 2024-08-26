@@ -37,11 +37,6 @@ describe('BodySerializer', () => {
         expect(result).toBeNull();
     });
 
-    it('serialize() should return null when object is an array', () => {
-        const result: any = BodySerializer.serialize([], ConsoleBodyType.ARRAY);
-        expect(result).toBeNull();
-    });
-
     it('serialize() should return null when object is a null', () => {
         const result: any = BodySerializer.serialize(null, ConsoleBodyType.NULL);
         expect(result).toBeNull();

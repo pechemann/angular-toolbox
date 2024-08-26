@@ -37,8 +37,4 @@ describe('ConsoleBodyType', () => {
     it('ConsoleBodyType.ARRAY_BUFFER should equal 5', () => {
         expect(ConsoleBodyType.ARRAY_BUFFER).toEqual(5);
     });
-
-    it('ConsoleBodyType.ARRAY should equal 6', () => {
-        expect(ConsoleBodyType.ARRAY).toEqual(6);
-    });
 });

@@ -86,7 +86,6 @@ export class DataUtil {
         if (obj instanceof Blob) return ConsoleBodyType.BLOB;
         if (obj instanceof FormData) return ConsoleBodyType.FORM_DATA;
         if (obj instanceof ArrayBuffer) return ConsoleBodyType.ARRAY_BUFFER;
-        if (Array.isArray(obj)) return ConsoleBodyType.ARRAY;
         if (primitive === OBJECT) return ConsoleBodyType.JSON;
         return ConsoleBodyType.INVALID;
     }

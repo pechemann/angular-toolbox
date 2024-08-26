@@ -33,10 +33,12 @@ export class AtxMonitoringConsoleState {
   private _selectedLog: Log | null = null;
   private _cumulativeSize: string = SizeUtil.INITIAL_SIZE;
   private _logs: Log[] = [];
-  private _size: number = 0; 
+  private _size: number = 0;
 
   public init(logs: Log[]): void {
-    this._logs.push(...logs);
+    const len: number = logs.length - 1;
+    let i: number = 0;
+    for (; i <= len; ++i) this.addLog(logs[i]);
   }
 
   public addLog(log: Log): void {

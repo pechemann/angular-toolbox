@@ -38,7 +38,7 @@ export class AtxResponseBodyRendererComponent {
     if (value) {
       const bodyType: ConsoleBodyType = DataUtil.getBodyType(value);
       if (bodyType === ConsoleBodyType.TEXT) this.text = value;
-      else if (bodyType === ConsoleBodyType.JSON || bodyType === ConsoleBodyType.ARRAY) this.text = JSON.stringify(value);
+      else if (bodyType === ConsoleBodyType.JSON) this.text = JSON.stringify(value);
       else if (bodyType === ConsoleBodyType.BLOB) this.blob = value;
       else if (bodyType === ConsoleBodyType.ARRAY_BUFFER) this.arrayBuffer = value;
     }

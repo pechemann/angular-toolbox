@@ -28,14 +28,16 @@ export class AtxMonitoringConsoleController extends IdentifiableComponent implem
               action: AtxUserActionService) {
     super("AtxMonitoringConsoleController");
     const connector: HttpMonitoringConsoleLogConnector = new HttpMonitoringConsoleLogConnector();
+    const logs: Log[] = this._logger.getLogs();
     this.connector = connector;
-    this._logger.setLogConnector(connector);
     this._subscribe.register(this, connector.change.subscribe((log: Log)=> this.addLog(log)))
                     .append(action.action.subscribe((action: AtxConsoleAction)=> this.onAction(action)));
+    this.connector.init(logs)
+    this._state.init(logs);
+    this._logger.setLogConnector(connector);
   }
 
   public ngOnDestroy(): void {
-    this.clearLogs();
     this._subscribe.clearAll(this);
     this._logger.setLogConnector(null);
     this.connector.destroy();

@@ -24,6 +24,9 @@ header {
     menu {
         background-color: var(--background-color);
         border: 1px solid var(--border-color);
+        display: flex;
+        align-items: center;
+        height: var(--header-height);
         li {
             padding: 0 0 0 6px;
         }

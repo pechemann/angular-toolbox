@@ -105,6 +105,10 @@ export class HttpMockLoggingService implements TransactionalLogger, OnDestroy {
         this._logger = null as any;
     }
 
+    public getLogs(): Log[] {
+        return this._logger.getLogs();
+    }
+
     /**
      * @inheritdoc
      */

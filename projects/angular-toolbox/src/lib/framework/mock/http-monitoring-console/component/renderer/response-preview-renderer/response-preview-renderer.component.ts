@@ -48,7 +48,7 @@ export class AtxResponsePreviewRendererComponent implements OnDestroy {
     if (body) {
       const bodyType: ConsoleBodyType = DataUtil.getBodyType(body);
       if (bodyType === ConsoleBodyType.TEXT) this.text = body;
-      else if (bodyType === ConsoleBodyType.JSON || bodyType === ConsoleBodyType.ARRAY) this.json = body;
+      else if (bodyType === ConsoleBodyType.JSON) this.json = body;
       else if (bodyType === ConsoleBodyType.BLOB) {
         if (body.type.startsWith(IMG_TYPE) ||
         body.type.startsWith(SVG_TYPE)) {

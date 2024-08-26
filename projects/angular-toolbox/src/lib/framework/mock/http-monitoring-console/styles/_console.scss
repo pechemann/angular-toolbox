@@ -14,6 +14,7 @@
     --selected-error-color: lavenderblush;
     --light-gray: whitesmoke;
     --dark-gray: gainsboro;
+    --header-height: 26px;
     display: block;
 }
 
@@ -76,11 +77,12 @@ tr:hover {
     background-color: var(--light-gray);
 }
 
+th {
+    height: var(--header-height);
+}
+
 .header-btn {
     margin-left: auto;
-    svg {
-        margin-top: 4px;
-    }
 }
 
 .header-btn:hover {

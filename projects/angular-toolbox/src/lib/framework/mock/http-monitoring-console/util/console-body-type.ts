@@ -52,11 +52,5 @@ export enum ConsoleBodyType {
      * @private
      * Indicates that the object is an ArrayBuffer instance.
      */
-    ARRAY_BUFFER = 5,
-
-    /**
-     * @private
-     * Indicates that the object is an Array.
-     */
-    ARRAY = 6
+    ARRAY_BUFFER = 5
 }

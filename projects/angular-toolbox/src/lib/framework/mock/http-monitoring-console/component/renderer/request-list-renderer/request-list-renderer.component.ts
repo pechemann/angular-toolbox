@@ -6,7 +6,7 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { Log } from '../../../../../../model';
 import { HttpResponse } from '@angular/common/http';
 import { SizeUtil } from '../../../util/size.util';
@@ -28,8 +28,7 @@ const MS_SUFIX: string = " ms";
     AtxIconRendererComponent
   ],
   templateUrl: './request-list-renderer.component.html',
-  styleUrl: './request-list-renderer.component.scss',
-  //changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrl: './request-list-renderer.component.scss'
 })
 export class AtxRequestListRendererComponent {
   
