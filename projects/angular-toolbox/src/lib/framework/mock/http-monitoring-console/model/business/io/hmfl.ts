@@ -8,8 +8,21 @@
 
 import { AtxHttpLogDto } from "./atx-http-log.dto";
 
-
+/**
+ * @private
+ * This interface represents the file format of logs exported by the monitoring console.
+ */
 export interface HMFL {
+
+    /**
+     * @private
+     * The list of serialized logs to export.
+     */
     logs: AtxHttpLogDto[];
+
+    /**
+     * @private
+     * The timestamp at which the logs have been exported.
+     */
     timestamp: number;
 }

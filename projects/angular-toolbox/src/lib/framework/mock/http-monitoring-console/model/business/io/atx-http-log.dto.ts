@@ -9,19 +9,26 @@
 import { LogLevel } from "../../../../../../model";
 import { AtxHttpLogMetadataDto } from "./atx-http-log-metadata.dto";
 
+/**
+ * @private
+ * The interface that must be implementd by ATX HTTP log DTOs.
+ */
 export interface AtxHttpLogDto {
     
     /**
+     * @private
      * The criticality level of this log dto.
      */
     level: LogLevel;
 
     /**
+     * @private
      * The timestamp at which the original log has been created.
      */
     timestamp: number;
 
     /**
+     * @private
      * Metada associated with the original log.
      */
     metadata: AtxHttpLogMetadataDto;

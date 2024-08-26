@@ -8,9 +8,21 @@
 
 import { AtxConsoleActionType } from "./atx-console-action-type";
 
+/**
+ * @private
+ * Defines a user action.
+ */
 export interface AtxConsoleAction {
 
+    /**
+     * @private
+     * The type of action triggered by the user.
+     */
     type: AtxConsoleActionType;
 
+    /**
+     * @private
+     * Optional data associated with the triggered action.
+     */
     data?: any;
 }

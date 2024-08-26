@@ -8,4 +8,8 @@
 
 import { HttpContextToken } from "@angular/common/http";
 
+/**
+ * @private
+ * A HTTP context value that indicates whether the specified log is imported (`true`), or not (`false`).
+ */
 export const ATX_IS_IMPORTED_LOG: HttpContextToken<boolean> = new HttpContextToken<boolean>(() => false);

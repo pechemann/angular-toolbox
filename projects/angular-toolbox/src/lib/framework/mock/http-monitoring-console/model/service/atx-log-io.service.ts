@@ -12,7 +12,14 @@ import { LogConverter } from "../../util/io/log-converter";
 import { AtxHttpLogDto } from "../business/io/atx-http-log.dto";
 import { HMFL } from "../business/io/hmfl";
 
+/**
+ * @private
+ */
 const BLOB_TYPE: any = { type: 'application/json' };
+
+/**
+ * @private
+ */
 const UTF8: any = "UTF-8";
 
 @Injectable()
@@ -71,6 +78,9 @@ export class AtxLogIoService {
     }
   }
 
+  /**
+   * @private
+   */
   private killReader(reader: FileReader): void {
     reader.onload = null;
     reader.onerror = null;

@@ -8,9 +8,21 @@
 
 import { ConsoleBodyType } from "../../../util/console-body-type";
 
+/**
+ * @private
+ * The interface that must be implementd by ATX body DTOs.
+ */
 export interface AtxBodyDto {
 
+    /**
+     * @private
+     * Specifies the type of data.
+     */
     type: ConsoleBodyType;
 
+    /**
+     * @private
+     * The data used as HTTP request body.
+     */
     data: string | null;
 }
