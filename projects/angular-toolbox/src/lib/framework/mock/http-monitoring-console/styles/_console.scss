@@ -77,8 +77,10 @@ tr:hover {
 }
 
 .header-btn {
-    padding: 4px;
     margin-left: auto;
+    svg {
+        margin-top: 4px;
+    }
 }
 
 .header-btn:hover {
