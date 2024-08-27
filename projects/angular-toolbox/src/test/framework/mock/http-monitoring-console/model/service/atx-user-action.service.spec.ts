@@ -16,7 +16,7 @@ describe('AtxUserActionService', () => {
         service = new AtxUserActionService();
     });
     
-    it('should create', () => {
+    it('should create a new instance', () => {
         expect(service).toBeTruthy();
     });
     

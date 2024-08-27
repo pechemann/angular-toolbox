@@ -46,7 +46,7 @@ describe('AtxLogIoService', () => {
         service = new AtxLogIoService(loggerSvc);
     });
     
-    it('should create', () => {
+    it('should create a new instance', () => {
         expect(service).toBeTruthy();
     });
     

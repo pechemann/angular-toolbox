@@ -31,7 +31,7 @@ describe('AtxUserActionService', () => {
         service = new AtxMonitoringConsoleState();
     });
     
-    it('should create', () => {
+    it('should create a new instance', () => {
         expect(service).toBeTruthy();
     });
     

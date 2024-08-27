@@ -47,7 +47,7 @@ describe('AtxMonitoringConsoleController', () => {
         actionSvc = new AtxUserActionService();
     });
     
-    it('should create', () => {
+    it('should create a new instance', () => {
         service = new AtxMonitoringConsoleController(loggerSvc, stateSvc, ioSvc, subscribeSvc, actionSvc);
         expect(service).toBeTruthy();
     });

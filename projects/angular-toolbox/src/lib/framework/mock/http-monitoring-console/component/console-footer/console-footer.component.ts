@@ -9,6 +9,10 @@
 import { Component } from '@angular/core';
 import { AtxMonitoringConsoleState } from '../../model/service/atx-monitoring-console.state';
 
+/**
+ * @private
+ * Represents the footer element of the ATX monitoring console.
+ */
 @Component({
   selector: 'atx-console-footer',
   standalone: true,
@@ -17,5 +21,8 @@ import { AtxMonitoringConsoleState } from '../../model/service/atx-monitoring-co
 })
 export class AtxConsoleFooterComponent {
 
+  /**
+   * @private
+   */
   constructor(protected state: AtxMonitoringConsoleState) {}
 }

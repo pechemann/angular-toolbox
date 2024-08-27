@@ -17,7 +17,7 @@ describe('HttpMonitoringConsoleLogConnector', () => {
         connector = new HttpMonitoringConsoleLogConnector();
     });
     
-    it('should create', () => {
+    it('should create a new instance', () => {
         expect(connector).toBeTruthy();
     });
     
