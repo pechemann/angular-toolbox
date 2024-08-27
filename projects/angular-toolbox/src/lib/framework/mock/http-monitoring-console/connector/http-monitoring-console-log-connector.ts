@@ -45,7 +45,7 @@ export class HttpMonitoringConsoleLogConnector implements LogConnector {
      */
     public sendLog(log: Log): void {
         const level: LogLevel = log.level;
-        if (level === LogLevel.INFO || LogLevel.ERROR) this.logs.push(log);
+        if (level === LogLevel.INFO || level === LogLevel.ERROR) this.logs.push(log);
         this.change.emit(log);
     }
 
