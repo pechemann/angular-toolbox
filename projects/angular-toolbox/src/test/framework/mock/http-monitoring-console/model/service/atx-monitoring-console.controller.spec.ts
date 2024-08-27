@@ -6,7 +6,6 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { HttpRequest, HttpResponse } from "@angular/common/http";
 import { HttpMonitoringConsoleLogConnector } from "projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/connector/http-monitoring-console-log-connector";
 import { AtxConsoleActionType } from "projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/model/business/atx-console-action-type";
 import { AtxLogIoService } from "projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/model/service/atx-log-io.service";
@@ -14,21 +13,7 @@ import { AtxMonitoringConsoleController } from "projects/angular-toolbox/src/lib
 import { AtxMonitoringConsoleState } from "projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/model/service/atx-monitoring-console.state";
 import { AtxUserActionService } from "projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/model/service/atx-user-action.service";
 import { DEFAULT_LOG_CONNECTOR, EMPTY_STRING, HttpMockLoggingService, IdentifiableComponent, Log, LogBuilder, LogConnector, LogLevel, SubscriptionService, Uuid } from "projects/angular-toolbox/src/public-api";
-import { URL_OBJ, URL_STRING } from "../../test-util/http-monitoring-test-util";
-
-const buildMetadata = ()=> {
-    return {
-        request: new HttpRequest("GET", URL_STRING),
-        response: new HttpResponse(),
-        requestMetadata: {
-            duration: 260,
-            stalled: 964,
-            start: 695,
-            url: URL_OBJ,
-            id: Uuid.build()
-        }
-    }
-};
+import { buildHttpMockLoggingMetadata } from "../../test-util/http-monitoring-test-util";
 
 describe('AtxMonitoringConsoleController', () => {
 
@@ -64,8 +49,8 @@ describe('AtxMonitoringConsoleController', () => {
     });
 
     it('should initialize the log connector with the logs previously registered', () => {
-        const log1 = loggerSvc.info(buildMetadata());
-        const log2 = loggerSvc.error(buildMetadata());
+        const log1 = loggerSvc.info(buildHttpMockLoggingMetadata());
+        const log2 = loggerSvc.error(buildHttpMockLoggingMetadata());
         service = new AtxMonitoringConsoleController(loggerSvc, stateSvc, ioSvc, subscribeSvc, actionSvc);
         const connector: HttpMonitoringConsoleLogConnector = loggerSvc.getLogConnector() as HttpMonitoringConsoleLogConnector;
         expect(connector.logs.includes(log1)).toBeTrue();
@@ -73,8 +58,8 @@ describe('AtxMonitoringConsoleController', () => {
     });
 
     it('should initialize the state service with the logs previously registered', () => {
-        const log1 = loggerSvc.info(buildMetadata());
-        const log2 = loggerSvc.error(buildMetadata());
+        const log1 = loggerSvc.info(buildHttpMockLoggingMetadata());
+        const log2 = loggerSvc.error(buildHttpMockLoggingMetadata());
         service = new AtxMonitoringConsoleController(loggerSvc, stateSvc, ioSvc, subscribeSvc, actionSvc);
         expect(stateSvc.logs.includes(log1)).toBeTrue();
         expect(stateSvc.logs.includes(log2)).toBeTrue();
@@ -109,7 +94,7 @@ describe('AtxMonitoringConsoleController', () => {
 
 describe('AtxMonitoringConsoleController: User\'s actions managmenent. Test all stategies managed by the internal onAction() method', () => {
     
-    const log1: Log = LogBuilder.build(EMPTY_STRING, EMPTY_STRING, LogLevel.INFO, { response: {}, requestMetadata: buildMetadata() });
+    const log1: Log = LogBuilder.build(EMPTY_STRING, EMPTY_STRING, LogLevel.INFO, { response: {}, requestMetadata: buildHttpMockLoggingMetadata() });
 
     let service: AtxMonitoringConsoleController;
     let loggerSvc: HttpMockLoggingService;
@@ -128,8 +113,8 @@ describe('AtxMonitoringConsoleController: User\'s actions managmenent. Test all 
 
     it('should clear all logs when the user\'s action is AtxConsoleActionType.CLEAR_LOGS', (done) => {
         service = new AtxMonitoringConsoleController(loggerSvc, stateSvc, ioSvc, subscribeSvc, actionSvc);
-        loggerSvc.info(buildMetadata());
-        loggerSvc.error(buildMetadata());
+        loggerSvc.info(buildHttpMockLoggingMetadata());
+        loggerSvc.error(buildHttpMockLoggingMetadata());
         actionSvc.sendAction(AtxConsoleActionType.CLEAR_LOGS);
         setTimeout(()=> {
             expect(stateSvc.logs.length).toEqual(0);

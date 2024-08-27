@@ -6,30 +6,17 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { HttpRequest, HttpResponse } from "@angular/common/http";
 import { HMFL } from "projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/model/business/io/hmfl";
 import { AtxLogIoService } from "projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/model/service/atx-log-io.service";
 import { HMFLBuilder } from "projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/util/io/hmfl-builder";
 import { LogConverter } from "projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/util/io/log-converter";
-import { EMPTY_STRING, HttpMockLoggingMetadata, HttpMockLoggingService, Log, LogBuilder, LogLevel, Uuid } from "projects/angular-toolbox/src/public-api";
-import { URL_OBJ, URL_STRING } from "../../test-util/http-monitoring-test-util";
+import { EMPTY_STRING, HttpMockLoggingService, Log, LogBuilder, LogLevel, Uuid } from "projects/angular-toolbox/src/public-api";
+import { buildHttpMockLoggingMetadata } from "../../test-util/http-monitoring-test-util";
 
 const FILE_NAME_REGEXP: RegExp = /logs-\d{2}\/\d{2}\/\d{2}-\d{2}:\d{2}-(A|P)M\.hmfl/;
 
-const metadata: HttpMockLoggingMetadata = {
-    request: new HttpRequest("GET", URL_STRING),
-    response: new HttpResponse(),
-    requestMetadata: {
-        duration: 0,
-        stalled: 0,
-        start: 0,
-        url: URL_OBJ,
-        id: Uuid.build()
-    }
-};
-
 const getFileList = (level: LogLevel = LogLevel.INFO) => {
-    const log: Log = LogBuilder.build(EMPTY_STRING, EMPTY_STRING, level, metadata);
+    const log: Log = LogBuilder.build(EMPTY_STRING, EMPTY_STRING, level, buildHttpMockLoggingMetadata());
     const data: HMFL = HMFLBuilder.build([LogConverter.logToDto(log)]);
     const dt: DataTransfer = new DataTransfer();
     dt.items.add(new File([JSON.stringify(data)], "test.file"));
@@ -82,7 +69,7 @@ describe('AtxLogIoService', () => {
     
     it('exportFile() should process the specified well formatted logs without errors and invoke the LogConverter.logToDto() method', () => {
         const spyObj = jasmine.createSpyObj('a', ['click']);
-        const log: Log = LogBuilder.build(EMPTY_STRING, EMPTY_STRING, LogLevel.INFO, metadata);
+        const log: Log = LogBuilder.build(EMPTY_STRING, EMPTY_STRING, LogLevel.INFO, buildHttpMockLoggingMetadata());
         const logs: Log[] = [log];
         spyOn(document, 'createElement').and.returnValue(spyObj);
         spyOn(LogConverter, 'logToDto');
@@ -91,7 +78,7 @@ describe('AtxLogIoService', () => {
     });
 
     it('exportFile() should invoke the HMFLBuilder.build() method', (done) => {
-        const log: Log = LogBuilder.build(EMPTY_STRING, EMPTY_STRING, LogLevel.INFO, metadata);
+        const log: Log = LogBuilder.build(EMPTY_STRING, EMPTY_STRING, LogLevel.INFO, buildHttpMockLoggingMetadata());
         const file = HMFLBuilder.build([]);
         const logs: Log[] = [log];
         const spyObj = jasmine.createSpyObj('a', ['click']);
@@ -105,7 +92,7 @@ describe('AtxLogIoService', () => {
     });
     
     it('importFile() should invoke the LogConverter.dtoToLog() method ', (done) => {
-        const log: Log = LogBuilder.build(EMPTY_STRING, EMPTY_STRING, LogLevel.INFO, metadata);
+        const log: Log = LogBuilder.build(EMPTY_STRING, EMPTY_STRING, LogLevel.INFO, buildHttpMockLoggingMetadata());
         spyOn(LogConverter, 'dtoToLog').and.returnValue(log);
         service.importFile(getFileList());
         setTimeout(()=> {

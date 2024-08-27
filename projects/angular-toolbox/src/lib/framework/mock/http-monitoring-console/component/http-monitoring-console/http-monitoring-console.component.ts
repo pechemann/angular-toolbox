@@ -17,6 +17,10 @@ import { AtxLogIoService } from '../../model/service/atx-log-io.service';
 import { AtxMonitoringConsoleController } from '../../model/service/atx-monitoring-console.controller';
 import { AtxUserActionService } from '../../model/service/atx-user-action.service';
 
+/**
+ * @private
+ * The main component used to layout the ATX monitoring console.
+ */
 @Component({
   selector: 'atx-http-monitoring-console',
   standalone: true,
@@ -40,7 +44,11 @@ import { AtxUserActionService } from '../../model/service/atx-user-action.servic
 })
 export class AtxMonitoringConsoleComponent {
 
+  /**
+   * @private
+   */
   constructor(protected state: AtxMonitoringConsoleState,
+              //--> Conponent scope services:
               private _ctrl: AtxMonitoringConsoleController,
               private _io: AtxLogIoService,
               private _input: AtxUserActionService) {}

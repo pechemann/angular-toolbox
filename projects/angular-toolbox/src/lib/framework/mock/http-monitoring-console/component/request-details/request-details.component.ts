@@ -7,7 +7,7 @@
  */
 
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
-import { HttpMockRequestMetadata, Log } from '../../../../../model';
+import { HttpMockLoggingMetadata, HttpMockRequestMetadata, Log } from '../../../../../model';
 import { NgStyle } from '@angular/common';
 import { HttpRequest, HttpResponse } from '@angular/common/http';
 import { AtxJsonViewerComponent } from '../renderer/json-viewer/json-viewer.component';
@@ -45,8 +45,8 @@ export class AtxRequestDetailsComponent {
   public set log(value: Log | null) {
     this.currLog = value;
     if (value) {
-      const metadata: any = value.metadata; 
-      const request: any = metadata.request; 
+      const metadata: HttpMockLoggingMetadata = value.metadata; 
+      const request: HttpRequest<any> = metadata.request; 
       this.request = request;
       this.response = metadata.response;
       this.requestMetadata = metadata.requestMetadata;
@@ -60,6 +60,10 @@ export class AtxRequestDetailsComponent {
     this.requestMetadata = null as any;
     this._cdr.detectChanges();
   }
+  
+  public get log(): Log | null {
+    return this.currLog;
+  }
 
   protected readonly actionType: any = AtxConsoleActionType;
   protected currSection: number = 0;
@@ -71,8 +75,8 @@ export class AtxRequestDetailsComponent {
     this.currSection = idx;
   }
 
-  private checkPayload(request: any): void {
-    const hasBody: boolean = (request.body !== null && request !== undefined); 
+  private checkPayload(request: HttpRequest<any>): void {
+    const hasBody: boolean = (request.body !== null && request.body !== undefined);
     this.hasPayload = (request.params.keys().length > 0 || hasBody);
   }
 }
