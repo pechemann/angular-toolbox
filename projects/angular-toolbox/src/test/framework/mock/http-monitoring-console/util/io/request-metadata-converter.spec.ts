@@ -9,15 +9,15 @@
 import { AtxHttpRequestMetadataDto } from "projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/model/business/io/atx-http-request-metadata.dto.ts";
 import { RequestMetadataConverter } from "projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/util/io/request-metadata-converter";
 import { HttpMockRequestMetadata, Uuid } from "projects/angular-toolbox/src/public-api";
+import { URL_OBJ, URL_STRING } from "../../test-util/http-monitoring-test-util";
 
 describe('RequestMetadataConverter', () => {
 
-    const url: string = "http://fake-url.com";
     const metadata: HttpMockRequestMetadata = {
         duration: 260,
         stalled: 964,
         start: 695,
-        url: new URL(url),
+        url: URL_OBJ,
         id: Uuid.build()
     };
 
@@ -25,7 +25,7 @@ describe('RequestMetadataConverter', () => {
         duration: 260,
         stalled: 964,
         start: 695,
-        url: url,
+        url: URL_STRING,
         id: Uuid.build().toString()
     }
 

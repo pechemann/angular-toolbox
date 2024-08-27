@@ -14,19 +14,19 @@ import { HttpResponseConverter } from "projects/angular-toolbox/src/lib/framewor
 import { LogMetadataConverter } from "projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/util/io/log-metadata-converter";
 import { RequestMetadataConverter } from "projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/util/io/request-metadata-converter";
 import { HttpMockLoggingMetadata, Uuid } from "projects/angular-toolbox/src/public-api";
+import { URL_OBJ, URL_STRING } from "../../test-util/http-monitoring-test-util";
 
 describe('LogMetadataConverter', () => {
 
-    const url: string = "http://fake-url.com";
     const requestMetadata: any = {
         duration: 0,
         stalled: 0,
         start: 0,
-        url: new URL(url),
+        url: URL_OBJ,
         id: Uuid.build()
     };
     const metadata: HttpMockLoggingMetadata = {
-        request: new HttpRequest("GET", url),
+        request: new HttpRequest("GET", URL_STRING),
         response: new HttpResponse(),
         requestMetadata: requestMetadata
     };
@@ -41,7 +41,7 @@ describe('LogMetadataConverter', () => {
             responseType: "json",
             method: "GET",
             headers: [],
-            url: url,
+            url: URL_STRING,
             params: "foo=bar"
         },
         response:{
@@ -52,7 +52,7 @@ describe('LogMetadataConverter', () => {
             headers: [],
             status: HttpStatusCode.Ok,
             statusText: "Ok",
-            url: url
+            url: URL_STRING
         },
         requestMetadata: requestMetadata
     }

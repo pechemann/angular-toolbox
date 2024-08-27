@@ -12,17 +12,16 @@ import { AtxConsoleFooterComponent } from 'projects/angular-toolbox/src/lib/fram
 import { AtxMonitoringConsoleState } from 'projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/model/service/atx-monitoring-console.state';
 import { SizeUtil } from 'projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/util/size.util';
 import { EMPTY_STRING, HttpMockLoggingMetadata, Log, LogBuilder, LogLevel, Uuid } from 'projects/angular-toolbox/src/public-api';
+import { DATA, URL_OBJ, URL_STRING } from '../../test-util/http-monitoring-test-util';
 
-const url: string = "http://fake-url.com";
-const data: any = { foo: "bar" };
 const metadata: HttpMockLoggingMetadata = {
-  request: new HttpRequest("GET", url),
-  response: new HttpResponse({ body: data }),
+  request: new HttpRequest("GET", URL_STRING),
+  response: new HttpResponse({ body: DATA }),
   requestMetadata: {
       duration: 0,
       stalled: 0,
       start: 0,
-      url: new URL(url),
+      url: URL_OBJ,
       id: Uuid.build()
   }
 };
@@ -70,7 +69,7 @@ describe('ConsoleFooterComponent', () => {
   it('should display the updated size', () => {
     const log: Log = LogBuilder.build(EMPTY_STRING, EMPTY_STRING, LogLevel.INFO, metadata);
     const divList = fixture.nativeElement.querySelectorAll('div');
-    const size: number = SizeUtil.getSize(data);
+    const size: number = SizeUtil.getSize(DATA);
     service.addLog(log);
     fixture.detectChanges();
     expect(divList[2].textContent).toContain(`${SizeUtil.sizeToString(size)} resources`);

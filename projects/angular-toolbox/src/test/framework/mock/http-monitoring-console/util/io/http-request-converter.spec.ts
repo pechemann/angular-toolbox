@@ -14,21 +14,19 @@ import { ConsoleBodyType } from "projects/angular-toolbox/src/lib/framework/mock
 import { BodyConverter } from "projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/util/io/body-converter";
 import { HttpRequestConverter } from "projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/util/io/http-request-converter";
 import { HttpHeadersConverter } from "projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/util/io/log-headers-converter";
+import { DATA, STRING_DATA, URL_STRING } from "../../test-util/http-monitoring-test-util";
 
 describe('HttpRequestConverter', () => {
     
-    const data: any = { foo: "bar" };
-    const stringData: string = '{ "foo": "bar" }';
-    const url: string = "http://fake-url.com";
     const buildRequest = (method: any = "GET", body: any = null, init: any = null)=> {
-        const request: HttpRequest<any> = new HttpRequest<any>(method, url, body, init);
+        const request: HttpRequest<any> = new HttpRequest<any>(method, URL_STRING, body, init);
         return request;
     };
 
     const buildDto = ()=> {
         const dto: AtxHttpRequestDto = {
             body: {
-                data: stringData,
+                data: STRING_DATA,
                 type: ConsoleBodyType.JSON
             },
             reportProgress: true,
@@ -36,7 +34,7 @@ describe('HttpRequestConverter', () => {
             responseType: "blob",
             method: "POST",
             headers: [],
-            url: url,
+            url: URL_STRING,
             params: "foo=bar"
         }
         return dto;
@@ -62,10 +60,10 @@ describe('HttpRequestConverter', () => {
     });
 
     it('buildRequestDto() should invoke the BodyConverter.bodyToDto() method', () => {
-        const request = buildRequest("POST", data);
+        const request = buildRequest("POST", DATA);
         spyOn(BodyConverter, "bodyToDto");
         HttpRequestConverter.buildRequestDto(request);
-       expect(BodyConverter.bodyToDto).toHaveBeenCalledOnceWith(data);
+       expect(BodyConverter.bodyToDto).toHaveBeenCalledOnceWith(DATA);
     });
     
     it('AtxHttpRequestDto.reportProgress should be false by default', () => {
@@ -113,7 +111,7 @@ describe('HttpRequestConverter', () => {
     it('AtxHttpRequestDto.url should be set with the specified HTTP url', () => {
         const request = buildRequest();
         const result: any = HttpRequestConverter.buildRequestDto(request);
-        expect(result.url).toEqual(url);
+        expect(result.url).toEqual(URL_STRING);
     });
 
     it('AtxHttpRequestDto.params should be set with the specified HTTP params, converted to string', () => {
@@ -141,7 +139,7 @@ describe('HttpRequestConverter', () => {
     it('HttpRequestConverter.body should be set with the specified data', () => {
         const dto = buildDto();
         const result: any = HttpRequestConverter.buildHttpRequest(dto);
-        expect(result.body).toEqual(data);
+        expect(result.body).toEqual(DATA);
     });
     
     it('HttpRequestConverter.reportProgress should be set with the specified data', () => {

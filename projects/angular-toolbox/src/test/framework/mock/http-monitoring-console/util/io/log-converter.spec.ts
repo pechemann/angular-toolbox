@@ -16,16 +16,16 @@ import { LogMessageUtil } from "projects/angular-toolbox/src/lib/framework/mock/
 import { LogMetadataConverter } from "projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/util/io/log-metadata-converter";
 import { HttpMockLoggingConstant } from "projects/angular-toolbox/src/lib/model/business/logging/http-mock-logging-constant.enum";
 import { HttpMockLoggingMetadata, Log, LogBuilder, LogImpl, LogLevel, Uuid } from "projects/angular-toolbox/src/public-api";
+import { STRING_DATA, URL_OBJ, URL_STRING } from "../../test-util/http-monitoring-test-util";
 
-const url: string = "http://fake-url.com";
 const metadata: HttpMockLoggingMetadata = {
-    request: new HttpRequest("GET", url),
+    request: new HttpRequest("GET", URL_STRING),
     response: new HttpResponse(),
     requestMetadata: {
         duration: 0,
         id: Uuid.build(),
         start: 0,
-        url: new URL(url),
+        url: URL_OBJ,
         stalled: 0
     }
 };
@@ -66,9 +66,8 @@ describe('LogConverter.logToDto()', () => {
 
 describe('LogConverter.dtoToLog()', () => {
 
-    let converter: LogConverter;
     const body: AtxBodyDto = {
-        data: '{ "foo": "bar" }',
+        data: STRING_DATA,
         type: ConsoleBodyType.JSON
     }
     const buildDto = ()=> {
@@ -83,7 +82,7 @@ describe('LogConverter.dtoToLog()', () => {
                     responseType: "blob",
                     method: "POST",
                     headers: [],
-                    url: url,
+                    url: URL_STRING,
                     params: "foo=bar"
                 },
                 response: {
@@ -91,14 +90,14 @@ describe('LogConverter.dtoToLog()', () => {
                     headers: [],
                     status: HttpStatusCode.AlreadyReported,
                     statusText: "Already Reported",
-                    url: url
+                    url: URL_STRING
                 },
                 requestMetadata: {
                     id: Uuid.build().toString(),
                     start: 0,
                     stalled: 0,
                     duration: 0,
-                    url: url
+                    url: URL_STRING
                 }
             }
         }

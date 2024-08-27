@@ -10,6 +10,7 @@ import { AtxConsoleJson } from "projects/angular-toolbox/src/lib/framework/mock/
 import { ConsoleBodyType } from "projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/util/console-body-type";
 import { ConsoleTypeClass } from "projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/util/console-type-class";
 import { DataUtil } from "projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/util/data.util";
+import { DATA } from "../test-util/http-monitoring-test-util";
 
 describe('DataUtil', () => {
 
@@ -50,8 +51,7 @@ describe('DataUtil', () => {
     });
 
     it('parseJson() should return an AtxConsoleJson object', () => {
-        const json: any = { foo: "bar" };
-        const result: AtxConsoleJson = DataUtil.parseJson(json);
+        const result: AtxConsoleJson = DataUtil.parseJson(DATA);
         expect(result.hasOwnProperty("label")).toBeTrue();
         expect(result.hasOwnProperty("value")).toBeTrue();
         expect(result.hasOwnProperty("typeClass")).toBeTrue();
@@ -59,20 +59,17 @@ describe('DataUtil', () => {
     });
 
     it('parseJson() should return an AtxConsoleJson object with label equal to undefined by default', () => {
-        const json: any = { foo: "bar" };
-        const result: AtxConsoleJson = DataUtil.parseJson(json);
+        const result: AtxConsoleJson = DataUtil.parseJson(DATA);
         expect(result.label).toBeUndefined();
     });
 
     it('parseJson() should return an AtxConsoleJson object with the specified label', () => {
-        const json: any = { foo: "bar" };
-        const result: AtxConsoleJson = DataUtil.parseJson(json, "testLabel");
+        const result: AtxConsoleJson = DataUtil.parseJson(DATA, "testLabel");
         expect(result.label).toEqual("testLabel");
     });
 
     it('parseJson() should return an AtxConsoleJson object with the typeClass property equal to ConsoleTypeClass.OBJECT when object is an object', () => {
-        const json: any = { foo: "bar" };
-        const result: AtxConsoleJson = DataUtil.parseJson(json);
+        const result: AtxConsoleJson = DataUtil.parseJson(DATA);
         expect(result.typeClass).toEqual(ConsoleTypeClass.OBJECT);
     });
 
@@ -102,13 +99,12 @@ describe('DataUtil', () => {
     });
 
     it('parseJson() should return an AtxConsoleJson object with the value property as a string representation of the specified object', () => {
-        const json: any = { foo: "bar" };
-        const result: AtxConsoleJson = DataUtil.parseJson(json);
-        expect(result.value).toEqual(JSON.stringify(json));
+        const result: AtxConsoleJson = DataUtil.parseJson(DATA);
+        expect(result.value).toEqual(JSON.stringify(DATA));
     });
 
     it('parseJson() should return an AtxConsoleJson object with the value property as a string representation of the specified array', () => {
-        const arr: any[] = [ { foo: "bar" } ];
+        const arr: any[] = [ DATA ];
         const result: AtxConsoleJson = DataUtil.parseJson(arr);
         expect(result.value).toEqual(JSON.stringify(arr));
     });
@@ -144,7 +140,7 @@ describe('DataUtil', () => {
     });
 
     it('parseJson() should return an AtxConsoleJson object with children when the specified object is an JSON', () => {
-        const result: AtxConsoleJson = DataUtil.parseJson({ foo: "bar #1" });
+        const result: AtxConsoleJson = DataUtil.parseJson(DATA);
         const children: any = result.children;
         expect(children.length).toEqual(1);
     });
@@ -161,20 +157,17 @@ describe('DataUtil', () => {
 
     it('DataUtil.parseJson() should be invoked to parse the child of an Object with the tupple [value,key]', () => {
         const parseJson: any = DataUtil.parseJson;
-        const complexObj: any = {
-            foo: "bar"
-        };
         spyOn(DataUtil, "parseJson");
-        parseJson(complexObj);
+        parseJson(DATA);
         expect(DataUtil.parseJson).toHaveBeenCalledWith("bar", "foo");
     });
 
     it('DataUtil.parseJson() should be invoked to parse the child of an Array with the tupple [value,index]', () => {
         const parseJson: any = DataUtil.parseJson;
-        const arr: any[] = [ { foo: "bar #1" } ];
+        const arr: any[] = [ DATA ];
         spyOn(DataUtil, "parseJson");
         parseJson(arr);
-        expect(DataUtil.parseJson).toHaveBeenCalledWith({ foo: "bar #1" }, "0");
+        expect(DataUtil.parseJson).toHaveBeenCalledWith(DATA, "0");
     });
 
     it('DataUtil.parseJson() should be invoked on each child when the specified object is an Object', () => {

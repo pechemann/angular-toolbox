@@ -13,19 +13,17 @@ import { ConsoleBodyType } from "projects/angular-toolbox/src/lib/framework/mock
 import { BodyConverter } from "projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/util/io/body-converter";
 import { HttpResponseConverter } from "projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/util/io/http-response-converter";
 import { HttpHeadersConverter } from "projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/util/io/log-headers-converter";
+import { DATA, STRING_DATA, URL_STRING } from "../../test-util/http-monitoring-test-util";
 
 describe('HttpResponseConverter', () => {
     
-    const data: any = { foo: "bar" };
-    const url: string = "http://fake-url.com";
-    const stringData: string = '{ "foo": "bar" }';
     const buildResponse = ()=> {
         const init: any = {
-            body: data,
+            body: DATA,
             headers: new HttpHeaders(),
             status: HttpStatusCode.AlreadyReported,
             statusText: "Already Reported",
-            url: url
+            url: URL_STRING
         };
         const response: HttpResponse<any> = new HttpResponse<any>(init);
         return response;
@@ -34,12 +32,12 @@ describe('HttpResponseConverter', () => {
     const buildDto = ()=> {
         const dto: AtxHttpResponseDto = {
             body: {
-                data: stringData,
+                data: STRING_DATA,
                 type: ConsoleBodyType.JSON
             },
             status: HttpStatusCode.Ok,
             statusText: "Ok",
-            url: url,
+            url: URL_STRING,
             headers: []
         };
         return dto;
