@@ -12,18 +12,18 @@ import { AtxLogIoService } from "projects/angular-toolbox/src/lib/framework/mock
 import { HMFLBuilder } from "projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/util/io/hmfl-builder";
 import { LogConverter } from "projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/util/io/log-converter";
 import { EMPTY_STRING, HttpMockLoggingMetadata, HttpMockLoggingService, Log, LogBuilder, LogLevel, Uuid } from "projects/angular-toolbox/src/public-api";
+import { URL_OBJ, URL_STRING } from "../../test-util/http-monitoring-test-util";
 
 const FILE_NAME_REGEXP: RegExp = /logs-\d{2}\/\d{2}\/\d{2}-\d{2}:\d{2}-(A|P)M\.hmfl/;
-const url: string = "http://fake-url.com";
 
 const metadata: HttpMockLoggingMetadata = {
-    request: new HttpRequest("GET", url),
+    request: new HttpRequest("GET", URL_STRING),
     response: new HttpResponse(),
     requestMetadata: {
         duration: 0,
         stalled: 0,
         start: 0,
-        url: new URL(url),
+        url: URL_OBJ,
         id: Uuid.build()
     }
 };

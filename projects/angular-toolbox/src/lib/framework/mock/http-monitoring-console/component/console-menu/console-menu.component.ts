@@ -10,6 +10,10 @@ import { Component } from '@angular/core';
 import { AtxConsoleActionType } from '../../model/business/atx-console-action-type';
 import { AtxUserActionService } from '../../model/service/atx-user-action.service';
 
+/**
+ * @private
+ * Represents the user's action menu element of the ATX monitoring console.
+ */
 @Component({
   selector: 'atx-console-menu',
   standalone: true,
@@ -18,10 +22,19 @@ import { AtxUserActionService } from '../../model/service/atx-user-action.servic
 })
 export class AtxConsoleMenuComponent {
 
+  /**
+   * @private
+   */
   protected readonly actionType: any = AtxConsoleActionType;
 
+  /**
+   * @private
+   */
   constructor(protected action: AtxUserActionService) {}
 
+  /**
+   * @private
+   */
   protected onFileSelect(event: any): void {
     this.action.sendAction(AtxConsoleActionType.IMPORT_LOGS, event.target.files);
   }

@@ -9,17 +9,16 @@
 import { AtxMonitoringConsoleState } from "projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/model/service/atx-monitoring-console.state";
 import { SizeUtil } from "projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/util/size.util";
 import { EMPTY_STRING, Log, LogBuilder, LogLevel, Uuid } from "projects/angular-toolbox/src/public-api";
+import { DATA, URL_OBJ } from "../../test-util/http-monitoring-test-util";
 
 describe('AtxUserActionService', () => {
 
-    const url: URL = new URL("http://fake-url.com");
-    const data: any = { foo: "bar "};
     const buildMetadata = ()=> {
         return {
             duration: 260,
             stalled: 964,
             start: 695,
-            url: url,
+            url: URL_OBJ,
             id: Uuid.build()
         }
     };
@@ -99,17 +98,17 @@ describe('AtxUserActionService', () => {
     });
     
     it('addLog() should not update size when the log level is LogLevel.CONFIG', () => {
-        service.addLog(LogBuilder.build(EMPTY_STRING, EMPTY_STRING, LogLevel.CONFIG, { response: { body: data }, requestMetadata: buildMetadata() }));
+        service.addLog(LogBuilder.build(EMPTY_STRING, EMPTY_STRING, LogLevel.CONFIG, { response: { body: DATA }, requestMetadata: buildMetadata() }));
         expect(service.cumulativeSize).toEqual(SizeUtil.INITIAL_SIZE);
     });
     
     it('addLog() should update size when the log level is not LogLevel.CONFIG', () => {
-        service.addLog(LogBuilder.build(EMPTY_STRING, EMPTY_STRING, LogLevel.INFO, { response: { body: data }, requestMetadata: buildMetadata() }));
+        service.addLog(LogBuilder.build(EMPTY_STRING, EMPTY_STRING, LogLevel.INFO, { response: { body: DATA }, requestMetadata: buildMetadata() }));
         expect(service.cumulativeSize).not.toEqual(SizeUtil.INITIAL_SIZE);
     });
     
     it('addLog() should replace the log when the log level is LogLevel.CONFIG', () => {
-        const log3: Log = LogBuilder.build(EMPTY_STRING, EMPTY_STRING, LogLevel.CONFIG, { response: { body: data }, requestMetadata: buildMetadata() })
+        const log3: Log = LogBuilder.build(EMPTY_STRING, EMPTY_STRING, LogLevel.CONFIG, { response: { body: DATA }, requestMetadata: buildMetadata() })
         const log3Updated: Log = LogBuilder.build(log3.caller, log3.message, LogLevel.INFO, log3.metadata);
         service.addLog(log1);
         service.addLog(log3);

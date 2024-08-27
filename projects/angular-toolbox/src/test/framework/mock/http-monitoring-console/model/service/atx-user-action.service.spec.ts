@@ -8,6 +8,7 @@
 
 import { AtxConsoleActionType } from "projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/model/business/atx-console-action-type";
 import { AtxUserActionService } from "projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/model/service/atx-user-action.service";
+import { DATA } from "../../test-util/http-monitoring-test-util";
 
 describe('AtxUserActionService', () => {
     let service: AtxUserActionService;
@@ -39,13 +40,12 @@ describe('AtxUserActionService', () => {
     });
     
     it('sendAction() should set the correct event properties', (done) => {
-        const data: any = { foo: "bar" };
         const sub = service.action.subscribe(action => {
-            expect(action.data).toBe(data);
+            expect(action.data).toBe(DATA);
             expect(action.type).toEqual(AtxConsoleActionType.EXPORT_LOGS);
             sub.unsubscribe();
             done();
         });
-        service.sendAction(AtxConsoleActionType.EXPORT_LOGS, data);
+        service.sendAction(AtxConsoleActionType.EXPORT_LOGS, DATA);
     });
 });

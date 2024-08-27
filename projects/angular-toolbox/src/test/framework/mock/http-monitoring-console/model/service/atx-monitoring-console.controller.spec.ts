@@ -14,17 +14,17 @@ import { AtxMonitoringConsoleController } from "projects/angular-toolbox/src/lib
 import { AtxMonitoringConsoleState } from "projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/model/service/atx-monitoring-console.state";
 import { AtxUserActionService } from "projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/model/service/atx-user-action.service";
 import { DEFAULT_LOG_CONNECTOR, EMPTY_STRING, HttpMockLoggingService, IdentifiableComponent, Log, LogBuilder, LogConnector, LogLevel, SubscriptionService, Uuid } from "projects/angular-toolbox/src/public-api";
+import { URL_OBJ, URL_STRING } from "../../test-util/http-monitoring-test-util";
 
-const url: URL = new URL("http://fake-url.com");
 const buildMetadata = ()=> {
     return {
-        request: new HttpRequest("GET", "http://fake-url.com"),
+        request: new HttpRequest("GET", URL_STRING),
         response: new HttpResponse(),
         requestMetadata: {
             duration: 260,
             stalled: 964,
             start: 695,
-            url: url,
+            url: URL_OBJ,
             id: Uuid.build()
         }
     }
