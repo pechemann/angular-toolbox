@@ -34,34 +34,32 @@ describe('LogConverter.logToDto()', () => {
     
     const caller: string = "test suite";
     const message: string = "test message";
-    let converter: LogConverter;
     let log: Log;
 
     beforeEach(() => {
-        converter = new LogConverter();
         log = LogBuilder.build(caller, message, LogLevel.CONFIG, metadata);
     });
 
     it('logToDto() should return an AtxHttpLogDto object', () => {
-        const dto: any = converter.logToDto(log);
+        const dto: any = LogConverter.logToDto(log);
         expect(dto.hasOwnProperty("level")).toBeTrue();
         expect(dto.hasOwnProperty("timestamp")).toBeTrue();
         expect(dto.hasOwnProperty("metadata")).toBeTrue();
     });
     
     it('AtxHttpLogDto.level should be set with the specified value', () => {
-        const dto: any = converter.logToDto(log);
+        const dto: any = LogConverter.logToDto(log);
         expect(dto.level).toEqual(LogLevel.CONFIG);
     });
 
     it('AtxHttpLogDto.timestamp should be set with the specified value', () => {
-        const dto: any = converter.logToDto(log);
+        const dto: any = LogConverter.logToDto(log);
         expect(dto.timestamp).toEqual(log.timestamp);
     });
 
     it('logToDto() should invoke the LogMetadataConverter.metadataToDto() method', () => {
         spyOn(LogMetadataConverter, "metadataToDto");
-        converter.logToDto(log);
+        LogConverter.logToDto(log);
         expect(LogMetadataConverter.metadataToDto).toHaveBeenCalledOnceWith(metadata);
     });
 });
@@ -107,39 +105,35 @@ describe('LogConverter.dtoToLog()', () => {
         return dto;
     };
 
-    beforeEach(() => {
-        converter = new LogConverter();
-    });
-
     it('dtoToLog() should return a Log object', () => {
         const dto: any = buildDto();
-        const log = converter.dtoToLog(dto);
+        const log = LogConverter.dtoToLog(dto);
         expect(log).toBeInstanceOf(LogImpl);
     });
     
     it('level property should be set with the specified value', () => {
         const dto: any = buildDto();
-        const log = converter.dtoToLog(dto);
+        const log = LogConverter.dtoToLog(dto);
         expect(log.level).toEqual(dto.level);
     });
 
     it('caller property should be set with HttpMockLoggingConstant.CALLER', () => {
         const dto: any = buildDto();
-        const log = converter.dtoToLog(dto);
+        const log = LogConverter.dtoToLog(dto);
         expect(log.caller).toEqual(HttpMockLoggingConstant.CALLER);
     });
     
     it('dtoToLog() should invoke the LogMessageUtil.getMessageFromLevel()', () => {
         spyOn(LogMessageUtil, "getMessageFromLevel");
         const dto: any = buildDto();
-        converter.dtoToLog(dto);
+        LogConverter.dtoToLog(dto);
         expect(LogMessageUtil.getMessageFromLevel).toHaveBeenCalledOnceWith(dto.level);
     });
     
     it('dtoToLog() should invoke the LogMetadataConverter.dtoToMetadata()', () => {
         spyOn(LogMetadataConverter, "dtoToMetadata");
         const dto: any = buildDto();
-        converter.dtoToLog(dto);
+        LogConverter.dtoToLog(dto);
         expect(LogMetadataConverter.dtoToMetadata).toHaveBeenCalledOnceWith(dto.metadata);
     });
 });

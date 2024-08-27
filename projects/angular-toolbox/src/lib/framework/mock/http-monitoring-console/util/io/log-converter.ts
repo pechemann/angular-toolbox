@@ -26,7 +26,7 @@ export class LogConverter {
      * @param log The `Log` object to convert.
      * @returns A new `AtxHttpLogDto` object.
      */
-    public logToDto(log: Log): AtxHttpLogDto {
+    public static logToDto(log: Log): AtxHttpLogDto {
         return {
             level: log.level,
             timestamp: log.timestamp,
@@ -41,7 +41,7 @@ export class LogConverter {
      * @param dto The `AtxHttpLogDto` object to convert.
      * @returns A new `Log` object.
      */
-    public dtoToLog(dto: AtxHttpLogDto): Log {
+    public static dtoToLog(dto: AtxHttpLogDto): Log {
         const level: LogLevel = dto.level;
         return LogBuilder.build(
             HttpMockLoggingConstant.CALLER,
