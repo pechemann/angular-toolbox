@@ -11,6 +11,10 @@ import { AtxJsonViewerPanelComponent } from '../json-viewer-panel/json-viewer-pa
 import { AtxConsoleJson } from '../../../model/business/atx-console-json';
 import { DataUtil } from '../../../util/data.util';
 
+/**
+ * @private
+ * The component that renders JSON data in the ATX monitoring console.
+ */
 @Component({
   selector: 'atx-json-viewer',
   standalone: true,
@@ -23,8 +27,15 @@ import { DataUtil } from '../../../util/data.util';
 })
 export class AtxJsonViewerComponent {
 
+  /**
+   * @private
+   */
   protected parsedData: AtxConsoleJson | null = null;
 
+  /**
+   * @private
+   * Sets the data to be rendererd whithin this component.
+   */
   @Input()
   public set data(value: any) {
     if (!value) {
