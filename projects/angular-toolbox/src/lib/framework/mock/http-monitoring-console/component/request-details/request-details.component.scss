@@ -43,33 +43,3 @@ main {
     bottom: 0;
     overflow-y: auto;
 }
-
-details {
-    summary {
-        padding: 2px 6px;
-        background-color: var(--background-color);
-        border: 1px solid var(--border-color);
-        user-select: none;
-        margin-bottom: 6px;
-    }
-    
-    section {
-        padding: 4px 6px;
-        dl {
-            display: flex;
-            gap: 10px;
-        }
-        dl, dt, dd {
-            padding: 0;
-            margin: 0;
-        }
-        dt {
-            min-width: 200px;;
-        }
-    }
-}
-
-.status-indicator {
-    padding: 0;
-    margin: 0;
-}

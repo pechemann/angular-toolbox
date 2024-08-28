@@ -25,71 +25,17 @@
     </header>
     <main>
         @if (currSection === 0) {
-            <details open>
-                <summary>General</summary>
-                <section>
-                    <dl>
-                        <dt>Request URL:</dt>
-                        <dd>{{ request.url }}</dd>
-                    </dl>
-                    <dl>
-                        <dt>Request Method:</dt>
-                        <dd>{{ request.method }}</dd>
-                    </dl>
-                    <dl>
-                        <dt>Status Code:</dt>
-                        <dd>
-                            @if (response) {
-                                <svg [ngStyle]="{ fill: response.status < 400 ? 'green' : 'red' }" 
-                                    width="13" height="13" viewBox="0 0 16 16">
-                                    <circle cx="8" cy="8" r="8"/>
-                                </svg>
-                                {{ response.status }} {{ response.statusText }}
-                            } @else {
-                                <svg fill="orange" width="13" height="13" viewBox="0 0 16 16">
-                                    <circle cx="8" cy="8" r="8"/>
-                                </svg>
-                                prefetch
-                            }
-                        </dd>
-                    </dl>
-                </section>
-            </details>
-            <details>
-                <summary>Response Headers</summary>
-                <section>
-                    @if (response) {
-                        @for( item of response.headers.keys(); track item) {
-                            <dl>
-                                <dt>{{ item }}</dt>
-                                <dd>{{ response.headers.get(item) }}</dd>
-                            </dl>
-                            
-                        }
-                    }
-                </section>
-            </details>
-            <details>
-                <summary>Request Headers</summary>
-                <section>
-                    @for( item of request.headers.keys(); track item) {
-                        <dl>
-                            <dt>{{ item }}</dt>
-                            <dd>{{ request.headers.get(item) }}</dd>
-                        </dl>
-                    }
-                </section>
-            </details>
+            <atx-request-info-renderer [log]="currLog"/>
         } @else if (currSection === 1) {
             <atx-payload-renderer [log]="currLog"/>
-        } @else if (currSection === 2 && response) {
-            <atx-response-preview-renderer [data]="response"/>
-        } @else if (currSection === 3 && response) {
+        } @else if (currSection === 2) {
+            <atx-response-preview-renderer [log]="currLog"/>
+        } @else if (currSection === 3) {
             <section class="raw-response">
-                <atx-response-body-renderer [data]="response.body"/>
+                <atx-response-body-renderer [log]="currLog"/>
             </section>
-        } @else if (currSection === 4 && response) {
-            <atx-timing-renderer [data]="currLog"/>
+        } @else if (currSection === 4) {
+            <atx-timing-renderer [log]="currLog"/>
         }
     </main>
 }

@@ -71,7 +71,6 @@ describe('AtxMonitoringConsoleComponent: selectedLog is null', () => {
 
 describe('AtxMonitoringConsoleComponent: selectedLog is not null', () => {
   let service: any;
-  let component: AtxMonitoringConsoleComponent;
   let fixture: ComponentFixture<AtxMonitoringConsoleComponent>;
 
   const buildLog = ()=> {
@@ -80,8 +79,7 @@ describe('AtxMonitoringConsoleComponent: selectedLog is not null', () => {
       response: new HttpResponse(),
       requestMetadata: buildHttpMockLoggingMetadata()
     };
-    const log: Log = LogBuilder.build(EMPTY_STRING, EMPTY_STRING, LogLevel.INFO, metadata);
-    return log;
+    return LogBuilder.build(EMPTY_STRING, EMPTY_STRING, LogLevel.INFO, metadata);
   }
 
   beforeEach(async () => {
@@ -94,7 +92,6 @@ describe('AtxMonitoringConsoleComponent: selectedLog is not null', () => {
     fixture = TestBed.createComponent(AtxMonitoringConsoleComponent);
     service = fixture.debugElement.injector.get(AtxMonitoringConsoleState);
     service.selectLog(buildLog());
-    component = fixture.componentInstance;
     fixture.detectChanges();
     await fixture.whenStable();
   });
@@ -111,6 +108,8 @@ describe('AtxMonitoringConsoleComponent: selectedLog is not null', () => {
 
   it('should bind the selected log reference to the embeded AtxRequestDetailsComponent component', () => {
     const detailsComponent = fixture.debugElement.query(By.css("atx-monitoring-console-details"));
-    expect(detailsComponent.componentInstance.log).toBe(service.selectedLog);
+    // Test introspection bug because of the use of a class factorisation: log is undefined while currLog is protected!
+    //expect(detailsComponent.componentInstance.log).toBe(service.selectedLog);
+    expect(detailsComponent.componentInstance.currLog).toBe(service.selectedLog);
   });
 });

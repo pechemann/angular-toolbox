@@ -1,0 +1,39 @@
+/**
+ * @license
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be found in
+ * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+ */
+ 
+ @import "../../../styles/console";
+
+details {
+    summary {
+        padding: 2px 6px;
+        background-color: var(--background-color);
+        border: 1px solid var(--border-color);
+        user-select: none;
+        margin-bottom: 6px;
+    }
+    
+    section {
+        padding: 4px 6px;
+        dl {
+            display: flex;
+            gap: 10px;
+        }
+        dl, dt, dd {
+            padding: 0;
+            margin: 0;
+        }
+        dt {
+            min-width: 200px;
+        }
+    }
+}
+
+.status-indicator {
+    padding: 0;
+    margin: 0;
+}

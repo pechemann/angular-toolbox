@@ -9,6 +9,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { HttpMockRequestMetadata, Log } from '../../../../../../model';
 import { DatePipe, NgStyle } from '@angular/common';
+import { AtxLogRendererBase } from '../../abstract/log-renderer-base';
 
 @Component({
   selector: 'atx-timing-renderer',
@@ -21,7 +22,7 @@ import { DatePipe, NgStyle } from '@angular/common';
   styleUrl: './timing-renderer.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AtxTimingRendererComponent {
+export class AtxTimingRendererComponent extends AtxLogRendererBase {
 
   protected hasData: boolean = false;
   protected start: number = NaN;
@@ -31,7 +32,8 @@ export class AtxTimingRendererComponent {
   protected error: boolean = false;
 
   @Input()
-  public set data(value: Log) {
+  public override set log(value: Log | null) {
+    super.log = value;
     if (value) {
       const metadata: any = value.metadata;
       const requestMetadata: HttpMockRequestMetadata = metadata.requestMetadata;

@@ -14,6 +14,8 @@ import { SafeHtmlPipe } from '../../../../../../pipe';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { HttpResponse } from '@angular/common/http';
 import { UrlUtil } from '../../../util/url.util';
+import { AtxLogRendererBase } from '../../abstract/log-renderer-base';
+import { HttpMockLoggingMetadata, Log } from 'projects/angular-toolbox/src/public-api';
 
 const IMG_TYPE: string = 'image/';
 const SVG_TYPE: string = 'svg/';
@@ -29,7 +31,7 @@ const SVG_TYPE: string = 'svg/';
   styleUrl: './response-preview-renderer.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AtxResponsePreviewRendererComponent implements OnDestroy {
+export class AtxResponsePreviewRendererComponent extends AtxLogRendererBase implements OnDestroy {
 
   protected json: any = null;
   protected text: string | null = null;
@@ -37,37 +39,46 @@ export class AtxResponsePreviewRendererComponent implements OnDestroy {
   protected imgUrl: string | null = null;
   protected trustUrl: SafeUrl | null = null;
   protected resourceName!: string;
-
   
   @Input()
-  public set data (value: HttpResponse<any>) {
-    const body: any = value.body;
-    this.revokeObjectURL();
+  public override set log(value: Log | null) {
+    super.log = value;
+    this.ngOnDestroy();
+    if (!value) return;
+    const metadata: HttpMockLoggingMetadata = value.metadata; 
+    const response: HttpResponse<any> =  metadata.response;
+    if (!response) return
+    const body: any = response.body;
     this.response = value;
     this.json = this.text = this.imgUrl = this.trustUrl = null;
-    if (body) {
-      const bodyType: ConsoleBodyType = DataUtil.getBodyType(body);
-      if (bodyType === ConsoleBodyType.TEXT) this.text = body;
-      else if (bodyType === ConsoleBodyType.JSON) this.json = body;
-      else if (bodyType === ConsoleBodyType.BLOB) {
-        if (body.type.startsWith(IMG_TYPE) ||
-        body.type.startsWith(SVG_TYPE)) {
-              this.resourceName = UrlUtil.getResourceNameFromPath((value as any).url);
-              const url: string = URL.createObjectURL(body);
-              this.imgUrl = url;
-              this.trustUrl = this.sanitizer.bypassSecurityTrustUrl(url);
-            }
+    if (!body) return;
+    const bodyType: ConsoleBodyType = DataUtil.getBodyType(body);
+    if (bodyType === ConsoleBodyType.TEXT) {
+      this.text = body;
+      return;
+    }
+    if (bodyType === ConsoleBodyType.JSON) {
+      this.json = body;
+      return;
+    }
+    if (bodyType === ConsoleBodyType.BLOB) {
+      const type = body.type;
+      if (type.startsWith(IMG_TYPE) || type.startsWith(SVG_TYPE)) {
+        this.resourceName = UrlUtil.getResourceNameFromPath((value as any).url);
+        const url: string = URL.createObjectURL(body);
+        this.imgUrl = url;
+        this.trustUrl = this.sanitizer.bypassSecurityTrustUrl(url);
       }
     }
-    this._cdr.detectChanges();
   }
 
-  constructor(private _cdr: ChangeDetectorRef,
-              private sanitizer: DomSanitizer) {}
+  constructor(private sanitizer: DomSanitizer) {
+    super();
+  }
 
   public ngOnDestroy(): void {
     this.revokeObjectURL();
-    this.json = this.text = this.imgUrl = this.trustUrl = null;
+    this.json = this.text = this.json = this.response = this.imgUrl = this.trustUrl = null;
   }
 
   protected revokeObjectURL(): void {

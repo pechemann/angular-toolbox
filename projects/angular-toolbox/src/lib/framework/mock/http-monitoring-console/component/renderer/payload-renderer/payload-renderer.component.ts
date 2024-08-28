@@ -12,6 +12,7 @@ import { HttpParams, HttpRequest } from '@angular/common/http';
 import { AtxJsonViewerComponent } from '../json-viewer/json-viewer.component';
 import { DataUtil } from '../../../util/data.util';
 import { ConsoleBodyType } from '../../../util/console-body-type';
+import { AtxLogRendererBase } from '../../abstract/log-renderer-base';
 
 @Component({
   selector: 'atx-payload-renderer',
@@ -23,14 +24,15 @@ import { ConsoleBodyType } from '../../../util/console-body-type';
   styleUrl: './payload-renderer.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AtxPayloadRendererComponent {
+export class AtxPayloadRendererComponent extends AtxLogRendererBase {
 
   protected json: any = null;
   protected formData: any | null = null;
   protected queryParams: any[] | null = null;
 
   @Input()
-  public set log (value: Log | null) {
+  public override set log (value: Log | null) {
+    super.log = value;
     const request: HttpRequest<any> = value?.metadata.request;
     const params: HttpParams = request.params;
     const paramsKeys: string[] = params.keys();
@@ -46,8 +48,5 @@ export class AtxPayloadRendererComponent {
     } else if (bodyType === ConsoleBodyType.TEXT) {
       this.json = JSON.parse(body);
     }
-    this._cdr.detectChanges();
   }
-
-  constructor(private _cdr: ChangeDetectorRef) {}
 }

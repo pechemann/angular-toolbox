@@ -1,0 +1,63 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<details open>
+    <summary>General</summary>
+    <section>
+        <dl>
+            <dt>Request URL:</dt>
+            <dd>{{ request.url }}</dd>
+        </dl>
+        <dl>
+            <dt>Request Method:</dt>
+            <dd>{{ request.method }}</dd>
+        </dl>
+        <dl>
+            <dt>Status Code:</dt>
+            <dd>
+                @if (response) {
+                    <svg [ngStyle]="{ fill: response.status < 400 ? 'green' : 'red' }" 
+                        width="13" height="13" viewBox="0 0 16 16">
+                        <circle cx="8" cy="8" r="8"/>
+                    </svg>
+                    {{ response.status }} {{ response.statusText }}
+                } @else {
+                    <svg fill="orange" width="13" height="13" viewBox="0 0 16 16">
+                        <circle cx="8" cy="8" r="8"/>
+                    </svg>
+                    prefetch
+                }
+            </dd>
+        </dl>
+    </section>
+</details>
+<details>
+    <summary>Response Headers</summary>
+    <section>
+        @if (response) {
+            @for( item of response.headers.keys(); track item) {
+                <dl>
+                    <dt>{{ item }}</dt>
+                    <dd>{{ response.headers.get(item) }}</dd>
+                </dl>
+                
+            }
+        }
+    </section>
+</details>
+<details>
+    <summary>Request Headers</summary>
+    <section>
+        @for(item of request.headers.keys(); track item) {
+            <dl>
+                <dt>{{ item }}</dt>
+                <dd>{{ request.headers.get(item) }}</dd>
+            </dl>
+        }
+    </section>
+</details>

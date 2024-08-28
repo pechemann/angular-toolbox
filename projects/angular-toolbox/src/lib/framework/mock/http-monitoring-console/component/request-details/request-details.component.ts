@@ -7,9 +7,9 @@
  */
 
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
-import { HttpMockLoggingMetadata, HttpMockRequestMetadata, Log } from '../../../../../model';
+import { HttpMockLoggingMetadata, Log } from '../../../../../model';
 import { NgStyle } from '@angular/common';
-import { HttpRequest, HttpResponse } from '@angular/common/http';
+import { HttpRequest } from '@angular/common/http';
 import { AtxJsonViewerComponent } from '../renderer/json-viewer/json-viewer.component';
 import { AtxPayloadRendererComponent } from '../renderer/payload-renderer/payload-renderer.component';
 import { AtxTimingRendererComponent } from '../renderer/timing-renderer/timing-renderer.component';
@@ -17,7 +17,13 @@ import { AtxResponsePreviewRendererComponent } from '../renderer/response-previe
 import { AtxResponseBodyRendererComponent } from '../renderer/response-body-renderer/response-body-renderer.component';
 import { AtxUserActionService } from '../../model/service/atx-user-action.service';
 import { AtxConsoleActionType } from '../../model/business/atx-console-action-type';
+import { AtxRequesInfoComponent } from '../renderer/request-info-renderer/request-info-renderer.component';
+import { AtxLogRendererBase } from '../abstract/log-renderer-base';
 
+/**
+ * @private
+ * The component that layouts all the logs details in the ATX monitoring console.
+ */
 @Component({
   selector: 'atx-monitoring-console-details',
   standalone: true,
@@ -27,54 +33,66 @@ import { AtxConsoleActionType } from '../../model/business/atx-console-action-ty
     AtxPayloadRendererComponent,
     AtxTimingRendererComponent,
     AtxResponsePreviewRendererComponent,
-    AtxResponseBodyRendererComponent
+    AtxResponseBodyRendererComponent,
+    AtxRequesInfoComponent
   ],
   templateUrl: './request-details.component.html',
   styleUrl: './request-details.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AtxRequestDetailsComponent {
+export class AtxRequestDetailsComponent extends AtxLogRendererBase {
 
-  protected currLog: Log | null = null;
+  /**
+   * @private
+   */
   protected hasPayload: boolean = false;
-  protected request!: HttpRequest<any>;
-  protected response!: HttpResponse<any>;
-  protected requestMetadata!: HttpMockRequestMetadata;
+  
+  /**
+   * @private
+   */
+  protected readonly actionType: any = AtxConsoleActionType;
+  
+  /**
+   * @private
+   */
+  protected currSection: number = 0;
 
+  /**
+   * @private
+   * Gest or sets the log for which to display details.
+   */
   @Input()
-  public set log(value: Log | null) {
-    this.currLog = value;
+  public override set log(value: Log | null) {
+    super.log = value;
     if (value) {
       const metadata: HttpMockLoggingMetadata = value.metadata; 
-      const request: HttpRequest<any> = metadata.request; 
-      this.request = request;
-      this.response = metadata.response;
-      this.requestMetadata = metadata.requestMetadata;
+      const request: HttpRequest<any> = metadata.request;
       this.checkPayload(request);
       this._cdr.detectChanges();
       return;
     }
     this.hasPayload = false;
-    this.request = null as any;
-    this.response = null as any;
-    this.requestMetadata = null as any;
     this._cdr.detectChanges();
   }
-  
-  public get log(): Log | null {
-    return this.currLog;
+
+  /**
+   * @private
+   */
+  constructor(protected action: AtxUserActionService,
+              private _cdr: ChangeDetectorRef) {
+    super();
   }
 
-  protected readonly actionType: any = AtxConsoleActionType;
-  protected currSection: number = 0;
-
-  constructor(protected action: AtxUserActionService,
-              private _cdr: ChangeDetectorRef) {}
-
+  /**
+   * @private
+   */
   protected changeSection(idx: number): void {
     this.currSection = idx;
   }
 
+  /**
+   * @private
+   */
   private checkPayload(request: HttpRequest<any>): void {
     const hasBody: boolean = (request.body !== null && request.body !== undefined);
     this.hasPayload = (request.params.keys().length > 0 || hasBody);

@@ -12,13 +12,17 @@ import { ATX_IS_IMPORTED_LOG } from '../../../model/business/atx-is-imported-log
 import { ConsoleBodyType } from '../../../util/console-body-type';
 import { DataUtil } from '../../../util/data.util';
 import { HttpResponse } from '@angular/common/http';
+import { AtxSpinnerComponent } from '../spinner/spinner.component';
 
 @Component({
   selector: 'atx-icon-renderer',
   standalone: true,
   templateUrl: './icon-renderer.component.html',
   styleUrl: './icon-renderer.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    AtxSpinnerComponent
+  ]
 })
 export class AtxIconRendererComponent {
 

@@ -6,11 +6,14 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { AtxJsonViewerComponent } from '../json-viewer/json-viewer.component';
 import { DataUtil } from '../../../util/data.util';
 import { ConsoleBodyType } from '../../../util/console-body-type';
 import { SafeHtmlPipe } from '../../../../../../pipe';
+import { HttpResponse } from '@angular/common/http';
+import { HttpMockLoggingMetadata, Log } from 'projects/angular-toolbox/src/public-api';
+import { AtxLogRendererBase } from '../../abstract/log-renderer-base';
 
 @Component({
   selector: 'atx-response-body-renderer',
@@ -23,27 +26,41 @@ import { SafeHtmlPipe } from '../../../../../../pipe';
   styleUrl: './response-body-renderer.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AtxResponseBodyRendererComponent {
+export class AtxResponseBodyRendererComponent extends AtxLogRendererBase {
 
   protected text: string | null = null;
   protected body: any = null;
   protected blob: Blob | null = null;
   protected arrayBuffer: ArrayBuffer | null = null;
   
-
   @Input()
-  public set data (value: any) {
-    this.body = value;
-    this.text = this.blob = this.arrayBuffer = null;
-    if (value) {
-      const bodyType: ConsoleBodyType = DataUtil.getBodyType(value);
-      if (bodyType === ConsoleBodyType.TEXT) this.text = value;
-      else if (bodyType === ConsoleBodyType.JSON) this.text = JSON.stringify(value);
-      else if (bodyType === ConsoleBodyType.BLOB) this.blob = value;
-      else if (bodyType === ConsoleBodyType.ARRAY_BUFFER) this.arrayBuffer = value;
+  public override set log(value: Log | null) {
+    super.log = value;
+    this.ngOnDestroy();
+    if (!value) return;
+    const metadata: HttpMockLoggingMetadata = value.metadata; 
+    const response: HttpResponse<any> =  metadata.response;
+    if (!response) return
+    const body: any = response.body;
+    this.body = body;
+    if (!body) return;
+    const bodyType: ConsoleBodyType = DataUtil.getBodyType(body);
+    if (bodyType === ConsoleBodyType.TEXT) {
+      this.text = body;
+      return;
     }
-    this._cdr.detectChanges();
+    if (bodyType === ConsoleBodyType.JSON) {
+      this.text = JSON.stringify(body);
+      return;
+    }
+    if (bodyType === ConsoleBodyType.BLOB) {
+      this.blob = body;
+      return;
+    }
+    if (bodyType === ConsoleBodyType.ARRAY_BUFFER) this.arrayBuffer = body;
   }
-
-  constructor(private _cdr: ChangeDetectorRef) {}
+  
+  public ngOnDestroy(): void {
+    this.text = this.body = this.blob = this.arrayBuffer = null;
+  }
 }
