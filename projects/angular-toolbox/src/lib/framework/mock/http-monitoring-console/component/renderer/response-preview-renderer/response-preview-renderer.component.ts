@@ -64,7 +64,7 @@ export class AtxResponsePreviewRendererComponent extends AtxLogRendererBase impl
     if (bodyType === ConsoleBodyType.BLOB) {
       const type = body.type;
       if (type.startsWith(IMG_TYPE) || type.startsWith(SVG_TYPE)) {
-        this.resourceName = UrlUtil.getResourceNameFromPath((value as any).url);
+        this.resourceName = UrlUtil.getResourceNameFromPath((response as any).url);
         const url: string = URL.createObjectURL(body);
         this.imgUrl = url;
         this.trustUrl = this.sanitizer.bypassSecurityTrustUrl(url);
