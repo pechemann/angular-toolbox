@@ -15,6 +15,10 @@ import { HttpResponse } from '@angular/common/http';
 import { AtxSpinnerComponent } from '../spinner/spinner.component';
 import { AtxLogRendererBase } from '../../abstract/log-renderer-base';
 
+/**
+ * @private
+ * The component responsible for managing icons the ATX monitoring console.
+ */
 @Component({
   selector: 'atx-icon-renderer',
   standalone: true,
@@ -27,20 +31,36 @@ import { AtxLogRendererBase } from '../../abstract/log-renderer-base';
 })
 export class AtxIconRendererComponent extends AtxLogRendererBase {
 
+  /**
+   * @private
+   */
   protected bodyType: ConsoleBodyType = ConsoleBodyType.INVALID;
+
+  /**
+   * @private
+   */
   protected hasReponse: boolean = false;
+  
+  /**
+   * @private
+   */
   protected isImported: boolean = false;
 
+  /**
+   * @private
+   */
   @Input()
   public override set log(value: Log | null) {
     super.log = value;
-    this.hasReponse = this.isImported = false;
-    this.bodyType = ConsoleBodyType.INVALID;
-    if (!value) return;
+    if (!value) {
+      this.hasReponse = this.isImported = false;
+      this.bodyType = ConsoleBodyType.INVALID;
+      return;
+    }
     const response: HttpResponse<any> = value.metadata.response;
     const complete: boolean = response !== null && response !== undefined;
     this.hasReponse = complete;
-    if (complete) this.bodyType = DataUtil.getBodyType(response.body);
+    this.bodyType = complete ? DataUtil.getBodyType(response.body) : ConsoleBodyType.INVALID;
     this.isImported = value.metadata.request?.context.get(ATX_IS_IMPORTED_LOG);
   }
 }

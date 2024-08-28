@@ -35,7 +35,7 @@ export class AtxConsoleMenuComponent {
   /**
    * @private
    */
-  protected onFileSelect(event: any): void {
-    this.action.sendAction(AtxConsoleActionType.IMPORT_LOGS, event.target.files);
+  protected onFileSelect(event: Event): void {
+    this.action.sendAction(AtxConsoleActionType.IMPORT_LOGS, (event.target as HTMLInputElement).files);
   }
 }

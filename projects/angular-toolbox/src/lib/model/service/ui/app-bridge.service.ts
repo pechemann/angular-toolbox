@@ -87,9 +87,9 @@ export class AppBrigeService {
      */
     public goToAnchor(event: Event): Promise<boolean> {
         event.preventDefault();
-        const anchor: string = (event.target as any).getAttribute(HREF);
+        const anchor: string | null = (event.target as HTMLElement).getAttribute(HREF);
         if (!anchor) throw new ReferenceError("href attribute is not defined.");
-        const elm: any = this._document.querySelector(anchor);
+        const elm: HTMLElement = this._document.querySelector(anchor);
         if (!elm) return new Promise((resolve: Function) => resolve(false));
         elm.scrollIntoView(DEFAULT_SCROLL_BEHAVIOR);
         return this._zone.run(() => {

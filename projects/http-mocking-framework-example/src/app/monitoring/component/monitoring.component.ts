@@ -51,8 +51,8 @@ export class MonitoringComponent extends IdentifiableComponent implements OnInit
     this.console.open();
   }
 
-  protected actionSelect(event: any) {
-    const selectedId: string = event.target.value;
+  protected actionSelect(event: Event) {
+    const selectedId: string = (event.target as HTMLSelectElement).value;
     this.selectedAction = this.apiConfig.API.find( cfg => cfg.id.toString() === selectedId);
   }
 

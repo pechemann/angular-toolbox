@@ -67,8 +67,8 @@ export class TodoComponent extends IdentifiableComponent implements OnInit, OnDe
     this.subscriptionService.clearAll(this);
   }
 
-  protected userSelect(event: any): void {
-    const selectedId: number = parseInt(event.target.value);
+  protected userSelect(event: Event): void {
+    const selectedId: number = parseInt((event.target as HTMLSelectElement).value);
     this.userService.setUserId(selectedId);
     this.todoList = null;
     this.todoForm.disable();

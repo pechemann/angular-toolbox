@@ -24,13 +24,13 @@ export class TodoItemComponent {
   @Input()
   public todo!: Todo;
 
-  protected completedChange(event: any): void {
-    this.todo.completed = event.target.checked;
+  protected completedChange(event: Event): void {
+    this.todo.completed = (event.target as HTMLInputElement).checked;
     this.dispatchEvent("update");
   }
 
-  protected titleChange(event: any): void {
-    const titleValue: string = event.target.value;
+  protected titleChange(event: Event): void {
+    const titleValue: string = (event.target as HTMLInputElement).value;
     if (titleValue.length) {
       this.todo.title = titleValue;
       this.dispatchEvent("update");
