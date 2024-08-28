@@ -31,7 +31,7 @@
                 <tr [class.error-row]="isError(log)" role="button" (click)="action.sendAction(actionType.LOG_SELECT, log)"
                     [class.selected-row]="this.state.selectedLog === log">
                     <td [title]="getResourcePath(log)">
-                        <atx-icon-renderer [data]="log"/>
+                        <atx-icon-renderer [log]="log"/>
                         <div class="resource-cell">
                             {{ getResourceName(log) }}
                             <br>
