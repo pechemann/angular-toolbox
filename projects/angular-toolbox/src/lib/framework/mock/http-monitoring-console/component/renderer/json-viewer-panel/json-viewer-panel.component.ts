@@ -10,6 +10,10 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AtxConsoleJson } from '../../../model/business/atx-console-json';
 
+/**
+ * @private
+ * The component that recursively renders `AtxConsoleJson` objects in the ATX monitoring console.
+ */
 @Component({
   selector: 'atx-json-viewer-panel',
   standalone: true,
@@ -22,6 +26,10 @@ import { AtxConsoleJson } from '../../../model/business/atx-console-json';
 })
 export class AtxJsonViewerPanelComponent {
 
+  /**
+   * @private
+   * The data to be rendererd whithin this component.
+   */
   @Input()
   public data: AtxConsoleJson | null = null;
 }

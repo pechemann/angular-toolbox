@@ -41,7 +41,7 @@ describe('JsonViewerComponent', () => {
   });
 
   it('the data setter should bind the data to the embeded AtxJsonViewerComponent component', (done) => {
-    let panel = fixture.debugElement.query(By.css("atx-json-viewer-panel"));
+    const panel = fixture.debugElement.query(By.css("atx-json-viewer-panel"));
     expect(panel.componentInstance.data).toBeNull();
     component.data = DATA;
     fixture.detectChanges();
