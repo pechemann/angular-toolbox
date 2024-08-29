@@ -8,7 +8,7 @@
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AtxRequesInfoComponent } from 'projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/component/renderer/request-info-renderer/request-info-renderer.component';
-import { buildHttpMockLoggingMetadata, buildLog, URL_STRING } from '../../../test-util/http-monitoring-test-util';
+import { buildHttpMockLoggingMetadata, URL_STRING } from '../../../test-util/http-monitoring-test-util';
 import { HttpRequest, HttpResponse, HttpStatusCode } from '@angular/common/http';
 import { EMPTY_STRING, httpHeadersMock, LogBuilder, LogLevel } from 'projects/angular-toolbox/src/public-api';
 

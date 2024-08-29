@@ -19,7 +19,7 @@
         </dl>
         <dl>
             <dt>Status Code:</dt>
-            <dd>
+            <dd class="status-container">
                 @if (response) {
                     <svg [ngStyle]="{ fill: response.status < 400 ? 'green' : 'red' }" 
                         width="13" height="13" viewBox="0 0 16 16">

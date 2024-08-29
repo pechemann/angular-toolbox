@@ -74,7 +74,7 @@ tr:nth-child(even):not(.selected-row) {
 }
 
 tr:hover {
-    background-color: var(--light-gray);
+    background-color: var(--light-gray) !important;
 }
 
 th {

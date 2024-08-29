@@ -33,6 +33,12 @@ details {
     }
 }
 
+.status-container {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
 .status-indicator {
     padding: 0;
     margin: 0;
