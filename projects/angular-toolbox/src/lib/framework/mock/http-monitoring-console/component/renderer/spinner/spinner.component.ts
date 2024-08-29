@@ -8,6 +8,10 @@
 
 import { Component } from '@angular/core';
 
+/**
+ * @private
+ * A spinner icon component.
+ */
 @Component({
   selector: 'atx-spinner',
   standalone: true,

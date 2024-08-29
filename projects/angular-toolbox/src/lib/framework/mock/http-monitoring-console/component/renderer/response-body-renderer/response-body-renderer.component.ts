@@ -15,6 +15,10 @@ import { HttpResponse } from '@angular/common/http';
 import { HttpMockLoggingMetadata, Log } from 'projects/angular-toolbox/src/public-api';
 import { AtxLogRendererBase } from '../../abstract/log-renderer-base';
 
+/**
+ * @private
+ * The component that displays HTTP response data in the ATX monitoring console.
+ */
 @Component({
   selector: 'atx-response-body-renderer',
   standalone: true,
@@ -28,11 +32,29 @@ import { AtxLogRendererBase } from '../../abstract/log-renderer-base';
 })
 export class AtxResponseBodyRendererComponent extends AtxLogRendererBase {
 
+  /**
+   * @private
+   */
   protected text: string | null = null;
+  
+  /**
+   * @private
+   */
   protected body: any = null;
+  
+  /**
+   * @private
+   */
   protected blob: Blob | null = null;
+  
+  /**
+   * @private
+   */
   protected arrayBuffer: ArrayBuffer | null = null;
   
+  /**
+   * @private
+   */
   @Input()
   public override set log(value: Log | null) {
     super.log = value;
@@ -60,6 +82,9 @@ export class AtxResponseBodyRendererComponent extends AtxLogRendererBase {
     if (bodyType === ConsoleBodyType.ARRAY_BUFFER) this.arrayBuffer = body;
   }
   
+  /**
+   * @private
+   */
   public ngOnDestroy(): void {
     this.text = this.body = this.blob = this.arrayBuffer = null;
   }

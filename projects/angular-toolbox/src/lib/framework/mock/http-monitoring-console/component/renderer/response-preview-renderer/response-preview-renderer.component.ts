@@ -6,7 +6,7 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy } from '@angular/core';
 import { AtxJsonViewerComponent } from '../json-viewer/json-viewer.component';
 import { DataUtil } from '../../../util/data.util';
 import { ConsoleBodyType } from '../../../util/console-body-type';
@@ -17,9 +17,15 @@ import { UrlUtil } from '../../../util/url.util';
 import { AtxLogRendererBase } from '../../abstract/log-renderer-base';
 import { HttpMockLoggingMetadata, Log } from 'projects/angular-toolbox/src/public-api';
 
+/**
+ * @Private
+ */
 const IMG_TYPE: string = 'image/';
-const SVG_TYPE: string = 'svg/';
 
+/**
+ * @private
+ * The component that displays HTTP response data preview in the ATX monitoring console.
+ */
 @Component({
   selector: 'atx-response-preview-renderer',
   standalone: true,
@@ -33,13 +39,39 @@ const SVG_TYPE: string = 'svg/';
 })
 export class AtxResponsePreviewRendererComponent extends AtxLogRendererBase implements OnDestroy {
 
+  /**
+   * @private
+   */
   protected json: any = null;
+
+  /**
+   * @private
+   */
   protected text: string | null = null;
+  
+  /**
+   * @private
+   */
   protected response: any = null;
+  
+  /**
+   * @private
+   */
   protected imgUrl: string | null = null;
+  
+  /**
+   * @private
+   */
   protected trustUrl: SafeUrl | null = null;
+  
+  /**
+   * @private
+   */
   protected resourceName!: string;
   
+  /**
+   * @private
+   */
   @Input()
   public override set log(value: Log | null) {
     super.log = value;
@@ -63,7 +95,7 @@ export class AtxResponsePreviewRendererComponent extends AtxLogRendererBase impl
     }
     if (bodyType === ConsoleBodyType.BLOB) {
       const type = body.type;
-      if (type.startsWith(IMG_TYPE) || type.startsWith(SVG_TYPE)) {
+      if (type.startsWith(IMG_TYPE)) {
         this.resourceName = UrlUtil.getResourceNameFromPath((response as any).url);
         const url: string = URL.createObjectURL(body);
         this.imgUrl = url;
@@ -72,15 +104,24 @@ export class AtxResponsePreviewRendererComponent extends AtxLogRendererBase impl
     }
   }
 
+  /**
+   * @private
+   */
   constructor(private sanitizer: DomSanitizer) {
     super();
   }
 
+  /**
+   * @private
+   */
   public ngOnDestroy(): void {
     this.revokeObjectURL();
     this.json = this.text = this.json = this.response = this.imgUrl = this.trustUrl = null;
   }
 
+  /**
+   * @private
+   */
   protected revokeObjectURL(): void {
     if (this.imgUrl) URL.revokeObjectURL(this.imgUrl);
   }
