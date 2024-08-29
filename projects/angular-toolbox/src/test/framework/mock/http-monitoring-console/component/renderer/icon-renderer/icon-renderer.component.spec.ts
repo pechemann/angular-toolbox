@@ -16,7 +16,6 @@ import { ATX_IS_IMPORTED_LOG } from 'projects/angular-toolbox/src/lib/framework/
 describe('AtxIconRendererComponent', () => {
   let component: AtxIconRendererComponent;
   let fixture: ComponentFixture<AtxIconRendererComponent>;
-
   
   const buildLog = (response: any = null)=> {
     const metadata =  {
@@ -25,7 +24,6 @@ describe('AtxIconRendererComponent', () => {
     };
     return LogBuilder.build(EMPTY_STRING, EMPTY_STRING, LogLevel.INFO, metadata);
   }
-
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

@@ -8,9 +8,8 @@
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AtxMonitoringConsoleState } from 'projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/model/service/atx-monitoring-console.state';
-import { AtxMonitoringConsoleComponent, EMPTY_STRING, Log, LogBuilder, LogLevel } from 'projects/angular-toolbox/src/public-api';
-import { buildHttpMockLoggingMetadata, URL_STRING } from '../../test-util/http-monitoring-test-util';
-import { HttpRequest, HttpResponse } from '@angular/common/http';
+import { AtxMonitoringConsoleComponent } from 'projects/angular-toolbox/src/public-api';
+import { buildLog } from '../../test-util/http-monitoring-test-util';
 import { By } from '@angular/platform-browser';
 
 describe('AtxMonitoringConsoleComponent: selectedLog is null', () => {
@@ -72,15 +71,6 @@ describe('AtxMonitoringConsoleComponent: selectedLog is null', () => {
 describe('AtxMonitoringConsoleComponent: selectedLog is not null', () => {
   let service: any;
   let fixture: ComponentFixture<AtxMonitoringConsoleComponent>;
-
-  const buildLog = ()=> {
-    const metadata =  {
-      request: new HttpRequest("GET", URL_STRING),
-      response: new HttpResponse(),
-      requestMetadata: buildHttpMockLoggingMetadata()
-    };
-    return LogBuilder.build(EMPTY_STRING, EMPTY_STRING, LogLevel.INFO, metadata);
-  }
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

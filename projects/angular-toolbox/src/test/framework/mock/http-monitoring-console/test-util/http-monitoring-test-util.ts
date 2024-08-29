@@ -7,7 +7,7 @@
  */
 
 import { HttpRequest, HttpResponse } from "@angular/common/http";
-import { Uuid } from "projects/angular-toolbox/src/public-api";
+import { EMPTY_STRING, LogBuilder, LogLevel, Uuid } from "projects/angular-toolbox/src/public-api";
 
 export const URL_STRING: string = "http://fake-url.com";
 export const URL_OBJ: URL = new URL(URL_STRING);
@@ -27,3 +27,12 @@ export const buildHttpMockLoggingMetadata = ()=> {
         }
     }
 };
+
+export const buildLog = ()=> {
+    const metadata =  {
+      request: new HttpRequest("GET", URL_STRING),
+      response: new HttpResponse(),
+      requestMetadata: buildHttpMockLoggingMetadata()
+    };
+    return LogBuilder.build(EMPTY_STRING, EMPTY_STRING, LogLevel.INFO, metadata);
+  }

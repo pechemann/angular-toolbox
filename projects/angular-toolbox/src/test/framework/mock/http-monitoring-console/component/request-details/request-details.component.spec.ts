@@ -10,7 +10,7 @@ import { HttpRequest, HttpResponse } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AtxRequestDetailsComponent } from 'projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/component/request-details/request-details.component';
 import { AtxUserActionService } from 'projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/model/service/atx-user-action.service';
-import { buildHttpMockLoggingMetadata, DATA, URL_STRING } from '../../test-util/http-monitoring-test-util';
+import { buildHttpMockLoggingMetadata, buildLog, DATA, URL_STRING } from '../../test-util/http-monitoring-test-util';
 import { EMPTY_STRING, Log, LogBuilder, LogLevel } from 'projects/angular-toolbox/src/public-api';
 import { AtxConsoleActionType } from 'projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/model/business/atx-console-action-type';
 import { By } from '@angular/platform-browser';
@@ -45,14 +45,6 @@ describe('AtxRequestDetailsComponent: log is specified', () => {
   let fixture: ComponentFixture<AtxRequestDetailsComponent>;
   let log: Log;
   
-  const buildLog = ()=> {
-    const metadata =  {
-      request: new HttpRequest("GET", URL_STRING),
-      response: new HttpResponse(),
-      requestMetadata: buildHttpMockLoggingMetadata()
-    };
-    return LogBuilder.build(EMPTY_STRING, EMPTY_STRING, LogLevel.INFO, metadata);
-  }
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
