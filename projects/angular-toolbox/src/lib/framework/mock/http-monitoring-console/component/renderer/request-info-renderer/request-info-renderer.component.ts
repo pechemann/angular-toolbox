@@ -45,14 +45,13 @@ export class AtxRequesInfoComponent extends AtxLogRendererBase {
   @Input()
   public override set log(value: Log | null) {
     super.log = value;
-    if (value) {
-      const metadata: HttpMockLoggingMetadata = value.metadata; 
-      const request: HttpRequest<any> = metadata.request; 
-      this.request = request;
-      this.response = metadata.response;
+    if (!value) {
+      this.request = this.response = null as any;
       return;
     }
-    this.request = null as any;
-    this.response = null as any;
+    const metadata: HttpMockLoggingMetadata = value.metadata; 
+    const request: HttpRequest<any> = metadata.request; 
+    this.request = request;
+    this.response = metadata.response;
   }
 }
