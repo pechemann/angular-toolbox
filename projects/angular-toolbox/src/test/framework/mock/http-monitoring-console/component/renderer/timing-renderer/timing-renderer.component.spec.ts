@@ -6,7 +6,7 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { HttpRequest } from '@angular/common/http';
+import { HttpRequest, HttpStatusCode } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AtxTimingRendererComponent } from 'projects/angular-toolbox/src/lib/framework/mock/http-monitoring-console/component/renderer/timing-renderer/timing-renderer.component';
 import { buildHttpMockLoggingMetadata, buildLog, URL_STRING } from '../../../test-util/http-monitoring-test-util';
@@ -71,11 +71,13 @@ describe('TimingRendererComponent', () => {
     component.log = log;
     fixture.detectChanges();
     const dl = fixture.nativeElement.querySelectorAll("dl")[1];
+    const downloadBar = dl.querySelector(".download");
     expect(dl.querySelector("dt").textContent.includes("Request/Response")).toBeTrue();
     expect(dl.querySelector(".timeline")).toBeTruthy();
     expect(dl.querySelector(".stalled")).toBeTruthy();
-    expect(dl.querySelector(".download")).toBeTruthy();
+    expect(downloadBar).toBeTruthy();
     expect(dl.querySelectorAll(".time").length).toEqual(2);
+    expect(downloadBar.classList.contains("error")).toBeFalse();
   });
 
   it('should invoke the TimelineUtil.getTimelineData() method', () => {
@@ -100,5 +102,14 @@ describe('TimingRendererComponent', () => {
     const titmeList = nativeElement.querySelectorAll(".time");
     expect(titmeList[0].textContent.includes(timelineData.downloadStart)).toBeTrue();
     expect(titmeList[1].textContent.includes(log.metadata.requestMetadata.duration)).toBeTrue();
+  });
+
+  it('download bar should detect error logs', () => {
+    const log = LogBuilder.build(EMPTY_STRING, EMPTY_STRING, LogLevel.ERROR, buildHttpMockLoggingMetadata());
+    log.metadata.response.status = HttpStatusCode.Forbidden;
+    component.log = log;
+    fixture.detectChanges();
+    const downloadBar = fixture.nativeElement.querySelector(".download");
+    expect(downloadBar.classList.contains("error")).toBeTrue();
   });
 });
