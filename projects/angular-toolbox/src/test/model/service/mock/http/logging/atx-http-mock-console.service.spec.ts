@@ -30,6 +30,22 @@ describe('HttpMockLoggingService', () => {
         ref = null;
     });
 
+    it('open() should set the correct title to the AtxHttpMockConsolePopup object', () => {
+        let ref: any = service.open();
+        expect(ref.popup.document.querySelector('title').textContent).toEqual("HTTP Mocking Framework Console");
+        service.close();
+        ref = null;
+    });
+
+    it('open() add a favicon to the AtxHttpMockConsolePopup object', () => {
+        let ref: any = service.open();
+        const link = ref.popup.document.querySelector('link');
+        expect(link.getAttribute("rel")).toEqual("shortcut icon");
+        expect(link.getAttribute("href")).toEqual(service.ICON);
+        service.close();
+        ref = null;
+    });
+
     it('close() should close and destroy the AtxHttpMockConsolePopup object', () => {
         let ref: any = service.open();
         const close = ref.popup.close;
