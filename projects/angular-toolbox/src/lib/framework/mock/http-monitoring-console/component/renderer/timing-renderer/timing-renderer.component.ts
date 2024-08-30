@@ -7,10 +7,16 @@
  */
 
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { HttpMockRequestMetadata, Log } from '../../../../../../model';
+import { HttpMockLoggingMetadata, HttpMockRequestMetadata, Log } from '../../../../../../model';
 import { DatePipe, NgStyle } from '@angular/common';
 import { AtxLogRendererBase } from '../../abstract/log-renderer-base';
+import { HttpResponse } from '@angular/common/http';
+import { TimelineUtil } from '../../../util/timeline.util';
 
+/**
+ * @private
+ * The component that displays the timeline of an HTTP response in the ATX monitoring console.
+ */
 @Component({
   selector: 'atx-timing-renderer',
   standalone: true,
@@ -24,36 +30,58 @@ import { AtxLogRendererBase } from '../../abstract/log-renderer-base';
 })
 export class AtxTimingRendererComponent extends AtxLogRendererBase {
 
+  /**
+   * @private
+   */
   protected hasData: boolean = false;
+  
+  /**
+   * @private
+   */
   protected start: number = NaN;
+  
+  /**
+   * @private
+   */
   protected downloadStart: number = NaN;
+  
+  /**
+   * @private
+   */
   protected downloadLength: number = NaN;
+  
+  /**
+   * @private
+   */
   protected duration: number = 0;
+  
+  /**
+   * @private
+   */
   protected error: boolean = false;
 
+  /**
+   * @private
+   */
   @Input()
   public override set log(value: Log | null) {
     super.log = value;
-    if (value) {
-      const metadata: any = value.metadata;
-      const requestMetadata: HttpMockRequestMetadata = metadata.requestMetadata;
-      const duration: number = requestMetadata.duration;
-      const stalled: number = requestMetadata.stalled;
-      this.error = metadata.response.status >= 400;
-      this.hasData = true;
-      this.start = requestMetadata.start;
-      this.duration = duration;
-      if (duration === 0) {
-        this.downloadStart = this.downloadLength = 0;
-        return;
-      }
-      const downloadLength: number = Math.round(100 * (duration - stalled) / duration);
-      this.downloadStart = 100 - downloadLength;
-      this.downloadLength = downloadLength;
+    if (!value) {
+      this.hasData = this.error = false;
+      this.start = this.downloadStart = this.downloadLength = NaN;
+      this.duration = 0;
       return;
     }
-    this.hasData = this.error = false;
-    this.start = this.downloadStart = this.downloadLength = NaN;
-    this.duration = 0;
+    const metadata: HttpMockLoggingMetadata = value.metadata;
+    const response: HttpResponse<any> | undefined = metadata.response;
+    if (!response) return;
+    const requestMetadata: HttpMockRequestMetadata = metadata.requestMetadata;
+    this.error = response.status >= 400;
+    this.hasData = true;
+    this.start = requestMetadata.start;
+    this.duration = requestMetadata.duration;
+    const timelineData = TimelineUtil.getTimelineData(requestMetadata);
+    this.downloadStart = timelineData.downloadStart;
+    this.downloadLength = timelineData.downloadLength;
   }
 }

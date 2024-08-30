@@ -14,25 +14,29 @@ export const URL_OBJ: URL = new URL(URL_STRING);
 export const DATA: any = { foo: "bar" };
 export const STRING_DATA: string = '{ "foo": "bar" }';
 
+export const buildRequestMetadata = ()=> {
+  return {
+    duration: 964,
+    stalled: 500,
+    start: 60,
+    url: URL_OBJ,
+    id: Uuid.build()
+  };
+}
+
 export const buildHttpMockLoggingMetadata = ()=> {
     return {
         request: new HttpRequest("GET", URL_STRING),
         response: new HttpResponse(),
-        requestMetadata: {
-            duration: 260,
-            stalled: 964,
-            start: 695,
-            url: URL_OBJ,
-            id: Uuid.build()
-        }
+        requestMetadata: buildRequestMetadata()
     }
 };
 
 export const buildLog = ()=> {
-    const metadata =  {
-      request: new HttpRequest("GET", URL_STRING),
-      response: new HttpResponse(),
-      requestMetadata: buildHttpMockLoggingMetadata()
-    };
-    return LogBuilder.build(EMPTY_STRING, EMPTY_STRING, LogLevel.INFO, metadata);
-  }
+  const metadata = {
+    request: new HttpRequest("GET", URL_STRING),
+    response: new HttpResponse(),
+    requestMetadata: buildRequestMetadata()
+  };
+  return LogBuilder.build(EMPTY_STRING, EMPTY_STRING, LogLevel.INFO, metadata);
+}

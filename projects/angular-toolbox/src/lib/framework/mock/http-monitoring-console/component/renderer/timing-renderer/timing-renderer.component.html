@@ -6,28 +6,29 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
 -->
 
-<section class="content">
 @if (hasData) {
-    <dl>
-        <dt>Connection start</dt>
-        <dd>{{ start | date: 'short' }}</dd>
-    </dl>
-    <dl>
-        <dt>Request/Response</dt>
-        <dd class="timeline">
-            <div>
-                <div [attr.style]="'width:' + downloadStart + '%'">
-                    stalled
-                    <div class="stalled"></div>
-                    <div class="time">{{ downloadStart }} ms</div>
+    <section class="content">
+        <dl>
+            <dt>Connection start</dt>
+            <dd>{{ start | date: 'short' }}</dd>
+        </dl>
+        <dl>
+            <dt>Request/Response</dt>
+            <dd class="timeline">
+                <div>
+                    <div [attr.style]="'width:' + downloadStart + '%'">
+                        stalled
+                        <div class="stalled"></div>
+                        <div class="time">{{ downloadStart }} ms</div>
+                    </div>
+                    <div [attr.style]="'width:' + downloadLength + '%;margin-left:' + downloadStart + '%'">
+                        download
+                        <div class="download" [class.error]="error"></div>
+                        <div class="time">{{ duration }} ms</div>
+                    </div>
                 </div>
-                <div [attr.style]="'width:' + downloadLength + '%;margin-left:' + downloadStart + '%'">
-                    download
-                    <div class="download" [class.error]="error"></div>
-                    <div class="time">{{ duration }} ms</div>
-                </div>
-            </div>
-        </dd>
-    </dl>
+            </dd>
+        </dl>
+    </section>
 } 
-</section>
+
