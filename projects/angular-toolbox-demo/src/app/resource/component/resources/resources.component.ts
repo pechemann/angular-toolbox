@@ -9,6 +9,7 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AngularToolboxGitSectionComponent, AngularToolboxPageTitleComponent, BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
+import { AngularToolboxVersionService } from 'projects/angular-toolbox/src/public-api';
 
 @Component({
   selector: 'app-resources',
@@ -18,11 +19,15 @@ import { AngularToolboxGitSectionComponent, AngularToolboxPageTitleComponent, Br
     AngularToolboxGitSectionComponent,
     AngularToolboxPageTitleComponent
   ],
+  providers: [
+    AngularToolboxVersionService
+  ],
   templateUrl: './resources.component.html'
 })
 export class ResourcesComponent {
 
-  constructor(breadcrumb: BreadcrumbService) {
+  constructor(breadcrumb: BreadcrumbService,
+              protected versionService: AngularToolboxVersionService) {
     breadcrumb.removeAll()
               .addItem(breadcrumb.buildItem("Resources"));
   }

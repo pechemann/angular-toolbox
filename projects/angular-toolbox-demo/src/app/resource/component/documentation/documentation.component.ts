@@ -40,7 +40,7 @@ export class DocumentationComponent extends IdentifiableComponent implements OnI
   protected itemListCollection: IconListItem[][] = [];
   protected articles!: IconListItem[];
 
-  constructor(public versionService: AngularToolboxVersionService,
+  constructor(protected versionService: AngularToolboxVersionService,
               //--> HttpMockService is declared only for @HttpMock reference:
               private _httpMockService: HttpMockService,
               private _breadcrumb: BreadcrumbService,
