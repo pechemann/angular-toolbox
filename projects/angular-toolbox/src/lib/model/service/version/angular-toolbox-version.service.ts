@@ -15,11 +15,10 @@ import { VersionConfig } from '../../business';
  * The current version of the Angular Toolbox library.
  */
 const LAYERS_VERSION_CONFIG: VersionConfig = {
-  major: 0,
-  minor: 12,
-  patch: 3,
-  buildTimestamp: 1724232710896,
-  metadata: "beta"
+  major: 1,
+  minor: 0,
+  patch: 0,
+  buildTimestamp: 1725191621422
 };
 
 /**
