@@ -1,0 +1,137 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100 mb-4">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework'])">
+                Presentation
+            </a>
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','setting-up-the-framework'])">
+                Setting up the Framework
+            </a></li>
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','creating-mock-config'])">
+                Creating Mock Config</a>
+            </li>
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','mock-config-declaration'])">
+                Mock Config Declaration</a>
+            </li>
+            <li class="list-group-item">
+                Progressive Downloads (W.I.P.)
+            </li>
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','the-proxy-anti-pattern'])">
+                The Proxy Anti-pattern</a>
+            </li>
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','config-provider'])">
+                Config Provider</a>
+            </li>
+            <li class="list-group-item active" aria-current="true">
+                Loggers
+            </li>
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','api'])">
+                API</a>
+            </li>
+        </ul>
+    </aside>
+    <section class="w-100">
+        <h5 class="mb-4">On this page</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="#loggers" onclick="appBridge.goToAnchor(event)" title="loggers">Loggers</a></li>
+            <li class="list-group-item"><a href="#console" onclick="appBridge.goToAnchor(event)" title="ATX Monitoring Console">ATX Monitoring Console</a></li>
+        </ul>
+    </section>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3">HTTP Mocking Framework</h2>
+    <p>
+        The <em class="lib-name">HTTP Mocking Framework</em> provides an easy-to-use and highly configurable
+        solution to mock HTTP responses to API calls sent from your Angular applications.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9" id="loggers">
+    <h3>Loggers</h3>
+    <div class="version-info text-end mb-4 me-3">
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 0.12.2</span></small>
+    </div>
+    <p>
+        Since the HTTP calls are intercepted by the <em class="lib-name">HTTP Mocking Framework</em>,
+        it is not possible to access HTTP logs in the browser debug console.
+        However, the framework provides HTTP logs built on top of the 
+        <a href="javascript:appBridge.navigate(['resources/documentation/logging-framework'])" title="ATX Logging Framework">ATX Logging Framework</a>.
+    </p>
+    <p>
+        To access the HTTP logs, simply associate a connector with the <code>HttpMockLoggingService</code> singleton.
+        The following example shows how to configure the HTTP Mocking Framework for sending HTTP logs to the browser console:
+        <figure>
+            <figcaption>AppComponent.ts</figcaption>
+            <pre><code class="language-typescript">@Component({
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    standalone: true,
+    imports: [ RouterOutlet ]
+})
+export class AppComponent {
+    constructor(logger: HttpMockLoggingService) {
+        logger.setLogConnector(new ConsoleLogConnector());
+    }
+}</code></pre></figure>
+    </p>
+</section>
+
+<section class="col-xl-9" id="console">
+    <h3>ATX Monitoring Console</h3>
+    <div class="version-info text-end mb-4 me-3">
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 0.12.3</span></small>
+    </div>
+    <p>
+        The <em class="lib-name">HTTP Mocking Framework</em> provides a component that allows
+        to easily inspect network activity intercepted by the framework: the ATX Monitoring Console.
+    </p>
+    <p>
+        You can open this component within a popup window by using the <code>AtxHttpMockConsoleService</code> singleton:
+        <figure>
+            <figcaption>SampleComponent.ts</figcaption>
+            <pre><code class="language-typescript">@Component({
+    selector: 'app-sample',
+    template: '&lt;button (click)="console.open()"&gt;Open ATX Console&lt;/button&gt;',
+    standalone: true
+})
+export class SampleComponent {
+    constructor(console: AtxHttpMockConsoleService) {}
+}</code></pre></figure>
+    </p>
+    <figure>
+        <figcaption>ATX Monitoring Console</figcaption>
+        <img class="img-fluid" src="./documentation/http-mocking-framework/atx-monitoring-console.webp" title="ATX Monitoring Console" alt="ATX Monitoring Console">
+    </figure>
+    <p>
+        The most common use cases for the ATX Monitoring Console are:
+    </p>
+    <ul>
+        <li>
+            Making sure that resources are actually being uploaded or downloaded at all.
+        </li>
+        <li>
+            Inspecting the properties of an individual resource, such as its HTTP headers, content, size, and so on.
+        </li>
+    </ul>
+    <p>
+        It allows Developer to focus on business code,
+        instead of wasting time with invalid data sources, or multi-environment issues (eg. PHP, Electron Apps, JAVA, etc.).
+        Hence,  docked version of the ATX Monitoring Console significantly increases productivity.
+    </p>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+    data-tree="[{ 'label': 'HTTP Mocking Framework', 'path': 'http-mocking-framework' }, { 'label': 'Loggers' }]">
+</object>

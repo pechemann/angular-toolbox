@@ -65,6 +65,7 @@ export class HttpMockLoggingService implements TransactionalLogger, OnDestroy {
     }
 
     /**
+     * @private
      * Processes a special kind of logs that are used to indicate that a HTTP operation
      * started and no response is available yet.
      * 
@@ -105,6 +106,9 @@ export class HttpMockLoggingService implements TransactionalLogger, OnDestroy {
         this._logger = null as any;
     }
 
+    /**
+     * @inheritdoc
+     */
     public getLogs(): Log[] {
         return this._logger.getLogs();
     }
@@ -117,7 +121,7 @@ export class HttpMockLoggingService implements TransactionalLogger, OnDestroy {
     }
 
     /**
-     * @inheritdoc
+     * @private
      */
     private getLastLog(): Log {
         const logs: Log[] = this._logger.getLogs();

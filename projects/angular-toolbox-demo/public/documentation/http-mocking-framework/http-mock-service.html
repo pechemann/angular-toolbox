@@ -7,7 +7,7 @@
 -->
 
 <nav class="page-menu col-xl-3 ps-4">
-    <aside class="w-100">
+    <aside class="w-100 mb-4">
         <h5 class="mb-4">In this topic</h5>
         <ul class="list-group">
             <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','api'])">
@@ -19,7 +19,7 @@
             </li>
            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','creating-mock-config'])">
                 Creating Mock Config
-            </a>
+            </a></li>
         </ul>
     </aside>
     <section class="w-100">
@@ -53,7 +53,7 @@
 </section>
 
 <section class="col-xl-9 mb-4">
-    <h3 id="add-config"><code>HttpResponseMockBuilder.addConfig()</code></h3>
+    <h3 id="add-config"><code>HttpMockService.addConfig()</code></h3>
     <pre><code class="language-typescript">addConfig(config: HttpMockConfig): Uuid</code></pre>
     <p>
         Adds the specified <code>HttpMockConfig</code> object to this <code>HttpMockService</code> instance.
@@ -99,7 +99,7 @@
 </section>
 
 <section class="col-xl-9 mb-4">
-    <h3 id="get-app-origin"><code>HttpResponseMockBuilder.getAppOrigin()</code></h3>
+    <h3 id="get-app-origin"><code>HttpMockService.getAppOrigin()</code></h3>
     <pre><code class="language-typescript">getAppOrigin(): string</code></pre>
     <p>
         Returns the current app URL origin.
@@ -114,7 +114,7 @@
 </section>
 
 <section class="col-xl-9 mb-4">
-    <h3 id="remove-config"><code>HttpResponseMockBuilder.removeConfig()</code></h3>
+    <h3 id="remove-config"><code>HttpMockService.removeConfig()</code></h3>
     <pre><code class="language-typescript">removeConfig(uuid: Uuid): void</code></pre>
     <p>
         Removes the configuration registered with the specified UUID from this <code>HttpMockService</code> instance.
@@ -122,7 +122,7 @@
 </section>
 
 <section class="col-xl-9 mb-4">
-    <h3 id="clear-configs"><code>HttpResponseMockBuilder.clearConfigs()</code></h3>
+    <h3 id="clear-configs"><code>HttpMockService.clearConfigs()</code></h3>
     <pre><code class="language-typescript">clearConfigs(): void</code></pre>
     <p>
         Removes all registred configurations from this <code>HttpMockService</code> instance.
@@ -130,7 +130,7 @@
 </section>
 
 <section class="col-xl-9 mb-4">
-    <h3 id="has-registered-config"><code>HttpResponseMockBuilder.hasRegisteredConfig()</code></h3>
+    <h3 id="has-registered-config"><code>HttpMockService.hasRegisteredConfig()</code></h3>
     <pre><code class="language-typescript">hasRegisteredConfig(uuid: Uuid): boolean</code></pre>
     <p>
         Returns a boolean value that indicates whether a config with the specified UUID has been registered
@@ -157,7 +157,7 @@
 </section>
 
 <section class="col-xl-9 mb-4">
-    <h3 id="get-route-config"><code>HttpResponseMockBuilder.getRouteConfig()</code></h3>
+    <h3 id="get-route-config"><code>HttpMockService.getRouteConfig()</code></h3>
     <pre><code class="language-typescript">getRouteConfig(url: URL, method: HTTPMethodRef): RouteMockConfig | undefined</code></pre>
     <p>
         Returns the <code>RouteMockConfig</code> object associated with the specified

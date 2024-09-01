@@ -1,0 +1,190 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100 mb-4">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','api'])">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z"/>
+                    <path d="M8.646 6.646a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L10.293 9 8.646 7.354a.5.5 0 0 1 0-.708m-1.292 0a.5.5 0 0 0-.708 0l-2 2a.5.5 0 0 0 0 .708l2 2a.5.5 0 0 0 .708-.708L5.707 9l1.647-1.646a.5.5 0 0 0 0-.708"/>
+                </svg>
+                 API </a>
+            </li>
+           <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','loggers'])">
+                Loggers
+            </a></li>
+        </ul>
+    </aside>
+    <section class="w-100">
+        <h5 class="mb-4">On this page</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="#size" onclick="appBridge.goToAnchor(event)" title="size property">size property</a></li>
+            <li class="list-group-item"><a href="#info" onclick="appBridge.goToAnchor(event)" title="info() method">info() method</a></li>
+            <li class="list-group-item"><a href="#error" onclick="appBridge.goToAnchor(event)" title="error() method">error() method</a></li>
+            <li class="list-group-item"><a href="#clear-logs" onclick="appBridge.goToAnchor(event)" title="clearLogs() method">clearLogs() method</a></li>
+            <li class="list-group-item"><a href="#set-log-connector" onclick="appBridge.goToAnchor(event)" title="setLogConnector() method">setLogConnector() method</a></li>
+            <li class="list-group-item"><a href="#get-log-connector" onclick="appBridge.goToAnchor(event)" title="getLogConnector() method">getLogConnector() method</a></li>
+            <li class="list-group-item"><a href="#get-logs" onclick="appBridge.goToAnchor(event)" title="getLogs() method">getLogs() method</a></li>
+        </ul>
+    </section>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3">HTTP Mocking Framework</h2>
+    <p>
+        The <em class="lib-name">HTTP Mocking Framework</em> provides an easy-to-use and highly configurable
+        solution to mock HTTP responses to API calls sent from your Angular applications.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9">
+    <h3><code>HttpMockLoggingService</code> Class</h3>
+    <div class="version-info text-end mb-4 me-3">
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 0.12.2</span></small>
+    </div>
+    <p>
+        The utility service that manages the HTTP Mocking Framework logs.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="size"><code>HttpMockLoggingService.size</code></h3>
+    <pre><code class="language-typescript">get size(): number </code></pre>
+    <p>
+        Returns the number of logs currently processed by this service.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="info"><code>HttpMockLoggingService.info()</code></h3>
+    <pre><code class="language-typescript">info(metadata: HttpMockLoggingMetadata): Log</code></pre>
+    <p>
+        Processes information logs with the specified metadata.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>metadata: HttpMockLoggingMetadata</code></dt>
+            <dd>
+                <p>
+                    The metadata associated with the HTTP method to log.
+                </p>
+            </dd>
+        </dl>
+    </div>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>Log</code>
+        <p>
+            The new info <code>Log</code> object created from the specified metadata.
+        </p>
+    </div>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="error"><code>HttpMockLoggingService.error()</code></h3>
+    <pre><code class="language-typescript">error(metadata: HttpMockLoggingMetadata): Log</code></pre>
+    <p>
+        Processes error logs with the specified metadata.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>metadata: HttpMockLoggingMetadata</code></dt>
+            <dd>
+                <p>
+                    The metadata associated with the HTTP method to log.
+                </p>
+            </dd>
+        </dl>
+    </div>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>Log</code>
+        <p>
+            The new error <code>Log</code> object created from the specified metadata.
+        </p>
+    </div>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="clear-logs"><code>HttpMockLoggingService.clearLogs()</code></h3>
+    <pre><code class="language-typescript">clearLogs(): void</code></pre>
+    <p>
+        Removes all the logs that have been processed by this service.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="set-log-connector"><code>TransactionalLogger.setLogConnector()</code></h3>
+    <pre><code class="language-typescript">setLogConnector(value: LogConnector | null): void</code></pre>
+    <p>
+        Sets a new log connector this service.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>value: LogConnector | null</code></dt>
+            <dd>
+                <p>
+                    The reference to the new log connector associated with thisservice.
+                    <br>
+                    If <code>null</code> the service uses the instance defined by the <code>DEFAULT_LOG_CONNECTOR</code> constant.
+                </p>
+            </dd>
+        </dl>
+    </div>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="get-log-connector"><code>TransactionalLogger.getLogConnector()</code></h3>
+    <pre><code class="language-typescript">etLogConnector(): LogConnector</code></pre>
+    <p>
+        Returns the reference to the log connector associated with this service.
+    </p>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>LogConnector</code>
+        <p>
+            The log connector associated with this service.
+        </p>
+    </div>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="destroy"><code>Destroyable.destroy()</code></h3>
+    <pre><code class="language-typescript">destroy(): void</code></pre>
+    <p>
+        The <code>destroy()</code> method contain mechanisms to delete all internal references for this service
+    </p>
+</section>
+
+
+<section class="col-xl-9 mb-4">
+    <h3 id="get-logs"><code>HttpMockLoggingService.getLogs()</code></h3>
+    <pre><code class="language-typescript">getLogs(): Log[]</code></pre>
+    <p>
+        Returns the list of logs processed by this service.
+    </p>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>Log[]</code>
+        <p>
+            A list that contains all logs send to this service.
+        </p>
+    </div>
+</section>
+
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'HTTP Mocking Framework', 'path': 'http-mocking-framework' }, { 'label': 'API', 'path': 'http-mocking-framework/api' }, { 'label': 'HttpMockLoggingService' }]">
+</object>

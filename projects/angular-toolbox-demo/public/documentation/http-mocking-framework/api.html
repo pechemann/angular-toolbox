@@ -34,8 +34,8 @@
             <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','config-provider'])">
                 Config Provider</a>
             </li>
-            <li class="list-group-item">
-                Logger (W.I.P.)
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','loggers'])">
+                Loggers</a>
             </li>
             <li class="list-group-item active" aria-current="true">
                 API
@@ -181,6 +181,19 @@
                 </button>
             </td>
           </tr>
+          <tr>
+            <td><code>AtxHttpMockConsolePopup</code></td>
+            <td>
+                Provides references to control ATX monitoring console objects created with the <code>AtxHttpMockConsoleService</code> class.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/http-mocking-framework/atx-http-mock-console-popup'])" title="AtxHttpMockConsolePopup">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
         </tbody>
         <thead>
             <tr>
@@ -299,6 +312,31 @@
                 </td>
                 <td>
                     <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/http-mocking-framework/http-mock-service'])" title="HttpMockService">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                            <use href="#linkIcon"/>
+                        </svg>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td><code>HttpMockLoggingService</code></td>
+                <td>
+                    The singleton that manages the HTTP Mocking Framework logs.
+                </td>
+                <td>
+                    <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/http-mocking-framework/http-mock-logging-service'])" title="HttpMockLoggingService">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                            <use href="#linkIcon"/>
+                        </svg>
+                    </button>
+                </td>
+            </tr><tr>
+                <td><code>AtxHttpMockConsoleService</code></td>
+                <td>
+                    Provides functionality to display the ATX monitoring console within a new window.
+                </td>
+                <td>
+                    <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/http-mocking-framework/atx-http-mock-console-service'])" title="AtxHttpMockConsoleService">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
                             <use href="#linkIcon"/>
                         </svg>

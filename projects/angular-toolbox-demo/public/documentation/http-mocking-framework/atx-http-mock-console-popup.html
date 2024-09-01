@@ -1,0 +1,72 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','api'])">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z"/>
+                    <path d="M8.646 6.646a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L10.293 9 8.646 7.354a.5.5 0 0 1 0-.708m-1.292 0a.5.5 0 0 0-.708 0l-2 2a.5.5 0 0 0 0 .708l2 2a.5.5 0 0 0 .708-.708L5.707 9l1.647-1.646a.5.5 0 0 0 0-.708"/>
+                </svg>
+                 API </a>
+            </li>
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','loggers'])">
+                Loggers </a>
+            </li>
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','atx-http-mock-console-service'])">
+                <code>AtxHttpMockConsoleService </code></a>
+            </li>
+        </ul>
+    </aside>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3">HTTP Mocking Framework</h2>
+    <p>
+        The <em class="lib-name">HTTP Mocking Framework</em> provides an easy-to-use and highly configurable
+        solution to mock HTTP responses to API calls sent from your Angular applications.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9">
+    <h3><code>AtxHttpMockConsolePopup</code> Interface</h3>
+    <div class="version-info text-end mb-4 me-3">
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 0.12.3</span></small>
+    </div>
+    <p>
+        The <code>AtxHttpMockConsolePopup</code> interface provides component references for
+        the ATX monitoring console objects created with the <code>AtxHttpMockConsoleService</code> singleton.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="popup"><code>AtxHttpMockConsolePopup.popup</code></h3>
+    <pre><code class="language-typescript">popup: Window</code></pre>
+    <p>
+        The reference to the popup window created with the <code>AtxHttpMockConsoleService</code> singleton.
+        <br>
+        See the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window" title="Window">Window</a> specification for details.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="component-ref"><code>AtxHttpMockConsolePopup.componentRef</code></h3>
+    <pre><code class="language-typescript">componentRef: ComponentRef&gt;AtxMonitoringConsoleComponent&lt;</code></pre>
+    <p>
+        The reference to the <code>AtxMonitoringConsoleComponent</code> instance created with the
+        <code>AtxHttpMockConsoleService</code> singleton.
+    </p>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'HTTP Mocking Framework', 'path': 'http-mocking-framework' }, { 'label': 'API', 'path': 'http-mocking-framework/api' }, { 'label': 'AtxHttpMockConsolePopup ' }]">
+</object>
