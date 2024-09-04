@@ -164,6 +164,10 @@
         <figcaption>External HTML page:</figcaption>
         <pre><code class="language-html">&lt;button onclick="appBridge.navigate(['resources/documentation'])"&gt;Go to the Documentation section&lt;button/&gt;</code></pre>
     </figure>
+    <figure>
+        <figcaption>Alternate anchor link version:</figcaption>
+        <pre><code class="language-html">&lt;a href="javascript:appBridge.navigate(['resources/documentation'])"&gt;Go to the Documentation section&lt;a/&gt;</code></pre>
+    </figure>
               <h5 class="card-title mb-3">Result</h5>
               <div>
                 <button class="btn btn-primary flex-icon" onclick="appBridge.navigate(['resources/documentation'])">
@@ -176,7 +180,24 @@
               
         </div>
     </div>
-
+    <div class="mt-4">
+        <p>
+            Do not forget to import the <code>AppBridgeService</code> singleton in your component to enable access to the native api:
+        </p>
+        
+        <figure>
+            <figcaption>html-display.component.ts</figcaption>
+            <pre><code class="language-typescript">&#64;Component(&#123;
+    selector: 'app-html-display',
+    templateUrl: './html-display.component.html',
+    standalone: true
+&#125;)
+export class HtmlDisplayComponent &#123;
+    constructor(appBridge: AppBridgeService) &#123; &#125;
+&#125;</code></pre></figure>
+    </div>
+</section>
+<section>
     <h4>Creating Custom Commands</h4>
     <p>
         The following sample code shows how to declare a JavaScript command that invokes the
