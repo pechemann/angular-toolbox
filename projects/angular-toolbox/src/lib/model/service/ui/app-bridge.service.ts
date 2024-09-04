@@ -35,7 +35,7 @@ const NATIVE_COMMANDS: string = "navigate|goToAnchor|declareCommand|deleteComman
 @Injectable({
     providedIn: 'root'
 })
-export class AppBrigeService {
+export class AppBridgeService {
 
     /**
      * @private

@@ -7,7 +7,7 @@
  */
 
 import { TestBed } from '@angular/core/testing';
-import { AppBrigeService } from '../../../../lib/model/service/ui/app-bridge.service';
+import { AppBridgeService } from '../../../../lib/model/service/ui/app-bridge.service';
 import { DOCUMENT } from '@angular/common';
 import { Router, RouterModule, Routes } from '@angular/router';
 import { addAnchor, BRIDGE_COMMAND, BRIDGE_COMMAND_NAME, getAnchorName, getButton, MockEvent } from '../../../core/bridge/test-util/app-bridge-test-utils';
@@ -22,7 +22,7 @@ describe('AppBrigeService', () => {
         return new AppBridgeError("Command name cannot be the reference to a native command: " + methodName);
     };
     
-    let service: AppBrigeService;
+    let service: AppBridgeService;
     let testDocument: any;
     let router: Router;
     const routes: Routes = [
@@ -37,7 +37,7 @@ describe('AppBrigeService', () => {
             ]
         }).compileComponents();
         testDocument = TestBed.inject(DOCUMENT);
-        service = TestBed.inject(AppBrigeService);
+        service = TestBed.inject(AppBridgeService);
         router = TestBed.inject(Router);
     });
 

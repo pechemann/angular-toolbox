@@ -8,7 +8,7 @@
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { HttpMockService, SafeHtmlPipe, SubscriptionService, AppBrigeService, IdentifiableComponent, ContentRendererDirective, HttpMock } from 'projects/angular-toolbox/src/public-api';
+import { HttpMockService, SafeHtmlPipe, SubscriptionService, AppBridgeService, IdentifiableComponent, ContentRendererDirective, HttpMock } from 'projects/angular-toolbox/src/public-api';
 import { ActivatedRoute, UrlSegment } from '@angular/router';
 import { IconListService } from '../../../ui/model/service/icon-list-list.service';
 import { DOCUMENTATION_PROXY_CONFIG } from '../../proxy/documentation-proxy.config';
@@ -48,7 +48,7 @@ export class DocumentationComponent extends IdentifiableComponent implements OnI
               private _subsciptionService: SubscriptionService,
               private _route : ActivatedRoute,
               private _highlightService: HighlightService,
-              private _appBridgService: AppBrigeService,
+              private _appBridgService: AppBridgeService,
               private _iconListService: IconListService) {
     super();
   }
