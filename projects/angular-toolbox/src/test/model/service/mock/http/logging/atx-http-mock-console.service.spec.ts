@@ -65,4 +65,13 @@ describe('HttpMockLoggingService', () => {
         close();
         ref = null;
     });
+    
+    it('beforeunload event test: unloading the parent window should invoke the ngOnDestroy() method', () => {
+        let ref: any = service.open();
+        spyOn(service, "ngOnDestroy");
+        window.dispatchEvent(new Event('beforeunload'));
+        expect(service.ngOnDestroy).toHaveBeenCalled();
+        service.close();
+        ref = null;
+    });
 });

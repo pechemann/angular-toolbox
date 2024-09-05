@@ -6,7 +6,7 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { ApplicationRef, ComponentRef, Injectable, OnDestroy } from "@angular/core";
+import { ApplicationRef, ComponentRef, HostListener, Injectable, OnDestroy } from "@angular/core";
 import { AtxMonitoringConsoleComponent } from "../../../../../framework/mock/http-monitoring-console";
 import { EMPTY_STRING } from "../../../../../util";
 import { AtxHttpMockConsolePopup } from "../../../../business/mock/http/popup/atx-http-mock-console-popup";
@@ -37,7 +37,9 @@ export class AtxHttpMockConsoleService implements OnDestroy {
   /**
    * @private
    */
-  constructor(private _appRef: ApplicationRef) { }
+  constructor(private _appRef: ApplicationRef) {
+    window.addEventListener("beforeunload", () => this.beforUnloadHandler());
+  }
 
   /**
    * Opens the ATX monitoring console within a new window and returns reference objects
@@ -76,6 +78,14 @@ export class AtxHttpMockConsoleService implements OnDestroy {
    */
   public ngOnDestroy(): void {
     this.close();
+  }
+
+  /**
+   * @private
+   */
+  private beforUnloadHandler(): void {
+    this.ngOnDestroy();
+    window.removeEventListener("beforeunload", () => this.beforUnloadHandler());
   }
 
   /**
