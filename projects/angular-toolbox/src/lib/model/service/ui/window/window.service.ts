@@ -8,10 +8,10 @@
 
 import { ApplicationRef, ComponentRef, Injectable, OnDestroy, Type } from "@angular/core";
 import { EMPTY_STRING, Uuid } from "../../../../util";
-import { BrowserWindowInit, WindowRef } from "../../../business";
-import { BrowserWindowTarget } from "../../../business/ui/window/browser-window-target";
-import { BrowserWindowFeaturesBuilder } from "../../../../util/window/browser-window-features-builder";
-import { BrowserWindowHeaderTagUtil } from "../../../../util/window/browser-window-header-tag-util";
+import { WindowInit, WindowRef } from "../../../business";
+import { WindowTarget } from "../../../business/ui/window/window-target";
+import { BrowserWindowFeaturesBuilder } from "../../../../util/window/window-features-builder";
+import { WindowHeaderTagUtil } from "../../../../util/window/window-header-tag-util";
 import { AbstractWindowService } from "./abstract-window.service";
 
 /**
@@ -20,7 +20,7 @@ import { AbstractWindowService } from "./abstract-window.service";
 @Injectable({
   providedIn: 'root'
 })
-export class BrowserWindowService extends AbstractWindowService implements OnDestroy {
+export class WindowService extends AbstractWindowService implements OnDestroy {
 
   /**
    * @private
@@ -33,15 +33,15 @@ export class BrowserWindowService extends AbstractWindowService implements OnDes
   /**
    * @inheritdoc
    */
-  public open<T>(component: Type<T>, init?: BrowserWindowInit): WindowRef<T> {
+  public open<T, Window>(component: Type<T>, init?: WindowInit): WindowRef<T, Window> {
     const id: Uuid = Uuid.build();
     const features: string = BrowserWindowFeaturesBuilder.build(init);
     const win: WindowProxy = window.open(EMPTY_STRING, this.getTarget(init), features) as WindowProxy;
-    BrowserWindowHeaderTagUtil.setTitle(win, init);
-    BrowserWindowHeaderTagUtil.setIcon(win, init);
+    WindowHeaderTagUtil.setTitle(win, init);
+    WindowHeaderTagUtil.setIcon(win, init);
     const componentRef: ComponentRef<T> = this._appRef.bootstrap(component, win.document.body);
-    const winRef: WindowRef<T> = {
-      window: win,
+    const winRef: WindowRef<T, Window> = {
+      window: win as Window,
       componentRef: componentRef,
       uuid: id
     };
@@ -53,7 +53,7 @@ export class BrowserWindowService extends AbstractWindowService implements OnDes
    * @inheritdoc
    */
   public close(uuid: Uuid): boolean {
-    const winRef: WindowRef<any> | undefined = this.windowRefMap.get(uuid);
+    const winRef: WindowRef<any, Window> | undefined = this.windowRefMap.get(uuid);
     if (!winRef) return false;
     this.windowRefMap.delete(uuid);
     winRef.window.close();
@@ -89,8 +89,8 @@ export class BrowserWindowService extends AbstractWindowService implements OnDes
   /**
    * @private
    */
-  private getTarget(init?: BrowserWindowInit): BrowserWindowTarget {
-    if (init) return init.target || BrowserWindowTarget.BLANK;
-    return BrowserWindowTarget.BLANK;
+  private getTarget(init?: WindowInit): WindowTarget {
+    if (init) return init.target || WindowTarget.BLANK;
+    return WindowTarget.BLANK;
   }
 }

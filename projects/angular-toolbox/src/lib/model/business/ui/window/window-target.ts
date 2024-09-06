@@ -9,7 +9,7 @@
 /**
  * Specifies the name of the browsing context the resource is being loaded into.
  */
-export enum BrowserWindowTarget {
+export enum WindowTarget {
 
     /**
      * The current browsing context.
@@ -22,7 +22,7 @@ export enum BrowserWindowTarget {
     BLANK = "_blank",
 
     /**
-     * The parent browsing context of the current one. If no parent, behaves as `BrowserWindowTarget.SELF`.
+     * The parent browsing context of the current one. If no parent, behaves as `WindowTarget.SELF`.
      */
     PARENT = "_parent",
 

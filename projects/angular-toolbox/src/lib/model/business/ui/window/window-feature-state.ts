@@ -7,9 +7,9 @@
  */
 
 /**
- * Specifies values used to activate, or deactivate, a feature for a browser window created by the `BrowserWindowService.open()` method.
+ * Specifies values used to activate, or deactivate, a feature for a browser window created by the `WindowService.open()` method.
  */
-export enum BrowserWindowTFeatureState {
+export enum WindowFeatureState {
 
     /**
      * The values used to activate a feature.

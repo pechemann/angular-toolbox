@@ -6,17 +6,17 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { BrowserWindowInit } from "../../model";
+import { WindowInit } from "../../model";
 import { EMPTY_STRING } from "../empty-string.const";
 
 
 /**
  * A static builder that creates the features associated with a popup window created by
- * the `BrowserWindowService.open()` method.
+ * the `WindowService.open()` method.
  */
 export class BrowserWindowFeaturesBuilder {
 
-    public static build(init?: BrowserWindowInit): string {
+    public static build(init?: WindowInit): string {
         if (!init) return "popup=true,left=100,top=100,width=800,height=450";
         let features: string = "popup=true";
         features += BrowserWindowFeaturesBuilder.getLeft(init);
@@ -36,7 +36,7 @@ export class BrowserWindowFeaturesBuilder {
     /**
      * @private
      */
-    public static getLeft(init?: BrowserWindowInit): string {
+    public static getLeft(init?: WindowInit): string {
         const v: number | undefined = init?.left;
         return ",left=" + (v || 100);
     }
@@ -44,7 +44,7 @@ export class BrowserWindowFeaturesBuilder {
     /**
      * @private
      */
-    public static getTop(init?: BrowserWindowInit): string {
+    public static getTop(init?: WindowInit): string {
         const v: number | undefined = init?.top;
         return ",top=" + (v || 100);
     }
@@ -52,7 +52,7 @@ export class BrowserWindowFeaturesBuilder {
     /**
      * @private
      */
-    public static getWidth(init?: BrowserWindowInit): string {
+    public static getWidth(init?: WindowInit): string {
         const v: number | undefined = init?.width;
         return ",width=" + (v || 800);
     }
@@ -60,7 +60,7 @@ export class BrowserWindowFeaturesBuilder {
     /**
      * @private
      */
-    public static getHeight(init?: BrowserWindowInit): string {
+    public static getHeight(init?: WindowInit): string {
         const v: number | undefined = init?.height;
         return ",height=" + (v || 450);
     }
@@ -68,7 +68,7 @@ export class BrowserWindowFeaturesBuilder {
     /**
      * @private
      */
-    public static getPopupProp(property: string, init?: BrowserWindowInit): string {
+    public static getPopupProp(property: string, init?: WindowInit): string {
         if (!init) return EMPTY_STRING;
         const v: any = (init as any)[property as any];
         if (!v) return EMPTY_STRING;

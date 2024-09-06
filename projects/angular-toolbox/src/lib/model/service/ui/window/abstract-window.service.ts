@@ -18,7 +18,7 @@ export abstract class AbstractWindowService implements Destroyable {
   /**
    * @private
    */
-  protected windowRefMap: Map<Uuid, WindowRef<any>> = new Map();
+  protected windowRefMap: Map<Uuid, WindowRef<any, any>> = new Map();
 
   /**
    * Returns the window reference object associated with the specified `Uuid` object.
@@ -27,7 +27,7 @@ export abstract class AbstractWindowService implements Destroyable {
    * 
    * @returns A `WindowRef` object, or `undefined` if the reference cannot be found.
    */
-  public get(uuid: Uuid): WindowRef<any> | undefined {
+  public get(uuid: Uuid): WindowRef<any, any> | undefined {
     return this.windowRefMap.get(uuid);
   }
 
@@ -36,7 +36,7 @@ export abstract class AbstractWindowService implements Destroyable {
    * 
    * @returns A list of `WindowRef` objects created by this service.
    */
-  public getAll(): WindowRef<any>[] {
+  public getAll(): WindowRef<any, any>[] {
     return Array.from(this.windowRefMap.values());
   }
 
@@ -56,7 +56,7 @@ export abstract class AbstractWindowService implements Destroyable {
    * 
    * @returns A `WindowRef` object.
    */
-  abstract open<T>(component: Type<T>, init?: any): WindowRef<T>;
+  abstract open<T, U>(component: Type<T>, init?: any): WindowRef<T, U>;
 
   /**
    * Closes the window associated with the specified `Uuid` object.

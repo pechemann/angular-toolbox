@@ -12,12 +12,12 @@ import { Uuid } from "../../../../util";
 /**
  * Defines the type of objects managed by the `AbstractWindowService` class.
  */
-export interface WindowRef<T> {
+export interface WindowRef<T, U> {
     
     /**
      * The reference to a window stored within the `AbstractWindowService` class.
      */
-    window: Window;
+    window: U;
 
     /**
      * The reference to the Angular component displayed within a window.

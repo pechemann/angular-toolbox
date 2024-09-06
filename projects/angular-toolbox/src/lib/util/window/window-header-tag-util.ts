@@ -6,32 +6,32 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { BrowserWindowInit } from "../../model";
+import { WindowInit } from "../../model";
 
 /**
- * A static utility class that creates header tags for windows created by the `BrowserWindowService.open()` method.
+ * A static utility class that creates header tags for windows created by the `WindowService.open()` method.
  */
-export class BrowserWindowHeaderTagUtil {
+export class WindowHeaderTagUtil {
 
     /**
-     * Sets the title of the specified window if defined in the `BrowserWindowInit` config object.
+     * Sets the title of the specified window if defined in the `WindowInit` config object.
      * 
      * @param win The window for which to set the title.
-     * @param init The `BrowserWindowInit` config object used to initialize the window.
+     * @param init The `WindowInit` config object used to initialize the window.
      */
-    public static setTitle(win: Window, init?: BrowserWindowInit): void {
+    public static setTitle(win: Window, init?: WindowInit): void {
        const title: string | undefined = init?.title;
        if (!title) return;
        win.document.title = title;
     }
 
     /**
-     * Sets the icon of the specified window if defined in the `BrowserWindowInit` config object.
+     * Sets the icon of the specified window if defined in the `WindowInit` config object.
      * 
      * @param win The window for which to set the icon.
-     * @param init The `BrowserWindowInit` config object used to initialize the window.
+     * @param init The `WindowInit` config object used to initialize the window.
      */
-    public static setIcon(win: Window, init?: BrowserWindowInit): void {
+    public static setIcon(win: Window, init?: WindowInit): void {
         const icon: string | undefined = init?.icon;
        if (!icon) return;
         const doc: Document = win.document;
