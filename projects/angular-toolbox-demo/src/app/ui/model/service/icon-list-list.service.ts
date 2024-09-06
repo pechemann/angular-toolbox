@@ -40,7 +40,8 @@ export class IconListService {
       { label: "Dark Mode Service: Bootstrap Integration", urlTree: ["../demo", "dark-mode-service-bootstrap"] },
       { label: "Scroll Service", urlTree: ["../demo", "scroll-service"] },
       { label: "Version Service", urlTree: ["../demo", "version-service"] },
-      { label: "ArrayList Class", urlTree: ["../demo", "array-list"] }
+      { label: "ArrayList Class", urlTree: ["../demo", "array-list"] },
+      { label: "Window Service", urlTree: ["../demo", "window-service"] }
     ];
   }
 

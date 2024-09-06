@@ -53,6 +53,10 @@ const routes: Routes = [
   {
     path: 'logging-framework',
     loadComponent: () => import('./component/logging-framework/logging-framework.component').then(mod => mod.LoggingFrameworkComponent)
+  },
+  {
+    path: 'window-service',
+    loadComponent: () => import('./component/window-service/window-service.component').then(mod => mod.WindowServiceComponent)
   }
 ];
 
