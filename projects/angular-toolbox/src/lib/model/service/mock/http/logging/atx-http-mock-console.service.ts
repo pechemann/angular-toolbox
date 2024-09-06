@@ -6,7 +6,7 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { ApplicationRef, ComponentRef, HostListener, Injectable, OnDestroy } from "@angular/core";
+import { ApplicationRef, ComponentRef, Injectable, OnDestroy } from "@angular/core";
 import { AtxMonitoringConsoleComponent } from "../../../../../framework/mock/http-monitoring-console";
 import { EMPTY_STRING } from "../../../../../util";
 import { AtxHttpMockConsolePopup } from "../../../../business/mock/http/popup/atx-http-mock-console-popup";
