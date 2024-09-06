@@ -1,0 +1,218 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <section class="w-100">
+        <h5 class="mb-4">On this page</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="#motivation" onclick="appBridge.goToAnchor(event)" title="Motivation">Motivation</a></li>
+            <li class="list-group-item"><a href="#api" onclick="appBridge.goToAnchor(event)" title="API">API</a></li>
+            <li class="list-group-item"><a href="#example" onclick="appBridge.goToAnchor(event)" title="API">Example</a></li>
+        </ul>
+    </section>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3">Window Managment API</h2>
+    <div class="version-info text-end mb-4 me-3">
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 1.2.0</span></small>
+    </div>
+    <p>
+        A flexible API for creating browser windows that render Angular components.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="motivation">Motivation</h3>
+    <div class="alert alert-warning" role="alert">
+        <svg width="20" height="20" fill="currentColor" class="bi bi-exclamation-triangle" viewBox="0 0 16 16">
+            <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.15.15 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.2.2 0 0 1-.054.06.1.1 0 0 1-.066.017H1.146a.1.1 0 0 1-.066-.017.2.2 0 0 1-.054-.06.18.18 0 0 1 .002-.183L7.884 2.073a.15.15 0 0 1 .054-.057m1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767z"/>
+            <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z"/>
+        </svg>
+        This API is still experimental.
+    </div>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="api">API</h3>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Interface</th>
+            <th scope="col">Description</th>
+            <th scope="col">Link</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>WindowRef</code></td>
+                <td>
+                    The <code>WindowRef</code> interface defines the type of objects managed by the <code>AbstractWindowService</code> class.
+                </td>
+                <td>
+                    <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/window-managment-api/window-ref'])" title="WindowRef">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                            <use href="#linkIcon"/>
+                        </svg>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td><code>WindowInit</code></td>
+                <td>
+                    The <code>WindowInit</code> interface defines the APi used to initialize the windows created by the <code>WindowService.open()</code> method.
+                </td>
+                <td>
+                    <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/window-managment-api/window-init'])" title="WindowInit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                            <use href="#linkIcon"/>
+                        </svg>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+        <thead>
+            <tr>
+              <th scope="col">Service</th>
+              <th scope="col">Description</th>
+              <th scope="col">Link</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>WindowService</code></td>
+              <td>
+                Provides functionality to display Angular component within a new browser window.
+              </td>
+              <td>
+                  <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/window-managment-api/window-service'])" title="WindowService">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                          <use href="#linkIcon"/>
+                      </svg>
+                  </button>
+              </td>
+            </tr>
+          </tbody>
+        <thead>
+          <tr>
+            <th scope="col">Abstract Class</th>
+            <th scope="col">Description</th>
+            <th scope="col">Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>AbstractWindowService</code></td>
+            <td>
+                The abstract class for all services that create new windows to render Angular component.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/window-managment-api/abstract-window-service'])" title="AbstractWindowService">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+        </tbody>
+
+        <thead>
+            <tr>
+              <th scope="col">Utility</th>
+              <th scope="col">Description</th>
+              <th scope="col">Link</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>WindowFeatureState</code></td>
+              <td>
+                Specifies values used to activate, or deactivate, a feature for a browser window created by the 
+                <code>WindowService.open()</code> method.
+              </td>
+              <td>
+                  <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/window-managment-api/window-feature-state'])" title="WindowFeatureState">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                          <use href="#linkIcon"/>
+                      </svg>
+                  </button>
+              </td>
+            </tr>
+            <tr>
+                <td><code>WindowTarget</code></td>
+                <td>
+                    Specifies the name of the browsing context the resource is being loaded into.
+                </td>
+                <td>
+                    <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/window-managment-api/window-target'])" title="WindowTarget">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                            <use href="#linkIcon"/>
+                        </svg>
+                    </button>
+                </td>
+              </tr>
+          </tbody>
+      </table>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="example">Example</h3>
+    <p>
+        The following code sample shows how to display a basic Angular component into a new popup window:
+    </p>
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title mb-2">Code</h5>
+            <figure>
+                <figcaption>HTML Template:</figcaption>
+                <pre><code class="language-html">&lt;button (click)="openWindow()"&gt;Open new window&lt;/button&gt;</code></pre></figure>
+            <figure>
+                <figcaption>Angular Component:</figcaption>
+                <pre><code class="language-typescript">&#64;Component(&#123;
+    selector: 'app-window-service',
+    standalone: true,
+    templateUrl: './window-service.component.html'
+&#125;)
+export class WindowServiceComponent implements OnDestroy &#123;
+    
+    constructor(private windowService: WindowService) &#123; &#125;
+    
+    public ngOnDestroy(): void &#123;
+        this.windowService.closeAll();
+    &#125;
+    
+    protected openWindow(): void &#123;
+        const init: WindowInit = &#123;
+        title: "Dynamic Component"
+        &#125;;
+        this.windowService.open(WindowContentComponent);
+    &#125;
+&#125;</code></pre></figure>
+            <figure>
+                <figcaption>Dynamic Angular Component:</figcaption>
+                <pre><code class="language-typescript">&#64;Component(&#123;
+    selector: 'app-window-content',
+    standalone: true,
+    template: '<div>Angular Toolbox rocks!</div>'
+&#125;)
+export class WindowContentComponent &#123; &#125;</code></pre></figure>
+             <p>
+                To see this sample in action, go to the demo section:
+             </p>
+             <button class="btn btn-primary btn-lg" onclick="appBridge.navigate(['demo/window-service'])" title="WindowService Demo">
+                WindowService Demo
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'Window Managment API' }]">
+</object>

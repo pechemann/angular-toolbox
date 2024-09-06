@@ -43,11 +43,11 @@ export class WindowServiceComponent implements OnDestroy {
   }
 
   protected documentation: DocumentationLink = {
-    label: "Window Service",
-    commands: ['/resources', 'documentation', 'window-service']
+    label: "Window Managment API",
+    commands: ['/resources', 'documentation', 'window-managment-api']
   };
   protected title: string = "Window Service Demo";
-  protected presentation: string = "A lightweight service allows to create browser windows that render Angular components.";
+  protected presentation: string = "A lightweight service for creating browser windows that render Angular components.";
   protected srcCode: CodeWrapper = {
     html: [`<button (click)="openWindow()">Open new window</button>`],
     typescript: [`/////////////////////////

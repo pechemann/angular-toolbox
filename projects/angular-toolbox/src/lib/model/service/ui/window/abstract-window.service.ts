@@ -11,7 +11,8 @@ import { Uuid } from "../../../../util";
 import { Destroyable, WindowRef } from "../../../business";
 
 /**
- * Provides functionality to display Angular component within a new browser window.
+ * The abstract class that must be implemented by services that provide
+ * functionality to display Angular component within a new browser window.
  */
 export abstract class AbstractWindowService implements Destroyable {
 
