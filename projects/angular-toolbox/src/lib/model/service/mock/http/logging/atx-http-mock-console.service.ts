@@ -60,7 +60,7 @@ export class AtxHttpMockConsoleService implements OnDestroy {
    */
   public open(): void {
     if (this._uuid) return;
-    this._windowSrv.open(AtxMonitoringConsoleComponent, FEATURES);
+    this._uuid = this._windowSrv.open(AtxMonitoringConsoleComponent, FEATURES);
   }
 
   /**
