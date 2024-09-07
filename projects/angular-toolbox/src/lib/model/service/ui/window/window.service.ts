@@ -33,7 +33,7 @@ export class WindowService extends AbstractWindowService implements OnDestroy {
   /**
    * @inheritdoc
    */
-  public open<T, Window>(component: Type<T>, init?: WindowInit): WindowRef<T, Window> {
+  public open<T>(component: Type<T>, init?: WindowInit): Uuid {
     const id: Uuid = Uuid.build();
     const features: string = BrowserWindowFeaturesBuilder.build(init);
     const win: WindowProxy = window.open(EMPTY_STRING, this.getTarget(init), features) as WindowProxy;
@@ -42,11 +42,10 @@ export class WindowService extends AbstractWindowService implements OnDestroy {
     const componentRef: ComponentRef<T> = this._appRef.bootstrap(component, win.document.body);
     const winRef: WindowRef<T, Window> = {
       window: win as Window,
-      componentRef: componentRef,
-      uuid: id
+      componentRef: componentRef
     };
     this.windowRefMap.set(id, winRef);
-    return winRef;
+    return id;
   }
 
   /**
@@ -67,7 +66,8 @@ export class WindowService extends AbstractWindowService implements OnDestroy {
    * @inheritdoc
    */
   public closeAll(): void {
-    this.windowRefMap.forEach(ref => this.close(ref.uuid));
+    const keys: IterableIterator<Uuid> = this.windowRefMap.keys();
+    for (const key of keys) this.close(key);
   }
 
   /**
@@ -75,7 +75,7 @@ export class WindowService extends AbstractWindowService implements OnDestroy {
    */
   public ngOnDestroy(): void {
     this.closeAll();
-    super.destroy();
+    this.destroy();
   }
 
   /**

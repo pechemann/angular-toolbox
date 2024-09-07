@@ -55,9 +55,9 @@ export abstract class AbstractWindowService implements Destroyable {
    * @param component The component to attach in the new window.
    * @param init The config used to initialize the window.
    * 
-   * @returns A `WindowRef` object.
+   * @returns A `Uuid` object.
    */
-  abstract open<T, U>(component: Type<T>, init?: any): WindowRef<T, U>;
+  abstract open<T>(component: Type<T>, init?: any): Uuid;
 
   /**
    * Closes the window associated with the specified `Uuid` object.

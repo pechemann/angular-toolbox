@@ -7,7 +7,6 @@
  */
 
 import { ComponentRef } from "@angular/core";
-import { Uuid } from "../../../../util";
 
 /**
  * Defines the type of objects managed by the `AbstractWindowService` class.
@@ -23,9 +22,4 @@ export interface WindowRef<T, U> {
      * The reference to the Angular component displayed within a window.
      */
     componentRef: ComponentRef<T>;
-
-    /**
-     * The unique identifier associated with a window.
-     */
-    uuid: Uuid;
 }
