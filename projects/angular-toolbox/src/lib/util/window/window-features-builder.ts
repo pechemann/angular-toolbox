@@ -9,13 +9,19 @@
 import { WindowInit } from "../../model";
 import { EMPTY_STRING } from "../empty-string.const";
 
-
 /**
  * A static builder that creates the features associated with a popup window created by
  * the `WindowService.open()` method.
  */
 export class BrowserWindowFeaturesBuilder {
 
+    /**
+     * Builds a string that represents the features parameter of the `Window.open()` method.
+     * 
+     * @param init A `WindowInit` object that contains data to initialize the features string.
+     * 
+     * @returns A string that represents the features parameter of the `Window.open()` method.
+     */
     public static build(init?: WindowInit): string {
         if (!init) return "popup=true,left=100,top=100,width=800,height=450";
         let features: string = "popup=true";

@@ -20,9 +20,9 @@ export class WindowHeaderTagUtil {
      * @param init The `WindowInit` config object used to initialize the window.
      */
     public static setTitle(win: Window, init?: WindowInit): void {
-       const title: string | undefined = init?.title;
-       if (!title) return;
-       win.document.title = title;
+        const title: string | undefined = init?.title;
+        if (!title) return;
+        win.document.title = title;
     }
 
     /**
@@ -33,7 +33,7 @@ export class WindowHeaderTagUtil {
      */
     public static setIcon(win: Window, init?: WindowInit): void {
         const icon: string | undefined = init?.icon;
-       if (!icon) return;
+        if (!icon) return;
         const doc: Document = win.document;
         const head: HTMLHeadElement = doc.getElementsByTagName('head')[0];
         const link: HTMLLinkElement = doc.createElement('link');
