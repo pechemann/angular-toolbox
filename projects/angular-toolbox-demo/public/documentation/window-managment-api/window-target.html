@@ -1,0 +1,84 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+ 
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100 mb-4">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+           <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/window-managment-api'])">
+             Window Managment API
+            </a></li>
+        </ul>
+    </aside>
+    <section class="w-100">
+        <h5 class="mb-4">On this page</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="#SELF" onclick="appBridge.goToAnchor(event)" title="SELF">SELF</a></li>
+            <li class="list-group-item"><a href="#BLANK" onclick="appBridge.goToAnchor(event)" title="BLANK">BLANK</a></li>
+            <li class="list-group-item"><a href="#PARENT" onclick="appBridge.goToAnchor(event)" title="PARENT">PARENT</a></li>
+            <li class="list-group-item"><a href="#TOP" onclick="appBridge.goToAnchor(event)" title="TOP">TOP</a></li>
+            <li class="list-group-item"><a href="#UNFENCED_TOP" onclick="appBridge.goToAnchor(event)" title="UNFENCED_TOP">UNFENCED_TOP</a></li>
+        </ul>
+    </section>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4"></header>
+    <h2 class="mb-3"><code>WindowTarget</code> Enum</h2>
+    <div class="version-info text-end mb-4 me-3">
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 1.2.0</span></small>
+    </div>
+    <p>
+        The <code>WindowTarget</code> specifies the name of the browsing context the resource is being loaded into.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="SELF"><code>WindowTarget.SELF</code></h3>
+    <pre><code class="language-typescript">SELF = "self"</code></pre>
+    <p>
+        Represents the current browsing context.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="BLANK"><code>WindowTarget.BLANK</code></h3>
+    <pre><code class="language-typescript">BLANK = "_blank"</code></pre>
+    <p>
+        Usually a new tab, but users can configure browsers to open a new window instead.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="PARENT"><code>WindowTarget.PARENT</code></h3>
+    <pre><code class="language-typescript">PARENT = "_parent"</code></pre>
+    <p>
+        The parent browsing context of the current one. If no parent, behaves as <code>WindowTarget.SELF</code>.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="TOP"><code>WindowTarget.TOP</code></h3>
+    <pre><code class="language-typescript">TOP = "_top"</code></pre>
+    <p>
+        The topmost browsing context.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="UNFENCED_TOP"><code>WindowTarget.UNFENCED_TOP</code></h3>
+    <pre><code class="language-typescript">UNFENCED_TOP = "_unfencedTop"</code></pre>
+    <p>
+        Allows embedded fenced frames to navigate the top-level frame.
+    </p>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'Window Managment API', 'path': 'window-managment-api' }, { 'label': 'WindowTarget Interface' }]">
+</object>

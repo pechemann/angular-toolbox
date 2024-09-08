@@ -1,0 +1,181 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+ 
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100 mb-4">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+           <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/window-managment-api'])">
+             Window Managment API
+            </a></li>
+        </ul>
+    </aside>
+    <section class="w-100"></section>
+        <h5 class="mb-4">On this page</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="#target" onclick="appBridge.goToAnchor(event)" title="target property">target property</a></li>
+            <li class="list-group-item"><a href="#title" onclick="appBridge.goToAnchor(event)" title="title property">title property</a></li>
+            <li class="list-group-item"><a href="#icon" onclick="appBridge.goToAnchor(event)" title="icon property">icon property</a></li>
+            <li class="list-group-item"><a href="#left" onclick="appBridge.goToAnchor(event)" title="left property">left property</a></li>
+            <li class="list-group-item"><a href="#top" onclick="appBridge.goToAnchor(event)" title="top property">top property</a></li>
+            <li class="list-group-item"><a href="#width" onclick="appBridge.goToAnchor(event)" title="width property">width property</a></li>
+            <li class="list-group-item"><a href="#height" onclick="appBridge.goToAnchor(event)" title="height property">height property</a></li>
+            <li class="list-group-item"><a href="#directories" onclick="appBridge.goToAnchor(event)" title="directories property">directories property</a></li>
+            <li class="list-group-item"><a href="#titlebar" onclick="appBridge.goToAnchor(event)" title="titlebar property">titlebar property</a></li>
+            <li class="list-group-item"><a href="#scrollbars" onclick="appBridge.goToAnchor(event)" title="scrollbars property">scrollbars property</a></li>
+            <li class="list-group-item"><a href="#toolbar" onclick="appBridge.goToAnchor(event)" title="toolbar property">toolbar property</a></li>
+            <li class="list-group-item"><a href="#location" onclick="appBridge.goToAnchor(event)" title="location property">location property</a></li>
+            <li class="list-group-item"><a href="#status" onclick="appBridge.goToAnchor(event)" title="status property">status property</a></li>
+            <li class="list-group-item"><a href="#menubar" onclick="appBridge.goToAnchor(event)" title="menubar property">menubar property</a></li>
+        </ul>
+    </section>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4"></header>
+    <h2 class="mb-3"><code>WindowInit</code> Interface</h2>
+    <div class="version-info text-end mb-4 me-3">
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 1.2.0</span></small>
+    </div>
+    <p>
+        The <code>WindowInit</code> defines the APi used to initialize the windows created by the <code>WindowService.open()</code> method.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="target"><code>WindowInit.target</code></h3>
+    <pre><code class="language-typescript">target?: WindowTarget</code></pre>
+    <p>
+        The name of the browsing context the resource is being loaded into.
+        <br>This property is optional.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="title"><code>WindowInit.title</code></h3>
+    <pre><code class="language-typescript">title?: string</code></pre>
+    <p>
+        The title of the new window.
+        <br>This property is optional.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="icon"><code>WindowInit.icon</code></h3>
+    <pre><code class="language-typescript">icon?: string</code></pre>
+    <p>
+        The icon of the new window. Can be either a HTML path, or a base 64 encoded image string.
+        <br>This property is optional.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="left"><code>WindowInit.left</code></h3>
+    <pre><code class="language-typescript">left?: number</code></pre>
+    <p>
+        Specifies the distance in pixels from the left side of the work area as defined by the user's
+        operating system where the new window will be generated.
+        <br>This property is optional.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="top"><code>WindowInit.top</code></h3>
+    <pre><code class="language-typescript">top?: number</code></pre>
+    <p>
+        Specifies the distance in pixels from the top side of the work area as defined by the user's
+        operating system where the new window will be generated.
+        <br>This property is optional.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="width"><code>WindowInit.width</code></h3>
+    <pre><code class="language-typescript">width?: number</code></pre>
+    <p>
+        Specifies the width of the content area, including scrollbars. The minimum required value is <code>100</code>.
+        <br>This property is optional.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="height"><code>WindowInit.height</code></h3>
+    <pre><code class="language-typescript">height?: number</code></pre>
+    <p>
+        Specifies the height of the content area, including scrollbars. The minimum required value is <code>100</code>.
+        <br>This property is optional.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="directories"><code>WindowInit.directories</code></h3>
+    <pre><code class="language-typescript">directories?: WindowFeatureState</code></pre>
+    <p>
+        Specifies whether the directories panel is visible (<code>WindowFeatureState.YES</code>), or not (<code>WindowFeatureState.YENOS</code>).
+        <br>This property is optional.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="titlebar"><code>WindowInit.titlebar</code></h3>
+    <pre><code class="language-typescript">titlebar?: WindowFeatureState</code></pre>
+    <p>
+        Specifies whether the title bar is visible (<code>WindowFeatureState.YES</code>), or not (<code>WindowFeatureState.YENOS</code>).
+        <br>This property is optional.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="scrollbars"><code>WindowInit.scrollbars</code></h3>
+    <pre><code class="language-typescript">scrollbars?: WindowFeatureState</code></pre>
+    <p>
+        Specifies whether the scrollbars are activated (<code>WindowFeatureState.YES</code>), or not (<code>WindowFeatureState.YENOS</code>).
+        <br>This property is optional.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="toolbar"><code>WindowInit.toolbar</code></h3>
+    <pre><code class="language-typescript">toolbar?: WindowFeatureState</code></pre>
+    <p>
+        Specifies whether the toolbar is visible (<code>WindowFeatureState.YES</code>), or not (<code>WindowFeatureState.YENOS</code>).
+        <br>This property is optional.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="location"><code>WindowInit.location</code></h3>
+    <pre><code class="language-typescript">location?: WindowFeatureState</code></pre>
+    <p>
+        Specifies whether the location is visible (<code>WindowFeatureState.YES</code>), or not (<code>WindowFeatureState.YENOS</code>).
+        <br>This property is optional.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="status"><code>WindowInit.status</code></h3>
+    <pre><code class="language-typescript">status?: WindowFeatureState</code></pre>
+    <p>
+        Specifies whether the status panel is visible (<code>WindowFeatureState.YES</code>), or not (<code>WindowFeatureState.YENOS</code>).
+        <br>This property is optional.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="menubar"><code>WindowInit.menubar</code></h3>
+    <pre><code class="language-typescript">menubar?: WindowFeatureState</code></pre>
+    <p>
+        Specifies whether the menu bar is visible (<code>WindowFeatureState.YES</code>), or not (<code>WindowFeatureState.YENOS</code>).
+        <br>This property is optional.
+    </p>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'Window Managment API', 'path': 'window-managment-api' }, { 'label': 'WindowInit Interface' }]">
+</object>
