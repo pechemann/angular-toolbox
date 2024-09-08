@@ -1,0 +1,179 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100 mb-4">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+           <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/window-managment-api'])">
+             Window Managment API
+            </a></li>
+        </ul>
+    </aside>
+    <section class="w-100"></section>
+        <h5 class="mb-4">On this page</h5>
+        <ul class="list-group"></ul>
+            <li class="list-group-item"><a href="#signature" onclick="appBridge.goToAnchor(event)" title="Class Signature">Class Signature</a></li>
+            <li class="list-group-item"><a href="#get" onclick="appBridge.goToAnchor(event)" title="get() method">get() method</a></li>
+            <li class="list-group-item"><a href="#getAll" onclick="appBridge.goToAnchor(event)" title="getAll() method">getAll() method</a></li>
+            <li class="list-group-item"><a href="#destroy" onclick="appBridge.goToAnchor(event)" title="destroy() method">destroy() method</a></li>
+            <li class="list-group-item"><a href="#open" onclick="appBridge.goToAnchor(event)" title="abstract open() method">abstract open() method</a></li>
+            <li class="list-group-item"><a href="#close" onclick="appBridge.goToAnchor(event)" title="abstract close() method">abstract close() method</a></li>
+            <li class="list-group-item"><a href="#closeAll" onclick="appBridge.goToAnchor(event)" title="abstract closeAll() method">abstract closeAll() method</a></li>
+        </ul>
+    </section>
+</nav>
+
+
+<header class="fs-5 col-xl-9 mb-4"></header>
+    <h2 class="mb-3"><code>AbstractWindowService</code> Class</h2>
+    <div class="version-info text-end mb-4 me-3">
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 1.2.0</span></small>
+    </div>
+    <p>
+        The abstract class that must be implemented by services that provide functionality to display Angular component within a new browser window.
+    </p>
+    <hr class="mt-4">
+</header>
+
+
+<section id="signature" class="col-xl-9 mb-4">
+    <h3>Class Signature</h3>
+    <pre><code class="language-typescript">abstract class AbstractWindowService implements Destroyable</code></pre>
+</section>
+
+<section id="get" class="col-xl-9 mb-4">
+    <h3><code>AbstractWindowService.get()</code></h3>
+    <p>
+        Returns the window reference object associated with the specified <code>Uuid</code> object.
+    </p>
+    <pre><code class="language-typescript">get(uuid: Uuid): WindowRef<any, any> | undefined</code></pre>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>uuid: Uuid</code></dt>
+            <dd>
+                <p>
+                    The <code>Uuid</code> object associated with the window reference to get.
+                    <br>
+                    If no window is associated with the <code>Uuid</code>, returns <code>undefined</code>.
+                    <br>
+                    See <a href="javascript:appBridge.navigate(['resources/documentation/uuid-class'])" title="Uuid"><code>Uuid</code></a> for details.
+                </p>
+            </dd>
+        </dl>
+    </div>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>WindowRef </code>
+        <p>
+            A <code>WindowRef</code> object, or <code>undefined</code>.<br>
+            See <a href="javascript:appBridge.navigate(['resources/documentation/window-managment-api/window-ref'])" title="WindowRef"><code>WindowRef</code></a> for details.
+        </p>
+    </div>
+</section>
+
+
+<section id="getAll" class="col-xl-9 mb-4">
+    <h3><code>AbstractWindowService.getAll()</code></h3>
+    <p>
+        Returns all the window reference objects created by the service.
+    </p>
+    <div class="alert alert-warning" role="alert">
+        Window reference objects do not longer exist when the associated window is closed.
+    </div>
+    <pre><code class="language-typescript">getAll(): WindowRef&lt;any, any&gt;[]</code></pre>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>WindowRef&lt;any, any&gt;[]</code>
+        <p>
+            A list of <code>WindowRef</code> objects created by this service.
+            <br>
+            See <a href="javascript:appBridge.navigate(['resources/documentation/uuid-class'])" title="Uuid"><code>Uuid</code></a> for details.
+        </p>
+    </div>
+</section>
+
+
+<section id="destroy" class="col-xl-9 mb-4">
+    <h3><code>Destroyable.destroy()</code></h3>
+    <p>
+        Removes all <code>WindowRef</code> objects from this service.
+    </p>
+    <pre><code class="language-typescript">destroy(): void</code></pre>
+    <div class="alert alert-danger" role="alert">
+        The <code>Destroyable.destroy()</code> method does not closes the associated windows.
+    </div>
+</section>
+
+
+<section id="open" class="col-xl-9 mb-4">
+    <h3><code>AbstractWindowService.open()</code></h3>
+    <p>
+        Opens a new browser window with the specified properties and attaches an instance of
+        the specified component into the window container.
+    </p>
+    <pre><code class="language-typescript">abstract open&lt;T&gt;(component: Typef&lt;T&gt;, init?: any): Uuid</code></pre>
+    <h5 class="mt-3">Parameters</h5>
+    <div class="border rounded p-3">
+        <code>component: Typef&lt;T&gt;</code>
+        <p>
+            The component to attach in the new window.
+        </p>
+        <code>init?: any</code>
+        <p>
+            An optional parameter that represents the config used to initialize the window.
+        </p>
+    </div>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>Uuid</code>
+        <p>
+            The <code>Uuid</code> object associated with the new window.
+            <br>
+            See <a href="javascript:appBridge.navigate(['resources/documentation/uuid-class'])" title="Uuid"><code>Uuid</code></a> for details.
+        </p>
+    </div>
+</section>
+
+<section id="close" class="col-xl-9 mb-4">
+    <h3><code>AbstractWindowService.close()</code></h3>
+    <p>
+        Closes the window associated with the specified <code>Uuid</code> object.
+    </p>
+    <pre><code class="language-typescript">abstract close(uuid: Uuid): boolean</code></pre>
+    <h5 class="mt-3">Parameters</h5>
+    <div class="border rounded p-3">
+        <code>uuid: Uuid</code>
+        <p>
+            The <code>Uuid</code> object associated with the window to close.<br>
+            See <a href="javascript:appBridge.navigate(['resources/documentation/uuid-class'])" title="Uuid"><code>Uuid</code></a> for details.
+        </p>
+    </div>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>boolean</code>
+        <p>
+            Returns <code>true</code> whether the window exists and is closed; <code>false</code> otherwise.
+        </p>
+    </div>
+</section>
+
+<section id="closeAll" class="col-xl-9 mb-4">
+    <h3><code>AbstractWindowService.closeAll()</code></h3>
+    <p>
+        Closes all opened windows.
+    </p>
+    <pre><code class="language-typescript">abstract closeAll(): void</code></pre>>
+    </div>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+data-tree="[{ 'label': 'Window Managment API', 'path': 'window-managment-api' }, { 'label': 'AbstractWindowService' }]">
+</object>

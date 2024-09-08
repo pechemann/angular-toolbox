@@ -12,12 +12,12 @@
 export enum WindowFeatureState {
 
     /**
-     * The values used to activate a feature.
+     * The value used to activate a feature.
      */
     YES = "yes",
 
     /**
-     * The values used to deactivate a feature.
+     * The value used to deactivate a feature.
      */
     NO = "no"
 }
