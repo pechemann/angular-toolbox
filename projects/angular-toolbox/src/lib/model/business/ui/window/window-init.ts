@@ -50,37 +50,37 @@ export interface WindowInit {
     height?: number;
     
     /**
-     * Specifies whether the directories are activated (WindowFeatureState.YES`), or not (WindowFeatureState.NO`).
+     * Specifies whether the directories are activated (`WindowFeatureState.YES`), or not (`WindowFeatureState.NO`).
      */
     directories?: WindowFeatureState;
     
     /**
-     * Specifies whether the title bar is activated (WindowFeatureState.YES`), or not (WindowFeatureState.NO`).
+     * Specifies whether the title bar is activated (`WindowFeatureState.YES`), or not (`WindowFeatureState.NO`).
      */
     titlebar?: WindowFeatureState;
     
     /**
-     * Specifies whether the scrollbars are activated (WindowFeatureState.YES`), or not (WindowFeatureState.NO`).
+     * Specifies whether the scrollbars are activated (`WindowFeatureState.YES`), or not (`WindowFeatureState.NO`).
      */
     scrollbars?: WindowFeatureState;
 
     /**
-     * Specifies whether the toolbar is activated (WindowFeatureState.YES`), or not (WindowFeatureState.NO`).
+     * Specifies whether the toolbar is activated (`WindowFeatureState.YES`), or not (`WindowFeatureState.NO`).
      */
     toolbar?: WindowFeatureState;
 
     /**
-     * Specifies whether the location is activated (WindowFeatureState.YES`), or not (WindowFeatureState.NO`).
+     * Specifies whether the location is activated (`WindowFeatureState.YES`), or not (`WindowFeatureState.NO`).
      */
     location?: WindowFeatureState;
 
     /**
-     * Specifies whether the status is activated (WindowFeatureState.YES`), or not (WindowFeatureState.NO`).
+     * Specifies whether the status is activated (`WindowFeatureState.YES`), or not (`WindowFeatureState.NO`).
      */
     status?: WindowFeatureState;
 
     /**
-     * Specifies whether the menu bar is activated (WindowFeatureState.YES`), or not (WindowFeatureState.NO`).
+     * Specifies whether the menu bar is activated (`WindowFeatureState.YES`), or not (`WindowFeatureState.NO`).
      */
     menubar?: WindowFeatureState;
 }
