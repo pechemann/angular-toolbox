@@ -6,7 +6,7 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { Type } from "@angular/core";
+import { EventEmitter, Type } from "@angular/core";
 import { Uuid } from "../../../../util";
 import { Destroyable, WindowRef } from "../../../business";
 
@@ -15,6 +15,11 @@ import { Destroyable, WindowRef } from "../../../business";
  * functionality to display Angular component within a new browser window.
  */
 export abstract class AbstractWindowService implements Destroyable {
+
+  /**
+   * An event triggered each time a window is closed.
+   */
+  public readonly windowClose: EventEmitter<Uuid> = new EventEmitter();
 
   /**
    * @private

@@ -70,7 +70,7 @@ describe('WindowService', () => {
         ref = null;
     });
 
-    it('close() should invike the close() method of the opened window', () => {
+    it('close() should invoke the close() method of the opened window', () => {
         let ref: any = service.open(WindowTestComponent);
         const window = (service.get(ref) as any).window;
         const close = window.close;
@@ -81,13 +81,23 @@ describe('WindowService', () => {
         ref = null;
     });
     
-    it('close() should invike the destroy() method of the component reference', () => {
+    it('close() should invoke the destroy() method of the component reference', () => {
         let ref: any = service.open(WindowTestComponent);
         const comp = (service.get(ref) as any).componentRef;
         spyOn(comp, "destroy");
         service.close(ref);
         expect(comp.destroy).toHaveBeenCalled();
         ref = null;
+    });
+    
+    it('close() should emit an event with the associated Uuid', (done) => {
+        let ref: any = service.open(WindowTestComponent);
+        service.windowClose.subscribe(next => {
+            expect(next).toEqual(ref);
+            done();
+            ref = null;
+        });
+        service.close(ref);
     });
 
     it('closeAll() should remove references to the opened windows', () => {

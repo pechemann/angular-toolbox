@@ -59,6 +59,7 @@ export class WindowService extends AbstractWindowService implements OnDestroy {
     winRef.window= null as any;
     winRef.componentRef.destroy();
     winRef.componentRef as any;
+    this.windowClose.emit(uuid);
     return true;
   }
 

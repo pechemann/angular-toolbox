@@ -19,6 +19,7 @@
         <h5 class="mb-4">On this page</h5>
         <ul class="list-group"></ul>
             <li class="list-group-item"><a href="#signature" onclick="appBridge.goToAnchor(event)" title="Class Signature">Class Signature</a></li>
+            <li class="list-group-item"><a href="#windowClose" onclick="appBridge.goToAnchor(event)" title="windowClose event">windowClose event</a></li>
             <li class="list-group-item"><a href="#get" onclick="appBridge.goToAnchor(event)" title="get() method">get() method</a></li>
             <li class="list-group-item"><a href="#getAll" onclick="appBridge.goToAnchor(event)" title="getAll() method">getAll() method</a></li>
             <li class="list-group-item"><a href="#destroy" onclick="appBridge.goToAnchor(event)" title="destroy() method">destroy() method</a></li>
@@ -46,6 +47,32 @@
     <h3>Class Signature</h3>
     <pre><code class="language-typescript">abstract class AbstractWindowService implements Destroyable</code></pre>
 </section>
+
+
+<section id="windowClose" class="col-xl-9 mb-4">
+    <h3><code>AbstractWindowService.windowClose</code></h3>
+    <div class="version-info text-end mb-4 me-3">
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 1.2.1</span></small>
+    </div>
+    <p>
+        An event triggered each time a window is closed.
+    </p>
+    <pre><code class="language-typescript">readonly windowClose: EventEmitter&lt;Uuid&gt;</code></pre>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>uuid: Uuid</code></dt>
+            <dd>
+                <p>
+                    The <code>Uuid</code> object associated with the closed window.
+                    <br>
+                    See <a href="javascript:appBridge.navigate(['resources/documentation/uuid-class'])" title="Uuid"><code>Uuid</code></a> for details.
+                </p>
+            </dd>
+        </dl>
+    </div>
+</section>
+
 
 <section id="get" class="col-xl-9 mb-4">
     <h3><code>AbstractWindowService.get()</code></h3>
