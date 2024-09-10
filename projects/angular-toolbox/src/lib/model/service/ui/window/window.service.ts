@@ -15,6 +15,16 @@ import { WindowHeaderTagUtil } from "../../../../util/window/window-header-tag-u
 import { AbstractWindowService } from "./abstract-window.service";
 
 /**
+ * @private
+ */
+type EvtListener = (this: Window, ev: BeforeUnloadEvent) => any;
+
+/**
+ * @private
+ */
+const EVT_TYPE: string = "beforeunload";
+
+/**
  * Provides functionality to display Angular component within a new browser window.
  */
 @Injectable({
@@ -27,7 +37,11 @@ export class WindowService extends AbstractWindowService implements OnDestroy {
    */
   constructor(private _appRef: ApplicationRef) {
     super();
-    window.addEventListener("beforeunload", () => this.beforUnloadHandler());
+    const beforeUnloadHandler: EvtListener = ()=> {
+      this.ngOnDestroy();
+      window.removeEventListener(EVT_TYPE, beforeUnloadHandler);
+    };
+    window.addEventListener(EVT_TYPE, beforeUnloadHandler);
   }
 
   /**
@@ -44,6 +58,11 @@ export class WindowService extends AbstractWindowService implements OnDestroy {
       window: win as Window,
       componentRef: componentRef
     };
+    const unloadListener: EvtListener = ()=> {
+      this.windowClose.emit(id);
+      win.removeEventListener(EVT_TYPE, unloadListener);
+    };
+    win.addEventListener(EVT_TYPE, unloadListener);
     this.windowRefMap.set(id, winRef);
     return id;
   }
@@ -56,10 +75,9 @@ export class WindowService extends AbstractWindowService implements OnDestroy {
     if (!winRef) return false;
     this.windowRefMap.delete(uuid);
     winRef.window.close();
-    winRef.window= null as any;
+    winRef.window = null as any;
     winRef.componentRef.destroy();
     winRef.componentRef as any;
-    this.windowClose.emit(uuid);
     return true;
   }
 
@@ -77,14 +95,6 @@ export class WindowService extends AbstractWindowService implements OnDestroy {
   public ngOnDestroy(): void {
     this.closeAll();
     this.destroy();
-  }
-
-  /**
-   * @private
-   */
-  private beforUnloadHandler(): void {
-    this.ngOnDestroy();
-    window.removeEventListener("beforeunload", () => this.beforUnloadHandler());
   }
 
   /**

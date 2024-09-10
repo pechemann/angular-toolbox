@@ -12,6 +12,7 @@ import { Uuid, WindowService } from 'projects/angular-toolbox/src/public-api';
 import { WindowTestComponent } from './abstract-window-service.test.util';
 import { BrowserWindowFeaturesBuilder } from 'projects/angular-toolbox/src/lib/util/window/window-features-builder';
 import { WindowHeaderTagUtil } from 'projects/angular-toolbox/src/lib/util/window/window-header-tag-util';
+import { Subscription } from 'rxjs';
 
 describe('WindowService', () => {
 
@@ -92,12 +93,25 @@ describe('WindowService', () => {
     
     it('close() should emit an event with the associated Uuid', (done) => {
         let ref: any = service.open(WindowTestComponent);
-        service.windowClose.subscribe(next => {
+        let sub: Subscription = service.windowClose.subscribe(next => {
             expect(next).toEqual(ref);
             done();
             ref = null;
+            sub.unsubscribe();
         });
         service.close(ref);
+    });
+
+    it('closing the window should emit an event with the associated Uuid', (done) => {
+        let ref: any = service.open(WindowTestComponent);
+        const window = (service.get(ref) as any).window;
+        let sub: Subscription = service.windowClose.subscribe(next => {
+            expect(next).toEqual(ref);
+            done();
+            ref = null;
+            sub.unsubscribe();
+        });
+        window.close();
     });
 
     it('closeAll() should remove references to the opened windows', () => {
@@ -130,12 +144,16 @@ describe('WindowService', () => {
         window.close();
     });
     
-    it('beforeunload event test: unloading the parent window should invoke the ngOnDestroy() method', () => {
+    it('beforeunload event test: unloading the parent window should invoke the ngOnDestroy() method', (done) => {
         let ref: any = service.open(WindowTestComponent);
         spyOn(service, "ngOnDestroy");
         window.dispatchEvent(new Event('beforeunload'));
-        expect(service.ngOnDestroy).toHaveBeenCalled();
+        setTimeout(()=> {
+            console.log(service)
+            expect(service.ngOnDestroy).toHaveBeenCalled();
+            ref = null;
+            done();
+        }, 10);
         service.close(ref);
-        ref = null;
     });
 });
