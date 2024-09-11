@@ -15,8 +15,7 @@ import { EMPTY_STRING } from "./empty-string.const";
 const DASH: string = "-";
 
 /**
- * A class that represents an immutable universally unique identifier (UUID).
- * This class is not available in workers. 
+ * A convenient utility class for working with `Version` objects.
  */
 export class VersionUtil {
 
@@ -40,7 +39,7 @@ export class VersionUtil {
      * 
      * @returns `true` whether both `Version` objects are equal; `false` otherwise.
      */
-    public static equals(v1: Version, v2: Version): boolean {
+    public static equal(v1: Version, v2: Version): boolean {
         return  v1.major === v2.major &&
                 v1.minor === v2.minor &&
                 v1.patch === v2.patch &&

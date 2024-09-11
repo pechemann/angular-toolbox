@@ -1,0 +1,105 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <section class="w-100">
+        <h5 class="mb-4">On this page</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="#stringify" onclick="appBridge.goToAnchor(event)" title="stringify()">stringify()</a></li>
+            <li class="list-group-item"><a href="#equal" onclick="appBridge.goToAnchor(event)" title="equal">equal()</a></li>
+        </ul>
+        <ul class="list-group mt-4">
+            <li class="list-group-item icon-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation/version-service'])" title="Version Service">
+                    Version Service
+                </a>
+            </li>
+            <li class="list-group-item icon-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation'])" title="Documentation">
+                    Documentation
+                </a>
+            </li>
+        </div>
+    </section>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h3><code>VersionUtil</code> Class</h3>
+    <p>
+        A convenient utility class for working with <code>Version</code> objects.
+    </p>
+    <hr class="mt-4">
+</header>
+
+
+<section class="col-xl-9 mb-4">
+    <h3 id="stringify"><code>VersionUtil.stringify()</code></h3>
+    <pre><code class="language-typescript">static stringify(version: Version): string</code></pre>
+    <p>
+        Returns a string that represents the specified <code>Version</code> object.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>version: Version</code></dt>
+            <dd>
+                <p>
+                    The <code>Version</code> object for which to get a string representation.
+                </p>
+            </dd>
+        </dl>
+    </div>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>string</code>
+        <p>
+            A string that represents the specified <code>Version</code> object.
+        </p>
+    </div>
+</section>
+
+
+<section class="col-xl-9 mb-4">
+    <h3 id="equal"><code>VersionUtil.equal()</code></h3>
+    <pre><code class="language-typescript">static equal(v1: Version, v2: Version): boolean</code></pre>
+    <p>
+        Compares the given <code>Version</code> objects.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>v1: Version</code></dt>
+            <dd>
+                <p>
+                    The first object to compare.
+                </p>
+            </dd>
+        </dl>
+        <dl></dl>
+            <dt><code>v2: Version</code></dt>
+            <dd>
+                <p>
+                    The second object to compare.
+                </p>
+            </dd>
+        </dl>
+    </div>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>boolean</code>
+        <p>
+            <code>true</code> whether both <code>Version</code> objects are equal; <code>false</code> otherwise.
+        </p>
+    </div>
+</section>
+
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'ATX Logging Framework', 'path': 'logging-framework' }, { 'label': 'API', 'path': 'logging-framework/api' }, { 'label': 'VersionUtil' }]">
+</object>

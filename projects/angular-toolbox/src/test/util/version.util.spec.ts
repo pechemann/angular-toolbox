@@ -23,15 +23,15 @@ describe('VersionUtil', () => {
     expect(VersionUtil.stringify(version)).toBe(`${MAJOR}.${MINOR}.${PATCH}`);
   });
 
-  it('equals() should return true when both Version objects are identical', () => {
+  it('equal() should return true when both Version objects are identical', () => {
     const v1: Version = new VersionImpl(MAJOR, MINOR, PATCH, BUILD_TIMESTAMP, METADATA);
     const v2: Version = new VersionImpl(MAJOR, MINOR, PATCH, BUILD_TIMESTAMP, METADATA);
-    expect(VersionUtil.equals(v1, v2)).toBeTrue();
+    expect(VersionUtil.equal(v1, v2)).toBeTrue();
   });
 
-  it('equals() should return false when both Version objects are different', () => {
+  it('equal() should return false when both Version objects are different', () => {
     const v1: Version = new VersionImpl(MAJOR, MINOR, PATCH, BUILD_TIMESTAMP);
     const v2: Version = new VersionImpl(MAJOR, MINOR, PATCH, BUILD_TIMESTAMP, METADATA);
-    expect(VersionUtil.equals(v1, v2)).toBeFalse();
+    expect(VersionUtil.equal(v1, v2)).toBeFalse();
   });
 });
