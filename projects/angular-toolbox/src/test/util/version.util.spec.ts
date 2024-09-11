@@ -29,7 +29,31 @@ describe('VersionUtil', () => {
     expect(VersionUtil.equal(v1, v2)).toBeTrue();
   });
 
-  it('equal() should return false when both Version objects are different', () => {
+  it('equal() should return false when major values are different', () => {
+    const v1: Version = new VersionImpl(1, MINOR, PATCH, BUILD_TIMESTAMP, METADATA);
+    const v2: Version = new VersionImpl(3, MINOR, PATCH, BUILD_TIMESTAMP, METADATA);
+    expect(VersionUtil.equal(v1, v2)).toBeFalse();
+  });
+
+  it('equal() should return false when minor values are different', () => {
+    const v1: Version = new VersionImpl(MAJOR, 1, PATCH, BUILD_TIMESTAMP, METADATA);
+    const v2: Version = new VersionImpl(MAJOR, 3, PATCH, BUILD_TIMESTAMP, METADATA);
+    expect(VersionUtil.equal(v1, v2)).toBeFalse();
+  });
+
+  it('equal() should return false when patch values are different', () => {
+    const v1: Version = new VersionImpl(MAJOR, MINOR, 1, BUILD_TIMESTAMP, METADATA);
+    const v2: Version = new VersionImpl(MAJOR, MINOR, 3, BUILD_TIMESTAMP, METADATA);
+    expect(VersionUtil.equal(v1, v2)).toBeFalse();
+  });
+
+  it('equal() should return false when timestamp values are different', () => {
+    const v1: Version = new VersionImpl(MAJOR, MINOR, PATCH, 0, METADATA);
+    const v2: Version = new VersionImpl(MAJOR, MINOR, PATCH, 20, METADATA);
+    expect(VersionUtil.equal(v1, v2)).toBeFalse();
+  });
+
+  it('equal() should return false when metadata are different', () => {
     const v1: Version = new VersionImpl(MAJOR, MINOR, PATCH, BUILD_TIMESTAMP);
     const v2: Version = new VersionImpl(MAJOR, MINOR, PATCH, BUILD_TIMESTAMP, METADATA);
     expect(VersionUtil.equal(v1, v2)).toBeFalse();
