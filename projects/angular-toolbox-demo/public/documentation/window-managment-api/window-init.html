@@ -32,6 +32,7 @@
             <li class="list-group-item"><a href="#location" onclick="appBridge.goToAnchor(event)" title="location property">location property</a></li>
             <li class="list-group-item"><a href="#status" onclick="appBridge.goToAnchor(event)" title="status property">status property</a></li>
             <li class="list-group-item"><a href="#menubar" onclick="appBridge.goToAnchor(event)" title="menubar property">menubar property</a></li>
+            <li class="list-group-item"><a href="#center" onclick="appBridge.goToAnchor(event)" title="center property">center property</a></li>
         </ul>
     </section>
 </nav>
@@ -172,6 +173,15 @@
     <p>
         Specifies whether the menu bar is visible (<code>WindowFeatureState.YES</code>), or not (<code>WindowFeatureState.YENOS</code>).
         <br>This property is optional.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="menubar"><code>WindowInit.center</code></h3>
+    <pre><code class="language-typescript">center?: boolean</code></pre>
+    <p>
+        Indicates whether the winbdow is centered (<code>true</code>), or not (<code>false</code>).
+        <br>If <code>true</code>, the <code>top</code> and <code>left</code> properties are ignored.
     </p>
 </section>
 

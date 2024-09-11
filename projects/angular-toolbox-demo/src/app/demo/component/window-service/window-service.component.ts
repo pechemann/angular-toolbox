@@ -37,7 +37,8 @@ export class WindowServiceComponent implements OnDestroy {
 
   protected openWindow(): void {
     const init: WindowInit = {
-      title: "Dynamic Component"
+      title: "Dynamic Component",
+      center: true
     };
     this.windowService.open(WindowContentComponent, init);
   }
@@ -68,7 +69,8 @@ export class WindowServiceComponent implements OnDestroy {
 
   protected openWindow(): void {
     const init: WindowInit = {
-      title: "Dynamic Component"
+      title: "Dynamic Component",
+      center: true
     };
     this.windowService.open(WindowContentComponent);
   }

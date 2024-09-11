@@ -83,4 +83,10 @@ export interface WindowInit {
      * Specifies whether the menu bar is activated (`WindowFeatureState.YES`), or not (`WindowFeatureState.NO`).
      */
     menubar?: WindowFeatureState;
+
+    /**
+     * Indicates whether the winbdow is centered (`true`), or not (`false`).
+     * If `true`, the `top` and `left` properties are ignored.
+     */
+    center?: boolean;
 }

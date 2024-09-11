@@ -25,6 +25,7 @@ export class BrowserWindowFeaturesBuilder {
     public static build(init?: WindowInit): string {
         if (!init) return "popup=true,left=100,top=100,width=800,height=450";
         let features: string = "popup=true";
+        if (init.center) BrowserWindowFeaturesBuilder.setCenterPos(init);
         features += BrowserWindowFeaturesBuilder.getLeft(init);
         features += BrowserWindowFeaturesBuilder.getTop(init);
         features += BrowserWindowFeaturesBuilder.getWidth(init);
@@ -37,6 +38,17 @@ export class BrowserWindowFeaturesBuilder {
         features += BrowserWindowFeaturesBuilder.getPopupProp("status", init);
         features += BrowserWindowFeaturesBuilder.getPopupProp("menubar", init);
         return features;
+    }
+
+    /**
+     * @private
+     */
+    public static setCenterPos(init: WindowInit): void {
+        const screen: Screen = window.screen;
+        let meas: number =  init.width || 800;
+        init.left = (screen.width - meas) / 2;
+        meas =  init.height || 450;
+        init.top = (screen.height - meas) / 2;
     }
 
     /**

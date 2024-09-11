@@ -82,6 +82,19 @@ describe('BrowserWindowFeaturesBuilder', () => {
   it('getHeight() should return a string with the specified height value', () => {
     expect(BrowserWindowFeaturesBuilder.getHeight({ height: 500 })).toEqual(',height=500');
   });
+
+  it('build() should not invoke the BrowserWindowFeaturesBuilder.setCenterPos() when the center parameter is not defined', () => {
+    spyOn(BrowserWindowFeaturesBuilder, "setCenterPos");
+    BrowserWindowFeaturesBuilder.build();
+    expect(BrowserWindowFeaturesBuilder.setCenterPos).not.toHaveBeenCalled();
+  });
+
+  it('build() should invoke the BrowserWindowFeaturesBuilder.setCenterPos() when the center parameter is true', () => {
+    const initCenter: WindowInit = { center: true };
+    spyOn(BrowserWindowFeaturesBuilder, "setCenterPos");
+    BrowserWindowFeaturesBuilder.build(initCenter);
+    expect(BrowserWindowFeaturesBuilder.setCenterPos).toHaveBeenCalledWith(initCenter);
+  });
   
   it('getPopupProp() should return the an empty string when the init parameter is not defined', () => {
     expect(BrowserWindowFeaturesBuilder.getPopupProp("titlebar")).toEqual(EMPTY_STRING);
@@ -95,5 +108,23 @@ describe('BrowserWindowFeaturesBuilder', () => {
     expect(BrowserWindowFeaturesBuilder.getPopupProp("location", { location: WindowFeatureState.YES})).toEqual(",location=yes");
     expect(BrowserWindowFeaturesBuilder.getPopupProp("status", { status: WindowFeatureState.NO})).toEqual(",status=no");
     expect(BrowserWindowFeaturesBuilder.getPopupProp("menubar", { menubar: WindowFeatureState.YES})).toEqual(",menubar=yes");
+  });
+  
+  it('setCenterPos() should set the top and left properties', () => {
+    const initCenter: WindowInit = { center: true };
+    expect(initCenter.left).toBeUndefined();
+    expect(initCenter.top).toBeUndefined();
+    BrowserWindowFeaturesBuilder.setCenterPos(initCenter);
+    expect(initCenter.left).toEqual(jasmine.any(Number));
+    expect(initCenter.top).toEqual(jasmine.any(Number));
+  });
+  
+  it('setCenterPos() should update the top and left properties', () => {
+    const initCenter: WindowInit = { center: true };
+    initCenter.left = -100;
+    initCenter.top = -100;
+    BrowserWindowFeaturesBuilder.setCenterPos(initCenter);
+    expect(initCenter.left).not.toEqual(-100);
+    expect(initCenter.top).not.toEqual(-100);
   });
 });
