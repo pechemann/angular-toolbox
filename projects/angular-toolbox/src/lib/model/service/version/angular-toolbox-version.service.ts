@@ -18,7 +18,7 @@ const LAYERS_VERSION_CONFIG: VersionConfig = {
   major: 1,
   minor: 2,
   patch: 3,
-  buildTimestamp: 1725951428350
+  buildTimestamp: 1726052348239
 };
 
 /**
