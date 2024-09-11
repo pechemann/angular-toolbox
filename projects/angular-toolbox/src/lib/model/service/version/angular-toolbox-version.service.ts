@@ -17,7 +17,7 @@ import { VersionConfig } from '../../business';
 const LAYERS_VERSION_CONFIG: VersionConfig = {
   major: 1,
   minor: 2,
-  patch: 2,
+  patch: 3,
   buildTimestamp: 1725951428350
 };
 
