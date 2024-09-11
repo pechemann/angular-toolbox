@@ -149,7 +149,6 @@ describe('WindowService', () => {
         spyOn(service, "ngOnDestroy");
         window.dispatchEvent(new Event('beforeunload'));
         setTimeout(()=> {
-            console.log(service)
             expect(service.ngOnDestroy).toHaveBeenCalled();
             ref = null;
             done();

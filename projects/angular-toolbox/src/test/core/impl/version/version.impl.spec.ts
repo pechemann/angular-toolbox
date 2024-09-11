@@ -8,19 +8,15 @@
 
 import { Version } from '../../../../lib/model/business/version/version';
 import { VersionImpl } from '../../../../lib/core/impl/version/version.impl';
+import { BUILD_TIMESTAMP, MAJOR, METADATA, MINOR, PATCH } from '../../abstract/test-config/version.service-test-util';
+import { VersionUtil } from 'projects/angular-toolbox/src/public-api';
 
 describe('VersionImpl', () => {
-
-  const MAJOR: number = 2;
-  const MINOR: number = 5;
-  const PATCH: number = 32;
-  const METADATA: string = "pre-release";
-  const BUILD_TS: number = Date.now();
 
   let version: VersionImpl;
 
   beforeEach(() => {
-    version = new VersionImpl(MAJOR, MINOR, PATCH, BUILD_TS, METADATA);
+    version = new VersionImpl(MAJOR, MINOR, PATCH, BUILD_TIMESTAMP, METADATA);
   });
 
   it('should create an instance', () => {
@@ -40,7 +36,7 @@ describe('VersionImpl', () => {
   });
 
   it('buildTimeStamp should return the correct timestamp number', () => {
-    expect(version.buildTimeStamp).toBe(BUILD_TS);
+    expect(version.buildTimeStamp).toBe(BUILD_TIMESTAMP);
   });
 
   it('metadata should return the correct metadata string', () => {
@@ -48,16 +44,13 @@ describe('VersionImpl', () => {
   });
 
   it('metadata should be undefined by default', () => {
-    const v: Version = new VersionImpl(MAJOR, MINOR, PATCH, BUILD_TS);
+    const v: Version = new VersionImpl(MAJOR, MINOR, PATCH, BUILD_TIMESTAMP);
     expect(v.metadata).toBeUndefined();
   });
 
-  it('toString() should return string representation of the version in the form "M.m.p-metadata"', () => {
-    expect(version.toString()).toBe(`${MAJOR}.${MINOR}.${PATCH}-${METADATA}`);
-  });
-
-  it('toString() should return string representation of the version in the form "M.m.p when no metadata are provided"', () => {
-    const v: Version = new VersionImpl(MAJOR, MINOR, PATCH, BUILD_TS);
-    expect(v.toString()).toBe(`${MAJOR}.${MINOR}.${PATCH}`);
+  it('toString() should invoke the VersionUtil.stringify() method', () => {
+    spyOn(VersionUtil, "stringify");
+    version.toString();
+    expect(VersionUtil.stringify).toHaveBeenCalledWith(version);
   });
 });

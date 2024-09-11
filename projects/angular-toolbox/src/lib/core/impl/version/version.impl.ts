@@ -7,7 +7,7 @@
  */
 
 import { Version } from "../../../model";
-import { EMPTY_STRING } from "../../../util";
+import { VersionUtil } from "../../../util";
 
 /**
  * @private
@@ -59,7 +59,6 @@ export class VersionImpl implements Version {
      * @returns A string representation of this `VersionImpl` instance.
      */
     public toString(): string {
-        const m: string | undefined = this.metadata;
-        return `${this.major}.${this.minor}.${this.patch}${m ? "-" + m : EMPTY_STRING}`;
+        return VersionUtil.stringify(this);
     }
 };
