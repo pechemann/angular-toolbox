@@ -1,0 +1,44 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+ 
+<demo [title]="title" [presentation]="presentation" [srcCode]="srcCode" [documentation]="documentation">
+    <p class="fs-5 mb-4">
+        The following sample app show how to implement the ATX border layout with Bootstrap:
+    </p>
+    <div class="wrapper">
+        <atx-border-layout>
+            <atx-border-layout-container [constraints]="{ region: 'north', size: 80 }">
+                <div class="h-100">
+                    <button class="btn btn-secondary w-100 h-100">North<br><em>(button)</em></button>
+                </div>
+            </atx-border-layout-container>
+            <atx-border-layout-container [constraints]="{ region: 'west' }">
+                <div class="border h-100 p-1 bg-light">
+                    <h6>West</h6>
+                </div>
+            </atx-border-layout-container>
+            <atx-border-layout-container [constraints]="{ region: 'center' }">
+                <div class="border h-100 p-1 bg-info-subtle">
+                    <h6>Center</h6>
+                </div>
+            </atx-border-layout-container>
+            <atx-border-layout-container [constraints]="{ region: 'east', resizable: true, size: 250 }">
+                <div class="border h-100 p-1 bg-light">
+                    <h6>East</h6>
+                    <em>(resizable panel)</em>
+                </div>
+            </atx-border-layout-container>
+            <atx-border-layout-container [constraints]="{ region: 'south', resizable: true, size: 150 }">
+                <div class="border h-100 p-1 bg-body-secondary">
+                    <h6>South</h6>
+                    <em>(resizable panel)</em>
+                </div>
+            </atx-border-layout-container>
+        </atx-border-layout>
+    </div>
+</demo>

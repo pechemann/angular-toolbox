@@ -1,0 +1,104 @@
+/**
+ * @license
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be found in
+ * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+ */
+
+$handle-size: 4px;
+
+.atx-border-layout {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    user-select: none;
+    overflow: hidden;
+}
+
+.atx-border-layout,
+.atx-border-layout * {
+    box-sizing: border-box;
+}
+
+.atx-border-layout .content {
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+}
+
+.atx-border-layout .drag {
+    position: absolute;
+    border: 2px solid black;
+}
+
+
+:host ::ng-deep {
+    .atx-handle {
+        position: absolute;
+    }
+    .atx-handle:hover {
+        background-color: var(--atx-handle-color, #469afa);
+    }
+    .north {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        left: 0;
+        right: 0;
+        .atx-handle {
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: $handle-size;
+            cursor: ns-resize;
+        }
+    }
+
+    .west {
+        position: absolute;
+        z-index: 5;
+        left: 0;
+        height: unset !important;
+        .atx-handle {
+            right: 0;
+            bottom: 0;
+            top: 0 ;
+            width: $handle-size;
+            cursor: ew-resize;
+        }
+    }
+
+    .east {
+        position: absolute;
+        z-index: 5;
+        right: 0;
+        height: unset !important;
+        .atx-handle {
+            left: 0;
+            bottom: 0;
+            top: 0;
+            width: $handle-size;
+            cursor: ew-resize;
+        }
+    }
+
+    .south {
+        position: absolute;
+        z-index: 10;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        .atx-handle {
+            left: 0;
+            right: 0;
+            top: 0;
+            height: $handle-size;
+            cursor: ns-resize;
+        }
+    }
+
+    .center {
+        position: absolute;
+    }
+}

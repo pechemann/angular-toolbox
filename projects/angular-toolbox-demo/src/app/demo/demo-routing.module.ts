@@ -57,6 +57,10 @@ const routes: Routes = [
   {
     path: 'window-service',
     loadComponent: () => import('./component/window-service/window-service.component').then(mod => mod.WindowServiceComponent)
+  },
+  {
+    path: 'border-layout',
+    loadComponent: () => import('./component/border-layout/border-layout-demo.component').then(mod => mod.BorderLayoutDemoComponent)
   }
 ];
 
