@@ -8,13 +8,8 @@
 
 import { AfterViewInit, Component, ContentChildren, OnDestroy, ElementRef, ViewChild, HostListener, QueryList } from '@angular/core';
 import { BorderLayoutContainer } from '../border-layout-container/border-layout-container.component';
-import { EMPTY_STRING } from '../../../util';
-import { LayoutConstraints, LayoutRegion, SubscriptionService } from '../../../model';
-import { IdentifiableComponent } from '../../../core';
-
-const MOUSEMOVE: any = "mousemove";
-const MOUSEUP: any = "mouseup";
-type ResizeMethod = (event: MouseEvent, width: number, height: number, minSize: number | undefined, maxSize: number | undefined)=> number;
+import { SubscriptionService } from '../../../model';
+import { BorderLayoutRenderer } from './border-layout-renderer';
 
 @Component({
   selector: 'atx-border-layout',
@@ -22,182 +17,46 @@ type ResizeMethod = (event: MouseEvent, width: number, height: number, minSize: 
   styleUrls: ['./border-layout.component.scss'],
   standalone: true
 })
-export class BorderLayout extends IdentifiableComponent implements AfterViewInit, OnDestroy {
+export class BorderLayout implements AfterViewInit, OnDestroy {
 
   @HostListener("window:resize")
   private onResize(): void {
-    this.paintLayout();
+    this.paint();
   }
 
   @ViewChild("atxLayoutContainer")
   private layoutContainer!: ElementRef<HTMLDivElement>;
-  private lytContainerElm!: HTMLDivElement;
-  private containerList: BorderLayoutContainer[] = [];
-  private topPos: number = 0;
-  private leftPos: number = 0;
-  private readonly BOUNDS: DOMRect = new DOMRect();
+
+  private renderer: BorderLayoutRenderer;
 
   @ContentChildren(BorderLayoutContainer)
   private set __containers__(containers: QueryList<BorderLayoutContainer>) {
-    let regionValidator: string = EMPTY_STRING;
-    containers.forEach(container => {
-      const constraints: LayoutConstraints = container.constraints;
-      const r: string = constraints.region as string;
-      if (regionValidator.indexOf(r) !== -1) throw new SyntaxError();
-      regionValidator += r;
-      if (container.constraints.resizable) this.subscribeSvc.register(this, container.resizeStart.subscribe(container=> this.resizeEnter(container)));
-      this.containerList.push(container);
-      this.setBounds(container);
-    });
+    this.renderer.addContainers(containers);
   };
 
-  constructor(private subscribeSvc: SubscriptionService) {
-    super("BorderLayout");
-   }
+  constructor(subscribeSvc: SubscriptionService) {
+    this.renderer = new BorderLayoutRenderer(subscribeSvc);
+  }
+
+  /**
+   * @private
+   * For test purpose.
+   */
+  public getRenderer(): BorderLayoutRenderer {
+    return this.renderer;
+  }
 
   public ngOnDestroy(): void {
-    this.subscribeSvc.clearAll(this);
+    this.renderer.destroy();
+    this.renderer = null as any;
   }
 
   public ngAfterViewInit(): void {
-    this.lytContainerElm = this.layoutContainer.nativeElement;
-    this.paintLayout();
+    this.renderer.setLayoutContainer(this.layoutContainer.nativeElement);
+    this.paint();
   }
 
-  private paintLayout(): void {
-    this.repaint(this.lytContainerElm.offsetWidth);
-  }
-
-  private northResize(event: MouseEvent, width: number, height: number, minSize: number | undefined, maxSize: number | undefined): number {
-    const size: number = event.clientY - this.topPos;
-    if (maxSize && size > maxSize) return this.setY(maxSize);
-    if (minSize && size < minSize) return this.setY(minSize);
-    return this.setY(size);
-  }
-
-  private setY(y: number): number {
-    this.BOUNDS.y = y;
-    return y;
-  }
-
-  private southResize(event: MouseEvent, width: number, height: number, minSize: number | undefined, maxSize: number | undefined): number {
-    const size: number = height - (event.clientY - this.topPos);
-    if (maxSize && size > maxSize) return this.setHeight(maxSize);
-    if (minSize && size < minSize) return this.setHeight(minSize);
-    return this.setHeight(size);
-  }
-
-  private setHeight(height: number): number {
-    this.BOUNDS.height = height;
-    return height;
-  }
-
-  private westResize(event: MouseEvent, width: number, height: number, minSize: number | undefined, maxSize: number | undefined): number {
-    const size: number = event.clientX - this.leftPos;
-    if (maxSize && size > maxSize) return this.setX(maxSize);
-    if (minSize && size < minSize) return this.setX(minSize);
-    return this.setX(size);
-  }
-
-  private setX(x: number): number {
-    this.BOUNDS.x = x;
-    return x;
-  }
-
-  private eastResize(event: MouseEvent, width: number, height: number, minSize: number | undefined, maxSize: number | undefined): number {
-    const size: number = width - (event.clientX - this.leftPos);
-    if (maxSize && size > maxSize) return this.setWidth(maxSize);
-    if (minSize && size < minSize) return this.setWidth(minSize);
-    return this.setWidth(size);
-  }
-
-  private setWidth(width: number): number {
-    this.BOUNDS.width = width;
-    return width;
-  }
-
-  private getResizeMethod(region: LayoutRegion): ResizeMethod {
-    let method: ResizeMethod = this.southResize;
-    switch (region) {
-      case LayoutRegion.NORTH: method = this.northResize; break;
-      case LayoutRegion.SOUTH: method = this.southResize; break;
-      case LayoutRegion.WEST: method = this.westResize; break;
-      case LayoutRegion.EAST: method = this.eastResize; break;
-    }
-    return method as any;
-  }
-
-  private resizeEnter(container: BorderLayoutContainer): void {
-    const lytNativeElm: HTMLDivElement = this.lytContainerElm;
-    const width: number = lytNativeElm.offsetWidth;
-    const height: number = lytNativeElm.offsetHeight;
-    const bounds: DOMRect = lytNativeElm.getBoundingClientRect();
-    const constraints: LayoutConstraints = container.constraints;
-    const region: LayoutRegion = constraints.region as LayoutRegion;
-    const minSize: number | undefined = constraints.minSize;
-    const maxSize: number | undefined = constraints.maxSize;
-    let size: number = 0;
-    this.topPos = bounds.y;
-    this.leftPos = bounds.x;
-    let resizeMethod: ResizeMethod = this.getResizeMethod(region).bind(this);
-    const onMoveHandler = (event: MouseEvent)=> {
-      event.preventDefault();
-      event.stopPropagation();
-      size = resizeMethod(event, width, height, minSize, maxSize);
-      container.setSize(size);
-      this.repaint(width);
-    };
-    const onStopHandler = (event: MouseEvent)=> {
-      event.preventDefault();
-      event.stopPropagation();
-      lytNativeElm.removeEventListener(MOUSEMOVE, onMoveHandler);
-      lytNativeElm.removeEventListener(MOUSEUP, onStopHandler);
-      size = resizeMethod(event, width, height, minSize, maxSize);
-      container.setSize(size);
-      this.repaint(width);
-    };
-    lytNativeElm.addEventListener(MOUSEMOVE, onMoveHandler);
-    lytNativeElm.addEventListener(MOUSEUP, onStopHandler)
-  }
-
-  private setBounds(container: BorderLayoutContainer): void {
-    const r: LayoutRegion = container.constraints.region as LayoutRegion;
-    if (r === LayoutRegion.NORTH) {
-      this.BOUNDS.y = container.getSize();
-      return;
-    }
-    if (r === LayoutRegion.SOUTH) {
-      this.BOUNDS.height = container.getSize();
-      return;
-    }
-    if (r === LayoutRegion.WEST) {
-      this.BOUNDS.x = container.getSize();
-      return;
-    }
-    if (r === LayoutRegion.EAST) this.BOUNDS.width = container.getSize();
-  }
-
-  private repaint(width: number): void {
-    this.containerList.forEach(container => {
-      const r: LayoutRegion = container.constraints.region as LayoutRegion;
-      if (r === LayoutRegion.WEST) {
-        container.setTopPos(this.BOUNDS.top);
-        container.setRightPos(width - this.BOUNDS.left);
-        container.setBottomPos(this.BOUNDS.bottom - this.BOUNDS.top);
-        return;
-      }
-      if (r === LayoutRegion.CENTER) {
-        container.setTopPos(this.BOUNDS.top);
-        container.setLeftPos(this.BOUNDS.left);
-        container.setRightPos(this.BOUNDS.right - this.BOUNDS.left);
-        container.setBottomPos(this.BOUNDS.bottom - this.BOUNDS.top);
-        return;
-      }
-      if (r === LayoutRegion.EAST) {
-        container.setTopPos(this.BOUNDS.top);
-        container.setLeftPos(width - (this.BOUNDS.right - this.BOUNDS.left));
-        container.setBottomPos(this.BOUNDS.bottom - this.BOUNDS.top);
-      }
-    });
+  public paint(): void {
+    this.renderer.paint();
   }
 }

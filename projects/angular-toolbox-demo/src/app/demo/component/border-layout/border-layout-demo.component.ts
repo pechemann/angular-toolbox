@@ -36,7 +36,6 @@ export class BorderLayoutDemoComponent {
               .addItem(breadcrumb.buildItem("BorderLayout Component"));
   }
 
-
   /*protected documentation: DocumentationLink = {
     label: "Border Layout",
     commands: ['/resources', 'documentation', 'border-layout']
@@ -47,9 +46,7 @@ export class BorderLayoutDemoComponent {
     html: [`<div class="wrapper w-100">
     <atx-border-layout>
         <atx-border-layout-container [constraints]="{ region: 'north', size: 80 }">
-            <div class="h-100">
-                <button class="btn btn-secondary w-100 h-100">North<br><em>(button)</em></button>
-            </div>
+          <button class="btn btn-secondary w-100 h-100">North<br><em>(button)</em></button>
         </atx-border-layout-container>
         <atx-border-layout-container [constraints]="{ region: 'west' }">
             <div class="border h-100 p-1 bg-light">
