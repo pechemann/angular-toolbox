@@ -37,14 +37,14 @@ export class BorderLayoutDemoComponent {
   }
 
 
-  protected documentation: DocumentationLink = {
+  /*protected documentation: DocumentationLink = {
     label: "Border Layout",
     commands: ['/resources', 'documentation', 'border-layout']
-  };
+  };*/
   protected title: string = "BorderLayout Component Demo";
   protected presentation: string = "A container that arranges and resizes its components to fit in five regions: north, south, east, west, and center.";
   protected srcCode: CodeWrapper = {
-    html: [`<div class="wrapper">
+    html: [`<div class="wrapper w-100">
     <atx-border-layout>
         <atx-border-layout-container [constraints]="{ region: 'north', size: 80 }">
             <div class="h-100">
@@ -61,13 +61,13 @@ export class BorderLayoutDemoComponent {
                 <h6>Center</h6>
             </div>
         </atx-border-layout-container>
-        <atx-border-layout-container [constraints]="{ region: 'east', resizable: true, size: 250 }">
+        <atx-border-layout-container [constraints]="{ region: 'east', resizable: true, size: 250, maxSize: 400, minSize: 140 }">
             <div class="border h-100 p-1 bg-light">
                 <h6>East</h6>
                 <em>(resizable panel)</em>
             </div>
         </atx-border-layout-container>
-        <atx-border-layout-container [constraints]="{ region: 'south', resizable: true, size: 150 }">
+        <atx-border-layout-container [constraints]="{ region: 'south', resizable: true, size: 150, maxSize: 250, minSize: 60 }">
             <div class="border h-100 p-1 bg-body-secondary">
                 <h6>South</h6>
                 <em>(resizable panel)</em>
@@ -76,7 +76,6 @@ export class BorderLayoutDemoComponent {
     </atx-border-layout>
 </div>`],
   css: [`.wrapper {
-  width: 100%;
   height: 500px;
   --atx-handle-color: orange;
 }`]

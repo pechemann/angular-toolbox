@@ -13,4 +13,5 @@ export interface LayoutConstraints {
     resizable?: boolean;
     size?: number;
     minSize?: number;
+    maxSize?: number;
 }

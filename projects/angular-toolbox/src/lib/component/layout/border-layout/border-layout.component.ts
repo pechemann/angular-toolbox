@@ -14,7 +14,7 @@ import { IdentifiableComponent } from '../../../core';
 
 const MOUSEMOVE: any = "mousemove";
 const MOUSEUP: any = "mouseup";
-type ResizeMethod = (event: MouseEvent, width: number, height: number)=> number;
+type ResizeMethod = (event: MouseEvent, width: number, height: number, minSize: number | undefined, maxSize: number | undefined)=> number;
 
 @Component({
   selector: 'atx-border-layout',
@@ -68,33 +68,57 @@ export class BorderLayout extends IdentifiableComponent implements AfterViewInit
     this.repaint(this.lytContainerElm.offsetWidth);
   }
 
-  private northResize(event: MouseEvent, width: number, height: number): number {
+  private northResize(event: MouseEvent, width: number, height: number, minSize: number | undefined, maxSize: number | undefined): number {
     const size: number = event.clientY - this.topPos;
-    this.BOUNDS.y = size;
-    return size;
+    if (maxSize && size > maxSize) return this.setY(maxSize);
+    if (minSize && size < minSize) return this.setY(minSize);
+    return this.setY(size);
   }
 
-  private southResize(event: MouseEvent, width: number, height: number): number {
+  private setY(y: number): number {
+    this.BOUNDS.y = y;
+    return y;
+  }
+
+  private southResize(event: MouseEvent, width: number, height: number, minSize: number | undefined, maxSize: number | undefined): number {
     const size: number = height - (event.clientY - this.topPos);
-    this.BOUNDS.height = size;
-    return size;
+    if (maxSize && size > maxSize) return this.setHeight(maxSize);
+    if (minSize && size < minSize) return this.setHeight(minSize);
+    return this.setHeight(size);
   }
 
-  private westResize(event: MouseEvent, width: number, height: number): number {
+  private setHeight(height: number): number {
+    this.BOUNDS.height = height;
+    return height;
+  }
+
+  private westResize(event: MouseEvent, width: number, height: number, minSize: number | undefined, maxSize: number | undefined): number {
     const size: number = event.clientX - this.leftPos;
-    this.BOUNDS.x = size;
-    return size;
+    if (maxSize && size > maxSize) return this.setX(maxSize);
+    if (minSize && size < minSize) return this.setX(minSize);
+    return this.setX(size);
   }
 
-  private eastResize(event: MouseEvent, width: number, height: number): number {
+  private setX(x: number): number {
+    this.BOUNDS.x = x;
+    return x;
+  }
+
+  private eastResize(event: MouseEvent, width: number, height: number, minSize: number | undefined, maxSize: number | undefined): number {
     const size: number = width - (event.clientX - this.leftPos);
-    this.BOUNDS.width = size;
-    return size;
+    if (maxSize && size > maxSize) return this.setWidth(maxSize);
+    if (minSize && size < minSize) return this.setWidth(minSize);
+    return this.setWidth(size);
   }
 
-  private getResizeMethod(container: BorderLayoutContainer): ResizeMethod {
+  private setWidth(width: number): number {
+    this.BOUNDS.width = width;
+    return width;
+  }
+
+  private getResizeMethod(region: LayoutRegion): ResizeMethod {
     let method: ResizeMethod = this.southResize;
-    switch (container.constraints.region) {
+    switch (region) {
       case LayoutRegion.NORTH: method = this.northResize; break;
       case LayoutRegion.SOUTH: method = this.southResize; break;
       case LayoutRegion.WEST: method = this.westResize; break;
@@ -108,14 +132,18 @@ export class BorderLayout extends IdentifiableComponent implements AfterViewInit
     const width: number = lytNativeElm.offsetWidth;
     const height: number = lytNativeElm.offsetHeight;
     const bounds: DOMRect = lytNativeElm.getBoundingClientRect();
+    const constraints: LayoutConstraints = container.constraints;
+    const region: LayoutRegion = constraints.region as LayoutRegion;
+    const minSize: number | undefined = constraints.minSize;
+    const maxSize: number | undefined = constraints.maxSize;
     let size: number = 0;
     this.topPos = bounds.y;
     this.leftPos = bounds.x;
-    let resizeMethod: ResizeMethod = this.getResizeMethod(container).bind(this);
+    let resizeMethod: ResizeMethod = this.getResizeMethod(region).bind(this);
     const onMoveHandler = (event: MouseEvent)=> {
       event.preventDefault();
       event.stopPropagation();
-      size = resizeMethod(event, width, height);
+      size = resizeMethod(event, width, height, minSize, maxSize);
       container.setSize(size);
       this.repaint(width);
     };
@@ -124,7 +152,7 @@ export class BorderLayout extends IdentifiableComponent implements AfterViewInit
       event.stopPropagation();
       lytNativeElm.removeEventListener(MOUSEMOVE, onMoveHandler);
       lytNativeElm.removeEventListener(MOUSEUP, onStopHandler);
-      size = resizeMethod(event, width, height);
+      size = resizeMethod(event, width, height, minSize, maxSize);
       container.setSize(size);
       this.repaint(width);
     };
