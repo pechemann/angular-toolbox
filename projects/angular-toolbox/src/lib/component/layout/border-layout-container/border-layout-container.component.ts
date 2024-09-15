@@ -9,8 +9,14 @@
 import { Component, Input, HostBinding, ElementRef, EventEmitter } from '@angular/core';
 import { LayoutConstraints, LayoutRegion } from '../../../model';
 
+/**
+ * @private
+ */
 const PX: string = "px";
 
+/**
+ * A container that defines the region of a `BorderLayout` component instance.
+ */
 @Component({
   selector: 'atx-border-layout-container',
   templateUrl: './border-layout-container.component.html',
@@ -19,20 +25,51 @@ const PX: string = "px";
 })
 export class BorderLayoutContainer {
 
-  public readonly resizeStart: EventEmitter<BorderLayoutContainer> = new EventEmitter();
+  /**
+   * @private
+   * Indicates to the parent `BorderLayout` instance that the user starts to resize this container.
+   */
+  public readonly resizeStart: EventEmitter<BorderLayoutContainer> = new EventEmitter(false);
 
-  @HostBinding('class') get class(): string {
+  /**
+   * Gets the CSS class associated with the region constraint of the `BorderLayoutContainer` object.
+   */
+  @HostBinding('class')
+  get class(): string {
     return this.region;
   }
 
+  /**
+   * @private
+   */
   protected region!: LayoutRegion;
+  
+  /**
+   * @private
+   */
   protected resizable: boolean = false;
 
+  /**
+   * @private
+   */
   private atxConstraints!: LayoutConstraints;
+
+  /**
+   * @private
+   */
   private size!: number;
 
+  /**
+   * @private
+   */
   private readonly style: CSSStyleDeclaration;
 
+  /**
+   * Gets or sets the constraints for this `BorderLayoutContainer` object.
+   */
+  public get constraints(): LayoutConstraints  {
+    return this.atxConstraints;
+  }
   @Input()
   public set constraints(constraints: LayoutConstraints) {
     this.atxConstraints = constraints;
@@ -41,49 +78,87 @@ export class BorderLayoutContainer {
     this.setSize(constraints.size);
   }
 
-  public get constraints(): LayoutConstraints  {
-    return this.atxConstraints;
-  }
-
+  /**
+   * @private
+   */
   constructor(private elRef: ElementRef) {
     this.style = this.elRef.nativeElement.style;
   }
 
+  /**
+   * Sets the size of this container depending on the specified region.
+   * 
+   * @param size The new size for this container, in pixels.
+   */
   public setSize(size: number | undefined): void {
     const r: LayoutRegion = this.region;
     if (r === LayoutRegion.CENTER) return;
     if (r === LayoutRegion.NORTH || r === LayoutRegion.SOUTH) {
       this.size = size ? size : 50;
-    } else if (r === LayoutRegion.EAST || r === LayoutRegion.WEST) {
-      this.size = size ? size : 100;
+      this.style.height = this.size + PX;
+      return;
     }
-    this.style.height = this.size + PX;
+    if (r === LayoutRegion.EAST || r === LayoutRegion.WEST) {
+      this.size = size ? size : 100;
+      this.style.width = this.size + PX;
+    }
   }
 
+  /**
+   * Returns the size of the container, in pixels.
+   * 
+   * @returns The size of the container.
+   */
   public getSize(): number {
     return this.size;
   }
 
+  /**
+   * Sets the left-hand side position of this container.
+   * 
+   * @param position The left-hand side position of this container, in pixels.
+   */
   public setLeftPos(position: number): void {
     this.style.left = position + PX;
   }
 
+  /**
+   * Sets the right-hand side position of this container.
+   * 
+   * @param position The right-hand side position of this container, in pixels.
+   */
   public setRightPos(position: number): void {
     this.style.right = position + PX;
   }
   
+  /**
+   * Sets the top position of this container.
+   * 
+   * @param position The top position of this container, in pixels.
+   */
   public setTopPos(position: number): void {
     this.style.top = position + PX;
   }
   
+  /**
+   * Sets the bottom position of this container.
+   * 
+   * @param position The bottom position of this container, in pixels.
+   */
   public setBottomPos(position: number): void {
     this.style.bottom = position + PX;
   }
 
+  /**
+   * @private
+   */
   protected resizetart(): void {
     this.resizeStart.emit(this);
   }
 
+  /**
+   * @private
+   */
   private initHandle(): void {
     if (this.region === LayoutRegion.CENTER) return;
     this.resizable = true;
