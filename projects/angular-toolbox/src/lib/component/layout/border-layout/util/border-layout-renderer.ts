@@ -112,7 +112,6 @@ export class BorderLayoutRenderer extends IdentifiableComponent implements Destr
     this.containerList.length = 0;
     this.containerList = null as any;
     this.lytContainerElm = null as any;
-    if (!this.boundsManager) return;
     this.boundsManager.destroy();
     this.boundsManager = null as any;
   }

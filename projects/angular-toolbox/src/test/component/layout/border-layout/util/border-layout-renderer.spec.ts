@@ -11,7 +11,7 @@ import { BorderLayoutBoundsManager } from "projects/angular-toolbox/src/lib/comp
 import { BorderLayoutRenderer } from "projects/angular-toolbox/src/lib/component/layout/border-layout/util/border-layout-renderer";
 import { BorderLayoutContainer, LayoutRegion, SubscriptionService } from "projects/angular-toolbox/src/public-api";
 
-describe('BorderLayout', () => {
+describe('BorderLayoutRenderer', () => {
 
     let renderer: BorderLayoutRenderer;
     let service: SubscriptionService;
@@ -334,5 +334,32 @@ describe('BorderLayout', () => {
         comp.componentInstance.resizeStart.emit(instance);
         layoutContainer.dispatchEvent(new MouseEvent("mouseup"));
         expect(layoutContainer.removeEventListener).toHaveBeenCalledTimes(2);
+    });
+});
+
+describe('BorderLayoutRenderer: destroy() method', () => {
+
+    let renderer: BorderLayoutRenderer;
+    let service: SubscriptionService;
+
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [BorderLayoutContainer],
+            providers: [SubscriptionService]
+        })
+        .compileComponents();
+        service = TestBed.inject(SubscriptionService);
+        renderer = new BorderLayoutRenderer(service);
+    });
+    
+    it('destroy() should delete the BorderLayoutBoundsManager instance', () => {
+        renderer.destroy();
+        expect(renderer.getBoundsManager()).toBeNull();
+    });
+
+    it('destroy() should remove all registered events', () => {
+        spyOn(service, "clearAll")
+        renderer.destroy();
+        expect(service.clearAll).toHaveBeenCalledOnceWith(renderer);
     });
 });

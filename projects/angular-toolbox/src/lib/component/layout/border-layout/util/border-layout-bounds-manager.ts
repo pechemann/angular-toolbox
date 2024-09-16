@@ -62,6 +62,14 @@ export class BorderLayoutBoundsManager implements Destroyable {
   }
 
   /**
+   * @private
+   * For test purpose only.
+   */
+  public getOrigin(): any {
+    return { x: this.leftPos, y: this.topPos };
+  }
+
+  /**
    * Computes the size of a "north" container.
    * 
    * @param event The mouse event that triggered the computation of the container size.
@@ -198,7 +206,6 @@ export class BorderLayoutBoundsManager implements Destroyable {
     let method: ResizeMethod = this.southResize;
     switch (region) {
       case LayoutRegion.NORTH: method = this.northResize; break;
-      case LayoutRegion.SOUTH: method = this.southResize; break;
       case LayoutRegion.WEST: method = this.westResize; break;
       case LayoutRegion.EAST: method = this.eastResize; break;
     }
