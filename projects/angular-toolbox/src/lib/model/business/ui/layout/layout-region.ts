@@ -12,7 +12,7 @@
 export type LayoutRegionType = "north" | "south" | "west" | "west" | "east" | "center";
 
 /**
- * Defines the list of layout constraints that defines the regions of a `BorderLayout` container.
+ * The list of layout constraints that defines the regions of a `BorderLayout` container.
  */
 export enum LayoutRegion {
 

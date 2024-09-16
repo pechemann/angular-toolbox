@@ -36,10 +36,10 @@ export class BorderLayoutDemoComponent {
               .addItem(breadcrumb.buildItem("BorderLayout Component"));
   }
 
-  /*protected documentation: DocumentationLink = {
+  protected documentation: DocumentationLink = {
     label: "Border Layout",
     commands: ['/resources', 'documentation', 'border-layout']
-  };*/
+  };
   protected title: string = "BorderLayout Component Demo";
   protected presentation: string = "A container that arranges and resizes its components to fit in five regions: north, south, east, west, and center.";
   protected srcCode: CodeWrapper = {

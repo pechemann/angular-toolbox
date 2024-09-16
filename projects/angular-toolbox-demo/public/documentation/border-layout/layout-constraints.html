@@ -1,0 +1,113 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <section class="w-100">
+        <h5 class="mb-4">On this page</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="#region" onclick="appBridge.goToAnchor(event)" title="region">region</a></li>
+            <li class="list-group-item"><a href="#resizable" onclick="appBridge.goToAnchor(event)" title="resizable">resizable</a></li>
+            <li class="list-group-item"><a href="#size" onclick="appBridge.goToAnchor(event)" title="size">size</a></li>
+            <li class="list-group-item"><a href="#minSize" onclick="appBridge.goToAnchor(event)" title="minSize">minSize</a></li>
+            <li class="list-group-item"><a href="#maxSize" onclick="appBridge.goToAnchor(event)" title="maxSize">maxSize</a></li>
+        </ul>
+        <ul class="list-group mt-4">
+            <li class="list-group-item icon-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation/border-layout'])" title="Border Layout">
+                    Border Layout
+                </a>
+            </li>
+            <li class="list-group-item icon-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation'])" title="Documentation">
+                    Documentation
+                </a>
+            </li>
+        </div>
+    </section>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3">Border Layout</h2>
+    <div class="version-info text-end mb-4 me-3">
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 1.3.0</span></small>
+    </div>
+    <p>
+        A border layout lays out a container, arranging and resizing its components to fit in five regions:
+        <em>north</em>, <em>south</em>, <em>east</em>, <em>west</em>, and <em>center</em>.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3><code>LayoutConstraints</code> Interface</h3>
+    <p>
+        Defines the layout constraints of a <code>BorderLayoutContainer</code> object.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="region"><code>LayoutConstraints.region</code></h3>
+    <pre><code class="language-typescript">region: LayoutRegion</code></pre>
+    <p>
+        Specifies the region associated with a <code>BorderLayoutContainer</code> object.
+        <br>
+        See the <a href="javascript:appBridge.navigate(['resources/documentation/border-layout','/layout-region'])"><code>LayoutRegion</code> enum API</a> for details.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="resizable"><code>LayoutConstraints.resizable</code></h3>
+    <pre><code class="language-typescript">resizable?: boolean</code></pre>
+    <p>
+        Indicates whether the <code>BorderLayoutContainer</code> object can be resized (<code>true</code>), or not (<code>false</code>).
+        <br>
+        The <code>BorderLayoutContainer</code> object is not resizable by default.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="size"><code>LayoutConstraints.size</code></h3>
+    <pre><code class="language-typescript">size?: number</code></pre>
+    <p>
+        Defines the default size of a <code>BorderLayoutContainer</code> object.
+        <br>
+        The default size of a <code>BorderLayoutContainer</code> object depends on its region:
+    </p>
+    <ul>
+        <li><code>LayoutRegion.NORTH</code>, <code>LayoutRegion.SOUTH</code>: default size is <code>50</code> pixels</li>
+        <li><code>LayoutRegion.EAST</code>, <code>LayoutRegion.WEST</code>: default size is <code>100</code> pixels</li>
+    </ul>
+    <p>
+        The <code>size</code> value is not applied to containers of type <code>LayoutRegion.NORTH</code>.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="minSize"><code>LayoutConstraints.minSize</code></h3>
+    <pre><code class="language-typescript">minSize?: number</code></pre>
+    <p>
+        Defines the minimum size of the <code>BorderLayoutContainer</code> object.
+        <br>
+        No minimum size is applied by default.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="maxSize"><code>LayoutConstraints.maxSize</code></h3>
+    <pre><code class="language-typescript">maxSize?: number</code></pre>
+    <p>
+        Defines the maximum size of the <code>BorderLayoutContainer</code> object.
+        <br>
+        No maximum size is applied by default.
+    </p>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+    data-tree="[{ 'label': 'Border Layout', 'path': 'border-layout' }, { 'label': 'LayoutConstraints Interface' }]">
+</object>
