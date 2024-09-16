@@ -25,12 +25,34 @@ const MOUSEMOVE: any = "mousemove";
 const MOUSEUP: any = "mouseup";
 
 /**
- * 
+ * @private
+ */
+const REGION_ERR_MSG: string = "A container with the same identifier has already been registered: ";
+
+/**
+ * @private
+ */
+const LAYOUT_ERR_MSG: string = "No layout container has been registered.";
+
+/**
+ * @private
+ * A controller object responsible for handling user actions on a `BorderLayout` container.
  */
 export class BorderLayoutRenderer extends IdentifiableComponent implements Destroyable {
 
+  /**
+   * @private
+   */
   private lytContainerElm!: HTMLDivElement;
+  
+  /**
+   * @private
+   */
   private containerList: BorderLayoutContainer[] = [];
+  
+  /**
+   * @private
+   */
   private boundsManager: BorderLayoutBoundsManager; 
 
   /**
@@ -41,12 +63,17 @@ export class BorderLayoutRenderer extends IdentifiableComponent implements Destr
     this.boundsManager = new BorderLayoutBoundsManager();
   }
 
-  public addContainers(containers: QueryList<BorderLayoutContainer>) {
+  /**
+   * Add the list `BorderLayoutContainer` objects associated with the main container to this controller.
+   * 
+   * @param containers the list `BorderLayoutContainer` objects associated with the main container.
+   */
+  public addContainers(containers: QueryList<BorderLayoutContainer>): void {
     let regionValidator: string = EMPTY_STRING;
     containers.forEach(container => {
       const constraints: LayoutConstraints = container.constraints;
       const r: string = constraints.region as string;
-      if (regionValidator.indexOf(r) !== -1) throw new SyntaxError("A container with the same identifier has already been registered: " + r);
+      if (regionValidator.indexOf(r) !== -1) throw new SyntaxError(REGION_ERR_MSG + r);
       regionValidator += r;
       if (constraints.resizable) {
         this.subscribeSvc.register(this,
@@ -59,18 +86,27 @@ export class BorderLayoutRenderer extends IdentifiableComponent implements Destr
     });
   };
 
-  public setLayoutContainer(lytContainer: HTMLDivElement) {
+  /**
+   * Sets the reference to the HTML container associated with the main container.
+   * 
+   * @param lytContainer The reference to the HTML container associated with the main container.
+   */
+  public setLayoutContainer(lytContainer: HTMLDivElement): void {
     this.lytContainerElm = lytContainer;
   };
 
   /**
    * @private
    * For test purpose only.
+   * Returns the reference to the internal `BorderLayoutBoundsManager` instance.
    */
   public getBoundsManager(): BorderLayoutBoundsManager {
     return this.boundsManager; 
   }
 
+  /**
+   * Makes this object elligible for garbage collection.
+   */
   public destroy(): void {
     this.subscribeSvc.clearAll(this);
     this.containerList.length = 0;
@@ -81,11 +117,19 @@ export class BorderLayoutRenderer extends IdentifiableComponent implements Destr
     this.boundsManager = null as any;
   }
 
+  /**
+   * Forces the layout of all `BorderLayoutContainer` objects associated with the main container.
+   */
   public paint(): void {
+    this.checkLytContainer();
     this.render(this.lytContainerElm.offsetWidth);
   }
 
+  /**
+   * @private
+   */
   private resizeEnter(container: BorderLayoutContainer): void {
+    this.checkLytContainer();
     const lytNativeElm: HTMLDivElement = this.lytContainerElm;
     const width: number = lytNativeElm.offsetWidth;
     const height: number = lytNativeElm.offsetHeight;
@@ -117,28 +161,39 @@ export class BorderLayoutRenderer extends IdentifiableComponent implements Destr
     lytNativeElm.addEventListener(MOUSEUP, onStopHandler)
   }
 
+  /**
+   * @private
+   */
   private render(width: number): void {
     const bounds: DOMRect = this.boundsManager.getBounds();
-    this.containerList.forEach(container => {
-      const r: LayoutRegion = container.constraints.region as LayoutRegion;
+    const top: number = bounds.top;
+    const bottom: number = bounds.bottom;
+    const left: number = bounds.left;
+    const right: number = bounds.right;
+    this.containerList.forEach((cont: BorderLayoutContainer) => {
+      const r: LayoutRegion = cont.constraints.region as LayoutRegion;
       if (r === LayoutRegion.WEST) {
-        container.setTopPos(bounds.top);
-        container.setRightPos(width - bounds.left);
-        container.setBottomPos(bounds.bottom - bounds.top);
+        cont.setTopPos(top);
+        cont.setRightPos(width - left);
+        cont.setBottomPos(bottom - top);
         return;
       }
       if (r === LayoutRegion.CENTER) {
-        container.setTopPos(bounds.top);
-        container.setLeftPos(bounds.left);
-        container.setRightPos(bounds.right - bounds.left);
-        container.setBottomPos(bounds.bottom - bounds.top);
+        cont.setTopPos(top);
+        cont.setLeftPos(left);
+        cont.setRightPos(right - left);
+        cont.setBottomPos(bottom - top);
         return;
       }
       if (r === LayoutRegion.EAST) {
-        container.setTopPos(bounds.top);
-        container.setLeftPos(width - (bounds.right - bounds.left));
-        container.setBottomPos(bounds.bottom - bounds.top);
+        cont.setTopPos(top);
+        cont.setLeftPos(width - (right - left));
+        cont.setBottomPos(bottom - top);
       }
     });
+  }
+
+  private checkLytContainer(): void {
+    if (!this.lytContainerElm) throw new ReferenceError(LAYOUT_ERR_MSG);
   }
 }
