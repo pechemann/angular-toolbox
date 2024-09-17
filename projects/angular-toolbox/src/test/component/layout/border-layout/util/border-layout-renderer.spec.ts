@@ -9,7 +9,7 @@
 import { TestBed } from "@angular/core/testing";
 import { BorderLayoutBoundsManager } from "projects/angular-toolbox/src/lib/component/layout/border-layout/util/border-layout-bounds-manager";
 import { BorderLayoutRenderer } from "projects/angular-toolbox/src/lib/component/layout/border-layout/util/border-layout-renderer";
-import { BorderLayoutContainer, LayoutRegion, SubscriptionService } from "projects/angular-toolbox/src/public-api";
+import { BorderLayoutContainer, LayoutDragEventType, LayoutRegion, SubscriptionService } from "projects/angular-toolbox/src/public-api";
 
 describe('BorderLayoutRenderer', () => {
 
@@ -331,9 +331,64 @@ describe('BorderLayoutRenderer', () => {
         containers.push(instance);
         renderer.setLayoutContainer(layoutContainer);
         renderer.addContainers(containers);
-        comp.componentInstance.resizeStart.emit(instance);
+        instance.resizeStart.emit(instance);
         layoutContainer.dispatchEvent(new MouseEvent("mouseup"));
         expect(layoutContainer.removeEventListener).toHaveBeenCalledTimes(2);
+    });
+
+    it('start resizing a container should emit a LayoutDragEvent of type DRAG_START', (done) => {
+        const layoutContainer: HTMLDivElement = document.createElement("div");
+        const containers: any = [];
+        const comp = TestBed.createComponent(BorderLayoutContainer);
+        comp.componentInstance.constraints = { region: LayoutRegion.EAST, resizable: true };
+        containers.push(comp.componentInstance);
+        renderer.addContainers(containers);
+        renderer.setLayoutContainer(layoutContainer);
+        const sub = renderer.userAction.subscribe(event=> {
+            expect(event.type).toEqual(LayoutDragEventType.DRAG_START);
+            expect(event.target).toBe(comp.componentInstance);
+            sub.unsubscribe();
+            done();
+        });
+        comp.componentInstance.resizeStart.emit(comp.componentInstance);
+    });
+    
+    it('resizing a container should emit a LayoutDragEvent of type DRAGGING', (done) => {
+        const layoutContainer: HTMLDivElement = document.createElement("div");
+        const containers: any = [];
+        const comp = TestBed.createComponent(BorderLayoutContainer);
+        const instance = comp.componentInstance;
+        instance.constraints = { region: LayoutRegion.EAST, resizable: true };
+        containers.push(instance);
+        renderer.setLayoutContainer(layoutContainer);
+        renderer.addContainers(containers);
+        instance.resizeStart.emit(instance);
+        const sub = renderer.userAction.subscribe(event=> {
+            expect(event.type).toEqual(LayoutDragEventType.DRAGGING);
+            expect(event.target).toBe(instance);
+            sub.unsubscribe();
+            done();
+        });
+        layoutContainer.dispatchEvent(new MouseEvent("mousemove"));
+    });
+    
+    it('stoping resizing a container should emit a LayoutDragEvent of type DRAG_STOP', (done) => {
+        const layoutContainer: HTMLDivElement = document.createElement("div");
+        const containers: any = [];
+        const comp = TestBed.createComponent(BorderLayoutContainer);
+        const instance = comp.componentInstance;
+        instance.constraints = { region: LayoutRegion.EAST, resizable: true };
+        containers.push(instance);
+        renderer.setLayoutContainer(layoutContainer);
+        renderer.addContainers(containers);
+        instance.resizeStart.emit(instance);
+        const sub = renderer.userAction.subscribe(event=> {
+            expect(event.type).toEqual(LayoutDragEventType.DRAG_STOP);
+            expect(event.target).toBe(instance);
+            sub.unsubscribe();
+            done();
+        });
+        layoutContainer.dispatchEvent(new MouseEvent("mouseup"));
     });
 });
 

@@ -11,8 +11,9 @@ import { CodeWrapper } from '../../../ui/model/business/code-wrapper';
 import { DemoComponent } from '../../../ui/component/demo/demo.component';
 import { DocumentationLink } from '../../../ui/model/business/documentation-link';
 import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
-import { AngularToolboxVersionService } from 'projects/angular-toolbox/src/lib/model/service/version/angular-toolbox-version.service';
-import { BorderLayout, BorderLayoutContainer } from 'projects/angular-toolbox/src/public-api';
+import { BorderLayout, BorderLayoutContainer, LayoutDragEvent, LayoutDragEventType, LayoutRegion } from 'projects/angular-toolbox/src/public-api';
+
+type EventRef = { size: number, type: LayoutDragEventType, region: LayoutRegion };
 
 @Component({
   selector: 'app-border-layout-demo',
@@ -22,18 +23,26 @@ import { BorderLayout, BorderLayoutContainer } from 'projects/angular-toolbox/sr
     BorderLayout,
     BorderLayoutContainer
   ],
-  providers: [
-    AngularToolboxVersionService
-  ],
   templateUrl: './border-layout-demo.component.html',
   styleUrls: ['./border-layout-demo.component.scss']
 })
 export class BorderLayoutDemoComponent {
 
+  protected eventList: EventRef[] = [];
+
   constructor(breadcrumb: BreadcrumbService) {
     breadcrumb.removeAll()
               .addItem(breadcrumb.buildItem("Demo", "/demo"))
               .addItem(breadcrumb.buildItem("BorderLayout Component"));
+  }
+
+  protected registerEvent(event: LayoutDragEvent): void {
+    const target: BorderLayoutContainer = event.target;
+    this.eventList.push({
+      type: event.type,
+      size: Math.round(target.getSize()),
+      region: target.constraints.region as LayoutRegion
+    });
   }
 
   protected documentation: DocumentationLink = {
@@ -44,7 +53,7 @@ export class BorderLayoutDemoComponent {
   protected presentation: string = "A container that arranges and resizes its components to fit in five regions: north, south, east, west, and center.";
   protected srcCode: CodeWrapper = {
     html: [`<div class="wrapper w-100">
-    <atx-border-layout>
+    <atx-border-layout (dragStart)="registerEvent($event)" (dragStop)="registerEvent($event)">
         <atx-border-layout-container [constraints]="{ region: 'north', size: 80 }">
           <button class="btn btn-secondary w-100 h-100">North<br><em>(button)</em></button>
         </atx-border-layout-container>
@@ -71,10 +80,45 @@ export class BorderLayoutDemoComponent {
             </div>
         </atx-border-layout-container>
     </atx-border-layout>
-</div>`],
+</div>
+<h6>Events:</h6>
+<ul>
+    @for (evt of eventList; track evt) {
+        <li>
+            {{ evt.type }}: region = {{ evt.region }}, size = {{ evt.size }}px
+        </li>
+    }
+</ul>`],
   css: [`.wrapper {
   height: 500px;
   --atx-handle-color: orange;
-}`]
+}`],
+typescript: [`type EventRef = { size: number, type: LayoutDragEventType, region: LayoutRegion };
+
+@Component({
+  selector: 'app-border-layout-demo',
+  standalone: true,
+  imports: [
+    DemoComponent,
+    BorderLayout,
+    BorderLayoutContainer
+  ],
+  templateUrl: './border-layout-demo.component.html',
+  styleUrls: ['./border-layout-demo.component.scss']
+})
+export class BorderLayoutDemoComponent {
+
+  protected eventList: EventRef[] = [];
+
+  protected registerEvent(event: LayoutDragEvent): void {
+    const target: BorderLayoutContainer = event.target;
+    this.eventList.push({
+      type: event.type,
+      size: Math.round(target.getSize()),
+      region: target.constraints.region as LayoutRegion
+    });
+  }
+}
+`]
   };
 }

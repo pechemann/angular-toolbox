@@ -6,10 +6,11 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { AfterViewInit, Component, ContentChildren, OnDestroy, ElementRef, ViewChild, HostListener, QueryList } from '@angular/core';
+import { AfterViewInit, Component, ContentChildren, OnDestroy, ElementRef, ViewChild, HostListener, QueryList, EventEmitter, output, Output } from '@angular/core';
 import { BorderLayoutContainer } from '../border-layout-container/border-layout-container.component';
-import { SubscriptionService } from '../../../model';
+import { LayoutDragEvent, LayoutDragEventType, SubscriptionService } from '../../../model';
 import { BorderLayoutRenderer } from './util/border-layout-renderer';
+import { IdentifiableComponent } from '../../../core';
 
 /**
  * A border layout lays out a container, arranging and resizing its components to fit in five regions: north, south, east, west, and center.
@@ -21,8 +22,26 @@ import { BorderLayoutRenderer } from './util/border-layout-renderer';
   styleUrls: ['./border-layout.component.scss'],
   standalone: true
 })
-export class BorderLayout implements AfterViewInit, OnDestroy {
+export class BorderLayout extends IdentifiableComponent implements AfterViewInit, OnDestroy {
 
+  /**
+   * Emits events each time the user starts dragging a region handle.
+   */
+  @Output()
+  public readonly dragStart: EventEmitter<LayoutDragEvent> = new EventEmitter(false);
+
+  /**
+   * Emits events each time the user stops dragging a region handle.
+   */
+  @Output()
+  public readonly dragStop: EventEmitter<LayoutDragEvent> = new EventEmitter(false);
+
+  /**
+   * Emits events each time the user is dragging a region handle.
+   */
+  @Output()
+  public readonly dragging: EventEmitter<LayoutDragEvent> = new EventEmitter(false);
+  
   /**
    * @private
    */
@@ -53,8 +72,23 @@ export class BorderLayout implements AfterViewInit, OnDestroy {
   /**
    * @private
    */
-  constructor(subscribeSvc: SubscriptionService) {
+  constructor(private subscribeSvc: SubscriptionService) {
+    super();
     this.renderer = new BorderLayoutRenderer(subscribeSvc);
+    subscribeSvc.register(this,
+      this.renderer.userAction.subscribe((event: LayoutDragEvent)=> {
+        event.layout = this;
+        if (event.type === LayoutDragEventType.DRAGGING) {
+          this.dragging.emit(event);
+          return;
+        }
+        if (event.type === LayoutDragEventType.DRAG_START) {
+          this.dragStart.emit(event);
+          return;
+        }
+        this.dragStop.emit(event);
+      })
+    );
   }
 
   /**
@@ -69,6 +103,7 @@ export class BorderLayout implements AfterViewInit, OnDestroy {
    * @private
    */
   public ngOnDestroy(): void {
+    this.subscribeSvc.clearAll(this);
     this.renderer.destroy();
   }
 

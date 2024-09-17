@@ -8,7 +8,7 @@
 
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { BorderLayoutRenderer } from "projects/angular-toolbox/src/lib/component/layout/border-layout/util/border-layout-renderer";
-import { BorderLayout } from "projects/angular-toolbox/src/public-api";
+import { BorderLayout, LayoutDragEvent, LayoutDragEventType } from "projects/angular-toolbox/src/public-api";
 
 describe('BorderLayout', () => {
 
@@ -59,6 +59,45 @@ describe('BorderLayout', () => {
         spyOn(renderer, "destroy");
         component.ngOnDestroy();
         expect(renderer.destroy).toHaveBeenCalled();
+    });
+    
+    it('start resizing a container should emit a LayoutDragEvent of type DRAG_START', (done) => {
+        const container: any = {};
+        const renderer: BorderLayoutRenderer = component.getRenderer();
+        const sub = component.dragStart.subscribe(event=> {
+            expect(event.type).toEqual(LayoutDragEventType.DRAG_START);
+            expect(event.target).toBe(container);
+            expect(event.layout).toBe(component);
+            sub.unsubscribe();
+            done();
+        });
+        renderer.userAction.emit(new LayoutDragEvent(container, LayoutDragEventType.DRAG_START));
+    });
+    
+    it('resizing a container should emit a LayoutDragEvent of type DRAGGING', (done) => {
+        const container: any = {};
+        const renderer: BorderLayoutRenderer = component.getRenderer();
+        const sub = component.dragging.subscribe(event=> {
+            expect(event.type).toEqual(LayoutDragEventType.DRAGGING);
+            expect(event.target).toBe(container);
+            expect(event.layout).toBe(component);
+            sub.unsubscribe();
+            done();
+        });
+        renderer.userAction.emit(new LayoutDragEvent(container, LayoutDragEventType.DRAGGING));
+    });
+    
+    it('stoping resizing a container should emit a LayoutDragEvent of type DRAG_STOP', (done) => {
+        const container: any = {};
+        const renderer: BorderLayoutRenderer = component.getRenderer();
+        const sub = component.dragStop.subscribe(event=> {
+            expect(event.type).toEqual(LayoutDragEventType.DRAG_STOP);
+            expect(event.target).toBe(container);
+            expect(event.layout).toBe(component);
+            sub.unsubscribe();
+            done();
+        });
+        renderer.userAction.emit(new LayoutDragEvent(container, LayoutDragEventType.DRAG_STOP));
     });
 });
 

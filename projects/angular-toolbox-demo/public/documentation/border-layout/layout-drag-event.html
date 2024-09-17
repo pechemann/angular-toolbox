@@ -1,0 +1,110 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <section class="w-100">
+        <h5 class="mb-4">On this page</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="#constructor" onclick="appBridge.goToAnchor(event)" title="constructor">constructor</a></li>
+            <li class="list-group-item"><a href="#target" onclick="appBridge.goToAnchor(event)" title="target">target</a></li>
+            <li class="list-group-item"><a href="#layout" onclick="appBridge.goToAnchor(event)" title="layout">layout</a></li>
+            <li class="list-group-item"><a href="#type" onclick="appBridge.goToAnchor(event)" title="type">type</a></li>
+        </ul>
+        <ul class="list-group mt-4">
+            <li class="list-group-item icon-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation/border-layout'])" title="Border Layout">
+                    Border Layout
+                </a>
+            </li>
+            <li class="list-group-item icon-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation'])" title="Documentation">
+                    Documentation
+                </a>
+            </li>
+        </div>
+    </section>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3">Border Layout</h2>
+    <div class="version-info text-end mb-4 me-3">
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 1.3.0</span></small>
+    </div>
+    <p>
+        A border layout lays out a container, arranging and resizing its components to fit in five regions:
+        <em>north</em>, <em>south</em>, <em>east</em>, <em>west</em>, and <em>center</em>.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3><code>LayoutDragEvent</code></h3>
+    <p>
+        An event that represents a drag interaction with a <code>BorderLayoutContainer</code> component.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="constructor"><code>Constructor Function</code></h3>
+    <pre><code class="language-typescript">constructor(target: BorderLayoutContainer, type: LayoutDragEventType)</code></pre>
+    <p>
+        Creates a new <code>LayoutDragEvent</code> instance.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>target: BorderLayoutContainer</code></dt>
+            <dd>
+                <p>
+                    The container that triggered this event.
+                </p>
+            </dd>
+        </dl>
+        <dl>
+            <dt><code>type: LayoutDragEventType</code></dt>
+            <dd>
+                <p>
+                    The type of this event.
+                    <br>
+                    See the <a href="javascript:appBridge.navigate(['resources/documentation/border-layout','/layout-drag-event-type'])"><code>LayoutDragEventType</code> API</a> for details.
+                </p>
+            </dd>
+        </dl>
+    </div>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="target"><code>BorderLayoutContainer.target</code></h3>
+    <pre><code class="language-typescript">readonly target: BorderLayoutContainer</code></pre>
+    <p>
+        The reference to the container that triggered this event.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="layout"><code>BorderLayoutContainer.layout</code></h3>
+    <pre><code class="language-typescript">layout!: BorderLayout</code></pre>
+    <p>
+        The reference to the layout that contains the <code>target</code> container.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="type"><code>BorderLayoutContainer.type</code></h3>
+    <pre><code class="language-typescript">type: LayoutDragEventType</code></pre>
+    <p>
+        The type of this event.
+        <br>
+        See the <a href="javascript:appBridge.navigate(['resources/documentation/border-layout','/layout-drag-event-type'])"><code>LayoutDragEventType</code> API</a> for details.
+    </p>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'Border Layout', 'path': 'border-layout' }, { 'label': 'LayoutDragEvent' }]">
+</object>

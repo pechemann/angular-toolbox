@@ -6,10 +6,10 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { QueryList } from '@angular/core';
+import { EventEmitter, QueryList } from '@angular/core';
 import { BorderLayoutContainer } from '../../border-layout-container/border-layout-container.component';
 import { EMPTY_STRING } from '../../../../util';
-import { Destroyable, LayoutConstraints, LayoutRegion, SubscriptionService } from '../../../../model';
+import { Destroyable, LayoutConstraints, LayoutDragEvent, LayoutDragEventType, LayoutRegion, SubscriptionService } from '../../../../model';
 import { IdentifiableComponent } from '../../../../core';
 import { BorderLayoutBoundsManager } from './border-layout-bounds-manager';
 import { ResizeMethod } from './resize-method';
@@ -39,6 +39,11 @@ const LAYOUT_ERR_MSG: string = "No layout container has been registered.";
  * A controller object responsible for handling user actions on a `BorderLayout` container.
  */
 export class BorderLayoutRenderer extends IdentifiableComponent implements Destroyable {
+
+  /**
+   * Emits events each time the user starts, or stops dragging handle.
+   */
+  public readonly userAction: EventEmitter<LayoutDragEvent> = new EventEmitter(false);
 
   /**
    * @private
@@ -140,12 +145,14 @@ export class BorderLayoutRenderer extends IdentifiableComponent implements Destr
     let size: number = 0;
     this.boundsManager.setOrigin(bounds.x, bounds.y);
     let resizeMethod: ResizeMethod = this.boundsManager.getResizeMethod(region);
+    this.fireEvent(container, LayoutDragEventType.DRAG_START);
     const onMoveHandler = (event: MouseEvent)=> {
       event.preventDefault();
       event.stopPropagation();
       size = resizeMethod(event, width, height, minSize, maxSize);
       container.setSize(size);
       this.render(width);
+      this.fireEvent(container, LayoutDragEventType.DRAGGING);
     };
     const onStopHandler = (event: MouseEvent)=> {
       event.preventDefault();
@@ -155,9 +162,18 @@ export class BorderLayoutRenderer extends IdentifiableComponent implements Destr
       size = resizeMethod(event, width, height, minSize, maxSize);
       container.setSize(size);
       this.render(width);
+      this.fireEvent(container, LayoutDragEventType.DRAG_STOP);
     };
     lytNativeElm.addEventListener(MOUSEMOVE, onMoveHandler);
-    lytNativeElm.addEventListener(MOUSEUP, onStopHandler)
+    lytNativeElm.addEventListener(MOUSEUP, onStopHandler);
+  }
+
+  /**
+   * @private
+   */
+  private fireEvent(target: BorderLayoutContainer, type: LayoutDragEventType): void {
+    const evt: LayoutDragEvent = new LayoutDragEvent(target, type);
+    this.userAction.emit(evt);
   }
 
   /**

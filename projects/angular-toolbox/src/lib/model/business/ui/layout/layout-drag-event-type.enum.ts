@@ -1,0 +1,28 @@
+/**
+ * @license
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be found in
+ * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+ */
+
+/**
+ * Defines the type of a `LayoutDragEvent` instance.
+ */
+export enum LayoutDragEventType {
+
+    /**
+     * Indicates that the dragging process is starting.
+     */
+    DRAG_START = "dragstart",
+
+    /**
+     * Indicates that the dragging process stopped.
+     */
+    DRAG_STOP = "dragstop",
+
+    /**
+     * Indicates that the user is dragging the container handle.
+     */
+    DRAGGING = "dragging"
+}

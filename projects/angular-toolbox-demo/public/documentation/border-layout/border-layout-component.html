@@ -11,6 +11,9 @@
         <h5 class="mb-4">On this page</h5>
         <ul class="list-group">
             <li class="list-group-item"><a href="#paint" onclick="appBridge.goToAnchor(event)" title="paint()">paint()</a></li>
+            <li class="list-group-item"><a href="#dragStart" onclick="appBridge.goToAnchor(event)" title="dragStart">dragStart</a></li>
+            <li class="list-group-item"><a href="#dragStop" onclick="appBridge.goToAnchor(event)" title="dragStop">dragStop</a></li>
+            <li class="list-group-item"><a href="#dragging" onclick="appBridge.goToAnchor(event)" title="dragging">dragging</a></li>
         </ul>
         <ul class="list-group mt-4">
             <li class="list-group-item icon-item">
@@ -67,7 +70,6 @@
     </p>
 </section>
 
-
 <section class="col-xl-9 mb-4">
     <h3 id="paint"><code>BorderLayout.paint()</code></h3>
     <pre><code class="language-typescript">paint(): void</code></pre>
@@ -75,6 +77,43 @@
         Forces the container to be redrawn.
     </p>
 </section>
+
+<section class="col-xl-9 mb-4">
+    <h3>Events</h3>
+    <hr>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="dragStart"><code>BorderLayout.dragStart</code></h3>
+    <pre><code class="language-typescript">readonly dragStart: EventEmitter&lt;LayoutDragEvent&gt;</code></pre>
+    <p>
+        Emits events each time the user starts dragging a region handle.
+        <br>
+        See the <a href="javascript:appBridge.navigate(['resources/documentation/border-layout','/layout-drag-event'])"><code>LayoutDragEvent</code> API</a> for details.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="dragStart"><code>BorderLayout.dragStop</code></h3>
+    <pre><code class="language-typescript">readonly dragStop: EventEmitter&lt;LayoutDragEvent&gt;</code></pre>
+    <p>
+        Emits events each time the user stops dragging a region handle.
+        <br>
+        See the <a href="javascript:appBridge.navigate(['resources/documentation/border-layout','/layout-drag-event'])"><code>LayoutDragEvent</code> API</a> for details.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="dragging"><code>BorderLayout.dragging</code></h3>
+    <pre><code class="language-typescript">readonly dragging: EventEmitter&lt;LayoutDragEvent&gt;</code></pre>
+    <p>
+        Emits events each time the user is dragging a region handle.
+        <br>
+        See the <a href="javascript:appBridge.navigate(['resources/documentation/border-layout','/layout-drag-event'])"><code>LayoutDragEvent</code> API</a> for details.
+    </p>
+</section>
+
+
 
 <!-- We use a data object to store navigation tree structure-->
 <object id="navigation-tree"
