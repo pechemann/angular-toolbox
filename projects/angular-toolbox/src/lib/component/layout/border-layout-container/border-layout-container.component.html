@@ -8,5 +8,5 @@
 
 <ng-content></ng-content>
 @if (resizable) {
-    <div class="atx-handle" (mousedown)="resizetart()"></div>
+    <div class="atx-handle" [class.atx-handle-selected]="selected" (mousedown)="resizetart()"></div>
 }

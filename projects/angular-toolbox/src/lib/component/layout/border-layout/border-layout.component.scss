@@ -37,7 +37,7 @@ $handle-size: 4px;
     .atx-handle {
         position: absolute;
     }
-    .atx-handle:hover {
+    .atx-handle:hover, .atx-handle.atx-handle-selected {
         background-color: var(--atx-handle-color, #469afa);
     }
     .north {

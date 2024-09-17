@@ -145,7 +145,7 @@ export class BorderLayoutRenderer extends IdentifiableComponent implements Destr
     let size: number = 0;
     this.boundsManager.setOrigin(bounds.x, bounds.y);
     let resizeMethod: ResizeMethod = this.boundsManager.getResizeMethod(region);
-    this.fireEvent(container, LayoutDragEventType.DRAG_START);
+    container.selected = true;
     const onMoveHandler = (event: MouseEvent)=> {
       event.preventDefault();
       event.stopPropagation();
@@ -159,6 +159,7 @@ export class BorderLayoutRenderer extends IdentifiableComponent implements Destr
       event.stopPropagation();
       lytNativeElm.removeEventListener(MOUSEMOVE, onMoveHandler);
       lytNativeElm.removeEventListener(MOUSEUP, onStopHandler);
+      container.selected = false;
       size = resizeMethod(event, width, height, minSize, maxSize);
       container.setSize(size);
       this.render(width);
@@ -166,6 +167,7 @@ export class BorderLayoutRenderer extends IdentifiableComponent implements Destr
     };
     lytNativeElm.addEventListener(MOUSEMOVE, onMoveHandler);
     lytNativeElm.addEventListener(MOUSEUP, onStopHandler);
+    this.fireEvent(container, LayoutDragEventType.DRAG_START);
   }
 
   /**

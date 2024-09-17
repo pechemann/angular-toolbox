@@ -390,6 +390,38 @@ describe('BorderLayoutRenderer', () => {
         });
         layoutContainer.dispatchEvent(new MouseEvent("mouseup"));
     });
+    
+    it('start resizing a container should set the container selected property to true', () => {
+        const layoutContainer: HTMLDivElement = document.createElement("div");
+        const containers: any = [];
+        const comp = TestBed.createComponent(BorderLayoutContainer);
+        const instance = comp.componentInstance;
+        instance.constraints = { region: LayoutRegion.EAST, resizable: true };
+        containers.push(instance);
+        expect(instance.selected).toBeFalse();
+        renderer.addContainers(containers);
+        renderer.setLayoutContainer(layoutContainer);
+        instance.resizeStart.emit(instance);
+        expect(instance.selected).toBeTrue();
+    });
+    
+    it('stoping resizing a container should set the container selected property to false', (done) => {
+        const layoutContainer: HTMLDivElement = document.createElement("div");
+        const containers: any = [];
+        const comp = TestBed.createComponent(BorderLayoutContainer);
+        const instance = comp.componentInstance;
+        instance.constraints = { region: LayoutRegion.EAST, resizable: true };
+        containers.push(instance);
+        renderer.setLayoutContainer(layoutContainer);
+        renderer.addContainers(containers);
+        instance.resizeStart.emit(instance);
+        const sub = renderer.userAction.subscribe(event=> {
+            expect(instance.selected).toBeFalse();
+            sub.unsubscribe();
+            done();
+        });
+        layoutContainer.dispatchEvent(new MouseEvent("mouseup"));
+    });
 });
 
 describe('BorderLayoutRenderer: destroy() method', () => {

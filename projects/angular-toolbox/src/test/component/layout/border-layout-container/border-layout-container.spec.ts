@@ -200,4 +200,30 @@ describe('BorderLayoutContainer', () => {
         handle.dispatchEvent(new MouseEvent("mousedown"));
         expect(component.resizeStart.emit).toHaveBeenCalledWith(component);
     });
+    
+    it('selected should be false by default', () => {
+        expect(component.selected).toBeFalse();
+    });
+    
+    it('atx-handle-selected CSS class should be missing by default', () => {
+        component.constraints = {
+            region: LayoutRegion.EAST,
+            resizable: true
+        };
+        fixture.detectChanges();
+        expect(component.selected).toBeFalse();
+        const handle = fixture.nativeElement.querySelector(".atx-handle");
+        expect(handle.classList.contains("atx-handle-selected")).toBeFalse();
+    });
+
+    it('setting selected to true should add the atx-handle-selected CSS class to the handle', () => {
+        component.constraints = {
+            region: LayoutRegion.EAST,
+            resizable: true
+        };
+        component.selected = true;
+        fixture.detectChanges();
+        const handle = fixture.nativeElement.querySelector(".atx-handle");
+        expect(handle.classList.contains("atx-handle-selected")).toBeTrue();
+    });
 });

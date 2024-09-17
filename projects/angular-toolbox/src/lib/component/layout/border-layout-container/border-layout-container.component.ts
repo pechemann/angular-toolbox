@@ -30,6 +30,11 @@ export class BorderLayoutContainer {
    * Indicates to the parent `BorderLayout` instance that the user starts to resize this container.
    */
   public readonly resizeStart: EventEmitter<BorderLayoutContainer> = new EventEmitter(false);
+  
+  /**
+   * @private
+   */
+  public selected: Boolean = false;
 
   /**
    * Gets the CSS class associated with the region constraint of the `BorderLayoutContainer` object.
