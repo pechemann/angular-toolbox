@@ -6,7 +6,8 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { BorderLayout, BorderLayoutContainer, LayoutDragEventType } from "projects/angular-toolbox/src/public-api";
+import { BorderLayoutContainer, BorderLayout } from "../../../../component";
+import { LayoutDragEventType } from "../../../../model";
 
 /**
  * The `LayoutDragEvent` class is an event that represents a drag interaction with a `BorderLayoutContainer`.

@@ -6,7 +6,7 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { AfterViewInit, Component, ContentChildren, OnDestroy, ElementRef, ViewChild, HostListener, QueryList, EventEmitter, output, Output } from '@angular/core';
+import { AfterViewInit, Component, ContentChildren, OnDestroy, ElementRef, ViewChild, HostListener, QueryList, EventEmitter, Output } from '@angular/core';
 import { BorderLayoutContainer } from '../border-layout-container/border-layout-container.component';
 import { LayoutDragEvent, LayoutDragEventType, LayoutRegion, LayoutRegionType, SubscriptionService } from '../../../model';
 import { BorderLayoutRenderer } from './util/border-layout-renderer';

@@ -12,8 +12,8 @@ import { DataUtil } from '../../../util/data.util';
 import { ConsoleBodyType } from '../../../util/console-body-type';
 import { SafeHtmlPipe } from '../../../../../../pipe';
 import { HttpResponse } from '@angular/common/http';
-import { HttpMockLoggingMetadata, Log } from 'projects/angular-toolbox/src/public-api';
 import { AtxLogRendererBase } from '../../abstract/log-renderer-base';
+import { HttpMockLoggingMetadata, Log } from '../../../../../../model';
 
 /**
  * @private

@@ -8,8 +8,6 @@
 
 import { HttpMockServiceError } from "projects/angular-toolbox/src/public-api";
 
-
-
 describe('HttpMockServiceError', () => {
   
   const ERROR_MESSAGE: string = "Error Message";

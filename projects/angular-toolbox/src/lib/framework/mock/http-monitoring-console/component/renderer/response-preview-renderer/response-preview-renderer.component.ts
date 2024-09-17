@@ -15,7 +15,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { HttpResponse } from '@angular/common/http';
 import { UrlUtil } from '../../../util/url.util';
 import { AtxLogRendererBase } from '../../abstract/log-renderer-base';
-import { HttpMockLoggingMetadata, Log } from 'projects/angular-toolbox/src/public-api';
+import { HttpMockLoggingMetadata, Log } from '../../../../../../model';
 
 /**
  * @Private
