@@ -8,7 +8,7 @@
 
 import { AfterViewInit, Component, ContentChildren, OnDestroy, ElementRef, ViewChild, HostListener, QueryList, EventEmitter, output, Output } from '@angular/core';
 import { BorderLayoutContainer } from '../border-layout-container/border-layout-container.component';
-import { LayoutDragEvent, LayoutDragEventType, SubscriptionService } from '../../../model';
+import { LayoutDragEvent, LayoutDragEventType, LayoutRegion, LayoutRegionType, SubscriptionService } from '../../../model';
 import { BorderLayoutRenderer } from './util/border-layout-renderer';
 import { IdentifiableComponent } from '../../../core';
 
@@ -120,5 +120,17 @@ export class BorderLayout extends IdentifiableComponent implements AfterViewInit
    */
   public paint(): void {
     this.renderer.paint();
+  }
+
+  /**
+   * Resizes the specified region.
+   * 
+   * @param region The region to resize.
+   * @param size The new size of the region to resize.
+   * 
+   * @returns `true` whether the specified region has been resized; `false` otherwise.
+   */
+  public resizeRegion(region: LayoutRegion | LayoutRegionType, size: number): void {
+    this.renderer.resizeRegion(region as LayoutRegion, size);
   }
 }

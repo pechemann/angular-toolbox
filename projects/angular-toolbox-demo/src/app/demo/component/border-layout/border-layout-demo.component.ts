@@ -29,6 +29,7 @@ type EventRef = { size: number, type: LayoutDragEventType, region: LayoutRegion 
 export class BorderLayoutDemoComponent {
 
   protected eventList: EventRef[] = [];
+  protected westContainerSize: number = 100;
 
   constructor(breadcrumb: BreadcrumbService) {
     breadcrumb.removeAll()
@@ -43,6 +44,10 @@ export class BorderLayoutDemoComponent {
       size: Math.round(target.getSize()),
       region: target.constraints.region as LayoutRegion
     });
+  }
+
+  protected parseInt(value: string): number {
+    return parseInt(value);
   }
 
   protected documentation: DocumentationLink = {

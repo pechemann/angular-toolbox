@@ -11,7 +11,7 @@
         The following sample app shows how to implement the ATX border layout with Bootstrap:
     </p>
     <div class="wrapper w-100 mb-3">
-        <atx-border-layout (dragStart)="registerEvent($event)" (dragStop)="registerEvent($event)">
+        <atx-border-layout #borderLayout (dragStart)="registerEvent($event)" (dragStop)="registerEvent($event)">
             <atx-border-layout-container [constraints]="{ region: 'north', size: 80 }">
                 <button class="btn btn-secondary w-100 h-100">North<br><em>(button)</em></button>
             </atx-border-layout-container>
@@ -39,12 +39,29 @@
             </atx-border-layout-container>
         </atx-border-layout>
     </div>
-    <h6>Events:</h6>
-    <ul class="pe-0 m-0">
-        @for (evt of eventList; track evt) {
-            <li>
-                {{ evt.type }}: region = {{ evt.region }}, size = {{ evt.size }}px
-            </li>
-        }
-    </ul>
+    <div class="row">
+        <div class="col-md-6">
+            <h6>Resize region:</h6>
+            <p>
+                Use the slider below to resize the <em>west region</em> container:
+            </p>
+            <div class="d-flex gap-5">
+                <input #sizeRange type="range" min="100" max="400" value="100" (input)="borderLayout.resizeRegion('west', parseInt(sizeRange.value))">
+                <span>{{ sizeRange.value }}px</span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h6>Events:</h6>
+            <p>
+                Drag the resizable containers to show events values:
+            </p>
+            <ul class="pe-0 m-0">
+                @for (evt of eventList; track evt) {
+                    <li>
+                        {{ evt.type }}: region = {{ evt.region }}, size = {{ evt.size }}px
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
 </demo>

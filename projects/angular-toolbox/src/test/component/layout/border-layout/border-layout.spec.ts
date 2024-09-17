@@ -8,7 +8,7 @@
 
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { BorderLayoutRenderer } from "projects/angular-toolbox/src/lib/component/layout/border-layout/util/border-layout-renderer";
-import { BorderLayout, LayoutDragEvent, LayoutDragEventType } from "projects/angular-toolbox/src/public-api";
+import { BorderLayout, LayoutDragEvent, LayoutDragEventType, LayoutRegion } from "projects/angular-toolbox/src/public-api";
 
 describe('BorderLayout', () => {
 
@@ -98,6 +98,13 @@ describe('BorderLayout', () => {
             done();
         });
         renderer.userAction.emit(new LayoutDragEvent(container, LayoutDragEventType.DRAG_STOP));
+    });
+
+    it('resizeRegion() should invoke the BorderLayoutRenderer.resizeRegion() method', () => {
+        const renderer: BorderLayoutRenderer = component.getRenderer();
+        spyOn(renderer, "resizeRegion");
+        component.resizeRegion(LayoutRegion.EAST, 300);
+        expect(renderer.resizeRegion).toHaveBeenCalledWith(LayoutRegion.EAST, 300);
     });
 });
 

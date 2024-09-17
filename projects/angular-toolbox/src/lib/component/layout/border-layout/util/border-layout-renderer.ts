@@ -130,6 +130,26 @@ export class BorderLayoutRenderer extends IdentifiableComponent implements Destr
   }
 
   /**
+   * Resizes the specified region of the associated container.
+   * 
+   * @param region The region to resize.
+   * @param size The new size of the region to resize.
+   * 
+   * @returns `true` whether the specified region has been resized; `false` otherwise.
+   */
+  public resizeRegion(region: LayoutRegion, size: number): boolean {
+    if (region === LayoutRegion.CENTER) return false;
+    const container: BorderLayoutContainer | undefined = this.containerList.find((c: BorderLayoutContainer)=> {
+      return c.constraints.region === region;
+    });
+    if (!container) return false;
+    container.setSize(size);
+    this.boundsManager.initBounds(container);
+    this.paint();
+    return true;
+  }
+
+  /**
    * @private
    */
   private resizeEnter(container: BorderLayoutContainer): void {

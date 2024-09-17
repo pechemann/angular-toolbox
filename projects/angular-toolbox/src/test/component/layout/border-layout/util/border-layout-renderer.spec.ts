@@ -422,6 +422,49 @@ describe('BorderLayoutRenderer', () => {
         });
         layoutContainer.dispatchEvent(new MouseEvent("mouseup"));
     });
+
+    it('resizeRegion() should return false if the region is LayoutRegion.CENTER', () => {
+        expect(renderer.resizeRegion(LayoutRegion.CENTER, 100)).toBeFalse();
+    });
+
+    it('resizeRegion() should return false if the region does not exists', () => {
+        expect(renderer.resizeRegion(LayoutRegion.EAST, 100)).toBeFalse();
+    });
+
+    it('resizeRegion() should throw an error if the main layout container has not been defined', () => {
+        const containers: any = [];
+        const comp = TestBed.createComponent(BorderLayoutContainer);
+        comp.componentInstance.constraints = { region: LayoutRegion.EAST };
+        containers.push(comp.componentInstance);
+        renderer.addContainers(containers);
+        const invalidAction = ()=> {
+            renderer.resizeRegion(LayoutRegion.EAST, 100)
+        };
+        expect(invalidAction).toThrowError("No layout container has been registered.");
+    });
+
+    it('resizeRegion() should return true if the region exists', () => {
+        const layoutContainer: HTMLDivElement = document.createElement("div");
+        const containers: any = [];
+        const comp = TestBed.createComponent(BorderLayoutContainer);
+        renderer.setLayoutContainer(layoutContainer);
+        comp.componentInstance.constraints = { region: LayoutRegion.EAST };
+        containers.push(comp.componentInstance);
+        renderer.addContainers(containers);
+        expect(renderer.resizeRegion(LayoutRegion.EAST, 100)).toBeTrue();
+    });
+    
+    it('resizeRegion() should update the size of the container for the specified region', () => {
+        const layoutContainer: HTMLDivElement = document.createElement("div");
+        const containers: any = [];
+        const comp = TestBed.createComponent(BorderLayoutContainer);
+        renderer.setLayoutContainer(layoutContainer);
+        comp.componentInstance.constraints = { region: LayoutRegion.EAST };
+        containers.push(comp.componentInstance);
+        renderer.addContainers(containers);
+        renderer.resizeRegion(LayoutRegion.EAST, 300);
+        expect(comp.componentInstance.getSize()).toEqual(300);
+    });
 });
 
 describe('BorderLayoutRenderer: destroy() method', () => {

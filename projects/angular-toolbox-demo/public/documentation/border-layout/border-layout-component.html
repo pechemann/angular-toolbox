@@ -11,6 +11,7 @@
         <h5 class="mb-4">On this page</h5>
         <ul class="list-group">
             <li class="list-group-item"><a href="#paint" onclick="appBridge.goToAnchor(event)" title="paint()">paint()</a></li>
+            <li class="list-group-item"><a href="#resizeRegion" onclick="appBridge.goToAnchor(event)" title="resizeRegion()">resizeRegion()</a></li>
             <li class="list-group-item"><a href="#dragStart" onclick="appBridge.goToAnchor(event)" title="dragStart">dragStart</a></li>
             <li class="list-group-item"><a href="#dragStop" onclick="appBridge.goToAnchor(event)" title="dragStop">dragStop</a></li>
             <li class="list-group-item"><a href="#dragging" onclick="appBridge.goToAnchor(event)" title="dragging">dragging</a></li>
@@ -76,6 +77,43 @@
     <p>
         Forces the container to be redrawn.
     </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="resizeRegion"><code>BorderLayout.resizeRegion()</code></h3>
+    <pre><code class="language-typescript">resizeRegion(region: LayoutRegion, size: number): boolean</code></pre>
+    <p>
+        Resizes the container specified by the <code>region</code> parameter.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>region: LayoutRegion</code></dt>
+            <dd>
+                <p>
+                    The region to resize.
+                    <br>
+                    Notice that resizing the <code>LayoutRegion.CENTER</code> region has no effect.
+                    <br>
+                    See the <a href="javascript:appBridge.navigate(['resources/documentation/border-layout','/layout-region'])"><code>LayoutRegion</code> enum API</a> for details.
+                </p>
+            </dd>
+        </dl>
+        <dl>
+            <dt><code>size: number</code></dt>
+            <dd>
+                <p>
+                    The new size of the container, in pixels.
+            </dd>
+        </dl>
+    </div>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>boolean</code>
+        <p>
+            <code>true</code> whether the specified region has been resized; <code>false</code> otherwise.
+        </p>
+    </div>
 </section>
 
 <section class="col-xl-9 mb-4">
