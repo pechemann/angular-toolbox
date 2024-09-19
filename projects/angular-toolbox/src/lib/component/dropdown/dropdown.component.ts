@@ -60,6 +60,10 @@ export class DropdownComponent extends IdentifiableComponent {
     this._opened = true;
   }
 
+  public isOpened(): boolean {
+    return this._opened;
+  }
+
   public toggleContent(): void {
     if (!this._popover) return;
     this.toggleState();
