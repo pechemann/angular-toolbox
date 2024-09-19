@@ -61,6 +61,10 @@ const routes: Routes = [
   {
     path: 'border-layout',
     loadComponent: () => import('./component/border-layout/border-layout-demo.component').then(mod => mod.BorderLayoutDemoComponent)
+  },
+  {
+    path: 'dropdown',
+    loadComponent: () => import('./component/dropdown/dropdown-demo.component').then(mod => mod.DropdownDemoComponent)
   }
 ];
 

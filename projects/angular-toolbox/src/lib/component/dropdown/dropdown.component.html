@@ -1,0 +1,21 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+ 
+<div class="atx-dropdown-container" [class]="containerClass">
+    <button [class]="buttonClass" [attr.popovertarget]="id">
+        <ng-content></ng-content>
+    </button>
+    <div popover [attr.id]="id" (toggle)="onToggle($event)"></div>
+    <div class="atx-dropdown-popover"
+         [class.atx-dropdown-bottom]="vPos === 'bottom'"
+         [class.atx-dropdown-top]="vPos === 'top'"
+         [class.atx-dropdown-left]="hPos === 'left'"
+         [class.atx-dropdown-right]="hPos === 'right'">
+        <ng-content select="[content]"></ng-content>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+/**
+ * @license
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+ */
+
+
+.atx-dropdown-container {
+    position: relative;
+}
+
+[popover]:popover-open {
+    inset: unset;
+    border: none;
+    background: none;
+    margin: 0;
+    padding: 0;
+}
+
+[popover]:popover-open + .atx-dropdown-popover {
+    display: block;
+}
+
+.atx-dropdown-popover {
+    display: none;
+    position: absolute;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    z-index: 100;
+    height: auto;
+    width: max-content;
+}
+
+.atx-dropdown-bottom {
+    bottom: unset;
+    top: calc(100% + var(--atx-dropdown-gutter, 2px));
+}
+
+.atx-dropdown-top {
+    bottom: calc(100% + var(--atx-dropdown-gutter, 2px));
+    top: unset;
+}
+
+.atx-dropdown-right {
+    right: 100%;
+    left: unset;
+}
+
+.atx-dropdown-left {
+    left: 0;
+    right: unset;
+}
+
