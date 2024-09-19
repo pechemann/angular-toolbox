@@ -12,14 +12,17 @@
     </button>
     <div popover [attr.id]="id" (toggle)="onToggle($event)"></div>
     <div class="atx-dropdown-popover"
-         [class.atx-dropdown-bottom]="vPos === 'bottom'"
-         [class.atx-dropdown-middle]="vPos === 'middle'"
+         [class.atx-dropdown-v-start]="vPos === 'start'"
          [class.atx-dropdown-top]="vPos === 'top'"
-         [class.atx-dropdown-start]="hPos === 'start'"
+         [class.atx-dropdown-middle]="vPos === 'middle'"
+         [class.atx-dropdown-bottom]="vPos === 'bottom'"
+         [class.atx-dropdown-v-end]="vPos === 'end'"
+         [class.atx-dropdown-h-start]="hPos === 'start'"
          [class.atx-dropdown-left]="hPos === 'left'"
          [class.atx-dropdown-center]="hPos === 'center'"
          [class.atx-dropdown-right]="hPos === 'right'"
-         [class.atx-dropdown-end]="hPos === 'end'">
+         [class.atx-dropdown-h-end]="hPos === 'end'"
+         [class.atx-dropdown-centered]="hPos === 'center' && vPos === 'middle'">
         <ng-content select="[content]"></ng-content>
     </div>
 </div>

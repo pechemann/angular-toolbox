@@ -9,7 +9,7 @@
 /**
  * Defines the vertical position of a dropdown component.
  */
-export type DropdownVerticalPosition = "top" | "middle" | "bottom";
+export type DropdownVerticalPosition = "start" | "top" | "middle" | "bottom" | "end";
 
 /**
  * Defines the horizontal position of a dropdown component.

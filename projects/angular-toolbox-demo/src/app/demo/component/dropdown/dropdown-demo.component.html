@@ -28,16 +28,24 @@
         <form class="col-md-6">
             <h6>Vertical position:</h6>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="vPos" id="bottomBtn" [(ngModel)]="vPos" value="bottom">
-                <label class="form-check-label" for="bottomBtn">bottom</label>
+                <input class="form-check-input" type="radio" name="vPos" id="vStartBtn" [(ngModel)]="vPos" value="start">
+                <label class="form-check-label" for="vStartBtn">start</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="vPos" id="topBtn" [(ngModel)]="vPos" value="top">
+                <label class="form-check-label" for="topBtn">top</label>
             </div>
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="vPos" id="middleBtn" [(ngModel)]="vPos" value="middle">
                 <label class="form-check-label" for="middleBtn">middle</label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="vPos" id="topBtn" [(ngModel)]="vPos" value="top">
-                <label class="form-check-label" for="topBtn">top</label>
+                <input class="form-check-input" type="radio" name="vPos" id="bottomBtn" [(ngModel)]="vPos" value="bottom">
+                <label class="form-check-label" for="bottomBtn">bottom</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="vPos" id="vEndBtn" [(ngModel)]="vPos" value="end">
+                <label class="form-check-label" for="vEndBtn">end</label>
             </div>
             <h6 class="mt-2">Horizontal position:</h6>
             <div class="form-check">

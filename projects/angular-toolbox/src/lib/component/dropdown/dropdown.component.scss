@@ -6,7 +6,6 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-
 .atx-dropdown-container {
     position: relative;
 }
@@ -34,9 +33,14 @@
     width: max-content;
 }
 
-.atx-dropdown-bottom {
+.atx-dropdown-v-start {
     bottom: unset;
-    top: calc(100% + var(--atx-dropdown-gutter, 2px));
+    top: 0;
+}
+
+.atx-dropdown-top {
+    bottom: calc(100% + var(--atx-dropdown-gutter, 2px));
+    top: unset;
 }
 
 .atx-dropdown-middle {
@@ -45,12 +49,17 @@
     transform: translateY(-50%);
 }
 
-.atx-dropdown-top {
-    bottom: calc(100% + var(--atx-dropdown-gutter, 2px));
+.atx-dropdown-bottom {
+    bottom: unset;
+    top: calc(100% + var(--atx-dropdown-gutter, 2px));
+}
+
+.atx-dropdown-v-end {
+    bottom: 0;
     top: unset;
 }
 
-.atx-dropdown-start {
+.atx-dropdown-h-start {
     right: calc(100% + var(--atx-dropdown-gutter, 2px));
     left: unset;
 }
@@ -71,10 +80,11 @@
     left: unset;
 }
 
-.atx-dropdown-end {
+.atx-dropdown-h-end {
     right: unset;
     left: calc(100% + var(--atx-dropdown-gutter, 2px));
 }
 
-
-
+.atx-dropdown-centered {
+    transform: translate(-50%, -50%);
+}

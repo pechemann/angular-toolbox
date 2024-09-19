@@ -21,10 +21,12 @@
         { "label": "NetworkInformation Interface", "urlTree": [ "/resources", "documentation", "network-information-interface" ] },
         { "label": "BatteryManager Interface", "urlTree": [ "/resources", "documentation", "battery-manager" ] },
         { "label": "Window Managment API", "urlTree": [ "/resources", "documentation", "window-managment-api" ] },
-        { "label": "Border Layout", "urlTree": [ "/resources", "documentation", "border-layout" ] }
+        { "label": "Border Layout", "urlTree": [ "/resources", "documentation", "border-layout" ] },
+        { "label": "Dropdown Container" }
     ],
     "articles": [
         { "label": "Angular Toolbox Principles" },
+        { "label": "LAF-less Components" },
         { "label": "Library Vs. Application Services", "urlTree": [ "/resources", "documentation", "lib-vs-app-services" ] }
     ]
 }
