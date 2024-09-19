@@ -39,13 +39,19 @@
     top: calc(100% + var(--atx-dropdown-gutter, 2px));
 }
 
+.atx-dropdown-middle {
+    bottom: unset;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
 .atx-dropdown-top {
     bottom: calc(100% + var(--atx-dropdown-gutter, 2px));
     top: unset;
 }
 
-.atx-dropdown-right {
-    right: 100%;
+.atx-dropdown-start {
+    right: calc(100% + var(--atx-dropdown-gutter, 2px));
     left: unset;
 }
 
@@ -53,4 +59,22 @@
     left: 0;
     right: unset;
 }
+
+.atx-dropdown-center {
+    left:  50%;
+    transform: translateX(-50%);
+    right: unset;
+}
+
+.atx-dropdown-right {
+    right: 0;
+    left: unset;
+}
+
+.atx-dropdown-end {
+    right: unset;
+    left: calc(100% + var(--atx-dropdown-gutter, 2px));
+}
+
+
 
