@@ -7,10 +7,10 @@
 -->
  
 <div class="atx-dropdown-container" [class]="containerClass">
-    <button [class]="buttonClass" [attr.popovertarget]="id">
+    <button [class]="buttonClass" [attr.popovertarget]="id" (click)="btnClick()">
         <ng-content></ng-content>
     </button>
-    <div popover [attr.id]="id" (toggle)="onToggle($event)"></div>
+    <div #popover popover [attr.id]="id" (toggle)="onToggle($event)" (beforetoggle)="onBeforeToggle($event)"></div>
     <div class="atx-dropdown-popover"
          [class.atx-dropdown-v-start]="vPos === 'start'"
          [class.atx-dropdown-top]="vPos === 'top'"

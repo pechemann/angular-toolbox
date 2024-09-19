@@ -13,7 +13,7 @@ import { DocumentationLink } from '../../../ui/model/business/documentation-link
 import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
 import { DropdownComponent } from 'projects/angular-toolbox/src/public-api';
 import { FormsModule } from '@angular/forms';
-import { DropdownHorizontalPosition, DropdownVerticalPosition } from 'projects/angular-toolbox/src/lib/component/dropdown/util/dropdown-position';
+import { DropdownHorizontalPosition, DropdownVerticalPosition } from 'projects/angular-toolbox/src/lib/model/business/ui/dropdown/dropdown-position';
 
 @Component({
   selector: 'dropdown-demo',

@@ -11,8 +11,8 @@
         The following sample app shows how to implement the ATX dropdown component with Bootstrap:
     </p>
     <div class="row">
-        <nav class="d-flex col-md-6 mb-5">
-            <atx-dropdown buttonClass="btn btn-primary" [vPos]="vPos" [hPos]="hPos">
+        <nav class="d-flex col-md-4 mb-5">
+            <atx-dropdown #dropdown buttonClass="btn btn-primary" [vPos]="vPos" [hPos]="hPos">
                 <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
                     <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0"/>
                     <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z"/>
@@ -25,7 +25,7 @@
                 </ul>
             </atx-dropdown>
         </nav>
-        <form class="col-md-6">
+        <form class="col-md-4">
             <h6>Vertical position:</h6>
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="vPos" id="vStartBtn" [(ngModel)]="vPos" value="start">
@@ -69,5 +69,13 @@
                 <label class="form-check-label" for="endBtn">end</label>
             </div>
         </form>
+        <div class="col-md-4">
+            <h6>API:</h6>
+            <div class="btn-group-vertical" role="group">
+                <button class="btn btn-outline-secondary" (click)="dropdown.toggleContent()">Toggle content</button>
+                <button class="btn btn-outline-secondary" (click)="dropdown.showContent()">Show content</button>
+                <button class="btn btn-outline-secondary" (click)="dropdown.hideContent()">Hide content</button>
+            </div>
+        </div>
     </div>
 </demo>
