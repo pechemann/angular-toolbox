@@ -7,8 +7,7 @@
  */
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { DropdownComponent } from './dropdown.component';
+import { DropdownComponent } from 'projects/angular-toolbox/src/public-api';
 
 describe('DropdownComponent', () => {
   let component: DropdownComponent;
