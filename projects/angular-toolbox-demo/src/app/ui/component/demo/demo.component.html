@@ -8,7 +8,9 @@
  
 <article>
     <h2 class="mb-4">{{ title }}</h2>
-    <p [innerHTML]="presentation"></p>
+    @if (presentation) {
+        <p [innerHTML]="presentation | safeHtml"></p>
+    }
     <h4 class="mb-4">Example</h4>
     <section class="mb-4">
         <div class="container border rounded p-5">

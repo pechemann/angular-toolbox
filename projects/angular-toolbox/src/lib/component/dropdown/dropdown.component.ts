@@ -10,6 +10,14 @@ import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@
 import { IdentifiableComponent } from '../../core';
 import { DropdownEvent, DropdownEventType, DropdownHorizontalPosition, DropdownState, DropdownVerticalPosition } from '../../model';
 
+/**
+ * @private
+ */
+const API_MATCH: string = ':popover-open';
+
+/**
+ * This component is part of the LAF-less API.
+ */
 @Component({
   selector: 'atx-dropdown',
   standalone: true,
@@ -36,13 +44,20 @@ export class DropdownComponent extends IdentifiableComponent {
   @Input()
   public hPos: DropdownHorizontalPosition = "left";
 
+  /**
+   * @private
+   */
   protected id!: string;
 
-  private _opened: boolean = false;
-
+  /**
+   * @private
+   */
   @ViewChild("popover")
   private _popover!: ElementRef;
 
+  /**
+   * @private
+   */
   constructor() {
     super();
     this.id = this.getID().toString();
@@ -50,56 +65,41 @@ export class DropdownComponent extends IdentifiableComponent {
 
   public hideContent(): void {
     if (!this._popover) return;
-    this.hidePopover();
-    this._opened = false;
+    this._popover.nativeElement.hidePopover();
   }
 
   public showContent(): void {
     if (!this._popover) return;
-    this.showPopover();
-    this._opened = true;
+    this._popover.nativeElement.showPopover();
   }
 
   public isOpened(): boolean {
-    return this._opened;
+    if (!this._popover) return false;
+    return this._popover.nativeElement.matches(API_MATCH);
   }
 
-  public toggleContent(): void {
-    if (!this._popover) return;
-    this.toggleState();
-    if (this._opened) return this.showPopover();
-    this.hidePopover();
-  }
-
-  protected btnClick(): void {
-    this.toggleState();
-  }
-
+  /**
+   * @private
+   */
   protected onBeforeToggle(event: Event): void {
     this.beforeToggle.emit(
       this.buildEvent(event as ToggleEvent, DropdownEventType.BEFORE_TOGGLE)
     );
   }
 
+  /**
+   * @private
+   */
   protected onToggle(event: Event): void {
     this.toggle.emit(
       this.buildEvent(event as ToggleEvent, DropdownEventType.TOGGLE)
     );
   }
 
+  /**
+   * @private
+   */
   private buildEvent(event: ToggleEvent, type: DropdownEventType): DropdownEvent {
     return new DropdownEvent(this, type, event.newState as DropdownState, event.oldState as DropdownState);
-  }
-
-  private showPopover(): void {
-    this._popover.nativeElement.showPopover();
-  }
-
-  private hidePopover(): void {
-    this._popover.nativeElement.hidePopover();
-  }
-
-  private toggleState(): void {
-    this._opened = !this._opened;
   }
 }

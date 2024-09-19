@@ -42,7 +42,7 @@ export class DropdownDemoComponent {
     commands: ['/resources', 'documentation', 'dropdown']
   };
   protected title: string = "Dropdown Component Demo";
-  protected presentation: string = "A container that allows Users to toggle the display of specified content by clicking a button.";
+  protected presentation: string = 'A container that allows Users to toggle the display of specified content by clicking a button.<br>This component is part of the <a href="javascript:appBridge.navigate([\'resources/documentation/laf-less-components\'])" title=LAF-less API>LAF-less API</a>.';
   protected srcCode: CodeWrapper = {
     html: [`<atx-dropdown buttonClass="btn btn-primary">
     <!-- button display -->

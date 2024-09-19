@@ -26,7 +26,7 @@
     ],
     "articles": [
         { "label": "Angular Toolbox Principles" },
-        { "label": "LAF-less Components" },
-        { "label": "Library Vs. Application Services", "urlTree": [ "/resources", "documentation", "lib-vs-app-services" ] }
+        { "label": "LAF-less Components", "urlTree": [ "/resources", "documentation", "laf-less-components" ] },
+        { "label": "Library Vs. Application Services" }
     ]
 }

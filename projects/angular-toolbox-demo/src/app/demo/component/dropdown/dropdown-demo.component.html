@@ -25,7 +25,7 @@
                 </ul>
             </atx-dropdown>
         </nav>
-        <form class="col-md-4">
+        <form class="col-md-4 mb-5">
             <h6>Vertical position:</h6>
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="vPos" id="vStartBtn" [(ngModel)]="vPos" value="start">
@@ -71,10 +71,13 @@
         </form>
         <div class="col-md-4">
             <h6>API:</h6>
-            <div class="btn-group-vertical" role="group">
-                <button class="btn btn-outline-secondary" (click)="dropdown.toggleContent()">Toggle content</button>
+            <div class="btn-group-vertical mb-3" role="group">
                 <button class="btn btn-outline-secondary" (click)="dropdown.showContent()">Show content</button>
                 <button class="btn btn-outline-secondary" (click)="dropdown.hideContent()">Hide content</button>
+            </div>
+            <h6>State:</h6>
+            <div>
+                {{ dropdown.isOpened() ? 'open' : "closed" }}
             </div>
         </div>
     </div>

@@ -15,6 +15,7 @@ import { IdentifiableComponent } from '../../../core';
 /**
  * A border layout lays out a container, arranging and resizing its components to fit in five regions: north, south, east, west, and center.
  * Each region is defined by a `BorderLayoutContainer` instance, and is identified by a corresponding constant: `NORTH`, `SOUTH`, `EAST`, `WEST`, and `CENTER`.
+ * This component is part of the LAF-less API.
  */
 @Component({
   selector: 'atx-border-layout',
