@@ -16,6 +16,8 @@ import { DropdownEvent, DropdownEventType, DropdownHorizontalPosition, DropdownS
 const API_MATCH: string = ':popover-open';
 
 /**
+ * The ATX dropdown component allows to create popup containers that are displayed by clicking on a button.
+ * The content of the container is defined by Developer.
  * This component is part of the LAF-less API.
  */
 @Component({
@@ -32,15 +34,27 @@ export class DropdownComponent extends IdentifiableComponent {
   @Output()
   public readonly beforeToggle: EventEmitter<DropdownEvent> = new EventEmitter();
 
+  /**
+   * Sets the dropdown button CSS class.
+   */
   @Input()
   public buttonClass!: string;
 
+  /**
+   * Sets the dropdown conpoment CSS class.
+   */
   @Input()
   public containerClass!: string;
 
+  /**
+   * Sets the vertical position of the content container.
+   */
   @Input()
   public vPos: DropdownVerticalPosition = "bottom";
 
+  /**
+   * Sets the horizontal position of the content container.
+   */
   @Input()
   public hPos: DropdownHorizontalPosition = "left";
 
@@ -63,16 +77,27 @@ export class DropdownComponent extends IdentifiableComponent {
     this.id = this.getID().toString();
   }
 
+  /**
+   * Hides the dropdown container.
+   */
   public hideContent(): void {
     if (!this._popover) return;
     this._popover.nativeElement.hidePopover();
   }
 
+  /**
+   * Displays the dropdown container.
+   */
   public showContent(): void {
     if (!this._popover) return;
     this._popover.nativeElement.showPopover();
   }
 
+  /**
+   * Returns the open state of the dropdown.
+   * 
+   * @returns Returns `true` whether the dropdown is opened; `false` otherwise.
+   */
   public isOpened(): boolean {
     if (!this._popover) return false;
     return this._popover.nativeElement.matches(API_MATCH);

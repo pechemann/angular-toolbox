@@ -39,7 +39,6 @@ describe('DropdownEvent', () => {
         event = new DropdownEvent(container, DropdownEventType.TOGGLE, "closed", "open");
         expect(event.newState).toEqual("closed");
     });
-    
 
     it('oldState should be a reference to the object passed in the constructor', () => {
         const container: any = {};
