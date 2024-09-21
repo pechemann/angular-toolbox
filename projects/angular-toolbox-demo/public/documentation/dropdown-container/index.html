@@ -10,7 +10,7 @@
     <section class="w-100">
         <h5 class="mb-4">On this page</h5>
         <ul class="list-group">
-            <li class="list-group-item"><a href="#motivation" onclick="appBridge.goToAnchor(event)" title="motivation">Motivation</a></li>
+            <li class="list-group-item"><a href="#principle" onclick="appBridge.goToAnchor(event)" title="Principle">Principle</a></li>
             <li class="list-group-item"><a href="#api" onclick="appBridge.goToAnchor(event)" title="API">API</a></li>
             <li class="list-group-item"><a href="#usage" onclick="appBridge.goToAnchor(event)" title="Usage">Usage</a></li>
         </ul>
@@ -30,9 +30,24 @@
 </header>
 
 <section class="col-xl-9 mb-4">
-    <h3 id="motivation">Motivation</h3>
+    <h3 id="principle">Principle</h3>
     <p>
-        
+        Regarding the <a href="javascript:appBridge.navigate(['resources/documentation/laf-less-components'])" title="LAF-less API">LAF-less API</a>,
+        dropdown containers allows to create non-modal popup elements by separating the popup UI logic from the app business logic. 
+    </p>
+    <p>
+        You typically use dropdown containers to create popup menus, complex select action components and so on.
+    </p>
+    <p>
+        The dropdown API is built on top of the <code>popover</code> HTML API.
+        Since the <code>popover</code> HTML API is partially implemented by the browser ecosystem,
+        some functionalities are not fully efficient yet.
+        The final version of the dropdown API will allow to display content over all HTML elements.
+        This behavior is the same as the dropdown behavior of native OS.
+    </p>
+    <p>
+        The current version works the same as all other JavaScript/CSS frameworks.
+        Final version will be available according to the CSS anchor positioning support for all major browser.
     </p>
 </section>
 

@@ -6,24 +6,174 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
 -->
 
-<!--< nav class="page-menu col-xl-3 ps-4">
+<nav class="page-menu col-xl-3 ps-4">
     <section class="w-100">
         <h5 class="mb-4">On this page</h5>
        <ul class="list-group">
-            <li class="list-group-item"><a href="#api" onclick="appBridge.goToAnchor(event)" title="API">API</a></li>
-            <li class="list-group-item"><a href="#usage" onclick="appBridge.goToAnchor(event)" title="API">Usage</a></li>
+            <li class="list-group-item"><a href="#motivation" onclick="appBridge.goToAnchor(event)" title="Motivation">Motivation</a></li>
+            <li class="list-group-item"><a href="#solution" onclick="appBridge.goToAnchor(event)" title="The LAF-less Components Solution">The LAF-less Components Solution</a></li>
+            
+            <li class="list-group-item"><a href="#api" onclick="appBridge.goToAnchor(event)" title="API">LAF-less API</a></li>
         </ul>
     </section>
-</nav>-->
+</nav>
 
 <header class="fs-5 col-xl-9 mb-4">
     <h2 class="mb-3">LAF-less Components</h2>
     <p>
-        
+        <em>LAF-less</em> Components, for "Look-and-Feel-less" Components, provide a GUI API built on top of native HTML,
+        to enable common user actions independently from the application Look and Feel.
     </p>
     <hr class="mt-4">
 </header>
 
+<section class="col-xl-9 mb-4">
+    <h3 id="motivation">Motivation</h3>
+    <p>
+        A major recurring problem that developers face while developing Angular applications is the choice of graphic design.
+        You can either use custom CSS, CSS frameworks, libraries built on top of CSS frameworks, or component libraries...
+    </p>
+    <p>
+        None of these solutions are bad in themselves; the choice will be made based on the type of project.
+        However, when a choice is made, Developers often have to deal with the same problem: add a functionality not covered by the chosen solution.
+        <br>
+        In this case, the approach is always the same: include a library that solves the problem.
+    </p>
+    <p>
+        Making the right choice from the start is crucial!
+    </p>
+    <p>
+        Let us take a concrete use case: using the <a href="https://getbootstrap.com/" title="Bootstrap">Bootstrap</a> framework to create a web site.
+        <br>
+        If you decide to use the framework as is, you will include additional javascript libraries (e.g. jQuery),
+        which is not the best solution. If you decide to use additional framework built on Boostrap,
+        you may have new issues:
+    </p>
+    <ul>
+        <li>include more code that needed (e.g. component core modules of Component frameworks)</li>
+        <li>icrease security vulnerabilities (e.g. additional 3<sup>rd</sup> party library dependencies)</li>
+        <li>icrease learning curve</li>
+        <li>add strong dependency to the framework</li>
+        <li>icrease bundle size</li>
+    </ul>
+    <p>
+        Another major problem is that it is difficult for framework developers to adapt to Angular upgrade cycle.
+    </p>
+    <p>
+        On the other hand, if you do not use a framework you will have to take into account some other difficulties:
+    </p>
+    <ul>
+        <li>reinvent the wheel for basic behaviours (e.g. dropdown menus, etc.)</li>
+        <li>icrease bug occurences (e.g. poor test coverage, etc.)</li>
+        <li>add poorly designed code</li>
+    </ul>
+    <p>
+        The last option is to use an independent component library (e.g.
+        <a href="https://primeng.org/" title="PrimeNG">PrimeNG</a>, <a href="https://ng.ant.design/docs/introduce/en" title="NG-ZORRO">NG-ZORRO</a>, etc.),
+        which strongly constrains the graphics of your project.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="solution">The LAF-less Components Solution</h3>
+    <p>
+        In view of the various issues discussed above, <em>Angular Toolbox</em> offers an additional alternative to provide
+        Angular developers with a finer granularity of choices.
+    </p>
+    <p>
+        The idea behind this is to separate the behavior of common components from the graphics framework rendering.
+        According to ATX principles, these containers do not use third-party libraries and have a maximum test coverage.
+        <br>
+        The key point is to use the native HTML API to ensure a better code quality.
+    </p>
+    <p>
+        Another important point is to keep the use of containers as simple as possible, while maintaining maximum flexibility.
+        To achieve this, we respect architectural principles, such as the separation of concerns.
+        According to this logic, there is no coupling between the "container" behavior and the business code of the application.
+        <br>
+        This is why we often use the term <em>Container</em> to refer to the components of the LAF-less API.
+        A good illustration of this concept is the behavior of the
+        <a href="javascript:appBridge.navigate(['resources/documentation/border-layout'])" title="ATX Border Layout ">ATX Border Layout</a>
+        which does not resize the  contents of containers, as Java <code>BorderLayout</code> class does.
+    </p>
+    <p>
+        As mentioned before, this solution does not claim to be better than others.
+        It is just an additional tool to allow developers to make the best choice according to their needs.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="api">LAF-less API</h3>
+    <p>
+        The following table shows the list of all <em>LAF-less</em> components available with the ATX framework:
+    </p>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Component</th>
+            <th scope="col">Description</th>
+            <th scope="col">API</th>
+            <th scope="col">Demo</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <strong>Border Layout</strong>
+                </td>
+                <td>
+                    Arranges the components to fit in the five regions: east, west, north, south, and center.
+                </td>
+                <td>
+                    <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/border-layout'])" title="Border Layout">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                            <use href="#linkIcon"/>
+                        </svg>
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-outline-secondary" onclick="appBridge.navigate(['demo/border-layout'])" title="Border Layout Demo">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                            <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0m6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0"/>
+                        </svg>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Dropdown Container</strong>
+                </td>
+                <td>
+                    Creates popup containers that are displayed by clicking on a button.
+                </td>
+                <td>
+                    <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/dropdown-container'])" title="Dropdown Container">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                            <use href="#linkIcon"/>
+                        </svg>
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-outline-secondary" onclick="appBridge.navigate(['demo/dropdown'])" title="Dropdown Container Demo">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                            <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0m6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0"/>
+                        </svg>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Popup Container</strong>
+                </td>
+                <td>
+                    Not available yet.
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+      </table>
+</section>
 
 <!-- We use a data object to store navigation tree structure-->
 <object id="navigation-tree"
