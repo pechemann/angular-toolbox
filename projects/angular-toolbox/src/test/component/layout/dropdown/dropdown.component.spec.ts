@@ -8,6 +8,7 @@
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DropdownComponent, DropdownEvent, DropdownEventType, EMPTY_STRING } from 'projects/angular-toolbox/src/public-api';
+import { DropdownTestComponent } from './dropdown-component.test.util';
 
 describe('DropdownComponent', () => {
   let component: DropdownComponent;
@@ -330,5 +331,31 @@ describe('DropdownComponent', () => {
     });
     component.showContent();
     fixture.detectChanges();
+  });
+});
+
+describe('DropdownComponent: content projection', () => {
+  let component: DropdownTestComponent;
+  let fixture: ComponentFixture<DropdownTestComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [DropdownTestComponent, DropdownComponent]
+    })
+    .compileComponents();
+
+    fixture = TestBed.createComponent(DropdownTestComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should render the button content', () => {
+    const btn = fixture.nativeElement.querySelector("button");
+    expect(btn.textContent).toContain("Button Label");
+  });
+
+  it('should render the popup container content', () => {
+    const popover: any = fixture.nativeElement.querySelector(".atx-dropdown-popover");
+    expect(popover.textContent).toContain("Content text...");
   });
 });
