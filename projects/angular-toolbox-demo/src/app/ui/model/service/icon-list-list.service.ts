@@ -42,7 +42,8 @@ export class IconListService {
       { label: "Version Service", urlTree: ["../demo", "version-service"] },
       { label: "ArrayList Class", urlTree: ["../demo", "array-list"] },
       { label: "Window Service", urlTree: ["../demo", "window-service"] },
-      { label: "BorderLayout Component", urlTree: ["../demo", "border-layout"] }
+      { label: "BorderLayout Component", urlTree: ["../demo", "border-layout"] },
+      { label: "Dropdown Container", urlTree: ["../demo", "dropdown"] }
     ];
   }
 

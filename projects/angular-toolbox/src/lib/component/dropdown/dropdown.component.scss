@@ -1,0 +1,90 @@
+/**
+ * @license
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+ */
+
+.atx-dropdown-container {
+    position: relative;
+}
+
+[popover]:popover-open {
+    inset: unset;
+    border: none;
+    background: none;
+    margin: 0;
+    padding: 0;
+}
+
+[popover]:popover-open + .atx-dropdown-popover {
+    display: block;
+}
+
+.atx-dropdown-popover {
+    display: none;
+    position: absolute;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    z-index: 100;
+    height: auto;
+    width: max-content;
+}
+
+.atx-dropdown-v-start {
+    bottom: unset;
+    top: 0;
+}
+
+.atx-dropdown-top {
+    bottom: calc(100% + var(--atx-dropdown-gutter, 2px));
+    top: unset;
+}
+
+.atx-dropdown-middle {
+    bottom: unset;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.atx-dropdown-bottom {
+    bottom: unset;
+    top: calc(100% + var(--atx-dropdown-gutter, 2px));
+}
+
+.atx-dropdown-v-end {
+    bottom: 0;
+    top: unset;
+}
+
+.atx-dropdown-h-start {
+    right: calc(100% + var(--atx-dropdown-gutter, 2px));
+    left: unset;
+}
+
+.atx-dropdown-left {
+    left: 0;
+    right: unset;
+}
+
+.atx-dropdown-center {
+    left:  50%;
+    transform: translateX(-50%);
+    right: unset;
+}
+
+.atx-dropdown-right {
+    right: 0;
+    left: unset;
+}
+
+.atx-dropdown-h-end {
+    right: unset;
+    left: calc(100% + var(--atx-dropdown-gutter, 2px));
+}
+
+.atx-dropdown-centered {
+    transform: translate(-50%, -50%);
+}

@@ -12,6 +12,7 @@ import { SrcViewportComponent } from '../src-viewport/src-viewport.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { DocumentationLink } from '../../model/business/documentation-link';
+import { AppBridgeService, SafeHtmlPipe } from 'projects/angular-toolbox/src/public-api';
 
 @Component({
   selector: 'demo',
@@ -19,7 +20,8 @@ import { DocumentationLink } from '../../model/business/documentation-link';
   imports: [
     CommonModule,
     RouterModule,
-    SrcViewportComponent
+    SrcViewportComponent,
+    SafeHtmlPipe
   ],
   templateUrl: './demo.component.html'
 })
@@ -38,4 +40,6 @@ export class DemoComponent {
   public documentation: DocumentationLink | null = null;
 
   public contentTemplateRef: TemplateRef<any> | null = null;
+
+  constructor(appBridg: AppBridgeService) {}
 }

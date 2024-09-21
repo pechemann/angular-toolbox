@@ -8,7 +8,7 @@
 
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, ViewChild } from '@angular/core';
-import { DarkModeService } from 'projects/angular-toolbox/src/public-api';
+import { DarkModeService, DropdownComponent } from 'projects/angular-toolbox/src/public-api';
 
 const LIGHT: string = 'light';
 const DARK: string = 'dark';
@@ -17,9 +17,11 @@ const BS_ATTRIBUTE: string = 'data-bs-theme';
 @Component({
   selector: 'atx-dark-mode',
   standalone: true,
+  imports: [
+    DropdownComponent
+  ],
   providers: [ DarkModeService ],
-  templateUrl: './dark-mode.component.html',
-  styleUrl: './dark-mode.component.scss'
+  templateUrl: './dark-mode.component.html'
 })
 export class AngularToolboxDarkModeComponent {
 

@@ -1,0 +1,69 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <section class="w-100">
+        <h5 class="mb-4">On this page</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="#TOGGLE" onclick="appBridge.goToAnchor(event)" title="TOGGLE">TOGGLE</a></li>
+            <li class="list-group-item"><a href="#BEFORE_TOGGLE" onclick="appBridge.goToAnchor(event)" title="BEFORE_TOGGLE">BEFORE_TOGGLE</a></li>
+        </ul>
+        <ul class="list-group mt-4">
+            <li class="list-group-item icon-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation/dropdown-container'])" title="Dropdown Container">
+                    Dropdown Container
+                </a>
+            </li>
+            <li class="list-group-item icon-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation'])" title="Documentation">
+                    Documentation
+                </a>
+            </li>
+        </div>
+    </section>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3">Dropdown Container</h2>
+    <div class="version-info text-end mb-4 me-3">
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 1.3.2</span></small>
+    </div>
+    <p>
+        Dropdown containers allow Users to toggle the display of a specific content by clicking a button.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3><code>DropdownEventEventType</code> Enum</h3>
+    <p>
+        The <code>LayoutDragEventType</code> enum contains all values that defines the type of a <code>DropdownEvent</code> instance.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="TOGGLE"><code>DropdownEventEventType.TOGGLE</code></h3>
+    <pre><code class="language-typescript">TOGGLE = "toggle"</code></pre>
+    <p>
+        Defines an event fired on a dropdown component just after it is shown or hidden.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="BEFORE_TOGGLE"><code>DropdownEventEventType.BEFORE_TOGGLE</code></h3>
+    <pre><code class="language-typescript">BEFORE_TOGGLE = "beforetoggle"</code></pre>
+    <p>
+        Defines an event fired on a dropdown component just before it is shown or hidden.
+    </p>
+</section>
+
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+    data-tree="[{ 'label': 'Dropdown Container', 'path': 'dropdown-container' }, { 'label': 'DropdownEventEventType Enum' }]">
+</object>

@@ -4,3 +4,4 @@ export * from './dark-mode-config.provider';
 export * from './scroll-behavior.type';
 export * from './window';
 export * from './layout';
+export * from './dropdown';

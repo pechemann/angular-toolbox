@@ -23,7 +23,11 @@
     </atx-page-title>
     <h2 class="mb-4">All Angular Toolbox Samples</h2>
     <div class="row">
-        <atx-icon-list [itemList]="iconListService.getDemoList()"/>
+        @for (item of itemListCollection; track item) {
+            <div class="col-md-4">
+                <atx-icon-list [itemList]="item"/>
+            </div>
+        }
     </div>
 </main>
     

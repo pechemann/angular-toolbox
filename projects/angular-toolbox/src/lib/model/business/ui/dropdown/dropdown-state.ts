@@ -6,6 +6,7 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-export * from './angular-toolbox-logo/angular-toolbox-logo.component';
-export * from './dropdown/dropdown.component';
-export * from './layout';
+/**
+ * Represents the state of a dropdown container.
+ */
+export type DropdownState = "open" | "closed";
