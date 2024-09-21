@@ -1,0 +1,168 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <section class="w-100">
+        <h5 class="mb-4">On this page</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="#buttonClass" onclick="appBridge.goToAnchor(event)" title="buttonClass">buttonClass</a></li>
+            <li class="list-group-item"><a href="#containerClass" onclick="appBridge.goToAnchor(event)" title="containerClass">containerClass</a></li>
+            <li class="list-group-item"><a href="#vPos" onclick="appBridge.goToAnchor(event)" title="vPos">vPos</a></li>
+            <li class="list-group-item"><a href="#hPos" onclick="appBridge.goToAnchor(event)" title="hPos">hPos</a></li>
+            <li class="list-group-item"><a href="#hideContent" onclick="appBridge.goToAnchor(event)" title="hideContent">hideContent()</a></li>
+            <li class="list-group-item"><a href="#showContent" onclick="appBridge.goToAnchor(event)" title="showContent">showContent()</a></li>
+            <li class="list-group-item"><a href="#isOpened" onclick="appBridge.goToAnchor(event)" title="isOpened">isOpened()</a></li>
+            <li class="list-group-item"><a href="#toggle" onclick="appBridge.goToAnchor(event)" title="toggle">toggle</a></li>
+            <li class="list-group-item"><a href="#beforeToggle" onclick="appBridge.goToAnchor(event)" title="beforeToggle">beforeToggle</a></li>
+        </ul>
+        <ul class="list-group mt-4">
+            <li class="list-group-item icon-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation/dropdown-container'])" title="Dropdown Container">
+                    Dropdown Container
+                </a>
+            </li>
+            <li class="list-group-item icon-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation'])" title="Documentation">
+                    Documentation
+                </a>
+            </li>
+        </div>
+    </section>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3">Dropdown Container</h2>
+    <div class="version-info text-end mb-4 me-3">
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 1.3.2</span></small>
+    </div>
+    <p>
+        Dropdown containers allow Users to toggle the display of a specific content by clicking a button.
+        <br>This component is part of the <a href="javascript:appBridge.navigate(['resources/documentation/laf-less-components'])" title="LAF-less API">LAF-less API</a>.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3><code>DropdownComponent</code> Component</h3>
+    <p>
+        The ATX <code>DropdownComponent</code> component allows to create popup containers that are displayed by clicking on a button.
+    </p>
+    <p>
+        The content of the container is defined by Developer by adding the <code>content</code> attribute to an HTML container element.
+        Anything not wrapped by the <code>content</code> attribute is displayed in the button rendering:
+    </p>
+    <figure>
+        <pre><code class="language-html">&lt;atx-dropdown buttonClass="btn btn-primary"&gt;
+    &lt;!-- button display --&gt;
+    Button Text
+    &lt;div content&gt;
+        &lt;!-- dropdown content --&gt;
+    &lt;/div&gt;
+&lt;/atx-dropdown&gt;</code></pre></figure>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="paint"><code>DropdownComponent.buttonClass</code></h3>
+    <pre><code class="language-typescript">@Input() buttonClass!: string</code></pre>
+    <p>
+        Sets the dropdown button CSS class.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="paint"><code>DropdownComponent.containerClass</code></h3>
+    <pre><code class="language-typescript">@Input() containerClass!: string</code></pre>
+    <p>
+        Sets the dropdown conpoment CSS class.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="paint"><code>DropdownComponent.vPos</code></h3>
+    <pre><code class="language-typescript">@Input() vPos: DropdownVerticalPosition = "bottom"</code></pre>
+    <p>
+        Sets the vertical position of the content container.
+        <br>
+        Default value is <code>"bottom"</code>.
+        <br>
+        See the <a href="javascript:appBridge.navigate(['resources/documentation/dropdown-container','/dropdown-vertical-position'])"><code>DropdownVerticalPosition</code> API</a> for details.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="paint"><code>DropdownComponent.hPos</code></h3>
+    <pre><code class="language-typescript">@Input() hPos: DropdownHorizontalPosition = "left"</code></pre>
+    <p>
+        Sets the horizontal position of the content container.
+        <br>
+        Default value is <code>"left"</code>.
+        <br>
+        See the <a href="javascript:appBridge.navigate(['resources/documentation/dropdown-container','/dropdown-vertical-position'])"><code>DropdownVerticalPosition</code> API</a> for details.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="hideContent"><code>DropdownComponent.hideContent</code></h3>
+    <pre><code class="language-typescript">hideContent(): void</code></pre>
+    <p>
+        Hides the dropdown container.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="showContent"><code>DropdownComponent.showContent</code></h3>
+    <pre><code class="language-typescript">showContent(): void</code></pre>
+    <p>
+        Displays the dropdown container.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="isOpened"><code>DropdownComponent.isOpened</code></h3>
+    <pre><code class="language-typescript">isOpened(): boolean</code></pre>
+    <p>
+        Returns the display state of the dropdown.
+    </p>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>boolean</code>
+        <p>
+            Returns <code>true</code> whether the dropdown is opened; <code>false</code> otherwise.
+        </p>
+    </div>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3>Events</h3>
+    <hr>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="toggle"><code>DropdownComponent.toggle</code></h3>
+    <pre><code class="language-typescript">@Ouput() readonly toggle: EventEmitter&lt;DropdownEvent&gt;</code></pre>
+    <p>
+        Emits events just before the dropdown component is shown or hidden.
+        <br>
+        See the <a href="javascript:appBridge.navigate(['resources/documentation/dropdown-container','/dropdown-event'])"><code>DropdownEvent</code> API</a> for details.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="toggle"><code>DropdownComponent.beforeToggle</code></h3>
+    <pre><code class="language-typescript">@Ouput() readonly beforeToggle: EventEmitter&lt;DropdownEvent&gt;</code></pre>
+    <p>
+        Emits events just after the dropdown component is shown or hidden.
+        <br>
+        See the <a href="javascript:appBridge.navigate(['resources/documentation/dropdown-container','/dropdown-event'])"><code>DropdownEvent</code> API</a> for details.
+    </p>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'Dropdown Container', 'path': 'dropdown-container' }, { 'label': 'Dropdown Component' }]">
+</object>

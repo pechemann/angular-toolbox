@@ -1,0 +1,141 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <section class="w-100">
+        <h5 class="mb-4">On this page</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="#constructor" onclick="appBridge.goToAnchor(event)" title="constructor">constructor</a></li>
+            <li class="list-group-item"><a href="#target" onclick="appBridge.goToAnchor(event)" title="target">target</a></li>
+            <li class="list-group-item"><a href="#type" onclick="appBridge.goToAnchor(event)" title="type">type</a></li>
+            <li class="list-group-item"><a href="#newState" onclick="appBridge.goToAnchor(event)" title="newState">newState</a></li>
+            <li class="list-group-item"><a href="#oldState" onclick="appBridge.goToAnchor(event)" title="oldState">oldState</a></li>
+        </ul>
+        <ul class="list-group mt-4">
+            <li class="list-group-item icon-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation/dropdown-container'])" title="Dropdown Container">
+                    Dropdown Container
+                </a>
+            </li>
+            <li class="list-group-item icon-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation'])" title="Documentation">
+                    Documentation
+                </a>
+            </li>
+        </div>
+    </section>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3">Dropdown Container</h2>
+    <div class="version-info text-end mb-4 me-3">
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 1.3.2</span></small>
+    </div>
+    <p>
+        Dropdown containers allow Users to toggle the display of a specific content by clicking a button.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3><code>DropdownEvent</code></h3>
+    <p>
+        An event that represents a user interaction with a <code>Dropdown</code> component.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="constructor"><code>Constructor Function</code></h3>
+    <pre><code class="language-typescript">constructor(target: DropdownComponent, type: DropdownEventType, newState: DropdownState, oldState: DropdownState)</code></pre>
+    <p>
+        Creates a new <code>DropdownEvent</code> instance.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>target: DropdownComponent</code></dt>
+            <dd>
+                <p>
+                    The dropdown container that triggered this event.
+                </p>
+            </dd>
+        </dl>
+        <dl>
+            <dt><code>type: DropdownEventType</code></dt>
+            <dd>
+                <p>
+                    The type of this event.
+                    <br>
+                    See the <a href="javascript:appBridge.navigate(['resources/documentation/dropdown-container','/dropdown-event-type'])"><code>DropdownEventType</code> API</a> for details.
+                </p>
+            </dd>
+        </dl>
+        </dl>
+            <dt><code>newState: DropdownState</code></dt>
+            <dd>
+                <p>
+                    The state the dropdown container is transitioning to.
+                    <br>
+                    See the <a href="javascript:appBridge.navigate(['resources/documentation/dropdown-container','/dropdown-state'])"><code>DropdownState</code> API</a> for details.
+                </p>
+            </dd>
+        </dl>
+        <dt><code>oldState: DropdownState</code></dt>
+            <dd>
+                <p>
+                    The state the dropdown container is transitioning from..
+                    <br>
+                    See the <a href="javascript:appBridge.navigate(['resources/documentation/dropdown-container','/dropdown-state'])"><code>DropdownState</code> API</a> for details.
+                </p>
+            </dd>
+        </dl>
+    </div>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="target"><code>DropdownEvent.target</code></h3>
+    <pre><code class="language-typescript">readonly target: DropdownComponent</code></pre>
+    <p>
+        The reference to the container that triggered this event.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="type"><code>DropdownEvent.type</code></h3>
+    <pre><code class="language-typescript">type: DropdownEventType</code></pre>
+    <p>
+        The type of this event.
+        <br>
+        See the <a href="javascript:appBridge.navigate(['resources/documentation/dropdown-container','/dropdown-event-type'])"><code>DropdownEventType</code> API</a> for details.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="type"><code>DropdownEvent.newState</code></h3>
+    <pre><code class="language-typescript">newState: DropdownState</code></pre>
+    <p>
+        The state the dropdown container is transitioning to.
+        <br>
+        See the <a href="javascript:appBridge.navigate(['resources/documentation/dropdown-container','/dropdown-state'])"><code>DropdownState</code> API</a> for details.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="type"><code>DropdownEvent.oldState</code></h3>
+    <pre><code class="language-typescript">oldState: DropdownState</code></pre>
+    <p>
+        The state the dropdown container is transitioning from.
+        <br>
+        See the <a href="javascript:appBridge.navigate(['resources/documentation/dropdown-container','/dropdown-state'])"><code>DropdownState</code> API</a> for details.
+    </p>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'Dropdown Container', 'path': 'dropdown-container' }, { 'label': 'DropdownEvent' }]">
+</object>

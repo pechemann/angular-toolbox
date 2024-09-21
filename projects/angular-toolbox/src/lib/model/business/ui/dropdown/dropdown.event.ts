@@ -11,7 +11,7 @@ import { DropdownEventType } from "./dropdown-event-type.enum";
 import { DropdownState } from "./dropdown-state";
 
 /**
- * The `DropdownToggleEvent` class is an event that represents an interaction with a dropdown container.
+ * The `DropdownEvent` class is an event that represents an interaction with a dropdown container.
  */
 export class DropdownEvent {
 

@@ -55,7 +55,7 @@ export class BorderLayoutDemoComponent {
     commands: ['/resources', 'documentation', 'border-layout']
   };
   protected title: string = "BorderLayout Component Demo";
-  protected presentation: string = 'A container that arranges and resizes its components to fit in five regions: north, south, east, west, and center..<br>This component is part of the <a href="javascript:appBridge.navigate([\'resources/documentation/laf-less-components\'])" title=LAF-less API>LAF-less API</a>.';
+  protected presentation: string = 'A container that arranges and resizes its components to fit in five regions: north, south, east, west, and center..<br>This component is part of the <a href="javascript:appBridge.navigate([\'resources/documentation/laf-less-components\'])" title="LAF-less API">LAF-less API</a>.';
   protected srcCode: CodeWrapper = {
     html: [`<div class="wrapper w-100">
     <atx-border-layout (dragStart)="registerEvent($event)" (dragStop)="registerEvent($event)">

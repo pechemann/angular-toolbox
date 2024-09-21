@@ -28,9 +28,15 @@ const API_MATCH: string = ':popover-open';
 })
 export class DropdownComponent extends IdentifiableComponent {
 
+  /**
+   * An event fired on the dropdown component just after it is shown or hidden.
+   */
   @Output()
   public readonly toggle: EventEmitter<DropdownEvent> = new EventEmitter();
 
+  /**
+   * An event fired on the dropdown component just before it is shown or hidden.
+   */
   @Output()
   public readonly beforeToggle: EventEmitter<DropdownEvent> = new EventEmitter();
 
@@ -94,7 +100,7 @@ export class DropdownComponent extends IdentifiableComponent {
   }
 
   /**
-   * Returns the open state of the dropdown.
+   * Returns the display state of the dropdown.
    * 
    * @returns Returns `true` whether the dropdown is opened; `false` otherwise.
    */

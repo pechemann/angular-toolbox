@@ -1,0 +1,71 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <section class="w-100">
+        <ul class="list-group mt-4">
+            <li class="list-group-item icon-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation/dropdown-container'])" title="Dropdown Container">
+                    Dropdown Container
+                </a>
+            </li>
+            <li class="list-group-item icon-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation'])" title="Documentation">
+                    Documentation
+                </a>
+            </li>
+        </div>
+    </section>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3">Dropdown Container</h2>
+    <div class="version-info text-end mb-4 me-3">
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 1.3.2</span></small>
+    </div>
+    <p>
+        Dropdown containers allow Users to toggle the display of a specific content by clicking a button.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3><code>DropdownHorizontalPosition</code> Type</h3>
+    <p>
+        Defines the content vertical horizontal of a dropdown component.
+        Considering the button <code>bounds</code> rectangle, possible values are:
+    </p>
+    <ul>
+        <li>
+            <code>"start"</code>: the dropdown content container <em>right</em> position is is equal to <code>bounds.x</code>.
+        </li>
+        <li>
+            <code>"left"</code>: the dropdown content container <em>left</em> position is is equal to <code>bounds.x</code>.
+        </li>
+        <li>
+            <code>"center"</code>: the dropdown content container <em>center</em> position is is equal to <code>bounds.width/2</code>.
+        </li>
+        <li>
+            <code>"right"</code>: the dropdown content container <em>right</em> position is is equal to <code>bounds.width</code>.
+        </li>
+        <li>
+            <code>"end"</code>: the dropdown content container <em>left</em> position is is equal to <code>bounds.width</code>.
+        </li>
+    </ul>
+    <p>
+        You can try all horizontal position values in the demo app:
+     </p>
+     <button class="btn btn-primary btn-lg" onclick="appBridge.navigate(['demo/dropdown'])" title="Dropdown Container Demo">
+        Dropdown Container Demo
+    </button>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+    data-tree="[{ 'label': 'Dropdown Container', 'path': 'dropdown-container' }, { 'label': 'DropdownHorizontalPosition Type' }]">
+</object>
