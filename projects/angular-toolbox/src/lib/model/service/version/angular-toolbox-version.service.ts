@@ -14,7 +14,7 @@ import { VersionConfig } from '../../business';
  * @private
  * The current version of the Angular Toolbox library.
  */
-const LAYERS_VERSION_CONFIG: VersionConfig = {
+const ATX_VERSION_CONFIG: VersionConfig = {
   major: 1,
   minor: 3,
   patch: 2,
@@ -31,6 +31,6 @@ export class AngularToolboxVersionService extends AbstractVersionManager {
    * @private
    */
   constructor() {
-    super(LAYERS_VERSION_CONFIG);
+    super(ATX_VERSION_CONFIG);
   }
 }

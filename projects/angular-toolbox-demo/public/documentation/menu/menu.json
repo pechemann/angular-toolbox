@@ -25,8 +25,8 @@
         { "label": "Dropdown Container", "urlTree": [ "/resources", "documentation", "dropdown-container" ] }
     ],
     "articles": [
-        { "label": "Angular Toolbox Principles" },
+        { "label": "Angular Toolbox Principles", "urlTree": [ "/resources", "documentation", "atx-principles" ]  },
         { "label": "LAF-less Components", "urlTree": [ "/resources", "documentation", "laf-less-components" ] },
-        { "label": "Library Vs. Application Services" }
+        { "label": "Library Vs. Application Services", "urlTree": [ "/resources", "documentation", "lib-vs-app-services" ] }
     ]
 }

@@ -1,0 +1,148 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <section class="w-100">
+        <h5 class="mb-4">On this page</h5>
+       <ul class="list-group">
+            <li class="list-group-item"><a href="#introduction" onclick="appBridge.goToAnchor(event)" title="Introduction">Introduction</a></li>
+            <li class="list-group-item"><a href="#keep-it-simple" onclick="appBridge.goToAnchor(event)" title="Keep it simple!">Keep it simple!</a></li>
+            <li class="list-group-item">
+                <a href="#no-dependency" onclick="appBridge.goToAnchor(event)" title="No Dependency">No Dependency</a>
+                <ol>
+                    <li><a href="#security-issues" onclick="appBridge.goToAnchor(event)" title="Security Issues">Security Issues</a></li>
+                    <li><a href="#dependency-updates" onclick="appBridge.goToAnchor(event)" title="Dependency Updates">Dependency Updates</a></li>
+                    <li><a href="#test-coverage" onclick="appBridge.goToAnchor(event)" title="Test Coverage">Test Coverage</a></li>
+                    <li><a href="#bundles-size" onclick="appBridge.goToAnchor(event)" title="Bundles Size">Bundles Size</a></li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3">Angular Toolbox Principles</h2>
+    <p>
+        Learn more about the Angular Toolbox goal and philosophy.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="introduction">Introduction to Angular Toolbox concepts</h3>
+    <p>
+        Angular Toolbox (ATX) is a framework that provides developers both, development and production tools,
+        to facilitate the creation of Angular apps.
+    </p>
+    <p>
+        It meets recurring needs not covered by other frameworks and identified during the development
+        of websites or desktop applications.
+    </p>
+    <p>
+        The framework was designed not to interfere with other libraries.
+        It strongly separates concerns, to reduce application size and maintain good performance.
+    </p>
+    <p>
+        Development tools, such as the ATX HTTP Mocking Framework, were created to focus on parallel backend and frontend development.
+        The goal is to increase productivity while reducing the risk of bugs, by relying on interface design in distributed environments.
+    </p>
+    <p>
+        One of the general ideas is to encourage good development practices based on OOP concepts.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="keep-it-simple">Keep it simple!</h3>
+    <p>
+        A major challenge when creating APIs is defining the right granularity.
+        Framework designers tend to address all possible needs from a single entry point.
+        The problem with this approach is that the couplings between components are often poorly defined,
+        which unnecessarily increases the size of the bundles.
+    </p>
+    <p>
+        Typescript interfaces are a good way to partially solve this problem.
+        To go further, the ATX framework follows the OOP principle "do one thing and do it well".
+        There are several purposes behind the way we implement this concept.
+        They are based on the observations below:
+    </p>
+    <ul>
+        <li>
+            most of the features of a framework are not used within a project (it varies from project to project)
+        </li>
+        <li>
+            complex APIs have longer learning curve
+        </li>
+        <li>
+            the higher the display layer, the less flexible the component
+        </li>
+        <li>
+            the less modular the API, the less test coverage
+        </li>
+        <li>
+            no matter how complex an API is, it will not cover all needs
+        </li>
+    </ul>
+    <p>
+        However, we consider that it is not useful to push this logic to its paroxysm.
+        What we are trying to do is make the developer's job as easy as possible.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="no-dependency">No Dependency</h3>
+    <p>
+        The only dependency of the ATX framework is Angular! You will not find any third party libraries.
+        <br>
+        This is a core principle of Angular Toolbox. Here too, this is a choice made based on observations.
+    </p>
+    <h4 id="security-issues">1. Security Issues</h4>
+    <p>
+        More and more utility libraries are affected by security issues.
+        This can critically affect your framework, especially when the 3<sup>rd</sup> party library is no longer maintained.
+    </p>
+    <p>
+        If you develop your own framework, it is your responsibility to ensure maximum quality;
+        otherwise your project may be taken over by a competitor.
+    </p>
+    <h4 id="dependency-updates">2. Dependency Updates</h4>
+    <p>
+        Every Angular developer has had to deal with the problem of dependency updates.
+        The nightmare begins when you change the Angular version and 3<sup>rd</sup> party libraries are not compatible.
+    </p>
+    <p>
+        Frameworks work the same way!
+        <br>
+        Since Angular Toolbox has no dependency to 3<sup>rd</sup> party libraries, it easier to provide patches and updates.
+    </p>
+    <h4 id="test-coverage">3. Test Coverage</h4>
+    <p>
+        The problem with the amount of libraries available on the web is that nothing can guarantee the
+        quality of the code and the effectiveness of the associated test suites.
+    </p>
+    <p>
+        Testability is an important aspect of the ATX framework.
+        We cannot claim that the framework is bug-free, nor that test coverage is complete.
+        However, we do not release new functionalities without trying to provide strong test suites.
+    </p>
+    <p>
+        The fact that Angular Toolbox has no dependencies goes a long way in achieving this goal.
+    </p>
+    <h4 id="bundles-size">4. Bundles Size</h4>
+    <p>
+        As we mentioned before, some libraries may embed unnecessary features and increase the size of the bundles.
+        By maintaining full control of the code, the ATX framework avoids this issue.
+    </p>
+    <p>
+        Additionally, we are careful not to include unnecessary code in core functionality.
+    </p>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'Angular Toolbox Principles' }]">
+</object>

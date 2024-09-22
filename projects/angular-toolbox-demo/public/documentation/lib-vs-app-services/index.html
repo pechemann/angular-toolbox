@@ -6,24 +6,162 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
 -->
 
-<!--< nav class="page-menu col-xl-3 ps-4">
+<nav class="page-menu col-xl-3 ps-4">
     <section class="w-100">
         <h5 class="mb-4">On this page</h5>
        <ul class="list-group">
-            <li class="list-group-item"><a href="#api" onclick="appBridge.goToAnchor(event)" title="API">API</a></li>
-            <li class="list-group-item"><a href="#usage" onclick="appBridge.goToAnchor(event)" title="API">Usage</a></li>
+            <li class="list-group-item"><a href="#principles" onclick="appBridge.goToAnchor(event)" title="Principles">Principles</a></li>
+            <li class="list-group-item"><a href="#polymorphic-services" onclick="appBridge.goToAnchor(event)" title="Polymorphic Services">Polymorphic Services</a></li>
         </ul>
     </section>
-</nav>-->
+</nav>
 
 <header class="fs-5 col-xl-9 mb-4">
     <h2 class="mb-3">Library Vs. Application Services</h2>
     <p>
-        
+        Angular Toolbox comes with a special architecture, based on polymorphism, to allow developers
+        to create application services and/or library services.
     </p>
     <hr class="mt-4">
 </header>
 
+<section class="col-xl-9 mb-4">
+    <h3 id="principles">Principles</h3>
+    <p>
+        There are 2 ways to implement polymorphism in an object-oriented language: Interfaces and Inheritance.
+    </p>
+    <p>
+        When working with compiled OOP languages, dependency injection is based on interfaces (e.g. Java).
+        But user-defined interfaces do not exist in interpreted languages like JavaScript.
+        So, Angular manages DI by class substitution.
+    </p>
+    <p>
+        According to this principle, Angular Toolbox provides some singleton services that are built on top of an abstraction level
+        (a.k.a. <em>Polymorphic Services</em>).
+        Such services often comes with their own <em>app-level</em> config. This is what we call an <em>Application</em> service.
+        Since the provider scope of these services is <code>"root"</code>, you cannot reuse them for different purposes in your app.
+    </p>
+    <p>
+        But thanks to the abstraction level, you can create custom services with the same functionalities.
+        This is what we call a <em>Library</em> service.
+    </p>
+    <p>
+        A good example to explain this is the <a href="javascript:appBridge.navigate(['resources/documentation/version-service'])" title="ATX Version API">ATX <code>Version</code> API</a>.
+        When you create an Angular app, you typically use the <code>VersionService</code> class to create, config and access the
+        <em>semantic versioning</em> data. <em>(Application service).</em>
+        <br>
+        But when you create a Angular lib, you declare a custom service that extends the <code>AbstractVersionManager</code>
+        class to manage <em>semantic versioning</em>. <em>(Library service).</em>
+    </p>
+    <h4>Library Service Example</h4>
+    <p>
+        The following example shows how you typically create a library-level service with ATX 
+        <em>polymorphic services</em>:
+    </p>
+    <figure>
+        <figcaption>TypeScript:</figcaption>
+        <pre><code class="language-typescript">import &#123; Injectable &#125; from '@angular/core';
+import &#123; AbstractVersionManager, VersionConfig &#125; from 'angular-toolbox';
+
+const MY_LIB_VERSION_CONFIG: VersionConfig = &#123;
+    major: 1,
+    minor: 3,
+    patch: 2
+&#125;;
+
+&#64;Injectable()
+export class MyLibVersionService extends AbstractVersionManager &#123;
+
+    constructor() &#123;
+        super(MY_LIB_VERSION_CONFIG);
+    &#125;
+&#125;</code></pre></figure>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="polymorphic-services">Polymorphic Services</h3>
+    <p>
+        The following table shows the list of all <em>Polymorphic Services</em> available with the ATX framework:
+    </p>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Service</th>
+            <th scope="col">Description</th>
+            <th scope="col">API</th>
+            <th scope="col">Demo</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <strong>Subscription  Service</strong>
+                </td>
+                <td>
+                    A lightweight service that helps to manage unregistration issues of Angular subscriptions.
+                </td>
+                <td>
+                    <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/subscription-service'])" title="Subscription Service">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                            <use href="#linkIcon"/>
+                        </svg>
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-outline-secondary" onclick="appBridge.navigate(['demo/subscription-service'])" title="Subscription Service Demo">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                            <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0m6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0"/>
+                        </svg>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Version Service</strong>
+                </td>
+                <td>
+                    A lightweight service that provides <em>Semantic Versioning</em> implementation for your Angular apps.
+                </td>
+                <td>
+                    <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/version-service'])" title="Version Service">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                            <use href="#linkIcon"/>
+                        </svg>
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-outline-secondary" onclick="appBridge.navigate(['demo/version-service'])" title="Version Service Demo">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                            <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0m6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0"/>
+                        </svg>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Logger Service</strong>
+                </td>
+                <td>
+                Aan easy-to-use service to add a logging system to your Angular libraries and applications.
+                </td>
+                <td>
+                    <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/logging-framework/logger-service'])" title="LoggerService">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                            <use href="#linkIcon"/>
+                        </svg>
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-outline-secondary" onclick="appBridge.navigate(['demo/logging-framework'])" title="Logging Framework Demo">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                            <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0m6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0"/>
+                        </svg>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+      </table>
+</section>
 
 <!-- We use a data object to store navigation tree structure-->
 <object id="navigation-tree"
