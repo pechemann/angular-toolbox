@@ -14,6 +14,7 @@
             <li class="list-group-item"><a href="#containerClass" onclick="appBridge.goToAnchor(event)" title="containerClass">containerClass</a></li>
             <li class="list-group-item"><a href="#vPos" onclick="appBridge.goToAnchor(event)" title="vPos">vPos</a></li>
             <li class="list-group-item"><a href="#hPos" onclick="appBridge.goToAnchor(event)" title="hPos">hPos</a></li>
+            <li class="list-group-item"><a href="#popoverState" onclick="appBridge.goToAnchor(event)" title="popoverState">popoverState</a></li>
             <li class="list-group-item"><a href="#hideContent" onclick="appBridge.goToAnchor(event)" title="hideContent">hideContent()</a></li>
             <li class="list-group-item"><a href="#showContent" onclick="appBridge.goToAnchor(event)" title="showContent">showContent()</a></li>
             <li class="list-group-item"><a href="#isOpened" onclick="appBridge.goToAnchor(event)" title="isOpened">isOpened()</a></li>
@@ -67,7 +68,7 @@
 </section>
 
 <section class="col-xl-9 mb-4">
-    <h3 id="paint"><code>DropdownComponent.buttonClass</code></h3>
+    <h3 id="buttonClass"><code>DropdownComponent.buttonClass</code></h3>
     <pre><code class="language-typescript">@Input() buttonClass!: string</code></pre>
     <p>
         Sets the dropdown button CSS class.
@@ -75,7 +76,7 @@
 </section>
 
 <section class="col-xl-9 mb-4">
-    <h3 id="paint"><code>DropdownComponent.containerClass</code></h3>
+    <h3 id="containerClass"><code>DropdownComponent.containerClass</code></h3>
     <pre><code class="language-typescript">@Input() containerClass!: string</code></pre>
     <p>
         Sets the dropdown conpoment CSS class.
@@ -83,7 +84,7 @@
 </section>
 
 <section class="col-xl-9 mb-4">
-    <h3 id="paint"><code>DropdownComponent.vPos</code></h3>
+    <h3 id="vPos"><code>DropdownComponent.vPos</code></h3>
     <pre><code class="language-typescript">@Input() vPos: DropdownVerticalPosition = "bottom"</code></pre>
     <p>
         Sets the vertical position of the content container.
@@ -95,7 +96,7 @@
 </section>
 
 <section class="col-xl-9 mb-4">
-    <h3 id="paint"><code>DropdownComponent.hPos</code></h3>
+    <h3 id="hPos"><code>DropdownComponent.hPos</code></h3>
     <pre><code class="language-typescript">@Input() hPos: DropdownHorizontalPosition = "left"</code></pre>
     <p>
         Sets the horizontal position of the content container.
@@ -107,7 +108,23 @@
 </section>
 
 <section class="col-xl-9 mb-4">
-    <h3 id="hideContent"><code>DropdownComponent.hideContent</code></h3>
+    <h3 id="popoverState"><code>DropdownComponent.popoverState</code></h3>
+    <div class="version-info text-end mb-4 me-3">
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 1.3.3</span></small>
+    </div>
+    <pre><code class="language-typescript">@Input() popoverState: PopoverState = "auto"</code></pre>
+    <p>
+        Indicates whether the content container can be "light dismissed" by selecting outside the popover area
+        (<code>"auto"</code>), or not (<code>"manual"</code>).
+        <br>
+        Default value is <code>"auto"</code>.
+        <br>
+        See the <a href="javascript:appBridge.navigate(['resources/documentation/dropdown-container','/popover-state'])"><code>PopoverState</code> API</a> for details.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="hideContent"><code>DropdownComponent.hideContent()</code></h3>
     <pre><code class="language-typescript">hideContent(): void</code></pre>
     <p>
         Hides the dropdown container.
@@ -115,7 +132,7 @@
 </section>
 
 <section class="col-xl-9 mb-4">
-    <h3 id="showContent"><code>DropdownComponent.showContent</code></h3>
+    <h3 id="showContent"><code>DropdownComponent.showContent()</code></h3>
     <pre><code class="language-typescript">showContent(): void</code></pre>
     <p>
         Displays the dropdown container.
@@ -123,7 +140,7 @@
 </section>
 
 <section class="col-xl-9 mb-4">
-    <h3 id="isOpened"><code>DropdownComponent.isOpened</code></h3>
+    <h3 id="isOpened"><code>DropdownComponent.isOpened()</code></h3>
     <pre><code class="language-typescript">isOpened(): boolean</code></pre>
     <p>
         Returns the display state of the dropdown.

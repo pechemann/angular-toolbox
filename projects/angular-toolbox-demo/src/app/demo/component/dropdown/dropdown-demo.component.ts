@@ -11,7 +11,7 @@ import { CodeWrapper } from '../../../ui/model/business/code-wrapper';
 import { DemoComponent } from '../../../ui/component/demo/demo.component';
 import { DocumentationLink } from '../../../ui/model/business/documentation-link';
 import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
-import { DropdownComponent, DropdownHorizontalPosition, DropdownVerticalPosition } from 'projects/angular-toolbox/src/public-api';
+import { DropdownComponent, DropdownHorizontalPosition, DropdownVerticalPosition, PopoverState } from 'projects/angular-toolbox/src/public-api';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -29,11 +29,17 @@ export class DropdownDemoComponent {
 
   protected vPos: DropdownVerticalPosition = "bottom";
   protected hPos: DropdownHorizontalPosition = "left";
+  protected popoverState: PopoverState = "auto";
+  protected selectedItem: number = 0;
 
   constructor(breadcrumb: BreadcrumbService) {
     breadcrumb.removeAll()
               .addItem(breadcrumb.buildItem("Demo", "/demo"))
               .addItem(breadcrumb.buildItem("Dropdown Container"));
+  }
+
+  protected itemClicked(index: number): void {
+    this.selectedItem = index;
   }
 
   protected documentation: DocumentationLink = {
@@ -52,6 +58,13 @@ export class DropdownDemoComponent {
         <li class="list-group-item list-group-item-action" role="button">A second item</li>
         <li class="list-group-item list-group-item-action disabled" aria-disabled="true">A disabled item</li>
     </ul>
-</atx-dropdown>`]
+</atx-dropdown>`],
+    typescript: [`@Component({
+  selector: 'dropdown-demo',
+  standalone: true,
+  imports: [ DropdownComponent ],
+  templateUrl: './dropdown-demo.component.html'
+})
+export class DropdownDemoComponent {}`]
   };
 }

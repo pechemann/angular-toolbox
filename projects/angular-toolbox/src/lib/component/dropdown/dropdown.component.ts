@@ -8,7 +8,7 @@
 
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { IdentifiableComponent } from '../../core';
-import { DropdownEvent, DropdownEventType, DropdownHorizontalPosition, DropdownState, DropdownVerticalPosition } from '../../model';
+import { DropdownEvent, DropdownEventType, DropdownHorizontalPosition, DropdownState, DropdownVerticalPosition, PopoverState } from '../../model';
 
 /**
  * @private
@@ -63,6 +63,13 @@ export class DropdownComponent extends IdentifiableComponent {
    */
   @Input()
   public hPos: DropdownHorizontalPosition = "left";
+  
+  /**
+   * Indicates whether the content container can be "light dismissed" by selecting outside the popover area
+   * (`auto`), or not (`manual`).
+   */
+  @Input()
+  public popoverState: PopoverState = "auto";
 
   /**
    * @private

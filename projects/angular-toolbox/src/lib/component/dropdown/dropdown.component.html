@@ -10,7 +10,7 @@
     <button [class]="buttonClass" [attr.popovertarget]="id">
         <ng-content></ng-content>
     </button>
-    <div #popover popover [attr.id]="id" (toggle)="onToggle($event)" (beforetoggle)="onBeforeToggle($event)"></div>
+    <div #popover [attr.popover]="popoverState" [attr.id]="id" (toggle)="onToggle($event)" (beforetoggle)="onBeforeToggle($event)"></div>
     <div class="atx-dropdown-popover"
          [class.atx-dropdown-v-start]="vPos === 'start'"
          [class.atx-dropdown-top]="vPos === 'top'"

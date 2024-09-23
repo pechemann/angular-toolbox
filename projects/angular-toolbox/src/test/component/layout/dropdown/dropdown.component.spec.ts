@@ -7,7 +7,7 @@
  */
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DropdownComponent, DropdownEvent, DropdownEventType, EMPTY_STRING } from 'projects/angular-toolbox/src/public-api';
+import { DropdownComponent, DropdownEvent, DropdownEventType } from 'projects/angular-toolbox/src/public-api';
 import { DropdownTestComponent } from './dropdown-component.test.util';
 
 describe('DropdownComponent', () => {
@@ -37,7 +37,18 @@ describe('DropdownComponent', () => {
   it('should create a HTML popover container with the id set by using the component ID', () => {
     const popover: any = document.getElementById(component.getID().toString());
     expect(popover).toBeTruthy();
-    expect(popover.getAttribute("popover")).toEqual(EMPTY_STRING);
+  });
+
+  it('should create a HTML popover container with popover equal to "auto" by default', () => {
+    const popover: any = document.getElementById(component.getID().toString());
+    expect(popover.getAttribute("popover")).toEqual("auto");
+  });
+
+  it('popoverState should change the HTML popover value', () => {
+    component.popoverState = "manual";
+    fixture.detectChanges();
+    const popover: any = document.getElementById(component.getID().toString());
+    expect(popover.getAttribute("popover")).toEqual("manual");
   });
 
   it('buttonClass should be undefined by default', () => {
