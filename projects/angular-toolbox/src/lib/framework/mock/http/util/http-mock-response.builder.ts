@@ -10,11 +10,9 @@ import { HttpHeaders, HttpStatusCode } from "@angular/common/http";
 import { HttpMockError, HttpResponseMock } from "../../../../model";
 import { HttpHeadersUtil } from "./http-headers.util";
 import { HTTP_MOCK_MAX_DELAY } from "./http-mock-max-delay";
-
-/**
- * @private
- */
-const OK: string = "OK";
+import { HttpStatusText } from "./http-status-text.enum";
+import { HttpStatusTextFinder } from "./http-status-text-finder";
+import { EMPTY_STRING } from "projects/angular-toolbox/src/public-api";
 
 /**
  * A statefull builder for creating new `HttpResponseMock` instances.
@@ -28,7 +26,7 @@ export class HttpResponseMockBuilder {
         url: null,
         body: null,
         status: HttpStatusCode.Ok,
-        statusText: OK,
+        statusText: EMPTY_STRING,
         error: null,
         delay: 0
     };
@@ -83,18 +81,6 @@ export class HttpResponseMockBuilder {
      */
     public status(status: number): HttpResponseMockBuilder {
         this._response.status = status;
-        return this;
-    }
-
-    /**
-     * Sets the `statusText` property of the new `HttpResponseMock` instance with the specified `statusText` value.
-     * 
-     * @param statusText The value used to set the `statusText` property of the new `HttpResponseMock` instance.
-     * 
-     * @returns A reference to this `HttpResponseMockBuilder` instance.
-     */
-    public statusText(statusText: string): HttpResponseMockBuilder {
-        this._response.statusText = statusText;
         return this;
     }
 
@@ -167,6 +153,7 @@ export class HttpResponseMockBuilder {
      */
     public response(error: HttpMockError | null = null): HttpResponseMock {
         this._response.error = error;
+        this._response.statusText = HttpStatusTextFinder.getStatusText(this._response.status);
         return this._response;
     }
 }

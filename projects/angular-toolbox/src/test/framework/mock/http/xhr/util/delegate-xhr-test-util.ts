@@ -9,7 +9,7 @@
 import { HttpErrorResponse, HttpHeaders, HttpStatusCode } from '@angular/common/http';
 import { RouteMockConfig } from 'projects/angular-toolbox/src/lib/framework/mock/http/config/route-mock-config';
 import { HttpHeadersUtil } from 'projects/angular-toolbox/src/lib/framework/mock/http/util/http-headers.util';
-import { HttpMockConfig, HttpMockError, httpResponseMock, Uuid } from 'projects/angular-toolbox/src/public-api';
+import { HttpMockConfig, HttpMockError, httpResponseMock, HttpStatusText, Uuid } from 'projects/angular-toolbox/src/public-api';
 import { of, throwError } from 'rxjs';
 
 //--> We use a delay before calling the done method to ensure the DelegateXhr
@@ -44,14 +44,12 @@ export const buildUrlSearchParamsMock = (...data: any): URLSearchParams=> {
 
 export const BODY: string = "Hello world!";
 export const BODY_SIZE = new Blob([JSON.stringify(BODY)]).size;
-export const I_M_A_TEA_POT: string = "I'm a teapot";
 export const URL_STRING: string = "http://www.foo-bar.com/api/users/10";
 export const HTTP_HEADERS: HttpHeaders = HttpHeadersUtil.createDefaultRequestHeaders();
 export const HTTP_STATUS: HttpStatusCode = HttpStatusCode.ImATeapot;
 export const ROUTE_CONFIG: RouteMockConfig = {
     methodConfig: {
         data: () => httpResponseMock().status(HTTP_STATUS)
-                                      .statusText(I_M_A_TEA_POT)
                                       .url(URL_STRING)
                                       .headers(HTTP_HEADERS)
                                       .body(BODY).response()
@@ -68,7 +66,6 @@ export const ERROR: HttpMockError = {
 export const ROUTE_CONFIG_WITH_ERROR: RouteMockConfig = {
     methodConfig: {
         data: () => httpResponseMock().status(HTTP_STATUS)
-                                      .statusText(I_M_A_TEA_POT)
                                       .url(URL_STRING)
                                       .headers(HTTP_HEADERS)
                                       .body(BODY).response(ERROR)
@@ -98,7 +95,6 @@ export const FOO_MOCK_CONFIG: HttpMockConfig = {
 export const OBSERVABLE_MOCK_CONFIG: RouteMockConfig = {
   methodConfig: {
       data: () => httpResponseMock().status(HTTP_STATUS)
-                                    .statusText(I_M_A_TEA_POT)
                                     .url(URL_STRING)
                                     .headers(HTTP_HEADERS)
                                     .body(of(BODY)).response()

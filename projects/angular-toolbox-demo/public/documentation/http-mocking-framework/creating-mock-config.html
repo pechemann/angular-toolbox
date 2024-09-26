@@ -152,11 +152,17 @@ get: &#123;
     data: (req: HttpRequest&lt;any&gt;, params: any) =&gt;
         httpResponseMock().headers(headers) // Adds HTTP headers (optional)
                           .status(HttpStatusCode.Ok) // Sets HTTP status code (optional)
-                          .statusText("Ok") // Sets HTTP status text (optional)
                           .delay(1000) // Emulates the delay before the server sends the response (optional)
                           .body(&#123; foo: "foo", bar: "bar" &#125;) // Adds reponse body (optional)
                           .response() // Builds an returns the HTTP response (required)
 &#125;</code></pre></figure>
+            <div class="alert alert-warning" role="alert">
+                <svg width="20" height="20">
+                    <use xlink:href="#exclamationIcon"/>
+                </svg>
+                Note that since v 1.4.0, the <code>statusText</code> property of the HTTP response is
+                automatically set by using the <code>status</code> value as reference.
+            </div>
     
     <h4 id="http-methods-interception">HTTP Methods Interception</h4>
     <p>

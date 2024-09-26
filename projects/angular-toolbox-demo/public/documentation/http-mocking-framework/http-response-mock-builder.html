@@ -125,29 +125,35 @@
 
 <section class="col-xl-9 mb-4">
     <h3 id="destroy"><code>HttpResponseMockBuilder.statusText()</code></h3>
-    <pre><code class="language-typescript">statusText(statusText: string): HttpResponseMockBuilder</code></pre>
-    <p>
-        Sets the status text of the new <code>HttpResponseMock</code> instance.
-    </p>
-    <h5>Parameters</h5>
-    <div class="border rounded p-3">
-        <dl>
-            <dt><code>statusText: string</code></dt>
-            <dd>
-                <p>
-                    The value used to set the status text of the new <code>HttpResponseMock</code> instance.
-                </p>
-            </dd>
-        </dl>
+    <div class="version-info text-end mb-4 me-3">
+        <small class="text-danger">Removed since <span class="badge text-bg-danger rounded-pill">v 1.4.0</span></small>
     </div>
-    <h5 class="mt-3">Returns</h5>
-    <div class="border rounded p-3">
-        <code>HttpResponseMockBuilder</code>
+    <details>
+        <summary>Deprecated API</summary>
+        <pre><code class="language-typescript">statusText(statusText: string): HttpResponseMockBuilder</code></pre>
         <p>
-            The reference to this <code>HttpResponseMockBuilder</code> instance.
+            Sets the status text of the new <code>HttpResponseMock</code> instance.
         </p>
-    </div>
-    </p>
+        <h5>Parameters</h5>
+        <div class="border rounded p-3">
+            <dl>
+                <dt><code>statusText: string</code></dt>
+                <dd>
+                    <p>
+                        The value used to set the status text of the new <code>HttpResponseMock</code> instance.
+                    </p>
+                </dd>
+            </dl>
+        </div>
+        <h5 class="mt-3">Returns</h5>
+        <div class="border rounded p-3">
+            <code>HttpResponseMockBuilder</code>
+            <p>
+                The reference to this <code>HttpResponseMockBuilder</code> instance.
+            </p>
+        </div>
+        </p>
+    </details>
 </section>
 
 <section class="col-xl-9 mb-4">

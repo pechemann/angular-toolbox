@@ -6,12 +6,12 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { HTTP_MOCK_MAX_DELAY, HttpResponseMockBuilder, NUMBER } from '../../../../../public-api';
+import { HTTP_MOCK_MAX_DELAY, HttpResponseMockBuilder, HttpStatusText, NUMBER } from '../../../../../public-api';
 import { HttpHeaders, HttpStatusCode } from '@angular/common/http';
 
 const BODY: string = 'Body test';
 const STATUS: number = HttpStatusCode.Accepted;
-const STATUS_TEXT: string = 'Status text test';
+const STATUS_TEXT: HttpStatusText = HttpStatusText.I_M_A_TEAPOT;
 const URL: string = '/test/url';
 const DELAY: number = 1500;
 const HEADERS: HttpHeaders = new HttpHeaders();
@@ -49,8 +49,8 @@ describe('HttpResponseMockBuilder', () => {
     expect(builder.response().status).toEqual(HttpStatusCode.Ok);
   });
   
-  it('response() method should create a HttpResponseMock with "status" property set to "OK"', () => {
-    expect(builder.response().statusText).toEqual("OK");
+  it('response() method should create a HttpResponseMock with "status" property set to HttpStatusText.OK', () => {
+    expect(builder.response().statusText).toEqual(HttpStatusText.OK);
   });
 
   it('response() method should create a HttpResponseMock with default "delay" equal to 0', () => {
@@ -90,18 +90,6 @@ describe('HttpResponseMockBuilder', () => {
     const anotherStatusCode: number = HttpStatusCode.Conflict;
     builder.status(anotherStatusCode);
     expect(builder.response().status).toEqual(anotherStatusCode);
-  });
-
-  it('statusText() method should set the "statusText" property of the response object', () => {
-    expect(builder.statusText(STATUS_TEXT).response().statusText).toEqual(STATUS_TEXT);
-  });
-  
-  it('statusText() method should update the "statusText" property of the response object', () => {
-    builder.statusText(STATUS_TEXT);
-    expect(builder.response().statusText).toEqual(STATUS_TEXT);
-    const anotherStatusText: string = "Lorem Ipsum";
-    builder.statusText(anotherStatusText);
-    expect(builder.response().statusText).toEqual(anotherStatusText);
   });
   
   it('url() method should set the "url" property of the response object', () => {
@@ -183,5 +171,13 @@ describe('HttpResponseMockBuilder', () => {
     const delay = builder.response().delay;
     expect(delay).toBeGreaterThanOrEqual(0);
     expect(delay).toBeLessThanOrEqual(HTTP_MOCK_MAX_DELAY);
+  });
+  
+  it('statusText should be set depending on the specified status', () => {
+    builder.status(STATUS);
+    expect(builder.response().statusText).toEqual(HttpStatusText.ACCEPTED);
+    const anotherStatusCode: number = HttpStatusCode.Conflict;
+    builder.status(anotherStatusCode);
+    expect(builder.response().statusText).toEqual(HttpStatusText.CONFLICT);
   });
 });
