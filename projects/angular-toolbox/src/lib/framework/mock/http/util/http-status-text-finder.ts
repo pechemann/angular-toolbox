@@ -10,10 +10,18 @@ import { HttpStatusCode } from "@angular/common/http";
 import { HttpStatusText } from "./http-status-text.enum";
 
 /**
+ * @private
  * A utility class that helps to retreive a status text depending on its status code.
  */
 export class HttpStatusTextFinder {
 
+    /**
+     * @private
+     * Retreives and return a status text depending on its status code.
+     * 
+     * @param code The status code for which to find the status text.
+     * @returns A `HttpStatusText` constant.
+     */
     public static getStatusText(code: HttpStatusCode): HttpStatusText {
         if(code === HttpStatusCode.Continue) return HttpStatusText.CONTINUE;
         if(code === HttpStatusCode.SwitchingProtocols) return HttpStatusText.SWITCHING_PROTOCOLS;
