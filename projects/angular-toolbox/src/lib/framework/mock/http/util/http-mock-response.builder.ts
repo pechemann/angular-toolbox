@@ -10,9 +10,8 @@ import { HttpHeaders, HttpStatusCode } from "@angular/common/http";
 import { HttpMockError, HttpResponseMock } from "../../../../model";
 import { HttpHeadersUtil } from "./http-headers.util";
 import { HTTP_MOCK_MAX_DELAY } from "./http-mock-max-delay";
-import { HttpStatusText } from "./http-status-text.enum";
 import { HttpStatusTextFinder } from "./http-status-text-finder";
-import { EMPTY_STRING } from "projects/angular-toolbox/src/public-api";
+import { EMPTY_STRING } from "../../../../util";
 
 /**
  * A statefull builder for creating new `HttpResponseMock` instances.
