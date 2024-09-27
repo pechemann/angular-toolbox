@@ -71,7 +71,6 @@ export const TODOS_MOCK_CONFIG: HttpMockConfig = {
                             return responseMock.body( dto )
                                                .defaultHeaders()
                                                .status(HttpStatusCode.Created)
-                                               .statusText("Created")
                                                .response();
                         }
                     }
@@ -90,7 +89,6 @@ export const TODOS_MOCK_CONFIG: HttpMockConfig = {
                             if (result) return responseMock.body( null )
                                                            .defaultHeaders()
                                                            .status(HttpStatusCode.NoContent)
-                                                           .statusText("No Content")
                                                            .response();
                             return responseMock.response(NOT_FOUND_ERROR);
                         }
@@ -105,7 +103,6 @@ export const TODOS_MOCK_CONFIG: HttpMockConfig = {
                             if (result) return responseMock.body( id )
                                                            .defaultHeaders()
                                                            .status(HttpStatusCode.Accepted)
-                                                           .statusText("Accepted")
                                                            .response();
                             return responseMock.response(NOT_FOUND_ERROR);
                         }

@@ -26,10 +26,10 @@ export const MONITORING_MOCK_CONFIG: HttpMockConfig = {
                     post: {
                         data: ()=> {
                             const builder: HttpResponseMockBuilder = httpResponseMock().defaultHeaders().delay();
-                            if (DATA_STORAGE.item) builder.status(HttpStatusCode.Conflict).statusText("Conflict");
+                            if (DATA_STORAGE.item) builder.status(HttpStatusCode.Conflict);
                             else {
                                 DATA_STORAGE.item = EMPTY_ITEM_DTO;
-                                builder.status(HttpStatusCode.Created).statusText("Created").body(CREATED_ITEM_DTO);
+                                builder.status(HttpStatusCode.Created).body(CREATED_ITEM_DTO);
                             }
                             return builder.response();
                         }
@@ -42,7 +42,7 @@ export const MONITORING_MOCK_CONFIG: HttpMockConfig = {
                             const builder: HttpResponseMockBuilder = httpResponseMock().defaultHeaders().delay();
                             if (DATA_STORAGE.item) {
                                 DATA_STORAGE.item = UPDATE_ITEM_DTO;
-                                return builder.status(HttpStatusCode.NoContent).statusText("No Content").response();
+                                return builder.status(HttpStatusCode.NoContent).response();
                             }
                             return builder.response(NOT_FOUND_ERROR);
                         }
@@ -51,7 +51,7 @@ export const MONITORING_MOCK_CONFIG: HttpMockConfig = {
                         data: ()=> {
                             const builder: HttpResponseMockBuilder = httpResponseMock().defaultHeaders().delay();
                             const item: ItemDto | null = DATA_STORAGE.item;
-                            if (item) return builder.status(HttpStatusCode.Ok).statusText("Ok").body(item).response();
+                            if (item) return builder.status(HttpStatusCode.Ok).body(item).response();
                             return builder.response(NOT_FOUND_ERROR);
                         }    
                     },
@@ -60,7 +60,7 @@ export const MONITORING_MOCK_CONFIG: HttpMockConfig = {
                             const builder: HttpResponseMockBuilder = httpResponseMock().defaultHeaders().delay();
                             if (DATA_STORAGE.item) {
                                 DATA_STORAGE.item = null;
-                                builder.status(HttpStatusCode.Ok).statusText("Ok").body(DELETED_ITEM_DTO).response();
+                                builder.status(HttpStatusCode.Ok).body(DELETED_ITEM_DTO).response();
                             }
                             return builder.response(NOT_FOUND_ERROR);
                         }                             
