@@ -14,6 +14,11 @@ import { HttpMethodMock } from "./http-method-mock";
 export interface HttpMockEndpoint {
     
     /**
+     * The description of this endpoint.
+     */
+    description?: string;
+
+    /**
      * The route part of the endpoint to mock.
      */
     route: string;

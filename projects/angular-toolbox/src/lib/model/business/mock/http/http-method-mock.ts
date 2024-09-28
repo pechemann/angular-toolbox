@@ -31,4 +31,9 @@ export interface HttpMethodMock {
      * @returns A user-defined `HttpResponse` mock object.
      */
     data: (request: HttpRequest<any>, parameters?: HttpMockParameters)=> HttpResponseMock;
+    
+    /**
+     * The description of the API associated with this HTTP method.
+     */
+    description?: string;
 }
