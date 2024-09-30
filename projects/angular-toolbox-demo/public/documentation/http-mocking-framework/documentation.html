@@ -7,17 +7,18 @@
 -->
 
 <nav class="page-menu col-xl-3 ps-4">
-    <aside class="w-100">
+    <aside class="w-100 mb-4">
         <h5 class="mb-4">In this topic</h5>
         <ul class="list-group">
             <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework'])">
                 Presentation
             </a>
             </li>
-            <li class="list-group-item active" aria-current="true">
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','setting-up-the-framework'])">
                 Setting up the Framework
+            </a>
             </li>
-           <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','creating-mock-config'])">
+            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','creating-mock-config'])">
                 Creating Mock Config</a>
             </li>
             <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','mock-config-declaration'])">
@@ -35,14 +36,23 @@
             <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','loggers'])">
                 Loggers</a>
             </li>
-            <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','documentation'])">
-                Documenting Mock APIs</a>
+            <li class="list-group-item active"  aria-current="true">
+                Documenting Mock APIs
             </li>
             <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','api'])">
                 API </a>
             </li>
         </ul>
     </aside>
+    <section class="w-100">
+        <h5 class="mb-4">On this page</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="#philosophy" onclick="appBridge.goToAnchor(event)" title="HTTP Mocking Framework Philosophy">HTTP Mocking Framework Philosophy</a></li>
+            <li class="list-group-item"><a href="#config-provider" onclick="appBridge.goToAnchor(event)" title="Config Provider">Config Provider</a></li>
+            <li class="list-group-item"><a href="#disable-visual-flag" onclick="appBridge.goToAnchor(event)" title="Disabling the visual flag">Disabling the visual flag</a></li>
+            <li class="list-group-item"><a href="#prevent-production-exceptions" onclick="appBridge.goToAnchor(event)" title="Prevent Production Exceptions">Prevent Production Exceptions</a></li>
+        </ul>
+    </section>
 </nav>
 
 <header class="fs-5 col-xl-9 mb-4">
@@ -54,43 +64,15 @@
     <hr class="mt-4">
 </header>
 
-<section class="col-xl-9" id="setting-up-the-framework">
-    <h3>Setting up the Framework</h3>
-    <p>
-        One of the major advantages of the <em>HTTP Mocking Framework</em> is being able to mock HTTP
-        calls directly on production endpoints.
-    </p>
-    <p>
-        Before doing this, it is necessary to initialize the framework by the updating
-        the <code>XhrFactory</code> provider. You typically add the <code>httpMockFactory</code>
-        factory method in the <code>app.config.ts</code> file, as shown bellow:
-    </p>
-    <figure>
-        <figcaption>app.config.ts</figcaption>
-        <pre><code class="language-typescript">...
-import &#123; httpMockFactory &#125; from 'angular-toolbox';
-
-export const appConfig: ApplicationConfig = &#123;
-  providers: [
-    provideZoneChangeDetection(&#123; eventCoalescing: true &#125;), 
-    provideRouter(routes),
-    provideHttpClient(),
-    // HTTP Mocking Framework initialization:
-    &#123; provide: XhrFactory, useFactory: httpMockFactory &#125;
-  ]
-&#125;;</code></pre></figure>
-<div class="alert alert-warning" role="alert">
-    <svg width="20" height="20">
-        <use xlink:href="#exclamationIcon"/>
-    </svg>
-    Remember that the HTTP Mocking Framework is a development tool.
-    <br>
-    You should never use this feature in production mode.
-</div>
-
+<section class="col-xl-9" id="philosophy">
+    <h3>Documenting Mock APIs</h3>
+    <div class="version-info text-end mb-4 me-3">
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 1.4.1</span></small>
+    </div>
 </section>
+
 
 <!-- We use a data object to store navigation tree structure-->
 <object id="navigation-tree"
-        data-tree="[{ 'label': 'HTTP Mocking Framework', 'path': 'http-mocking-framework' }, { 'label': 'Setting up the Framework' }]">
+        data-tree="[{ 'label': 'HTTP Mocking Framework', 'path': 'http-mocking-framework' }, { 'label': 'Documenting Mock APIs' }]">
 </object>

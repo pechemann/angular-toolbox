@@ -17,7 +17,7 @@ export interface HttpParameterDescriptor {
     description: string;
 
     /**
-     * The referrence to the HTTP associated with this descriptor.
+     * The referrence to the HTTP parameter associated with this descriptor.
      */
     ref: string;
 }
