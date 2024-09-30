@@ -30,4 +30,9 @@ export interface HttpMockConfig {
      * The configuration of mocking strategies for each specific API.
      */
     interceptors: HttpMockInterceptor[];
+    
+    /**
+     * The description of this HTTP API.
+     */
+    description?: string;
 }

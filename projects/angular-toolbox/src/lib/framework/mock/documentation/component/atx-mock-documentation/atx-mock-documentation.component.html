@@ -1,0 +1,110 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+ 
+@if (configApi) {
+    <section>
+        <h1>{{ title }}</h1>
+        <h2>Description</h2>
+        @if (configApi.description || configApi.origin) {
+            <div class="description">
+                @if (configApi.description) {
+                    <div [innerHTML]="configApi.description | safeHtml"></div>
+                }
+                @if (configApi.origin) {
+                    <dl>
+                        <dt>origin:</dt>
+                        <dd><a [href]="configApi.origin" [title]="configApi.origin"><code>{{ configApi.origin }}</code></a></dd>
+                    </dl>
+                }
+            </div>
+        }
+    </section>
+    <section>
+        <h2>Interceptors</h2>
+        <button (click)="toggleExpandState()">{{ expanded ? 'Collapse' : 'Expand' }} all</button>
+        @if (configApi.interceptors) {
+            @for (inteceptor of configApi.interceptors; track inteceptor) {
+                <details>
+                    <summary>
+                        {{ inteceptor.id }}
+                    </summary>
+                    @if (inteceptor.description || inteceptor.origin) {
+                        <div class="description">
+                            @if (inteceptor.description) {
+                                <div [innerHTML]="inteceptor.description | safeHtml"></div>
+                            }
+                            @if (inteceptor.origin) {
+                                <dl>
+                                    <dt>origin:</dt>
+                                    <dd><a [href]="inteceptor.origin" [title]="inteceptor.origin"><code>{{ inteceptor.origin }}</code></a></dd>
+                                </dl>
+                            }
+                        </div>
+                    }
+                    @for (endpoint of inteceptor.endpoints; track endpoint; let last = $last) {
+                        <section class="endpoint">
+                            <dl>
+                                <dt>route:</dt>
+                                <dd><code>{{ endpoint.route }}</code></dd>
+                            </dl>
+                            @if (endpoint.descriptor) {
+                                @if (endpoint.descriptor.description) {
+                                    <div [innerHTML]="endpoint.descriptor.description | safeHtml"></div>
+                                }
+                                @if (endpoint.descriptor.params) {
+                                    <h3>Parameters</h3>
+                                    @for (param of getParamList(endpoint); track param) {
+                                        <dl class="param">
+                                            <dt><code>{{param.ref}}</code></dt>
+                                            <dd [innerHTML]="param.description | safeHtml"></dd>
+                                        </dl>
+                                    }
+                                }
+                            }
+                            <h3>Methods</h3>
+                            <ul>
+                                @for (item of getMethodList(endpoint); track item; let last = $last) {
+                                    <li>
+                                        <span>{{ item.method }}</span>
+                                        @if (item.descriptor) {
+                                            <div class="method-descriptor">
+                                                @if (item.descriptor.description) {
+                                                    <div [innerHTML]="item.descriptor.description"></div>
+                                                }
+                                                @if (item.descriptor.payload) {
+                                                    <dl>
+                                                        <dt>payload:</dt>
+                                                        <dd [innerHTML]="item.descriptor.payload"></dd>
+                                                    </dl>
+                                                }
+                                                @if (item.descriptor.body) {
+                                                    <dl>
+                                                        <dt>body:</dt>
+                                                        <dd [innerHTML]="item.descriptor.body"></dd>
+                                                    </dl>
+                                                }
+                                            </div>
+                                           
+                                        }
+                                    </li>
+                                    @if (!last) {
+                                        <hr>
+                                    }
+                                }
+                            </ul>
+                        </section>
+                        @if (!last) {
+                            <hr>
+                        }
+                    }
+                </details>
+            }
+        }
+    </section>
+}
+

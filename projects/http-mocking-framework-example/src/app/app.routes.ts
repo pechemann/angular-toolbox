@@ -32,5 +32,9 @@ export const routes: Routes = [ {
   {
     path: 'monitoring',
     loadComponent: () => import('./monitoring/component/monitoring.component').then(mod => mod.MonitoringComponent)
+  },
+  {
+    path: 'resources-documentation',
+    loadComponent: () => import('./resources-documentation/resources-documentation.component').then(mod => mod.ResourcesDocumentationComponent)
   }
 ];

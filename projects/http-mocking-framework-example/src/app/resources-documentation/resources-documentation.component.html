@@ -1,0 +1,40 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+ 
+<main>
+    <atx-page-title label="Resources Documentation sample Application">
+        <p primary class="fs-5">
+            The following sample application shows how to use the HTTP Mocking Framework documentation API
+            to create a HTML display of your REST APIs.
+        </p>
+    </atx-page-title>
+    <div class="mb-5">
+        <p>
+            Angular Toolbox provides the <code>AtxMockDocumentation</code> component to render documentation
+            of an <code>HttpMockConfig</code> object:
+        </p>
+        <atx-code-viewport lang="html"> &lt;atx-mock-documentation [config]="myConfig"/&gt; </atx-code-viewport>
+        <p>
+            Use the drop-down menu below to view documentation for one of the APIs in this demo application:
+        </p>
+        <atx-dropdown buttonClass="btn btn-primary">
+            Select a mock API
+            <ul class="list-group shadow" content>
+                @for (item of configList; track item) {
+                    <li class="list-group-item list-group-item-action" role="button"
+                        [class.active]="item === selectedConfig" (click)="selectedConfig = item">
+                        {{ item.label }}
+                    </li>
+                }
+            </ul>
+        </atx-dropdown>
+    </div>
+    <hr>
+    <atx-mock-documentation [config]="selectedConfig.config" [title]="selectedConfig.label"/>
+</main>
+

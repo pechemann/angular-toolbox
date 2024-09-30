@@ -8,18 +8,16 @@
 
 import { HttpHeaders, HttpRequest, HttpStatusCode } from '@angular/common/http';
 import { httpHeadersMock, HttpMockConfig, httpResponseMock, HttpResponseMockBuilder } from 'projects/angular-toolbox/src/public-api';
-import { COMPLEX_JSON, CREATED_ITEM_DTO, DELETED_ITEM_DTO, EMPTY_ITEM_DTO, getPngBlobData, getArrayBufferData, NOT_FOUND_ERROR, PHP_ERROR, TEXT_DATA, UNAUTHORIZED_ERROR, UPDATE_ITEM_DTO, VALID_PASSWORD } from './http-mock-data';
+import { COMPLEX_JSON, CREATED_ITEM_DTO, DELETED_ITEM_DTO, EMPTY_ITEM_DTO, getPngBlobData, getArrayBufferData, NOT_FOUND_ERROR, PHP_ERROR, TEXT_DATA, UNAUTHORIZED_ERROR, UPDATE_ITEM_DTO, VALID_PASSWORD, DATA_STORAGE } from './http-mock-data';
 import { ItemDto } from './http-mock-business';
 
-const DATA_STORAGE: any = {
-    item: null
-};
-
 export const MONITORING_MOCK_CONFIG: HttpMockConfig = {
+    description: "A HTTP API that shows the ATX HTTP Mocking Framework capabilities.",
     origin: "https://my-awsome-company.com",
     interceptors: [
         {
             id: "basic",
+            description: "A basic sample that shows how to create mocks for a REST-based CRUD API.",
             endpoints: [
                 {
                     route: "/api/monitoring",
@@ -32,11 +30,25 @@ export const MONITORING_MOCK_CONFIG: HttpMockConfig = {
                                 builder.status(HttpStatusCode.Created).body(CREATED_ITEM_DTO);
                             }
                             return builder.response();
+                        },
+                        descriptor: {
+                            description: "Sends a request for the server to create a new <code>Item</code> object.",
+                            payload: "A <code>TokenDto</code> object.",
+                            body: "Returns an <code>ItemDto</code> object."
                         }
+                    },
+                    descriptor: {
+                        description: "Creates a new <code>Item</code> object."
                     }
                 },
                 {
                     route: "/api/monitoring/:id",
+                    descriptor: {
+                        description: "Performs (C)RUD operations over the specified item.",
+                        params: [
+                            { ref: "id", description: "The reference to the item on which to perform a (C)RUD operation."}
+                        ]
+                    },
                     put: {
                         data: ()=> {
                             const builder: HttpResponseMockBuilder = httpResponseMock().defaultHeaders().delay();

@@ -7,6 +7,7 @@
  */
 
 import { HttpMethodMock } from "./http-method-mock";
+import { HttpMockEndpointDescriptor } from "./http-mock-endpoint-descriptor";
 
 /**
  * Provides the API to define mocking strategies for a specific endpoint.
@@ -14,9 +15,9 @@ import { HttpMethodMock } from "./http-method-mock";
 export interface HttpMockEndpoint {
     
     /**
-     * The description of this endpoint.
+     * The API descriptor for this endpoint.
      */
-    description?: string;
+    descriptor?: HttpMockEndpointDescriptor;
 
     /**
      * The route part of the endpoint to mock.

@@ -9,6 +9,7 @@
 import { HttpRequest } from "@angular/common/http";
 import { HttpResponseMock } from "./http-response-mock";
 import { HttpMockParameters } from "../../../../framework";
+import { HttpMockEMethodDescriptor } from "./http-mock-method-descriptor";
 
 /**
  * The `HttpMethodMock` interface defines the behavior of actions invoked each time an Angular
@@ -33,7 +34,7 @@ export interface HttpMethodMock {
     data: (request: HttpRequest<any>, parameters?: HttpMockParameters)=> HttpResponseMock;
     
     /**
-     * The description of the API associated with this HTTP method.
+     * The API descriptor of the associated with this HTTP method.
      */
-    description?: string;
+    descriptor?: HttpMockEMethodDescriptor;
 }

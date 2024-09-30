@@ -8,7 +8,11 @@
 
 import { HttpStatusCode } from "@angular/common/http";
 import { HttpMockError, Uuid } from 'projects/angular-toolbox/src/public-api';
-import { ItemDto, Token, UpdateItemDto } from "./http-mock-business";
+import { DataStorage, ItemDto, Token, UpdateItemDto } from "./http-mock-business";
+
+export const DATA_STORAGE: DataStorage = {
+    item: null
+};
 
 export const NOT_FOUND_ERROR: HttpMockError = {
     status: HttpStatusCode.NotFound,

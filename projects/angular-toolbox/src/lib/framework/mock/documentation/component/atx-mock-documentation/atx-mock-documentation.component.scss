@@ -1,0 +1,102 @@
+/**
+ * @license
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+ */
+
+h1 {
+    font-size: 1.5em;
+}
+
+h2 {
+    font-size: 1.25em;
+}
+
+ h3 {
+    font-size: 1em;
+    text-decoration: underline;
+}
+
+details {
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    padding: 0.5em 0.5em 0;
+    margin-bottom: 0.5em;
+}
+
+summary {
+    font-weight: bold;
+    margin: -0.5em -0.5em 0;
+    padding: 0.5em;
+}
+
+details[open] {
+    padding: 0.5em 1.5em;
+    summary {
+        border-bottom: 1px solid #aaa;
+        margin-bottom: 1em;
+        padding: 0.5em 0;
+    }
+}
+
+dl {
+    display: flex;
+    margin: 0.5em 0;
+}
+
+dt {
+    font-weight: bold;
+}
+
+dd {
+    margin-inline-start: 10px;
+}
+
+li {
+    display: flex;
+    align-items: baseline;
+}
+
+.endpoint {
+    padding: 0.25em 1em;
+    background-color: #eee;
+    color: black;
+}
+
+.param {
+    dt:before {
+        padding-right: 0.2em;
+        content: "-";
+    }
+}
+
+.description {
+    margin-bottom: 1em;
+}
+
+code {
+    color: Orchid;
+}
+
+button {
+    padding: 5px 10px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    float: right;
+    margin-top: -45px;
+}
+
+span {
+    text-transform: uppercase;
+    display: inline-block;
+    width: 60px;
+}
+
+.method-descriptor {
+    line-height: 0.95em;
+    dt {
+        width: 70px;
+    }
+}

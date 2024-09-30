@@ -17,7 +17,6 @@ import { HttpMock, HttpMockService, IdentifiableComponent, SubscriptionService }
   selector: 'app-proxy-antipattern',
   standalone: true,
   imports: [
-
     AngularToolboxPageTitleComponent
   ],
   templateUrl: './proxy-antipattern.component.html',
