@@ -6,10 +6,11 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewEncapsulation } from '@angular/core';
-import { HttpMethodMock, HttpMockConfig, HttpMockEMethodDescriptor, HttpMockEndpoint, HttpMockEndpointParameterDescriptor } from '../../../../../model';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { HttpMethodMock, HttpMockConfig, HttpMockEMethodDescriptor, HttpMockEndpoint } from '../../../../../model';
 import { SafeHtmlPipe } from '../../../../../pipe';
 import { EMPTY_STRING } from 'projects/angular-toolbox/src/public-api';
+import { AtxMockParamComponent } from '../atx-mock-param/atx-mock-param.component';
 
 /**
  * @private
@@ -45,7 +46,8 @@ type MethodDescriptor = {
   selector: 'atx-mock-documentation',
   standalone: true,
   imports: [
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    AtxMockParamComponent
   ],
   templateUrl: './atx-mock-documentation.component.html',
   styleUrl: './atx-mock-documentation.component.scss',
@@ -82,13 +84,6 @@ export class AtxMockDocumentation {
       }
     });
     return methods;
-  }
-
-  protected getParamList(endpoint: HttpMockEndpoint): HttpMockEndpointParameterDescriptor[] {
-    const result: HttpMockEndpointParameterDescriptor[] = [];
-    const params: HttpMockEndpointParameterDescriptor[] | undefined = endpoint.descriptor?.params;
-    if (params === undefined) return result;
-    return params;
   }
 
   protected toggleExpandState(): void {

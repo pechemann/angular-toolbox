@@ -58,12 +58,11 @@
                                 }
                                 @if (endpoint.descriptor.params) {
                                     <h3>Parameters</h3>
-                                    @for (param of getParamList(endpoint); track param) {
-                                        <dl class="param">
-                                            <dt><code>{{param.ref}}</code></dt>
-                                            <dd [innerHTML]="param.description | safeHtml"></dd>
-                                        </dl>
-                                    }
+                                    <div class="atx-mock-param-container">
+                                        @for (param of endpoint.descriptor.params; track param) {
+                                            <atx-mock-param [param]="param"/>
+                                        }
+                                </div>
                                 }
                             }
                             <h3>Methods</h3>
@@ -87,6 +86,14 @@
                                                         <dt>body:</dt>
                                                         <dd [innerHTML]="item.descriptor.body"></dd>
                                                     </dl>
+                                                }
+                                                @if (item.descriptor.queryParams) {
+                                                    <h4>Query Parameters</h4>
+                                                    <div class="atx-mock-param-container">
+                                                        @for (param of item.descriptor.queryParams; track param) {
+                                                            <atx-mock-param [param]="param"/>
+                                                        }
+                                                    </div>
                                                 }
                                             </div>
                                            

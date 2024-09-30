@@ -27,12 +27,20 @@ const BAD_REQUEST_ERROR: HttpMockError = {
 
 export const TODOS_MOCK_CONFIG: HttpMockConfig = {
     origin: "https://my-awsome-company.com",
+    description: "The API used by the \"TODO\" sample application.",
     interceptors: [
         {
             id: "todoCollection",
+            description: "Allows to work with collections of <code>Todo</code> objects.",
             endpoints: [
                 {
                     route: "/api/todos/:userId",
+                    descriptor: {
+                        description: "Allows to read or delete collections of <code>Todo</code> objects associated with the specified user ID.",
+                        params: [
+                            { ref: "userId", description: "The ID of the user associated with collection of <code>Todo</code> objects to manipulate." }
+                        ]
+                    },
                     get: {
                         data: (req: HttpRequest<TodoDto>, params: any)=> {
                             const responseMock = httpResponseMock();
@@ -41,6 +49,10 @@ export const TODOS_MOCK_CONFIG: HttpMockConfig = {
                                                                          .defaultHeaders()
                                                                          .response();
                             return responseMock.response(NOT_FOUND_ERROR);
+                        },
+                        descriptor: {
+                            description: "Returns the collection of <code>Todo</code> objects associated with the specified user.",
+                            body: "A collection of <code>Todo</code> objects."
                         }
                     },
                     delete: {
@@ -51,6 +63,10 @@ export const TODOS_MOCK_CONFIG: HttpMockConfig = {
                                                                          .defaultHeaders()
                                                                          .response();
                             return responseMock.response(NOT_FOUND_ERROR);
+                        },
+                        descriptor: {
+                            description: "Deletes the collection of <code>Todo</code> objects associated with the specified user.",
+                            body: "A boolean that indicates whether the collection has been deleted (<code>true</code>), or not (<code>false</code>)."
                         }
                     }
                 }
@@ -58,9 +74,16 @@ export const TODOS_MOCK_CONFIG: HttpMockConfig = {
         },
         {
             id: "todo",
+            description: "Mock a REST-based CRUD API for managing <code>Todo</code> objects",
             endpoints: [
                 {
                     route: "/api/todos/:userId/todo",
+                    descriptor: {
+                        description: "Creates a new <code>Todo</code> object associated with the specified user.",
+                        params: [
+                            { ref: "userId", description: "The ID of the user that creates the <code>Todo</code> object." }
+                        ]
+                    },
                     post: {
                         data: (req: HttpRequest<string>, params: any)=> {
                             const responseMock = httpResponseMock();
@@ -72,11 +95,23 @@ export const TODOS_MOCK_CONFIG: HttpMockConfig = {
                                                .defaultHeaders()
                                                .status(HttpStatusCode.Created)
                                                .response();
+                        },
+                        descriptor: {
+                            description: "Creates and returns a new <code>Todo</code> object.",
+                            payload: "A string: the title of the <code>Todo</code> object to create.",
+                            body: "The newly created <code>Todo</code> object."
                         }
                     }
                 },
                 {
                     route: "/api/todos/:userId/todo/:id",
+                    descriptor: {
+                        description: "Updates, or deletes, <code>Todo</code> objects associated with the specified user.",
+                        params: [
+                            { ref: "userId", description: "The ID of the user that updates, or deletes, <code>Todo</code> objects." },
+                            { ref: "id", description: "The ID of <code>Todo</code> object to manipulate." }
+                        ]
+                    },
                     put: {
                         data: (req: HttpRequest<UpdateTodoDto>, params: any)=> {
                             const responseMock = httpResponseMock();
@@ -91,6 +126,10 @@ export const TODOS_MOCK_CONFIG: HttpMockConfig = {
                                                            .status(HttpStatusCode.NoContent)
                                                            .response();
                             return responseMock.response(NOT_FOUND_ERROR);
+                        },
+                        descriptor: {
+                            description: "Updates the <code>Todo</code> object with the specified ID.",
+                            payload: "An <code>UpdateTodoDto</code> object."
                         }
                     },
                     delete: {
@@ -105,6 +144,9 @@ export const TODOS_MOCK_CONFIG: HttpMockConfig = {
                                                            .status(HttpStatusCode.Accepted)
                                                            .response();
                             return responseMock.response(NOT_FOUND_ERROR);
+                        },
+                        descriptor: {
+                            description: "Deletes the <code>Todo</code> object with the specified ID."
                         }
                     }
                 }

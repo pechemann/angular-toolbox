@@ -7,8 +7,8 @@
  */
 
 import { HttpStatusCode } from "@angular/common/http";
-import { HttpMockError, Uuid } from 'projects/angular-toolbox/src/public-api';
-import { DataStorage, ItemDto, Token, UpdateItemDto } from "./http-mock-business";
+import { HttpMockError, HttpStatusText, Uuid } from 'projects/angular-toolbox/src/public-api';
+import { ActorListDto, DataStorage, ItemDto, Token, UpdateItemDto } from "./http-mock-business";
 
 export const DATA_STORAGE: DataStorage = {
     item: null
@@ -16,12 +16,17 @@ export const DATA_STORAGE: DataStorage = {
 
 export const NOT_FOUND_ERROR: HttpMockError = {
     status: HttpStatusCode.NotFound,
-    statusText: "Not Found"
+    statusText: HttpStatusText.NOT_FOUND
+};
+
+export const BAD_REQUEST: HttpMockError = {
+    status: HttpStatusCode.BadRequest,
+    statusText: HttpStatusText.BAD_REQUEST
 };
 
 export const UNAUTHORIZED_ERROR: HttpMockError = {
     status: HttpStatusCode.Unauthorized,
-    statusText: "Unauthorized"
+    statusText: HttpStatusText.UNAUTHORIZED
 };
 
 export const TOKEN: Token = {
@@ -50,35 +55,35 @@ export const UPDATE_ITEM_DTO: UpdateItemDto = {
 
 // from https://codeblogmoney.com/json-example-with-data-types-including-json-array/
 
-export const COMPLEX_JSON: any = {
-    "actors": [
+export const COMPLEX_JSON: ActorListDto = {
+    actors: [
         {
-            "name": "Tom Cruise",
-            "age": 56,
-            "bornPlace": "Syracuse, NY",
-            "birthdate": "July 3, 1962",
-            "photo": "https://jsonformatter.org/img/tom-cruise.jpg",
-            "wife": null,
-            "weight": 67.5,
-            "hasChildren": true,
-            "hasGreyHair": false,
-            "children": [
+            name: "Tom Cruise",
+            age: 56,
+            bornPlace: "Syracuse, NY",
+            birthdate: "July 3, 1962",
+            photo: "https://jsonformatter.org/img/tom-cruise.jpg",
+            wife: null,
+            weight: 67.5,
+            hasChildren: true,
+            hasGreyHair: false,
+            children: [
                 "Suri",
                 "Isabella Jane",
                 "Connor"
             ]
         },
         {
-            "name": "Robert Downey Jr.",
-            "age": 53,
-            "bornPlace": "New York City, NY",
-            "birthdate": "April 4, 1965",
-            "photo": "https://jsonformatter.org/img/Robert-Downey-Jr.jpg",
-            "wife": "Susan Downey",
-            "weight": 77.1,
-            "hasChildren": true,
-            "hasGreyHair": false,
-            "children": [
+            name: "Robert Downey Jr.",
+            age: 53,
+            bornPlace: "New York City, NY",
+            birthdate: "April 4, 1965",
+            photo: "https://jsonformatter.org/img/Robert-Downey-Jr.jpg",
+            wife: "Susan Downey",
+            weight: 77.1,
+            hasChildren: true,
+            hasGreyHair: false,
+            children: [
                 "Indio Falconer",
                 "Avri Roel",
                 "Exton Elias"

@@ -25,22 +25,38 @@ const getMessage = (id: string): FetchClient =>
 
 export const MESSAGE_PROXY_MOCK_CONFIG: HttpMockConfig = {
     origin: "https://my-awsome-company.com",
+    description: "A basic sample that shows how to create a forward proxy by using the HTTP Mocking Framework API.",
     interceptors: [
         {
             id: "message",
+            description: "Sends and reads messages from a local PHP server.",
             endpoints: [
                 {
                     route: "/api/message",
                     post: {
                         data: (req: HttpRequest<any>)=> {
                             return httpResponseMock().body(postMessage(req.body)).response();
+                        },
+                        descriptor: {
+                            description: "Sends a message to the PHP server.",
+                            payload: "A string: the message to send."
                         }
                     },
                     get: {
                         data: (req: HttpRequest<any>)=> {
                             const id: string = req.params.get("id") as any;
                             return httpResponseMock().body(getMessage(id)).response();
+                        },
+                        descriptor: {
+                            description: "Gets a message from the PHP server.",
+                            queryParams: [
+                                { ref: "id", description: "The id of the message to get."}
+                            ],
+                            body: "A string: the message to get."
                         }
+                    },
+                    descriptor: {
+                        description: "Uses the <code>FetchClient</code> API to send and get messages from a local PHP server"
                     }
                 }
             ]

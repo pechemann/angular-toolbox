@@ -7,17 +7,17 @@
  */
 
 /**
- * Provides the API to create documentation for a specific endpoint parameter.
+ * Provides the API to create documentation for a specific HTTP parameter.
  */
-export interface HttpMockEndpointParameterDescriptor {
+export interface HttpParameterDescriptor {
     
     /**
-     * The description of the endpoint parameter associated with this descriptor.
+     * The description of the HTTP parameter associated with this descriptor.
      */
     description: string;
 
     /**
-     * The referrence to the parameter associated with this descriptor.
+     * The referrence to the HTTP associated with this descriptor.
      */
     ref: string;
 }

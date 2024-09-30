@@ -4,7 +4,7 @@ export * from './http-mock-config';
 export * from './http-mock-endpoint';
 export * from './http-mock-endpoint-descriptor';
 export * from './http-mock-method-descriptor';
-export * from './http-mock-endpoint-parameter-descriptor';
+export * from './http-mock-parameter-descriptor';
 export * from './http-mock-interceptor';
 export * from './http-mock-error';
 export * from './http-mock-request-metadata';

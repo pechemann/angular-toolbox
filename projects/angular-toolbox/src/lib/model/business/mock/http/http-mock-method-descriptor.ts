@@ -6,6 +6,8 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
+import { HttpParameterDescriptor } from "./http-mock-parameter-descriptor";
+
 /**
  * Provides the API to create documentation for a specific HTTP method.
  */
@@ -25,4 +27,9 @@ export interface HttpMockEMethodDescriptor {
      * The body description for the method associated with this descriptor.
      */
     body?: string;
+
+    /**
+     * The list of query string parameters for the method associated with this descriptor.
+     */
+    queryParams?: HttpParameterDescriptor[];
 }

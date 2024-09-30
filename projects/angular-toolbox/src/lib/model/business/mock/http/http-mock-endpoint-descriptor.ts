@@ -6,7 +6,7 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { HttpMockEndpointParameterDescriptor } from "./http-mock-endpoint-parameter-descriptor";
+import { HttpParameterDescriptor } from "./http-mock-parameter-descriptor";
 
 /**
  * Provides the API to create documentation for a specific endpoint.
@@ -21,5 +21,5 @@ export interface HttpMockEndpointDescriptor {
     /**
      * The description all parameters of the endpoint associated with this descriptor.
      */
-    params?: HttpMockEndpointParameterDescriptor[];
+    params?: HttpParameterDescriptor[];
 }

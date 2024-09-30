@@ -14,9 +14,13 @@ h2 {
     font-size: 1.25em;
 }
 
- h3 {
+h3 {
     font-size: 1em;
     text-decoration: underline;
+}
+
+h4 {
+    margin: 0.25em 0;
 }
 
 details {
@@ -54,6 +58,10 @@ dd {
     margin-inline-start: 10px;
 }
 
+ul {
+    padding-inline-start: 40px;
+}
+
 li {
     display: flex;
     align-items: baseline;
@@ -63,13 +71,6 @@ li {
     padding: 0.25em 1em;
     background-color: #eee;
     color: black;
-}
-
-.param {
-    dt:before {
-        padding-right: 0.2em;
-        content: "-";
-    }
 }
 
 .description {
@@ -91,7 +92,7 @@ button {
 span {
     text-transform: uppercase;
     display: inline-block;
-    width: 60px;
+    width: 70px;
 }
 
 .method-descriptor {
@@ -99,4 +100,9 @@ span {
     dt {
         width: 70px;
     }
+}
+
+.atx-mock-param-container {
+    padding-inline-start: 40px;
+    line-height: 0.95em;
 }
