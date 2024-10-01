@@ -49,6 +49,7 @@
         <ul class="list-group">
             <li class="list-group-item"><a href="#documenting-mock-apis" onclick="appBridge.goToAnchor(event)" title="Documenting Mock APIs">Documenting Mock APIs</a></li>
             <li class="list-group-item"><a href="#implementation" onclick="appBridge.goToAnchor(event)" title="Implementation">Implementation</a></li>
+            <li class="list-group-item"><a href="#rendering" onclick="appBridge.goToAnchor(event)" title="Rendering">Rendering</a></li>
         </ul>
     </section>
 </nav>
@@ -87,7 +88,94 @@
 <section class="col-xl-9" id="implementation">
     <h3>Implementation</h3>
     <p>
+        The <code>HttpMockConfig</code> API provides interfaces that allow to document
+        each parts of a HTTP resource. The structure of this API was designed to organize
+        the different endpoints logically, depending on the business aspect of the application.
+    </p>
+    <div class="alert alert-info" role="alert">
+        Note that all <code>description</code> properties below accept the use of HTML tags for rendering.
+    </div>
+    <h4>Root Level</h4>
+    <p>
+        The optional <code>HttpMockConfig.description</code> string property is used to expose the aim of the associated API.
+        <br>
+        The optional <code>HttpMockConfig.origin</code> property is used in documentation rendering.
+    </p>
+    <figure>
+        <pre><code class="language-typescript">export const MOCK_CONFIG: HttpMockConfig = &#123;
+    origin: "https://my-awsome-company.com",
+    description: "Describes the purpose of the API to be mocked.",
+    interceptors: []
+&#125;</code></pre></figure>
+    <h4>Resource Level</h4>
+    <p>
+        The optional <code>HttpMockInterceptor.description</code> property string allows to describe the API associated with a resource.
+        <br>
+        The <code>HttpMockInterceptor.id</code> and the optional <code>HttpMockInterceptor.origin</code> properties are used in documentation rendering.
+    </p>
+    <figure>
+        <pre><code class="language-typescript">interceptors: [
+    id: "resourceName"
+    description: "Description of the associated resource.",
+    endpoints: []
+]</code></pre></figure>
+    <h4>Endpoint Level</h4>
+    <p>
+        The optional <code>HttpMockEndpoint.descriptor</code> property allows to describe the API associated with a resource.
+        <br>
+        See the <a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','http-mock-endpoint-descriptor'])"><code>HttpMockEndpointDescriptor</code></a> interface reference for details.
+        <br>
+        The <code>HttpMockEndpoint.route</code> property is used in documentation rendering.
+    </p>
+    <figure>
+        <pre><code class="language-typescript">endpoints: [
+    &#123;
+        route: "/api/resource/:id"
+        descriptor: &#123;
+            description: "Performs CRUD operations over the resource depending on its ID.",
+            params: [
+                &#123; ref: "id", description: "The reference to the item on which to perform a (C)RUD operation." &#125;
+            ]
+        &#125;
+    &#125;
+]</code></pre></figure>
+    <h4>HTTP Method Level</h4>
+    <p>
+        The optional <code>HttpMethodMock.descriptor</code> property allows to describe the API associated with a HTTP method.
+        <br>
+        See the <a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','http-mock-method-descriptor'])"><code>HttpMockEMethodDescriptor</code></a> interface reference for details.
+    </p>
+    <figure>
+        <pre><code class="language-typescript">delete: &#123;
+    data: ()=&gt; httpResponseMock().body(DELETED_ITEM_DTO).response(),
+    descriptor: &#123;
+        description: "Deletes the &lt;code&gt;Item&lt;/code&gt; object with the specified ID.",
+        body: "An &lt;code&gt;ItemDto&lt;/code&gt; object."
+    &#125;        
+&#125;</code></pre></figure>
+</section>
 
+<section class="col-xl-9" id="rendering">
+    <h3>Rendering</h3>
+    <p>
+        <em>Angular Toolbox</em> provides the <code>AtxMockDocumentation</code> component to render documentation
+        of an <code>HttpMockConfig</code> object:
+    </p>
+    <figure>
+        <pre><code class="html"> &lt;atx-mock-documentation [config]="MOCK_CONFIG"/&gt; </code></pre></figure>
+    <p>
+        You chan check our <a title="Resources Documentation sample Application" href="https://pascalechemann.com/angular-toolbox/http-mock-demo/resources-documentation">demo application</a> 
+        to see  how this component displays the documented API of a <code>HttpMockConfig</code> object.
+        <br>
+        The source code of this application is avaible from the <em>Angular Toolbox</em> repository:
+    </p>
+    <p>
+        <a class="btn btn-primary" href="https://github.com/pechemann/angular-toolbox" title="Angular Toolbox Git Repository">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/>
+            </svg>
+            Git repository
+        </a>
     </p>
 </section>
 
