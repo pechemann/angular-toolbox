@@ -6,7 +6,9 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
 -->
 
-<dl class="param">
-    <dt><code>{{param.ref}}</code></dt>
-    <dd [innerHTML]="param.description | safeHtml"></dd>
-</dl>
+@if (param) {
+    <dl class="param">
+        <dt><code>{{ param.ref }}</code></dt>
+        <dd [innerHTML]="param.description | safeHtml"></dd>
+    </dl>
+}

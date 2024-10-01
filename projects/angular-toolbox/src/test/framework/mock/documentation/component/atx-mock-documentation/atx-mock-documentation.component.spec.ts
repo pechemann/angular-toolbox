@@ -8,7 +8,7 @@
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AtxMockDocumentation } from './atx-mock-documentation.component';
+import { AtxMockDocumentation } from '../../../../../../lib/framework/mock/documentation/component/atx-mock-documentation/atx-mock-documentation.component';
 
 describe('AtxMockDocumentationComponent', () => {
   let component: AtxMockDocumentation;
@@ -25,7 +25,7 @@ describe('AtxMockDocumentationComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create a new component instance', () => {
     expect(component).toBeTruthy();
   });
 });

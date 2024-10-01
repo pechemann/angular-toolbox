@@ -9,7 +9,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { HttpMethodMock, HttpMockConfig, HttpMockEMethodDescriptor, HttpMockEndpoint } from '../../../../../model';
 import { SafeHtmlPipe } from '../../../../../pipe';
-import { EMPTY_STRING } from 'projects/angular-toolbox/src/public-api';
+import { EMPTY_STRING } from '../../../../../util';
 import { AtxMockParamComponent } from '../atx-mock-param/atx-mock-param.component';
 
 /**

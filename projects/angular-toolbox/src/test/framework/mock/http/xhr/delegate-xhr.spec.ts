@@ -8,8 +8,8 @@
 
 import { HTTPMethodRef } from 'projects/angular-toolbox/src/lib/framework/mock/http/util/http-method-ref.enum';
 import { DelegateXhr } from 'projects/angular-toolbox/src/lib/framework/mock/http/xhr/delegate-xhr';
-import { EMPTY_STRING, HttpMockLoggingService, httpResponseMock } from 'projects/angular-toolbox/src/public-api';
-import { BODY, BODY_SIZE, buildUrlSearchParamsMock, ERROR, HTTP_ERROR, HTTP_STATUS, I_M_A_TEA_POT, OBSERVABLE_ERROR_CONFIG, OBSERVABLE_MOCK_CONFIG, ROUTE_CONFIG, ROUTE_CONFIG_WITH_ERROR, URL_STRING, DESTROY_DELAY } from './util/delegate-xhr-test-util';
+import { EMPTY_STRING, HttpMockLoggingService, httpResponseMock, HttpStatusText } from 'projects/angular-toolbox/src/public-api';
+import { BODY, BODY_SIZE, buildUrlSearchParamsMock, ERROR, HTTP_ERROR, HTTP_STATUS, OBSERVABLE_ERROR_CONFIG, OBSERVABLE_MOCK_CONFIG, ROUTE_CONFIG, ROUTE_CONFIG_WITH_ERROR, URL_STRING, DESTROY_DELAY } from './util/delegate-xhr-test-util';
 import { RouteMockConfig } from 'projects/angular-toolbox/src/lib/framework/mock/http/config/route-mock-config';
 import { HttpParams, HttpRequest } from '@angular/common/http';
 import { ProgressEventMock } from 'projects/angular-toolbox/src/lib/framework/mock/http/event/progress-event-mock';
@@ -141,7 +141,7 @@ describe('DelegateXhr', () => {
         xhr.open(HTTPMethodRef.GET, URL_STRING);
         xhr.send();
         setTimeout(()=> {
-            expect(xhr.statusText).toEqual(I_M_A_TEA_POT);
+            expect(xhr.statusText).toEqual(HttpStatusText.I_M_A_TEAPOT);
             done();
         }, 100);
     });
@@ -314,7 +314,7 @@ describe('DelegateXhr: observable responses', () => {
             const readyState = xhr.readyState;
             if (readyState === xhr.DONE) {
                 expect(xhr.status).toEqual(HTTP_STATUS);
-                expect(xhr.statusText).toEqual(I_M_A_TEA_POT);
+                expect(xhr.statusText).toEqual(HttpStatusText.I_M_A_TEAPOT);
                 expect(xhr.responseURL).toEqual(URL_STRING);
                 expect(xhr.responseText).toEqual(JSON.stringify(BODY));
                 expect(xhr.getAllResponseHeaders()).toEqual(EXPECTED_HEADERS);
