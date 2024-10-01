@@ -8,6 +8,7 @@
     "build": "ng build angular-toolbox --configuration production",
     "build-demo": "ng build angular-toolbox-demo --configuration production --base-href /angular-toolbox/",
     "start-http-mock-sample": "ng serve http-mocking-framework-example --open",
+    "build-http-mock-sample": "ng build http-mocking-framework-example --configuration production --base-href /angular-toolbox/http-mock-demo/",
     "test": "ng test angular-toolbox"
   },
   "private": false,

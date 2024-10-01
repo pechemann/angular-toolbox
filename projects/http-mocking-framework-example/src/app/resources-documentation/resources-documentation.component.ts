@@ -39,5 +39,5 @@ export class ResourcesDocumentationComponent {
     { label: "TODO API", config: TODOS_MOCK_CONFIG }
   ];
 
-  protected selectedConfig: HttpMockConfigRef = this.configList[0];
+  protected selectedConfig!: HttpMockConfigRef;
 }

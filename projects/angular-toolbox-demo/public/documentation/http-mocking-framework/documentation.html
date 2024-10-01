@@ -46,9 +46,10 @@
     </aside>
     <section class="w-100">
         <h5 class="mb-4">On this page</h5>
-        <!--<ul class="list-group">
-            <li class="list-group-item"><a href="#philosophy" onclick="appBridge.goToAnchor(event)" title="HTTP Mocking Framework Philosophy">HTTP Mocking Framework Philosophy</a></li>
-        </ul>-->
+        <ul class="list-group">
+            <li class="list-group-item"><a href="#documenting-mock-apis" onclick="appBridge.goToAnchor(event)" title="Documenting Mock APIs">Documenting Mock APIs</a></li>
+            <li class="list-group-item"><a href="#implementation" onclick="appBridge.goToAnchor(event)" title="Implementation">Implementation</a></li>
+        </ul>
     </section>
 </nav>
 
@@ -61,13 +62,34 @@
     <hr class="mt-4">
 </header>
 
-<section class="col-xl-9" id="philosophy">
+<section class="col-xl-9" id="documenting-mock-apis">
     <h3>Documenting Mock APIs</h3>
     <div class="version-info text-end mb-4 me-3">
         <small>Since <span class="badge text-bg-warning rounded-pill">v 1.4.1</span></small>
     </div>
+    <p>
+        Ideally, the development of complex applications goes through an analysis phase.
+        The developer can then rely on a technical specification to implement the APIs.
+        But this is rarely the case in small companies, in startups, or in R&D.
+    </p>
+    <p>
+        On the other hand, collaborative work involving multiple teams constantly
+        introduces changes to APIs. In this case it is desirable that developers
+        can refer to the state of the APIs without having to analyze the code or
+        complex technical documents.
+    </p>
+    <p>
+        The ATX HTTP Mock Framework provides a structure to easily document APIs and avoid
+        issues with implementation changes during development.
+    </p>
 </section>
 
+<section class="col-xl-9" id="implementation">
+    <h3>Implementation</h3>
+    <p>
+
+    </p>
+</section>
 
 <!-- We use a data object to store navigation tree structure-->
 <object id="navigation-tree"

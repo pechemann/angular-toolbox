@@ -7,21 +7,27 @@
  */
 
 import { HttpRequest } from "@angular/common/http";
+import { isDevMode } from "@angular/core";
 import { FetchClientBuilder, HttpMockConfig, httpResponseMock, FetchClientResponseType, FetchClient } from 'projects/angular-toolbox/src/public-api';
 
 // Replace the following value by the path tou you API:
 const VIRTUAL_HOST_PATH: string = "http://angular-toolbox/api/message/";
+
+// Production host path:
+const PROD_HOST_PATH: string = "./php/api/message/";
+
+const gettPath = ()=> isDevMode() ? VIRTUAL_HOST_PATH : PROD_HOST_PATH;
 
 const postMessage = (data: any): FetchClient => {
     const options: RequestInit = {
         method: "POST",
         body: data
     };
-    return FetchClientBuilder.buildFetchClient(VIRTUAL_HOST_PATH, options, FetchClientResponseType.RESPONSE);
+    return FetchClientBuilder.buildFetchClient(gettPath(), options, FetchClientResponseType.RESPONSE);
 }
 
-const getMessage = (id: string): FetchClient => 
-    FetchClientBuilder.buildFetchClient(VIRTUAL_HOST_PATH + "?id=" + id);
+const getMessage = (id: string): FetchClient =>
+    FetchClientBuilder.buildFetchClient(gettPath() + "?id=" + id);
 
 export const MESSAGE_PROXY_MOCK_CONFIG: HttpMockConfig = {
     origin: "https://my-awsome-company.com",

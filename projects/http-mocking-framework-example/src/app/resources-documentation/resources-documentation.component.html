@@ -35,6 +35,8 @@
         </atx-dropdown>
     </div>
     <hr>
-    <atx-mock-documentation [config]="selectedConfig.config" [title]="selectedConfig.label"/>
+    @if (selectedConfig) {
+        <atx-mock-documentation [config]="selectedConfig.config" [title]="selectedConfig.label"/>
+    }
 </main>
 
