@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { ChangeDetectionStrategy, Component, ElementRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewEncapsulation } from '@angular/core';
 import { HttpMethodMock, HttpMockConfig, HttpMockEndpoint } from '../../../../../model';
 import { SafeHtmlPipe } from '../../../../../pipe';
 import { EMPTY_STRING } from '../../../../../util';

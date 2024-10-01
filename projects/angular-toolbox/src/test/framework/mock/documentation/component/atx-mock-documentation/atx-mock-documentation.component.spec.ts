@@ -31,7 +31,6 @@ describe('AtxMockDocumentation', () => {
 
     fixture = TestBed.createComponent(AtxMockDocumentation);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create a new component instance', () => {
@@ -39,25 +38,32 @@ describe('AtxMockDocumentation', () => {
   });
   
   it('should not render anything by default', () => {
-    expect(fixture.nativeElement.shadowRoot.querySelectorAll('section').length).toEqual(0);
+    expect(fixture.nativeElement.querySelectorAll('section').length).toEqual(0);
   });
   
-  it('should create HTML structure when the config property is set', async() => {
-    const shadowRoot: DocumentFragment = fixture.debugElement.nativeElement.shadowRoot;
+  it('should create HTML structure when the config property is set', () => {
+    const elm = fixture.nativeElement;
     component.config = buildMockSkeleton();
     fixture.detectChanges();
-    await fixture.whenStable().then(()=> {
-      console.log("test", shadowRoot)
-      expect(shadowRoot.querySelectorAll('section').length).toEqual(2);
-    });
+    expect(elm.querySelectorAll('section').length).toEqual(2);
+    const h1: HTMLHeadingElement = elm.querySelector('h1');
+    expect(h1.textContent).toEqual(component.title);
+    const h2: HTMLHeadingElement[] = elm.querySelectorAll('h2');
+    expect(h2.length).toEqual(2);
+    expect(h2[0].textContent).toEqual("Description");
+    expect(h2[1].textContent).toEqual("Interceptors");
   });
   
   it('title should be "HTTP Mock API" by default', () => {
-    expect(component.title).toEqual("HTTP Mock API" );
+    expect(component.title).toEqual("HTTP Mock API");
   });
   
-  /*it('title should be displayed when the config property is set', () => {
+  it('title should update the H1 element', () => {
+    const NEW_TITLE: string = "New Title";
+    component.title = NEW_TITLE;
     component.config = buildMockSkeleton();
-    expect(component.title).toEqual("HTTP Mock API" );
-  });*/
+    fixture.detectChanges();
+    const h1: HTMLHeadingElement = fixture.nativeElement.querySelector('h1');
+    expect(h1.textContent).toEqual(NEW_TITLE);
+  });
 });
