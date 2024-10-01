@@ -66,6 +66,7 @@ export class AtxMockDocumentation {
   @Input()
   public set config(value: HttpMockConfig) {
     this.configApi = value;
+    this.expanded = false;
   }
   public get config(): HttpMockConfig {
     return this.configApi;
