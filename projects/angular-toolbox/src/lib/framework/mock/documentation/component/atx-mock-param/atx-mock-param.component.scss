@@ -7,6 +7,10 @@
  */
 
  .param {
+    dt {
+        font-weight: normal;
+        min-width: 70px;
+    }
     dt:before {
         padding-right: 0.2em;
         content: "-";

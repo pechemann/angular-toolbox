@@ -6,103 +6,152 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-h1 {
-    font-size: 1.5em;
-}
+:host, :host::ng-deep {
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    margin: 0;
+    font-size: 0.95em;
 
-h2 {
-    font-size: 1.25em;
-}
+    h1,
+    h2,
+    h3,
+    h4 {
+        font-weight: bold;
+    }
 
-h3 {
-    font-size: 1em;
-    text-decoration: underline;
-}
+    h1 {
+        font-size: 1.5em;
+        margin: 0.67em 0;
+    }
 
-h4 {
-    margin: 0.25em 0;
-}
+    h2 {
+        font-size: 1.25em;
+    }
+    
+    h3 {
+        font-size: 1em;
+        text-decoration: underline;
+    }
+    
+    h4 {
+        font-size: 1em;
+        margin: 0.25em 0;
+    }
 
-details {
-    border: 1px solid #aaa;
-    border-radius: 4px;
-    padding: 0.5em 0.5em 0;
-    margin-bottom: 0.5em;
-}
+    hr {
+        box-sizing: content-box;
+        height: 0;
+        overflow: visible;
+    }
 
-summary {
-    font-weight: bold;
-    margin: -0.5em -0.5em 0;
-    padding: 0.5em;
-}
-
-details[open] {
-    padding: 0.5em 1.5em;
-    summary {
-        border-bottom: 1px solid #aaa;
+    div {
+        margin-top: 1em;
         margin-bottom: 1em;
-        padding: 0.5em 0;
     }
-}
 
-dl {
-    display: flex;
-    margin: 0.5em 0;
-}
+    a {
+        background-color: transparent;
+    }
 
-dt {
-    font-weight: bold;
-}
+    code {
+        font-family: monospace, monospace;
+        font-size: 1.05em;
+        color: orchid;
+    }
 
-dd {
-    margin-inline-start: 10px;
-}
 
-ul {
-    padding-inline-start: 40px;
-}
+    button {
+        font-family: inherit;
+        font-size: 0.9em;
+        line-height: 1.15;
+        margin: 0;
+        text-transform: none;
+        padding: 5px 10px;
+        border: 1px solid #aaa;
+        border-radius: 5px;
+        float: right;
+        margin-top: -45px;
+    }
 
-li {
-    display: flex;
-    align-items: baseline;
-}
+    details {
+        display: block;
+        border: 1px solid #aaa;
+        border-radius: 4px;
+        padding: 0.5em 0.5em 0;
+        margin-bottom: 0.5em;
+    }
 
-.endpoint {
-    padding: 0.25em 1em;
-    background-color: #eee;
-    color: black;
-}
+    summary {
+        display: list-item;
+        font-weight: bold;
+        margin: -0.5em -0.5em 0;
+        padding: 0.5em;
+    }
 
-.description {
-    margin-bottom: 1em;
-}
+    details[open] {
+        padding: 0.5em 1.5em;
+    
+        summary {
+            border-bottom: 1px solid #aaa;
+            margin-bottom: 1em;
+            padding: 0.5em 0;
+        }
+    }
 
-code {
-    color: Orchid;
-}
-
-button {
-    padding: 5px 10px;
-    border: 1px solid #aaa;
-    border-radius: 5px;
-    float: right;
-    margin-top: -45px;
-}
-
-span {
-    text-transform: uppercase;
-    display: inline-block;
-    width: 70px;
-}
-
-.method-descriptor {
-    line-height: 0.95em;
+    dl {
+        display: flex;
+        margin: 0.5em 0;
+    }
+    
     dt {
-        width: 70px;
+        margin: 0;
+        font-weight: bold;
     }
-}
+    
+    dd {
+        margin: 0;
+        margin-inline-start: 10px;
+    }
 
-.atx-mock-param-container {
-    padding-inline-start: 40px;
-    line-height: 0.95em;
+    ul {
+        margin: 0;
+        padding-inline-start: 40px;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+    }
+    
+    li {
+        margin: 0;
+        display: flex;
+        align-items: baseline;
+    }
+    
+    .endpoint {
+        padding: 0.25em 1em;
+        background-color: #eee;
+        color: black;
+    }
+    
+    .description {
+        margin-bottom: 1em;
+    }
+    span {
+        text-transform: uppercase;
+        display: inline-block;
+        width: 80px;
+    }
+    
+    .method-descriptor {
+        line-height: 0.95em;
+        margin: 0;
+        dt {
+            width: 80px;
+        }
+    }
+    
+    .atx-mock-param-container {
+        padding-inline-start: 40px;
+        line-height: 0.95em;
+    }
 }

@@ -10,6 +10,10 @@ import { Component, Input } from '@angular/core';
 import { HttpParameterDescriptor } from '../../../../../model';
 import { SafeHtmlPipe } from '../../../../../pipe';
 
+/**
+ * @private
+ * Displays documentation for HTTP fragment parameters, or query parameters.
+ */
 @Component({
   selector: 'atx-mock-param',
   standalone: true,
@@ -21,6 +25,10 @@ import { SafeHtmlPipe } from '../../../../../pipe';
 })
 export class AtxMockParamComponent {
 
+  /**
+   * @private
+   * The `HttpParameterDescriptor` object that contains information to display.
+   */
   @Input()
   public param!: HttpParameterDescriptor;
 }

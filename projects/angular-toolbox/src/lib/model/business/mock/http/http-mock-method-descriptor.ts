@@ -11,7 +11,7 @@ import { HttpParameterDescriptor } from "./http-mock-parameter-descriptor";
 /**
  * Provides the API to create documentation for a specific HTTP method.
  */
-export interface HttpMockEMethodDescriptor {
+export interface HttpMockMethodDescriptor {
     
     /**
      * The description of the method associated with this descriptor.

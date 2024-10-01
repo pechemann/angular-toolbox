@@ -137,7 +137,7 @@ export const MONITORING_MOCK_CONFIG: HttpMockConfig = {
                         },
                         descriptor: {
                             description: "Sends an email/password pair to authenticate the user.",
-                            payload: "A <code>FormData</code> objects.",
+                            payload: "A <code>FormData</code> object.",
                         }
                     }
                 },
