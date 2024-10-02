@@ -1,0 +1,45 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+ 
+@if (methods.length) {
+    <h3>Methods</h3>
+    <ul>
+        @for (item of methods; track item; let last = $last) {
+            <li>
+                <span>{{ item.method }}</span>
+                @if (item.descriptor) {
+                    <div class="method-descriptor">
+                        @if (item.descriptor.description) {
+                            <atx-mock-description [description]="item.descriptor.description"/>
+                        }
+                        @if (item.descriptor.payload) {
+                            <dl>
+                                <dt>payload:</dt>
+                                <dd [innerHTML]="item.descriptor.payload"></dd>
+                            </dl>
+                        }
+                        @if (item.descriptor.body) {
+                            <dl>
+                                <dt>body:</dt>
+                                <dd [innerHTML]="item.descriptor.body"></dd>
+                            </dl>
+                        }
+                        @if (item.descriptor.queryParams) {
+                            <h4>Query Parameters</h4>
+                            <atx-mock-param [params]="item.descriptor.queryParams"/>
+                        }
+                    </div>
+                
+                }
+            </li>
+            @if (!last) {
+                <hr>
+            }
+        }
+    </ul>
+}

@@ -7,17 +7,12 @@
  */
 
 import { ChangeDetectionStrategy, Component, ElementRef, Input } from '@angular/core';
-import { HttpMethodMock, HttpMockConfig, HttpMockEndpoint } from '../../../../../model';
+import { HttpMockConfig } from '../../../../../model';
 import { EMPTY_STRING } from '../../../../../util';
 import { AtxMockParamComponent } from '../atx-mock-param/atx-mock-param.component';
-import { MethodDocDescriptor } from '../../model/business/method-doc-descriptor.type';
 import { AtxMockDescriptionComponent } from '../atx-mock-description/atx-mock-description.component';
 import { AtxMockFullDescriptionComponent } from '../atx-mock-full-description/atx-mock-full-description.component';
-
-/**
- * @private
- */
-const ROUTE: string = "route";
+import { AtxMockMethodsComponent } from '../atx-mock-methods/atx-mock-methods.component';
 
 /**
  * @private
@@ -30,11 +25,6 @@ const OPEN: string = "open";
 const DETAILS: string = "details";
 
 /**
- * @private
- */
-const DESCRIPTOR: string = "descriptor";
-
-/**
  * An easy-to-use component that displays the documentation of a `HttpMockConfig` object.
  */
 @Component({
@@ -43,7 +33,8 @@ const DESCRIPTOR: string = "descriptor";
   imports: [
     AtxMockParamComponent,
     AtxMockDescriptionComponent,
-    AtxMockFullDescriptionComponent
+    AtxMockFullDescriptionComponent,
+    AtxMockMethodsComponent
   ],
   templateUrl: './atx-mock-documentation.component.html',
   styleUrl: './atx-mock-documentation.component.scss',
@@ -83,24 +74,6 @@ export class AtxMockDocumentation {
    * @private
    */
   constructor(private elmRef: ElementRef) {}
-
-  /**
-   * @private
-   */
-  protected getMethodList(endpoint: HttpMockEndpoint): MethodDocDescriptor[] {
-    const keys: string[] = Object.keys(endpoint);
-    const methods: MethodDocDescriptor[] = [];
-    keys.forEach(key =>{
-      if (key !== ROUTE && key !== DESCRIPTOR) {
-        const mock: HttpMethodMock = (endpoint as any)[key];
-        methods.push({
-          method: key,
-          descriptor: mock.descriptor
-        });
-      }
-    });
-    return methods;
-  }
 
   /**
    * @private
