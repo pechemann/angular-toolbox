@@ -11,17 +11,7 @@
         <h1>{{ title }}</h1>
         <h2>Description</h2>
         @if (configApi.description || configApi.origin) {
-            <div class="description">
-                @if (configApi.description) {
-                    <div [innerHTML]="configApi.description | safeHtml"></div>
-                }
-                @if (configApi.origin) {
-                    <dl>
-                        <dt>origin:</dt>
-                        <dd><a [href]="configApi.origin" [title]="configApi.origin"><code>{{ configApi.origin }}</code></a></dd>
-                    </dl>
-                }
-            </div>
+            <atx-mock-full-description [config]="configApi"/>
         }
     </section>
     <section>
@@ -34,17 +24,7 @@
                         {{ inteceptor.id }}
                     </summary>
                     @if (inteceptor.description || inteceptor.origin) {
-                        <div class="description">
-                            @if (inteceptor.description) {
-                                <div [innerHTML]="inteceptor.description | safeHtml"></div>
-                            }
-                            @if (inteceptor.origin) {
-                                <dl>
-                                    <dt>origin:</dt>
-                                    <dd><a [href]="inteceptor.origin" [title]="inteceptor.origin"><code>{{ inteceptor.origin }}</code></a></dd>
-                                </dl>
-                            }
-                        </div>
+                        <atx-mock-full-description [config]="inteceptor"/>
                     }
                     @for (endpoint of inteceptor.endpoints; track endpoint; let last = $last) {
                         <section class="endpoint">
@@ -54,15 +34,11 @@
                             </dl>
                             @if (endpoint.descriptor) {
                                 @if (endpoint.descriptor.description) {
-                                    <div [innerHTML]="endpoint.descriptor.description | safeHtml"></div>
+                                    <atx-mock-description [description]="endpoint.descriptor.description"/>
                                 }
                                 @if (endpoint.descriptor.params) {
                                     <h3>Parameters</h3>
-                                    <div class="atx-mock-param-container">
-                                        @for (param of endpoint.descriptor.params; track param) {
-                                            <atx-mock-param [param]="param"/>
-                                        }
-                                </div>
+                                    <atx-mock-param [params]="endpoint.descriptor.params"/>
                                 }
                             }
                             <h3>Methods</h3>
@@ -73,7 +49,7 @@
                                         @if (item.descriptor) {
                                             <div class="method-descriptor">
                                                 @if (item.descriptor.description) {
-                                                    <div [innerHTML]="item.descriptor.description"></div>
+                                                    <atx-mock-description [description]="item.descriptor.description"/>
                                                 }
                                                 @if (item.descriptor.payload) {
                                                     <dl>
@@ -89,11 +65,7 @@
                                                 }
                                                 @if (item.descriptor.queryParams) {
                                                     <h4>Query Parameters</h4>
-                                                    <div class="atx-mock-param-container">
-                                                        @for (param of item.descriptor.queryParams; track param) {
-                                                            <atx-mock-param [param]="param"/>
-                                                        }
-                                                    </div>
+                                                    <atx-mock-param [params]="item.descriptor.queryParams"/>
                                                 }
                                             </div>
                                            

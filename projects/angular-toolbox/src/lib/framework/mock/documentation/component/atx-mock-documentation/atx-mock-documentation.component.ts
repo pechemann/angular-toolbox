@@ -6,12 +6,13 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input } from '@angular/core';
 import { HttpMethodMock, HttpMockConfig, HttpMockEndpoint } from '../../../../../model';
-import { SafeHtmlPipe } from '../../../../../pipe';
 import { EMPTY_STRING } from '../../../../../util';
 import { AtxMockParamComponent } from '../atx-mock-param/atx-mock-param.component';
 import { MethodDocDescriptor } from '../../model/business/method-doc-descriptor.type';
+import { AtxMockDescriptionComponent } from '../atx-mock-description/atx-mock-description.component';
+import { AtxMockFullDescriptionComponent } from '../atx-mock-full-description/atx-mock-full-description.component';
 
 /**
  * @private
@@ -40,8 +41,9 @@ const DESCRIPTOR: string = "descriptor";
   selector: 'atx-mock-documentation',
   standalone: true,
   imports: [
-    SafeHtmlPipe,
-    AtxMockParamComponent
+    AtxMockParamComponent,
+    AtxMockDescriptionComponent,
+    AtxMockFullDescriptionComponent
   ],
   templateUrl: './atx-mock-documentation.component.html',
   styleUrl: './atx-mock-documentation.component.scss',
@@ -77,6 +79,9 @@ export class AtxMockDocumentation {
     return this.configApi;
   }
 
+  /**
+   * @private
+   */
   constructor(private elmRef: ElementRef) {}
 
   /**

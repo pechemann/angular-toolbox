@@ -12,10 +12,16 @@ import { HttpParameterDescriptor } from 'projects/angular-toolbox/src/public-api
 
 describe('AtxMockParamaComponent', () => {
 
-  const param: HttpParameterDescriptor = {
-    ref: "param-ref",
-    description : "param description"
-  };
+  const params: HttpParameterDescriptor[] = [
+    {
+      ref: "param-ref-1",
+      description : "param description-1"
+    },
+    {
+      ref: "param-ref-2",
+      description : "param description-2"
+    }
+  ];
 
   let component: AtxMockParamComponent;
   let fixture: ComponentFixture<AtxMockParamComponent>;
@@ -28,7 +34,6 @@ describe('AtxMockParamaComponent', () => {
 
     fixture = TestBed.createComponent(AtxMockParamComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create a new component instance', () => {
@@ -39,36 +44,45 @@ describe('AtxMockParamaComponent', () => {
     expect(fixture.nativeElement.querySelector('dl')).toBeNull();
   });
 
-  it('should create a data list with "param" as css class', () => {
-    component.param = param;
+  it('should create a set if data list with "param" as css class', () => {
+    component.params = params;
     fixture.detectChanges();
-    const dl = fixture.nativeElement.querySelector('dl');
-    expect(dl).not.toBeNull();
-    expect(dl.classList.contains("param")).toBeTrue();
+    const dl = fixture.nativeElement.querySelectorAll('dl');
+    expect(dl.length).toEqual(2);
+    dl.forEach((elm: any) => expect(elm.classList.contains("param")).toBeTrue());
   });
   
   it('should display the parameter ref value', () => {
-    component.param = param;
+    component.params = params;
     fixture.detectChanges();
-    const dtCode = fixture.nativeElement.querySelector('dt code');
-    expect(dtCode.textContent).toEqual(param.ref);
+    const dtCode = fixture.nativeElement.querySelectorAll('dt code');
+    let i: number = 0;
+    dtCode.forEach((elm: any) => {
+      expect(elm.textContent).toEqual(params[i].ref);
+      ++i;
+    });
   });
   
   it('should display the parameter description value', () => {
-    component.param = param;
+    component.params = params;
     fixture.detectChanges();
-    const dd = fixture.nativeElement.querySelector('dd');
-    expect(dd.textContent).toEqual(param.description);
+    const dd = fixture.nativeElement.querySelectorAll('dd');
+    let i: number = 0;
+    dd.forEach((elm: any) => {
+      expect(elm.textContent).toEqual(params[i].description);
+      ++i;
+    });
   });
   
   it('should render HTML tags', () => {
+    const desc: string = "param description";
     const htmlParam: HttpParameterDescriptor = {
       ref: "param-ref",
-      description : `<h3>${param.description}</h3>`
+      description : `<em>${desc}</em>`
     };
-    component.param = htmlParam;
+    component.params = [ htmlParam ];
     fixture.detectChanges();
-    const h3 = fixture.nativeElement.querySelector('h3');
-    expect(h3.textContent).toEqual(param.description);
+    const h3 = fixture.nativeElement.querySelector('em');
+    expect(h3.textContent).toEqual(desc);
   });
 });

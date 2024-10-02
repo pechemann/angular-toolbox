@@ -7,28 +7,26 @@
  */
 
 import { Component, Input } from '@angular/core';
-import { HttpParameterDescriptor } from '../../../../../model';
 import { SafeHtmlPipe } from '../../../../../pipe';
 
 /**
  * @private
- * Displays documentation for HTTP fragment parameters, or query parameters.
+ * A conmponent that renders mock config description ppoperties.
  */
 @Component({
-  selector: 'atx-mock-param',
+  selector: 'atx-mock-description',
   standalone: true,
   imports: [
     SafeHtmlPipe
   ],
-  templateUrl: './atx-mock-param.component.html',
-  styleUrl: './atx-mock-param.component.scss'
+  templateUrl: './atx-mock-description.component.html'
 })
-export class AtxMockParamComponent {
+export class AtxMockDescriptionComponent {
 
   /**
    * @private
-   * The list of `HttpParameterDescriptor` object that contains information to display.
+   * The description to render. Can contains HTML tags.
    */
   @Input()
-  public params!: HttpParameterDescriptor[];
+  public description!: string;
 }
