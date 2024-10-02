@@ -7,7 +7,7 @@
 -->
 
 <nav class="page-menu col-xl-3 ps-4">
-    <aside class="w-100">
+    <aside class="w-100 mb-4">
         <h5 class="mb-4">In this topic</h5>
         <ul class="list-group">
             <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/http-mocking-framework','api'])">
@@ -22,6 +22,13 @@
             </a></li>
         </ul>
     </aside>
+    <section class="w-100">
+        <h5 class="mb-4">On this page</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="#title" onclick="appBridge.goToAnchor(event)" title="title">title</a></li>
+            <li class="list-group-item"><a href="#config" onclick="appBridge.goToAnchor(event)" title="config">config</a></li>
+        </ul>
+    </section>
 </nav>
 
 <header class="fs-5 col-xl-9 mb-4">
@@ -34,33 +41,31 @@
 </header>
 
 <section class="col-xl-9">
-    <h3><code>HttpParameterDescriptor</code> Interface</h3>
-    <div class="version-info text-end mb-4 me-3">
-        <small>Since <span class="badge text-bg-warning rounded-pill">v 1.4.1</span></small>
-    </div>
+    <h3><code>AtxMockDocumentation</code></h3>
     <p>
-        <code>HttpParameterDescriptor</code> objects provide the API to create documentation for a specific HTTP parameter, or query string parameter.
+        An easy-to-use component that displays the documentation of a <code>HttpMockConfig</code> object.
+    </p>
+    <pre><code class="language-html">&lt;atx-mock-documentation [config]="MOCK_CONFIG"/&gt;</code></pre>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="add-config"><code>AtxMockDocumentation.title</code></h3>
+    <pre><code class="language-typescript">@Input() title: string</code></pre>
+    <p>
+        Specifies the title of the current mocked API.
     </p>
 </section>
 
 <section class="col-xl-9 mb-4">
-    <h3 id="destroy"><code>HttpParameterDescriptor.description</code></h3>
-    <pre><code class="language-typescript">description: string</code></pre>
+    <h3 id="config"><code>AtxMockDocumentation.config</code></h3>
+    <pre><code class="language-typescript">@Input() set config(value: HttpMockConfig)
+         get config(): HttpMockConfig</code></pre>
     <p>
-        The description of the HTTP parameter, or query string parameter, associated with this descriptor. <em>(Supports rendering of HTML tags.)</em>
+        Gets or sets the <code>HttpMockConfig</code> object for which to display documentation.
     </p>
 </section>
-
-<section class="col-xl-9 mb-4">
-    <h3 id="destroy"><code>HttpParameterDescriptor.ref</code></h3>
-    <pre><code class="language-typescript">ref: string</code></pre>
-    <p>
-        The string referrence to the HTTP parameter, or query string parameter, associated with this descriptor.
-    </p>
-</section>
-
 
 <!-- We use a data object to store navigation tree structure-->
 <object id="navigation-tree"
-        data-tree="[{ 'label': 'HTTP Mocking Framework', 'path': 'http-mocking-framework' }, { 'label': 'API', 'path': 'http-mocking-framework/api' }, { 'label': 'HttpParameterDescriptor' }]">
+        data-tree="[{ 'label': 'HTTP Mocking Framework', 'path': 'http-mocking-framework' }, { 'label': 'API', 'path': 'http-mocking-framework/api' }, { 'label': 'AtxMockDocumentation' }]">
 </object>
