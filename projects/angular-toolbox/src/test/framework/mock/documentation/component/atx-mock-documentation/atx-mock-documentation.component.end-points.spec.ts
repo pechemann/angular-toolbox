@@ -116,5 +116,22 @@ describe('AtxMockDocumentation: Endpoints', () => {
     const fullDesc = elm.query(By.css("atx-mock-methods"));
     expect(fullDesc.componentInstance.endpoint).toBe(endPoint);
   });
+  
+  it('should add separations between endpoints', () => {
+    const elm = fixture.nativeElement;
+    const cfg: HttpMockConfig = buildMockSkeleton();
+    const interceptor = buildInterceptorSkeleton();
+    interceptor.endpoints = [
+      buildEndpointSkeleton("route/test/1"),
+      buildEndpointSkeleton("route/test/2"),
+      buildEndpointSkeleton("route/test/3")
+    ];
+    cfg.interceptors = [ interceptor ];
+    component.config = cfg;
+    fixture.detectChanges();
+    const details = elm.querySelector("details");
+    expect(details.querySelectorAll('hr').length).toEqual(2);
+    //expect(details.lastChild.nodeName).toEqual("section");
+  });
 });
 
