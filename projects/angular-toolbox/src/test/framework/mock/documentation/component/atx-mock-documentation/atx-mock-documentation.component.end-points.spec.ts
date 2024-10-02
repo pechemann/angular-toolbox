@@ -11,6 +11,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AtxMockDocumentation } from '../../../../../../lib/framework/mock/documentation/component/atx-mock-documentation/atx-mock-documentation.component';
 import { HttpMockConfig, HttpMockEndpoint } from 'projects/angular-toolbox/src/public-api';
 import { buildEndpointSkeleton, buildInterceptorSkeleton, buildMockSkeleton } from './atx-mock-documentation.component.test.util';
+import { By } from '@angular/platform-browser';
 
 describe('AtxMockDocumentation: Endpoints', () => {
   let component: AtxMockDocumentation;
@@ -69,68 +70,51 @@ describe('AtxMockDocumentation: Endpoints', () => {
     expect(endpoint.querySelector("atx-mock-param")).toBeNull();
   });
 
-  /*
-  
-  it('full description should not be available by default', () => {
-    const elm = fixture.nativeElement;
-    const cfg: HttpMockConfig = buildMockSkeleton();
-    const interceptors = [
-      buildInterceptorSkeleton(),
-      buildInterceptorSkeleton()
-    ];
-    cfg.interceptors = interceptors;
-    component.config = cfg;
-    fixture.detectChanges();
-    const fullDesc = elm.querySelectorAll("atx-mock-full-description");
-    expect(fullDesc.length).toEqual(0);
-  });
-  
-  it('full description should be available if description is set', () => {
-    const elm = fixture.nativeElement;
-    const cfg: HttpMockConfig = buildMockSkeleton();
-    const interceptor = buildInterceptorSkeleton()
-    interceptor.description = "Lorem ipsum";
-    cfg.interceptors = [ interceptor ];
-    component.config = cfg;
-    fixture.detectChanges();
-    const fullDesc = elm.querySelector("atx-mock-full-description");
-    expect(fullDesc).toBeTruthy();
-  });
-  
-  it('full description config should be set if description is set', () => {
+  it('description should be available if descriptor.description is set', () => {
     const elm = fixture.debugElement;
     const cfg: HttpMockConfig = buildMockSkeleton();
-    const interceptor = buildInterceptorSkeleton()
-    interceptor.description = "Lorem ipsum";
+    const endPoint: HttpMockEndpoint = buildEndpointSkeleton("route/test");
+    const interceptor = buildInterceptorSkeleton();
+    endPoint.descriptor = {
+      description: "Lorem ipsum"
+    };
+    interceptor.endpoints = [endPoint];
     cfg.interceptors = [ interceptor ];
     component.config = cfg;
     fixture.detectChanges();
-    const fullDesc = elm.query(By.css("atx-mock-full-description"));
-    expect(fullDesc.componentInstance.config).toBe(interceptor);
+    const fullDesc = elm.query(By.css("atx-mock-description"));
+    expect(fullDesc.componentInstance.description).toBe(endPoint.descriptor.description);
+  });
+  
+  it('parameters should be available if descriptor.params is set', () => {
+    const elm = fixture.debugElement;
+    const cfg: HttpMockConfig = buildMockSkeleton();
+    const endPoint: HttpMockEndpoint = buildEndpointSkeleton("route/test");
+    const interceptor = buildInterceptorSkeleton();
+    endPoint.descriptor = {
+      params: []
+    };
+    interceptor.endpoints = [endPoint];
+    cfg.interceptors = [ interceptor ];
+    component.config = cfg;
+    fixture.detectChanges();
+    const fullDesc = elm.query(By.css("atx-mock-param"));
+    expect(fullDesc.componentInstance.params).toBe(endPoint.descriptor.params);
+    const h3 = elm.nativeElement.querySelector("h3");
+    expect(h3.textContent).toEqual("Parameters");
   });
 
-  it('full description should be available if origin is set', () => {
-    const elm = fixture.nativeElement;
-    const cfg: HttpMockConfig = buildMockSkeleton();
-    const interceptor = buildInterceptorSkeleton()
-    interceptor.origin = "Lorem ipsum";
-    cfg.interceptors = [ interceptor ];
-    component.config = cfg;
-    fixture.detectChanges();
-    const fullDesc = elm.querySelector("atx-mock-full-description");
-    expect(fullDesc).toBeTruthy();
-  });
-  
-  it('full description config should be set if origin is set', () => {
+  it('AtxMockMethodsComponent should be available by default', () => {
     const elm = fixture.debugElement;
     const cfg: HttpMockConfig = buildMockSkeleton();
-    const interceptor = buildInterceptorSkeleton()
-    interceptor.origin = "Lorem ipsum";
+    const endPoint: HttpMockEndpoint = buildEndpointSkeleton("route/test");
+    const interceptor = buildInterceptorSkeleton();
+    interceptor.endpoints = [endPoint];
     cfg.interceptors = [ interceptor ];
     component.config = cfg;
     fixture.detectChanges();
-    const fullDesc = elm.query(By.css("atx-mock-full-description"));
-    expect(fullDesc.componentInstance.config).toBe(interceptor);
-  });*/
+    const fullDesc = elm.query(By.css("atx-mock-methods"));
+    expect(fullDesc.componentInstance.endpoint).toBe(endPoint);
+  });
 });
 

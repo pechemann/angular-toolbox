@@ -22,6 +22,10 @@ const ROUTE: string = "route";
  */
 const DESCRIPTOR: string = "descriptor";
 
+/**
+ * @private
+ * A convenient component that allows to display documentation for HTTP methods of an endpoint.
+ */
 @Component({
   selector: 'atx-mock-methods',
   standalone: true,
@@ -43,6 +47,10 @@ export class AtxMockMethodsComponent {
    */
   private _endpoint!: HttpMockEndpoint;
 
+  /**
+   * @private
+   * The endpoint for which to show HTTP methods documentation.
+   */
   @Input()
   public set endpoint(value: HttpMockEndpoint) {
     this._endpoint = value;
