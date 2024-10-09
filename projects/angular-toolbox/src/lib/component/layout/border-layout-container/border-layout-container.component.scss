@@ -20,7 +20,7 @@ $handle-size: 4px;
         top: 0;
         left: 0;
         right: 0;
-        .atx-handle {
+        > .atx-handle {
             left: 0;
             right: 0;
             bottom: 0;
@@ -34,7 +34,7 @@ $handle-size: 4px;
         z-index: 5;
         left: 0;
         height: unset !important;
-        .atx-handle {
+        > .atx-handle {
             right: 0;
             bottom: 0;
             top: 0 ;
@@ -48,7 +48,7 @@ $handle-size: 4px;
         z-index: 5;
         right: 0;
         height: unset !important;
-        .atx-handle {
+        > .atx-handle {
             left: 0;
             bottom: 0;
             top: 0;
@@ -63,7 +63,7 @@ $handle-size: 4px;
         bottom: 0;
         left: 0;
         right: 0;
-        .atx-handle {
+        > .atx-handle {
             left: 0;
             right: 0;
             top: 0;
