@@ -63,7 +63,8 @@ export class BorderLayoutRenderer extends IdentifiableComponent implements Destr
   /**
    * @private
    */
-  constructor(private subscribeSvc: SubscriptionService) {
+  constructor(private subscribeSvc: SubscriptionService,
+              private document: Document) {
     super();
     this.boundsManager = new BorderLayoutBoundsManager();
   }
@@ -178,7 +179,7 @@ export class BorderLayoutRenderer extends IdentifiableComponent implements Destr
       event.preventDefault();
       event.stopPropagation();
       lytNativeElm.removeEventListener(MOUSEMOVE, onMoveHandler);
-      lytNativeElm.removeEventListener(MOUSEUP, onStopHandler);
+      this.document.removeEventListener(MOUSEUP, onStopHandler);
       container.selected = false;
       size = resizeMethod(event, width, height, minSize, maxSize);
       container.setSize(size);
@@ -186,7 +187,7 @@ export class BorderLayoutRenderer extends IdentifiableComponent implements Destr
       this.fireEvent(container, LayoutDragEventType.DRAG_STOP);
     };
     lytNativeElm.addEventListener(MOUSEMOVE, onMoveHandler);
-    lytNativeElm.addEventListener(MOUSEUP, onStopHandler);
+    this.document.addEventListener(MOUSEUP, onStopHandler);
     this.fireEvent(container, LayoutDragEventType.DRAG_START);
   }
 
