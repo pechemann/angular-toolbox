@@ -23,11 +23,6 @@ describe('BorderLayoutBoundsManager', () => {
         manager = new BorderLayoutBoundsManager();
     });
 
-    afterEach(() => {
-        manager.destroy();
-        manager = null as any;
-    });
-
     it('should create a new instance', () => {
         expect(manager).toBeTruthy();
     });
@@ -85,11 +80,6 @@ describe('BorderLayoutBoundsManager: resizing methods', () => {
 
     beforeEach(async () => {
         manager = new BorderLayoutBoundsManager();
-    });
-
-    afterEach(() => {
-        manager.destroy();
-        manager = null as any;
     });
 
     it('northResize() should update size from the origin and the mouse position only', () => {

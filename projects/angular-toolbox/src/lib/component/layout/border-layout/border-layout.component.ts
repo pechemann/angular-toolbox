@@ -30,19 +30,19 @@ export class BorderLayout extends IdentifiableComponent implements AfterViewInit
    * Emits events each time the user starts dragging a region handle.
    */
   @Output()
-  public readonly dragStart: EventEmitter<LayoutDragEvent> = new EventEmitter(false);
+  public readonly dragStart: EventEmitter<LayoutDragEvent> = new EventEmitter();
 
   /**
    * Emits events each time the user stops dragging a region handle.
    */
   @Output()
-  public readonly dragStop: EventEmitter<LayoutDragEvent> = new EventEmitter(false);
+  public readonly dragStop: EventEmitter<LayoutDragEvent> = new EventEmitter();
 
   /**
    * Emits events each time the user is dragging a region handle.
    */
   @Output()
-  public readonly dragging: EventEmitter<LayoutDragEvent> = new EventEmitter(false);
+  public readonly dragging: EventEmitter<LayoutDragEvent> = new EventEmitter();
   
   /**
    * @private
