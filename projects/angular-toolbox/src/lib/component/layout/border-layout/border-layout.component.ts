@@ -6,11 +6,12 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { AfterViewInit, Component, ContentChildren, OnDestroy, ElementRef, ViewChild, HostListener, QueryList, EventEmitter, Output } from '@angular/core';
+import { AfterViewInit, Component, ContentChildren, OnDestroy, ElementRef, ViewChild, HostListener, QueryList, EventEmitter, Output, Inject } from '@angular/core';
 import { BorderLayoutContainer } from '../border-layout-container/border-layout-container.component';
 import { LayoutDragEvent, LayoutDragEventType, LayoutRegion, LayoutRegionType, SubscriptionService } from '../../../model';
 import { BorderLayoutRenderer } from './util/border-layout-renderer';
 import { IdentifiableComponent } from '../../../core';
+import { DOCUMENT } from '@angular/common';
 
 /**
  * A border layout lays out a container, arranging and resizing its components to fit in five regions: north, south, east, west, and center.
@@ -29,19 +30,19 @@ export class BorderLayout extends IdentifiableComponent implements AfterViewInit
    * Emits events each time the user starts dragging a region handle.
    */
   @Output()
-  public readonly dragStart: EventEmitter<LayoutDragEvent> = new EventEmitter(false);
+  public readonly dragStart: EventEmitter<LayoutDragEvent> = new EventEmitter();
 
   /**
    * Emits events each time the user stops dragging a region handle.
    */
   @Output()
-  public readonly dragStop: EventEmitter<LayoutDragEvent> = new EventEmitter(false);
+  public readonly dragStop: EventEmitter<LayoutDragEvent> = new EventEmitter();
 
   /**
    * Emits events each time the user is dragging a region handle.
    */
   @Output()
-  public readonly dragging: EventEmitter<LayoutDragEvent> = new EventEmitter(false);
+  public readonly dragging: EventEmitter<LayoutDragEvent> = new EventEmitter();
   
   /**
    * @private
@@ -73,9 +74,10 @@ export class BorderLayout extends IdentifiableComponent implements AfterViewInit
   /**
    * @private
    */
-  constructor(private subscribeSvc: SubscriptionService) {
+  constructor(private subscribeSvc: SubscriptionService,
+              @Inject(DOCUMENT) document: Document) {
     super();
-    this.renderer = new BorderLayoutRenderer(subscribeSvc);
+    this.renderer = new BorderLayoutRenderer(subscribeSvc, document);
     subscribeSvc.register(this,
       this.renderer.userAction.subscribe((event: LayoutDragEvent)=> {
         event.layout = this;

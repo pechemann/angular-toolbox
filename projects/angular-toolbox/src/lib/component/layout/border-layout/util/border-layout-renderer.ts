@@ -43,7 +43,7 @@ export class BorderLayoutRenderer extends IdentifiableComponent implements Destr
   /**
    * Emits events each time the user starts, or stops dragging handle.
    */
-  public readonly userAction: EventEmitter<LayoutDragEvent> = new EventEmitter(false);
+  public readonly userAction: EventEmitter<LayoutDragEvent> = new EventEmitter();
 
   /**
    * @private
@@ -63,7 +63,18 @@ export class BorderLayoutRenderer extends IdentifiableComponent implements Destr
   /**
    * @private
    */
-  constructor(private subscribeSvc: SubscriptionService) {
+  private storedStopHandler: any = null;
+
+  /**
+   * @private
+   */
+  private storedMoveHandler: any = null;
+
+  /**
+   * @private
+   */
+  constructor(private subscribeSvc: SubscriptionService,
+              private document: Document) {
     super();
     this.boundsManager = new BorderLayoutBoundsManager();
   }
@@ -113,12 +124,17 @@ export class BorderLayoutRenderer extends IdentifiableComponent implements Destr
    * Makes this object elligible for garbage collection.
    */
   public destroy(): void {
+    if (this.storedStopHandler) {
+      this.document.removeEventListener(MOUSEMOVE, this.storedMoveHandler);
+      this.document.removeEventListener(MOUSEUP, this.storedStopHandler);
+      this.deleteStoredHandlers();
+    }
     this.subscribeSvc.clearAll(this);
-    this.containerList.length = 0;
-    this.containerList = null as any;
     this.lytContainerElm = null as any;
     this.boundsManager.destroy();
     this.boundsManager = null as any;
+    this.containerList.length = 0;
+    this.containerList = null as any;
   }
 
   /**
@@ -162,32 +178,36 @@ export class BorderLayoutRenderer extends IdentifiableComponent implements Destr
     const region: LayoutRegion = constraints.region as LayoutRegion;
     const minSize: number | undefined = constraints.minSize;
     const maxSize: number | undefined = constraints.maxSize;
+    const doc: Document = this.document;
     let size: number = 0;
     this.boundsManager.setOrigin(bounds.x, bounds.y);
     let resizeMethod: ResizeMethod = this.boundsManager.getResizeMethod(region);
     container.selected = true;
     const onMoveHandler = (event: MouseEvent)=> {
-      event.preventDefault();
       event.stopPropagation();
+      event.preventDefault();
       size = resizeMethod(event, width, height, minSize, maxSize);
       container.setSize(size);
       this.render(width);
       this.fireEvent(container, LayoutDragEventType.DRAGGING);
     };
     const onStopHandler = (event: MouseEvent)=> {
-      event.preventDefault();
       event.stopPropagation();
-      lytNativeElm.removeEventListener(MOUSEMOVE, onMoveHandler);
-      lytNativeElm.removeEventListener(MOUSEUP, onStopHandler);
+      event.preventDefault();
+      doc.removeEventListener(MOUSEMOVE, onMoveHandler);
+      doc.removeEventListener(MOUSEUP, onStopHandler);
+      this.deleteStoredHandlers();
       container.selected = false;
       size = resizeMethod(event, width, height, minSize, maxSize);
       container.setSize(size);
       this.render(width);
       this.fireEvent(container, LayoutDragEventType.DRAG_STOP);
     };
-    lytNativeElm.addEventListener(MOUSEMOVE, onMoveHandler);
-    lytNativeElm.addEventListener(MOUSEUP, onStopHandler);
+    this.storedMoveHandler = onMoveHandler;
+    this.storedStopHandler = onStopHandler;
     this.fireEvent(container, LayoutDragEventType.DRAG_START);
+    doc.addEventListener(MOUSEMOVE, onMoveHandler);
+    doc.addEventListener(MOUSEUP, onStopHandler);
   }
 
   /**
@@ -207,30 +227,45 @@ export class BorderLayoutRenderer extends IdentifiableComponent implements Destr
     const bottom: number = bounds.bottom;
     const left: number = bounds.left;
     const right: number = bounds.right;
-    this.containerList.forEach((cont: BorderLayoutContainer) => {
+    const cList: BorderLayoutContainer[] = this.containerList;
+    let cursor: number = cList.length - 1;
+    while(cursor >= 0) {
+      const cont: BorderLayoutContainer = cList[cursor];
       const r: LayoutRegion = cont.constraints.region as LayoutRegion;
+      cursor--;
       if (r === LayoutRegion.WEST) {
         cont.setTopPos(top);
         cont.setRightPos(width - left);
         cont.setBottomPos(bottom - top);
-        return;
+        continue;
       }
       if (r === LayoutRegion.CENTER) {
         cont.setTopPos(top);
         cont.setLeftPos(left);
         cont.setRightPos(right - left);
         cont.setBottomPos(bottom - top);
-        return;
+        continue;
       }
       if (r === LayoutRegion.EAST) {
         cont.setTopPos(top);
         cont.setLeftPos(width - (right - left));
         cont.setBottomPos(bottom - top);
+        continue;
       }
-    });
+    };
   }
 
+  /**
+   * @private
+   */
   private checkLytContainer(): void {
     if (!this.lytContainerElm) throw new ReferenceError(LAYOUT_ERR_MSG);
+  }
+  
+  /**
+   * @private
+   */
+  private deleteStoredHandlers(): void {
+    this.storedMoveHandler = this.storedStopHandler = null;
   }
 }

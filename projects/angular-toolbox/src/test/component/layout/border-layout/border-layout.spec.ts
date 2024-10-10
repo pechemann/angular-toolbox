@@ -87,7 +87,7 @@ describe('BorderLayout', () => {
         renderer.userAction.emit(new LayoutDragEvent(container, LayoutDragEventType.DRAGGING));
     });
     
-    it('stoping resizing a container should emit a LayoutDragEvent of type DRAG_STOP', (done) => {
+    it('stopping resizing a container should emit a LayoutDragEvent of type DRAG_STOP', (done) => {
         const container: any = {};
         const renderer: BorderLayoutRenderer = component.getRenderer();
         const sub = component.dragStop.subscribe(event=> {

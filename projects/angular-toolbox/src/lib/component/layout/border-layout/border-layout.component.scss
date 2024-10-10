@@ -16,30 +16,12 @@ $handle-size: 4px;
     overflow: hidden;
 }
 
-.atx-border-layout,
-.atx-border-layout * {
+.atx-border-layout {
     box-sizing: border-box;
 }
 
-.atx-border-layout .content {
-    height: 100%;
-    width: 100%;
-    overflow: auto;
-}
-
-.atx-border-layout .drag {
-    position: absolute;
-    border: 2px solid black;
-}
-
-
-:host ::ng-deep {
-    .atx-handle {
-        position: absolute;
-    }
-    .atx-handle:hover, .atx-handle.atx-handle-selected {
-        background-color: var(--atx-handle-color, #469afa);
-    }
+/*:host ::ng-deep {
+    
     .north {
         position: absolute;
         z-index: 10;
@@ -101,4 +83,4 @@ $handle-size: 4px;
     .center {
         position: absolute;
     }
-}
+}*/
