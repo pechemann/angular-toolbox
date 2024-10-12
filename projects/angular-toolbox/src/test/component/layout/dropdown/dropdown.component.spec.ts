@@ -161,7 +161,7 @@ describe('DropdownComponent', () => {
     expect(popover.classList.contains("atx-dropdown-centered")).toBeTrue();
   });
 
-  it('isOpened() should be false by default', () => {
+  it('isOpened() should return false by default', () => {
     expect(component.isOpened()).toBeFalse();
   });
 
@@ -172,7 +172,7 @@ describe('DropdownComponent', () => {
     expect(popover.matches(":popover-open")).toBeTrue();
   });
 
-  it('isOpened() should be true affer invoking the showContent() method', () => {
+  it('isOpened() should return true affer invoking the showContent() method', () => {
     component.showContent();
     fixture.detectChanges();
     expect(component.isOpened()).toBeTrue();
@@ -187,7 +187,7 @@ describe('DropdownComponent', () => {
     expect(popover.matches(":popover-open")).toBeFalse();
   });
 
-  it('isOpened() should be false affer invoking the hideContent() method', () => {
+  it('isOpened() should return false affer invoking the hideContent() method', () => {
     component.showContent();
     fixture.detectChanges();
     component.hideContent();
@@ -195,14 +195,14 @@ describe('DropdownComponent', () => {
     expect(component.isOpened()).toBeFalse();
   });
 
-  it('isOpened() should be true affer clicking the button to show the content', () => {
+  it('isOpened() should return true affer clicking the button to show the content', () => {
     const btn = fixture.nativeElement.querySelector("button");
     btn.dispatchEvent(new MouseEvent("click"));
     fixture.detectChanges();
     expect(component.isOpened()).toBeTrue();
   });
 
-  it('isOpened() should be false affer clicking the button to hide the content', () => {
+  it('isOpened() should return false affer clicking the button to hide the content', () => {
     component.showContent();
     fixture.detectChanges();
     const btn = fixture.nativeElement.querySelector("button");
@@ -342,6 +342,32 @@ describe('DropdownComponent', () => {
     });
     component.showContent();
     fixture.detectChanges();
+  });
+
+  it('disabled should be false by default', () => {
+    expect(component.disabled).toBeFalse();
+  });
+
+  it('should disable the dropbox button when disabled is true', () => {
+    const btn = fixture.nativeElement.querySelector("button");
+    component.disabled = true;
+    fixture.detectChanges();
+    expect(btn.disabled).toBeTrue();
+  });
+
+  it('should hide the dropbox content when setting disabled to true', () => {
+    spyOn(component, 'hideContent');
+    component.disabled = true;
+    fixture.detectChanges();
+    expect(component.hideContent).toHaveBeenCalled();
+  });
+
+  it('should prevent the dropbox content to be displayed when disabled is true', () => {
+    const popover: any = document.getElementById(component.getID().toString());
+    component.disabled = true;
+    component.showContent();
+    fixture.detectChanges();
+    expect(popover.matches(":popover-open")).toBeFalse();
   });
 });
 

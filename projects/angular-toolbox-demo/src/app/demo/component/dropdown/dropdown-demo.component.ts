@@ -31,6 +31,7 @@ export class DropdownDemoComponent {
   protected hPos: DropdownHorizontalPosition = "left";
   protected popoverState: PopoverState = "auto";
   protected selectedItem: number = 0;
+  protected disabled: boolean = false;
 
   constructor(breadcrumb: BreadcrumbService) {
     breadcrumb.removeAll()
