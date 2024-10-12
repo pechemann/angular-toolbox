@@ -15,6 +15,7 @@
             <li class="list-group-item"><a href="#vPos" onclick="appBridge.goToAnchor(event)" title="vPos">vPos</a></li>
             <li class="list-group-item"><a href="#hPos" onclick="appBridge.goToAnchor(event)" title="hPos">hPos</a></li>
             <li class="list-group-item"><a href="#popoverState" onclick="appBridge.goToAnchor(event)" title="popoverState">popoverState</a></li>
+            <li class="list-group-item"><a href="#disabled" onclick="appBridge.goToAnchor(event)" title="disabled">disabled</a></li>
             <li class="list-group-item"><a href="#hideContent" onclick="appBridge.goToAnchor(event)" title="hideContent">hideContent()</a></li>
             <li class="list-group-item"><a href="#showContent" onclick="appBridge.goToAnchor(event)" title="showContent">showContent()</a></li>
             <li class="list-group-item"><a href="#isOpened" onclick="appBridge.goToAnchor(event)" title="isOpened">isOpened()</a></li>
@@ -120,6 +121,20 @@
         Default value is <code>"auto"</code>.
         <br>
         See the <a href="javascript:appBridge.navigate(['resources/documentation/dropdown-container','/popover-state'])"><code>PopoverState</code> API</a> for details.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="disabled"><code>DropdownComponent.disabled</code></h3>
+    <div class="version-info text-end mb-4 me-3">
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 1.4.3</span></small>
+    </div>
+    <pre><code class="language-typescript">@Input() set disabled(value: boolean)
+get disabled(): boolean</code></pre>
+    <p>
+        The disabled property sets or returns whether a dropdown is disabled (<code>true</code>), or not (<code>false</code>).
+        <br>
+        Default value is <code>false</code>.
     </p>
 </section>
 
