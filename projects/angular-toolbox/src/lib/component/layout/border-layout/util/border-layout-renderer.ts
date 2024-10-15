@@ -9,7 +9,7 @@
 import { EventEmitter, QueryList } from '@angular/core';
 import { BorderLayoutContainer } from '../../border-layout-container/border-layout-container.component';
 import { EMPTY_STRING } from '../../../../util';
-import { Destroyable, LayoutConstraints, LayoutDragEvent, LayoutDragEventType, LayoutRegion, SubscriptionService } from '../../../../model';
+import { Destroyable, LayoutConstraints, LayoutDragEvent, LayoutDragEventType, LayoutRegion, LayoutRegionType, SubscriptionService, LayoutRegionError } from '../../../../model';
 import { IdentifiableComponent } from '../../../../core';
 import { BorderLayoutBoundsManager } from './border-layout-bounds-manager';
 import { ResizeMethod } from './resize-method';
@@ -89,13 +89,11 @@ export class BorderLayoutRenderer extends IdentifiableComponent implements Destr
     containers.forEach(container => {
       const constraints: LayoutConstraints = container.constraints;
       const r: string = constraints.region as string;
-      if (regionValidator.indexOf(r) !== -1) throw new SyntaxError(REGION_ERR_MSG + r);
+      if (regionValidator.indexOf(r) !== -1) throw new LayoutRegionError(REGION_ERR_MSG + r);
       regionValidator += r;
-      if (constraints.resizable) {
-        this.subscribeSvc.register(this,
-          container.resizeStart.subscribe(container=> this.resizeEnter(container))
-        );
-      }
+      this.subscribeSvc.register(this,
+        container.resizeStart.subscribe(container=> this.resizeEnter(container))
+      );
       this.boundsManager.initBounds(container);
       if (r === LayoutRegion.NORTH || r === LayoutRegion.SOUTH) return;
       this.containerList.push(container);
@@ -118,6 +116,20 @@ export class BorderLayoutRenderer extends IdentifiableComponent implements Destr
    */
   public getBoundsManager(): BorderLayoutBoundsManager {
     return this.boundsManager; 
+  }
+  
+  /**
+   * Changes the constraints of the region specified by the `LayoutConstraints.region` property.
+   * 
+   * @param constraints The new constraints of the associated region.
+   */
+  public setConstraints(constraints: LayoutConstraints): void {
+    const region: LayoutRegionType = constraints.region as LayoutRegionType;
+    const container: BorderLayoutContainer | undefined = this.containerList.find((container: BorderLayoutContainer) => container.constraints.region === region);
+    if (!container) throw new LayoutRegionError(`Invalid region: no container with the region '${region}' has been found.`);
+    if (constraints.size === undefined) constraints.size = container.getSize();
+    container.constraints = constraints;
+    this.paint();
   }
 
   /**

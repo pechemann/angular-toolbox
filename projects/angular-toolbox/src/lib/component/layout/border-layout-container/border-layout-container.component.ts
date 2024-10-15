@@ -80,6 +80,7 @@ export class BorderLayoutContainer {
     this.atxConstraints = constraints;
     this.region = constraints.region as LayoutRegion;
     if(constraints.resizable) this.initHandle();
+    else this.resizable = false;
     this.setSize(constraints.size);
   }
 

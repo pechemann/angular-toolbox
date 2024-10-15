@@ -6,12 +6,12 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CodeWrapper } from '../../../ui/model/business/code-wrapper';
 import { DemoComponent } from '../../../ui/component/demo/demo.component';
 import { DocumentationLink } from '../../../ui/model/business/documentation-link';
 import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
-import { BorderLayout, BorderLayoutContainer, LayoutDragEvent, LayoutDragEventType, LayoutRegion } from 'projects/angular-toolbox/src/public-api';
+import { BorderLayout, BorderLayoutContainer, LayoutConstraints, LayoutDragEvent, LayoutDragEventType, LayoutRegion, LayoutRegionType } from 'projects/angular-toolbox/src/public-api';
 
 type EventRef = { size: number, type: LayoutDragEventType, region: LayoutRegion };
 
@@ -31,6 +31,9 @@ export class BorderLayoutDemoComponent {
   protected eventList: EventRef[] = [];
   protected westContainerSize: number = 100;
 
+  @ViewChild("borderLayout")
+  private borderLayout!: BorderLayout;
+
   constructor(breadcrumb: BreadcrumbService) {
     breadcrumb.removeAll()
               .addItem(breadcrumb.buildItem("Demo", "/demo"))
@@ -48,6 +51,17 @@ export class BorderLayoutDemoComponent {
 
   protected parseInt(value: string): number {
     return parseInt(value);
+  }
+
+  protected updateConstraints(event: Event): void {
+    const tgt: HTMLInputElement = event.target as HTMLInputElement;
+    const constraints: LayoutConstraints = {
+      region: LayoutRegion.EAST,
+      resizable: tgt.checked,
+      maxSize: 400,
+      minSize: 140
+    };
+    this.borderLayout.setConstraints(constraints);
   }
 
   protected documentation: DocumentationLink = {
