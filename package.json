@@ -1,6 +1,6 @@
 {
   "name": "angular-toolbox",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "license": "SEE LICENSE IN LICENSE",
   "scripts": {
     "ng": "ng",
