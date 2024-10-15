@@ -522,6 +522,23 @@ describe('BorderLayoutRenderer', () => {
         renderer.setConstraints( { region: LayoutRegion.EAST, size: 180 } );
         expect(instance.getSize()).toEqual(180);
     });
+
+    it('getBorderLayoutContainer() should return undefined when no container with the specified region exists', () => {
+        expect(renderer.getBorderLayoutContainer(LayoutRegion.EAST)).toBeUndefined();
+    });
+
+    it('getBorderLayoutContainer() should return the BorderLayoutContainer instance associated with the specified region', () => {
+        const layoutContainer: HTMLDivElement = document.createElement("div");
+        const containers: any = [];
+        const instance = comp.componentInstance;
+        renderer.setLayoutContainer(layoutContainer);
+        instance.constraints = { region: LayoutRegion.EAST, size: 10 };
+        containers.push(instance);
+        renderer.addContainers(containers);
+        const childContainer = renderer.getBorderLayoutContainer(LayoutRegion.EAST);
+        expect(childContainer).toBeInstanceOf(BorderLayoutContainer);
+        expect(childContainer?.constraints.region).toEqual(LayoutRegion.EAST);
+    });
 });
 
 describe('BorderLayoutRenderer: destroy() method', () => {

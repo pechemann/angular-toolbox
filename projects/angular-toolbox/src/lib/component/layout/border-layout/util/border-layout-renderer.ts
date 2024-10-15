@@ -95,7 +95,6 @@ export class BorderLayoutRenderer extends IdentifiableComponent implements Destr
         container.resizeStart.subscribe(container=> this.resizeEnter(container))
       );
       this.boundsManager.initBounds(container);
-      if (r === LayoutRegion.NORTH || r === LayoutRegion.SOUTH) return;
       this.containerList.push(container);
     });
   };
@@ -158,6 +157,18 @@ export class BorderLayoutRenderer extends IdentifiableComponent implements Destr
   }
 
   /**
+   * Returns the `BorderLayoutContainer` component associated with the specified region.
+   * 
+   * @param region The region for which to retreive the container.
+   * 
+   * @returns The `BorderLayoutContainer` component associated with the specified region,
+   *          or `undefined` whether no container has been found.
+   */
+  public getBorderLayoutContainer(region: LayoutRegionType): BorderLayoutContainer | undefined {
+    return this.containerList.find((c: BorderLayoutContainer)=> c.constraints.region === region);
+  }
+
+  /**
    * Resizes the specified region of the associated container.
    * 
    * @param region The region to resize.
@@ -167,9 +178,7 @@ export class BorderLayoutRenderer extends IdentifiableComponent implements Destr
    */
   public resizeRegion(region: LayoutRegion, size: number): boolean {
     if (region === LayoutRegion.CENTER) return false;
-    const container: BorderLayoutContainer | undefined = this.containerList.find((c: BorderLayoutContainer)=> {
-      return c.constraints.region === region;
-    });
+    const container: BorderLayoutContainer | undefined = this.getBorderLayoutContainer(region);
     if (!container) return false;
     container.setSize(size);
     this.boundsManager.initBounds(container);
@@ -245,6 +254,7 @@ export class BorderLayoutRenderer extends IdentifiableComponent implements Destr
       const cont: BorderLayoutContainer = cList[cursor];
       const r: LayoutRegion = cont.constraints.region as LayoutRegion;
       cursor--;
+      if (r === LayoutRegion.NORTH || r === LayoutRegion.SOUTH) continue;
       if (r === LayoutRegion.WEST) {
         cont.setTopPos(top);
         cont.setRightPos(width - left);

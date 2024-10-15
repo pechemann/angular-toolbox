@@ -145,4 +145,17 @@ export class BorderLayout extends IdentifiableComponent implements AfterViewInit
   public setConstraints(constraints: LayoutConstraints): void {
     this.renderer.setConstraints(constraints);
   }
+  
+  /**
+   * Returns the `BorderLayoutContainer` component associated with the specified region.
+   * 
+   * @param region The region for which to retreive the container.
+   * 
+   * @returns The `BorderLayoutContainer` component associated with the specified region,
+   *          or `undefined` whether no container has been found.
+   */
+  public getBorderLayoutContainer(region: LayoutRegionType): BorderLayoutContainer | undefined {
+    return this.renderer.getBorderLayoutContainer(region);
+  }
+
 }

@@ -117,6 +117,13 @@ describe('BorderLayout', () => {
         component.setConstraints(constraints);
         expect(renderer.setConstraints).toHaveBeenCalledWith(constraints);
     });
+
+    it('getBorderLayoutContainer() should invoke the BorderLayoutRenderer.getBorderLayoutContainer() method', () => {
+        const renderer: BorderLayoutRenderer = component.getRenderer();
+        spyOn(renderer, "getBorderLayoutContainer");
+        component.getBorderLayoutContainer(LayoutRegion.WEST);
+        expect(renderer.getBorderLayoutContainer).toHaveBeenCalledWith(LayoutRegion.WEST);
+    });
 });
 
 describe('BorderLayout: BorderLayoutContainer test', () => {
