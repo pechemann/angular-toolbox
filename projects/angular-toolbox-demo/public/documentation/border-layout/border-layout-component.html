@@ -12,6 +12,7 @@
         <ul class="list-group">
             <li class="list-group-item"><a href="#paint" onclick="appBridge.goToAnchor(event)" title="paint()">paint()</a></li>
             <li class="list-group-item"><a href="#resizeRegion" onclick="appBridge.goToAnchor(event)" title="resizeRegion()">resizeRegion()</a></li>
+            <li class="list-group-item"><a href="#setConstraints" onclick="appBridge.goToAnchor(event)" title="setConstraints()">setConstraints()</a></li>
             <li class="list-group-item"><a href="#dragStart" onclick="appBridge.goToAnchor(event)" title="dragStart">dragStart</a></li>
             <li class="list-group-item"><a href="#dragStop" onclick="appBridge.goToAnchor(event)" title="dragStop">dragStop</a></li>
             <li class="list-group-item"><a href="#dragging" onclick="appBridge.goToAnchor(event)" title="dragging">dragging</a></li>
@@ -113,6 +114,30 @@
         <p>
             <code>true</code> whether the specified region has been resized; <code>false</code> otherwise.
         </p>
+    </div>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="setConstraints"><code>BorderLayout.setConstraints()</code></h3>
+    <div class="version-info text-end mb-4 me-3">
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 1.4.4</span></small>
+    </div>
+    <pre><code class="language-typescript">setConstraints(constraints: LayoutConstraints): void</code></pre>
+    <p>
+        Changes the constraints of the region specified by the <code>LayoutConstraints.region</code> property.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>constraints: LayoutConstraints</code></dt>
+            <dd>
+                <p>
+                    The new constraints of the associated region.
+                    <br>
+                    See the <a href="javascript:appBridge.navigate(['resources/documentation/border-layout','/layout-constraints'])"><code>LayoutConstraints</code> interface API</a> for details.
+                </p>
+            </dd>
+        </dl>
     </div>
 </section>
 
