@@ -11,15 +11,14 @@ import { CodeWrapper } from '../../../ui/model/business/code-wrapper';
 import { DemoComponent } from '../../../ui/component/demo/demo.component';
 import { DocumentationLink } from '../../../ui/model/business/documentation-link';
 import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
-import { DialogOutlet, DialogService } from 'projects/angular-toolbox/src/lib/component/dialog';
+import { DialogService } from 'projects/angular-toolbox/src/lib/component/dialog';
 import { DialogSampleComponent } from './dialog-sample/dialog-sample.component';
 
 @Component({
   selector: 'app-dialog-demo',
   standalone: true,
   imports: [
-    DemoComponent,
-    DialogOutlet
+    DemoComponent
   ],
   templateUrl: './dialog-demo.component.html'
 })
@@ -41,12 +40,9 @@ export class DialogDemoComponent {
     commands: ['/resources', 'documentation', 'dialog-service']
   };
   protected title: string = "Dialog Service Demo (Experimental)";
-  protected presentation: string = 'A service that allows Users to display information within the native <code>&lt;dialog&gt;</code> HTML element.<br>This component is part of the <a href="javascript:appBridge.navigate([\'resources/documentation/laf-less-components\'])" title="LAF-less API">LAF-less API</a>.';
+  protected presentation: string = 'A service that allows Users to manage information displayed within the native <code>&lt;dialog&gt;</code> HTML element.<br>This component is part of the <a href="javascript:appBridge.navigate([\'resources/documentation/laf-less-components\'])" title="LAF-less API">LAF-less API</a>.';
   protected srcCode: CodeWrapper = {
-    html: [`<!-- dialog-demo.component.html -->
-<button (click)="openDialog()">Open Dialog</button>
-<atx-dialog-outlet/>`,
-`<!-- dialog-sample.component.html -->
+    html: [`<!-- dialog-sample.component.html -->
 <div class="card">
     <div class="card-header">
         Alert Popup Sample
@@ -60,6 +56,16 @@ export class DialogDemoComponent {
     </div>
 </div>`],
     typescript: [`@Component({
+  selector: 'app-root',
+  template: '<router-outlet></router-outlet><atx-dialog-outlet/>',
+  standalone: true,
+  imports: [
+    RouterOutlet,
+    DialogOutlet
+  ]
+})
+export class AppComponent {}`,
+`@Component({
   selector: 'app-dialog-sample',
   standalone: true,
   templateUrl: './dialog-sample.component.html'
@@ -71,11 +77,7 @@ export class DialogSampleComponent {
 `@Component({
   selector: 'app-dialog-demo',
   standalone: true,
-  imports: [
-    DemoComponent,
-    DialogOutlet
-  ],
-  templateUrl: './dialog-demo.component.html'
+  template: '<button (click)="openDialog()">Open Dialog</button>'
 })
 export class DialogDemoComponent {
 
