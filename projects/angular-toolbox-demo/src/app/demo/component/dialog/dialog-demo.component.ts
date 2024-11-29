@@ -36,8 +36,8 @@ export class DialogDemoComponent {
   }
 
   protected documentation: DocumentationLink = {
-    label: "Dialog Service",
-    commands: ['/resources', 'documentation', 'dialog-service']
+    label: "Dialog API",
+    commands: ['/resources', 'documentation', 'dialog-api']
   };
   protected title: string = "Dialog Service Demo (Experimental)";
   protected presentation: string = 'A service that allows Users to manage information displayed within the native <code>&lt;dialog&gt;</code> HTML element.<br>This component is part of the <a href="javascript:appBridge.navigate([\'resources/documentation/laf-less-components\'])" title="LAF-less API">LAF-less API</a>.';
