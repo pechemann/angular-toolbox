@@ -6,8 +6,12 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
+import { DialogBackdropType } from './dialog-backdrop-type.enum';
 import { DialogConfig } from './dialog.config';
 
+/**
+ * @private
+ */
 export const DEFAULT_CONFIG: DialogConfig = {
-  backdrop: "modal"
+  backdrop: DialogBackdropType.MODAL
 };

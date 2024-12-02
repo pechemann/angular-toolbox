@@ -11,9 +11,12 @@ import { DialogService } from './dialog.service';
 import { DialogOutletEvent } from './dialog-outlet.event';
 import { DialogOutletEventType } from './dialog-outlet-event-type';
 import { DialogConfig } from './dialog.config';
-import { DialogBackdrop } from './dialog-backdrop.type';
 import { DEFAULT_CONFIG } from './dialog-default-config';
+import { DialogBackdropType } from './dialog-backdrop-type.enum';
 
+/**
+ * 
+ */
 @Component({
   selector: 'atx-dialog-outlet',
   standalone: true,
@@ -22,24 +25,41 @@ import { DEFAULT_CONFIG } from './dialog-default-config';
 })
 export class DialogOutlet implements OnInit {
 
+  /**
+   * @private
+   */
   @ViewChild("dialog")
   private _dialog!: ElementRef<HTMLDialogElement>;
 
+  /**
+   * @private
+   */
   @ViewChild("renderer", { static: true, read: ViewContainerRef })
   private renderer!: ViewContainerRef;
 
+  /**
+   * @private
+   */
   private _config!: DialogConfig;
 
+  /**
+   * @private
+   */
   constructor(private dialogSvc: DialogService) {}
 
+  /**
+   * @private
+   */
   public ngOnInit(): void {
     this.dialogSvc.__init__(this.renderer);
     this.dialogSvc.dialogStateChange.subscribe((event: DialogOutletEvent)=> this.stateChange(event));
   }
 
+  /**
+   * @private
+   */
   protected mouseupHandler(event: MouseEvent): void {
-    const backdrop: DialogBackdrop | undefined = this._config.backdrop;
-    if (backdrop === undefined || backdrop === "static") return;
+    if (this._config.backdrop !== DialogBackdropType.MODAL) return;
     const rect: DOMRect = this._dialog.nativeElement.getBoundingClientRect();
     const xPos: number = event.clientX;
     const yPos: number = event.clientY;
@@ -49,21 +69,33 @@ export class DialogOutlet implements OnInit {
     if (!isDialog) this.hide();
   }
 
+  /**
+   * @private
+   */
   protected onClose(event: Event): void {
     this.renderer.clear();
   }
 
+  /**
+   * @private
+   */
   private stateChange(event: DialogOutletEvent): void {
     const state: DialogOutletEventType = event.state;
     if (state === DialogOutletEvent.SHOW) return this.show(event);
     if (state === DialogOutletEvent.HIDE) this.hide();
   }
 
+  /**
+   * @private
+   */
   private show(event: DialogOutletEvent): void {
     this._config = event.config || DEFAULT_CONFIG;
     this._dialog.nativeElement.showModal();
   }
 
+  /**
+   * @private
+   */
   private hide(): void {
     this._dialog.nativeElement.close();
   }

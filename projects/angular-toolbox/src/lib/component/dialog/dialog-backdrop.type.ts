@@ -7,6 +7,6 @@
  */
 
 /**
- * 
+ * Indicates the type of a dialog backdrop element.
  */
-export type DialogBackdrop = "static" | "modal";
+export type DialogBackdrop =  "modal" | "static";

@@ -14,14 +14,35 @@ import { DialogConfig } from "./dialog.config";
  */
 export class DialogOutletEvent {
 
+    /**
+     * The type of event dispatched each time the dialog element is displayed.
+     */
     public static readonly SHOW: DialogOutletEventType = "show";
 
+    /**
+     * The type of event dispatched each time the dialog element is removed.
+     */
     public static readonly HIDE: DialogOutletEventType = "hide";
 
+    /**
+     * A `DialogOutletEventType` value that indicates the state of the dialog element.
+     */
     public readonly state: DialogOutletEventType;
 
+    /**
+     * The dialog element config associated with an event of type of `"show"`. 
+     * `config` is set to  `null` when the event is of type of `"hide"`.
+     */
     public readonly config: DialogConfig | null;
 
+    /**
+     * @private
+     * 
+     * Creates a new `DialogOutletEvent` instance.
+     * 
+     * @param state The state of the dialog element.
+     * @param config  The dialog element config associated with this event.
+     */
     constructor(state: DialogOutletEventType, config: DialogConfig | null = null) {
         this.state = state;
         this.config = config;

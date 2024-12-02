@@ -7,6 +7,6 @@
  */
 
 /**
- * Specifies the type of `DialogOutletEvent` instances.
+ * Specifies the event type of `DialogOutletEvent` instances.
  */
 export type DialogOutletEventType = "show" | "hide";

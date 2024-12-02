@@ -6,8 +6,9 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
+import { DialogBackdropType } from "./dialog-backdrop-type.enum";
 import { DialogBackdrop } from "./dialog-backdrop.type";
 
 export interface DialogConfig {
-    backdrop?: DialogBackdrop;
+    backdrop?: DialogBackdrop | DialogBackdropType;
 }

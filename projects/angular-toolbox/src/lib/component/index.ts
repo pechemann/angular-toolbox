@@ -9,3 +9,4 @@
 export * from './angular-toolbox-logo/angular-toolbox-logo.component';
 export * from './dropdown/dropdown.component';
 export * from './layout';
+export * from './dialog';
