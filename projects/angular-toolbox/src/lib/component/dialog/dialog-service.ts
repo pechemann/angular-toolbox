@@ -6,15 +6,19 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { ComponentRef, EventEmitter, ViewContainerRef } from "@angular/core";
+import { ComponentRef, EventEmitter, Injectable, ViewContainerRef } from "@angular/core";
 import { DialogOutletEvent } from "./dialog-outlet.event";
 import { DialogConfig } from "./dialog.config";
+import { DialogServiceError } from "./dialog-service.error";
 
 /**
- * The base class for creating services that manage injection of custom component into the
+ * The `DialogService` class manages injection of custom component into the
  * HTML dialog element created by the ATX framework.
  */
-export class DialogServiceBase {
+@Injectable({
+    providedIn: "root"
+})
+export class DialogService {
 
     /**
      * Dispatches an event that indicates the state of the dialog element when a custom
@@ -37,6 +41,7 @@ export class DialogServiceBase {
      * @returns The new `ComponentRef` which contains the component instance and the host view.
      */
     public show<T>(compRef: any, config: DialogConfig | null = null): ComponentRef<T> {
+        if (!this.viewContainerRef) throw new DialogServiceError("DialogOutlet missing: you must add the <atx-dialog-outlet/> tag to your application before using dialog services.");
         const component: ComponentRef<T> = this.viewContainerRef.createComponent<T>(compRef);
         const event: DialogOutletEvent = new DialogOutletEvent(DialogOutletEvent.SHOW, config);
         this.dialogStateChange.emit(event);
@@ -55,8 +60,9 @@ export class DialogServiceBase {
     /**
      * @private
      */
-    public __init__(viewContainerRef: ViewContainerRef): void {
-        if (this.viewContainerRef !== undefined) return;
+    public __init__(viewContainerRef: ViewContainerRef): boolean {
+        if (this.viewContainerRef !== undefined) return false;
         this.viewContainerRef = viewContainerRef;
+        return true;
     }
 }

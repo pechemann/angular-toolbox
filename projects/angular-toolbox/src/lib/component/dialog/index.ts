@@ -12,5 +12,5 @@ export * from "./dialog-outlet-event-type";
 export * from "./dialog-outlet.event";
 export * from "./dialog.config";
 export * from "./dialog.outlet";
-export * from "./dialog-service-base";
-export * from "./dialog.service";
+export * from "./dialog-service";
+export * from "./dialog-service.error";

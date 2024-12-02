@@ -7,12 +7,12 @@
  */
 
 import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { DialogService } from './dialog.service';
 import { DialogOutletEvent } from './dialog-outlet.event';
 import { DialogOutletEventType } from './dialog-outlet-event-type';
 import { DialogConfig } from './dialog.config';
 import { DEFAULT_CONFIG } from './dialog-default-config';
 import { DialogBackdropType } from './dialog-backdrop-type.enum';
+import { DialogService } from './dialog-service';
 
 /**
  * 
