@@ -15,7 +15,8 @@ import { DialogBackdropType } from './dialog-backdrop-type.enum';
 import { DialogService } from './dialog-service';
 
 /**
- * 
+ * Acts as a placeholder that the ATX framework dynamically fills based on the component specified
+ * by the dialog service `show()` method.
  */
 @Component({
   selector: 'atx-dialog-outlet',

@@ -7,6 +7,11 @@
  */
 
 /**
+ * @private
+ */
+const NAME: string = "DialogServiceError";
+
+/**
  * The `DialogServiceError` class represents errors thrown by the ATX framework
  * when a dialog error occurs.
  */
@@ -19,5 +24,6 @@ export class DialogServiceError extends Error {
      */
     constructor(message: string) {
         super(message);
+        this.name = NAME;
     }
 }
