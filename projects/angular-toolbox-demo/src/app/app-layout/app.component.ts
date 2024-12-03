@@ -9,7 +9,7 @@
 import { Component } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { AngularToolboxBreadcrumbComponent, AngularToolboxDarkModeComponent, AngularToolboxFooterComponent, AngularToolboxHeaderComponent } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
-import { DialogOutlet } from 'projects/angular-toolbox/src/lib/component/dialog';
+import { DialogOutlet } from 'projects/angular-toolbox/src/lib/framework/dialog';
 
 @Component({
   selector: 'app-root',

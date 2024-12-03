@@ -11,7 +11,7 @@ import { CodeWrapper } from '../../../ui/model/business/code-wrapper';
 import { DemoComponent } from '../../../ui/component/demo/demo.component';
 import { DocumentationLink } from '../../../ui/model/business/documentation-link';
 import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
-import { DialogService } from 'projects/angular-toolbox/src/lib/component/dialog';
+import { DialogService } from 'projects/angular-toolbox/src/lib/framework/dialog';
 import { DialogSampleComponent } from './dialog-sample/dialog-sample.component';
 
 @Component({

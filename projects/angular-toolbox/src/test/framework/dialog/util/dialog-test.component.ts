@@ -7,7 +7,7 @@
  */
 
 import { Component } from '@angular/core';
-import { DialogService } from 'projects/angular-toolbox/src/lib/component/dialog';
+import { DialogService } from 'projects/angular-toolbox/src/lib/framework/dialog';
 
 @Component({
   selector: 'app-dialog-test',

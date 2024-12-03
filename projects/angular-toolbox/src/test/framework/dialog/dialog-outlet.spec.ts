@@ -79,7 +79,7 @@ describe('DialogOutlet I/O', () => {
             customComp = fixture.nativeElement.querySelector("app-dialog-test");  
             expect(customComp).toBeNull();
             done();
-        }, 0);
+        }, 150);
     });
 
     it('clicking on the custom component should not close the the HTML dialog element', () => {

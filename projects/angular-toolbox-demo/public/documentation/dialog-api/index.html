@@ -24,7 +24,8 @@
         <small><span class="badge text-bg-warning rounded-pill">Experimental</span></small>
     </div>
     <p>
-        W.I.P.
+        The Dialog API allows to create modal or non-modal dialog box or other interactive component,
+        such as a dismissible alert, inspector, or subwindow.
         <br>This component is part of the <a href="javascript:appBridge.navigate(['resources/documentation/laf-less-components'])" title="LAF-less API">LAF-less API</a>.
     </p>
     <hr class="mt-4">
@@ -32,18 +33,18 @@
 
 <section class="col-xl-9 mb-4">
     <h3 id="principle">Principle</h3>
-    <!--<p>
+   <p>
         Regarding the <a href="javascript:appBridge.navigate(['resources/documentation/laf-less-components'])" title="LAF-less API">LAF-less API</a>,
-        dropdown containers allows to create non-modal popup elements by separating the popup UI logic from the app business logic. 
+        dialog containers allow to create modal and non-modal popup windows by separating the popup UI logic from the app business logic. 
     </p>
     <p>
-        You typically use dropdown containers to create popup menus, complex select action components and so on.
-    </p>-->
+        You typically use the Dialog API to create both, blocking and non-blocking messages (such as alerts), contextual input components and so on.
+    </p>
 </section>
 
 <section class="col-xl-9 mb-4">
     <h3 id="api">API</h3>
-    <!--<table class="table table-striped">
+    <table class="table table-striped">
         <thead>
           <tr>
             <th scope="col">Component</th>
@@ -58,7 +59,7 @@
                 Creates popup containers that are displayed by clicking on a button.
             </td>
             <td>
-                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/dropdown-container/dropdown-component'])" title="Dropdown">
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/dialog-api/dropdown-component'])" title="Dropdown">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
                         <use href="#linkIcon"/>
                     </svg>
@@ -66,37 +67,88 @@
             </td>
           </tr>
         </tbody>
-      </table>-->
+      </table>
 </section>
 
 <section class="col-xl-9 mb-4">
     <h3 id="usage">Usage</h3>
-    <!--<p>
-        The following sample app shows how to implement the ATX dropdown container with Bootstrap:
+    <p>
+        Before using the Dialog API, you must declare the <code>&lt;atx-dialog-outlet/&gt;</code> tag,
+        typically in the <code>AppComponent</code> HTML template:
+    </p>
+    <div class="card mb-4">
+        <div class="card-body">
+            <figure>
+                <figcaption>app-component.ts:</figcaption>
+                <pre><code class="language-typescript">&#64;Component(&#123;
+    selector: 'app-root',
+    template: '&lt;router-outlet&gt;&lt;/router-outlet&gt;&lt;atx-dialog-outlet/&gt;',
+    standalone: true,
+    imports: [
+        RouterOutlet,
+        DialogOutlet
+    ]
+&#125;)
+export class AppComponent &#123;&#125;</code></pre></figure>
+        </div>
+    </div>
+
+    <p>
+        The following sample app shows how to create a basic alert popup built on top of the Bootstrap <em>Card</em> component:
     </p>
     <div class="card mb-4">
         <div class="card-body">
             <h5 class="card-title mb-2">Code</h5>
     <figure>
-        <figcaption>HTML:</figcaption>
-        <pre><code class="language-html">&lt;atx-dropdown buttonClass="btn btn-primary"&gt;
-    &lt;!-- button display --&gt;
-    &lt;i class="bi bi-check2-circle"&gt;&lt;/i&gt; Select item
-    &lt;!-- dropdown content --&gt;
-    &lt;ul class="list-group shadow" content&gt;
-        &lt;li class="list-group-item list-group-item-action" role="button"&gt;A first item&lt;/li&gt;
-        &lt;li class="list-group-item list-group-item-action" role="button"&gt;A second item&lt;/li&gt;
-        &lt;li class="list-group-item list-group-item-action disabled" aria-disabled="true"&gt;A disabled item&lt;/li&gt;
-    &lt;/ul&gt;
-&lt;/atx-dropdown&gt;</code></pre></figure>
+        <figcaption>dialog-sample.component.html</figcaption>
+        <pre><code class="language-html">&lt;div class="card"&gt;
+    &lt;div class="card-header"&gt; Alert Popup Sample &lt;/div&gt;
+    &lt;div class="card-body"&gt;
+        &lt;p class="card-text"&gt;
+            &lt;i class="bi bi-exclamation-triangle"&gt;&lt;/i&gt;
+            This message is displayed using the HTML5 &lt;dialog&gt; element.
+        &lt;/p&gt;
+        &lt;button (click)="dialog.hide()" class="btn btn-primary"&gt;Close&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt; </code></pre></figure>
+<figure>
+    <figcaption>dialog-sample.component.ts</figcaption>
+    <pre><code class="language-typescript">&#64;Component(&#123;
+    selector: 'app-dialog-sample',
+    standalone: true,
+    templateUrl: './dialog-sample.component.html'
+&#125;)
+export class DialogSampleComponent &#123;
+
+    constructor(protected dialog: DialogService) &#123;&#125;
+&#125;</code></pre></figure>
+            <p>
+                The modal component above can be invoked anywhere within your application:
+            </p>
+            <figure>
+                <figcaption>dialog-demo.component.ts</figcaption>
+                <pre><code class="language-typescript">&#64;Component(&#123;
+    selector: 'app-dialog-demo',
+    standalone: true,
+    template: '&lt;button (click)="openDialog()"&gt;Open Dialog&lt;/button&gt;'
+&#125;)
+export class DialogDemoComponent &#123;
+    
+    constructor(private dialog: DialogService) &#123;&#125;
+    
+    protected openDialog(): void &#123;
+        // Dialog component injection 
+        this.dialog.show(DialogSampleComponent);
+    &#125;
+&#125;</code></pre></figure>
              <p>
                 To see this sample in action, go to the demo section:
              </p>
-             <button class="btn btn-primary btn-lg" onclick="appBridge.navigate(['demo/dropdown'])" title="Dropdown Container Demo">
-                Dropdown Container Demo
+             <button class="btn btn-primary btn-lg" onclick="appBridge.navigate(['demo/dialog'])" title="Dialog API Demo">
+                Dialog API Demo
             </button>
         </div>
-    </div>-->
+    </div>
 </section>
 
 <!-- We use a data object to store navigation tree structure-->
