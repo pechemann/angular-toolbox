@@ -28,7 +28,12 @@
             <atx-border-layout-container [constraints]="{ region: 'east', resizable: true, size: 250, maxSize: 400, minSize: 140 }">
                 <div class="border h-100 p-1 bg-light">
                     <h6>East</h6>
-                    <em>(resizable panel)</em>
+                    <div class="form-check ms-3">
+                        <input class="form-check-input" type="checkbox" value="" id="eastResizableCb" checked (change)="updateConstraints($event)">
+                        <label class="form-check-label" for="eastResizableCb">
+                            resizable
+                        </label>
+                    </div>
                 </div>
             </atx-border-layout-container>
             <atx-border-layout-container [constraints]="{ region: 'south', resizable: true, size: 150, maxSize: 250, minSize: 60  }">

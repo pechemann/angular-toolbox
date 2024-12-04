@@ -1,0 +1,125 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+ 
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100 mb-4">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+           <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/dialog-api'])">
+            Dialog API
+            </a></li>
+        </ul>
+    </aside>
+    <section class="w-100">
+        <h5 class="mb-4">On this page</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="#show" onclick="appBridge.goToAnchor(event)" title="show() method">show() method</a></li>
+            <li class="list-group-item"><a href="#hide" onclick="appBridge.goToAnchor(event)" title="hide() method">hide() method</a></li>
+            <li class="list-group-item"><a href="#dialogStateChange" onclick="appBridge.goToAnchor(event)" title="dialogStateChange">dialogStateChange</a></li>
+        </ul>
+    </section>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3">Dialog API</h2>
+    <div class="version-info text-end mb-4 me-3">
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 1.4.6</span></small>
+        <small><span class="badge text-bg-warning rounded-pill">Experimental</span></small>
+    </div>
+    <p>
+        The Dialog API allows to create modal or non-modal dialog box or other interactive component,
+        such as a dismissible alert, inspector, or subwindow.
+        <br>This component is part of the <a href="javascript:appBridge.navigate(['resources/documentation/laf-less-components'])" title="LAF-less API">LAF-less API</a>.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9">
+    <h3><code>DialogService</code> Class</h3>
+    <p>
+        The <code>DialogService</code> class provides the API for managing injection of customs component into the
+        HTML dialog element created by the ATX framework.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="show"><code>DialogService.show()</code></h3>
+    <pre><code class="language-typescript">show&lt;T&gt;(compRef: any, config: DialogConfig | null = null): ComponentRef&lt;T&gt;</code></pre>
+    <p>
+        Creates an instance of the type of the <code>compRef</code> parameter, adds this instance to the HTML dialog element
+        and displays the dialog element in front of all other components in the application.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>compRef: any</code></dt>
+            <dd>
+                <p>
+                    The class that represents the component to display as a popup element.
+                </p>
+            </dd>
+        </dl>
+        <dl>
+            <dt><code>config: DialogConfig</code></dt>
+            <dd>
+                <p>
+                    The dialog element config associated with the new component instance to display.<br>
+                    Default value is <code>null</code>.
+                </p>
+            </dd>
+        </dl>
+    </div>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>ComponentRef&lt;T&gt;</code>
+        <p>
+            The new <code>ComponentRef</code> onject which contains the component instance and the host view.
+        </p>
+    </div>
+    <h5 class="mt-3">Exeptions</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>DialogServiceError</code></dt>
+            <dd>
+                <p>
+                    Thrown if no <code>&lt;atx-dialog-outlet/&gt;</code> tag has been declared whithin the application.
+                </p>
+            </dd>
+        </dl>
+    </div>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="hide"><code>HttpMockService.hide()</code></h3>
+    <pre><code class="language-typescript">hide(): void</code></pre>
+    <p>
+        Indicates to the ATX framework to remove component instances previously created with
+        the <code>show()</code> method.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3>Events</h3>
+    <hr>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="dialogStateChange"><code>HttpMockService.dialogStateChange</code></h3>
+    <pre><code class="language-typescript">readonly dialogStateChange: EventEmitter&lt;DialogOutletEvent&gt;</code></pre>
+    <p>
+        Dispatches an event that indicates the state of the dialog element when a custom
+        component is added to, or remove from it.
+        <br>
+        See the <a href="javascript:appBridge.navigate(['resources/documentation/dialog-api','dialog-outlet-event'])"><code>DialogOutletEvent</code> API</a> for details.
+    </p>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'Dialog API', 'path': 'dialog-api' }, { 'label': 'DialogService Class' }]">
+</object>

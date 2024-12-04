@@ -8,7 +8,7 @@
 
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { BorderLayoutRenderer } from "projects/angular-toolbox/src/lib/component/layout/border-layout/util/border-layout-renderer";
-import { BorderLayout, LayoutDragEvent, LayoutDragEventType, LayoutRegion } from "projects/angular-toolbox/src/public-api";
+import { BorderLayout, LayoutConstraints, LayoutDragEvent, LayoutDragEventType, LayoutRegion } from "projects/angular-toolbox/src/public-api";
 
 describe('BorderLayout', () => {
 
@@ -105,6 +105,24 @@ describe('BorderLayout', () => {
         spyOn(renderer, "resizeRegion");
         component.resizeRegion(LayoutRegion.EAST, 300);
         expect(renderer.resizeRegion).toHaveBeenCalledWith(LayoutRegion.EAST, 300);
+    });
+    
+    it('setConstraints() should invoke the BorderLayoutRenderer.setConstraints() method', () => {
+        const renderer: BorderLayoutRenderer = component.getRenderer();
+        const constraints: LayoutConstraints = {
+            region: LayoutRegion.WEST,
+            size: 100
+        };
+        spyOn(renderer, "setConstraints");
+        component.setConstraints(constraints);
+        expect(renderer.setConstraints).toHaveBeenCalledWith(constraints);
+    });
+
+    it('getBorderLayoutContainer() should invoke the BorderLayoutRenderer.getBorderLayoutContainer() method', () => {
+        const renderer: BorderLayoutRenderer = component.getRenderer();
+        spyOn(renderer, "getBorderLayoutContainer");
+        component.getBorderLayoutContainer(LayoutRegion.WEST);
+        expect(renderer.getBorderLayoutContainer).toHaveBeenCalledWith(LayoutRegion.WEST);
     });
 });
 

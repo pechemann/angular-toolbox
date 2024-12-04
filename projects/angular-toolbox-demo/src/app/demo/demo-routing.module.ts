@@ -65,6 +65,10 @@ const routes: Routes = [
   {
     path: 'dropdown',
     loadComponent: () => import('./component/dropdown/dropdown-demo.component').then(mod => mod.DropdownDemoComponent)
+  },
+  {
+    path: 'dialog',
+    loadComponent: () => import('./component/dialog/dialog-demo.component').then(mod => mod.DialogDemoComponent)
   }
 ];
 

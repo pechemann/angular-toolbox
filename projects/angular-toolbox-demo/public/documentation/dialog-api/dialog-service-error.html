@@ -1,0 +1,69 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+ 
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100 mb-4">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+           <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/dialog-api'])">
+            Dialog API
+            </a></li>
+        </ul>
+    </aside>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3">Dialog API</h2>
+    <div class="version-info text-end mb-4 me-3">
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 1.4.6</span></small>
+        <small><span class="badge text-bg-warning rounded-pill">Experimental</span></small>
+    </div>
+    <p>
+        The Dialog API allows to create modal or non-modal dialog box or other interactive component,
+        such as a dismissible alert, inspector, or subwindow.
+        <br>This component is part of the <a href="javascript:appBridge.navigate(['resources/documentation/laf-less-components'])" title="LAF-less API">LAF-less API</a>.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3><code>DialogServiceError</code></h3>
+    <p>
+        The <code>DialogServiceError</code> class represents errors thrown by the ATX framework
+        when a dialog error occurs.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="constructor"><code>Constructor Function</code></h3>
+    <pre><code class="language-typescript">constructor(message: string)</code></pre>
+    <p>
+        Creates a new <code>DialogServiceError</code> instance.
+    </p>
+    <p>
+        Extends the <code>Error</code> class. See the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" title="Error">
+            <code>Error class reference</code></a> for details.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>message: string</code></dt>
+            <dd>
+                <p>
+                    A human-readable description of the error.
+                </p>
+            </dd>
+        </dl>
+    </div>
+</section>
+
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'Dialog API', 'path': 'dialog-api' }, { 'label': 'DialogServiceError' }]">
+</object>

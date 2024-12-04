@@ -70,7 +70,7 @@ describe('BorderLayoutRenderer', () => {
         expect(renderer.getBoundsManager().getBounds().width).toEqual(100);
     });
 
-    it('addContainers() should register event listeners for each resizable container', () => {
+    it('addContainers() should register event listeners for each container', () => {
         spyOn(service, "register");
         const containers: any = [];
         const comp1 = TestBed.createComponent(BorderLayoutContainer);
@@ -83,7 +83,7 @@ describe('BorderLayoutRenderer', () => {
         comp3.componentInstance.constraints = { region: LayoutRegion.NORTH, resizable: true };
         containers.push(comp3.componentInstance);
         renderer.addContainers(containers);
-        expect(service.register).toHaveBeenCalledTimes(2);
+        expect(service.register).toHaveBeenCalledTimes(3);
     });
 
     it('paint() should throw an error if the main layout container has not been defined', () => {
@@ -446,12 +446,99 @@ describe('BorderLayoutRenderer', () => {
         instance.constraints = { region: LayoutRegion.EAST, resizable: true };
         containers.push(instance);
         renderer.addContainers(containers);
-        const userAction = ()=> {
+        const invalidAction = ()=> {
             instance.resizeStart.emit(instance);
         };
-        expect(userAction).toThrowError("No layout container has been registered.");
+        expect(invalidAction).toThrowError("No layout container has been registered.");
     });
     */
+
+    it('setConstraints() should hrow an error if the region cannot be associated with a container', () => {
+        const invalidAction = ()=> {
+            renderer.setConstraints( { region: LayoutRegion.EAST });
+        }
+        expect(invalidAction).toThrow();
+    });
+    
+    it('setConstraints() should invoke the paint() method', () => {
+        const containers: any = [];
+        const instance = comp.componentInstance;
+        spyOn(renderer, "paint");
+        instance.constraints = { region: LayoutRegion.EAST };
+        containers.push(instance);
+        renderer.addContainers(containers);
+        renderer.setConstraints( { region: LayoutRegion.EAST, resizable: false });
+        expect(renderer.paint).toHaveBeenCalled();
+    });
+
+    it('setConstraints() should update the constraints of the target container', () => {
+        const layoutContainer: HTMLDivElement = document.createElement("div");
+        const containers: any = [];
+        const instance = comp.componentInstance;
+        renderer.setLayoutContainer(layoutContainer);
+        instance.constraints = { region: LayoutRegion.EAST, resizable: true };
+        containers.push(instance);
+        renderer.addContainers(containers);
+        expect(instance.constraints.resizable).toBeTrue();
+        renderer.setConstraints( { region: LayoutRegion.EAST, resizable: false });
+        expect(instance.constraints.resizable).toBeFalse();
+    });
+
+    it('setConstraints() should not invoke the container.getSize() method if the size is specified', () => {
+        const layoutContainer: HTMLDivElement = document.createElement("div");
+        const containers: any = [];
+        const instance = comp.componentInstance;
+        renderer.setLayoutContainer(layoutContainer);
+        instance.constraints = { region: LayoutRegion.EAST };
+        containers.push(instance);
+        renderer.addContainers(containers);
+        spyOn(instance, "getSize")
+        renderer.setConstraints( { region: LayoutRegion.EAST, size: 80 });
+        expect(instance.getSize).not.toHaveBeenCalled();
+    });
+
+    it('setConstraints() should invoke the container.getSize() method if the size is not specified', () => {
+        const layoutContainer: HTMLDivElement = document.createElement("div");
+        const containers: any = [];
+        const instance = comp.componentInstance;
+        renderer.setLayoutContainer(layoutContainer);
+        instance.constraints = { region: LayoutRegion.EAST, size: 80 };
+        containers.push(instance);
+        renderer.addContainers(containers);
+        spyOn(instance, "getSize")
+        renderer.setConstraints( { region: LayoutRegion.EAST });
+        expect(instance.getSize).toHaveBeenCalled();
+    });
+
+    it('setConstraints() should update the container size', () => {
+        const layoutContainer: HTMLDivElement = document.createElement("div");
+        const containers: any = [];
+        const instance = comp.componentInstance;
+        renderer.setLayoutContainer(layoutContainer);
+        instance.constraints = { region: LayoutRegion.EAST, size: 10 };
+        expect(instance.getSize()).toEqual(10);
+        containers.push(instance);
+        renderer.addContainers(containers);
+        renderer.setConstraints( { region: LayoutRegion.EAST, size: 180 } );
+        expect(instance.getSize()).toEqual(180);
+    });
+
+    it('getBorderLayoutContainer() should return undefined when no container with the specified region exists', () => {
+        expect(renderer.getBorderLayoutContainer(LayoutRegion.EAST)).toBeUndefined();
+    });
+
+    it('getBorderLayoutContainer() should return the BorderLayoutContainer instance associated with the specified region', () => {
+        const layoutContainer: HTMLDivElement = document.createElement("div");
+        const containers: any = [];
+        const instance = comp.componentInstance;
+        renderer.setLayoutContainer(layoutContainer);
+        instance.constraints = { region: LayoutRegion.EAST, size: 10 };
+        containers.push(instance);
+        renderer.addContainers(containers);
+        const childContainer = renderer.getBorderLayoutContainer(LayoutRegion.EAST);
+        expect(childContainer).toBeInstanceOf(BorderLayoutContainer);
+        expect(childContainer?.constraints.region).toEqual(LayoutRegion.EAST);
+    });
 });
 
 describe('BorderLayoutRenderer: destroy() method', () => {

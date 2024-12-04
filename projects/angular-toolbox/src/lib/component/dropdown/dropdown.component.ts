@@ -72,6 +72,19 @@ export class DropdownComponent extends IdentifiableComponent {
   public popoverState: PopoverState = "auto";
 
   /**
+   * The disabled property sets or returns whether a dropdown is disabled, or not.
+   */
+  @Input()
+  public set disabled(value: boolean) {
+    this._disabled = this._button.nativeElement.disabled = value;
+    if (!value) return;
+    this.hideContent();
+  }
+  public get disabled(): boolean {
+    return this._disabled;
+  }
+  
+  /**
    * @private
    */
   protected id!: string;
@@ -81,6 +94,17 @@ export class DropdownComponent extends IdentifiableComponent {
    */
   @ViewChild("popover")
   private _popover!: ElementRef;
+
+  /**
+   * @private
+   */
+  @ViewChild("button")
+  private _button!: ElementRef;
+
+  /**
+   * @private
+   */
+  private _disabled: boolean = false;
 
   /**
    * @private
@@ -102,7 +126,7 @@ export class DropdownComponent extends IdentifiableComponent {
    * Displays the dropdown container.
    */
   public showContent(): void {
-    if (!this._popover) return;
+    if (!this._popover || this._disabled) return;
     this._popover.nativeElement.showPopover();
   }
 

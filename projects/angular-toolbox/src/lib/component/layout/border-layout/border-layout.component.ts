@@ -8,7 +8,7 @@
 
 import { AfterViewInit, Component, ContentChildren, OnDestroy, ElementRef, ViewChild, HostListener, QueryList, EventEmitter, Output, Inject } from '@angular/core';
 import { BorderLayoutContainer } from '../border-layout-container/border-layout-container.component';
-import { LayoutDragEvent, LayoutDragEventType, LayoutRegion, LayoutRegionType, SubscriptionService } from '../../../model';
+import { LayoutConstraints, LayoutDragEvent, LayoutDragEventType, LayoutRegion, LayoutRegionType, SubscriptionService } from '../../../model';
 import { BorderLayoutRenderer } from './util/border-layout-renderer';
 import { IdentifiableComponent } from '../../../core';
 import { DOCUMENT } from '@angular/common';
@@ -136,4 +136,26 @@ export class BorderLayout extends IdentifiableComponent implements AfterViewInit
   public resizeRegion(region: LayoutRegion | LayoutRegionType, size: number): void {
     this.renderer.resizeRegion(region as LayoutRegion, size);
   }
+  
+  /**
+   * Changes the constraints of the region specified by the `LayoutConstraints.region` property.
+   * 
+   * @param constraints The new constraints of the associated region.
+   */
+  public setConstraints(constraints: LayoutConstraints): void {
+    this.renderer.setConstraints(constraints);
+  }
+  
+  /**
+   * Returns the `BorderLayoutContainer` component associated with the specified region.
+   * 
+   * @param region The region for which to retreive the container.
+   * 
+   * @returns The `BorderLayoutContainer` component associated with the specified region,
+   *          or `undefined` whether no container has been found.
+   */
+  public getBorderLayoutContainer(region: LayoutRegionType): BorderLayoutContainer | undefined {
+    return this.renderer.getBorderLayoutContainer(region);
+  }
+
 }

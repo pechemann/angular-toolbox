@@ -1,0 +1,66 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+ 
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100 mb-4">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+           <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/dialog-api'])">
+            Dialog API
+            </a></li>
+        </ul>
+    </aside>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3">Dialog API</h2>
+    <div class="version-info text-end mb-4 me-3">
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 1.4.6</span></small>
+        <small><span class="badge text-bg-warning rounded-pill">Experimental</span></small>
+    </div>
+    <p>
+        The Dialog API allows to create modal or non-modal dialog box or other interactive component,
+        such as a dismissible alert, inspector, or subwindow.
+        <br>This component is part of the <a href="javascript:appBridge.navigate(['resources/documentation/laf-less-components'])" title="LAF-less API">LAF-less API</a>.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3><code>DialogOutlet</code> Component</h3>
+    <p>
+        Acts as a placeholder that the ATX framework dynamically fills based on the component specified
+        by the dialog service <code>show()</code> method.
+    </p>
+    <p>
+        Before using the Dialog API, you must declare the <code>&lt;atx-dialog-outlet/&gt;</code> tag,
+        typically in the <code>AppComponent</code> HTML template:
+    </p>
+    <div class="card mb-4">
+        <div class="card-body">
+            <figure>
+                <figcaption>app-component.ts:</figcaption>
+                <pre><code class="language-typescript">&#64;Component(&#123;
+    selector: 'app-root',
+    template: '&lt;router-outlet&gt;&lt;/router-outlet&gt;&lt;atx-dialog-outlet/&gt;',
+    standalone: true,
+    imports: [
+        RouterOutlet,
+        DialogOutlet
+    ]
+&#125;)
+export class AppComponent &#123;&#125;</code></pre></figure>
+        </div>
+    </div>
+</section>
+
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'Dialog API', 'path': 'dialog-api' }, { 'label': 'DialogOutlet Component' }]">
+</object>

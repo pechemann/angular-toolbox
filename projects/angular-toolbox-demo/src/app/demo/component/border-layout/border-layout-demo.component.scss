@@ -15,3 +15,7 @@ ul {
   height: 150px;
   overflow-y: auto;
 }
+
+label {
+  user-select: none;
+}

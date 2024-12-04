@@ -1,0 +1,284 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <section class="w-100">
+        <h5 class="mb-4">On this page</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="#principle" onclick="appBridge.goToAnchor(event)" title="Principle">Principle</a></li>
+            <li class="list-group-item"><a href="#api" onclick="appBridge.goToAnchor(event)" title="API">API</a></li>
+            <li class="list-group-item"><a href="#usage" onclick="appBridge.goToAnchor(event)" title="Usage">Usage</a></li>
+        </ul>
+    </section>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3">Dialog API</h2>
+    <div class="version-info text-end mb-4 me-3">
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 1.4.6</span></small>
+        <small><span class="badge text-bg-warning rounded-pill">Experimental</span></small>
+    </div>
+    <p>
+        The Dialog API allows to create modal or non-modal dialog box or other interactive component,
+        such as a dismissible alert, inspector, or subwindow.
+        <br>This component is part of the <a href="javascript:appBridge.navigate(['resources/documentation/laf-less-components'])" title="LAF-less API">LAF-less API</a>.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="principle">Principle</h3>
+   <p>
+        Regarding the <a href="javascript:appBridge.navigate(['resources/documentation/laf-less-components'])" title="LAF-less API">LAF-less API</a>,
+        dialog containers allow to create modal and non-modal popup windows by separating the popup UI logic from the app business logic. 
+    </p>
+    <p>
+        You typically use the Dialog API to create both, blocking and non-blocking messages (such as alerts), contextual input components and so on.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="api">API</h3>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Interface</th>
+            <th scope="col">Description</th>
+            <th scope="col">Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>DialogBackdrop</code></td>
+            <td>
+                Indicates the type of a dialog backdrop element.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/dialog-api/dialog-backdrop'])" title="DialogBackdrop">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <td><code>DialogConfig</code></td>
+            <td>
+                The configuration of a custom component displayed through the Dialog API.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/dialog-api/dialog-config'])" title="DialogConfig">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+        </tbody>
+      <thead>
+        <tr>
+          <th scope="col">Component</th>
+          <th scope="col">Description</th>
+          <th scope="col">Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+            <td><code>DialogOutlet</code></td>
+            <td>
+                The placeholder for the ATX Dialog API.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/dialog-api/dialog-outlet'])" title="DialogOutlet">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+        </tr>
+      </tbody>
+      <thead>
+        <tr>
+          <th scope="col">Service</th>
+          <th scope="col">Description</th>
+          <th scope="col">Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+            <td><code>DialogService</code></td>
+            <td>
+                Manages injection of custom components into the HTML dialog element created by the ATX framework.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/dialog-api/dialog-service'])" title="DialogService">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+        </tr>
+      </tbody>
+      <thead>
+        <tr>
+          <th scope="col">Event</th>
+          <th scope="col">Description</th>
+          <th scope="col">Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+            <td><code>DialogOutletEvent</code></td>
+            <td>
+                Event that indicates the state changes of components managed by the <code>DialogService</code> service singleton.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/dialog-api/dialog-outlet-event'])" title="DialogOutletEvent">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td><code>DialogOutletEventType</code></td>
+            <td>
+                Specifies the event type of <code>DialogOutletEvent</code> instances.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/dialog-api/dialog-outlet-event-type'])" title="DialogOutletEventType">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+      </tbody>
+      <thead>
+        <tr>
+          <th scope="col">Util</th>
+          <th scope="col">Description</th>
+          <th scope="col">Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>DialogBackdropType</code></td>
+          <td>
+            Defines the possible values used to assign properties of type of <code>DialogBackdrop</code>.
+          </td>
+          <td>
+              <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/dialog-api/dialog-backdrop-type'])" title="DialogBackdropType Enum">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                      <use href="#linkIcon"/>
+                  </svg>
+              </button>
+          </td>
+        </tr>
+        <tr>
+            <td><code>DialogServiceError</code></td>
+            <td>
+                Represents errors thrown by the ATX framework when a dialog error occurs.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/dialog-api/dialog-service-error'])" title="DialogServiceError">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="usage">Usage</h3>
+    <p>
+        Before using the Dialog API, you must declare the <code>&lt;atx-dialog-outlet/&gt;</code> tag,
+        typically in the <code>AppComponent</code> HTML template:
+    </p>
+    <div class="card mb-4">
+        <div class="card-body">
+            <figure>
+                <figcaption>app-component.ts:</figcaption>
+                <pre><code class="language-typescript">&#64;Component(&#123;
+    selector: 'app-root',
+    template: '&lt;router-outlet&gt;&lt;/router-outlet&gt;&lt;atx-dialog-outlet/&gt;',
+    standalone: true,
+    imports: [
+        RouterOutlet,
+        DialogOutlet
+    ]
+&#125;)
+export class AppComponent &#123;&#125;</code></pre></figure>
+        </div>
+    </div>
+
+    <p>
+        The following sample app shows how to create a basic alert popup built on top of the Bootstrap <em>Card</em> component:
+    </p>
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title mb-2">Code</h5>
+    <figure>
+        <figcaption>dialog-sample.component.html</figcaption>
+        <pre><code class="language-html">&lt;div class="card"&gt;
+    &lt;div class="card-header"&gt; Alert Popup Sample &lt;/div&gt;
+    &lt;div class="card-body"&gt;
+        &lt;p class="card-text"&gt;
+            &lt;i class="bi bi-exclamation-triangle"&gt;&lt;/i&gt;
+            This message is displayed using the HTML5 &lt;dialog&gt; element.
+        &lt;/p&gt;
+        &lt;button (click)="dialog.hide()" class="btn btn-primary"&gt;Close&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt; </code></pre></figure>
+<figure>
+    <figcaption>dialog-sample.component.ts</figcaption>
+    <pre><code class="language-typescript">&#64;Component(&#123;
+    selector: 'app-dialog-sample',
+    standalone: true,
+    templateUrl: './dialog-sample.component.html'
+&#125;)
+export class DialogSampleComponent &#123;
+
+    constructor(protected dialog: DialogService) &#123;&#125;
+&#125;</code></pre></figure>
+            <p>
+                The modal component above can be invoked anywhere within your application:
+            </p>
+            <figure>
+                <figcaption>dialog-demo.component.ts</figcaption>
+                <pre><code class="language-typescript">&#64;Component(&#123;
+    selector: 'app-dialog-demo',
+    standalone: true,
+    template: '&lt;button (click)="openDialog()"&gt;Open Dialog&lt;/button&gt;'
+&#125;)
+export class DialogDemoComponent &#123;
+    
+    constructor(private dialog: DialogService) &#123;&#125;
+    
+    protected openDialog(): void &#123;
+        // Dialog component injection 
+        this.dialog.show(DialogSampleComponent);
+    &#125;
+&#125;</code></pre></figure>
+             <p>
+                To see this sample in action, go to the demo section:
+             </p>
+             <button class="btn btn-primary btn-lg" onclick="appBridge.navigate(['demo/dialog'])" title="Dialog API Demo">
+                Dialog API Demo
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'Dialog API' }]">
+</object>

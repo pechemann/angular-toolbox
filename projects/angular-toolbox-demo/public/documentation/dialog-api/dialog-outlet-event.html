@@ -1,0 +1,119 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+ 
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100 mb-4">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+           <li class="list-group-item"><a href="javascript:appBridge.navigate(['resources/documentation/dialog-api'])">
+            Dialog API
+            </a></li>
+        </ul>
+    </aside>
+    <section class="w-100">
+        <h5 class="mb-4">On this page</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="#constructor" onclick="appBridge.goToAnchor(event)" title="constructor">constructor</a></li>
+            <li class="list-group-item"><a href="#SHOW" onclick="appBridge.goToAnchor(event)" title="SHOW property">SHOW property</a></li>
+            <li class="list-group-item"><a href="#HIDE" onclick="appBridge.goToAnchor(event)" title="HIDE property">HIDE property</a></li>
+            <li class="list-group-item"><a href="#state" onclick="appBridge.goToAnchor(event)" title="state property">state property</a></li>
+            <li class="list-group-item"><a href="#config" onclick="appBridge.goToAnchor(event)" title="config property">config property</a></li>
+        </ul>
+    </section>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3">Dialog API</h2>
+    <div class="version-info text-end mb-4 me-3">
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 1.4.6</span></small>
+        <small><span class="badge text-bg-warning rounded-pill">Experimental</span></small>
+    </div>
+    <p>
+        The Dialog API allows to create modal or non-modal dialog box or other interactive component,
+        such as a dismissible alert, inspector, or subwindow.
+        <br>This component is part of the <a href="javascript:appBridge.navigate(['resources/documentation/laf-less-components'])" title="LAF-less API">LAF-less API</a>.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3><code>DialogOutletEvent</code></h3>
+    <p>
+        Event that indicates the state changes of components managed by the <code>DialogService</code> service singleton.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="constructor"><code>Constructor Function</code></h3>
+    <pre><code class="language-typescript">constructor(state: DialogOutletEventType, config: DialogConfig | null = null)</code></pre>
+    <p>
+        Creates a new <code>DialogOutletEvent</code> instance.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>state: DialogOutletEventType</code></dt>
+            <dd>
+                <p>
+                    The state of the dialog element.<br>
+                    See the <a href="javascript:appBridge.navigate(['resources/documentation/dialog-api','/dialog-outlet-event-type'])"><code>DialogOutletEventType</code> API</a> for details.
+                </p>
+            </dd>
+        </dl>
+        <dl>
+            <dt><code>config: DialogConfig | null</code></dt>
+            <dd>
+                <p>
+                    The dialog element config associated with this event.
+                    <br>
+                    See the <a href="javascript:appBridge.navigate(['resources/documentation/dialog-api','/dialog-config'])"><code>DialogConfig</code> API</a> for details.
+                </p>
+            </dd>
+        </dl>
+    </div>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="SHOW"><code>DialogOutletEvent.SHOW</code></h3>
+    <pre><code class="language-typescript">static readonly SHOW: DialogOutletEventType</code></pre>
+    <p>
+        The type of event dispatched each time the dialog element is displayed.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="HIDE"><code>DialogOutletEvent.HIDE</code></h3>
+    <pre><code class="language-typescript">static readonly HIDE: DialogOutletEventType</code></pre>
+    <p>
+        The type of event dispatched each time the dialog element is removed.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="state"><code>DialogOutletEvent.state</code></h3>
+    <pre><code class="language-typescript">readonly state: DialogOutletEventType</code></pre>
+    <p>
+        A <code>DialogOutletEventType</code> value that indicates the state of the dialog element.<br>
+        See the <a href="javascript:appBridge.navigate(['resources/documentation/dialog-api','/dialog-outlet-event-type'])"><code>DialogOutletEventType</code> API</a> for details.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="config"><code>DialogOutletEvent.config</code></h3>
+    <pre><code class="language-typescript">readonly config: DialogConfig | null</code></pre>
+    <p>
+        The dialog element config associated with an event of type of <code>DialogOutletEvent.SHOW</code>.<br>
+        <code>config</code> is set to <code>null</code> when the event is of type of <code>DialogOutletEvent.HIDE</code>.<br>
+        See the <a href="javascript:appBridge.navigate(['resources/documentation/dialog-api','/dialog-config'])"><code>DialogConfig</code> API</a> for details.
+    </p>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'Dialog API', 'path': 'dialog-api' }, { 'label': 'DialogOutletEvent Class' }]">
+</object>

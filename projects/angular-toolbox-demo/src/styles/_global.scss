@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
- 
+
 /* common code indentations */
 pre {
     margin-top: 10px;
@@ -44,4 +44,42 @@ pre {
     margin-right: .5rem;
     content: "";
     background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%230d6efd' viewBox='0 0 16 16'%3E%3Cpath d='M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z'/%3E%3C/svg%3E") no-repeat center center / 100% auto;
+}
+
+///// dialog /////////////
+
+dialog {
+    outline: none;
+    border: none;
+    background: none;
+
+    &[open] {
+        animation: fadeIn 0.35s forwards;
+
+        &::backdrop {
+            animation: backdropFadeIn 0.35s forwards;
+        }
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        translate: 0 -3em;
+    }
+
+    to {
+        opacity: 1;
+        translate: 0 0;
+    }
+}
+
+@keyframes backdropFadeIn {
+    from {
+        background: hsl(0 0% 0% / 0%);
+    }
+
+    to {
+        background: hsl(0 0% 0% / 75%);
+    }
 }

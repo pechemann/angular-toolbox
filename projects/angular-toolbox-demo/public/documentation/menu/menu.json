@@ -22,7 +22,8 @@
         { "label": "BatteryManager Interface", "urlTree": [ "/resources", "documentation", "battery-manager" ] },
         { "label": "Window Managment API", "urlTree": [ "/resources", "documentation", "window-managment-api" ] },
         { "label": "Border Layout", "urlTree": [ "/resources", "documentation", "border-layout" ] },
-        { "label": "Dropdown Container", "urlTree": [ "/resources", "documentation", "dropdown-container" ] }
+        { "label": "Dropdown Container", "urlTree": [ "/resources", "documentation", "dropdown-container" ] },
+        { "label": "Dialog API (Experimental)", "urlTree": [ "/resources", "documentation", "dialog-api" ] }
     ],
     "articles": [
         { "label": "Angular Toolbox Principles", "urlTree": [ "/resources", "documentation", "atx-principles" ]  },
