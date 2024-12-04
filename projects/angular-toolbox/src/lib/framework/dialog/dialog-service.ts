@@ -12,7 +12,7 @@ import { DialogConfig } from "./dialog.config";
 import { DialogServiceError } from "./dialog-service.error";
 
 /**
- * The `DialogService` class manages injection of custom component into the
+ * The `DialogService` class manages injection of customs component into the
  * HTML dialog element created by the ATX framework.
  */
 @Injectable({
@@ -22,7 +22,7 @@ export class DialogService {
 
     /**
      * Dispatches an event that indicates the state of the dialog element when a custom
-     * component is added to, or remove from, it.
+     * component is added to, or remove from it.
      */
     public readonly dialogStateChange: EventEmitter<DialogOutletEvent> = new EventEmitter();
 

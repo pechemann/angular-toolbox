@@ -10,7 +10,7 @@ import { DialogOutletEventType } from "./dialog-outlet-event-type";
 import { DialogConfig } from "./dialog.config";
 
 /**
- * Events that indicates the state changes of component managed by `DialogService` service instances.
+ * Event that indicates the state changes of components managed by the `DialogService` service singleton.
  */
 export class DialogOutletEvent {
 

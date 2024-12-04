@@ -20,7 +20,7 @@
 <header class="fs-5 col-xl-9 mb-4">
     <h2 class="mb-3">Dialog API</h2>
     <div class="version-info text-end mb-4 me-3">
-        <!--<small>Since <span class="badge text-bg-warning rounded-pill">v 1.4.0</span></small>-->
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 1.4.6</span></small>
         <small><span class="badge text-bg-warning rounded-pill">Experimental</span></small>
     </div>
     <p>
@@ -79,7 +79,73 @@
                 </button>
             </td>
           </tr>
-          <tr>
+        </tbody>
+      <thead>
+        <tr>
+          <th scope="col">Component</th>
+          <th scope="col">Description</th>
+          <th scope="col">Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+            <td><code>DialogOutlet</code></td>
+            <td>
+                The placeholder for the ATX Dialog API.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/dialog-api/dialog-outlet'])" title="DialogOutlet">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+        </tr>
+      </tbody>
+      <thead>
+        <tr>
+          <th scope="col">Service</th>
+          <th scope="col">Description</th>
+          <th scope="col">Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+            <td><code>DialogService</code></td>
+            <td>
+                Manages injection of custom components into the HTML dialog element created by the ATX framework.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/dialog-api/dialog-service'])" title="DialogService">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+        </tr>
+      </tbody>
+      <thead>
+        <tr>
+          <th scope="col">Event</th>
+          <th scope="col">Description</th>
+          <th scope="col">Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+            <td><code>DialogOutletEvent</code></td>
+            <td>
+                Event that indicates the state changes of components managed by the <code>DialogService</code> service singleton.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/dialog-api/dialog-outlet-event'])" title="DialogOutletEvent">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+        </tr>
+        <tr>
             <td><code>DialogOutletEventType</code></td>
             <td>
                 Specifies the event type of <code>DialogOutletEvent</code> instances.
@@ -92,8 +158,43 @@
                 </button>
             </td>
           </tr>
-        </tbody>
-      </table>
+      </tbody>
+      <thead>
+        <tr>
+          <th scope="col">Util</th>
+          <th scope="col">Description</th>
+          <th scope="col">Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>DialogBackdropType</code></td>
+          <td>
+            Defines the possible values used to assign properties of type of <code>DialogBackdrop</code>.
+          </td>
+          <td>
+              <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/dialog-api/dialog-backdrop-type'])" title="DialogBackdropType Enum">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                      <use href="#linkIcon"/>
+                  </svg>
+              </button>
+          </td>
+        </tr>
+        <tr>
+            <td><code>DialogServiceError</code></td>
+            <td>
+                Represents errors thrown by the ATX framework when a dialog error occurs.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/dialog-api/dialog-service-error'])" title="DialogServiceError">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 </section>
 
 <section class="col-xl-9 mb-4">

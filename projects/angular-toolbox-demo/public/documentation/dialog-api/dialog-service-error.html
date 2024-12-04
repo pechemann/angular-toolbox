@@ -32,18 +32,38 @@
 </header>
 
 <section class="col-xl-9 mb-4">
-    <h3 class="mb-3"><code>DialogBackdrop</code> Type</h3> 
+    <h3><code>DialogServiceError</code></h3>
     <p>
-        The <code>DialogBackdrop</code> type defines the possible values for the <code>backdrop</code> property of the <code>DialogConfig</code> interface.
+        The <code>DialogServiceError</code> class represents errors thrown by the ATX framework
+        when a dialog error occurs.
     </p>
-<section class="col-xl-9">
+</section>
 
 <section class="col-xl-9 mb-4">
-    <h3>Type Definition</h3>
-    <pre><code class="language-typescript">type DialogBackdrop =  "modal" | "static"</code></pre>
+    <h3 id="constructor"><code>Constructor Function</code></h3>
+    <pre><code class="language-typescript">constructor(message: string)</code></pre>
+    <p>
+        Creates a new <code>DialogServiceError</code> instance.
+    </p>
+    <p>
+        Extends the <code>Error</code> class. See the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" title="Error">
+            <code>Error class reference</code></a> for details.
+    </p>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>message: string</code></dt>
+            <dd>
+                <p>
+                    A human-readable description of the error.
+                </p>
+            </dd>
+        </dl>
+    </div>
 </section>
+
 
 <!-- We use a data object to store navigation tree structure-->
 <object id="navigation-tree"
-        data-tree="[{ 'label': 'Dialog API', 'path': 'dialog-api' }, { 'label': 'DialogBackdrop Type' }]">
+        data-tree="[{ 'label': 'Dialog API', 'path': 'dialog-api' }, { 'label': 'DialogServiceError' }]">
 </object>
