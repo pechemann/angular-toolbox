@@ -9,6 +9,13 @@
 import { DialogBackdropType } from "./dialog-backdrop-type.enum";
 import { DialogBackdrop } from "./dialog-backdrop.type";
 
+/**
+ * Defines the configuration associated with a custom component displayed through the Dialog API.
+ */
 export interface DialogConfig {
+
+    /**
+     * Indicates whether the dialog is modal, or static.
+     */
     backdrop?: DialogBackdrop | DialogBackdropType;
 }
