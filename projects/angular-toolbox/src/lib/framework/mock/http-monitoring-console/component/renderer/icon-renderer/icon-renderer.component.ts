@@ -20,14 +20,13 @@ import { AtxLogRendererBase } from '../../abstract/log-renderer-base';
  * The component responsible for managing icons the ATX monitoring console.
  */
 @Component({
-  selector: 'atx-icon-renderer',
-  standalone: true,
-  templateUrl: './icon-renderer.component.html',
-  styleUrl: './icon-renderer.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    AtxSpinnerComponent
-  ]
+    selector: 'atx-icon-renderer',
+    templateUrl: './icon-renderer.component.html',
+    styleUrl: './icon-renderer.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        AtxSpinnerComponent
+    ]
 })
 export class AtxIconRendererComponent extends AtxLogRendererBase {
 

@@ -11,11 +11,13 @@ import { Component } from "@angular/core";
 export const TEST_URL: string = "http://external-url.com";
 
 @Component({
-  template: `<div id="testElm" navigateToUrl href="http://external-url.com"></div>`
+    template: `<div id="testElm" navigateToUrl href="http://external-url.com"></div>`,
+    standalone: false
 })
 export class NavigateToUrlDirectiveTestComponent {}
 
 @Component({
-  template: `<div id="testElm" navigateToUrl></div>`
+    template: `<div id="testElm" navigateToUrl></div>`,
+    standalone: false
 })
 export class NavigateToUrlDirectiveNoHrefTestComponent {}

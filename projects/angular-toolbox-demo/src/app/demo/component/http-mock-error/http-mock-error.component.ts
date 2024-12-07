@@ -18,13 +18,12 @@ import { DocumentationLink } from '../../../ui/model/business/documentation-link
 import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
 
 @Component({
-  selector: 'app-http-mock-error',
-  standalone: true,
-  imports: [
-    DemoComponent,
-    RouterModule
-  ],
-  templateUrl: './http-mock-error.component.html'
+    selector: 'app-http-mock-error',
+    imports: [
+        DemoComponent,
+        RouterModule
+    ],
+    templateUrl: './http-mock-error.component.html'
 })
 export class HttpMockErrorComponent extends IdentifiableComponent implements OnDestroy {
 

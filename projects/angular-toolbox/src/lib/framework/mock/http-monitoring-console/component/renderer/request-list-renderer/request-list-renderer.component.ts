@@ -36,13 +36,12 @@ const MS_SUFIX: string = " ms";
  * The component that layouts HTTP logs via a table element in the ATX monitoring console.
  */
 @Component({
-  selector: 'atx-request-list-renderer',
-  standalone: true,
-  imports: [
-    AtxIconRendererComponent
-  ],
-  templateUrl: './request-list-renderer.component.html',
-  styleUrl: './request-list-renderer.component.scss'
+    selector: 'atx-request-list-renderer',
+    imports: [
+        AtxIconRendererComponent
+    ],
+    templateUrl: './request-list-renderer.component.html',
+    styleUrl: './request-list-renderer.component.scss'
 })
 export class AtxRequestListRendererComponent {
   

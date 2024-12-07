@@ -17,14 +17,13 @@ import { FormsModule } from '@angular/forms';
 const CALLER: string = "Logging Console Demo";
 
 @Component({
-  selector: 'app-logging-framework-demo',
-  standalone: true,
-  imports: [
-    DemoComponent,
-    FormsModule
-  ],
-  templateUrl: './logging-framework.component.html',
-  styleUrl: 'logging-framework.component.scss'
+    selector: 'app-logging-framework-demo',
+    imports: [
+        DemoComponent,
+        FormsModule
+    ],
+    templateUrl: './logging-framework.component.html',
+    styleUrl: 'logging-framework.component.scss'
 })
 export class LoggingFrameworkComponent extends IdentifiableComponent implements AfterViewInit, OnDestroy {
 

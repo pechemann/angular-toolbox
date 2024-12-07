@@ -13,13 +13,12 @@ import { AngularToolboxCodeViewportComponent } from 'projects/angular-toolbox-de
 declare type Language = "html" | "typescript" | "css";
 
 @Component({
-  selector: 'src-viewport',
-  standalone: true,
-  imports: [
-    AngularToolboxCodeViewportComponent
-  ],
-  templateUrl: './src-viewport.component.html',
-  styleUrls: ['./src-viewport.component.scss']
+    selector: 'src-viewport',
+    imports: [
+        AngularToolboxCodeViewportComponent
+    ],
+    templateUrl: './src-viewport.component.html',
+    styleUrls: ['./src-viewport.component.scss']
 })
 export class SrcViewportComponent {
 

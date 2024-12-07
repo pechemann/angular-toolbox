@@ -17,14 +17,13 @@ import { AtxLogRendererBase } from '../../abstract/log-renderer-base';
  * The component that displays HTTP request info in the ATX monitoring console.
  */
 @Component({
-  selector: 'atx-request-info-renderer',
-  standalone: true,
-  imports: [
-    NgStyle,
-  ],
-  templateUrl: './request-info-renderer.component.html',
-  styleUrl: './request-info-renderer.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'atx-request-info-renderer',
+    imports: [
+        NgStyle,
+    ],
+    templateUrl: './request-info-renderer.component.html',
+    styleUrl: './request-info-renderer.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AtxRequesInfoComponent extends AtxLogRendererBase {
   

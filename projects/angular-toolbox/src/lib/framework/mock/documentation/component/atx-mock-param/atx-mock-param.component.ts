@@ -15,13 +15,12 @@ import { SafeHtmlPipe } from '../../../../../pipe';
  * Displays documentation for HTTP fragment parameters, or query parameters.
  */
 @Component({
-  selector: 'atx-mock-param',
-  standalone: true,
-  imports: [
-    SafeHtmlPipe
-  ],
-  templateUrl: './atx-mock-param.component.html',
-  styleUrl: './atx-mock-param.component.scss'
+    selector: 'atx-mock-param',
+    imports: [
+        SafeHtmlPipe
+    ],
+    templateUrl: './atx-mock-param.component.html',
+    styleUrl: './atx-mock-param.component.scss'
 })
 export class AtxMockParamComponent {
 

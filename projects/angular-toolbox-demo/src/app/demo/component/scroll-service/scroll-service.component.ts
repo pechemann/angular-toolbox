@@ -14,12 +14,11 @@ import { DocumentationLink } from '../../../ui/model/business/documentation-link
 import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
 
 @Component({
-  selector: 'scroll-service',
-  standalone: true,
-  imports: [
-    DemoComponent
-  ],
-  templateUrl: './scroll-service.component.html'
+    selector: 'scroll-service',
+    imports: [
+        DemoComponent
+    ],
+    templateUrl: './scroll-service.component.html'
 })
 export class ScrollServiceComponent extends IdentifiableComponent implements OnInit, OnDestroy {
 

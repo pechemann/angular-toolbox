@@ -16,13 +16,12 @@ import { FormsModule } from '@angular/forms';
 
 @HttpMock(SAY_HELLO_MOCK_CONFIG)
 @Component({
-  selector: 'app-say-hello',
-  standalone: true,
-  imports: [
-    AngularToolboxPageTitleComponent,
-    FormsModule
-  ],
-  templateUrl: './say-hello.component.html'
+    selector: 'app-say-hello',
+    imports: [
+        AngularToolboxPageTitleComponent,
+        FormsModule
+    ],
+    templateUrl: './say-hello.component.html'
 })
 export class SayHelloComponent extends IdentifiableComponent implements OnInit, OnDestroy {
 

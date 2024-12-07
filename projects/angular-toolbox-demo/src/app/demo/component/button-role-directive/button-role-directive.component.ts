@@ -15,14 +15,13 @@ import { DocumentationLink } from '../../../ui/model/business/documentation-link
 import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
 
 @Component({
-  selector: 'app-button-role-directive',
-  standalone: true,
-  imports: [
-    DemoComponent,
-    ButtonRoleDirective
-  ],
-  templateUrl: './button-role-directive.component.html',
-  styles: ['dialog { width: 400px; }']
+    selector: 'app-button-role-directive',
+    imports: [
+        DemoComponent,
+        ButtonRoleDirective
+    ],
+    templateUrl: './button-role-directive.component.html',
+    styles: ['dialog { width: 400px; }']
 })
 export class ButtonRoleDirectiveComponent {
 

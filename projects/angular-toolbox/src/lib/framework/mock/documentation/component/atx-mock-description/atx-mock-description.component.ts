@@ -14,12 +14,11 @@ import { SafeHtmlPipe } from '../../../../../pipe';
  * A conmponent that renders mock config description ppoperties.
  */
 @Component({
-  selector: 'atx-mock-description',
-  standalone: true,
-  imports: [
-    SafeHtmlPipe
-  ],
-  templateUrl: './atx-mock-description.component.html'
+    selector: 'atx-mock-description',
+    imports: [
+        SafeHtmlPipe
+    ],
+    templateUrl: './atx-mock-description.component.html'
 })
 export class AtxMockDescriptionComponent {
 

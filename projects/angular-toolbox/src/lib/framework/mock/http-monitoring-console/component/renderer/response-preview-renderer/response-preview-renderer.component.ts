@@ -27,15 +27,14 @@ const IMG_TYPE: string = 'image/';
  * The component that displays HTTP response data preview in the ATX monitoring console.
  */
 @Component({
-  selector: 'atx-response-preview-renderer',
-  standalone: true,
-  imports: [
-    AtxJsonViewerComponent,
-    SafeHtmlPipe
-  ],
-  templateUrl: './response-preview-renderer.component.html',
-  styleUrl: './response-preview-renderer.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'atx-response-preview-renderer',
+    imports: [
+        AtxJsonViewerComponent,
+        SafeHtmlPipe
+    ],
+    templateUrl: './response-preview-renderer.component.html',
+    styleUrl: './response-preview-renderer.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AtxResponsePreviewRendererComponent extends AtxLogRendererBase implements OnDestroy {
 

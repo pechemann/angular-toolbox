@@ -12,17 +12,16 @@ import { AngularToolboxGitSectionComponent, AngularToolboxPageTitleComponent, Br
 import { AngularToolboxVersionService } from 'projects/angular-toolbox/src/public-api';
 
 @Component({
-  selector: 'app-resources',
-  standalone: true,
-  imports: [
-    RouterModule,
-    AngularToolboxGitSectionComponent,
-    AngularToolboxPageTitleComponent
-  ],
-  providers: [
-    AngularToolboxVersionService
-  ],
-  templateUrl: './resources.component.html'
+    selector: 'app-resources',
+    imports: [
+        RouterModule,
+        AngularToolboxGitSectionComponent,
+        AngularToolboxPageTitleComponent
+    ],
+    providers: [
+        AngularToolboxVersionService
+    ],
+    templateUrl: './resources.component.html'
 })
 export class ResourcesComponent {
 

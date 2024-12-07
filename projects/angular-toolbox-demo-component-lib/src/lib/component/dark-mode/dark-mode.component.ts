@@ -15,13 +15,12 @@ const DARK: string = 'dark';
 const BS_ATTRIBUTE: string = 'data-bs-theme';
 
 @Component({
-  selector: 'atx-dark-mode',
-  standalone: true,
-  imports: [
-    DropdownComponent
-  ],
-  providers: [ DarkModeService ],
-  templateUrl: './dark-mode.component.html'
+    selector: 'atx-dark-mode',
+    imports: [
+        DropdownComponent
+    ],
+    providers: [DarkModeService],
+    templateUrl: './dark-mode.component.html'
 })
 export class AngularToolboxDarkModeComponent {
 

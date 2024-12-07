@@ -27,13 +27,12 @@ const DESCRIPTOR: string = "descriptor";
  * A convenient component that allows to display documentation for HTTP methods of an endpoint.
  */
 @Component({
-  selector: 'atx-mock-methods',
-  standalone: true,
-  imports: [
-    AtxMockParamComponent,
-    AtxMockDescriptionComponent
-  ],
-  templateUrl: './atx-mock-methods.component.html'
+    selector: 'atx-mock-methods',
+    imports: [
+        AtxMockParamComponent,
+        AtxMockDescriptionComponent
+    ],
+    templateUrl: './atx-mock-methods.component.html'
 })
 export class AtxMockMethodsComponent {
   

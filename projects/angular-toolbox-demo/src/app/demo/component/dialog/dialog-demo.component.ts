@@ -15,12 +15,11 @@ import { DialogService } from 'projects/angular-toolbox/src/lib/framework/dialog
 import { DialogSampleComponent } from './dialog-sample/dialog-sample.component';
 
 @Component({
-  selector: 'app-dialog-demo',
-  standalone: true,
-  imports: [
-    DemoComponent
-  ],
-  templateUrl: './dialog-demo.component.html'
+    selector: 'app-dialog-demo',
+    imports: [
+        DemoComponent
+    ],
+    templateUrl: './dialog-demo.component.html'
 })
 export class DialogDemoComponent {
 

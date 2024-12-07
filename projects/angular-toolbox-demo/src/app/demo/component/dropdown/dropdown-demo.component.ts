@@ -15,15 +15,14 @@ import { DropdownComponent, DropdownHorizontalPosition, DropdownVerticalPosition
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'dropdown-demo',
-  standalone: true,
-  imports: [
-    DemoComponent,
-    DropdownComponent,
-    FormsModule
-  ],
-  templateUrl: './dropdown-demo.component.html',
-  styleUrls: ['./dropdown-demo.component.scss']
+    selector: 'dropdown-demo',
+    imports: [
+        DemoComponent,
+        DropdownComponent,
+        FormsModule
+    ],
+    templateUrl: './dropdown-demo.component.html',
+    styleUrls: ['./dropdown-demo.component.scss']
 })
 export class DropdownDemoComponent {
 

@@ -14,13 +14,12 @@ import { DocumentationLink } from '../../../ui/model/business/documentation-link
 import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
 
 @Component({
-  selector: 'app-dark-mode-service',
-  standalone: true,
-  imports: [
-    DemoComponent
-  ],
-  templateUrl: './dark-mode-service.component.html',
-  styleUrls: ['./dark-mode-service.component.scss']
+    selector: 'app-dark-mode-service',
+    imports: [
+        DemoComponent
+    ],
+    templateUrl: './dark-mode-service.component.html',
+    styleUrls: ['./dark-mode-service.component.scss']
 })
 export class DarkModeServiceComponent implements OnDestroy {
 

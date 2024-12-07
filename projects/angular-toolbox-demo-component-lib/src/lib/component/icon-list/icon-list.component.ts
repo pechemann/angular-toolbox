@@ -11,13 +11,12 @@ import { RouterModule } from '@angular/router';
 import { IconListItem } from '../../model/business/icon-list-item';
 
 @Component({
-  selector: 'atx-icon-list',
-  standalone: true,
-  imports: [
-    RouterModule
-  ],
-  templateUrl: './icon-list.component.html',
-  styleUrl: './icon-list.component.scss'
+    selector: 'atx-icon-list',
+    imports: [
+        RouterModule
+    ],
+    templateUrl: './icon-list.component.html',
+    styleUrl: './icon-list.component.scss'
 })
 export class AngularToolboxIconListComponent {
 

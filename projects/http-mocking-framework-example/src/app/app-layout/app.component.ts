@@ -11,15 +11,14 @@ import { RouterOutlet } from '@angular/router';
 import { AngularToolboxBreadcrumbComponent, AngularToolboxDarkModeComponent, AngularToolboxFooterComponent,  AngularToolboxHeaderComponent } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  standalone: true,
-  imports: [
-    RouterOutlet,
-    AngularToolboxHeaderComponent,
-    AngularToolboxFooterComponent,
-    AngularToolboxDarkModeComponent,
-    AngularToolboxBreadcrumbComponent
-  ]
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    imports: [
+        RouterOutlet,
+        AngularToolboxHeaderComponent,
+        AngularToolboxFooterComponent,
+        AngularToolboxDarkModeComponent,
+        AngularToolboxBreadcrumbComponent
+    ]
 })
 export class AppComponent {}

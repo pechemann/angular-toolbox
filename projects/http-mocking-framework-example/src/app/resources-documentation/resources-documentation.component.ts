@@ -20,15 +20,14 @@ type HttpMockConfigRef = {
 };
 
 @Component({
-  selector: 'app-resources-documentation',
-  standalone: true,
-  imports: [
-    AngularToolboxPageTitleComponent,
-    AngularToolboxCodeViewportComponent,
-    AtxMockDocumentation,
-    DropdownComponent
-  ],
-  templateUrl: './resources-documentation.component.html'
+    selector: 'app-resources-documentation',
+    imports: [
+        AngularToolboxPageTitleComponent,
+        AngularToolboxCodeViewportComponent,
+        AtxMockDocumentation,
+        DropdownComponent
+    ],
+    templateUrl: './resources-documentation.component.html'
 })
 export class ResourcesDocumentationComponent {
   

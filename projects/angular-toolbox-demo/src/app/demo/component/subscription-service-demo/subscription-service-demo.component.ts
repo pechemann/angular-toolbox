@@ -14,12 +14,11 @@ import { DocumentationLink } from '../../../ui/model/business/documentation-link
 import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
 
 @Component({
-  selector: 'app-subscription-service-demo',
-  standalone: true,
-  imports: [
-    DemoComponent
-  ],
-  templateUrl: './subscription-service-demo.component.html'
+    selector: 'app-subscription-service-demo',
+    imports: [
+        DemoComponent
+    ],
+    templateUrl: './subscription-service-demo.component.html'
 })
 export class SubscriptionServiceComponent extends IdentifiableComponent implements OnInit, OnDestroy {
 

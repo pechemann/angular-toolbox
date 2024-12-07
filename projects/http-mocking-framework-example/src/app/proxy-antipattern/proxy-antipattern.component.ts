@@ -14,13 +14,12 @@ import { HttpMock, HttpMockService, IdentifiableComponent, SubscriptionService }
 
 @HttpMock(MESSAGE_PROXY_MOCK_CONFIG)
 @Component({
-  selector: 'app-proxy-antipattern',
-  standalone: true,
-  imports: [
-    AngularToolboxPageTitleComponent
-  ],
-  templateUrl: './proxy-antipattern.component.html',
-  styleUrl: './proxy-antipattern.component.scss'
+    selector: 'app-proxy-antipattern',
+    imports: [
+        AngularToolboxPageTitleComponent
+    ],
+    templateUrl: './proxy-antipattern.component.html',
+    styleUrl: './proxy-antipattern.component.scss'
 })
 export class ProxyAntipatternComponent extends IdentifiableComponent implements OnInit, OnDestroy {
 

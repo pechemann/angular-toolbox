@@ -18,15 +18,14 @@ const page2: string[] = [ "Resources", "Documentation" ];
 const page3: string[] = [ "Contact" ];
 
 @Component({
-  selector: 'app-array-list',
-  standalone: true,
-  imports: [
-    DemoComponent
-  ],
-  providers: [
-    BreadcrumbDemoService
-  ],
-  templateUrl: './array-list.component.html'
+    selector: 'app-array-list',
+    imports: [
+        DemoComponent
+    ],
+    providers: [
+        BreadcrumbDemoService
+    ],
+    templateUrl: './array-list.component.html'
 })
 export class ArrayListComponent {
 

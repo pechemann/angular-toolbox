@@ -15,20 +15,19 @@ import { YouTubeLink } from '../model/youtube-link';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [
-    AngularToolboxGitSectionComponent,
-    AnchorLinklDirective,
-    AngularToolboxCodeViewportComponent,
-    AngularToolboxPageTitleComponent,
-    AngularToolboxIconListComponent,
-    AngularToolboxHrComponent,
-    NgOptimizedImage,
-    RouterModule
-  ],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+    selector: 'app-home',
+    imports: [
+        AngularToolboxGitSectionComponent,
+        AnchorLinklDirective,
+        AngularToolboxCodeViewportComponent,
+        AngularToolboxPageTitleComponent,
+        AngularToolboxIconListComponent,
+        AngularToolboxHrComponent,
+        NgOptimizedImage,
+        RouterModule
+    ],
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.scss'
 })
 export class HomeComponent {
 

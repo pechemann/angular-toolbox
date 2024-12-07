@@ -7,24 +7,20 @@
  */
 
 import { Component } from '@angular/core';
-import { NavigateToUrlDirective } from 'projects/angular-toolbox/src/public-api';
-import { BreadcrumbService, IconListItem, AngularToolboxCodeViewportComponent, AngularToolboxGitSectionComponent, AngularToolboxHrComponent, AngularToolboxIconListComponent, AngularToolboxPageTitleComponent } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
+import { BreadcrumbService, IconListItem, AngularToolboxGitSectionComponent, AngularToolboxHrComponent, AngularToolboxIconListComponent, AngularToolboxPageTitleComponent } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [
-    AngularToolboxGitSectionComponent,
-    NavigateToUrlDirective,
-    AngularToolboxCodeViewportComponent,
-    AngularToolboxPageTitleComponent,
-    AngularToolboxIconListComponent,
-    AngularToolboxHrComponent,
-    AngularToolboxGitSectionComponent,
-    RouterModule
-  ],
-  templateUrl: './home.component.html'
+    selector: 'app-home',
+    imports: [
+        AngularToolboxGitSectionComponent,
+        AngularToolboxPageTitleComponent,
+        AngularToolboxIconListComponent,
+        AngularToolboxHrComponent,
+        AngularToolboxGitSectionComponent,
+        RouterModule
+    ],
+    templateUrl: './home.component.html'
 })
 export class HomeComponent {
 

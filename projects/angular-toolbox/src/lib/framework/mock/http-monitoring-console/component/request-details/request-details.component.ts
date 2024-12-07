@@ -8,9 +8,7 @@
 
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { HttpMockLoggingMetadata, Log } from '../../../../../model';
-import { NgStyle } from '@angular/common';
 import { HttpRequest } from '@angular/common/http';
-import { AtxJsonViewerComponent } from '../renderer/json-viewer/json-viewer.component';
 import { AtxPayloadRendererComponent } from '../renderer/payload-renderer/payload-renderer.component';
 import { AtxTimingRendererComponent } from '../renderer/timing-renderer/timing-renderer.component';
 import { AtxResponsePreviewRendererComponent } from '../renderer/response-preview-renderer/response-preview-renderer.component';
@@ -25,20 +23,17 @@ import { AtxLogRendererBase } from '../abstract/log-renderer-base';
  * The component that layouts all the logs details in the ATX monitoring console.
  */
 @Component({
-  selector: 'atx-monitoring-console-details',
-  standalone: true,
-  imports: [
-    NgStyle,
-    AtxJsonViewerComponent,
-    AtxPayloadRendererComponent,
-    AtxTimingRendererComponent,
-    AtxResponsePreviewRendererComponent,
-    AtxResponseBodyRendererComponent,
-    AtxRequesInfoComponent
-  ],
-  templateUrl: './request-details.component.html',
-  styleUrl: './request-details.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'atx-monitoring-console-details',
+    imports: [
+        AtxPayloadRendererComponent,
+        AtxTimingRendererComponent,
+        AtxResponsePreviewRendererComponent,
+        AtxResponseBodyRendererComponent,
+        AtxRequesInfoComponent
+    ],
+    templateUrl: './request-details.component.html',
+    styleUrl: './request-details.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AtxRequestDetailsComponent extends AtxLogRendererBase {
 

@@ -9,6 +9,7 @@
 import { Component } from "@angular/core";
 
 @Component({
-  template: `<a id="testElm" href="#testAnchor" anchorLink>Anchor Link</a>`
+    template: `<a id="testElm" href="#testAnchor" anchorLink>Anchor Link</a>`,
+    standalone: false
 })
 export class AnchorDirectiveTestComponent {}

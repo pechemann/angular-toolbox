@@ -7,10 +7,8 @@
  */
 
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { AtxJsonViewerComponent } from '../json-viewer/json-viewer.component';
 import { DataUtil } from '../../../util/data.util';
 import { ConsoleBodyType } from '../../../util/console-body-type';
-import { SafeHtmlPipe } from '../../../../../../pipe';
 import { HttpResponse } from '@angular/common/http';
 import { AtxLogRendererBase } from '../../abstract/log-renderer-base';
 import { HttpMockLoggingMetadata, Log } from '../../../../../../model';
@@ -20,15 +18,10 @@ import { HttpMockLoggingMetadata, Log } from '../../../../../../model';
  * The component that displays HTTP response data in the ATX monitoring console.
  */
 @Component({
-  selector: 'atx-response-body-renderer',
-  standalone: true,
-  imports: [
-    AtxJsonViewerComponent,
-    SafeHtmlPipe
-  ],
-  templateUrl: './response-body-renderer.component.html',
-  styleUrl: './response-body-renderer.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'atx-response-body-renderer',
+    templateUrl: './response-body-renderer.component.html',
+    styleUrl: './response-body-renderer.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AtxResponseBodyRendererComponent extends AtxLogRendererBase {
 

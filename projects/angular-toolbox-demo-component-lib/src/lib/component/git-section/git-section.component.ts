@@ -11,14 +11,13 @@ import { NavigateToUrlDirective } from 'projects/angular-toolbox/src/public-api'
 import { AngularToolboxCodeViewportComponent } from '../code-viewport/code-viewport.component';
 
 @Component({
-  selector: 'atx-git-section',
-  standalone: true,
-  imports: [
-    NavigateToUrlDirective,
-    AngularToolboxCodeViewportComponent
-  ],
-  templateUrl: './git-section.component.html',
-  styleUrl: './git-section.component.scss'
+    selector: 'atx-git-section',
+    imports: [
+        NavigateToUrlDirective,
+        AngularToolboxCodeViewportComponent
+    ],
+    templateUrl: './git-section.component.html',
+    styleUrl: './git-section.component.scss'
 })
 export class  AngularToolboxGitSectionComponent {
   

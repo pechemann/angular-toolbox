@@ -48,11 +48,12 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/angular-toolbox-demo",
+            "outputPath": {
+              "base": "dist/angular-toolbox-demo"
+            },
             "index": "projects/angular-toolbox-demo/src/index.html",
-            "main": "projects/angular-toolbox-demo/src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -67,7 +68,11 @@
             "styles": [
               "projects/angular-toolbox-demo/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "browser": "projects/angular-toolbox-demo/src/main.ts",
+            "stylePreprocessorOptions": {
+              "includePaths": [ "." ]
+            }
           },
           "configurations": {
             "production": {
@@ -86,9 +91,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true

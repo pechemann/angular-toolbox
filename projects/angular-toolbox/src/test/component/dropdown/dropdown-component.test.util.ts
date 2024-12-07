@@ -11,7 +11,6 @@ import { DropdownComponent } from "projects/angular-toolbox/src/public-api";
 
 @Component({
     selector: "dropdown-test-component",
-    standalone: true,
     imports: [DropdownComponent],
     template: `<atx-dropdown buttonClass="btn btn-primary">
     Button Label

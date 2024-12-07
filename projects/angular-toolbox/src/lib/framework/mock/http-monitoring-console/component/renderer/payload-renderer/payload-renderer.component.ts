@@ -19,14 +19,13 @@ import { AtxLogRendererBase } from '../../abstract/log-renderer-base';
  * The component that displays payload data associated with an HTTP request in the ATX monitoring console.
  */
 @Component({
-  selector: 'atx-payload-renderer',
-  standalone: true,
-  imports: [
-    AtxJsonViewerComponent
-  ],
-  templateUrl: './payload-renderer.component.html',
-  styleUrl: './payload-renderer.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'atx-payload-renderer',
+    imports: [
+        AtxJsonViewerComponent
+    ],
+    templateUrl: './payload-renderer.component.html',
+    styleUrl: './payload-renderer.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AtxPayloadRendererComponent extends AtxLogRendererBase {
 

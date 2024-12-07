@@ -18,20 +18,19 @@ import { AngularToolboxVersionService } from 'projects/angular-toolbox/src/lib/m
 
 @HttpMock(DOCUMENTATION_PROXY_CONFIG) 
 @Component({
-  selector: 'app-documentation',
-  standalone: true,
-  imports: [
-    SafeHtmlPipe,
-    ContentRendererDirective,
-    AngularToolboxIconListComponent,
-    AngularToolboxPageTitleComponent,
-    AngularToolboxHrComponent
-  ],
-  providers: [
-    AngularToolboxVersionService
-  ],
-  templateUrl: './documentation.component.html',
-  styleUrl: './documentation.component.scss'
+    selector: 'app-documentation',
+    imports: [
+        SafeHtmlPipe,
+        ContentRendererDirective,
+        AngularToolboxIconListComponent,
+        AngularToolboxPageTitleComponent,
+        AngularToolboxHrComponent
+    ],
+    providers: [
+        AngularToolboxVersionService
+    ],
+    templateUrl: './documentation.component.html',
+    styleUrl: './documentation.component.scss'
 })
 export class DocumentationComponent extends IdentifiableComponent implements OnInit, OnDestroy {
 

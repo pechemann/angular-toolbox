@@ -4,15 +4,14 @@ import { IconListService } from '../../../ui/model/service/icon-list-list.servic
 import { AngularToolboxLogoComponent } from 'projects/angular-toolbox/src/public-api';
 
 @Component({
-  selector: 'app-demo-home',
-  standalone: true,
-  imports: [
-    AngularToolboxIconListComponent,
-    AngularToolboxPageTitleComponent,
-    AngularToolboxLogoComponent
-  ],
-  templateUrl: './demo-home.component.html',
-  styleUrl: './demo-home.component.scss'
+    selector: 'app-demo-home',
+    imports: [
+        AngularToolboxIconListComponent,
+        AngularToolboxPageTitleComponent,
+        AngularToolboxLogoComponent
+    ],
+    templateUrl: './demo-home.component.html',
+    styleUrl: './demo-home.component.scss'
 })
 export class DemoHomeComponent implements OnInit {
   

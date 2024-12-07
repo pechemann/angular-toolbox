@@ -8,7 +8,7 @@
 
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { HttpMockLoggingMetadata, HttpMockRequestMetadata, Log } from '../../../../../../model';
-import { DatePipe, NgStyle } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { AtxLogRendererBase } from '../../abstract/log-renderer-base';
 import { HttpResponse } from '@angular/common/http';
 import { TimelineUtil } from '../../../util/timeline.util';
@@ -18,15 +18,13 @@ import { TimelineUtil } from '../../../util/timeline.util';
  * The component that displays the timeline of an HTTP response in the ATX monitoring console.
  */
 @Component({
-  selector: 'atx-timing-renderer',
-  standalone: true,
-  imports: [
-    DatePipe,
-    NgStyle
-  ],
-  templateUrl: './timing-renderer.component.html',
-  styleUrl: './timing-renderer.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'atx-timing-renderer',
+    imports: [
+        DatePipe
+    ],
+    templateUrl: './timing-renderer.component.html',
+    styleUrl: './timing-renderer.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AtxTimingRendererComponent extends AtxLogRendererBase {
 

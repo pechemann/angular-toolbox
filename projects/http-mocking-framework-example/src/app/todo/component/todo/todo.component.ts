@@ -22,17 +22,16 @@ import { TodoItemAction, TodoItemActionType } from '../../model/business/todo-it
 
 @HttpMock(TODOS_MOCK_CONFIG)
 @Component({
-  selector: 'app-todo',
-  standalone: true,
-  imports: [
-    AngularToolboxPageTitleComponent,
-    ReactiveFormsModule,
-    DatePipe,
-    TodoItemComponent,
-    ContentRendererDirective
-  ],
-  templateUrl: './todo.component.html',
-  styleUrl: './todo.component.scss'
+    selector: 'app-todo',
+    imports: [
+        AngularToolboxPageTitleComponent,
+        ReactiveFormsModule,
+        DatePipe,
+        TodoItemComponent,
+        ContentRendererDirective
+    ],
+    templateUrl: './todo.component.html',
+    styleUrl: './todo.component.scss'
 })
 export class TodoComponent extends IdentifiableComponent implements OnInit, OnDestroy {
 

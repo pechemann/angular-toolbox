@@ -10,7 +10,6 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { AtxRequestDetailsComponent } from '../request-details/request-details.component';
 import { AtxConsoleFooterComponent } from '../console-footer/console-footer.component';
 import { AtxConsoleMenuComponent } from '../console-menu/console-menu.component';
-import { AtxIconRendererComponent } from '../renderer/icon-renderer/icon-renderer.component';
 import { AtxRequestListRendererComponent } from '../renderer/request-list-renderer/request-list-renderer.component';
 import { AtxMonitoringConsoleState } from '../../model/service/atx-monitoring-console.state';
 import { AtxLogIoService } from '../../model/service/atx-log-io.service';
@@ -22,25 +21,22 @@ import { AtxUserActionService } from '../../model/service/atx-user-action.servic
  * The main component used to layout the ATX monitoring console.
  */
 @Component({
-  selector: 'atx-http-monitoring-console',
-  standalone: true,
-  imports: [
-    AtxRequestDetailsComponent,
-    AtxConsoleFooterComponent,
-    AtxConsoleMenuComponent,
-    AtxIconRendererComponent,
-    AtxRequestListRendererComponent
-  ],
-  templateUrl: './http-monitoring-console.component.html',
-  styleUrl: './http-monitoring-console.component.scss',
-  providers: [
-    AtxMonitoringConsoleState,
-    AtxLogIoService,
-    AtxMonitoringConsoleController,
-    AtxUserActionService
-  ],
-  encapsulation: ViewEncapsulation.ShadowDom
-  
+    selector: 'atx-http-monitoring-console',
+    imports: [
+        AtxRequestDetailsComponent,
+        AtxConsoleFooterComponent,
+        AtxConsoleMenuComponent,
+        AtxRequestListRendererComponent
+    ],
+    templateUrl: './http-monitoring-console.component.html',
+    styleUrl: './http-monitoring-console.component.scss',
+    providers: [
+        AtxMonitoringConsoleState,
+        AtxLogIoService,
+        AtxMonitoringConsoleController,
+        AtxUserActionService
+    ],
+    encapsulation: ViewEncapsulation.ShadowDom
 })
 export class AtxMonitoringConsoleComponent {
 

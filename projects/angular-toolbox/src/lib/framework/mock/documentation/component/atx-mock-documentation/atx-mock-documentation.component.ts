@@ -28,17 +28,16 @@ const DETAILS: string = "details";
  * An easy-to-use component that displays the documentation of a `HttpMockConfig` object.
  */
 @Component({
-  selector: 'atx-mock-documentation',
-  standalone: true,
-  imports: [
-    AtxMockParamComponent,
-    AtxMockDescriptionComponent,
-    AtxMockFullDescriptionComponent,
-    AtxMockMethodsComponent
-  ],
-  templateUrl: './atx-mock-documentation.component.html',
-  styleUrl: './atx-mock-documentation.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'atx-mock-documentation',
+    imports: [
+        AtxMockParamComponent,
+        AtxMockDescriptionComponent,
+        AtxMockFullDescriptionComponent,
+        AtxMockMethodsComponent
+    ],
+    templateUrl: './atx-mock-documentation.component.html',
+    styleUrl: './atx-mock-documentation.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AtxMockDocumentation {
 

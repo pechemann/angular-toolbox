@@ -14,12 +14,11 @@ import { DocumentationLink } from '../../../ui/model/business/documentation-link
 import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
 
 @Component({
-  selector: 'app-dark-mode-service-bootstrap',
-  standalone: true,
-  imports: [
-    DemoComponent
-  ],
-  templateUrl: './dark-mode-service-bootstrap.component.html'
+    selector: 'app-dark-mode-service-bootstrap',
+    imports: [
+        DemoComponent
+    ],
+    templateUrl: './dark-mode-service-bootstrap.component.html'
 })
 export class DarkModeServiceBootstrapComponent {
 

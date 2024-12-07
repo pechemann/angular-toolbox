@@ -15,12 +15,11 @@ import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/s
 import { WindowContentComponent } from './window-content.component';
 
 @Component({
-  selector: 'app-window-service',
-  standalone: true,
-  imports: [
-    DemoComponent,
-  ],
-  templateUrl: './window-service.component.html'
+    selector: 'app-window-service',
+    imports: [
+        DemoComponent,
+    ],
+    templateUrl: './window-service.component.html'
 })
 export class WindowServiceComponent implements OnDestroy {
 

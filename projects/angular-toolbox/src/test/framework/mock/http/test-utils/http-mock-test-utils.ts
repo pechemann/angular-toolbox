@@ -31,8 +31,9 @@ export const FOO_MOCK_CONFIG: HttpMockConfig = {
 
 @HttpMock(FOO_MOCK_CONFIG)
 @Component({
-  selector: 'app-foo',
-  template: ''
+    selector: 'app-foo',
+    template: '',
+    standalone: false
 })
 export class FooComponent implements OnInit, OnDestroy {
 
@@ -44,8 +45,9 @@ export class FooComponent implements OnInit, OnDestroy {
 
 @HttpMock(FOO_MOCK_CONFIG)
 @Component({
-  selector: 'app-todo',
-  template: ''
+    selector: 'app-todo',
+    template: '',
+    standalone: false
 })
 export class InvalidComponentMockService implements OnInit, OnDestroy {
   public ngOnInit(): void {}

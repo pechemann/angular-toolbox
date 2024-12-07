@@ -15,14 +15,13 @@ import { AtxConsoleJson } from '../../../model/business/atx-console-json';
  * The component that recursively renders `AtxConsoleJson` objects in the ATX monitoring console.
  */
 @Component({
-  selector: 'atx-json-viewer-panel',
-  standalone: true,
-  imports: [
-    CommonModule
-  ],
-  templateUrl: './json-viewer-panel.component.html',
-  styleUrl: './json-viewer-panel.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'atx-json-viewer-panel',
+    imports: [
+        CommonModule
+    ],
+    templateUrl: './json-viewer-panel.component.html',
+    styleUrl: './json-viewer-panel.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AtxJsonViewerPanelComponent {
 

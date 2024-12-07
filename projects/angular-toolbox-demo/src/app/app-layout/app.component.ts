@@ -12,17 +12,16 @@ import { AngularToolboxBreadcrumbComponent, AngularToolboxDarkModeComponent, Ang
 import { DialogOutlet } from 'projects/angular-toolbox/src/lib/framework/dialog';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  standalone: true,
-  imports: [
-    RouterOutlet,
-    RouterModule,
-    DialogOutlet,
-    AngularToolboxHeaderComponent,
-    AngularToolboxFooterComponent,
-    AngularToolboxDarkModeComponent,
-    AngularToolboxBreadcrumbComponent
-  ]
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    imports: [
+        RouterOutlet,
+        RouterModule,
+        DialogOutlet,
+        AngularToolboxHeaderComponent,
+        AngularToolboxFooterComponent,
+        AngularToolboxDarkModeComponent,
+        AngularToolboxBreadcrumbComponent
+    ]
 })
 export class AppComponent {}

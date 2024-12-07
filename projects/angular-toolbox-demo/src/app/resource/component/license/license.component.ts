@@ -2,12 +2,11 @@ import { Component } from '@angular/core';
 import { AngularToolboxPageTitleComponent, BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
 
 @Component({
-  selector: 'app-license',
-  standalone: true,
-  imports: [
-    AngularToolboxPageTitleComponent
-  ],
-  templateUrl: './license.component.html'
+    selector: 'app-license',
+    imports: [
+        AngularToolboxPageTitleComponent
+    ],
+    templateUrl: './license.component.html'
 })
 export class LicenseComponent {
 

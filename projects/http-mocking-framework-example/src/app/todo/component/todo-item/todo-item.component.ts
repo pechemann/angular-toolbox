@@ -11,10 +11,9 @@ import { Todo } from '../../../model/business/todo';
 import { TodoItemAction, TodoItemActionType } from '../../model/business/todo-item-action';
 
 @Component({
-  selector: 'todo-item',
-  standalone: true,
-  imports: [],
-  templateUrl: './todo-item.component.html'
+    selector: 'todo-item',
+    imports: [],
+    templateUrl: './todo-item.component.html'
 })
 export class TodoItemComponent {
 

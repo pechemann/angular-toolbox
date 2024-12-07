@@ -11,13 +11,12 @@ import { SafeHtmlPipe } from 'projects/angular-toolbox/src/public-api';
 import { AngularToolboxHrComponent } from '../hr/hr.component';
 
 @Component({
-  selector: 'atx-page-title',
-  standalone: true,
-  templateUrl: './page-title.component.html',
-  imports: [
-    SafeHtmlPipe,
-    AngularToolboxHrComponent
-  ]
+    selector: 'atx-page-title',
+    templateUrl: './page-title.component.html',
+    imports: [
+        SafeHtmlPipe,
+        AngularToolboxHrComponent
+    ]
 })
 export class AngularToolboxPageTitleComponent {
 

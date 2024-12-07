@@ -16,14 +16,13 @@ import { DataUtil } from '../../../util/data.util';
  * The component that renders JSON data in the ATX monitoring console.
  */
 @Component({
-  selector: 'atx-json-viewer',
-  standalone: true,
-  imports: [
-    AtxJsonViewerPanelComponent
-  ],
-  templateUrl: './json-viewer.component.html',
-  styleUrl: './json-viewer.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'atx-json-viewer',
+    imports: [
+        AtxJsonViewerPanelComponent
+    ],
+    templateUrl: './json-viewer.component.html',
+    styleUrl: './json-viewer.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AtxJsonViewerComponent {
 

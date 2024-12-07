@@ -16,16 +16,15 @@ import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/s
 import { AngularToolboxVersionService } from 'projects/angular-toolbox/src/lib/model/service/version/angular-toolbox-version.service';
 
 @Component({
-  selector: 'app-version-service',
-  standalone: true,
-  imports: [
-    DemoComponent,
-    DatePipe
-  ],
-  providers: [
-    AngularToolboxVersionService
-  ],
-  templateUrl: './version-service.component.html'
+    selector: 'app-version-service',
+    imports: [
+        DemoComponent,
+        DatePipe
+    ],
+    providers: [
+        AngularToolboxVersionService
+    ],
+    templateUrl: './version-service.component.html'
 })
 export class VersionServiceComponent {
 

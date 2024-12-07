@@ -15,12 +15,11 @@ import { FullDescription } from '../../model/business/full-description.type';
  * A convenient component that displays the description and the origin of a mock config section.
  */
 @Component({
-  selector: 'atx-mock-full-description',
-  standalone: true,
-  imports: [
-    AtxMockDescriptionComponent
-  ],
-  templateUrl: './atx-mock-full-description.component.html'
+    selector: 'atx-mock-full-description',
+    imports: [
+        AtxMockDescriptionComponent
+    ],
+    templateUrl: './atx-mock-full-description.component.html'
 })
 export class AtxMockFullDescriptionComponent {
 

@@ -16,15 +16,14 @@ import { BorderLayout, BorderLayoutContainer, LayoutConstraints, LayoutDragEvent
 type EventRef = { size: number, type: LayoutDragEventType, region: LayoutRegion };
 
 @Component({
-  selector: 'app-border-layout-demo',
-  standalone: true,
-  imports: [
-    DemoComponent,
-    BorderLayout,
-    BorderLayoutContainer
-  ],
-  templateUrl: './border-layout-demo.component.html',
-  styleUrls: ['./border-layout-demo.component.scss']
+    selector: 'app-border-layout-demo',
+    imports: [
+        DemoComponent,
+        BorderLayout,
+        BorderLayoutContainer
+    ],
+    templateUrl: './border-layout-demo.component.html',
+    styleUrls: ['./border-layout-demo.component.scss']
 })
 export class BorderLayoutDemoComponent {
 

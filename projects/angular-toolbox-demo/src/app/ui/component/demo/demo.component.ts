@@ -15,15 +15,14 @@ import { DocumentationLink } from '../../model/business/documentation-link';
 import { AppBridgeService, SafeHtmlPipe } from 'projects/angular-toolbox/src/public-api';
 
 @Component({
-  selector: 'demo',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    SrcViewportComponent,
-    SafeHtmlPipe
-  ],
-  templateUrl: './demo.component.html'
+    selector: 'demo',
+    imports: [
+        CommonModule,
+        RouterModule,
+        SrcViewportComponent,
+        SafeHtmlPipe
+    ],
+    templateUrl: './demo.component.html'
 })
 export class DemoComponent {
 

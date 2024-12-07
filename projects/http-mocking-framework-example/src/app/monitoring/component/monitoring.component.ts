@@ -9,14 +9,13 @@ declare type TabType = "inline" | "docked";
 
 @HttpMock(MONITORING_MOCK_CONFIG)
 @Component({
-  selector: 'app-monitoring',
-  standalone: true,
-  imports: [
-    AngularToolboxPageTitleComponent,
-    AtxMonitoringConsoleComponent
-  ],
-  templateUrl: './monitoring.component.html',
-  styleUrl: './monitoring.component.scss'
+    selector: 'app-monitoring',
+    imports: [
+        AngularToolboxPageTitleComponent,
+        AtxMonitoringConsoleComponent
+    ],
+    templateUrl: './monitoring.component.html',
+    styleUrl: './monitoring.component.scss'
 })
 export class MonitoringComponent extends IdentifiableComponent implements OnInit, OnDestroy {
 
