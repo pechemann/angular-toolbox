@@ -71,7 +71,12 @@
             "scripts": [],
             "browser": "projects/angular-toolbox-demo/src/main.ts",
             "stylePreprocessorOptions": {
-              "includePaths": [ "." ]
+              "sass": {
+                "silenceDeprecations": ["mixed-decls", "color-functions", "global-builtin", "import"]
+              },
+              "includePaths": [
+                "."
+              ]
             }
           },
           "configurations": {

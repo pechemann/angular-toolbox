@@ -1,6 +1,6 @@
 {
   "name": "angular-toolbox",
-  "version": "1.4.6",
+  "version": "1.5.0",
   "license": "SEE LICENSE IN LICENSE",
   "peerDependencies": {
     "@angular/common": "^18.0.0",
