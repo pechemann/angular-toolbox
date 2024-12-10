@@ -6,7 +6,7 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
- @import "../../../styles/console";
+ @use "../../../styles/console" as *;
 
 .download, .stalled {
     width: 100%;
