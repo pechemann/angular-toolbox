@@ -1,0 +1,15 @@
+<nav class="navbar" role="navigation">
+    <div class="menu-action">
+        <div class="brand">
+            <ng-content select="[brand]"></ng-content>
+        </div>
+        <div class="hamburger" role="button" (click)="onClick()">
+            <ng-content select="[icon]"></ng-content>
+        </div>
+    </div>
+    <ul class="menu-list">
+        <div class="menu" [class.menu-opened]="menuOpened">
+            <ng-content></ng-content>
+        </div>
+    </ul>
+</nav>

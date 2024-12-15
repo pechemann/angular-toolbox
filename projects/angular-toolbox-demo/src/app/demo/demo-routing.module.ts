@@ -69,6 +69,10 @@ const routes: Routes = [
   {
     path: 'dialog',
     loadComponent: () => import('./component/dialog/dialog-demo.component').then(mod => mod.DialogDemoComponent)
+  },
+  {
+    path: 'navbar',
+    loadComponent: () => import('./component/navbar/navbar-demo.component').then(mod => mod.NavbarDemoComponent)
   }
 ];
 
