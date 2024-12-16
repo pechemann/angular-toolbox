@@ -1,14 +1,22 @@
-<nav class="navbar" role="navigation">
-    <div class="menu-action">
-        <div class="brand">
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+ 
+<nav class="atx-navbar" role="menubar">
+    <div class="atx-menu-action">
+        <div class="atx-brand">
             <ng-content select="[brand]"></ng-content>
         </div>
-        <div class="hamburger" role="button" (click)="onClick()">
+        <div class="atx-hamburger" role="button" (click)="onClick()">
             <ng-content select="[icon]"></ng-content>
         </div>
     </div>
-    <ul class="menu-list">
-        <div class="menu" [class.menu-opened]="menuOpened">
+    <ul class="atx-menu-list">
+        <div class="atx-menu" [class.atx-menu-opened]="menuOpened" role="menu">
             <ng-content></ng-content>
         </div>
     </ul>
