@@ -61,7 +61,6 @@ export class NavbarComponent implements OnInit {
    */
   protected menuOpened: boolean = false;
 
-
   /**
    * @private
    */
@@ -100,6 +99,16 @@ export class NavbarComponent implements OnInit {
     this.emitStateEvt();
   }
   
+  /**
+   * Returns a boolean that indicates whether the menu is currently in responsive mode (`true`),
+   * or not (`false`).
+   * 
+   * @returns `true` whether the menu is in responsive mode; `false` otherwise.
+   */
+  public isResponsiveMode(): boolean {
+    return this.isResponsive;
+  }
+
   /**
    * Returns a boolean that indicates whether the menu is opened in responsive mode (`true`),
    * or not (`false`).

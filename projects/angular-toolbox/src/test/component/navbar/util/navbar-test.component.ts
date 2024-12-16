@@ -6,12 +6,16 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { Component } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { NavbarComponent } from "projects/angular-toolbox/src/public-api";
 
 @Component({
-    selector: 'navbar-demo',
+    selector: 'navbar-test',
     imports: [ NavbarComponent ],
     templateUrl: './navbar-test.component.html'
   })
-  export class NavbarTestComponent {}
+  export class NavbarTestComponent {
+
+    @ViewChild("navbar", {static: true})
+    public navbar!: NavbarComponent;
+  }

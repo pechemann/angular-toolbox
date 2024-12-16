@@ -87,6 +87,10 @@ describe('NavbarComponent', () => {
     expect(div.getAttribute("title")).toEqual(testString);
   });
 
+  it('isResponsiveMode() method should return false in non-responsive mode', () => {
+    expect(component.isResponsiveMode()).toBeFalse();
+  });
+
   it('isOpen() method should return false by default', () => {
     expect(component.isOpen()).toBeFalse();
   });
@@ -104,6 +108,12 @@ describe('NavbarComponent', () => {
     component.close();
     fixture.detectChanges();
     expect(component.stateChange.emit).not.toHaveBeenCalled();
+  });
+  
+  it('isOpen() method should return true when this open() method is invoked in non-responsive mode', () => {
+    component.open();
+    fixture.detectChanges();
+    expect(component.isOpen()).toBeFalse();
   });
 });
 
@@ -197,6 +207,158 @@ describe('NavbarComponent: content projection', () => {
     const menu = fixture.nativeElement.querySelector(".atx-menu");
     const liList = menu.querySelectorAll("li");
     expect(liList.length).toEqual(4);
+  });
+});
+
+
+describe('NavbarComponent: content projection', () => {
+  let component: NavbarTestComponent;
+  let fixture: ComponentFixture<NavbarTestComponent>;
+  let navbar: NavbarComponent;
+
+  const MEDIA_QUERY: MediaQueryList = {
+    matches: true,
+    media: "",
+    addEventListener: {} as any,
+    dispatchEvent: {} as any,
+    onchange: {} as any,
+    removeEventListener: {} as any,
+    addListener: {} as any,
+    removeListener: {} as any
+  }
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [NavbarTestComponent]
+    })
+    .compileComponents();
+
+    fixture = TestBed.createComponent(NavbarTestComponent);
+    component = fixture.componentInstance;
+    
+    spyOn(window, "matchMedia").and.returnValue(MEDIA_QUERY);
+    fixture.detectChanges();
+    navbar = component.navbar;
+  });
+    
+  it('isResponsiveMode() method should return true in responsive mode', () => {
+    expect(navbar.isResponsiveMode()).toBeTrue();
+  });
+
+  it('expandedLabel property should set the aria-label property of the atx-hamburger div in responsive mode when menu is opened', () => {
+    const testString = "test string: seed = " + Math.random();
+    const div = fixture.nativeElement.querySelector(".atx-hamburger");
+    navbar.open();
+    fixture.detectChanges();
+    expect(div.getAttribute("aria-label")).not.toEqual(testString);
+    navbar.expandedLabel = testString;
+    fixture.detectChanges();
+    expect(div.getAttribute("aria-label")).toEqual(testString);
+  });
+
+  it('expandedLabel property should set the title property of the atx-hamburger div in responsive mode when menu is opened', () => {
+    const testString = "test string: seed = " + Math.random();
+    const div = fixture.nativeElement.querySelector(".atx-hamburger");
+    navbar.open();
+    fixture.detectChanges();
+    expect(div.getAttribute("title")).not.toEqual(testString);
+    navbar.expandedLabel = testString;
+    fixture.detectChanges();
+    expect(div.getAttribute("title")).toEqual(testString);
+  });
+  
+  it('isOpen() method should return false by default in responsive mode', () => {
+    expect(navbar.isOpen()).toBeFalse();
+  });
+  
+  it('open() method should add the atx-menu-opened class to the DOM in responsive mode', () => {
+    navbar.open();
+    fixture.detectChanges();
+    const nav = fixture.nativeElement.querySelector(".atx-navbar");
+    expect(nav.classList.contains("atx-menu-opened")).toBeTrue();
+  });
+
+  it('open() method should emit a stateChange eventin responsive mode', () => {
+    spyOn(navbar.stateChange, "emit");
+    navbar.open();
+    fixture.detectChanges();
+    expect(navbar.stateChange.emit).toHaveBeenCalledWith(true);
+  });
+
+  it('open() method should not emit a stateChange event when the menu is already opened in responsive mode', () => {
+    navbar.open();
+    fixture.detectChanges();
+    spyOn(navbar.stateChange, "emit");
+    navbar.open();
+    fixture.detectChanges();
+    expect(navbar.stateChange.emit).not.toHaveBeenCalledWith();
+  });
+
+  it('isOpen() method should return true when the open() method is invoked in responsive mode', () => {
+    navbar.open();
+    fixture.detectChanges();
+    expect(navbar.isOpen()).toBeTrue();
+  });
+  
+  it('close() method should remove the atx-menu-opened class from the DOM in responsive mode', () => {
+    navbar.open();
+    fixture.detectChanges();
+    navbar.close();
+    fixture.detectChanges();
+    const nav = fixture.nativeElement.querySelector(".atx-navbar");
+    expect(nav.classList.contains("atx-menu-opened")).toBeFalse();
+  });
+
+  it('close() method should emit a stateChange event in responsive mode', () => {
+    navbar.open();
+    fixture.detectChanges();
+    spyOn(navbar.stateChange, "emit");
+    navbar.close();
+    fixture.detectChanges();
+    expect(navbar.stateChange.emit).toHaveBeenCalledWith(false);
+  });
+
+  it('close() method should not emit a stateChange event in responsive mode when menu is already closed', () => {
+    navbar.open();
+    fixture.detectChanges();
+    navbar.close();
+    fixture.detectChanges();
+    spyOn(navbar.stateChange, "emit");
+    navbar.close();
+    fixture.detectChanges();
+    expect(navbar.stateChange.emit).not.toHaveBeenCalledWith();
+  });
+
+  it('isOpen() method should return false when the close() method is invoked in responsive mode', () => {
+    navbar.open();
+    fixture.detectChanges();
+    navbar.close();
+    fixture.detectChanges()
+    expect(navbar.isOpen()).toBeFalse();
+  });
+  
+  it('clicking the hanburger element should open the menu in responsive mode', () => {
+    const nav = fixture.nativeElement.querySelector(".atx-navbar");
+    const hanburger = fixture.nativeElement.querySelector(".atx-hamburger");
+    spyOn(navbar.stateChange, "emit");
+    hanburger.dispatchEvent(new Event("click"));
+    fixture.detectChanges();
+    expect(navbar.stateChange.emit).toHaveBeenCalledWith(true);
+    expect(navbar.isOpen()).toBeTrue();
+    expect(nav.classList.contains("atx-menu-opened")).toBeTrue();
+  });
+  
+  it('clicking the hanburger element when menu is open should close the menu in responsive mode', () => {
+    navbar.open();
+    fixture.detectChanges();
+    const nav = fixture.nativeElement.querySelector(".atx-navbar");
+    const hanburger = fixture.nativeElement.querySelector(".atx-hamburger");
+    spyOn(navbar.stateChange, "emit");
+    hanburger.dispatchEvent(new Event("click"));
+    fixture.detectChanges();
+    expect(navbar.stateChange.emit).toHaveBeenCalledWith(false);
+    expect(navbar.isOpen()).toBeFalse();
+    expect(nav.classList.contains("atx-menu-opened")).toBeFalse();
   });
 });
 
