@@ -153,7 +153,8 @@ export class NavbarComponent implements OnInit {
       this.setBtnLabel();
     } else {
       if (this.isResponsive === false) return;
-      this.isResponsive = false;
+      this.isResponsive = this.menuOpened = false;
+      this.setBtnLabel();
     }
   }
 

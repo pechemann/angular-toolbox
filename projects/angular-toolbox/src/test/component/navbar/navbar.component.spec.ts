@@ -211,7 +211,7 @@ describe('NavbarComponent: content projection', () => {
   });
 });
 
-describe('NavbarComponent: content projection', () => {
+describe('NavbarComponent: responsive mode', () => {
   let component: NavbarTestComponent;
   let fixture: ComponentFixture<NavbarTestComponent>;
   let navbar: NavbarComponent;
@@ -348,6 +348,63 @@ describe('NavbarComponent: content projection', () => {
     hanburger.dispatchEvent(new Event("click"));
     fixture.detectChanges();
     expect(navbar.stateChange.emit).toHaveBeenCalledWith(false);
+    expect(navbar.isOpen()).toBeFalse();
+    expect(nav.classList.contains("atx-menu-opened")).toBeFalse();
+  });
+});
+
+describe('NavbarComponent: responsive mode switching', () => {
+  let component: NavbarTestComponent;
+  let fixture: ComponentFixture<NavbarTestComponent>;
+  let navbar: NavbarComponent;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [NavbarTestComponent]
+    })
+    .compileComponents();
+
+    fixture = TestBed.createComponent(NavbarTestComponent);
+    component = fixture.componentInstance;
+    
+    fixture.detectChanges();
+    navbar = component.navbar;
+  });
+
+  it('resizing the window should switch from normal to responsive mode', () => {
+    expect(navbar.isResponsiveMode()).toBeFalse();
+    const MEDIA_QUERY: MediaQueryList = buildMediaQueryList();
+    spyOn(window, "matchMedia").and.returnValue(MEDIA_QUERY);
+    window.dispatchEvent(new Event("resize"));
+    fixture.detectChanges();
+    expect(navbar.isResponsiveMode()).toBeTrue();
+  });
+
+  it('resizing the window should switch from responsive to normal mode', () => {
+    expect(navbar.isResponsiveMode()).toBeFalse();
+    let spyObj = spyOn(window, "matchMedia").and.returnValue(buildMediaQueryList());
+    window.dispatchEvent(new Event("resize"));
+    fixture.detectChanges();
+    expect(navbar.isResponsiveMode()).toBeTrue();
+    spyObj.and.returnValue(buildMediaQueryList(false));
+    window.dispatchEvent(new Event("resize"));
+    fixture.detectChanges();
+    expect(navbar.isResponsiveMode()).toBeFalse();
+  });
+  
+  it('switching from responsive to normal mode should ensure that menu is collapsed', () => {
+    const nav = fixture.nativeElement.querySelector(".atx-navbar");
+    expect(navbar.isResponsiveMode()).toBeFalse();
+    let spyObj = spyOn(window, "matchMedia").and.returnValue(buildMediaQueryList());
+    window.dispatchEvent(new Event("resize"));
+    fixture.detectChanges();
+    navbar.open();
+    fixture.detectChanges();
+    expect(navbar.isOpen()).toBeTrue();
+    expect(nav.classList.contains("atx-menu-opened")).toBeTrue();
+    spyObj.and.returnValue(buildMediaQueryList(false));
+    window.dispatchEvent(new Event("resize"));
+    fixture.detectChanges();
     expect(navbar.isOpen()).toBeFalse();
     expect(nav.classList.contains("atx-menu-opened")).toBeFalse();
   });
