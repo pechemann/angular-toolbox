@@ -15,7 +15,6 @@ import { EMPTY_STRING } from '../../util';
  */
 @Component({
   selector: 'atx-navbar',
-  imports: [],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
@@ -37,18 +36,31 @@ export class NavbarComponent implements OnInit {
    * A string that represents the arial label of the button when the menu is expanded in responsive mode.
    */
   @Input()
-  public expandedLabel: string = EMPTY_STRING;
+  public set expandedLabel(value: string) {
+    this.expLabel = value;
+    this.setBtnLabel();
+  }
+  public get expandedLabel(): string {
+    return this.expLabel;
+  }
 
   /**
    * A string that represents the arial label of the button when the menu is collapsed in responsive mode.
    */
   @Input()
-  public collapsedLabel: string = EMPTY_STRING;
+  public set collapsedLabel(value: string) {
+    this.collLabel = value;
+    this.setBtnLabel();
+  }
+  public get collapsedLabel(): string {
+    return this.collLabel;
+  }
 
   /**
    * @private
    */
   protected menuOpened: boolean = false;
+
 
   /**
    * @private
@@ -59,6 +71,16 @@ export class NavbarComponent implements OnInit {
    * @private
    */
   protected btnLabel: string = EMPTY_STRING;
+
+  /**
+   * @private
+   */
+  protected collLabel: string = EMPTY_STRING;
+  
+  /**
+   * @private
+   */
+  protected expLabel: string = EMPTY_STRING;
 
   /**
    * Forces the menu to open in responsive mode.
@@ -130,7 +152,7 @@ export class NavbarComponent implements OnInit {
    * @private
    */
   private setBtnLabel(): void {
-    this.btnLabel = this.menuOpened ? this.expandedLabel : this.collapsedLabel;
+    this.btnLabel = this.menuOpened ? this.expLabel : this.collLabel;
   }
 
   /**

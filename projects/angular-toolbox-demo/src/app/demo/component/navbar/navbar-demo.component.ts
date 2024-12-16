@@ -53,7 +53,7 @@ export class NavbarDemoComponent {
   text-decoration: none;
 }`],
     typescript: [`@Component({
-  selector: 'navbar-demo',,
+  selector: 'navbar-demo',
   imports: [ NavbarComponent ],
   templateUrl: './navbar-demo.component.html'
 })
