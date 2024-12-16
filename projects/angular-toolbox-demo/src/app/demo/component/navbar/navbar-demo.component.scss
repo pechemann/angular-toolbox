@@ -6,8 +6,6 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
- ::ng-deep {
-    a:not(.active) {
-        text-decoration: none;
-    }
- }
+a:not(.active) {
+    text-decoration: none;
+}
