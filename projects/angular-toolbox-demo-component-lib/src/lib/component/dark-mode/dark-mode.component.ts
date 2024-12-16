@@ -7,7 +7,7 @@
  */
 
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject, ViewChild } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { DarkModeService, DropdownComponent } from 'projects/angular-toolbox/src/public-api';
 
 const LIGHT: string = 'light';
@@ -26,9 +26,6 @@ export class AngularToolboxDarkModeComponent {
 
   protected theme: string = LIGHT;
 
-  @ViewChild("dakModeMenu")
-  private dakModeMenu!: any;
-
   constructor(public darkModeService: DarkModeService,
               @Inject(DOCUMENT) document: Document) {
     this.setDarkmodeState(darkModeService.darkModeEnabled(), document);
@@ -39,7 +36,6 @@ export class AngularToolboxDarkModeComponent {
     event.stopPropagation();
     mode === LIGHT ? this.darkModeService.disableDarkMode() : this.darkModeService.enableDarkMode();
     this.theme = mode;
-    this.dakModeMenu.nativeElement.open = false;
   }
 
   private setDarkmodeState(isDarkMode: boolean, document: Document): void {

@@ -10,6 +10,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { EMPTY_STRING, NavbarComponent } from 'projects/angular-toolbox/src/public-api';
 import { NavbarTestComponent } from './util/navbar-test.component';
 import { EventEmitter } from '@angular/core';
+import { buildMediaQueryList } from './util/navbar-test.utils';
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
@@ -215,16 +216,7 @@ describe('NavbarComponent: content projection', () => {
   let fixture: ComponentFixture<NavbarTestComponent>;
   let navbar: NavbarComponent;
 
-  const MEDIA_QUERY: MediaQueryList = {
-    matches: true,
-    media: "",
-    addEventListener: {} as any,
-    dispatchEvent: {} as any,
-    onchange: {} as any,
-    removeEventListener: {} as any,
-    addListener: {} as any,
-    removeListener: {} as any
-  }
+  const MEDIA_QUERY: MediaQueryList = buildMediaQueryList();
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
