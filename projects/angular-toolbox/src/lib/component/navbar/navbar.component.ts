@@ -9,24 +9,39 @@
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { EMPTY_STRING } from '../../util';
 
+/**
+ * The `NavbarComponent` component is a horizontal menu. It can be used to show a list of navigation
+ * links positioned on the top side of your page.
+ */
 @Component({
   selector: 'atx-navbar',
   imports: [],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss',
-
+  styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent implements OnInit {
 
+  /**
+   * Emits a event each time the collapse state of the component changes in responsive mode.
+   */
   @Output()
   public readonly stateChange: EventEmitter<boolean> = new EventEmitter();
 
+  /**
+   * A string that represents the arial label of the brand item.
+   */
   @Input()
   public brandLabel: string = EMPTY_STRING;
 
+  /**
+   * A string that represents the arial label of the button when the menu is expanded in responsive mode.
+   */
   @Input()
   public expandedLabel: string = EMPTY_STRING;
 
+  /**
+   * A string that represents the arial label of the button when the menu is collapsed in responsive mode.
+   */
   @Input()
   public collapsedLabel: string = EMPTY_STRING;
 
@@ -45,16 +60,32 @@ export class NavbarComponent implements OnInit {
    */
   protected btnLabel: string = EMPTY_STRING;
 
+  /**
+   * Forces the menu to open in responsive mode.
+   */
   public open(): void {
     if (this.isResponsive === false) return;
     this.menuOpened = true;
     this.emitStateEvt();
   }
 
+  /**
+   * Forces the menu to close in responsive mode.
+   */
   public close(): void {
     if (this.isResponsive === false) return;
     this.menuOpened = false;
     this.emitStateEvt();
+  }
+  
+  /**
+   * Returns a boolean that indicates whether the menu is opened in responsive mode (`true`),
+   * or not (`false`).
+   * 
+   * @returns `true` whether the menu is opened in responsive mode; `false` otherwise.
+   */
+  public isOpen(): boolean {
+    return this.menuOpened;
   }
 
   /**

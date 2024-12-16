@@ -39,19 +39,21 @@ export class NavbarDemoComponent {
   protected presentation: string = 'A responsive navigation header that includes support for branding, navigation and mobile collapsing menu.<br>This component is part of the <a href="javascript:appBridge.navigate([\'resources/documentation/laf-less-components\'])" title="LAF-less API">LAF-less API</a>.';
   protected srcCode: CodeWrapper = {
     html: [`<atx-navbar class="border bg-light p-2 rounded">
+    <!-- Brand Item -->
     <div brand> <a href="./" class="h1">Brand</a> </div>
+    <!-- Menu Button Icon -->
+    <i icon class="bi bi-list"></i>
+    <!-- Menu Items -->
     <li> <a href="./" class="active">Home</a> </li>
     <li> <a href="./news">News</a> </li>
     <li> <a href="./about">About</a> </li>
     <li> <a href="./contact">Contact</a> </li>
-    <div icon> <i class="bi bi-list"></i> </div>
 </atx-navbar>`],
     css: [`a:not(.active) {
   text-decoration: none;
 }`],
     typescript: [`@Component({
-  selector: 'navbar-demo',
-  standalone: true,
+  selector: 'navbar-demo',,
   imports: [ NavbarComponent ],
   templateUrl: './navbar-demo.component.html'
 })
