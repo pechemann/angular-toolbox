@@ -40,7 +40,7 @@ export class NavbarDemoComponent {
   protected srcCode: CodeWrapper = {
     html: [`<atx-navbar class="border bg-light p-2 rounded">
     <!-- Brand Item -->
-    <div brand> <a href="./" class="h1">Brand</a> </div>
+    <a brand href="./" class="h2">Brand</a>
     <!-- Menu Button Icon -->
     <i icon class="bi bi-list"></i>
     <!-- Menu Items -->

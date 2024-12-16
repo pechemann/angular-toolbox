@@ -210,7 +210,6 @@ describe('NavbarComponent: content projection', () => {
   });
 });
 
-
 describe('NavbarComponent: content projection', () => {
   let component: NavbarTestComponent;
   let fixture: ComponentFixture<NavbarTestComponent>;
