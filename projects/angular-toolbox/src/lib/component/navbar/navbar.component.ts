@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { EMPTY_STRING } from '../../util';
 
 @Component({
@@ -17,6 +17,9 @@ import { EMPTY_STRING } from '../../util';
 
 })
 export class NavbarComponent implements OnInit {
+
+  @Output()
+  public readonly stateChange: EventEmitter<boolean> = new EventEmitter();
 
   @Input()
   public brandLabel: string = EMPTY_STRING;
@@ -42,6 +45,18 @@ export class NavbarComponent implements OnInit {
    */
   protected btnLabel: string = EMPTY_STRING;
 
+  public open(): void {
+    if (this.isResponsive === false) return;
+    this.menuOpened = true;
+    this.emitStateEvt();
+  }
+
+  public close(): void {
+    if (this.isResponsive === false) return;
+    this.menuOpened = false;
+    this.emitStateEvt();
+  }
+
   /**
    * @private
    */
@@ -54,6 +69,7 @@ export class NavbarComponent implements OnInit {
    */
   protected onClick(): void {
     this.menuOpened = !this.menuOpened;
+    this.emitStateEvt();
   }
 
   /**
@@ -84,5 +100,12 @@ export class NavbarComponent implements OnInit {
    */
   private setBtnLabel(): void {
     this.btnLabel = this.menuOpened ? this.expandedLabel : this.collapsedLabel;
+  }
+
+  /**
+   * @private
+   */
+  private emitStateEvt(): void {
+    this.stateChange.emit(this.menuOpened);
   }
 }
