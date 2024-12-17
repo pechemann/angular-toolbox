@@ -7,7 +7,7 @@
  */
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { EMPTY_STRING, NavbarComponent } from 'projects/angular-toolbox/src/public-api';
+import { NavbarComponent } from 'projects/angular-toolbox/src/public-api';
 import { NavbarTestComponent } from './util/navbar-test.component';
 import { EventEmitter } from '@angular/core';
 import { buildMediaQueryList } from './util/navbar-test.utils';
@@ -35,8 +35,8 @@ describe('NavbarComponent', () => {
     expect(component.stateChange).toBeInstanceOf(EventEmitter);
   });
 
-  it('brandLabel property should be an empty string by default', () => {
-    expect(component.brandLabel).toEqual(EMPTY_STRING);
+  it('brandLabel property should be undefined by default', () => {
+    expect(component.brandLabel).toBeUndefined();
   });
 
   it('brandLabel property should set the aria-label property of the atx-brand div', () => {
@@ -47,8 +47,8 @@ describe('NavbarComponent', () => {
     expect(div.getAttribute("aria-label")).toEqual(testString);
   });
 
-  it('expandedLabel property should be an empty string by default', () => {
-    expect(component.expandedLabel).toEqual(EMPTY_STRING);
+  it('expandedLabel property should be undefined by default', () => {
+    expect(component.expandedLabel).toBeUndefined();
   });
 
   it('expandedLabel property should not set the aria-label property of the atx-burger div in non-responsive mode', () => {
@@ -68,8 +68,8 @@ describe('NavbarComponent', () => {
     expect(div.getAttribute("title")).not.toEqual(testString);
   });
 
-  it('collapsedLabel property should be an empty string by default', () => {
-    expect(component.collapsedLabel).toEqual(EMPTY_STRING);
+  it('collapsedLabel property should be undefined by default', () => {
+    expect(component.collapsedLabel).toBeUndefined();
   });
 
   it('collapsedLabel property should set the aria-label property of the atx-burger div in non-responsive mode', () => {

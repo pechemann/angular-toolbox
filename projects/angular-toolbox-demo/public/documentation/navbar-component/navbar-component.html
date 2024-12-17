@@ -1,0 +1,177 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <section class="w-100">
+        <h5 class="mb-4">On this page</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="#brandLabel" onclick="appBridge.goToAnchor(event)" title="brandLabel">brandLabel</a></li>
+            <li class="list-group-item"><a href="#stateChange" onclick="appBridge.goToAnchor(event)" title="stateChange">stateChange</a></li>
+            <li class="list-group-item"><a href="#expandedLabel" onclick="appBridge.goToAnchor(event)" title="expandedLabel">expandedLabel</a></li>
+            <li class="list-group-item"><a href="#collapsedLabel" onclick="appBridge.goToAnchor(event)" title="collapsedLabel">collapsedLabel</a></li>
+            <li class="list-group-item"><a href="#open" onclick="appBridge.goToAnchor(event)" title="open()">open()</a></li>
+            <li class="list-group-item"><a href="#close" onclick="appBridge.goToAnchor(event)" title="close()">close()</a></li>
+            <li class="list-group-item"><a href="#isOpen" onclick="appBridge.goToAnchor(event)" title="isOpen()">isOpen()</a></li>
+            <li class="list-group-item"><a href="#isResponsiveMode" onclick="appBridge.goToAnchor(event)" title="isResponsiveMode()">isResponsiveMode()</a></li>
+        </ul>
+        <ul class="list-group mt-4">
+            <li class="list-group-item icon-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation/navbar-component'])" title="ATX Navbar">
+                    ATX Navbar
+                </a>
+            </li>
+            <li class="list-group-item icon-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation'])" title="Documentation">
+                    Documentation
+                </a>
+            </li>
+        </div>
+    </section>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3">ATX Navbar</h2>
+    <div class="version-info text-end mb-4 me-3">
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 1.5.3</span></small>
+        <small><span class="badge text-bg-warning rounded-pill">Experimental</span></small>
+    </div>
+    <p>
+        Navbar components are responsive navigation headers that include support for branding, navigation and mobile collapsing menu.
+        <br>This component is part of the <a href="javascript:appBridge.navigate(['resources/documentation/laf-less-components'])" title="LAF-less API">LAF-less API</a>.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3><code>NavbarComponent</code></h3>
+    <p>
+        The ATX <code>NavbarComponent</code> component allows to create top side menus with branding information.
+    </p>
+    <p>
+        The content of the branding section is defined by Developer by adding the <code>brand</code> attribute to an HTML container element.
+        The toggle button content, usually an burger icon, is identified by the <code>icon</code> attribute.
+    </p>
+    <p>
+        Anything not wrapped by both, the <code>brand</code> and the <code>icon</code> attributes, is displayed in the menu section:
+    </p>
+    <figure>
+        <figcaption>HTML:</figcaption>
+        <pre><code class="language-html"> &lt;atx-navbar&gt;
+    &lt;!-- Brand Item --&gt;
+    &lt;span brand&gt;Brand&lt;/span&gt;
+    &lt;!-- Menu Button Icon --&gt;
+    &lt;i icon&gt;&lt;/i&gt;
+    &lt;!-- Menu Items --&gt;
+    &lt;li&gt; Item #1&lt;/li&gt;
+    &lt;li&gt; Item #2&lt;/li&gt;
+&lt;/atx-navbar&gt;</code></pre></figure>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="brandLabel"><code>NavbarComponent.brandLabel</code></h3>
+    <pre><code class="language-typescript">@Input() brandLabel!: string</code></pre>
+    <p>
+        A string that represents the aria label of the brand item.
+        <br>
+        See the <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA">ARIA Documentation</a> for details.
+        <br>
+        Default value is <code>undefined</code>.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="expandedLabel"><code>NavbarComponent.expandedLabel</code></h3>
+    <pre><code class="language-typescript">@Input() set expandedLabel(value: string)
+         get expandedLabel(): string</code></pre>
+    <p>
+        A string that represents the aria label of the toggle button when the menu is expanded in responsive mode.
+        <br>
+        See the <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA">ARIA Documentation</a> for details.
+        <br>
+        Default value is <code>undefined</code>.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="collapsedLabel"><code>NavbarComponent.collapsedLabel</code></h3>
+    <pre><code class="language-typescript">@Input() set collapsedLabel(value: string)
+         get collapsedLabel(): string</code></pre>
+    <p>
+        A string that represents the aria label of the toggle button when the menu is collapsed in responsive mode.
+        <br>
+        See the <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA">ARIA Documentation</a> for details.
+        <br>
+        Default value is <code>undefined</code>.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="open"><code>NavbarComponent.open()</code></h3>
+    <pre><code class="language-typescript">open(): void</code></pre>
+    <p>
+        Forces the menu to open in responsive mode.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="close"><code>NavbarComponent.close()</code></h3>
+    <pre><code class="language-typescript">close(): void</code></pre>
+    <p>
+        Forces the menu to close in responsive mode.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="isOpen"><code>NavbarComponent.isOpen()</code></h3>
+    <pre><code class="language-typescript">isOpen(): boolean</code></pre>
+    <p>
+        Returns a boolean that indicates whether the menu is currently in responsive mode (<code>true</code>),
+        or not (<code>false</code>).
+    </p>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>boolean</code>
+        <p>
+            Returns <code>true</code> whether the menu is in responsive mode; <code>false</code> otherwise.
+        </p>
+    </div>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="isResponsiveMode"><code>NavbarComponent.isResponsiveMode()</code></h3>
+    <pre><code class="language-typescript">isResponsiveMode(): boolean</code></pre>
+    <p>
+        Returns a boolean that indicates whether the menu is currently in responsive mode (<code>true</code>),
+        or not (<code>false</code>).
+    </p>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>boolean</code>
+        <p>
+            Returns <code>true</code> whether the menu is in responsive mode; <code>false</code> otherwise.
+        </p>
+    </div>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3>Events</h3>
+    <hr>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="stateChange"><code>NavbarComponent.stateChange</code></h3>
+    <pre><code class="language-typescript">@Ouput() readonly stateChange: EventEmitter&lt;boolean&gt;</code></pre>
+    <p>
+        Emits a event each time the the component is expanded, or collapsed in responsive mode.
+    </p>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'ATX Navbar', 'path': 'navbar-component' }, { 'label': 'NavbarComponent' }]">
+</object>

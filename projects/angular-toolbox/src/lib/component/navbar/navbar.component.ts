@@ -7,7 +7,6 @@
  */
 
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
-import { EMPTY_STRING } from '../../util';
 
 /**
  * The `NavbarComponent` component is a horizontal menu. It can be used to show a list of navigation
@@ -27,13 +26,13 @@ export class NavbarComponent implements OnInit {
   public readonly stateChange: EventEmitter<boolean> = new EventEmitter();
 
   /**
-   * A string that represents the arial label of the brand item.
+   * A string that represents the aria label of the brand item.
    */
   @Input()
-  public brandLabel: string = EMPTY_STRING;
+  public brandLabel!: string;
 
   /**
-   * A string that represents the arial label of the button when the menu is expanded in responsive mode.
+   * A string that represents the aria label of the button when the menu is expanded in responsive mode.
    */
   @Input()
   public set expandedLabel(value: string) {
@@ -45,7 +44,7 @@ export class NavbarComponent implements OnInit {
   }
 
   /**
-   * A string that represents the arial label of the button when the menu is collapsed in responsive mode.
+   * A string that represents the aria label of the button when the menu is collapsed in responsive mode.
    */
   @Input()
   public set collapsedLabel(value: string) {
@@ -69,17 +68,17 @@ export class NavbarComponent implements OnInit {
   /**
    * @private
    */
-  protected btnLabel: string = EMPTY_STRING;
+  protected btnLabel!: string;
 
   /**
    * @private
    */
-  protected collLabel: string = EMPTY_STRING;
+  protected collLabel!: string;
   
   /**
    * @private
    */
-  protected expLabel: string = EMPTY_STRING;
+  protected expLabel!: string;
 
   /**
    * Forces the menu to open in responsive mode.

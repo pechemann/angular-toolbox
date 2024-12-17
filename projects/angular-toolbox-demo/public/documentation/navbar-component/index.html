@@ -40,6 +40,25 @@
     <p>
         
     </p>
+    <p>
+        Navigation bars provide a standard structure for interaction on a modern website. Following this structure,
+        the ATX Navbar component is divided into 3 parts:
+        <dl>
+            <dt>Brand</dt>
+            <dd>This container allows branding information to be displayed even if the menu is collapsed in responsive mode.
+                You must identify the brand content by using the special <code>brand</code> tag.
+            </dd>
+            <dt>Burger</dt>
+            <dd>The <em>Burger</em> section contains the toggle button which allows to expand, or collapse, the main menu in responsive mode.
+                It is hidden in standard mode.
+                The ATX framework identifies the toggle button icon by referring to the special <code>icon</code> tag.
+            </dd>
+            <dt>Menu</dt>
+            <dd>This container renders navigation links declared by developers.
+                All navigation links should be wrapped within <code>LI</code> elements, since they are direct children of an <code>UL</code> element.
+            <br>Any element that is not identified by the <code>brand</code> or<code> icon</code> tags is rendered as a navigation menu item.</dd>
+        </dl>
+    </p>
 </section>
 
 <section class="col-xl-9 mb-4">
@@ -73,6 +92,10 @@
 
 <section class="col-xl-9 mb-4">
     <h3 id="styles">Styles</h3>
+    <p>
+        ATX Navbar component has been designed to let you implement your own CSS styles.
+        The following table shows all the style declarations you can use for this purpose.
+    </p>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -113,9 +136,9 @@
                 <td>---</td>
               </tr>
               <tr>
-                <td><code>atx-hamburger</code></td>
+                <td><code>atx-burger</code></td>
                 <td>
-                    The class name of the toggle button.
+                    The class name of the toggle button container.
                 </td>
                 <td>
                     <code>button</code>
@@ -132,6 +155,9 @@
               </tr>
           </tbody>
       </table>
+      <p>
+        You typically use the <code>::ng-deep</code> pseudo declaration to override the rules above.
+      </p>
 </section>
 
 <section class="col-xl-9 mb-4">
@@ -146,9 +172,9 @@
         <figcaption>HTML:</figcaption>
         <pre><code class="language-html"> &lt;atx-navbar class="border bg-light p-2 rounded"&gt;
     &lt;!-- Brand Item --&gt;
-    &lt;a brand href="./" class="h2">Brand&lt;/a&gt;
+    &lt;a brand href="./" class="h2"&gt;Brand&lt;/a&gt;
     &lt;!-- Menu Button Icon --&gt;
-    &lt;i icon class="bi bi-list">&lt;/i&gt;
+    &lt;i icon class="bi bi-list"&gt;&lt;/i&gt;
     &lt;!-- Menu Items --&gt;
     &lt;li&gt; &lt;a href="./" class="active"&gt;Home&lt;/a&gt; &lt;/li&gt;
     &lt;li&gt; &lt;a href="./news"&gt;News&lt;/a&gt; &lt;/li&gt;
