@@ -51,20 +51,20 @@ describe('NavbarComponent', () => {
     expect(component.expandedLabel).toEqual(EMPTY_STRING);
   });
 
-  it('expandedLabel property should not set the aria-label property of the atx-hamburger div in non-responsive mode', () => {
+  it('expandedLabel property should not set the aria-label property of the atx-burger div in non-responsive mode', () => {
     const testString = "test string: seed = " + Math.random();
     component.expandedLabel = testString;
     fixture.detectChanges();
-    const div = fixture.nativeElement.querySelector(".atx-hamburger");
+    const div = fixture.nativeElement.querySelector(".atx-burger");
     expect(div.getAttribute("aria-label")).not.toEqual(testString);
   });
 
 
-  it('expandedLabel property should not set the title property of the atx-hamburger div in non-responsive mode', () => {
+  it('expandedLabel property should not set the title property of the atx-burger div in non-responsive mode', () => {
     const testString = "test string: seed = " + Math.random();
     component.expandedLabel = testString;
     fixture.detectChanges();
-    const div = fixture.nativeElement.querySelector(".atx-hamburger");
+    const div = fixture.nativeElement.querySelector(".atx-burger");
     expect(div.getAttribute("title")).not.toEqual(testString);
   });
 
@@ -72,19 +72,19 @@ describe('NavbarComponent', () => {
     expect(component.collapsedLabel).toEqual(EMPTY_STRING);
   });
 
-  it('collapsedLabel property should set the aria-label property of the atx-hamburger div in non-responsive mode', () => {
+  it('collapsedLabel property should set the aria-label property of the atx-burger div in non-responsive mode', () => {
     const testString = "test string: seed = " + Math.random();
     component.collapsedLabel = testString;
     fixture.detectChanges();
-    const div = fixture.nativeElement.querySelector(".atx-hamburger");
+    const div = fixture.nativeElement.querySelector(".atx-burger");
     expect(div.getAttribute("aria-label")).toEqual(testString);
   });
 
-  it('collapsedLabel property should set the title property of the atx-hamburger div in non-responsive mode', () => {
+  it('collapsedLabel property should set the title property of the atx-burger div in non-responsive mode', () => {
     const testString = "test string: seed = " + Math.random();
     component.collapsedLabel = testString;
     fixture.detectChanges();
-    const div = fixture.nativeElement.querySelector(".atx-hamburger");
+    const div = fixture.nativeElement.querySelector(".atx-burger");
     expect(div.getAttribute("title")).toEqual(testString);
   });
 
@@ -149,8 +149,8 @@ describe('NavbarComponent: HTML structure', () => {
     expect(div).toBeTruthy();
   });
 
-  it('should have a div element with "atx-hamburger" class name and "button" role', () => {
-    const div = fixture.nativeElement.querySelector(".atx-hamburger");
+  it('should have a div element with "atx-burger" class name and "button" role', () => {
+    const div = fixture.nativeElement.querySelector(".atx-burger");
     expect(div).toBeTruthy();
     expect(div.getAttribute("role")).toEqual("button");
   });
@@ -194,8 +194,8 @@ describe('NavbarComponent: content projection', () => {
     expect(brand.textContent).toEqual("Brand");
   });
   
-  it('should create content based on the icon tag projection whithin the "atx-hamburger" div', () => {
-    const div = fixture.nativeElement.querySelector(".atx-hamburger");
+  it('should create content based on the icon tag projection whithin the "atx-burger" div', () => {
+    const div = fixture.nativeElement.querySelector(".atx-burger");
     const icon = div.querySelector("#icon");
     expect(icon).toBeTruthy();
   });
@@ -232,9 +232,9 @@ describe('NavbarComponent: responsive mode', () => {
     expect(navbar.isResponsiveMode()).toBeTrue();
   });
 
-  it('expandedLabel property should set the aria-label property of the atx-hamburger div in responsive mode when menu is open', () => {
+  it('expandedLabel property should set the aria-label property of the atx-burger div in responsive mode when menu is open', () => {
     const testString = "test string: seed = " + Math.random();
-    const div = fixture.nativeElement.querySelector(".atx-hamburger");
+    const div = fixture.nativeElement.querySelector(".atx-burger");
     navbar.open();
     fixture.detectChanges();
     expect(div.getAttribute("aria-label")).not.toEqual(testString);
@@ -243,9 +243,9 @@ describe('NavbarComponent: responsive mode', () => {
     expect(div.getAttribute("aria-label")).toEqual(testString);
   });
 
-  it('expandedLabel property should set the title property of the atx-hamburger div in responsive mode when menu is open', () => {
+  it('expandedLabel property should set the title property of the atx-burger div in responsive mode when menu is open', () => {
     const testString = "test string: seed = " + Math.random();
-    const div = fixture.nativeElement.querySelector(".atx-hamburger");
+    const div = fixture.nativeElement.querySelector(".atx-burger");
     navbar.open();
     fixture.detectChanges();
     expect(div.getAttribute("title")).not.toEqual(testString);
@@ -326,7 +326,7 @@ describe('NavbarComponent: responsive mode', () => {
   
   it('clicking the hanburger element should open the menu in responsive mode', () => {
     const nav = fixture.nativeElement.querySelector(".atx-navbar");
-    const hanburger = fixture.nativeElement.querySelector(".atx-hamburger");
+    const hanburger = fixture.nativeElement.querySelector(".atx-burger");
     spyOn(navbar.stateChange, "emit");
     hanburger.dispatchEvent(new Event("click"));
     fixture.detectChanges();
@@ -339,7 +339,7 @@ describe('NavbarComponent: responsive mode', () => {
     navbar.open();
     fixture.detectChanges();
     const nav = fixture.nativeElement.querySelector(".atx-navbar");
-    const hanburger = fixture.nativeElement.querySelector(".atx-hamburger");
+    const hanburger = fixture.nativeElement.querySelector(".atx-burger");
     spyOn(navbar.stateChange, "emit");
     hanburger.dispatchEvent(new Event("click"));
     fixture.detectChanges();
