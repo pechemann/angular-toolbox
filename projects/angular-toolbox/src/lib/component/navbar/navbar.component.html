@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
 -->
  
-<nav class="atx-navbar" role="menubar" [class.atx-menu-opened]="menuOpened" >
+<nav class="atx-navbar" role="menubar" [class.atx-menu-open]="menuOpen">
     <div class="atx-menu-action">
         <div class="atx-brand" [attr.aria-label]="brandLabel">
             <ng-content select="[brand]"></ng-content>
@@ -15,9 +15,7 @@
             <ng-content select="[icon]"></ng-content>
         </div>
     </div>
-    <ul class="atx-menu-list">
-        <div class="atx-menu" role="menu">
-            <ng-content></ng-content>
-        </div>
+    <ul class="atx-menu" role="menu">
+        <ng-content></ng-content>
     </ul>
 </nav>

@@ -59,7 +59,7 @@ export class NavbarComponent implements OnInit {
   /**
    * @private
    */
-  protected menuOpened: boolean = false;
+  protected menuOpen: boolean = false;
 
   /**
    * @private
@@ -86,7 +86,7 @@ export class NavbarComponent implements OnInit {
    */
   public open(): void {
     if (this.isResponsive === false) return;
-    this.menuOpened = true;
+    this.menuOpen = true;
     this.emitStateEvt();
   }
 
@@ -95,7 +95,7 @@ export class NavbarComponent implements OnInit {
    */
   public close(): void {
     if (this.isResponsive === false) return;
-    this.menuOpened = false;
+    this.menuOpen = false;
     this.emitStateEvt();
   }
   
@@ -110,13 +110,13 @@ export class NavbarComponent implements OnInit {
   }
 
   /**
-   * Returns a boolean that indicates whether the menu is opened in responsive mode (`true`),
+   * Returns a boolean that indicates whether the menu is open in responsive mode (`true`),
    * or not (`false`).
    * 
-   * @returns `true` whether the menu is opened in responsive mode; `false` otherwise.
+   * @returns `true` whether the menu is open in responsive mode; `false` otherwise.
    */
   public isOpen(): boolean {
-    return this.menuOpened;
+    return this.menuOpen;
   }
 
   /**
@@ -130,7 +130,7 @@ export class NavbarComponent implements OnInit {
    * @private
    */
   protected onClick(): void {
-    this.menuOpened = !this.menuOpened;
+    this.menuOpen = !this.menuOpen;
     this.emitStateEvt();
   }
 
@@ -149,11 +149,11 @@ export class NavbarComponent implements OnInit {
     if (window.matchMedia("(max-width: 768px)").matches) {
       if (this.isResponsive === true) return;
       this.isResponsive = true;
-      this.menuOpened = false;
+      this.menuOpen = false;
       this.setBtnLabel();
     } else {
       if (this.isResponsive === false) return;
-      this.isResponsive = this.menuOpened = false;
+      this.isResponsive = this.menuOpen = false;
       this.setBtnLabel();
     }
   }
@@ -162,13 +162,13 @@ export class NavbarComponent implements OnInit {
    * @private
    */
   private setBtnLabel(): void {
-    this.btnLabel = this.menuOpened ? this.expLabel : this.collLabel;
+    this.btnLabel = this.menuOpen ? this.expLabel : this.collLabel;
   }
 
   /**
    * @private
    */
   private emitStateEvt(): void {
-    this.stateChange.emit(this.menuOpened);
+    this.stateChange.emit(this.menuOpen);
   }
 }

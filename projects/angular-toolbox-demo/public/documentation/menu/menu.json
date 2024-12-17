@@ -23,7 +23,8 @@
         { "label": "Window Managment API", "urlTree": [ "/resources", "documentation", "window-managment-api" ] },
         { "label": "Border Layout", "urlTree": [ "/resources", "documentation", "border-layout" ] },
         { "label": "Dropdown Container", "urlTree": [ "/resources", "documentation", "dropdown-container" ] },
-        { "label": "Dialog API (Experimental)", "urlTree": [ "/resources", "documentation", "dialog-api" ] }
+        { "label": "Dialog API (Experimental)", "urlTree": [ "/resources", "documentation", "dialog-api" ] },
+        { "label": "ATX Navbar (Experimental)", "urlTree": [ "/resources", "documentation", "navbar-component" ] }
     ],
     "articles": [
         { "label": "Angular Toolbox Principles", "urlTree": [ "/resources", "documentation", "atx-principles" ]  },
