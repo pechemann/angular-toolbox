@@ -161,8 +161,8 @@ describe('DropdownComponent', () => {
     expect(popover.classList.contains("atx-dropdown-centered")).toBeTrue();
   });
 
-  it('isOpened() should return false by default', () => {
-    expect(component.isOpened()).toBeFalse();
+  it('isOpen() should return false by default', () => {
+    expect(component.isOpen()).toBeFalse();
   });
 
   it('showContent() should display the popover', () => {
@@ -172,10 +172,10 @@ describe('DropdownComponent', () => {
     expect(popover.matches(":popover-open")).toBeTrue();
   });
 
-  it('isOpened() should return true affer invoking the showContent() method', () => {
+  it('isOpen() should return true affer invoking the showContent() method', () => {
     component.showContent();
     fixture.detectChanges();
-    expect(component.isOpened()).toBeTrue();
+    expect(component.isOpen()).toBeTrue();
   });
 
   it('hideContent() should hide the popover', () => {
@@ -187,28 +187,28 @@ describe('DropdownComponent', () => {
     expect(popover.matches(":popover-open")).toBeFalse();
   });
 
-  it('isOpened() should return false affer invoking the hideContent() method', () => {
+  it('isOpen() should return false affer invoking the hideContent() method', () => {
     component.showContent();
     fixture.detectChanges();
     component.hideContent();
     fixture.detectChanges();
-    expect(component.isOpened()).toBeFalse();
+    expect(component.isOpen()).toBeFalse();
   });
 
-  it('isOpened() should return true affer clicking the button to show the content', () => {
+  it('isOpen() should return true affer clicking the button to show the content', () => {
     const btn = fixture.nativeElement.querySelector("button");
     btn.dispatchEvent(new MouseEvent("click"));
     fixture.detectChanges();
-    expect(component.isOpened()).toBeTrue();
+    expect(component.isOpen()).toBeTrue();
   });
 
-  it('isOpened() should return false affer clicking the button to hide the content', () => {
+  it('isOpen() should return false affer clicking the button to hide the content', () => {
     component.showContent();
     fixture.detectChanges();
     const btn = fixture.nativeElement.querySelector("button");
     btn.dispatchEvent(new MouseEvent("click"));
     fixture.detectChanges();
-    expect(component.isOpened()).toBeFalse();
+    expect(component.isOpen()).toBeFalse();
   });
 
   it('clicking the button to show the content should trigger a beforeToggle event', (done) => {
