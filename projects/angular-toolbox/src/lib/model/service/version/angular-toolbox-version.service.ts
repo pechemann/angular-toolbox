@@ -17,8 +17,8 @@ import { VersionConfig } from '../../business';
 const ATX_VERSION_CONFIG: VersionConfig = {
   major: 1,
   minor: 5,
-  patch: 2,
-  buildTimestamp: 1733834973900
+  patch: 3,
+  buildTimestamp: 1734516667960
 };
 
 /**
