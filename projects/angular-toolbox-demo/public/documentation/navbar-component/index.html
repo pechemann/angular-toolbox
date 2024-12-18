@@ -1,0 +1,203 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <section class="w-100">
+        <h5 class="mb-4">On this page</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="#principle" onclick="appBridge.goToAnchor(event)" title="Principle">Principle</a></li>
+            <li class="list-group-item"><a href="#api" onclick="appBridge.goToAnchor(event)" title="API">API</a></li>
+            <li class="list-group-item"><a href="#styles" onclick="appBridge.goToAnchor(event)" title="Styles">Styles</a></li>
+            <li class="list-group-item"><a href="#usage" onclick="appBridge.goToAnchor(event)" title="Usage">Usage</a></li>
+        </ul>
+    </section>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3">ATX Navbar</h2>
+    <div class="version-info text-end mb-4 me-3">
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 1.5.3</span></small>
+        <small><span class="badge text-bg-warning rounded-pill">Experimental</span></small>
+    </div>
+    <p>
+        Navbar components are responsive navigation headers that include support for branding, navigation and mobile collapsing menu.
+        <br>This component is part of the <a href="javascript:appBridge.navigate(['resources/documentation/laf-less-components'])" title="LAF-less API">LAF-less API</a>.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="principle">Principle</h3>
+    <p>
+        Regarding the <a href="javascript:appBridge.navigate(['resources/documentation/laf-less-components'])" title="LAF-less API">LAF-less API</a>,
+        navbar components allows to create responsive navigation menus by separating the UI logic from the app business logic. 
+    </p>
+    <p>
+        
+    </p>
+    <p>
+        Navigation bars provide a standard structure for interaction on a modern website. Following this structure,
+        the ATX Navbar component is divided into 3 parts:
+        <dl>
+            <dt>Brand</dt>
+            <dd>This container allows branding information to be displayed even if the menu is collapsed in responsive mode.
+                You must identify the brand content by using the special <code>brand</code> tag.
+            </dd>
+            <dt>Burger</dt>
+            <dd>The <em>Burger</em> section contains the toggle button which allows to expand, or collapse, the main menu in responsive mode.
+                It is hidden in standard mode.
+                The ATX framework identifies the toggle button icon by referring to the special <code>icon</code> tag.
+            </dd>
+            <dt>Menu</dt>
+            <dd>This container renders navigation links declared by developers.
+                All navigation links should be wrapped within <code>LI</code> elements, since they are direct children of an <code>UL</code> element.
+            <br>Any element that is not identified by the <code>brand</code> or<code> icon</code> tags is rendered as a navigation menu item.</dd>
+        </dl>
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="api">API</h3>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Component</th>
+            <th scope="col">Description</th>
+            <th scope="col">Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>NavbarComponent</code></td>
+            <td>
+                A horizontal menu that can be used to show a list of navigation
+                links positioned on the top side of your page.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/navbar-component/navbar-component'])" title="NavbarComponent">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="styles">Styles</h3>
+    <p>
+        ATX Navbar component has been designed to let you implement your own CSS styles.
+        The following table shows all the style declarations you can use for this purpose.
+    </p>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+              <th scope="col">Class Name</th>
+              <th scope="col">Description</th>
+              <th scope="col">Aria Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>atx-navbar</code></td>
+              <td>
+                  The class name of the root <code>NAV</code> element.
+              </td>
+              <td>
+                <code>menubar</code>
+              </td>
+            </tr>
+            <tr>
+                <td><code>atx-menu-open</code></td>
+                <td>
+                    The class added to the root <code>NAV</code> element when the menu is open.
+                </td>
+                <td>---</td>
+              </tr>
+              <tr>
+                <td><code>atx-menu-action</code></td>
+                <td>
+                    The class name of the <code>DIV</code> element that contains both, brand container and toggle button.
+                </td>
+                <td>---</td>
+              </tr>
+              <tr>
+                <td><code>atx-brand</code></td>
+                <td>
+                    The class name of the <code>DIV</code> element that contains brand information.
+                </td>
+                <td>---</td>
+              </tr>
+              <tr>
+                <td><code>atx-burger</code></td>
+                <td>
+                    The class name of the toggle button container.
+                </td>
+                <td>
+                    <code>button</code>
+                </td>
+              </tr>
+              <tr>
+                <td><code>atx-menu</code></td>
+                <td>
+                    The class name of the <code>UL</code> element that contains all menu items.
+                </td>
+                <td>
+                    <code>menu</code>
+                </td>
+              </tr>
+          </tbody>
+      </table>
+      <p>
+        You typically use the <code>::ng-deep</code> pseudo declaration to override the rules above.
+      </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="usage">Usage</h3>
+    <p>
+        The following sample app shows how to implement the ATX navbar component with some Bootstrap styles:
+    </p>
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title mb-2">Code</h5>
+    <figure>
+        <figcaption>HTML:</figcaption>
+        <pre><code class="language-html"> &lt;atx-navbar class="border bg-light p-2 rounded"&gt;
+    &lt;!-- Brand Item --&gt;
+    &lt;a brand href="./" class="h2"&gt;Brand&lt;/a&gt;
+    &lt;!-- Menu Button Icon --&gt;
+    &lt;i icon class="bi bi-list"&gt;&lt;/i&gt;
+    &lt;!-- Menu Items --&gt;
+    &lt;li&gt; &lt;a href="./" class="active"&gt;Home&lt;/a&gt; &lt;/li&gt;
+    &lt;li&gt; &lt;a href="./news"&gt;News&lt;/a&gt; &lt;/li&gt;
+    &lt;li&gt; &lt;a href="./about"&gt;About&lt;/a&gt; &lt;/li&gt;
+    &lt;li&gt; &lt;a href="./contact"&gt;Contact&lt;/a&gt; &lt;/li&gt;
+&lt;/atx-navbar&gt;</code></pre></figure>
+
+<figure>
+    <figcaption>CSS:</figcaption>
+    <pre><code class="css">a:not(.active) &#123;
+    text-decoration: none;
+&#125;</code></pre></figure>
+             <p>
+                To see this sample in action, go to the demo section:
+             </p>
+             <button class="btn btn-primary btn-lg" onclick="appBridge.navigate(['demo/navbar'])" title="ATX Navbar Demo">
+                ATX Navbar Demo
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'ATX Navbar' }]">
+</object>

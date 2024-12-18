@@ -1,0 +1,57 @@
+/**
+ * @license
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+ */
+ 
+ * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.atx-menu {
+  list-style: none;
+  display: flex;
+  gap: 1em;
+}
+
+.atx-navbar,
+.atx-menu-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.atx-burger {
+  display: none;
+  user-select: none;
+}
+
+@media (max-width: 768px) {
+
+  .atx-navbar {
+    flex-flow: row wrap;
+  }
+
+  .atx-menu {
+    display: none;
+    text-align: center;
+    width: 100%;
+  }
+
+  .atx-menu-action {
+    flex-basis: 100%;
+  }
+
+  .atx-burger {
+    display: block;
+    margin-left: auto;
+  }
+
+  .atx-menu-open .atx-menu {
+    display: block;
+  }
+}

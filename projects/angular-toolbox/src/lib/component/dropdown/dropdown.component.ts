@@ -135,7 +135,7 @@ export class DropdownComponent extends IdentifiableComponent {
    * 
    * @returns Returns `true` whether the dropdown is opened; `false` otherwise.
    */
-  public isOpened(): boolean {
+  public isOpen(): boolean {
     if (!this._popover) return false;
     return this._popover.nativeElement.matches(API_MATCH);
   }

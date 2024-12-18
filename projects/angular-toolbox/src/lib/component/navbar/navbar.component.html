@@ -1,0 +1,21 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+ 
+<nav class="atx-navbar" role="menubar" [class.atx-menu-open]="menuOpen">
+    <div class="atx-menu-action">
+        <div class="atx-brand" [attr.aria-label]="brandLabel">
+            <ng-content select="[brand]"></ng-content>
+        </div>
+        <div class="atx-burger" role="button" (click)="onClick()" [attr.aria-label]="btnLabel" [attr.title]="btnLabel">
+            <ng-content select="[icon]"></ng-content>
+        </div>
+    </div>
+    <ul class="atx-menu" role="menu">
+        <ng-content></ng-content>
+    </ul>
+</nav>
