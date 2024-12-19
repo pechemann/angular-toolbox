@@ -1,12 +1,12 @@
 {
   "name": "angular-toolbox",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "license": "SEE LICENSE IN LICENSE",
   "peerDependencies": {
-    "@angular/common": "^19.0.3",
-    "@angular/core": "^19.0.3",
-    "@angular/platform-browser": "^19.0.3",
-    "@angular/router": "^19.0.3"
+    "@angular/common": "^19.0.5",
+    "@angular/core": "^19.0.5",
+    "@angular/platform-browser": "^19.0.5",
+    "@angular/router": "^19.0.5"
   },
   "dependencies": {
     "tslib": "^2.3.0"
