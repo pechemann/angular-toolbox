@@ -32,7 +32,7 @@ export class NavbarComponent implements OnInit {
   public brandLabel!: string;
   
   /**
-   * Gets or sets the breakpoint that is used to indicate whether the navbar is in responsibe mode, or not.
+   * Gets or sets the breakpoint that is used to indicate whether the navbar is in responsive mode, or not.
    */
   @Input()
   public set breakpoint(value: number) {

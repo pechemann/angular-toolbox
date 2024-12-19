@@ -14,6 +14,7 @@
             <li class="list-group-item"><a href="#stateChange" onclick="appBridge.goToAnchor(event)" title="stateChange">stateChange</a></li>
             <li class="list-group-item"><a href="#expandedLabel" onclick="appBridge.goToAnchor(event)" title="expandedLabel">expandedLabel</a></li>
             <li class="list-group-item"><a href="#collapsedLabel" onclick="appBridge.goToAnchor(event)" title="collapsedLabel">collapsedLabel</a></li>
+            <li class="list-group-item"><a href="#breakpoint" onclick="appBridge.goToAnchor(event)" title="breakpoint">breakpoint</a></li>
             <li class="list-group-item"><a href="#open" onclick="appBridge.goToAnchor(event)" title="open()">open()</a></li>
             <li class="list-group-item"><a href="#close" onclick="appBridge.goToAnchor(event)" title="close()">close()</a></li>
             <li class="list-group-item"><a href="#isOpen" onclick="appBridge.goToAnchor(event)" title="isOpen()">isOpen()</a></li>
@@ -111,6 +112,20 @@
         See the <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA">ARIA Documentation</a> for details.
         <br>
         Default value is <code>undefined</code>.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="breakpoint"><code>NavbarComponent.breakpoint</code></h3>
+    <div class="version-info text-end mb-4 me-3">
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 1.5.4</span></small>
+    </div>
+    <pre><code class="language-typescript">@Input() set breakpoint(value: number)
+         get breakpoint(): number</code></pre>
+    <p>
+        Gets or sets the breakpoint that is used to indicate whether the navbar is in responsive mode, or not.
+        <br>
+        Default value is <code>768</code>.
     </p>
 </section>
 
