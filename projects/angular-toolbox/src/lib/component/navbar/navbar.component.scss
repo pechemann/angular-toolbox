@@ -30,11 +30,9 @@
   user-select: none;
 }
 
-@media (max-width: 768px) {
+.atx-navbar-responsive {
 
-  .atx-navbar {
-    flex-flow: row wrap;
-  }
+  flex-flow: row wrap;
 
   .atx-menu {
     display: none;
@@ -50,8 +48,8 @@
     display: block;
     margin-left: auto;
   }
+}
 
-  .atx-menu-open .atx-menu {
-    display: block;
-  }
+.atx-navbar-responsive.atx-menu-open .atx-menu  {
+  display: block;
 }

@@ -116,6 +116,10 @@ describe('NavbarComponent', () => {
     fixture.detectChanges();
     expect(component.isOpen()).toBeFalse();
   });
+
+  it('breakpoint should be 768 by default', () => {
+    expect(component.breakpoint).toEqual(768);
+  });
 });
 
 describe('NavbarComponent: HTML structure', () => {
@@ -165,6 +169,11 @@ describe('NavbarComponent: HTML structure', () => {
   it('should not have "atx-menu-open" class name reference in non-responsive mode', () => {
     const div = fixture.nativeElement.querySelector(".atx-menu-open");
     expect(div).toBeFalsy();
+  });
+
+  it('should not have "atx-navbar-responsive" class name reference when is not in responsive mode', () => {
+    const elm = fixture.nativeElement.querySelector(".atx-navbar-responsive");
+    expect(elm).toBeFalsy();
   });
 });
 
@@ -230,6 +239,11 @@ describe('NavbarComponent: responsive mode', () => {
     
   it('isResponsiveMode() method should return true in responsive mode', () => {
     expect(navbar.isResponsiveMode()).toBeTrue();
+  });
+  
+  it('should have "atx-navbar-responsive" class name reference when is in responsive mode', () => {
+    const elm = fixture.nativeElement.querySelector(".atx-navbar-responsive");
+    expect(elm).toBeTruthy();
   });
 
   it('expandedLabel property should set the aria-label property of the atx-burger div in responsive mode when menu is open', () => {
@@ -403,6 +417,15 @@ describe('NavbarComponent: responsive mode switching', () => {
     fixture.detectChanges();
     expect(navbar.isOpen()).toBeFalse();
     expect(nav.classList.contains("atx-menu-open")).toBeFalse();
+  });
+  
+  it('changing the brekpoint value should update the responsive mode', () => {
+    const nav = fixture.nativeElement.querySelector(".atx-navbar");
+    expect(navbar.isResponsiveMode()).toBeFalse();
+    navbar.breakpoint = 3000;
+    fixture.detectChanges();
+    expect(navbar.isResponsiveMode()).toBeTrue();
+    expect(nav.classList.contains("atx-navbar-responsive")).toBeTrue();
   });
 });
 

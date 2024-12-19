@@ -30,6 +30,19 @@ export class NavbarComponent implements OnInit {
    */
   @Input()
   public brandLabel!: string;
+  
+  /**
+   * Gets or sets the breakpoint that is used to indicate whether the navbar is in responsibe mode, or not.
+   */
+  @Input()
+  public set breakpoint(value: number) {
+    this.bpNum = value;
+    this.bpString = `(max-width: ${value}px)`;
+    this.matchMedia();
+  }
+  public get breakpoint(): number {
+    return this.bpNum;
+  }
 
   /**
    * A string that represents the aria label of the button when the menu is expanded in responsive mode.
@@ -79,6 +92,16 @@ export class NavbarComponent implements OnInit {
    * @private
    */
   protected expLabel!: string;
+
+  /**
+   * @private
+   */
+  private bpNum: number = 768;
+
+  /**
+   * @private
+   */
+  private bpString: string = "(max-width: 768px)";
 
   /**
    * Forces the menu to open in responsive mode.
@@ -145,7 +168,7 @@ export class NavbarComponent implements OnInit {
    * @private
    */
   private matchMedia(): void {
-    if (window.matchMedia("(max-width: 768px)").matches) {
+    if (window.matchMedia(this.bpString).matches) {
       if (this.isResponsive === true) return;
       this.isResponsive = true;
       this.menuOpen = false;
