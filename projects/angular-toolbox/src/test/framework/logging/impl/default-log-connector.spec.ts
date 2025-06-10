@@ -14,8 +14,10 @@ describe('DEFAULT_LOG_CONNECTOR', () => {
         expect(DEFAULT_LOG_CONNECTOR).toBeInstanceOf(DefaultLogConnector);
     });
 
+    /** Obsolette since Angular 20.0.0
     it('should be immutable', () => {
         const invalidAssignation = () => (DEFAULT_LOG_CONNECTOR as any) = new DefaultLogConnector();
         expect(invalidAssignation).toThrow();
     });
+    */
 });

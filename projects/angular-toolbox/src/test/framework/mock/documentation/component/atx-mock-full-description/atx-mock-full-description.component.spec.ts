@@ -55,7 +55,7 @@ describe('AtxMockFullDescriptionComponent', () => {
     fixture.detectChanges();
     const elm: HTMLElement = fixture.nativeElement.querySelector('atx-mock-description');
     expect(elm).toBeTruthy();
-    expect(elm.getAttribute("ng-reflect-description")).toEqual(cfg.description as any);
+    expect(elm.firstChild?.textContent).toEqual(cfg.description as any);
   });
 
   it('should display the origin', () => {

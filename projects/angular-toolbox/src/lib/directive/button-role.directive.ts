@@ -19,7 +19,7 @@ const ENTER_KEY: string = 'Enter';
 /**
  * @private
  */
-const ROUTER_LINK_REF: string = 'ng-reflect-router-link';
+const ROUTER_LINK_REF: string = 'routerLink';
 
 /**
  * An easy-to-use directive that enables keyboard navigation and provides support for keyboard "Enter" key events.

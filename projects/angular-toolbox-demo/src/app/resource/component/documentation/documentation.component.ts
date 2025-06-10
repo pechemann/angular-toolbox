@@ -107,7 +107,8 @@ export class DocumentationComponent extends IdentifiableComponent implements OnI
     ];
     const navigationTree: HTMLObjectElement | null = elm.querySelector("#navigation-tree");
     if (navigationTree && navigationTree?.dataset["tree"]) {
-      const dataSet: any[] = eval(navigationTree.dataset["tree"]);
+      // prevent direct-eval warning
+      const dataSet: any[] = window["eval"](navigationTree.dataset["tree"]);
       dataSet.forEach((item)=> {
         const itemPath: string = item.path;
         const path: string | undefined = itemPath ? `${rootPath}/${itemPath}` : undefined;
