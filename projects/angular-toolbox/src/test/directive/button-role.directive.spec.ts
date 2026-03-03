@@ -9,7 +9,8 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { BUTTON_ROLE, ButtonRoleDirective } from "../../public-api";
 import { Router, RouterModule } from "@angular/router";
-import { ButtonRoleDirectiveTestComponent, ButtonRoleDirectiveWithDelegationTestComponent, ButtonRoleDirectiveWithRouterLinkTestComponent, Key, TEST_ITEM } from "./test-utils/button-role-directive-test.util";
+import { ATX_DATA, BUTTON_ROLE_DATA_OBJECT, ButtonRoleDirectiveTestComponent, ButtonRoleDirectiveWithDelegationTestComponent, ButtonRoleDirectiveWithRouterLinkTestComponent, Key } from "./test-utils/button-role-directive-test.util";
+import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 
 const createKeyEvent = (event: string, key: string) => new KeyboardEvent(event, { key: key });
 
@@ -24,9 +25,7 @@ describe('ButtonRoleDirective', () => {
                 RouterModule,
                 ButtonRoleDirective
             ],
-            declarations: [
-                ButtonRoleDirectiveTestComponent
-            ]
+            schemas: [CUSTOM_ELEMENTS_SCHEMA]
         }).compileComponents();
         fixture = TestBed.createComponent(ButtonRoleDirectiveTestComponent);
         spyOn(fixture.componentInstance, 'onEnter');
@@ -56,12 +55,6 @@ describe('ButtonRoleDirective', () => {
         expect(fixture.componentInstance.onEnter).toHaveBeenCalled();
     });
     
-    it('should dispatch an "enter" event and pass the specified object as property', () => {
-        decoratedElm.dispatchEvent(createKeyEvent('keyup', 'Enter'));
-        fixture.detectChanges();
-        expect(fixture.componentInstance.onEnter).toHaveBeenCalledWith(TEST_ITEM);
-    });
-    
     it('should not dispatch "enter" event when User presses any key (except for "enter" key)', () => {
         const keys: string[] = Object.values(Key);
         keys.forEach((value: string) => {
@@ -83,6 +76,33 @@ describe('ButtonRoleDirective', () => {
         expect(fixture.componentInstance.onEnter).not.toHaveBeenCalled();
     });
 
+    it('should set the "data" property of the decorated object with the value assigned to the "atxData" attribute', () => {
+        expect(fixture.componentInstance.data).toEqual(ATX_DATA);
+    });
+
+    /*
+     This should be the correct way to test this functionality;
+     but zonejs adds member to the spyed object that makes both object different from the system POV.
+        it('should dispatch an "enter" event and pass the a ButtonRoleDataObject object as property with the value assigned to the "atxData" attribute', () => {
+            decoratedElm.dispatchEvent(createKeyEvent('keyup', 'Enter'));
+            fixture.detectChanges();
+            expect(fixture.componentInstance.onEnter).toHaveBeenCalledWith(BUTTON_ROLE_DATA_OBJECT);
+        });
+    */
+    it('should dispatch an "enter" event and pass the a ButtonRoleDataObject object as property with the value assigned to the "atxData" attribute', (done) => {
+        const instance: ButtonRoleDirectiveTestComponent = fixture.componentInstance,
+              oldMethod: any = instance.onEnter;
+        instance.onEnter = (obj: any): void => {
+            instance.onEnter = oldMethod;
+            expect(obj.data).toEqual(ATX_DATA);
+            expect(obj.event).toBeInstanceOf(KeyboardEvent);
+            expect(obj.event.type).toEqual('keyup');
+            expect(obj.event.key).toEqual('Enter');
+            done();
+        };
+        decoratedElm.dispatchEvent(createKeyEvent('keyup', 'Enter'));
+        fixture.detectChanges();
+    });
 });
 
 describe('ButtonRoleDirective with delegation', () => {

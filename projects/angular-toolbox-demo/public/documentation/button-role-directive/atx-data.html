@@ -20,10 +20,13 @@
 </nav>
 
 <header class="fs-5 col-xl-9 mb-4">
-    <h2 class="mb-3"><code>delegateClick</code> Attribute</h2>
+    <h2 class="mb-3"><code>atxData</code> Attribute</h2>
+    <div class="version-info text-end mb-4 me-3">
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 1.7.0</span></small>
+    </div>
     <p>
-        The <code>delegateClick</code> attribute forces callback methods associated with the
-        <code>enter</code> event taregt to be invoked when User clicks on the decorated element.
+        The <code>atxData</code> attribute allows to associate any data to the button role directive.
+        Data are passed as member of <code>ButtonRoleDataObject</code> instances, emmited by the <code>enter</code> event.
     </p>
     <hr class="mt-4">
 </header>
@@ -31,17 +34,16 @@
 <section class="col-xl-9 mb-4">
     <h3>Description</h3>
     <p>
-        The <code>atxData</code> attribute avoid duplicate code by delegating 
+        The <code>delegateClick</code> attribute avoid duplicate code by delegating 
         HTML <code>click</code> events to the <em>template method</em> of the <code>enter</code>
         <em>event target</em>:
-    </p>
     </p>
     <figure>
         <figcaption>HTML template:</figcaption>
         <pre><code class="language-html">&lt;!-- following code: --&gt;
-&lt;div buttonRole delegateClick (enter)="atxTest($event)" [atxData]="'test'"&gt;&lt;/div&gt;
+&lt;div buttonRole delegateClick (enter)="atxLog($event)" [atxData]="'test'"&gt;&lt;/div&gt;
 &lt;!-- is equivalent to: --&gt;
-&lt;div role="button" (click)="angularTest('test')" (enter)="angularTest('test')"&gt;&lt;/div&gt;</code></pre></figure>
+&lt;div buttonRole (click)="angularTest($event, 'test')" (enter)="angularTest($event, 'test')"&gt;&lt;/div&gt;</code></pre></figure>
     <figure>
     <figure>
         <figcaption>Angular component:</figcaption>
@@ -61,19 +63,16 @@ protected angularTest(msg: string): void &#123;
     <h3 id="usage">Usage</h3>
     <figure>
         <figcaption>HTML template:</figcaption>
-        <pre><code class="language-html">&lt;div buttonRole delegateClick (enter)="showMsg($event)" [atxData]="'Hello World!'"&gt;&lt;/div&gt;</code></pre></figure>
-    <figure>
+        <pre><code class="language-html">&lt;li buttonRole delegateClick (enter)="showUserInfo($event)" [atxData]="user"&gt; &lt;/li&gt;</code></pre></figure>
     <figure>
         <figcaption>Angular component:</figcaption>
-        <pre><code class="language-typescript">protected showMsg(do: ButtonRoleDataObject): void &#123;
+        <pre><code class="language-typescript">protected showUserInfo(do: ButtonRoleDataObject): void &#123;
     console.log(do.data);
-&#125;
-// When User clicks on the decorated element,
-// Output: Hello World!</code></pre></figure>
+&#125;</code></pre></figure>
 </section>
 
 
 <!-- We use a data object to store navigation tree structure-->
 <object id="navigation-tree"
-    data-tree="[{ 'label': 'ButtonRoleDirective', 'path': 'button-role-directive' }, { 'label': 'delegateClick Attribute' }]">
+    data-tree="[{ 'label': 'ButtonRoleDirective', 'path': 'button-role-directive' }, { 'label': 'atxData Attribute' }]">
 </object>

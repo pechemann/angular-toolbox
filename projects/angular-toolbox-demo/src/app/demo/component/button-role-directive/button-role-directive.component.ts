@@ -6,11 +6,11 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, DOCUMENT, ElementRef, Inject, ViewChild } from '@angular/core';
 import { CodeWrapper } from '../../../ui/model/business/code-wrapper';
 import { USER_LIST_MOCK, User } from '../subscription-service-demo/user-list.mock';
 import { DemoComponent } from '../../../ui/component/demo/demo.component';
-import { ButtonRoleDirective } from 'projects/angular-toolbox/src/public-api';
+import { ButtonRoleDataObject, ButtonRoleDirective } from 'projects/angular-toolbox/src/public-api';
 import { DocumentationLink } from '../../../ui/model/business/documentation-link';
 import { BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
 
@@ -29,9 +29,10 @@ export class ButtonRoleDirectiveComponent {
   private _modal!: ElementRef<HTMLDialogElement>;
 
   protected data: User[] = USER_LIST_MOCK;
-  protected selectedUser!: User;
+  protected selectedUser: User | null = null;
 
-  constructor(breadcrumb: BreadcrumbService) {
+  constructor(breadcrumb: BreadcrumbService,
+              @Inject(DOCUMENT) private document: Document) {
     breadcrumb.removeAll()
               .addItem(breadcrumb.buildItem("Demo", "/demo"))
               .addItem(breadcrumb.buildItem("ButtonRole Directive"));
@@ -46,12 +47,12 @@ export class ButtonRoleDirectiveComponent {
   protected srcCode: CodeWrapper = {
     html: [`...
 <tbody>
-    @for (item of data; track item) {
-        <tr buttonRole delegateClick (enter)="showModal(item)">
-            <th scope="row">{{ item.id }}</th>
-            <td>{{ item.firstName }}</td>
-            <td>{{ item.lastName }}</td>
-            <td>{{ item.email }}</td>
+    @for (user of data; track user) {
+        <tr buttonRole delegateClick (enter)="showModal($event)" [atxData]="user">
+            <th scope="row">{{ user.id }}</th>
+            <td>{{ user.firstName }}</td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.email }}</td>
         </tr>
     }
 </tbody>
@@ -67,12 +68,17 @@ export class ButtonRoleDirectiveComponent {
 }`]
   };
 
-  protected showModal(user: User): void {
-    this.selectedUser = user;
+  protected showModal(event: ButtonRoleDataObject<User>): void {
+    this.selectedUser = event.data;
     this._modal.nativeElement.showModal();
   }
 
-  protected closeModal(): void {
+  protected closeModal(event: Event): void {
+    const user: User | null = this.selectedUser;
+    let idx: number = user ? user.id : 0;
+    if (idx >= this.data.length) idx = 0;
     this._modal.nativeElement.close();
+    // @ts-ignore
+    setTimeout(()=> this.document.getElementById(`user_${idx}`)?.focus({ focusVisible: true }), 100);
   }
 }

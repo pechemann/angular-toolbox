@@ -7,12 +7,11 @@
  */
 
 import { AfterViewChecked, ChangeDetectorRef, Component } from "@angular/core";
+import { ButtonRoleDataObject, ButtonRoleDirective } from "projects/angular-toolbox/src/public-api";
 
-export interface TestItem {
-  value: string;
-}
-
-export const TEST_ITEM: TestItem = { value: "test item" };
+export const ATX_DATA: any = { foo: "bar" };
+export const BUTTON_ROLE_EVENT: KeyboardEvent = new KeyboardEvent("enter");
+export const BUTTON_ROLE_DATA_OBJECT: ButtonRoleDataObject<any> = { event: BUTTON_ROLE_EVENT, data: ATX_DATA };
 
 export enum Key {
   Backspace = 'Backspace',
@@ -151,25 +150,24 @@ export enum Key {
 };
 
 @Component({
-    template: `<div id="testElm" buttonRole (enter)="onEnter(item)"></div>`,
-    standalone: false
+    imports: [ButtonRoleDirective],
+    template: `<div id="testElm" buttonRole (enter)="onEnter($event)" [atxData]="data"></div>`,
+    standalone: true
 })
 export class ButtonRoleDirectiveTestComponent {
 
-  protected readonly item: TestItem = TEST_ITEM;
+  public data: any = ATX_DATA;
 
-  public onEnter(item: TestItem): void {}
+  public onEnter(event: any): void {}
 }
 
 @Component({
-    template: `<div id="testElm" buttonRole delegateClick (enter)="onEnter(item)"></div>`,
+    template: `<div id="testElm" buttonRole delegateClick (enter)="onEnter($event)"></div>`,
     standalone: false
 })
 export class ButtonRoleDirectiveWithDelegationTestComponent {
 
-  protected readonly item: TestItem = TEST_ITEM;
-
-  public onEnter(item: TestItem): void {}
+  public onEnter(event: any): void {}
 }
 
 @Component({

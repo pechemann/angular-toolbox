@@ -17,13 +17,13 @@ export class DemoHomeComponent implements OnInit {
   
   protected itemListCollection: IconListItem[][] = [];
 
-  constructor(private _iconListService: IconListService,
+  constructor(protected iconListService: IconListService,
               breadcrumb: BreadcrumbService) {
     breadcrumb.removeAll().addItem(breadcrumb.buildItem("Demo"));
   }
 
   public ngOnInit(): void {
-    const itemList: IconListItem[] = this._iconListService.getDemoList();
+    const itemList: IconListItem[] = this.iconListService.getDemoList();
     while(itemList.length) {
       this.itemListCollection.push(itemList.splice(0,10));
     }

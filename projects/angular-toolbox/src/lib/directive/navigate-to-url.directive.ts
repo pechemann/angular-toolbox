@@ -7,7 +7,7 @@
  */
 
 import { DOCUMENT } from '@angular/common';
-import { Directive, ElementRef, HostListener, Inject, Input } from '@angular/core';
+import { Directive, ElementRef, Inject, Input } from '@angular/core';
 import { LINK_ROLE } from '../util';
 import { NavigationDirectiveBase } from './navigation-directive-base';
 
@@ -16,7 +16,10 @@ import { NavigationDirectiveBase } from './navigation-directive-base';
  */
 @Directive({
   selector: '[navigateToUrl]',
-  standalone: true
+  standalone: true,
+  host: {
+    '(click)': 'onClick()'
+  }
 })
 export class NavigateToUrlDirective extends NavigationDirectiveBase {
 
@@ -29,8 +32,7 @@ export class NavigateToUrlDirective extends NavigationDirectiveBase {
   /**
    * @private
    */
-  @HostListener('click')
-  private onClick(): void {
+  protected onClick(): void {
     const HREF: string | undefined = this.href;
     if (!HREF) throw new ReferenceError("href attribute is not defined.");
     this._document.defaultView.location.href = HREF;

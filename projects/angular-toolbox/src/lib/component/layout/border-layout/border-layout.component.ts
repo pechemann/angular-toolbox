@@ -6,7 +6,7 @@
  * the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { AfterViewInit, Component, ContentChildren, OnDestroy, ElementRef, ViewChild, HostListener, QueryList, EventEmitter, Output, Inject } from '@angular/core';
+import { AfterViewInit, Component, ContentChildren, OnDestroy, ElementRef, ViewChild, QueryList, EventEmitter, Output, Inject } from '@angular/core';
 import { BorderLayoutContainer } from '../border-layout-container/border-layout-container.component';
 import { LayoutConstraints, LayoutDragEvent, LayoutDragEventType, LayoutRegion, LayoutRegionType, SubscriptionService } from '../../../model';
 import { BorderLayoutRenderer } from './util/border-layout-renderer';
@@ -22,7 +22,10 @@ import { DOCUMENT } from '@angular/common';
   selector: 'atx-border-layout',
   templateUrl: './border-layout.component.html',
   styleUrls: ['./border-layout.component.scss'],
-  standalone: true
+  standalone: true,
+  host: {
+    '(window:resize)': 'onResize()'
+  }
 })
 export class BorderLayout extends IdentifiableComponent implements AfterViewInit, OnDestroy {
 
@@ -47,8 +50,7 @@ export class BorderLayout extends IdentifiableComponent implements AfterViewInit
   /**
    * @private
    */
-  @HostListener("window:resize")
-  private onResize(): void {
+  protected onResize(): void {
     this.paint();
   }
 

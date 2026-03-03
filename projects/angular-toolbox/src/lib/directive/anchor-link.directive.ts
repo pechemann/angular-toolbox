@@ -7,7 +7,7 @@
  */
 
 import { DOCUMENT } from '@angular/common';
-import { AfterViewInit, Directive, ElementRef, HostListener, Inject, Input } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, Inject, Input } from '@angular/core';
 import { LINK_ROLE } from '../util';
 import { DEFAULT_SCROLL_BEHAVIOR } from '../util/default-scroll-behavior';
 import { Router } from '@angular/router';
@@ -19,6 +19,9 @@ import { NavigationDirectiveBase } from './navigation-directive-base';
 @Directive({
   selector: '[anchorLink]',
   standalone: true,
+  host: {
+    '(click)': 'onClick($event)'
+  }
 })
 export class AnchorLinklDirective extends NavigationDirectiveBase implements AfterViewInit {
 
@@ -31,8 +34,7 @@ export class AnchorLinklDirective extends NavigationDirectiveBase implements Aft
   /**
    * @private
    */
-  @HostListener('click', ['$event'])
-  private onClick(event: MouseEvent): void {
+  protected onClick(event: MouseEvent): void {
     event.preventDefault();
     const HREF: string | undefined = this.href;
     this._router.navigate([], { fragment: HREF.slice(1)});

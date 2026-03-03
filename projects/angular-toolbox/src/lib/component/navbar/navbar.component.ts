@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 /**
  * The `NavbarComponent` component is a horizontal menu. It can be used to show a list of navigation
@@ -15,7 +15,10 @@ import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@a
 @Component({
   selector: 'atx-navbar',
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss'
+  styleUrl: './navbar.component.scss',
+  host: {
+    '(window:resize)': 'onResize()'
+  }
 })
 export class NavbarComponent implements OnInit {
 
@@ -159,7 +162,6 @@ export class NavbarComponent implements OnInit {
   /**
    * @private
    */
-  @HostListener('window:resize')
   protected onResize() {
     this.matchMedia();
   }

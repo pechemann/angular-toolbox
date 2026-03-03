@@ -30,11 +30,11 @@
 
 <section class="col-xl-9 mb-4">
     <h3>Signature</h3>
-    <pre><code class="language-typescript">readonly enter: EventEmitter&lt;T&gt;<boolean></code></pre>
+    <pre><code class="language-typescript">readonly enter: EventEmitter&lt;ButtonRoleDataObject&gt;<boolean></code></pre>
     <h5>Type</h5>
     <div class="border rounded p-3">
         <dl>
-            <dt><code>EventEmitter&lt;T&gt;</code></dt>
+            <dt><code>EventEmitter&lt;ButtonRoleDataObject&gt;</code></dt>
             <dd>
                 <p>
                     Emits events containing the value passed to the <code>event</code> method of the HTML template.
@@ -42,6 +42,17 @@
             </dd>
         </dl>
     </div>
+    <h5 class="mt-3">Breaking Changes</h5>
+    <div>
+        <div>
+            Generic type is replaced by the <code>ButtonRoleDataObject</code> type. This ensures compatibility with the
+            component's host element engine since the <code>HostBinding</code> decorator is marked as deprecated.
+        </div>
+        <div class="version-info text-end me-3 mt-0">
+            <small>Since <span class="badge text-bg-warning rounded-pill">v 1.7.0</span></small>
+        </div>
+    </div>
+
 </section>
 
 
@@ -49,13 +60,13 @@
     <h3 id="usage">Usage</h3>
     <figure>
         <figcaption>HTML template:</figcaption>
-        <pre><code class="language-html">&lt;div buttonRole (enter)="log('test')"&gt;&lt;/div&gt;</code></pre></figure>
+        <pre><code class="language-html">&lt;div buttonRole (enter)="sayHello($event)" [atxData]="'Hello World!'"&gt;&lt;/div&gt;</code></pre></figure>
     <figure>
         <figcaption>Angular component:</figcaption>
-        <pre><code class="language-typescript">protected log(msg: string): void &#123;
-    console.log(msg);
+        <pre><code class="language-typescript">protected sayHello(do: ButtonRoleDataObject): void &#123;
+    console.log(do.data);
 &#125;
-// Output: test</code></pre></figure>
+// Output: Hello World!</code></pre></figure>
 </section>
 
 

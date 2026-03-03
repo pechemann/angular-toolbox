@@ -1,0 +1,55 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation/button-role-directive'])" title="ButtonRoleDirective">
+                    ButtonRoleDirective
+                </a>
+            </li>
+        </ul>
+    </aside>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3"><code>ButtonRoleDataObject</code> Interface</h2>
+    <div class="version-info text-end mb-4 me-3">
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 1.7.0</span></small>
+    </div>
+    <p>
+        The <code>ButtonRoleDataObjectf&lt;T&gt;</code> interface defines the API of objects passed as parameters to the
+        <code>ButtonRoleDirective.enter</code> event emitter.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="window"><code>ButtonRoleDataObject.data</code></h3>
+    <pre><code class="language-typescript">data: &lt;T&gt; | null</code></pre>
+    <p>
+        The reference to the data defined by the <code>atxData</code> attribute.
+        <br>
+        Default valus is <code>null</code>.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="componentRef"><code>ButtonRoleDataObject.event</code></h3>
+    <pre><code class="language-typescript">event: MouseEvent | KeyboardEvent | PointerEvent</code></pre>
+    <p>
+        The reference to the original user input event that triggered the directive <code>enter</code> event.
+    </p>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'ButtonRoleDirective', 'path': 'button-role-directive' }, { 'label': 'ButtonRoleDataObject Interface' }]">
+</object>

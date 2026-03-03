@@ -50,6 +50,35 @@
     <table class="table table-striped">
         <thead>
           <tr>
+            <th scope="col">Interface</th>
+            <th scope="col">Description</th>
+            <th scope="col">Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>ButtonRoleDataObject</code></td>
+            <td>
+                <div>
+                    Defines the API of objects passed as parameters of the
+                    <code><a href="#enter" onclick="appBridge.goToAnchor(event)" title="enter">ButtonRoleDirective.enter</a></code>
+                    event emitter.
+                </div>
+                <div class="version-info text-end mt-0">
+                    <small>Since <span class="badge text-bg-warning rounded-pill">v 1.7.0</span></small>
+                </div>
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/button-role-directive/button-role-data-object'])" title="ButtonRoleDataObject">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+        </tbody>
+        <thead>
+          <tr>
             <th scope="col">Directive</th>
             <th scope="col">Description</th>
             <th scope="col">Link</th>
@@ -78,6 +107,22 @@
           </tr>
         </thead>
         <tbody>
+            <tr>
+                <td><code>atxData</code></td>
+                <td>
+                    <div>Allows to associate any data to the directive.</div>
+                    <div class="version-info text-end mt-0">
+                        <small>Since <span class="badge text-bg-warning rounded-pill">v 1.7.0</span></small>
+                    </div>
+                </td>
+                <td>
+                    <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/button-role-directive/atx-data'])" title="atxData">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                            <use href="#linkIcon"/>
+                        </svg>
+                    </button>
+                </td>
+          </tr>
           <tr>
             <td><code>delegateClick</code></td>
             <td>
@@ -101,7 +146,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr id="enter">
               <td><code>enter</code></td>
               <td>
                 Dispatches events when the user presses the <em>Enter</em> key.
