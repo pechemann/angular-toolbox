@@ -10,6 +10,7 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AngularToolboxGitSectionComponent, AngularToolboxPageTitleComponent, BreadcrumbService } from 'projects/angular-toolbox-demo-component-lib/src/public-api';
 import { AngularToolboxVersionService } from 'projects/angular-toolbox/src/public-api';
+import { AngularToolboxTestReportService } from '../../../ui/model/service/angular-toolbox-test-report.service';
 
 @Component({
     selector: 'app-resources',
@@ -19,14 +20,16 @@ import { AngularToolboxVersionService } from 'projects/angular-toolbox/src/publi
         AngularToolboxPageTitleComponent
     ],
     providers: [
-        AngularToolboxVersionService
+        AngularToolboxVersionService,
+        AngularToolboxTestReportService
     ],
     templateUrl: './resources.component.html'
 })
 export class ResourcesComponent {
 
   constructor(breadcrumb: BreadcrumbService,
-              protected versionService: AngularToolboxVersionService) {
+              protected versionService: AngularToolboxVersionService,
+              protected testReportService: AngularToolboxTestReportService) {
     breadcrumb.removeAll()
               .addItem(breadcrumb.buildItem("Resources"));
   }
