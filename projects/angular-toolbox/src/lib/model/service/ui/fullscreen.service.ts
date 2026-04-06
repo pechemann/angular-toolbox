@@ -7,7 +7,7 @@
  */
 
 import { DOCUMENT } from '@angular/common';
-import { Injectable, Inject, OnDestroy } from '@angular/core';
+import { Injectable, Inject, OnDestroy, Output, EventEmitter } from '@angular/core';
 
 // --> Internal members
 /**
@@ -30,6 +30,12 @@ let isFsMode: boolean = false;
 export class FullscreenService implements OnDestroy {
 
     /**
+     * 
+     */
+    @Output()
+    public readonly change: EventEmitter<boolean> = new EventEmitter();
+
+    /**
      * A `boolean` value that indicates whether the application is displayed in fullscreen mode (`true`), or not (`false`).
      * 
      * @returns `true` whether the application is displayed in fullscreen mode; `false` otherwise.
@@ -46,7 +52,7 @@ export class FullscreenService implements OnDestroy {
      */
     constructor(@Inject(DOCUMENT) private _document: Document) {
        window.addEventListener(EVENT_REF, this.fsEventHandler);
-       this.fsEventHandler();
+       this.setFsMode();
     }
 
     /**
@@ -59,16 +65,18 @@ export class FullscreenService implements OnDestroy {
     /**
      * Toggles the application between fullscreen/default modes.
      * 
+     * @param target An optional `Element` object on which to invoque the `requestFullscreen()` method.
      * @param options An optional object that controls the behavior of the transition to fullscreen mode.
      * 
      * @see https://developer.mozilla.org/en-US/docs/Web/API/Element/requestFullscreen#options
      * 
      * @return  A `Promise` which is resolved with a value of undefined when the transition to full screen is complete.
      */
-    public toggleFullscreenMode(options?: FullscreenOptions | undefined): Promise<void> {
+    public toggleFullscreenMode(target?: Element, options?: FullscreenOptions | undefined): Promise<void> {
         const D: Document = this._document;
         if (!D.fullscreenElement) {
-            return D.documentElement.requestFullscreen(options);
+            const TGT: Element = target ? target : D.documentElement;
+            return TGT.requestFullscreen(options);
         }
         return D.exitFullscreen();
     }
@@ -77,6 +85,15 @@ export class FullscreenService implements OnDestroy {
      * @private
      */
     private fsEventHandler(): void {
+        this.setFsMode();
+        this.change.emit(isFsMode);
+    }
+
+    
+    /**
+     * @private
+     */
+    private setFsMode(): void {
         if(screen.height === window.innerHeight) {
             isFsMode = true;
             return;
