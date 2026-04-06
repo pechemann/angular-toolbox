@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { EMPTY_STRING, LogLevel, LogLevelStringPipe } from '../../public-api';
+import { EMPTY_STRING, LogLevel, LogLevelStringPipe } from '../../../../public-api';
 
 describe('logLevelString', () => {
 

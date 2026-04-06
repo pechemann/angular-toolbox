@@ -7,8 +7,8 @@
  */
 
 import { PipeTransform, Pipe } from "@angular/core";
-import { LogLevel } from "../../model";
-import { EMPTY_STRING } from "../../util";
+import { LogLevel } from "../../../model";
+import { EMPTY_STRING } from "../../../util";
 
 /**
  * Allows to transform the specified `LogLevel` value to its corresponding string.
