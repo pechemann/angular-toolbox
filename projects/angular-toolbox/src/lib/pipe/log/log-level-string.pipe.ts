@@ -17,7 +17,7 @@ import { EMPTY_STRING } from "../../util";
   name: 'logLevelString',
   standalone: true
 })
-export class LogLevelStringPipe implements PipeTransform  {
+export class LogLevelStringPipe implements PipeTransform {
 
   /**
    * Transforms the `LogLevel` input value into its corresponding string and returns

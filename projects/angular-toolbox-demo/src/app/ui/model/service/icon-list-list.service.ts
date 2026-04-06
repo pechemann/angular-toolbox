@@ -45,7 +45,8 @@ export class IconListService {
       { label: "BorderLayout Component", urlTree: ["../demo", "border-layout"] },
       { label: "Dropdown Container", urlTree: ["../demo", "dropdown"] },
       { label: "Dialog Service (Experimental)", urlTree: ["../demo", "dialog"] },
-      { label: "ATX Navbar (Experimental)", urlTree: ["../demo", "navbar"] }
+      { label: "ATX Navbar (Experimental)", urlTree: ["../demo", "navbar"] },
+      { label: "Fullscreen Service", urlTree: ["../demo", "fullscreen"] }
     ];
   }
 

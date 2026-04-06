@@ -73,6 +73,10 @@ const routes: Routes = [
   {
     path: 'navbar',
     loadComponent: () => import('./component/navbar/navbar-demo.component').then(mod => mod.NavbarDemoComponent)
+  },
+  {
+    path: 'fullscreen',
+    loadComponent: () => import('./component/fullscreen/fullscreen.component').then(mod => mod.FullscreenComponent)
   }
 ];
 
