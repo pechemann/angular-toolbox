@@ -57,9 +57,9 @@ export class FullscreenService implements OnDestroy {
      * @param _document The reference to the `Document` singleton.
      */
     constructor(@Inject(DOCUMENT) private _document: Document) {
+        this._isFsMode = this.getFsMode();
         this._eventHandler = this.fsEventHandler.bind(this);
         window.addEventListener(EVENT_REF, this._eventHandler);
-        this.setFsMode();
     }
 
     /**
@@ -79,7 +79,7 @@ export class FullscreenService implements OnDestroy {
      * 
      * @return  A `Promise` which is resolved with a value of undefined when the transition to full screen is complete.
      */
-    public toggleFullscreenMode(target: Element | null = null, options?: FullscreenOptions | undefined): Promise<void> {
+    public toggleFullscreenMode(target: Element | null = null, options?: FullscreenOptions): Promise<void> {
         const D: Document = this._document;
         if (!D.fullscreenElement) {
             const TGT: Element = target === null ? D.documentElement : target;
@@ -91,19 +91,18 @@ export class FullscreenService implements OnDestroy {
     /**
      * @private
      */
-    private setFsMode(): void {
-        if(screen.height === window.innerHeight) {
-            this._isFsMode = true;
-            return;
-        }
-        this._isFsMode = false;
+    private getFsMode(): boolean {
+        return (screen.height !== window.innerHeight) ? false : true;
     }
 
     /**
      * @private
      */
     private fsEventHandler(): void {
-        this.setFsMode();
-        this.change.emit(this._isFsMode);
+        const newVal: boolean = this.getFsMode();
+        // Prevents event dispatching when window is resized by user actions.
+        if (this._isFsMode === newVal) return;
+        this._isFsMode = newVal;
+        this.change.emit(newVal);
     }
 }

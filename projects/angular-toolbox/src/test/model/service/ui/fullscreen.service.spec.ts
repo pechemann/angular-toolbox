@@ -99,4 +99,10 @@ describe('FullscreenService', () => {
         };
         btn.dispatchEvent(new MouseEvent("click"));
     });
+
+    it('change should not be inviked when the user resizes the window (internal API check)', () => {
+        spyOn(service, "change");
+        window.resizeBy(10, 10);
+        expect(service.change).not.toHaveBeenCalled();
+    });
 });

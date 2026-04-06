@@ -1,0 +1,109 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <aside class="w-100">
+        <h5 class="mb-4">In this topic</h5>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="javascript:appBridge.navigate(['resources/documentation/fullscreen-service'])" title="Fullscreen Service">
+                    Fullscreen Service
+                </a>
+            </li>
+        </ul>
+    </aside>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3"><code>FullscreenService.toggleFullscreenMode()</code> Method</h2>
+    <p>
+        Toogles the fullscreen mode state of the application. 
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3>Signature</h3>
+    <pre><code class="language-typescript">toggleFullscreenMode(target: Element | null = null, options?: FullscreenOptions): Promise&lt;void&gt;</void></code></pre>
+    <h5>Parameters</h5>
+    <div class="border rounded p-3">
+        <dl>
+            <dt><code>target: Element | null = null</code></dt>
+            <dd>
+                <p>
+                    Can be either an <code>Element</code> object, or <code>null</code>.
+                </p>
+                <p>
+                    Default value is <code>null</code>.
+                </p>
+                 <ul>
+                    <li>
+                        if <code>null</code>, the service makes the entire HTML document be displayed in fullscreen mode.
+                    </li>
+                    <li>
+                        if an HTML <code>Element</code>, the services make only this element be displayed in fullscreen mode.
+                    </li>
+                </ul>
+            </dd>
+        </dl>
+        <dl>
+            <dt><code>options?: FullscreenOptions</code></dt>
+            <dd>
+                <p>
+                    The optional settings to pass to the fullscreen mode API.<br>
+                    See <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/requestFullscreen#options"
+                        title="Element:scrollIntoView#options">Element:requestFullscreen()#options</a> on the MDN website for details.
+                </p>
+                <p>
+                    Default value is <code>undefined</code>.
+                </p>
+            </dd>
+        </dl>
+    </div>
+    <h5 class="mt-3">Returns</h5>
+    <div class="border rounded p-3">
+        <code>Promise&lt;void&gt;</code>
+        <p>
+            A <code>Promise</code> which is resolved with a value of <code>undefined</code> when the transition to full screen is complete.
+        </p>
+    </div>
+    <h5 class="mt-3">Exceptions</h5>
+    <div class="border rounded p-3">
+        <p>
+            Rather than throw a traditional exception, the <code>toggleFullscreenMode()</code> method announces error conditions
+             by rejecting the <code>Promise</code> it has returned. The rejection handler receives one of the following exception values:
+        </p>
+        <h6><code>TypeError</code></h6>
+        <p>
+            The <code>TypeError</code> exception may be delivered in any of the following situations:
+        </p>
+        <ul>
+            <li>The document containing the element is not fully active; that is, it is not the current active document.</li>
+            <li>The element is not contained by a document.</li>
+            <li>The element is not permitted to use the fullscreen feature, either because of
+                <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Permissions_Policy" title="Permissions Policy">Permissions Policy</a>
+                configuration or other access control features.</li>
+            <li>The element and its document are the same node.</li>
+            <li>The element is a <code>popover</code> that is already being shown via <code>HTMLElement.showPopover()</code>.</li>
+        </ul>
+    </div>
+</section>
+
+
+<section class="col-xl-9 mb-4">
+    <h3 id="usage">Usage</h3>
+    <figure>
+        <figcaption>Angular component:</figcaption>
+        <pre><code class="language-typescript">this.fullscreenService.toggleFullscreenMode();</code></pre></figure>
+</section>
+
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+    data-tree="[{ 'label': 'Fullscreen Service', 'path': 'fullscreen-service' }, { 'label': 'FullscreenService.toggleFullscreenMode() method' }]">
+</object>

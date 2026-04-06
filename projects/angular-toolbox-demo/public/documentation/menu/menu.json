@@ -24,7 +24,8 @@
         { "label": "Border Layout", "urlTree": [ "/resources", "documentation", "border-layout" ] },
         { "label": "Dropdown Container", "urlTree": [ "/resources", "documentation", "dropdown-container" ] },
         { "label": "Dialog API (Experimental)", "urlTree": [ "/resources", "documentation", "dialog-api" ] },
-        { "label": "ATX Navbar (Experimental)", "urlTree": [ "/resources", "documentation", "navbar-component" ] }
+        { "label": "ATX Navbar (Experimental)", "urlTree": [ "/resources", "documentation", "navbar-component" ] },
+        { "label": "Fullscreen Service", "urlTree": [ "/resources", "documentation", "fullscreen-service" ] }
     ],
     "articles": [
         { "label": "Angular Toolbox Principles", "urlTree": [ "/resources", "documentation", "atx-principles" ]  },

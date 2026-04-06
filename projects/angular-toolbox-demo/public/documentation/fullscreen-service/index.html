@@ -1,0 +1,148 @@
+<!--
+ * LICENSE
+ * Copyright Pascal ECHEMANN. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
+-->
+
+<nav class="page-menu col-xl-3 ps-4">
+    <section class="w-100">
+        <h5 class="mb-4">On this page</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="#description" onclick="appBridge.goToAnchor(event)" title="Description">Description</a></li>
+            <li class="list-group-item"><a href="#change" onclick="appBridge.goToAnchor(event)" title="change property">change</a></li>
+            <li class="list-group-item"><a href="#is-fullscreen-mode-active" onclick="appBridge.goToAnchor(event)" title="isFullscreenModeActive property">isFullscreenModeActive</a></li>
+            <li class="list-group-item"><a href="#change" onclick="appBridge.goToAnchor(event)" title="toggleFullscreenMode() method">toggleFullscreenMode()</a></li>
+            <li class="list-group-item"><a href="#change" onclick="appBridge.goToAnchor(event)" title="Example">Example</a></li>
+            
+        </ul>
+    </section>
+</nav>
+
+<header class="fs-5 col-xl-9 mb-4">
+    <h2 class="mb-3"><em>Fullscreen</em> Service</h2>
+    <div class="version-info text-end mb-4 me-3">
+        <small>Since <span class="badge text-bg-warning rounded-pill">v 1.8.0</span></small>
+    </div>
+    <p>
+        A lightweight service that provides easy-to-use <em>fullscreen mode</em> functionalities for your Angular application.
+    </p>
+    <hr class="mt-4">
+</header>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="description">Description</h3>
+    <p>
+        The ATX <code>FullscreenService</code> allows to present a specific <code>Element</code> in <em>fullscreen</em> mode, and to exit <em>fullscreen</em> mode once it is no longer needed.
+    </p>
+    <p>
+        This service has built-in features that automatically bind external full-screen calls, such as pressing the <code>F11</code> key, to your presentation layer.
+    </p>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3>API</h3>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Property</th>
+            <th scope="col">Description</th>
+            <th scope="col">Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="change">
+            <td><code>change</code></td>
+            <td>
+                The callback event that is triggered when the fullscreen mode has changed.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/fullscreen-service/change'])" title="change">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+          <tr id="is-fullscreen-mode-active">
+            <td><code>isFullscreenModeActive</code></td>
+            <td>
+                A <code>boolean</code> value that indicates whether the application is displayed in fullscreen mode (<code>true</code>), or not (<code>false</code>).
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/fullscreen-service/is-fullscreen-mode-active'])" title="isFullscreenModeActive">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+        </tbody>
+        <thead>
+          <tr>
+            <th scope="col">Method</th>
+            <th scope="col">Description</th>
+            <th scope="col">Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="toggle-fullscreen-mode">
+            <td><code>toggleFullscreenMode()</code></td>
+            <td>
+                Toogles the app fullscreen mode.
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" onclick="appBridge.navigate(['resources/documentation/fullscreen-service/toggle-fullscreen-mode'])" title="toggleFullscreenMode()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <use href="#linkIcon"/>
+                    </svg>
+                </button>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+</section>
+
+<section class="col-xl-9 mb-4">
+    <h3 id="example">Example</h3>
+    <p>
+        The following code example shows how to activate full-screen mode by clicking a button.
+    </p>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title mb-2">Code</h5>
+            <figure>
+                <figcaption>HTML template:</figcaption>
+                <pre><code class="language-html">...
+&lt;button class="btn btn-primary" (click)="fullscreenService.toggleFullscreenMode()"&gt;
+    &#64;if (fullscreenService.isFullscreenModeActive) &#123;
+        &lt;i class="bi bi-fullscreen-exit"&gt;&lt;/i&gt;
+    &#125;
+    &#64;else &#123;
+        &lt;i class="bi bi-fullscreen"&gt;&lt;/i&gt;
+    &#125;
+&lt;/button&gt;
+...</code></pre></figure>
+            <figure>
+                <figcaption>App component:</figcaption>
+                <pre><code class="language-typescript">&#64;Component(&#123;
+    selector: 'app-component',
+    templateUrl: './app-component.html'
+&#125;)
+export class AppComponent &#123;
+
+    constructor(public fullscreenService: FullscreenService) &#123; &#125;
+&#125;</code></pre></figure>
+    <p>
+        To see this sample in action, go to the demo section:
+    </p>
+    <button class="btn btn-primary btn-lg" onclick="appBridge.navigate(['demo/fullscreen'])" title="Fullscreen Service  Demo">
+        Fullscreen Service Demo
+    </button>
+</section>
+
+<!-- We use a data object to store navigation tree structure-->
+<object id="navigation-tree"
+        data-tree="[{ 'label': 'Fullscreen Service' }]">
+</object>
