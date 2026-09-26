@@ -6,11 +6,6 @@
  * found in the LICENSE file at https://pascalechemann.com/angular-toolbox/resources/license
  */
 
-import { DeprecatedDto } from "./deprecated-dto";
-
-export interface IconListItem {
-    label: string;
-    urlTree?: string[];
-    url?: string;
-    deprecated?: DeprecatedDto;
+export interface DeprecatedDto {
+    since: string;
 }
